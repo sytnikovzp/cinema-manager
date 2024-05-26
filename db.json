@@ -1,0 +1,124 @@
+{
+  "actors": [
+    {
+      "id": 1,
+      "movies": [
+        "Indiana Johns",
+        "The star wars",
+        "Patriot Games",
+        "Gentelmens of fortune"
+      ],
+      "fullName": "Harrison Ford",
+      "birthYear": "1942",
+      "nationality": "USA",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Harrison_Ford_by_Gage_Skidmore_3.jpg/274px-Harrison_Ford_by_Gage_Skidmore_3.jpg"
+    },
+    {
+      "id": 2,
+      "movies": [
+        "Sleepy Hollow",
+        "Pirates of the Caribbean",
+        "The Tourist",
+        "Alice in Wonderland"
+      ],
+      "fullName": "Johnny Depp",
+      "birthYear": "1963",
+      "nationality": "USA",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Johnny_Depp_Deauville_2019.jpg/220px-Johnny_Depp_Deauville_2019.jpg"
+    },
+    {
+      "id": 3,
+      "movies": ["Alien", "Avatar", "Aliens"],
+      "fullName": "Sigourney Weaver",
+      "birthYear": "1949",
+      "nationality": "USA",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Sigourney_Weaver_by_Gage_Skidmore_4.jpg/250px-Sigourney_Weaver_by_Gage_Skidmore_4.jpg"
+    }
+  ],
+  "directors": [
+    {
+      "id": 1,
+      "movies": ["Indiana Johns", "Schindler's List", "Saving Private Ryan"],
+      "fullName": "Steven Spielberg",
+      "birthYear": "1946",
+      "nationality": "USA",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Ready_Player_One_Japan_Premiere_Red_Carpet_Steven_Spielberg_%2841604920761%29_%28cropped%29.jpg/240px-Ready_Player_One_Japan_Premiere_Red_Carpet_Steven_Spielberg_%2841604920761%29_%28cropped%29.jpg"
+    },
+    {
+      "id": 2,
+      "movies": ["Alien", "Gladiator", "Robin Hood"],
+      "fullName": "Ridley Scott",
+      "birthYear": "1937",
+      "nationality": "UK",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/NASA_Journey_to_Mars_and_%E2%80%9CThe_Martian%E2%80%9D_%28201508180030HQ%29.jpg/220px-NASA_Journey_to_Mars_and_%E2%80%9CThe_Martian%E2%80%9D_%28201508180030HQ%29.jpg"
+    },
+    {
+      "id": 3,
+      "movies": ["Rambo", "Terminator", "Avatar"],
+      "fullName": "James Cameron",
+      "birthYear": "1954",
+      "nationality": "Canada",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/James_Cameron_by_Gage_Skidmore.jpg/240px-James_Cameron_by_Gage_Skidmore.jpg"
+    }
+  ],
+  "movies": [
+    {
+      "id": 1,
+      "title": "Indiana Johns",
+      "directors": ["Stiven Spilberg"],
+      "actors": ["Harrison  Ford", "Sean Connery"],
+      "studios": ["Lukas Film"],
+      "poster": "https://upload.wikimedia.org/wikipedia/ru/thumb/8/8b/IJandCrystalSkull.jpg/220px-IJandCrystalSkull.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Alien",
+      "directors": ["Ridley Scott"],
+      "actors": ["Sigourney Weaver"],
+      "studios": ["20th Century Studios, Inc."],
+      "poster": "https://upload.wikimedia.org/wikipedia/ru/thumb/c/c3/Alien_movie_poster.jpg/232px-Alien_movie_poster.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Aliens",
+      "directors": ["James Cameron"],
+      "actors": ["Sigourney Weaver"],
+      "studios": ["20th Century Studios, Inc."],
+      "poster": "https://upload.wikimedia.org/wikipedia/ru/thumb/f/fb/Aliens_poster.jpg/196px-Aliens_poster.jpg"
+    },
+    {
+      "id": 4,
+      "title": "Pirates of the Caribbean:",
+      "directors": ["Gregor (Gore) Verbinski"],
+      "actors": ["Johnny Depp", "Orlando Bloom"],
+      "studios": ["Walt Disney Pictures"],
+      "poster": "https://upload.wikimedia.org/wikipedia/ru/thumb/7/79/Pirates-of-the-Caribbean-The-Curse-of-the-Black-Pearl-.jpg/201px-Pirates-of-the-Caribbean-The-Curse-of-the-Black-Pearl-.jpg"
+    },
+    {
+      "id": 1658475813029,
+      "title": "The Lord Of The Rings",
+      "directors": ["Peter Jackson"],
+      "actors": ["Elijah Wood", "Ian McKellen"],
+      "studios": ["New Line Cinema "],
+      "poster": "https://upload.wikimedia.org/wikipedia/ru/thumb/0/08/The_Lord_of_the_Rings._The_Fellowship_of_the_Ring_%E2%80%94_movie.jpg/203px-The_Lord_of_the_Rings._The_Fellowship_of_the_Ring_%E2%80%94_movie.jpg"
+    }
+  ],
+  "studios": [
+    {
+      "id": 1,
+      "title": "Lucasfilm Ltd. LLC",
+      "location": "San Francisco",
+      "foundationYear": "1971",
+      "movies": ["Indiana Johns"],
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Lucasfilm_logo.svg/250px-Lucasfilm_logo.svg.png"
+    },
+    {
+      "id": 2,
+      "title": "20th Century Studios, Inc.",
+      "location": "Los Angeles",
+      "foundationYear": "1935",
+      "movies": ["Aliens", "Alien"],
+      "logo": "https://upload.wikimedia.org/wikipedia/ru/thumb/5/5e/20th_Century_Studios.svg/250px-20th_Century_Studios.svg.png"
+    }
+  ]
+}
