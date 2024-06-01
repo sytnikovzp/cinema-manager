@@ -25,6 +25,13 @@ export const directorsState = [
 export const moviesState = [
   {
     id: null,
+    posterUrl: '',
+    title: '',
+    releaseYear: '',
+    genre: '',
+    studio: '',
+    directors: '',
+    actors: '',
   },
 ];
 

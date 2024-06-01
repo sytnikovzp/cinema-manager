@@ -112,7 +112,7 @@ const actorsSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getActorById.fulfilled, (state, { payload }) => {
-      state.albums = payload;
+      state.actors = payload;
       state.currentActor = createEmptyActor();
       state.status = 'fulfilled';
       state.error = null;

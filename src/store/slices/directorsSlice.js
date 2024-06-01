@@ -112,7 +112,7 @@ const directorsSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getDirectorById.fulfilled, (state, { payload }) => {
-      state.albums = payload;
+      state.directors = payload;
       state.currentDirector = createEmptyDirector();
       state.status = 'fulfilled';
       state.error = null;

@@ -27,6 +27,13 @@ export const emptyDirector = {
 
 export const emptyMovie = {
   id: null,
+  posterUrl: '',
+  title: '',
+  releaseYear: '',
+  genre: '',
+  studio: '',
+  directors: '',
+  actors: '',
 };
 
 export const emptyStudio = {

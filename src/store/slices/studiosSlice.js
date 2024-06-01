@@ -112,7 +112,7 @@ const studiosSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getStudioById.fulfilled, (state, { payload }) => {
-      state.albums = payload;
+      state.studios = payload;
       state.currentStudio = createEmptyStudio();
       state.status = 'fulfilled';
       state.error = null;
