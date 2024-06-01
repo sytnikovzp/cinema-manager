@@ -1,3 +1,20 @@
+export const BASE_URL = 'http://localhost:5000';
+
+export const ACTORS_SLICE_NAME = 'actors';
+export const DIRECTORS_SLICE_NAME = 'directors';
+export const MOVIES_SLICE_NAME = 'movies';
+export const STUDIOS_SLICE_NAME = 'studios';
+
+export const emptyActor = {
+  id: null,
+  photoUrl: '',
+  fName: '',
+  lName: '',
+  birthYear: '',
+  nationality: '',
+  movies: '',
+};
+
 export const posters = [
   {
     id: 1,
