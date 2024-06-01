@@ -25,6 +25,19 @@ export const emptyDirector = {
   movies: '',
 };
 
+export const emptyMovie = {
+  id: null,
+};
+
+export const emptyStudio = {
+  id: null,
+  imgUrl: '',
+  title: '',
+  location: '',
+  foundationYear: '',
+  movies: '',
+};
+
 export const posters = [
   {
     id: 1,
