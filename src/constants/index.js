@@ -15,6 +15,16 @@ export const emptyActor = {
   movies: '',
 };
 
+export const emptyDirector = {
+  id: null,
+  photoUrl: '',
+  fName: '',
+  lName: '',
+  birthYear: '',
+  nationality: '',
+  movies: '',
+};
+
 export const posters = [
   {
     id: 1,
