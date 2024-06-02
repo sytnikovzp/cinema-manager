@@ -1,5 +1,6 @@
 import Carousel from 'react-material-ui-carousel';
-import { Box } from '@mui/material';
+// =============================================
+import Box from '@mui/material/Box';
 // =============================================
 import { carouselStyles } from '../../services/styleService';
 import { posters } from '../../constants';

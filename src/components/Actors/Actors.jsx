@@ -1,5 +1,7 @@
-import { Button, Stack } from '@mui/material';
 import { Link, Navigate, Route, Routes } from 'react-router-dom';
+// =============================================
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 // =============================================
 import ActorsItem from './ActorsItem';
 import ActorsList from './ActorsList';

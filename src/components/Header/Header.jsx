@@ -1,7 +1,8 @@
 import { useContext, useState } from 'react';
 // =============================================
-import AppBar from '@mui/material/AppBar';
 import { useTheme } from '@mui/material/styles';
+import { styled, alpha } from '@mui/material/styles';
+import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,7 +13,6 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
-import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import MailIcon from '@mui/icons-material/Mail';
