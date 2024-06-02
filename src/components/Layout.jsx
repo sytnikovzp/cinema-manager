@@ -1,5 +1,9 @@
+import { createContext, useState, useMemo } from 'react';
+// =============================================
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+// =============================================
 import { Outlet } from 'react-router-dom';
 // =============================================
 import Header from './Header/Header';
@@ -7,10 +11,21 @@ import NavBar from './Navigation/NavBar';
 import CinemaService from './Service/CinemaService';
 import Footer from './Footer/Footer';
 
+export const ColorModeContext = createContext({
+  toggleColorMode: () => {},
+});
+
 function Layout() {
   return (
     <Box>
-      <Grid container direction={'column'}>
+      <Grid
+        container
+        direction={'column'}
+        sx={{
+          bgcolor: 'background.default',
+          color: 'text.primary',
+        }}
+      >
         <Grid item lg={12} md={12} xl={12} sm={12} xs={12}>
           <Header></Header>
         </Grid>
@@ -33,4 +48,32 @@ function Layout() {
   );
 }
 
-export default Layout;
+export default function ToggleColorMode() {
+  const [mode, setMode] = useState('light');
+  const colorMode = useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+      },
+    }),
+    []
+  );
+
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+        },
+      }),
+    [mode]
+  );
+
+  return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <Layout />
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
+}

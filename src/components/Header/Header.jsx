@@ -1,11 +1,13 @@
-import * as React from 'react';
+import { useContext, useState } from 'react';
+// =============================================
 import AppBar from '@mui/material/AppBar';
+import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
@@ -16,11 +18,25 @@ import SearchIcon from '@mui/icons-material/Search';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+// =============================================
+import { ColorModeContext } from '../Layout';
+// =============================================
 
 const settings = ['Profile', 'Account', 'Logout'];
 
 function Header() {
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const theme = useTheme();
+
+  const themeModeDescription =
+    theme.palette.mode === 'dark'
+      ? 'Switch to light mode'
+      : 'Switch to dark mode';
+
+  const colorMode = useContext(ColorModeContext);
+
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -60,7 +76,6 @@ function Header() {
     width: '100%',
     '& .MuiInputBase-input': {
       padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)})`,
       transition: theme.transitions.create('width'),
       [theme.breakpoints.up('sm')]: {
@@ -76,7 +91,10 @@ function Header() {
     <AppBar position='static'>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
-          <LocalMoviesIcon fontSize='large' sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <LocalMoviesIcon
+            fontSize='large'
+            sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}
+          />
           <Typography
             variant='h6'
             noWrap
@@ -94,7 +112,9 @@ function Header() {
             CINEMA MANAGER
           </Typography>
 
-          <LocalMoviesIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <LocalMoviesIcon
+            sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}
+          />
           <Typography
             variant='h6'
             noWrap
@@ -123,6 +143,22 @@ function Header() {
                 inputProps={{ 'aria-label': 'search' }}
               />
             </Search>
+          </Box>
+
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title={themeModeDescription}>
+              <IconButton
+                sx={{ ml: 1 }}
+                onClick={colorMode.toggleColorMode}
+                color='inherit'
+              >
+                {theme.palette.mode === 'dark' ? (
+                  <Brightness7Icon />
+                ) : (
+                  <Brightness4Icon />
+                )}
+              </IconButton>
+            </Tooltip>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
