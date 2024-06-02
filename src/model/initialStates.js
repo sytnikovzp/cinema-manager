@@ -1,47 +1,43 @@
 export const actorsState = [
   {
     id: null,
-    photoUrl: '',
-    fName: '',
-    lName: '',
+    movies: [],
+    fullName: '',
     birthYear: '',
     nationality: '',
-    movies: '',
+    image: '',
   },
 ];
 
 export const directorsState = [
   {
     id: null,
-    photoUrl: '',
-    fName: '',
-    lName: '',
+    movies: [],
+    fullName: '',
     birthYear: '',
     nationality: '',
-    movies: '',
+    image: '',
   },
 ];
 
 export const moviesState = [
   {
     id: null,
-    posterUrl: '',
     title: '',
-    releaseYear: '',
-    genre: '',
-    studio: '',
-    directors: '',
-    actors: '',
+    directors: [],
+    actors: [],
+    studios: [],
+    poster: '',
   },
 ];
 
 export const studiosState = [
   {
     id: null,
-    imgUrl: '',
     title: '',
     location: '',
     foundationYear: '',
-    movies: '',
+    movies: [],
+    logo: '',
   },
 ];

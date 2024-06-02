@@ -7,42 +7,38 @@ export const STUDIOS_SLICE_NAME = 'studios';
 
 export const emptyActor = {
   id: null,
-  photoUrl: '',
-  fName: '',
-  lName: '',
+  movies: [],
+  fullName: '',
   birthYear: '',
   nationality: '',
-  movies: '',
+  image: '',
 };
 
 export const emptyDirector = {
   id: null,
-  photoUrl: '',
-  fName: '',
-  lName: '',
+  movies: [],
+  fullName: '',
   birthYear: '',
   nationality: '',
-  movies: '',
+  image: '',
 };
 
 export const emptyMovie = {
   id: null,
-  posterUrl: '',
   title: '',
-  releaseYear: '',
-  genre: '',
-  studio: '',
-  directors: '',
-  actors: '',
+  directors: [],
+  actors: [],
+  studios: [],
+  poster: '',
 };
 
 export const emptyStudio = {
   id: null,
-  imgUrl: '',
   title: '',
   location: '',
   foundationYear: '',
-  movies: '',
+  movies: [],
+  logo: '',
 };
 
 export const posters = [
