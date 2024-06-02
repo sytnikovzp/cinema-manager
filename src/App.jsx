@@ -25,10 +25,7 @@ function App() {
             <Route path='/directors/*' element={<Directors />} />
             <Route path='/studios/*' element={<Studios />} />
             <Route index element={<HomePage />} />
-            <Route
-              path='*'
-              element={<Navigate to='/movies' replace={true} />}
-            />
+            <Route path='*' element={<Navigate to='/movies' replace />} />
           </Route>
         </Routes>
       </Router>

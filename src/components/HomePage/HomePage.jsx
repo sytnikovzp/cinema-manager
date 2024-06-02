@@ -1,6 +1,6 @@
 import Carousel from 'react-material-ui-carousel';
-import { Box } from '@mui/material';
 import { posters } from '../../constants';
+import { Box } from '@mui/material';
 
 const styles = {
   imgContainerStyle: {
@@ -21,15 +21,14 @@ const styles = {
     objectFit: 'contain',
   },
 };
-
 function HomePage() {
   return (
     <>
       <Carousel>
         {posters.map((poster) => {
           return (
-            <Box key={poster.id} styles={styles.imgContainerStyle}>
-              <img style={styles.imgStyle} src={poster.url} alt={poster.alt} />
+            <Box key={poster.id} style={styles.imgContainerStyle}>
+              <img src={poster.url} alt={poster.alt} style={styles.imgStyle} />
             </Box>
           );
         })}
