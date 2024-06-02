@@ -11,8 +11,6 @@ import Directors from './components/Directors/Directors';
 import Studios from './components/Studios/Studios';
 import HomePage from './components/HomePage/HomePage';
 import Layout from './components/Layout';
-// =============================================
-import './App.css';
 
 function App() {
   return (

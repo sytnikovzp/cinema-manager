@@ -14,7 +14,7 @@ function Layout() {
         <Grid item lg={12} md={12} xl={12} sm={12} xs={12}>
           <Header></Header>
         </Grid>
-        <Grid container>
+        <Grid container sx={{ mt: '1rem', mb: '1rem' }}>
           <Grid item lg={2} md={2} xl={2} sm={2} xs={2}>
             <NavBar />
           </Grid>
