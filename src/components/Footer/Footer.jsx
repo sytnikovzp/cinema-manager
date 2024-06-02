@@ -1,8 +1,24 @@
+import { Box, Typography, Container } from '@mui/material';
 
-function Footer() {
+const Footer = () => {
   return (
-    <div>Footer</div>
-  )
-}
+    <Box
+      component='footer'
+      sx={{
+        py: 2,
+        backgroundColor: (theme) =>
+          theme.palette.mode === 'light'
+            ? theme.palette.grey[300]
+            : theme.palette.grey[800],
+      }}
+    >
+      <Container maxWidth='xl'>
+        <Typography variant='body1'>
+          Designed by Alexandr Sytnikov © {new Date().getFullYear()}
+        </Typography>
+      </Container>
+    </Box>
+  );
+};
 
-export default Footer
+export default Footer;
