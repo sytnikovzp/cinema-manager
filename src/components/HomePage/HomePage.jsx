@@ -1,6 +1,7 @@
 import Carousel from 'react-material-ui-carousel';
-import { posters } from '../../constants';
 import { Box } from '@mui/material';
+// =============================================
+import { posters } from '../../constants';
 
 const styles = {
   imgContainerStyle: {

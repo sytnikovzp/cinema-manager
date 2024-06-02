@@ -1,7 +1,7 @@
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { Outlet } from 'react-router-dom';
-
+// =============================================
 import Header from './Header/Header';
 import NavBar from './Navigation/NavBar';
 import CinemaService from './Service/CinemaService';
