@@ -7,7 +7,7 @@ import { posters } from '../../constants';
 function HomePage() {
   return (
     <>
-      <Carousel>
+      <Carousel stopAutoPlayOnHover>
         {posters.map((poster) => {
           return (
             <Box key={poster.id} style={carouselStyles.imgContainerStyle}>
