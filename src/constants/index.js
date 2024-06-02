@@ -53,7 +53,7 @@ export const posters = [
   },
   {
     id: 2,
-    url: 'https://www.combook.ru/imgrab/0068/9785041165246.jpg',
+    url: 'https://i.pinimg.com/736x/6b/2f/41/6b2f4114cafe3a3bc0ab845602c3cea6.jpg',
     alt: 'poster',
   },
   {
@@ -68,7 +68,7 @@ export const posters = [
   },
   {
     id: 5,
-    url: 'https://poster4.me/wp-content/uploads/2020/01/mstiteli_9.jpg',
+    url: 'https://m.media-amazon.com/images/I/811xdZfsUqL._AC_UF1000,1000_QL80_.jpg',
     alt: 'poster',
   },
   {
@@ -78,7 +78,7 @@ export const posters = [
   },
   {
     id: 7,
-    url: 'https://megaobzor.com/uploads/stories/66059/poster40933_1.jpg',
+    url: 'https://m.media-amazon.com/images/I/915RviLDi3L._AC_UF894,1000_QL80_.jpg',
     alt: 'poster',
   },
 ];
