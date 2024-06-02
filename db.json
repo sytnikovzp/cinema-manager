@@ -120,5 +120,75 @@
       "movies": ["Aliens", "Alien"],
       "logo": "https://upload.wikimedia.org/wikipedia/ru/thumb/5/5e/20th_Century_Studios.svg/250px-20th_Century_Studios.svg.png"
     }
+  ],
+  "genres": [
+    {
+      "id": 1,
+      "genre": "Fantazy"
+    },
+    {
+      "id": 2,
+      "genre": "Action"
+    },
+    {
+      "id": 3,
+      "genre": "Drama"
+    },
+    {
+      "id": 4,
+      "genre": "Western"
+    },
+    {
+      "id": 5,
+      "genre": "Horror"
+    },
+    {
+      "id": 6,
+      "genre": "Documentary"
+    },
+    {
+      "id": 7,
+      "genre": "Thriller"
+    },
+    {
+      "id": 8,
+      "genre": "Comedy"
+    },
+    {
+      "id": 9,
+      "genre": "Adventure"
+    },
+    {
+      "id": 10,
+      "genre": "Anime"
+    },
+    {
+      "id": 11,
+      "genre": "Science fiction"
+    },
+    {
+      "id": 12,
+      "genre": "Historic"
+    },
+    {
+      "id": 13,
+      "genre": "Serial"
+    },
+    {
+      "id": 14,
+      "genre": "Biopic"
+    },
+    {
+      "id": 15,
+      "genre": "Melodrama"
+    },
+    {
+      "id": 16,
+      "genre": "Music"
+    },
+    {
+      "id": 17,
+      "genre": "Peplum"
+    }
   ]
 }
