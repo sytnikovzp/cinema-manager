@@ -17,11 +17,12 @@ export const ColorModeContext = createContext({
 
 function Layout() {
   return (
-    <Box>
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Grid
         container
         direction={'column'}
         sx={{
+          flexGrow: 1,
           bgcolor: 'background.default',
           color: 'text.primary',
         }}
@@ -29,7 +30,7 @@ function Layout() {
         <Grid item lg={12} md={12} xl={12} sm={12} xs={12}>
           <Header></Header>
         </Grid>
-        <Grid container sx={{ mt: '1rem', mb: '1rem' }}>
+        <Grid container sx={{ mt: '1rem', mb: '1rem', flex: 1 }}>
           <Grid item lg={2} md={2} xl={2} sm={2} xs={2}>
             <NavBar />
           </Grid>
