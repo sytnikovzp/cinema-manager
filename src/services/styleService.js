@@ -17,3 +17,7 @@ export const carouselStyles = {
     objectFit: 'contain',
   },
 };
+
+export const listItemTextStyle = {
+  color: 'text.primary',
+};

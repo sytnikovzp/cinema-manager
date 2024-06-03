@@ -14,6 +14,8 @@ import MovieFilterIcon from '@mui/icons-material/MovieFilter';
 import RecentActorsIcon from '@mui/icons-material/RecentActors';
 import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 import AssuredWorkloadIcon from '@mui/icons-material/AssuredWorkload';
+// =============================================
+import { listItemTextStyle } from '../../services/styleService';
 
 function NavBar() {
   return (
@@ -30,7 +32,10 @@ function NavBar() {
                 <ListItemIcon>
                   <HomeIcon />
                 </ListItemIcon>
-                <ListItemText primary='Home'></ListItemText>
+                <ListItemText
+                  sx={listItemTextStyle}
+                  primary='Home'
+                ></ListItemText>
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding component={Link} to='/movies'>
@@ -38,7 +43,10 @@ function NavBar() {
                 <ListItemIcon>
                   <MovieFilterIcon />
                 </ListItemIcon>
-                <ListItemText primary='Movies'></ListItemText>
+                <ListItemText
+                  sx={listItemTextStyle}
+                  primary='Movies'
+                ></ListItemText>
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding component={Link} to='/actors'>
@@ -46,7 +54,10 @@ function NavBar() {
                 <ListItemIcon>
                   <RecentActorsIcon />
                 </ListItemIcon>
-                <ListItemText primary='Actors'></ListItemText>
+                <ListItemText
+                  sx={listItemTextStyle}
+                  primary='Actors'
+                ></ListItemText>
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding component={Link} to='/directors'>
@@ -54,7 +65,10 @@ function NavBar() {
                 <ListItemIcon>
                   <VideoCameraFrontIcon />
                 </ListItemIcon>
-                <ListItemText primary='Directors'></ListItemText>
+                <ListItemText
+                  sx={listItemTextStyle}
+                  primary='Directors'
+                ></ListItemText>
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding component={Link} to='/studios'>
@@ -62,7 +76,10 @@ function NavBar() {
                 <ListItemIcon>
                   <AssuredWorkloadIcon />
                 </ListItemIcon>
-                <ListItemText primary='Studios'></ListItemText>
+                <ListItemText
+                  sx={listItemTextStyle}
+                  primary='Studios'
+                ></ListItemText>
               </ListItemButton>
             </ListItem>
           </List>
@@ -75,7 +92,7 @@ function NavBar() {
                 <ListItemIcon>
                   <MiscellaneousServicesIcon />
                 </ListItemIcon>
-                <ListItemText primary='Service' />
+                <ListItemText sx={listItemTextStyle} primary='Service' />
               </ListItemButton>
             </ListItem>
           </List>
