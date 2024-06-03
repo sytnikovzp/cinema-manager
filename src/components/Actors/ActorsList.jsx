@@ -10,17 +10,20 @@ import ListItemButton from '@mui/material/ListItemButton';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import EditIcon from '@mui/icons-material/Edit';
 import { styled } from '@mui/system';
 // =============================================
 import { Link } from 'react-router-dom';
 // =============================================
 import { selectActor, deleteActor } from '../../store/slices/actorsSlice';
 import { actorItemListStyle } from '../../services/styleService';
+import { Stack } from '@mui/material';
 
 function ActorsList({ actors, currentActor }) {
   const dispatch = useDispatch();
 
-  const onActorEdit = () => {
+  const onActorEdit = (event) => {
+    event.stopPropagation();
     dispatch(selectActor(currentActor));
   };
 
@@ -63,16 +66,26 @@ function ActorsList({ actors, currentActor }) {
                   component={Link}
                   to={`/actors/${actor.id}`}
                   disablePadding
-                  onClick={onActorEdit}
                   sx={actorItemListStyle}
                   secondaryAction={
-                    <IconButton
-                      edge='end'
-                      aria-label='delete'
-                      onClick={onItemDelete}
-                    >
-                      <HighlightOffIcon />
-                    </IconButton>
+                    <Stack direction='row' spacing={1}>
+                      <IconButton
+                        edge='end'
+                        aria-label='edit'
+                        component={Link}
+                        to={`/actors/${actor.id}`}
+                        onClick={onActorEdit}
+                      >
+                        <EditIcon />
+                      </IconButton>
+                      <IconButton
+                        edge='end'
+                        aria-label='delete'
+                        onClick={onItemDelete}
+                      >
+                        <HighlightOffIcon />
+                      </IconButton>
+                    </Stack>
                   }
                 >
                   <ListItemButton>
