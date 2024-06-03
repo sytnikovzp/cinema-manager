@@ -18,7 +18,7 @@ export const carouselStyles = {
   },
 };
 
-export const listItemTextStyle = {
+export const itemTextStyle = {
   color: 'text.primary',
 };
 
@@ -28,6 +28,7 @@ export const buttonStyle = {
 };
 
 export const actorItemListStyle = {
+  color: 'text.primary',
   border: '1px solid #009688',
   borderRadius: 5,
 };

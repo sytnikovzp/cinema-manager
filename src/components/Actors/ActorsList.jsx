@@ -64,7 +64,7 @@ function ActorsList({ actors, currentActor }) {
                   to={`/actors/${actor.id}`}
                   disablePadding
                   onClick={onActorEdit}
-                  style={actorItemListStyle}
+                  sx={actorItemListStyle}
                   secondaryAction={
                     <IconButton
                       edge='end'
