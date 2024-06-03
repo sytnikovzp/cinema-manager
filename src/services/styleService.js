@@ -23,10 +23,11 @@ export const listItemTextStyle = {
 };
 
 export const buttonStyle = {
+  height: '40px',
   width: '150px',
 };
 
-export const actorItemStyle = {
+export const actorItemListStyle = {
   border: '1px solid #009688',
   borderRadius: 5,
 };

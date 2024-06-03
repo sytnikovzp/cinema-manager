@@ -15,7 +15,7 @@ import { styled } from '@mui/system';
 import { Link } from 'react-router-dom';
 // =============================================
 import { selectActor, deleteActor } from '../../store/slices/actorsSlice';
-import { actorItemStyle } from '../../services/styleService';
+import { actorItemListStyle } from '../../services/styleService';
 
 function ActorsList({ actors, currentActor }) {
   const dispatch = useDispatch();
@@ -64,7 +64,7 @@ function ActorsList({ actors, currentActor }) {
                   to={`/actors/${actor.id}`}
                   disablePadding
                   onClick={onActorEdit}
-                  style={actorItemStyle}
+                  style={actorItemListStyle}
                   secondaryAction={
                     <IconButton
                       edge='end'
