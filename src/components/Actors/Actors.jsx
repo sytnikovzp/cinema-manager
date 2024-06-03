@@ -19,6 +19,7 @@ function Actors() {
   const dispatch = useDispatch();
 
   const actors = useSelector((state) => state.actorsList.actors);
+  const currentActor = useSelector((state) => state.actorsList.currentActor);
 
   useEffect(() => {
     dispatch(getAllActors());
@@ -44,10 +45,7 @@ function Actors() {
           padding: '10px',
         }}
       >
-        <Stack
-          direction='row'
-          justifyContent='right'
-        >
+        <Stack direction='row' justifyContent='right'>
           <Button
             component={Link}
             to='new'
@@ -56,9 +54,6 @@ function Actors() {
             variant='contained'
             color='success'
             style={buttonStyle}
-            // sx={{
-            //   mt: 1,
-            // }}
             startIcon={<GroupAddIcon />}
             onClick={onNewActor}
           >
@@ -67,8 +62,11 @@ function Actors() {
         </Stack>
 
         <Routes>
-          <Route path=':id' element={<ActorsItem />} />
-          <Route path='/' element={<ActorsList actors={actors} />} />
+          <Route path=':id' element={<ActorsItem id={currentActor.id} />} />
+          <Route
+            path='/'
+            element={<ActorsList actors={actors} currentActor={currentActor} />}
+          />
           <Route path='new' element={<Navigate to='/actors/new/:id' />} />
         </Routes>
       </Paper>
