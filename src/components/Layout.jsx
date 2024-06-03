@@ -23,8 +23,11 @@ function Layout() {
         direction={'column'}
         sx={{
           flexGrow: 1,
-          bgcolor: 'background.default',
           color: 'text.primary',
+          backgroundColor: (theme) =>
+            theme.palette.mode === 'light'
+              ? theme.palette.grey[100]
+              : theme.palette.grey[700],
         }}
       >
         <Grid item lg={12} md={12} xl={12} sm={12} xs={12}>
