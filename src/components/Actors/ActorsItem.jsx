@@ -55,7 +55,7 @@ function ActorsItem() {
 
       <Box
         sx={{
-          height: '60vh',
+          minHeight: '57vh',
           overflowY: 'auto',
         }}
       >
@@ -66,7 +66,6 @@ function ActorsItem() {
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              height: '60vh',
               width: '40%',
             }}
           >
@@ -83,7 +82,6 @@ function ActorsItem() {
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              height: '60vh',
               width: '60%',
             }}
           >
