@@ -1,5 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 // =============================================
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+// =============================================
 import ActorsForm from '../Actors/ActorsForm';
 import DirectorsForm from '../Directors/DirectorsForm';
 import MoviesForm from '../Movies/MoviesForm';
@@ -7,8 +10,15 @@ import StudiosForm from '../Studios/StudiosForm';
 
 function CinemaService() {
   return (
-    <>
-      <h2>Cinema service</h2>
+    <Box
+      sx={{
+        textAlign: 'center',
+        m: 2,
+      }}
+    >
+      <Paper elevation={3}>
+        <h2>Cinema service</h2>
+      </Paper>
       <Routes>
         <Route path='/actors/new' element={<ActorsForm />} />
         <Route path='/actors/new/:id' element={<ActorsForm />} />
@@ -19,7 +29,7 @@ function CinemaService() {
         <Route path='/studios/new' element={<StudiosForm />} />
         <Route path='/studios/new/:id' element={<StudiosForm />} />
       </Routes>
-    </>
+    </Box>
   );
 }
 

@@ -19,8 +19,6 @@ function NavBar() {
   return (
     <Box
       sx={{
-        display: 'flex',
-        flexWrap: 'wrap',
         m: 2,
       }}
     >
