@@ -21,3 +21,12 @@ export const carouselStyles = {
 export const listItemTextStyle = {
   color: 'text.primary',
 };
+
+export const buttonStyle = {
+  width: '150px',
+};
+
+export const actorItemStyle = {
+  border: '1px solid #009688',
+  borderRadius: 5,
+};
