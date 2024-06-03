@@ -33,6 +33,72 @@
       "birthYear": "1949",
       "nationality": "USA",
       "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Sigourney_Weaver_by_Gage_Skidmore_4.jpg/250px-Sigourney_Weaver_by_Gage_Skidmore_4.jpg"
+    },{
+      "id": 4,
+      "movies": [
+        "Indiana Johns",
+        "The star wars",
+        "Patriot Games",
+        "Gentelmens of fortune"
+      ],
+      "fullName": "Harrison Ford",
+      "birthYear": "1942",
+      "nationality": "USA",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Harrison_Ford_by_Gage_Skidmore_3.jpg/274px-Harrison_Ford_by_Gage_Skidmore_3.jpg"
+    },
+    {
+      "id": 5,
+      "movies": [
+        "Sleepy Hollow",
+        "Pirates of the Caribbean",
+        "The Tourist",
+        "Alice in Wonderland"
+      ],
+      "fullName": "Johnny Depp",
+      "birthYear": "1963",
+      "nationality": "USA",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Johnny_Depp_Deauville_2019.jpg/220px-Johnny_Depp_Deauville_2019.jpg"
+    },
+    {
+      "id": 6,
+      "movies": ["Alien", "Avatar", "Aliens"],
+      "fullName": "Sigourney Weaver",
+      "birthYear": "1949",
+      "nationality": "USA",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Sigourney_Weaver_by_Gage_Skidmore_4.jpg/250px-Sigourney_Weaver_by_Gage_Skidmore_4.jpg"
+    },{
+      "id": 7,
+      "movies": [
+        "Indiana Johns",
+        "The star wars",
+        "Patriot Games",
+        "Gentelmens of fortune"
+      ],
+      "fullName": "Harrison Ford",
+      "birthYear": "1942",
+      "nationality": "USA",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Harrison_Ford_by_Gage_Skidmore_3.jpg/274px-Harrison_Ford_by_Gage_Skidmore_3.jpg"
+    },
+    {
+      "id": 8,
+      "movies": [
+        "Sleepy Hollow",
+        "Pirates of the Caribbean",
+        "The Tourist",
+        "Alice in Wonderland"
+      ],
+      "fullName": "Johnny Depp",
+      "birthYear": "1963",
+      "nationality": "USA",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Johnny_Depp_Deauville_2019.jpg/220px-Johnny_Depp_Deauville_2019.jpg"
+    },
+    {
+      "id": 9,
+      "movies": ["Alien", "Avatar", "Aliens"],
+      "fullName": "Sigourney Weaver",
+      "birthYear": "1949",
+      "nationality": "USA",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Sigourney_Weaver_by_Gage_Skidmore_4.jpg/250px-Sigourney_Weaver_by_Gage_Skidmore_4.jpg"
     }
   ],
   "directors": [

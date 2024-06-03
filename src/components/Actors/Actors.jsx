@@ -56,6 +56,9 @@ function Actors() {
             variant='contained'
             color='success'
             style={buttonStyle}
+            // sx={{
+            //   mt: 1,
+            // }}
             startIcon={<GroupAddIcon />}
             onClick={onNewActor}
           >
