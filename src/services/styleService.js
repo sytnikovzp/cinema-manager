@@ -24,7 +24,7 @@ export const itemTextStyle = {
 
 export const buttonMainStyle = {
   height: '40px',
-  width: '150px',
+  width: '170px',
 };
 
 export const buttonFormStyle = {
@@ -32,13 +32,13 @@ export const buttonFormStyle = {
   width: '100px',
 };
 
-export const actorItemListStyle = {
+export const itemListStyle = {
   color: 'text.primary',
   border: '1px solid #009688',
   borderRadius: 5,
 };
 
-export const actorFormItemStyle = {
+export const formItemStyle = {
   display: 'flex',
   alignItems: 'baseline',
   gap: 1,

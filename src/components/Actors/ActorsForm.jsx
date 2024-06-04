@@ -22,7 +22,7 @@ import {
   deleteActor,
 } from '../../store/slices/actorsSlice';
 import { emptyActor } from '../../constants';
-import { actorFormItemStyle } from '../../services/styleService';
+import { formItemStyle } from '../../services/styleService';
 import { buttonFormStyle } from '../../services/styleService';
 
 import * as React from 'react';
@@ -106,7 +106,7 @@ function ActorForm() {
             paddingBottom: '10px',
           }}
         >
-          <Box sx={actorFormItemStyle}>
+          <Box sx={formItemStyle}>
             <Field
               name='fullName'
               as={TextField}
@@ -118,7 +118,7 @@ function ActorForm() {
               <BackspaceIcon />
             </IconButton>
           </Box>
-          <Box sx={actorFormItemStyle}>
+          <Box sx={formItemStyle}>
             <LocalizationProvider dateAdapter={AdapterDayjs} fullWidth>
               <DatePicker
                 name='birthYear'
@@ -127,7 +127,7 @@ function ActorForm() {
               />
             </LocalizationProvider>
           </Box>
-          <Box sx={actorFormItemStyle}>
+          <Box sx={formItemStyle}>
             <Field
               name='nationality'
               as={TextField}
@@ -141,7 +141,7 @@ function ActorForm() {
               <BackspaceIcon />
             </IconButton>
           </Box>
-          <Box sx={actorFormItemStyle}>
+          <Box sx={formItemStyle}>
             <Field
               name='image'
               as={TextField}
@@ -156,7 +156,7 @@ function ActorForm() {
             </IconButton>
           </Box>
 
-          <Box sx={actorFormItemStyle}>
+          <Box sx={formItemStyle}>
             <Field
               name='movies'
               as={TextField}

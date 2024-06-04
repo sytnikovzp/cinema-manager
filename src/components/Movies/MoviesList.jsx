@@ -15,23 +15,23 @@ import { styled } from '@mui/system';
 // =============================================
 import { Link } from 'react-router-dom';
 // =============================================
-import { selectActor, deleteActor } from '../../store/slices/actorsSlice';
+import { selectMovie, deleteMovie } from '../../store/slices/moviesSlice';
 import { itemListStyle } from '../../services/styleService';
 import { Stack } from '@mui/material';
 
-function ActorsList({ actors, currentActor }) {
+function MoviesList({ movies, currentMovie }) {
   const dispatch = useDispatch();
 
-  const onActorEdit = (event) => {
+  const onMovieEdit = (event) => {
     event.stopPropagation();
-    dispatch(selectActor(currentActor)); // !!!
+    dispatch(selectMovie(currentMovie)); // !!!
   };
 
-  const { id } = currentActor;
+  const { id } = currentMovie;
 
   const onItemDelete = (event) => {
     event.stopPropagation();
-    dispatch(deleteActor(id));
+    dispatch(deleteMovie(id));
   };
 
   const StyledAvatar = styled(Avatar)({
@@ -48,7 +48,7 @@ function ActorsList({ actors, currentActor }) {
         component='h2'
         sx={{ marginTop: -7, textAlign: 'left' }}
       >
-        Actors list
+        Movies list
       </Typography>
 
       <Box
@@ -58,13 +58,13 @@ function ActorsList({ actors, currentActor }) {
         }}
       >
         <Grid container spacing={1}>
-          {actors.map((actor) => (
+          {movies.map((movie) => (
             <>
               <Grid item xs={12}>
                 <ListItem
-                  key={actor.id}
+                  key={movie.id}
                   component={Link}
-                  to={`/actors/${actor.id}`}
+                  to={`/movies/${movie.id}`}
                   disablePadding
                   sx={itemListStyle}
                   secondaryAction={
@@ -73,8 +73,8 @@ function ActorsList({ actors, currentActor }) {
                         edge='end'
                         aria-label='edit'
                         component={Link}
-                        to={`/actors/${actor.id}`}
-                        onClick={onActorEdit}
+                        to={`/movies/${movie.id}`}
+                        onClick={onMovieEdit}
                       >
                         <EditIcon />
                       </IconButton>
@@ -90,10 +90,10 @@ function ActorsList({ actors, currentActor }) {
                 >
                   <ListItemButton>
                     <ListItemAvatar>
-                      <StyledAvatar src={actor.image} />
+                      <StyledAvatar src={movie.poster} />
                     </ListItemAvatar>
                     <ListItemText
-                      primary={`${actor.fullName}, ${actor.nationality}`}
+                      primary={`${movie.title}, ${movie.studios}`}
                     />
                   </ListItemButton>
                 </ListItem>
@@ -106,4 +106,4 @@ function ActorsList({ actors, currentActor }) {
   );
 }
 
-export default ActorsList;
+export default MoviesList;
