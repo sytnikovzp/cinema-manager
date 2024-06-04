@@ -10,7 +10,7 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 // =============================================
-import { buttonStyle } from '../../services/styleService';
+import { buttonMainStyle } from '../../services/styleService';
 import { getActorById } from '../../store/slices/actorsSlice';
 
 function ActorsItem() {
@@ -44,7 +44,7 @@ function ActorsItem() {
           type='button'
           variant='contained'
           color='info'
-          style={buttonStyle}
+          style={buttonMainStyle}
           sx={{ marginTop: -8, textAlign: 'left' }}
           startIcon={<KeyboardBackspaceIcon />}
           onClick={goBack}

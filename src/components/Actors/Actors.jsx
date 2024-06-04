@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 // =============================================
-import { buttonStyle } from '../../services/styleService';
+import { buttonMainStyle } from '../../services/styleService';
 // =============================================
 import { getAllActors, addNewActor } from '../../store/slices/actorsSlice';
 // =============================================
@@ -53,7 +53,7 @@ function Actors() {
             type='button'
             variant='contained'
             color='success'
-            style={buttonStyle}
+            style={buttonMainStyle}
             startIcon={<GroupAddIcon />}
             onClick={onNewActor}
           >

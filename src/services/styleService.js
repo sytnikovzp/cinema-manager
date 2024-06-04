@@ -22,9 +22,14 @@ export const itemTextStyle = {
   color: 'text.primary',
 };
 
-export const buttonStyle = {
+export const buttonMainStyle = {
   height: '40px',
   width: '150px',
+};
+
+export const buttonFormStyle = {
+  height: '40px',
+  width: '100px',
 };
 
 export const actorItemListStyle = {

@@ -24,7 +24,7 @@ function ActorsList({ actors, currentActor }) {
 
   const onActorEdit = (event) => {
     event.stopPropagation();
-    dispatch(selectActor(currentActor));
+    dispatch(selectActor(currentActor)); // !!!
   };
 
   const { id } = currentActor;
