@@ -1,4 +1,4 @@
-import { createContext, useState, useMemo } from 'react';
+import { createContext, useState, useMemo, useEffect } from 'react';
 // =============================================
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
@@ -53,7 +53,17 @@ function Layout() {
 }
 
 export default function ToggleColorMode() {
-  const [mode, setMode] = useState('light');
+  const getInitialMode = () => {
+    const savedMode = localStorage.getItem('cinemaThemeMode');
+    return savedMode ? savedMode : 'light';
+  };
+
+  const [mode, setMode] = useState(getInitialMode);
+
+  useEffect(() => {
+    localStorage.setItem('cinemaThemeMode', mode);
+  }, [mode]);
+
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
