@@ -39,7 +39,7 @@ export const getStudioById = createAsyncThunk(
       }
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -112,28 +112,27 @@ const studiosSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getStudioById.fulfilled, (state, { payload }) => {
-      state.studios = payload;
-      state.currentStudio = createEmptyStudio();
+      state.currentActor = payload;
       state.status = 'fulfilled';
       state.error = null;
     });
     builder.addCase(createStudio.fulfilled, (state, { payload }) => {
       state.studios.push(payload);
       state.currentStudio = createEmptyStudio();
-      state.status = 'Create studio successfuly!';
+      state.status = 'Studio created successfully!';
       state.error = null;
     });
     builder.addCase(updateStudio.fulfilled, (state, { payload }) => {
       state.studios = state.studios.map((studio) =>
         studio.id === payload.id ? payload : studio
       );
-      state.status = 'Update studio successfuly!';
+      state.status = 'Studio updated successfully!';
       state.error = null;
     });
     builder.addCase(deleteStudio.fulfilled, (state, { payload }) => {
       state.studios = state.studios.filter((studio) => studio.id !== payload);
       state.currentStudio = createEmptyStudio();
-      state.status = 'Delete studio successfuly!';
+      state.status = 'Studio deleted successfully!';
       state.error = null;
     });
 

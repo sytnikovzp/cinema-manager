@@ -39,7 +39,7 @@ export const getDirectorById = createAsyncThunk(
       }
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -48,7 +48,10 @@ export const createDirector = createAsyncThunk(
   `${DIRECTORS_SLICE_NAME}/createDirector`,
   async (director, { rejectWithValue }) => {
     try {
-      const { status, data } = await api.post(`/${DIRECTORS_SLICE_NAME}`, director);
+      const { status, data } = await api.post(
+        `/${DIRECTORS_SLICE_NAME}`,
+        director
+      );
       if (status >= 400) throw new Error(`Error create director ${status}`);
       return data;
     } catch (error) {
@@ -112,28 +115,29 @@ const directorsSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getDirectorById.fulfilled, (state, { payload }) => {
-      state.directors = payload;
-      state.currentDirector = createEmptyDirector();
+      state.currentActor = payload;
       state.status = 'fulfilled';
       state.error = null;
     });
     builder.addCase(createDirector.fulfilled, (state, { payload }) => {
       state.directors.push(payload);
       state.currentDirector = createEmptyDirector();
-      state.status = 'Create director successfuly!';
+      state.status = 'Director created successfully!';
       state.error = null;
     });
     builder.addCase(updateDirector.fulfilled, (state, { payload }) => {
       state.directors = state.directors.map((director) =>
         director.id === payload.id ? payload : director
       );
-      state.status = 'Update director successfuly!';
+      state.status = 'Director updated successfully!';
       state.error = null;
     });
     builder.addCase(deleteDirector.fulfilled, (state, { payload }) => {
-      state.directors = state.directors.filter((director) => director.id !== payload);
+      state.directors = state.directors.filter(
+        (director) => director.id !== payload
+      );
       state.currentDirector = createEmptyDirector();
-      state.status = 'Delete director successfuly!';
+      state.status = 'Director deleted successfully!';
       state.error = null;
     });
 

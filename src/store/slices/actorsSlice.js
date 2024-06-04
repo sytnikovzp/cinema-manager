@@ -39,7 +39,7 @@ export const getActorById = createAsyncThunk(
       }
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -112,28 +112,27 @@ const actorsSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getActorById.fulfilled, (state, { payload }) => {
-      state.actors = payload;
-      state.currentActor = createEmptyActor();
+      state.currentActor = payload;
       state.status = 'fulfilled';
       state.error = null;
     });
     builder.addCase(createActor.fulfilled, (state, { payload }) => {
       state.actors.push(payload);
       state.currentActor = createEmptyActor();
-      state.status = 'Create actor successfuly!';
+      state.status = 'Actor created successfully!';
       state.error = null;
     });
     builder.addCase(updateActor.fulfilled, (state, { payload }) => {
       state.actors = state.actors.map((actor) =>
         actor.id === payload.id ? payload : actor
       );
-      state.status = 'Update actor successfuly!';
+      state.status = 'Actor updated successfully!';
       state.error = null;
     });
     builder.addCase(deleteActor.fulfilled, (state, { payload }) => {
       state.actors = state.actors.filter((actor) => actor.id !== payload);
       state.currentActor = createEmptyActor();
-      state.status = 'Delete actor successfuly!';
+      state.status = 'Actor deleted successfully!';
       state.error = null;
     });
 

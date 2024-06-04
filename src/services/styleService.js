@@ -32,3 +32,10 @@ export const actorItemListStyle = {
   border: '1px solid #009688',
   borderRadius: 5,
 };
+
+export const actorFormItemStyle = {
+  display: 'flex',
+  alignItems: 'baseline',
+  gap: 1,
+  width: '90%',
+};

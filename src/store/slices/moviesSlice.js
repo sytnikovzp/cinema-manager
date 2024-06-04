@@ -39,7 +39,7 @@ export const getMovieById = createAsyncThunk(
       }
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -112,28 +112,27 @@ const moviesSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getMovieById.fulfilled, (state, { payload }) => {
-      state.movies = payload;
-      state.currentMovie = createEmptyMovie();
+      state.currentActor = payload;
       state.status = 'fulfilled';
       state.error = null;
     });
     builder.addCase(createMovie.fulfilled, (state, { payload }) => {
       state.movies.push(payload);
       state.currentMovie = createEmptyMovie();
-      state.status = 'Create movie successfuly!';
+      state.status = 'Movie created successfully!';
       state.error = null;
     });
     builder.addCase(updateMovie.fulfilled, (state, { payload }) => {
       state.movies = state.movies.map((movie) =>
         movie.id === payload.id ? payload : movie
       );
-      state.status = 'Update movie successfuly!';
+      state.status = 'Movie updated successfully!';
       state.error = null;
     });
     builder.addCase(deleteMovie.fulfilled, (state, { payload }) => {
       state.movies = state.movies.filter((movie) => movie.id !== payload);
       state.currentMovie = createEmptyMovie();
-      state.status = 'Delete movie successfuly!';
+      state.status = 'Movie deleted successfully!';
       state.error = null;
     });
 
