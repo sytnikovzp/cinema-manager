@@ -31,7 +31,7 @@ function ActorForm() {
   const { actorId } = useParams();
   const navigate = useNavigate();
 
-  const currentActor = actors.find((actor) => actor.id === Number(actorId));
+  const currentActor = actors.find((actor) => Number(actor.id) === Number(actorId));
 
   const goBack = () => {
     navigate('/actors');

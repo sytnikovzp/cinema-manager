@@ -23,7 +23,7 @@ function StudiosItem() {
 
   const { studioId } = useParams();
 
-  const studio = studios.find((studio) => studio.id === Number(studioId));
+  const studio = studios.find((studio) => Number(studio.id) === Number(studioId));
 
   const currentStudio = studio ? studio : emptyStudio;
 

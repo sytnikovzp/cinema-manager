@@ -23,7 +23,7 @@ function ActorsItem() {
 
   const { actorId } = useParams();
 
-  const actor = actors.find((actor) => actor.id === Number(actorId));
+  const actor = actors.find((actor) => Number(actor.id) === Number(actorId));
 
   const currentActor = actor ? actor : emptyActor;
 

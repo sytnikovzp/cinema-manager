@@ -23,7 +23,7 @@ function DirectorsItem() {
 
   const { directorId } = useParams();
 
-  const director = directors.find((director) => director.id === Number(directorId));
+  const director = directors.find((director) => Number(director.id) === Number(directorId));
 
   const currentDirector = director ? director : emptyDirector;
 

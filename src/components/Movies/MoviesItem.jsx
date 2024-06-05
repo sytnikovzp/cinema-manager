@@ -23,7 +23,7 @@ function MoviesItem() {
 
   const { movieId } = useParams();
 
-  const movie = movies.find((movie) => movie.id === Number(movieId));
+  const movie = movies.find((movie) => Number(movie.id) === Number(movieId));
 
   const currentMovie = movie ? movie : emptyMovie;
 
