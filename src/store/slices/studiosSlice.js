@@ -1,15 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
+// =============================================
 import { studiosState } from '../../model/initialStates';
 import { STUDIOS_SLICE_NAME } from '../../constants';
-import { emptyStudio } from '../../constants';
-
+// =============================================
 import api from '../../api';
 import { setError, setStatus } from '../../services/reducer-service';
 
 const initialState = {
   studios: studiosState,
-  currentStudio: createEmptyStudio(),
   status: null,
   error: null,
 };
@@ -20,23 +18,6 @@ export const getAllStudios = createAsyncThunk(
     try {
       const { status, data } = await api.get(`/${STUDIOS_SLICE_NAME}`);
       if (status >= 400) throw new Error(`Error getting studios ${status}`);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const getStudioById = createAsyncThunk(
-  `${STUDIOS_SLICE_NAME}/getStudioById`,
-  async function (id, { rejectWithValue }) {
-    try {
-      const { status, data } = await api.get(
-        `/${STUDIOS_SLICE_NAME}?studioId=${id}`
-      );
-      if (status >= 400) {
-        throw new Error(`Error getting studio ${status}`);
-      }
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -86,39 +67,20 @@ export const deleteStudio = createAsyncThunk(
   }
 );
 
-function createEmptyStudio() {
-  return emptyStudio;
-}
-
 const studiosSlice = createSlice({
   name: STUDIOS_SLICE_NAME,
   initialState,
-  reducers: {
-    selectStudio(state, { payload }) {
-      state.currentStudio = payload;
-    },
-
-    addNewStudio(state) {
-      state.currentStudio = createEmptyStudio();
-    },
-  },
+  reducers: {},
 
   extraReducers: (builder) => {
     // Success
     builder.addCase(getAllStudios.fulfilled, (state, { payload }) => {
       state.studios = payload;
-      state.currentStudio = createEmptyStudio();
-      state.status = 'fulfilled';
-      state.error = null;
-    });
-    builder.addCase(getStudioById.fulfilled, (state, { payload }) => {
-      state.currentActor = payload;
-      state.status = 'fulfilled';
+      state.status = null;
       state.error = null;
     });
     builder.addCase(createStudio.fulfilled, (state, { payload }) => {
       state.studios.push(payload);
-      state.currentStudio = createEmptyStudio();
       state.status = 'Studio created successfully!';
       state.error = null;
     });
@@ -131,29 +93,22 @@ const studiosSlice = createSlice({
     });
     builder.addCase(deleteStudio.fulfilled, (state, { payload }) => {
       state.studios = state.studios.filter((studio) => studio.id !== payload);
-      state.currentStudio = createEmptyStudio();
       state.status = 'Studio deleted successfully!';
       state.error = null;
     });
 
     // Pending
     builder.addCase(getAllStudios.pending, setStatus);
-    builder.addCase(getStudioById.pending, setStatus);
     builder.addCase(createStudio.pending, setStatus);
     builder.addCase(updateStudio.pending, setStatus);
     builder.addCase(deleteStudio.pending, setStatus);
 
     // Error
     builder.addCase(getAllStudios.rejected, setError);
-    builder.addCase(getStudioById.rejected, setError);
     builder.addCase(createStudio.rejected, setError);
     builder.addCase(updateStudio.rejected, setError);
     builder.addCase(deleteStudio.rejected, setError);
   },
 });
 
-const { actions, reducer } = studiosSlice;
-
-export const { selectStudio, addNewStudio } = actions;
-
-export default reducer;
+export default studiosSlice.reducer;

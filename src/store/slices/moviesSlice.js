@@ -1,15 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
+// =============================================
 import { moviesState } from '../../model/initialStates';
 import { MOVIES_SLICE_NAME } from '../../constants';
-import { emptyMovie } from '../../constants';
-
+// =============================================
 import api from '../../api';
 import { setError, setStatus } from '../../services/reducer-service';
 
 const initialState = {
   movies: moviesState,
-  currentMovie: createEmptyMovie(),
   status: null,
   error: null,
 };
@@ -20,23 +18,6 @@ export const getAllMovies = createAsyncThunk(
     try {
       const { status, data } = await api.get(`/${MOVIES_SLICE_NAME}`);
       if (status >= 400) throw new Error(`Error getting movies ${status}`);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const getMovieById = createAsyncThunk(
-  `${MOVIES_SLICE_NAME}/getMovieById`,
-  async function (id, { rejectWithValue }) {
-    try {
-      const { status, data } = await api.get(
-        `/${MOVIES_SLICE_NAME}?movieId=${id}`
-      );
-      if (status >= 400) {
-        throw new Error(`Error getting movie ${status}`);
-      }
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -86,39 +67,20 @@ export const deleteMovie = createAsyncThunk(
   }
 );
 
-function createEmptyMovie() {
-  return emptyMovie;
-}
-
 const moviesSlice = createSlice({
   name: MOVIES_SLICE_NAME,
   initialState,
-  reducers: {
-    selectMovie(state, { payload }) {
-      state.currentMovie = payload;
-    },
-
-    addNewMovie(state) {
-      state.currentMovie = createEmptyMovie();
-    },
-  },
+  reducers: {},
 
   extraReducers: (builder) => {
     // Success
     builder.addCase(getAllMovies.fulfilled, (state, { payload }) => {
       state.movies = payload;
-      state.currentMovie = createEmptyMovie();
-      state.status = 'fulfilled';
-      state.error = null;
-    });
-    builder.addCase(getMovieById.fulfilled, (state, { payload }) => {
-      state.currentActor = payload;
-      state.status = 'fulfilled';
+      state.status = null;
       state.error = null;
     });
     builder.addCase(createMovie.fulfilled, (state, { payload }) => {
       state.movies.push(payload);
-      state.currentMovie = createEmptyMovie();
       state.status = 'Movie created successfully!';
       state.error = null;
     });
@@ -131,29 +93,22 @@ const moviesSlice = createSlice({
     });
     builder.addCase(deleteMovie.fulfilled, (state, { payload }) => {
       state.movies = state.movies.filter((movie) => movie.id !== payload);
-      state.currentMovie = createEmptyMovie();
       state.status = 'Movie deleted successfully!';
       state.error = null;
     });
 
     // Pending
     builder.addCase(getAllMovies.pending, setStatus);
-    builder.addCase(getMovieById.pending, setStatus);
     builder.addCase(createMovie.pending, setStatus);
     builder.addCase(updateMovie.pending, setStatus);
     builder.addCase(deleteMovie.pending, setStatus);
 
     // Error
     builder.addCase(getAllMovies.rejected, setError);
-    builder.addCase(getMovieById.rejected, setError);
     builder.addCase(createMovie.rejected, setError);
     builder.addCase(updateMovie.rejected, setError);
     builder.addCase(deleteMovie.rejected, setError);
   },
 });
 
-const { actions, reducer } = moviesSlice;
-
-export const { selectMovie, addNewMovie } = actions;
-
-export default reducer;
+export default moviesSlice.reducer;
