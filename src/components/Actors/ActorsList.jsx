@@ -12,9 +12,9 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
 import { styled } from '@mui/system';
 // =============================================
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // =============================================
-import { selectActor, deleteActor } from '../../store/slices/actorsSlice';
+import { deleteActor } from '../../store/slices/actorsSlice';
 import { itemListStyle } from '../../services/styleService';
 import { List, Stack } from '@mui/material';
 
@@ -28,10 +28,11 @@ const StyledAvatar = styled(Avatar)({
 function ActorsList({ actors }) {
   const dispatch = useDispatch();
 
-  // const onActorEdit = (event) => {
-  //   event.stopPropagation();
-  //   dispatch(selectActor(currentActor)); // !!!
-  // };
+  const navigate = useNavigate();
+
+  const onItemOpen = (id) => {
+    navigate(`/actors/${id}`);
+  };
 
   const onItemDelete = (event, id) => {
     event.stopPropagation();
@@ -56,23 +57,21 @@ function ActorsList({ actors }) {
       >
         <List>
           {actors.map((actor) => (
-            <Stack key={actor.id}>
+            <Stack key={actor.id} direction='column' spacing={1}>
               <ListItem
-                // component={Link}
-                // to={`/actors/${actor.id}`}
+                onClick={() => onItemOpen(actor.id)}
                 disablePadding
                 sx={itemListStyle}
                 secondaryAction={
                   <Stack direction='row' spacing={1}>
-                    {/* <IconButton
+                    <IconButton
                       edge='end'
                       aria-label='edit'
                       component={Link}
-                      to={`/actors/${actor.id}`}
-                      // onClick={(event) => onActorEdit(event, actor.id)}
+                      to={`/actors/new/${actor.id}`}
                     >
                       <EditIcon />
-                    </IconButton> */}
+                    </IconButton>
                     <IconButton
                       edge='end'
                       aria-label='delete'
