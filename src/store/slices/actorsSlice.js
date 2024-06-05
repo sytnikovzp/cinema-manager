@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 // =============================================
 import { actorsState } from '../../model/initialStates';
 import { ACTORS_SLICE_NAME } from '../../constants';
-
+// =============================================
 import api from '../../api';
 import { setError, setStatus } from '../../services/reducer-service';
 
@@ -70,6 +70,7 @@ export const deleteActor = createAsyncThunk(
 const actorsSlice = createSlice({
   name: ACTORS_SLICE_NAME,
   initialState,
+  reducers: {},
 
   extraReducers: (builder) => {
     // Success
@@ -110,8 +111,4 @@ const actorsSlice = createSlice({
   },
 });
 
-const { actions, reducer } = actorsSlice;
-
-export const { selectActor, addNewActor } = actions;
-
-export default reducer;
+export default actorsSlice.reducer;

@@ -10,7 +10,7 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 // =============================================
 import { buttonMainStyle } from '../../services/styleService';
 // =============================================
-import { getAllActors, addNewActor } from '../../store/slices/actorsSlice';
+import { getAllActors, createActor } from '../../store/slices/actorsSlice';
 // =============================================
 import ActorsItem from './ActorsItem';
 import ActorsList from './ActorsList';
@@ -24,8 +24,8 @@ function Actors() {
     dispatch(getAllActors());
   }, [dispatch]);
 
-  const onNewActor = () => {
-    dispatch(addNewActor());
+  const onCreateActor = () => {
+    dispatch(createActor());
   };
 
   return (
@@ -53,7 +53,7 @@ function Actors() {
             color='success'
             sx={buttonMainStyle}
             startIcon={<GroupAddIcon />}
-            onClick={onNewActor}
+            onClick={onCreateActor}
           >
             Add actor
           </Button>
