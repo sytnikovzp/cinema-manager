@@ -34,6 +34,11 @@ function ActorsList({ actors }) {
     navigate(`/actors/${id}`);
   };
 
+  const onItemEdit = (event, id) => {
+    event.stopPropagation();
+    navigate(`/actors/new/${id}`);
+  };
+
   const onItemDelete = (event, id) => {
     event.stopPropagation();
     dispatch(deleteActor(id));
@@ -67,8 +72,7 @@ function ActorsList({ actors }) {
                     <IconButton
                       edge='end'
                       aria-label='edit'
-                      component={Link}
-                      to={`/actors/new/${actor.id}`}
+                      onClick={(event) => onItemEdit(event, actor.id)}
                     >
                       <EditIcon />
                     </IconButton>
