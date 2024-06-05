@@ -28,10 +28,10 @@ function ActorForm() {
   const dispatch = useDispatch();
   const actors = useSelector((state) => state.actorsList.actors);
 
-  const { id } = useParams();
+  const { actorId } = useParams();
   const navigate = useNavigate();
 
-  const currentActor = actors.find((actor) => actor.id === Number(id));
+  const currentActor = actors.find((actor) => actor.id === Number(actorId));
 
   const goBack = () => {
     navigate('/actors');
