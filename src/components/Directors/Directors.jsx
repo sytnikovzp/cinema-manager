@@ -61,8 +61,8 @@ function Directors() {
 
         <Routes>
           <Route path='/' element={<DirectorsList directors={directors} />} />
-          <Route path=':id' element={<DirectorsItem />} />
-          <Route path='new' element={<Navigate to='/directors/new/:id' />} />
+          <Route path=':directorId' element={<DirectorsItem />} />
+          <Route path='new' element={<Navigate to='/directors/new/:directorId' />} />
         </Routes>
       </Paper>
     </Box>

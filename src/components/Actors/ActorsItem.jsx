@@ -21,9 +21,9 @@ function ActorsItem() {
 
   const actors = useSelector((state) => state.actorsList.actors);
 
-  const { id } = useParams();
+  const { actorId } = useParams();
 
-  const actor = actors.find((actor) => actor.id === Number(id));
+  const actor = actors.find((actor) => actor.id === Number(actorId));
 
   const currentActor = actor ? actor : emptyActor;
 

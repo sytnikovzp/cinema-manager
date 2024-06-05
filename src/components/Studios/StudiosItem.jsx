@@ -21,9 +21,9 @@ function StudiosItem() {
 
   const studios = useSelector((state) => state.studiosList.studios);
 
-  const { id } = useParams();
+  const { studioId } = useParams();
 
-  const studio = studios.find((studio) => studio.id === Number(id));
+  const studio = studios.find((studio) => studio.id === Number(studioId));
 
   const currentStudio = studio ? studio : emptyStudio;
 

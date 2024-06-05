@@ -21,9 +21,9 @@ function MoviesItem() {
 
   const movies = useSelector((state) => state.moviesList.movies);
 
-  const { id } = useParams();
+  const { movieId } = useParams();
 
-  const movie = movies.find((movie) => movie.id === Number(id));
+  const movie = movies.find((movie) => movie.id === Number(movieId));
 
   const currentMovie = movie ? movie : emptyMovie;
 

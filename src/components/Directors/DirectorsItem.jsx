@@ -21,9 +21,9 @@ function DirectorsItem() {
 
   const directors = useSelector((state) => state.directorsList.directors);
 
-  const { id } = useParams();
+  const { directorId } = useParams();
 
-  const director = directors.find((director) => director.id === Number(id));
+  const director = directors.find((director) => director.id === Number(directorId));
 
   const currentDirector = director ? director : emptyDirector;
 
