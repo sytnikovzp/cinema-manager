@@ -1,20 +1,18 @@
-import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import { useNavigate, useParams } from 'react-router-dom';
 // ===================================
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 // ===================================
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import BackspaceIcon from '@mui/icons-material/Backspace';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 // ===================================
 import {
   createActor,
@@ -22,14 +20,9 @@ import {
   deleteActor,
 } from '../../store/slices/actorsSlice';
 import { emptyActor } from '../../constants';
+// ===================================
 import { formItemStyle } from '../../services/styleService';
 import { buttonFormStyle } from '../../services/styleService';
-
-import * as React from 'react';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { PickersDay } from '@mui/x-date-pickers';
 
 function ActorForm() {
   const dispatch = useDispatch();
@@ -40,32 +33,18 @@ function ActorForm() {
 
   const currentActor = actors.find((actor) => actor.id === Number(id));
 
-  const [open, setOpen] = useState(false);
-  const [severity, setSeverity] = useState();
-
-  
-
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpen(false);
-  };
-
   const goBack = () => {
     navigate('/actors');
   };
 
   const schema = Yup.object().shape({
-    // eMail: Yup.string()
-    //   .email('Invalid email address')
-    //   .required('Email is a required field'),
-    // cPhone: Yup.string()
-    //   .matches(
-    //     cPhoneRegExp,
-    //     'The phone must be in the format +38(0XX) XXX-XX-XX'
-    //   )
-    //   .required('Phone is a required field'),
+    fullName: Yup.string().required('Full name is a required field'),
+    nationality: Yup.string().required('Nationality is a required field'),
+    image: Yup.string()
+      .url('Invalid URL')
+      .required('Image URL is a required field'),
+    // birthYear: Yup.date().required('Birth year is a required field'),
+    // movies: Yup.array().required('Movies is a required field'),
   });
 
   const onFormSubmit = (values, { resetForm }) => {
@@ -81,7 +60,8 @@ function ActorForm() {
     dispatch(deleteActor(currentActor.id));
   };
 
-  const renderForm = ({ errors, touched, setFieldValue }) => {
+  const renderForm = ({ values, errors, touched, setFieldValue }) => {
+    console.log(values);
     return (
       <Form id='actor-form'>
         <Box
@@ -102,18 +82,23 @@ function ActorForm() {
               label='Full name'
               variant='filled'
               fullWidth
+              error={touched.fullName && Boolean(errors.fullName)}
+              helperText={touched.fullName && errors.fullName}
             />
             <IconButton onClick={() => setFieldValue('fullName', '')}>
               <BackspaceIcon />
             </IconButton>
           </Box>
           <Box sx={formItemStyle}>
-            <LocalizationProvider dateAdapter={AdapterDayjs} fullWidth>
-              <DatePicker
-                name='birthYear'
-                label='Birth year'
-                variant='filled'
-              />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <Box components={['DatePicker']}>
+                <DatePicker
+                  name='birthYear'
+                  label='Birth year'
+                  // value={values.birthYear}
+                  views={['year']}
+                />
+              </Box>
             </LocalizationProvider>
           </Box>
           <Box sx={formItemStyle}>
@@ -123,8 +108,8 @@ function ActorForm() {
               label='Nationality'
               variant='filled'
               fullWidth
-              // error={touched.eMail && Boolean(errors.eMail)}
-              // helperText={touched.eMail && errors.eMail}
+              error={touched.nationality && Boolean(errors.nationality)}
+              helperText={touched.nationality && errors.nationality}
             />
             <IconButton onClick={() => setFieldValue('nationality', '')}>
               <BackspaceIcon />
@@ -137,8 +122,8 @@ function ActorForm() {
               label='Image URL'
               variant='filled'
               fullWidth
-              // error={touched.cPhone && Boolean(errors.cPhone)}
-              // helperText={touched.cPhone && errors.cPhone}
+              error={touched.image && Boolean(errors.image)}
+              helperText={touched.image && errors.image}
             />
             <IconButton onClick={() => setFieldValue('image', '')}>
               <BackspaceIcon />
@@ -152,8 +137,8 @@ function ActorForm() {
               label='Movies'
               variant='filled'
               fullWidth
-              // error={touched.cPhone && Boolean(errors.cPhone)}
-              // helperText={touched.cPhone && errors.cPhone}
+              error={touched.movies && Boolean(errors.movies)}
+              helperText={touched.movies && errors.movies}
             />
             <IconButton onClick={() => setFieldValue('movies', '')}>
               <BackspaceIcon />
@@ -204,25 +189,8 @@ function ActorForm() {
       >
         {renderForm}
       </Formik>
-
-      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-        <MuiAlert
-          onClose={handleClose}
-          severity={severity}
-          variant='filled'
-          sx={{ width: '100%' }}
-        >
-          {status}
-        </MuiAlert>
-      </Snackbar>
     </>
   );
 }
-
-ActorForm.propTypes = {
-  currentActor: PropTypes.object,
-  onFormSubmit: PropTypes.func,
-  onDelete: PropTypes.func,
-};
 
 export default ActorForm;
