@@ -40,21 +40,10 @@ function ActorForm() {
 
   const currentActor = actors.find((actor) => actor.id === Number(id));
 
-  // const status = useSelector((state) => state.actorList.status);
-
   const [open, setOpen] = useState(false);
   const [severity, setSeverity] = useState();
 
-  // useEffect(() => {
-  //   if (status && status !== null) {
-  //     setOpen(true);
-  //     if (status.toLowerCase().includes('success')) {
-  //       setSeverity('success');
-  //     } else {
-  //       return setSeverity('error');
-  //     }
-  //   }
-  // }, [status]);
+  
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {

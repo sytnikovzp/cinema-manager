@@ -1,4 +1,5 @@
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 // =============================================
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -13,6 +14,8 @@ import IconButton from '@mui/material/IconButton';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
 import { styled } from '@mui/system';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 // =============================================
 import { useNavigate } from 'react-router-dom';
 // =============================================
@@ -30,6 +33,29 @@ function ActorsList({ actors }) {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+
+  const status = useSelector((state) => state.actorsList.status);
+
+  const [open, setOpen] = useState(false);
+  const [severity, setSeverity] = useState();
+
+  useEffect(() => {
+    if (status && status !== null) {
+      setOpen(true);
+      if (status.toLowerCase().includes('success')) {
+        setSeverity('success');
+      } else {
+        return setSeverity('error');
+      }
+    }
+  }, [status]);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
 
   const onItemOpen = (id) => {
     navigate(`/actors/${id}`);
@@ -100,6 +126,17 @@ function ActorsList({ actors }) {
           ))}
         </List>
       </Box>
+
+      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+        <MuiAlert
+          onClose={handleClose}
+          severity={severity}
+          variant='filled'
+          sx={{ width: '100%' }}
+        >
+          {status}
+        </MuiAlert>
+      </Snackbar>
     </>
   );
 }

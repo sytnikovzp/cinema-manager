@@ -10,7 +10,6 @@ import CardMedia from '@mui/material/CardMedia';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 // =============================================
 import { buttonMainStyle } from '../../services/styleService';
-// import { getActorById } from '../../store/slices/actorsSlice';
 import { emptyActor } from '../../constants';
 
 function ActorsItem() {
