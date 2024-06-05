@@ -58,8 +58,8 @@ function ActorsList({ actors }) {
           {actors.map((actor) => (
             <Stack key={actor.id}>
               <ListItem
-                component={Link}
-                to={`/actors/${actor.id}`}
+                // component={Link}
+                // to={`/actors/${actor.id}`}
                 disablePadding
                 sx={itemListStyle}
                 secondaryAction={
