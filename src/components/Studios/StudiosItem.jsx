@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 // =============================================
 import Box from '@mui/material/Box';
@@ -11,30 +10,24 @@ import CardMedia from '@mui/material/CardMedia';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 // =============================================
 import { buttonMainStyle } from '../../services/styleService';
-import { getStudioById } from '../../store/slices/studiosSlice';
+import { emptyStudio } from '../../constants';
 
 function StudiosItem() {
-  const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   const goBack = () => {
     navigate(-1);
   };
 
-  const { id } = useParams();
-
   const studios = useSelector((state) => state.studiosList.studios);
 
-  const { title, foundationYear, location, logo, movies } = studios.find(
-    (studio) => studio.id === Number(id)
-  );
+  const { id } = useParams();
 
-  const formattedMovies = movies.join(', ');
+  const studio = studios.find((studio) => studio.id === Number(id));
 
-  useEffect(() => {
-    dispatch(getStudioById(id));
-  }, [dispatch, id]);
+  const currentStudio = studio ? studio : emptyStudio;
+
+  const formattedMovies = currentStudio.movies.join(', ');
 
   return (
     <>
@@ -73,8 +66,8 @@ function StudiosItem() {
               <CardMedia
                 component='img'
                 height='100%'
-                image={logo}
-                alt={title}
+                image={currentStudio.logo}
+                alt={currentStudio.title}
               />
             </Card>
           </Box>
@@ -86,13 +79,13 @@ function StudiosItem() {
             }}
           >
             <Typography variant='h6' component='div'>
-              Title: {title}
+              Title: {currentStudio.title}
             </Typography>
             <Typography variant='body1' component='div'>
-              Foundation Year: {foundationYear}
+              Foundation Year: {currentStudio.foundationYear}
             </Typography>
             <Typography variant='body1' component='div'>
-              Location: {location}
+              Location: {currentStudio.location}
             </Typography>
             <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
               Movies: {formattedMovies}

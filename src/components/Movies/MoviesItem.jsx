@@ -90,7 +90,7 @@ function MoviesItem() {
               Actors: {formattedActors}
             </Typography>
             <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
-              Movies: {formattedStudios}
+              Studios: {formattedStudios}
             </Typography>
           </Box>
         </Box>
