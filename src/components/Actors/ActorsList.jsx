@@ -1,7 +1,9 @@
 import { useDispatch } from 'react-redux';
 // =============================================
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
@@ -12,11 +14,10 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
 import { styled } from '@mui/system';
 // =============================================
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // =============================================
 import { deleteActor } from '../../store/slices/actorsSlice';
 import { itemListStyle } from '../../services/styleService';
-import { List, Stack } from '@mui/material';
 
 const StyledAvatar = styled(Avatar)({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
@@ -62,7 +63,7 @@ function ActorsList({ actors }) {
       >
         <List>
           {actors.map((actor) => (
-            <Stack key={actor.id} direction='column' spacing={1}>
+            <Stack key={actor.id} direction='column' marginBottom={1}>
               <ListItem
                 onClick={() => onItemOpen(actor.id)}
                 disablePadding
