@@ -10,7 +10,7 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 // =============================================
 import { buttonMainStyle } from '../../services/styleService';
 // =============================================
-import { getAllDirectors, addNewDirector } from '../../store/slices/directorsSlice';
+import { getAllDirectors, createDirector } from '../../store/slices/directorsSlice';
 // =============================================
 import DirectorsItem from './DirectorsItem';
 import DirectorsList from './DirectorsList';
@@ -19,14 +19,13 @@ function Directors() {
   const dispatch = useDispatch();
 
   const directors = useSelector((state) => state.directorsList.directors);
-  const currentDirector = useSelector((state) => state.directorsList.currentDirector);
 
   useEffect(() => {
     dispatch(getAllDirectors());
   }, [dispatch]);
 
-  const onNewDirector = () => {
-    dispatch(addNewDirector());
+  const onCreateDirector = () => {
+    dispatch(createDirector());
   };
 
   return (
@@ -49,24 +48,20 @@ function Directors() {
           <Button
             component={Link}
             to='new'
-            id='new-btn'
             type='button'
             variant='contained'
             color='success'
-            style={buttonMainStyle}
+            sx={buttonMainStyle}
             startIcon={<GroupAddIcon />}
-            onClick={onNewDirector}
+            onClick={onCreateDirector}
           >
             Add director
           </Button>
         </Stack>
 
         <Routes>
-          <Route path=':id' element={<DirectorsItem id={currentDirector.id} />} />
-          <Route
-            path='/'
-            element={<DirectorsList directors={directors} currentDirector={currentDirector} />}
-          />
+          <Route path='/' element={<DirectorsList directors={directors} />} />
+          <Route path=':id' element={<DirectorsItem />} />
           <Route path='new' element={<Navigate to='/directors/new/:id' />} />
         </Routes>
       </Paper>

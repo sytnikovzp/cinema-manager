@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 // =============================================
 import Box from '@mui/material/Box';
@@ -11,30 +10,24 @@ import CardMedia from '@mui/material/CardMedia';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 // =============================================
 import { buttonMainStyle } from '../../services/styleService';
-import { getDirectorById } from '../../store/slices/directorsSlice';
+import { emptyDirector } from '../../constants';
 
 function DirectorsItem() {
-  const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   const goBack = () => {
     navigate(-1);
   };
 
-  const { id } = useParams();
-
   const directors = useSelector((state) => state.directorsList.directors);
 
-  const { fullName, birthYear, nationality, image, movies } = directors.find(
-    (director) => director.id === Number(id)
-  );
+  const { id } = useParams();
 
-  const formattedMovies = movies.join(', ');
+  const director = directors.find((director) => director.id === Number(id));
 
-  useEffect(() => {
-    dispatch(getDirectorById(id));
-  }, [dispatch, id]);
+  const currentDirector = director ? director : emptyDirector;
+
+  const formattedMovies = currentDirector.movies.join(', ');
 
   return (
     <>
@@ -73,8 +66,8 @@ function DirectorsItem() {
               <CardMedia
                 component='img'
                 height='100%'
-                image={image}
-                alt={fullName}
+                image={currentDirector.image}
+                alt={currentDirector.fullName}
               />
             </Card>
           </Box>
@@ -86,13 +79,13 @@ function DirectorsItem() {
             }}
           >
             <Typography variant='h6' component='div'>
-              FullName: {fullName}
+              FullName: {currentDirector.fullName}
             </Typography>
             <Typography variant='body1' component='div'>
-              Birth Year: {birthYear}
+              Birth Year: {currentDirector.birthYear}
             </Typography>
             <Typography variant='body1' component='div'>
-              Nationality: {nationality}
+              Nationality: {currentDirector.nationality}
             </Typography>
             <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
               Movies: {formattedMovies}
