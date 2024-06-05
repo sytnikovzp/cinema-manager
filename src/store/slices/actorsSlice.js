@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 // =============================================
 import { actorsState } from '../../model/initialStates';
 import { ACTORS_SLICE_NAME } from '../../constants';
-import { emptyActor } from '../../constants';
 
 import api from '../../api';
 import { setError, setStatus } from '../../services/reducer-service';
@@ -67,10 +66,6 @@ export const deleteActor = createAsyncThunk(
     }
   }
 );
-
-function createEmptyActor() {
-  return emptyActor;
-}
 
 const actorsSlice = createSlice({
   name: ACTORS_SLICE_NAME,
