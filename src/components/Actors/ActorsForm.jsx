@@ -174,7 +174,6 @@ function ActorForm() {
           <Stack direction='row' justifyContent='center' spacing={1}>
             <Button
               type='submit'
-              id='save-btn'
               variant='contained'
               color='success'
               style={buttonFormStyle}
@@ -183,7 +182,6 @@ function ActorForm() {
             </Button>
 
             <Button
-              id='delButton'
               type='button'
               variant='contained'
               color='error'
@@ -194,8 +192,7 @@ function ActorForm() {
             </Button>
 
             <Button
-              type='submit'
-              id='save-btn'
+              type='button'
               variant='contained'
               style={buttonFormStyle}
               onClick={goBack}
