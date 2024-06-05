@@ -10,7 +10,7 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 // =============================================
 import { buttonMainStyle } from '../../services/styleService';
 // =============================================
-import { getAllMovies, addNewMovie } from '../../store/slices/moviesSlice';
+import { getAllMovies, createMovie } from '../../store/slices/moviesSlice';
 // =============================================
 import MoviesItem from './MoviesItem';
 import MoviesList from './MoviesList';
@@ -19,14 +19,13 @@ function Movies() {
   const dispatch = useDispatch();
 
   const movies = useSelector((state) => state.moviesList.movies);
-  const currentMovie = useSelector((state) => state.moviesList.currentMovie);
 
   useEffect(() => {
     dispatch(getAllMovies());
   }, [dispatch]);
 
-  const onNewMovie = () => {
-    dispatch(addNewMovie());
+  const onCreateMovie = () => {
+    dispatch(createMovie());
   };
 
   return (
@@ -49,24 +48,20 @@ function Movies() {
           <Button
             component={Link}
             to='new'
-            id='new-btn'
             type='button'
             variant='contained'
             color='success'
-            style={buttonMainStyle}
+            sx={buttonMainStyle}
             startIcon={<GroupAddIcon />}
-            onClick={onNewMovie}
+            onClick={onCreateMovie}
           >
             Add movie
           </Button>
         </Stack>
 
         <Routes>
-          <Route path=':id' element={<MoviesItem id={currentMovie.id} />} />
-          <Route
-            path='/'
-            element={<MoviesList movies={movies} currentMovie={currentMovie} />}
-          />
+          <Route path='/' element={<MoviesList movies={movies} />} />
+          <Route path=':id' element={<MoviesItem />} />
           <Route path='new' element={<Navigate to='/movies/new/:id' />} />
         </Routes>
       </Paper>

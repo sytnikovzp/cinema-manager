@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 // =============================================
 import Box from '@mui/material/Box';
@@ -11,32 +10,26 @@ import CardMedia from '@mui/material/CardMedia';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 // =============================================
 import { buttonMainStyle } from '../../services/styleService';
-import { getMovieById } from '../../store/slices/moviesSlice';
+import { emptyMovie } from '../../constants';
 
 function MoviesItem() {
-  const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   const goBack = () => {
     navigate(-1);
   };
 
-  const { id } = useParams();
-
   const movies = useSelector((state) => state.moviesList.movies);
 
-  const { title, directors, actors, studios, poster } = movies.find(
-    (movie) => movie.id === Number(id)
-  );
+  const { id } = useParams();
 
-  const formattedDirectors = directors.join(', ');
-  const formattedActors = actors.join(', ');
-  const formattedStudios = studios.join(', ');
+  const movie = movies.find((movie) => movie.id === Number(id));
 
-  useEffect(() => {
-    dispatch(getMovieById(id));
-  }, [dispatch, id]);
+  const currentMovie = movie ? movie : emptyMovie;
+
+  const formattedDirectors = currentMovie.directors.join(', ');
+  const formattedActors = currentMovie.actors.join(', ');
+  const formattedStudios = currentMovie.studios.join(', ');
 
   return (
     <>
@@ -75,8 +68,8 @@ function MoviesItem() {
               <CardMedia
                 component='img'
                 height='100%'
-                image={poster}
-                alt={title}
+                image={currentMovie.poster}
+                alt={currentMovie.title}
               />
             </Card>
           </Box>
@@ -88,7 +81,7 @@ function MoviesItem() {
             }}
           >
             <Typography variant='h6' component='div'>
-              Title: {title}
+              Title: {currentMovie.title}
             </Typography>
             <Typography variant='body1' component='div'>
               Directors: {formattedDirectors}
@@ -97,7 +90,7 @@ function MoviesItem() {
               Actors: {formattedActors}
             </Typography>
             <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
-              Studios: {formattedStudios}
+              Movies: {formattedStudios}
             </Typography>
           </Box>
         </Box>
