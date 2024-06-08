@@ -10,7 +10,8 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
-// import ListItemButton from '@mui/material/ListItemButton';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
@@ -27,10 +28,9 @@ import { buttonMainStyle } from '../../services/styleService';
 import {
   getAllActors,
   createActor,
-  deleteActor,
   updateActor,
+  deleteActor,
 } from '../../store/slices/actorsSlice';
-import { ListItemSecondaryAction } from '@mui/material';
 
 const StyledAvatar = styled(Avatar)({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
@@ -120,12 +120,15 @@ function ActorsList() {
                 disablePadding
                 sx={itemListStyle}
               >
-                <ListItemAvatar>
-                  <StyledAvatar src={actor.image} />
-                </ListItemAvatar>
-                <ListItemText
-                  primary={`${actor.fullName}, ${actor.nationality}`}
-                />
+                <ListItemButton sx={{ borderRadius: 5 }}>
+                  <ListItemAvatar>
+                    <StyledAvatar src={actor.image} />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={`${actor.fullName}, ${actor.nationality}`}
+                  />
+                </ListItemButton>
+
                 <ListItemSecondaryAction>
                   <Stack direction='row' spacing={1}>
                     <IconButton

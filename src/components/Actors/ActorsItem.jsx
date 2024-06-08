@@ -16,7 +16,7 @@ function ActorsItem() {
   const navigate = useNavigate();
 
   const goBack = () => {
-    navigate(-1);
+    navigate('/actors');
   };
 
   const actors = useSelector((state) => state.actorsList.actors);
