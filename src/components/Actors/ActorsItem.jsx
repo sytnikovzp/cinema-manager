@@ -1,5 +1,5 @@
-import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 // =============================================
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -8,12 +8,16 @@ import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import EditIcon from '@mui/icons-material/Edit';
 // =============================================
 import { buttonMainStyle } from '../../services/styleService';
 import { emptyActor } from '../../constants';
+import { useEffect } from 'react';
+import { getAllActors, updateActor } from '../../store/slices/actorsSlice';
 
 function ActorsItem() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const goBack = () => {
     navigate('/actors');
@@ -23,26 +27,50 @@ function ActorsItem() {
 
   const { actorId } = useParams();
 
+  useEffect(() => {
+    dispatch(getAllActors());
+  }, [dispatch]);
+
   const actor = actors.find((actor) => Number(actor.id) === Number(actorId));
 
   const currentActor = actor ? actor : emptyActor;
 
-  const formattedMovies = currentActor.movies.join(', ');
+  const formattedMovies = currentActor.movies
+    ? currentActor.movies.join(', ')
+    : 'No movies available';
+
+  const onItemEdit = (event, actor) => {
+    event.stopPropagation();
+    dispatch(updateActor(actor));
+  };
 
   return (
     <>
-      <Stack direction='row' justifyContent='left'>
+      <Stack direction='row' justifyContent='space-between'>
         <Button
           id='goBack-btn'
           type='button'
           variant='contained'
           color='info'
-          style={buttonMainStyle}
-          sx={{ textAlign: 'left' }}
+          sx={buttonMainStyle}
           startIcon={<KeyboardBackspaceIcon />}
           onClick={goBack}
         >
           Go back
+        </Button>
+
+        <Button
+          id='goBack-btn'
+          type='button'
+          variant='contained'
+          color='success'
+          sx={buttonMainStyle}
+          startIcon={<EditIcon />}
+          onClick={onItemEdit}
+          component={Link}
+          to={`/actors/new/${actor.id}`}
+        >
+          Edit
         </Button>
       </Stack>
 
