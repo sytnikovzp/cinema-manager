@@ -127,26 +127,28 @@ function ActorsList() {
                   primary={`${actor.fullName}, ${actor.nationality}`}
                 />
                 <ListItemSecondaryAction>
-                  <IconButton
-                    edge='end'
-                    aria-label='edit'
-                    component={Link}
-                    to={`/actors/new/${actor.id}`}
-                    onClick={(event) => {
-                      onItemEdit(event, actor);
-                    }}
-                  >
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton
-                    edge='end'
-                    aria-label='delete'
-                    onClick={(event) => {
-                      onItemDelete(event, actor.id);
-                    }}
-                  >
-                    <HighlightOffIcon />
-                  </IconButton>
+                  <Stack direction='row' spacing={1}>
+                    <IconButton
+                      edge='end'
+                      aria-label='edit'
+                      component={Link}
+                      to={`/actors/new/${actor.id}`}
+                      onClick={(event) => {
+                        onItemEdit(event, actor);
+                      }}
+                    >
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton
+                      edge='end'
+                      aria-label='delete'
+                      onClick={(event) => {
+                        onItemDelete(event, actor.id);
+                      }}
+                    >
+                      <HighlightOffIcon />
+                    </IconButton>
+                  </Stack>
                 </ListItemSecondaryAction>
               </ListItem>
             </Stack>
