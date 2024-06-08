@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // =============================================
+import { Link, useNavigate } from 'react-router-dom';
+// =============================================
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -11,16 +13,22 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
 import { styled } from '@mui/system';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 // =============================================
-import { useNavigate } from 'react-router-dom';
-// =============================================
-import { deleteActor } from '../../store/slices/actorsSlice';
 import { itemListStyle } from '../../services/styleService';
+import { buttonMainStyle } from '../../services/styleService';
+// =============================================
+import {
+  getAllActors,
+  createActor,
+  deleteActor,
+} from '../../store/slices/actorsSlice';
 
 const StyledAvatar = styled(Avatar)({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
@@ -29,15 +37,20 @@ const StyledAvatar = styled(Avatar)({
   },
 });
 
-function ActorsList({ actors }) {
+function ActorsList() {
   const dispatch = useDispatch();
+
+  const actors = useSelector((state) => state.actorsList.actors);
+  const status = useSelector((state) => state.actorsList.status);
 
   const navigate = useNavigate();
 
-  const status = useSelector((state) => state.actorsList.status);
-
   const [open, setOpen] = useState(false);
   const [severity, setSeverity] = useState();
+
+  useEffect(() => {
+    dispatch(getAllActors());
+  }, [dispatch]);
 
   useEffect(() => {
     if (status && status !== null) {
@@ -61,6 +74,10 @@ function ActorsList({ actors }) {
     navigate(`/actors/${id}`);
   };
 
+  const onCreateActor = () => {
+    dispatch(createActor());
+  };
+
   const onItemEdit = (event, id) => {
     event.stopPropagation();
     navigate(`/actors/new/${id}`);
@@ -73,13 +90,24 @@ function ActorsList({ actors }) {
 
   return (
     <>
-      <Typography
-        variant='h4'
-        component='h2'
-        sx={{ marginTop: -7, textAlign: 'left' }}
-      >
-        Actors list
-      </Typography>
+      <Stack direction='row' justifyContent='space-between'>
+        <Typography variant='h4' component='h2'>
+          Actors list
+        </Typography>
+
+        <Button
+          component={Link}
+          to='new'
+          type='button'
+          variant='contained'
+          color='success'
+          sx={buttonMainStyle}
+          startIcon={<GroupAddIcon />}
+          onClick={onCreateActor}
+        >
+          Add actor
+        </Button>
+      </Stack>
 
       <Box
         sx={{

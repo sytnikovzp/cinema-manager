@@ -60,9 +60,9 @@ function Movies() {
         </Stack>
 
         <Routes>
-          <Route path='/' element={<MoviesList movies={movies} />} />
+          <Route path='/' element={<MoviesList />} />
           <Route path=':movieId' element={<MoviesItem />} />
-          <Route path='new' element={<Navigate to='/movies/new/:movieId' />} />
+          <Route path='new' element={<Navigate to='movies/new/:movieId' />} />
         </Routes>
       </Paper>
     </Box>

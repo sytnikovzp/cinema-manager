@@ -38,7 +38,7 @@ function ActorsItem() {
           variant='contained'
           color='info'
           style={buttonMainStyle}
-          sx={{ marginTop: -8, textAlign: 'left' }}
+          sx={{ textAlign: 'left' }}
           startIcon={<KeyboardBackspaceIcon />}
           onClick={goBack}
         >

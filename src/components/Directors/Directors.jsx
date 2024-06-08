@@ -10,7 +10,10 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 // =============================================
 import { buttonMainStyle } from '../../services/styleService';
 // =============================================
-import { getAllDirectors, createDirector } from '../../store/slices/directorsSlice';
+import {
+  getAllDirectors,
+  createDirector,
+} from '../../store/slices/directorsSlice';
 // =============================================
 import DirectorsItem from './DirectorsItem';
 import DirectorsList from './DirectorsList';
@@ -60,9 +63,12 @@ function Directors() {
         </Stack>
 
         <Routes>
-          <Route path='/' element={<DirectorsList directors={directors} />} />
+          <Route path='/' element={<DirectorsList />} />
           <Route path=':directorId' element={<DirectorsItem />} />
-          <Route path='new' element={<Navigate to='/directors/new/:directorId' />} />
+          <Route
+            path='new'
+            element={<Navigate to='directors/new/:directorId' />}
+          />
         </Routes>
       </Paper>
     </Box>

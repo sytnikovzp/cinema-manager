@@ -60,9 +60,9 @@ function Studios() {
         </Stack>
 
         <Routes>
-          <Route path='/' element={<StudiosList studios={studios} />} />
+          <Route path='/' element={<StudiosList />} />
           <Route path=':studioId' element={<StudiosItem />} />
-          <Route path='new' element={<Navigate to='/studios/new/:studioId' />} />
+          <Route path='new' element={<Navigate to='studios/new/:studioId' />} />
         </Routes>
       </Paper>
     </Box>
