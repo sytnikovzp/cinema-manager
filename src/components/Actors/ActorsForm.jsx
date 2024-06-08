@@ -31,18 +31,18 @@ function ActorForm() {
   const { actorId } = useParams();
   const navigate = useNavigate();
 
-  const currentActor = actors.find((actor) => Number(actor.id) === Number(actorId));
+  const currentActor = actors.find(
+    (actor) => Number(actor.id) === Number(actorId)
+  );
 
   const goBack = () => {
     navigate('/actors');
   };
 
   const schema = Yup.object().shape({
-    fullName: Yup.string().required('Full name is a required field'),
-    nationality: Yup.string().required('Nationality is a required field'),
-    image: Yup.string()
-      .url('Invalid URL')
-      .required('Image URL is a required field'),
+    fullName: Yup.string(),
+    nationality: Yup.string(),
+    image: Yup.string().url('Invalid URL'),
     // birthYear: Yup.date().required('Birth year is a required field'),
     // movies: Yup.array().required('Movies is a required field'),
   });
@@ -61,7 +61,7 @@ function ActorForm() {
   };
 
   const renderForm = ({ values, errors, touched, setFieldValue }) => {
-    console.log(values);
+    // console.log(values);
     return (
       <Form id='actor-form'>
         <Box
@@ -81,6 +81,7 @@ function ActorForm() {
               as={TextField}
               label='Full name'
               variant='filled'
+              value={values.fullName}
               fullWidth
               error={touched.fullName && Boolean(errors.fullName)}
               helperText={touched.fullName && errors.fullName}

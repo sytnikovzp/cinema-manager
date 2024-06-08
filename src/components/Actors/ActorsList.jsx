@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // =============================================
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // =============================================
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -10,7 +10,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
-import ListItemButton from '@mui/material/ListItemButton';
+// import ListItemButton from '@mui/material/ListItemButton';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
@@ -28,7 +28,9 @@ import {
   getAllActors,
   createActor,
   deleteActor,
+  updateActor,
 } from '../../store/slices/actorsSlice';
+import { ListItemSecondaryAction } from '@mui/material';
 
 const StyledAvatar = styled(Avatar)({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
@@ -42,8 +44,6 @@ function ActorsList() {
 
   const actors = useSelector((state) => state.actorsList.actors);
   const status = useSelector((state) => state.actorsList.status);
-
-  const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
   const [severity, setSeverity] = useState();
@@ -70,17 +70,13 @@ function ActorsList() {
     setOpen(false);
   };
 
-  const onItemOpen = (id) => {
-    navigate(`/actors/${id}`);
-  };
-
   const onCreateActor = () => {
     dispatch(createActor());
   };
 
-  const onItemEdit = (event, id) => {
+  const onItemEdit = (event, actor) => {
     event.stopPropagation();
-    navigate(`/actors/new/${id}`);
+    dispatch(updateActor(actor));
   };
 
   const onItemDelete = (event, id) => {
@@ -119,36 +115,39 @@ function ActorsList() {
           {actors.map((actor) => (
             <Stack key={actor.id} direction='column' marginBottom={1}>
               <ListItem
-                onClick={() => onItemOpen(actor.id)}
+                component={Link}
+                to={`/actors/${actor.id}`}
                 disablePadding
                 sx={itemListStyle}
-                secondaryAction={
-                  <Stack direction='row' spacing={1}>
-                    <IconButton
-                      edge='end'
-                      aria-label='edit'
-                      onClick={(event) => onItemEdit(event, actor.id)}
-                    >
-                      <EditIcon />
-                    </IconButton>
-                    <IconButton
-                      edge='end'
-                      aria-label='delete'
-                      onClick={(event) => onItemDelete(event, actor.id)}
-                    >
-                      <HighlightOffIcon />
-                    </IconButton>
-                  </Stack>
-                }
               >
-                <ListItemButton>
-                  <ListItemAvatar>
-                    <StyledAvatar src={actor.image} />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={`${actor.fullName}, ${actor.nationality}`}
-                  />
-                </ListItemButton>
+                <ListItemAvatar>
+                  <StyledAvatar src={actor.image} />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={`${actor.fullName}, ${actor.nationality}`}
+                />
+                <ListItemSecondaryAction>
+                  <IconButton
+                    edge='end'
+                    aria-label='edit'
+                    component={Link}
+                    to={`/actors/new/${actor.id}`}
+                    onClick={(event) => {
+                      onItemEdit(event, actor);
+                    }}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton
+                    edge='end'
+                    aria-label='delete'
+                    onClick={(event) => {
+                      onItemDelete(event, actor.id);
+                    }}
+                  >
+                    <HighlightOffIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
               </ListItem>
             </Stack>
           ))}

@@ -26,7 +26,7 @@ function Actors() {
         <Routes>
           <Route path='/' element={<ActorsList />} />
           <Route path=':actorId' element={<ActorsItem />} />
-          <Route path='new' element={<Navigate to='actors/new/:actorId' />} />
+          <Route path='new' element={<Navigate to='/actors/new/:actorId' />} />
         </Routes>
       </Paper>
     </Box>
