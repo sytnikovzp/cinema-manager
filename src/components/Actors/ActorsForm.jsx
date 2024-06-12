@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 // =============================================
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, FieldArray } from 'formik';
 import * as Yup from 'yup';
 // =============================================
 import Box from '@mui/material/Box';
@@ -18,6 +18,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import SaveIcon from '@mui/icons-material/Save';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from '@mui/icons-material/Add';
 // =============================================
 import {
   getAllActors,
@@ -41,7 +43,7 @@ function ActorForm() {
   const navigate = useNavigate();
 
   const goBack = () => {
-    navigate('/actors');
+    navigate(`/actors/${id}`);
   };
 
   const schema = Yup.object().shape({
@@ -49,7 +51,7 @@ function ActorForm() {
     birthYear: Yup.date(),
     nationality: Yup.string(),
     image: Yup.string().url('Invalid URL'),
-    // movies: Yup.array().required('Movies is a required field'),
+    movies: Yup.array().required('Movies is a required field'),
   });
 
   const onFormSubmit = (values, { resetForm }) => {
@@ -139,7 +141,44 @@ function ActorForm() {
             </IconButton>
           </Box>
           <Box sx={formItemStyle}>
-            <Field
+            <FieldArray name='movies'>
+              {({
+                push,
+                remove,
+                form: {
+                  values: { movies },
+                },
+              }) => {
+                return (
+                  <Stack spacing={2}>
+                    {movies.map((movie, index) => {
+                      return (
+                        <Stack spacing={2} key={index} direction='row'>
+                          <Field
+                            name={`movies[${index}]`}
+                            as={TextField}
+                            label='Movie'
+                            fullWidth
+                            error={touched.movies && Boolean(errors.movies)}
+                            helperText={touched.movies && errors.movies}
+                          />
+                          {index > 0 && (
+                            <IconButton onClick={() => remove(index)}>
+                              <RemoveIcon />
+                            </IconButton>
+                          )}
+                          <IconButton onClick={() => push('')}>
+                            <AddIcon />
+                          </IconButton>
+                        </Stack>
+                      );
+                    })}
+                  </Stack>
+                );
+              }}
+            </FieldArray>
+
+            {/* <Field
               name='movies'
               as={TextField}
               label='Movies'
@@ -149,7 +188,7 @@ function ActorForm() {
             />
             <IconButton onClick={() => setFieldValue('movies', '')}>
               <BackspaceIcon />
-            </IconButton>
+            </IconButton> */}
           </Box>
           <Stack direction='row' justifyContent='center' spacing={1}>
             <Button
