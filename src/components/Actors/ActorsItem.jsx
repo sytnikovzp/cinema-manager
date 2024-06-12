@@ -13,7 +13,7 @@ import EditIcon from '@mui/icons-material/Edit';
 // =============================================
 import { buttonMainStyle } from '../../services/styleService';
 import { emptyActor } from '../../constants';
-import { getAllActors, updateActor } from '../../store/slices/actorsSlice';
+import { getAllActors } from '../../store/slices/actorsSlice';
 
 function ActorsItem() {
   const navigate = useNavigate();
@@ -39,11 +39,6 @@ function ActorsItem() {
     ? currentActor.movies.join(', ')
     : 'No movies available';
 
-  const onItemEdit = (event, actor) => {
-    event.stopPropagation();
-    dispatch(updateActor(actor));
-  };
-
   return (
     <>
       <Stack direction='row' justifyContent='space-between'>
@@ -66,7 +61,6 @@ function ActorsItem() {
           color='success'
           sx={buttonMainStyle}
           startIcon={<EditIcon />}
-          onClick={onItemEdit}
           component={Link}
           to={`/actors/new/${id}`}
         >

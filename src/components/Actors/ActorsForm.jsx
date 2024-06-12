@@ -51,15 +51,16 @@ function ActorForm() {
     birthYear: Yup.date(),
     nationality: Yup.string(),
     image: Yup.string().url('Invalid URL'),
-    movies: Yup.array().required('Movies is a required field'),
+    movies: Yup.array(),
   });
 
-  const onFormSubmit = (values, { resetForm }) => {
+  const onFormSubmit = (values) => {
     if (values.id) {
       dispatch(updateActor(values));
+      navigate(`/actors/${id}`);
     } else {
       dispatch(createActor(values));
-      resetForm();
+      navigate(`/actors`);
     }
   };
 
@@ -177,18 +178,6 @@ function ActorForm() {
                 );
               }}
             </FieldArray>
-
-            {/* <Field
-              name='movies'
-              as={TextField}
-              label='Movies'
-              fullWidth
-              error={touched.movies && Boolean(errors.movies)}
-              helperText={touched.movies && errors.movies}
-            />
-            <IconButton onClick={() => setFieldValue('movies', '')}>
-              <BackspaceIcon />
-            </IconButton> */}
           </Box>
           <Stack direction='row' justifyContent='center' spacing={1}>
             <Button

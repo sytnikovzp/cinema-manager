@@ -27,8 +27,6 @@ import { buttonMainStyle } from '../../services/styleService';
 // =============================================
 import {
   getAllActors,
-  createActor,
-  updateActor,
   deleteActor,
 } from '../../store/slices/actorsSlice';
 
@@ -70,15 +68,6 @@ function ActorsList() {
     setOpen(false);
   };
 
-  const onCreateActor = () => {
-    dispatch(createActor());
-  };
-
-  const onItemEdit = (event, actor) => {
-    event.stopPropagation();
-    dispatch(updateActor(actor));
-  };
-
   const onItemDelete = (event, id) => {
     event.stopPropagation();
     dispatch(deleteActor(id));
@@ -99,7 +88,6 @@ function ActorsList() {
           color='success'
           sx={buttonMainStyle}
           startIcon={<GroupAddIcon />}
-          onClick={onCreateActor}
         >
           Add actor
         </Button>
@@ -136,9 +124,6 @@ function ActorsList() {
                       aria-label='edit'
                       component={Link}
                       to={`/actors/new/${actor.id}`}
-                      onClick={(event) => {
-                        onItemEdit(event, actor);
-                      }}
                     >
                       <EditIcon />
                     </IconButton>
