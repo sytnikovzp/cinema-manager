@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // =============================================
 import { Link } from 'react-router-dom';
@@ -26,6 +26,8 @@ import { itemListStyle } from '../../services/styleService';
 import { buttonMainStyle } from '../../services/styleService';
 // =============================================
 import { getAllActors, deleteActor } from '../../store/slices/actorsSlice';
+// =============================================
+import useSnackbar from '../../hooks';
 
 const StyledAvatar = styled(Avatar)({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
@@ -40,30 +42,27 @@ function ActorsList() {
   const actors = useSelector((state) => state.actorsList.actors);
   const status = useSelector((state) => state.actorsList.status);
 
-  const [open, setOpen] = useState(false);
-  const [severity, setSeverity] = useState();
+  const { snackbar, showSnackbar, handleClose } = useSnackbar();
+
+  const prevStatusRef = useRef();
 
   useEffect(() => {
     dispatch(getAllActors());
   }, [dispatch]);
 
   useEffect(() => {
-    if (status && status !== null) {
-      setOpen(true);
-      if (status.toLowerCase().includes('success')) {
-        setSeverity('success');
-      } else {
-        return setSeverity('error');
-      }
-    }
-  }, [status]);
+    const prevStatus = prevStatusRef.current;
+    const currentStatus = status;
 
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
+    if (currentStatus && currentStatus !== prevStatus) {
+      const severity = currentStatus.toLowerCase().includes('success')
+        ? 'success'
+        : 'error';
+      showSnackbar(currentStatus, severity);
     }
-    setOpen(false);
-  };
+
+    prevStatusRef.current = currentStatus;
+  }, [status, showSnackbar]);
 
   const onItemDelete = (event, id) => {
     event.stopPropagation();
@@ -143,14 +142,18 @@ function ActorsList() {
         </List>
       </Box>
 
-      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={2000}
+        onClose={handleClose}
+      >
         <Alert
           onClose={handleClose}
-          severity={severity}
+          severity={snackbar.severity}
           variant='filled'
           sx={{ width: '100%' }}
         >
-          {status}
+          {snackbar.message}
         </Alert>
       </Snackbar>
     </>
