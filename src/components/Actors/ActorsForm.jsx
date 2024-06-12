@@ -42,8 +42,6 @@ function ActorForm() {
   const { id } = useParams();
   const currentActor = actors.find((actor) => actor.id === Number(id));
 
-  console.log(id);
-
   const navigate = useNavigate();
 
   const goBack = () => {
@@ -58,7 +56,7 @@ function ActorForm() {
     fullName: Yup.string().required('Full name is a required field'),
     birthYear: Yup.date(),
     nationality: Yup.string(),
-    image: Yup.string().url('Invalid URL'),
+    image: Yup.string().url('Invalid URL image'),
     movies: Yup.array(),
   });
 

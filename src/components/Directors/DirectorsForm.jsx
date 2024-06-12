@@ -20,6 +20,7 @@ import ClearAllIcon from '@mui/icons-material/ClearAll';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
+import { Typography } from '@mui/material';
 // =============================================
 import {
   getAllDirectors,
@@ -40,17 +41,22 @@ function DirectorForm() {
 
   const { id } = useParams();
   const currentDirector = directors.find((director) => director.id === Number(id));
+
   const navigate = useNavigate();
 
   const goBack = () => {
-    navigate(`/directors/${id}`);
+    if (id !== ':id') {
+      navigate(`/directors/${id}`);
+    } else {
+      navigate(`/directors`);
+    }
   };
 
   const schema = Yup.object().shape({
     fullName: Yup.string().required('Full name is a required field'),
     birthYear: Yup.date(),
     nationality: Yup.string(),
-    image: Yup.string().url('Invalid URL'),
+    image: Yup.string().url('Invalid URL image'),
     movies: Yup.array(),
   });
 
@@ -149,34 +155,46 @@ function DirectorForm() {
                 form: {
                   values: { movies },
                 },
-              }) => {
-                return (
-                  <Stack spacing={2} sx={{ width: '100%' }}>
-                    {movies.map((movie, index) => {
-                      return (
-                        <Stack spacing={2} key={index} direction='row'>
-                          <Field
-                            name={`movies[${index}]`}
-                            as={TextField}
-                            label='Movie'
-                            fullWidth
-                            error={touched.movies && Boolean(errors.movies)}
-                            helperText={touched.movies && errors.movies}
-                          />
-                          {index > 0 && (
-                            <IconButton onClick={() => remove(index)}>
-                              <RemoveIcon />
-                            </IconButton>
-                          )}
-                          <IconButton onClick={() => push('')}>
-                            <AddIcon />
+              }) => (
+                <>
+                  <Stack
+                    component='fieldset'
+                    form='director-form'
+                    spacing={2}
+                    sx={{
+                      width: '100%',
+                      paddingLeft: '10px',
+                      paddingRight: '10px',
+                      paddingBottom: '10px',
+                      borderRadius: '5px',
+                    }}
+                  >
+                    <Typography component='legend' variant='h6' gutterBottom>
+                      Movies
+                    </Typography>
+                    {movies.map((movie, index) => (
+                      <Stack spacing={2} key={index} direction='row'>
+                        <Field
+                          name={`movies[${index}]`}
+                          as={TextField}
+                          label='Movie'
+                          fullWidth
+                          error={touched.movies && Boolean(errors.movies)}
+                          helperText={touched.movies && errors.movies}
+                        />
+                        {index > 0 && (
+                          <IconButton onClick={() => remove(index)}>
+                            <RemoveIcon />
                           </IconButton>
-                        </Stack>
-                      );
-                    })}
+                        )}
+                        <IconButton onClick={() => push('')}>
+                          <AddIcon />
+                        </IconButton>
+                      </Stack>
+                    ))}
                   </Stack>
-                );
-              }}
+                </>
+              )}
             </FieldArray>
           </Box>
           <Stack direction='row' justifyContent='center' spacing={1}>
