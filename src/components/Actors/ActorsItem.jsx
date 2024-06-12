@@ -25,14 +25,13 @@ function ActorsItem() {
 
   const actors = useSelector((state) => state.actorsList.actors);
 
-  const { actorId } = useParams();
-  console.log('Actor ID:', actorId);
+  const { id } = useParams();
 
   useEffect(() => {
     dispatch(getAllActors());
   }, [dispatch]);
 
-  const actor = actors.find((actor) => Number(actor.id) === Number(actorId));
+  const actor = actors.find((actor) => Number(actor.id) === Number(id));
 
   const currentActor = actor ? actor : emptyActor;
 
@@ -69,7 +68,7 @@ function ActorsItem() {
           startIcon={<EditIcon />}
           onClick={onItemEdit}
           component={Link}
-          to={`/actors/new/${actorId}`}
+          to={`/actors/new/${id}`}
         >
           Edit
         </Button>

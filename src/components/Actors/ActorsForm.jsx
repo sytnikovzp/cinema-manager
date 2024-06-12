@@ -10,30 +10,31 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import BackspaceIcon from '@mui/icons-material/Backspace';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 // ===================================
 import {
+  getAllActors,
   createActor,
   updateActor,
-  deleteActor,
 } from '../../store/slices/actorsSlice';
 import { emptyActor } from '../../constants';
 // ===================================
 import { formItemStyle } from '../../services/styleService';
 import { buttonFormStyle } from '../../services/styleService';
+import { useEffect } from 'react';
 
 function ActorForm() {
   const dispatch = useDispatch();
   const actors = useSelector((state) => state.actorsList.actors);
 
-  const { actorId } = useParams();
-  const navigate = useNavigate();
+  useEffect(() => {
+    dispatch(getAllActors());
+  }, [dispatch]);
 
-  const currentActor = actors.find(
-    (actor) => Number(actor.id) === Number(actorId)
-  );
+  const { id } = useParams();
+
+  const currentActor = actors.find((actor) => actor.id === Number(id));
+
+  const navigate = useNavigate();
 
   const goBack = () => {
     navigate('/actors');
@@ -41,8 +42,8 @@ function ActorForm() {
 
   const schema = Yup.object().shape({
     fullName: Yup.string(),
-    nationality: Yup.string(),
-    image: Yup.string().url('Invalid URL'),
+    // nationality: Yup.string(),
+    // image: Yup.string().url('Invalid URL'),
     // birthYear: Yup.date().required('Birth year is a required field'),
     // movies: Yup.array().required('Movies is a required field'),
   });
@@ -56,12 +57,7 @@ function ActorForm() {
     }
   };
 
-  const onActorDelete = () => {
-    dispatch(deleteActor(currentActor.id));
-  };
-
   const renderForm = ({ values, errors, touched, setFieldValue }) => {
-    // console.log(values);
     return (
       <Form id='actor-form'>
         <Box
@@ -91,16 +87,18 @@ function ActorForm() {
             </IconButton>
           </Box>
           <Box sx={formItemStyle}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Box components={['DatePicker']}>
-                <DatePicker
-                  name='birthYear'
-                  label='Birth year'
-                  // value={values.birthYear}
-                  views={['year']}
-                />
-              </Box>
-            </LocalizationProvider>
+          <Field
+              name='birthYear'
+              as={TextField}
+              label='birthYear'
+              variant='filled'
+              fullWidth
+              error={touched.birthYear && Boolean(errors.birthYear)}
+              helperText={touched.birthYear && errors.natibirthYearonality}
+            />
+            <IconButton onClick={() => setFieldValue('birthYear', '')}>
+              <BackspaceIcon />
+            </IconButton>
           </Box>
           <Box sx={formItemStyle}>
             <Field
@@ -157,13 +155,13 @@ function ActorForm() {
             </Button>
 
             <Button
-              type='button'
+              type='reset'
               variant='contained'
               color='error'
               style={buttonFormStyle}
-              onClick={onActorDelete}
+              // onClick={onActorDelete}
             >
-              Delete
+              Reset
             </Button>
 
             <Button
