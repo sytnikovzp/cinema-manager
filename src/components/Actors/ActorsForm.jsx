@@ -1,26 +1,32 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-// ===================================
+import dayjs from 'dayjs';
+// =============================================
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-// ===================================
+// =============================================
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import BackspaceIcon from '@mui/icons-material/Backspace';
-// ===================================
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import SaveIcon from '@mui/icons-material/Save';
+import ClearAllIcon from '@mui/icons-material/ClearAll';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+// =============================================
 import {
   getAllActors,
   createActor,
   updateActor,
 } from '../../store/slices/actorsSlice';
 import { emptyActor } from '../../constants';
-// ===================================
-import { formItemStyle } from '../../services/styleService';
-import { buttonFormStyle } from '../../services/styleService';
-import { useEffect } from 'react';
+// =============================================
+import { formItemStyle, buttonFormStyle } from '../../services/styleService';
 
 function ActorForm() {
   const dispatch = useDispatch();
@@ -31,9 +37,7 @@ function ActorForm() {
   }, [dispatch]);
 
   const { id } = useParams();
-
   const currentActor = actors.find((actor) => actor.id === Number(id));
-
   const navigate = useNavigate();
 
   const goBack = () => {
@@ -41,10 +45,10 @@ function ActorForm() {
   };
 
   const schema = Yup.object().shape({
-    fullName: Yup.string(),
-    // nationality: Yup.string(),
-    // image: Yup.string().url('Invalid URL'),
-    // birthYear: Yup.date().required('Birth year is a required field'),
+    fullName: Yup.string().required('Full name is a required field'),
+    birthYear: Yup.date(),
+    nationality: Yup.string(),
+    image: Yup.string().url('Invalid URL'),
     // movies: Yup.array().required('Movies is a required field'),
   });
 
@@ -76,7 +80,6 @@ function ActorForm() {
               name='fullName'
               as={TextField}
               label='Full name'
-              variant='filled'
               value={values.fullName}
               fullWidth
               error={touched.fullName && Boolean(errors.fullName)}
@@ -87,15 +90,24 @@ function ActorForm() {
             </IconButton>
           </Box>
           <Box sx={formItemStyle}>
-          <Field
-              name='birthYear'
-              as={TextField}
-              label='birthYear'
-              variant='filled'
-              fullWidth
-              error={touched.birthYear && Boolean(errors.birthYear)}
-              helperText={touched.birthYear && errors.natibirthYearonality}
-            />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                name='birthYear'
+                label='Birth year'
+                value={values.birthYear ? dayjs().year(values.birthYear) : null}
+                views={['year']}
+                onChange={(value) =>
+                  setFieldValue('birthYear', value ? value.year() : '')
+                }
+                sx={{ width: '400px' }}
+                slotProps={{
+                  textField: {
+                    error: touched.birthYear && Boolean(errors.birthYear),
+                    helperText: touched.birthYear && errors.birthYear,
+                  },
+                }}
+              />
+            </LocalizationProvider>
             <IconButton onClick={() => setFieldValue('birthYear', '')}>
               <BackspaceIcon />
             </IconButton>
@@ -105,7 +117,6 @@ function ActorForm() {
               name='nationality'
               as={TextField}
               label='Nationality'
-              variant='filled'
               fullWidth
               error={touched.nationality && Boolean(errors.nationality)}
               helperText={touched.nationality && errors.nationality}
@@ -119,7 +130,6 @@ function ActorForm() {
               name='image'
               as={TextField}
               label='Image URL'
-              variant='filled'
               fullWidth
               error={touched.image && Boolean(errors.image)}
               helperText={touched.image && errors.image}
@@ -128,13 +138,11 @@ function ActorForm() {
               <BackspaceIcon />
             </IconButton>
           </Box>
-
           <Box sx={formItemStyle}>
             <Field
               name='movies'
               as={TextField}
               label='Movies'
-              variant='filled'
               fullWidth
               error={touched.movies && Boolean(errors.movies)}
               helperText={touched.movies && errors.movies}
@@ -143,13 +151,13 @@ function ActorForm() {
               <BackspaceIcon />
             </IconButton>
           </Box>
-
           <Stack direction='row' justifyContent='center' spacing={1}>
             <Button
               type='submit'
               variant='contained'
               color='success'
               style={buttonFormStyle}
+              startIcon={<SaveIcon />}
             >
               Save
             </Button>
@@ -159,7 +167,7 @@ function ActorForm() {
               variant='contained'
               color='error'
               style={buttonFormStyle}
-              // onClick={onActorDelete}
+              startIcon={<ClearAllIcon />}
             >
               Reset
             </Button>
@@ -169,8 +177,9 @@ function ActorForm() {
               variant='contained'
               style={buttonFormStyle}
               onClick={goBack}
+              startIcon={<ArrowBackIcon />}
             >
-              Go back
+              Back
             </Button>
           </Stack>
         </Box>
@@ -179,16 +188,14 @@ function ActorForm() {
   };
 
   return (
-    <>
-      <Formik
-        initialValues={currentActor ? currentActor : emptyActor}
-        onSubmit={onFormSubmit}
-        validationSchema={schema}
-        enableReinitialize
-      >
-        {renderForm}
-      </Formik>
-    </>
+    <Formik
+      initialValues={currentActor ? currentActor : emptyActor}
+      onSubmit={onFormSubmit}
+      validationSchema={schema}
+      enableReinitialize
+    >
+      {renderForm}
+    </Formik>
   );
 }
 
