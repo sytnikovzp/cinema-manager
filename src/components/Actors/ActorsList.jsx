@@ -20,7 +20,7 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
 import { styled } from '@mui/system';
 import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
+import Alert from '@mui/material/Alert';
 // =============================================
 import { itemListStyle } from '../../services/styleService';
 import { buttonMainStyle } from '../../services/styleService';
@@ -143,15 +143,15 @@ function ActorsList() {
         </List>
       </Box>
 
-      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-        <MuiAlert
+      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+        <Alert
           onClose={handleClose}
           severity={severity}
           variant='filled'
           sx={{ width: '100%' }}
         >
           {status}
-        </MuiAlert>
+        </Alert>
       </Snackbar>
     </>
   );

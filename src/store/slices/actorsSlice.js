@@ -76,7 +76,7 @@ const actorsSlice = createSlice({
     // Success
     builder.addCase(getAllActors.fulfilled, (state, { payload }) => {
       state.actors = payload;
-      state.status = null;
+      // state.status = null;
       state.error = null;
     });
     builder.addCase(createActor.fulfilled, (state, { payload }) => {
