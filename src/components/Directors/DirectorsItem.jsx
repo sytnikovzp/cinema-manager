@@ -1,5 +1,6 @@
-import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 // =============================================
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -8,47 +9,93 @@ import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import EditIcon from '@mui/icons-material/Edit';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 // =============================================
 import { buttonMainStyle } from '../../services/styleService';
 import { emptyDirector } from '../../constants';
+import { getAllDirectors, resetStatus } from '../../store/slices/directorsSlice';
+// =============================================
+import useSnackbar from '../../hooks';
 
 function DirectorsItem() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const goBack = () => {
-    navigate(-1);
+    navigate('/directors');
   };
 
   const directors = useSelector((state) => state.directorsList.directors);
+  const status = useSelector((state) => state.directorsList.status);
 
-  const { directorId } = useParams();
+  const { snackbar, showSnackbar, handleClose } = useSnackbar(() =>
+    dispatch(resetStatus())
+  );
 
-  const director = directors.find((director) => Number(director.id) === Number(directorId));
+  const prevStatusRef = useRef();
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    dispatch(getAllDirectors());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const prevStatus = prevStatusRef.current;
+    const currentStatus = status;
+
+    if (currentStatus && currentStatus !== prevStatus) {
+      const severity = currentStatus.toLowerCase().includes('success')
+        ? 'success'
+        : 'error';
+      showSnackbar(currentStatus, severity);
+    }
+
+    prevStatusRef.current = currentStatus;
+  }, [status, showSnackbar]);
+
+  const director = directors.find((director) => Number(director.id) === Number(id));
 
   const currentDirector = director ? director : emptyDirector;
 
-  const formattedMovies = currentDirector.movies.join(', ');
+  const formattedMovies = currentDirector.movies
+    ? currentDirector.movies.join(', ')
+    : 'No movies available';
 
   return (
     <>
-      <Stack direction='row' justifyContent='left'>
+      <Stack direction='row' justifyContent='space-between'>
         <Button
           id='goBack-btn'
           type='button'
           variant='contained'
           color='info'
-          style={buttonMainStyle}
-          sx={{ marginTop: -8, textAlign: 'left' }}
+          sx={buttonMainStyle}
           startIcon={<KeyboardBackspaceIcon />}
           onClick={goBack}
         >
           Go back
         </Button>
+
+        <Button
+          id='goBack-btn'
+          type='button'
+          variant='contained'
+          color='success'
+          sx={buttonMainStyle}
+          startIcon={<EditIcon />}
+          component={Link}
+          to={`/directors/new/${id}`}
+        >
+          Edit
+        </Button>
       </Stack>
 
       <Box
         sx={{
-          minHeight: '57vh',
+          minHeight: '60vh',
           overflowY: 'auto',
         }}
       >
@@ -66,7 +113,11 @@ function DirectorsItem() {
               <CardMedia
                 component='img'
                 height='100%'
-                image={currentDirector.image}
+                image={
+                  currentDirector.image
+                    ? currentDirector.image
+                    : 'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
+                }
                 alt={currentDirector.fullName}
               />
             </Card>
@@ -82,17 +133,34 @@ function DirectorsItem() {
               FullName: {currentDirector.fullName}
             </Typography>
             <Typography variant='body1' component='div'>
-              Birth Year: {currentDirector.birthYear}
+              Birth Year:{' '}
+              {currentDirector.birthYear ? currentDirector.birthYear : 'Unknown'}
             </Typography>
             <Typography variant='body1' component='div'>
-              Nationality: {currentDirector.nationality}
+              Nationality:{' '}
+              {currentDirector.nationality ? currentDirector.nationality : 'Unknown'}
             </Typography>
             <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
-              Movies: {formattedMovies}
+              Movies: {formattedMovies ? formattedMovies : 'Unknown'}
             </Typography>
           </Box>
         </Box>
       </Box>
+
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={1000}
+        onClose={handleClose}
+      >
+        <Alert
+          onClose={handleClose}
+          severity={snackbar.severity}
+          variant='filled'
+          sx={{ width: '100%' }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </>
   );
 }

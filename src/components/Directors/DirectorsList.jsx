@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+// =============================================
+import { Link } from 'react-router-dom';
 // =============================================
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -9,18 +11,27 @@ import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
 import { styled } from '@mui/system';
 import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
+import Alert from '@mui/material/Alert';
 // =============================================
-import { useNavigate } from 'react-router-dom';
-// =============================================
-import { deleteDirector } from '../../store/slices/directorsSlice';
 import { itemListStyle } from '../../services/styleService';
+import { buttonMainStyle } from '../../services/styleService';
+// =============================================
+import {
+  getAllDirectors,
+  deleteDirector,
+  resetStatus,
+} from '../../store/slices/directorsSlice';
+// =============================================
+import useSnackbar from '../../hooks';
 
 const StyledAvatar = styled(Avatar)({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
@@ -29,42 +40,35 @@ const StyledAvatar = styled(Avatar)({
   },
 });
 
-function DirectorsList({ directors }) {
+function DirectorsList() {
   const dispatch = useDispatch();
 
-  const navigate = useNavigate();
-
+  const directors = useSelector((state) => state.directorsList.directors);
   const status = useSelector((state) => state.directorsList.status);
 
-  const [open, setOpen] = useState(false);
-  const [severity, setSeverity] = useState();
+  const { snackbar, showSnackbar, handleClose } = useSnackbar(() =>
+    dispatch(resetStatus())
+  );
+
+  const prevStatusRef = useRef();
 
   useEffect(() => {
-    if (status && status !== null) {
-      setOpen(true);
-      if (status.toLowerCase().includes('success')) {
-        setSeverity('success');
-      } else {
-        return setSeverity('error');
-      }
+    dispatch(getAllDirectors());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const prevStatus = prevStatusRef.current;
+    const currentStatus = status;
+
+    if (currentStatus && currentStatus !== prevStatus) {
+      const severity = currentStatus.toLowerCase().includes('success')
+        ? 'success'
+        : 'error';
+      showSnackbar(currentStatus, severity);
     }
-  }, [status]);
 
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpen(false);
-  };
-
-  const onItemOpen = (id) => {
-    navigate(`/directors/${id}`);
-  };
-
-  const onItemEdit = (event, id) => {
-    event.stopPropagation();
-    navigate(`/directors/new/${id}`);
-  };
+    prevStatusRef.current = currentStatus;
+  }, [status, showSnackbar]);
 
   const onItemDelete = (event, id) => {
     event.stopPropagation();
@@ -73,13 +77,23 @@ function DirectorsList({ directors }) {
 
   return (
     <>
-      <Typography
-        variant='h4'
-        component='h2'
-        sx={{ marginTop: -7, textAlign: 'left' }}
-      >
-        Directors list
-      </Typography>
+      <Stack direction='row' justifyContent='space-between'>
+        <Typography variant='h4' component='h2'>
+          Directors list
+        </Typography>
+
+        <Button
+          component={Link}
+          to='new'
+          type='button'
+          variant='contained'
+          color='success'
+          sx={buttonMainStyle}
+          startIcon={<GroupAddIcon />}
+        >
+          Add director
+        </Button>
+      </Stack>
 
       <Box
         sx={{
@@ -91,51 +105,62 @@ function DirectorsList({ directors }) {
           {directors.map((director) => (
             <Stack key={director.id} direction='column' marginBottom={1}>
               <ListItem
-                onClick={() => onItemOpen(director.id)}
+                component={Link}
+                to={`/directors/${director.id}`}
                 disablePadding
                 sx={itemListStyle}
-                secondaryAction={
+              >
+                <ListItemButton sx={{ borderRadius: 5 }}>
+                  <ListItemAvatar>
+                    <StyledAvatar src={director.image} />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={`${director.fullName}, ${
+                      director.nationality ? director.nationality : 'Unknown'
+                    }`}
+                  />
+                </ListItemButton>
+
+                <ListItemSecondaryAction>
                   <Stack direction='row' spacing={1}>
                     <IconButton
                       edge='end'
                       aria-label='edit'
-                      onClick={(event) => onItemEdit(event, director.id)}
+                      component={Link}
+                      to={`/directors/new/${director.id}`}
                     >
                       <EditIcon />
                     </IconButton>
                     <IconButton
                       edge='end'
                       aria-label='delete'
-                      onClick={(event) => onItemDelete(event, director.id)}
+                      onClick={(event) => {
+                        onItemDelete(event, director.id);
+                      }}
                     >
                       <HighlightOffIcon />
                     </IconButton>
                   </Stack>
-                }
-              >
-                <ListItemButton>
-                  <ListItemAvatar>
-                    <StyledAvatar src={director.image} />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={`${director.fullName}, ${director.nationality}`}
-                  />
-                </ListItemButton>
+                </ListItemSecondaryAction>
               </ListItem>
             </Stack>
           ))}
         </List>
       </Box>
 
-      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-        <MuiAlert
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={1000}
+        onClose={handleClose}
+      >
+        <Alert
           onClose={handleClose}
-          severity={severity}
+          severity={snackbar.severity}
           variant='filled'
           sx={{ width: '100%' }}
         >
-          {status}
-        </MuiAlert>
+          {snackbar.message}
+        </Alert>
       </Snackbar>
     </>
   );
