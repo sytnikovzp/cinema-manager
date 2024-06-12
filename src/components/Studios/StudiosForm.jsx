@@ -40,7 +40,7 @@ function StudioForm() {
   }, [dispatch]);
 
   const { id } = useParams();
-  const currentStudio = studios.find((studio) => studio.id === Number(id));
+  const currentStudio = studios.find((studio) => Number(studio.id) === Number(id));
 
   const navigate = useNavigate();
 

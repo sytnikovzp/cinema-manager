@@ -40,7 +40,7 @@ function DirectorForm() {
   }, [dispatch]);
 
   const { id } = useParams();
-  const currentDirector = directors.find((director) => director.id === Number(id));
+  const currentDirector = directors.find((director) => Number(director.id) === Number(id));
 
   const navigate = useNavigate();
 

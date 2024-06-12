@@ -40,7 +40,7 @@ function MovieForm() {
   }, [dispatch]);
 
   const { id } = useParams();
-  const currentMovie = movies.find((movie) => movie.id === Number(id));
+  const currentMovie = movies.find((movie) => Number(movie.id) === Number(id));
 
   const navigate = useNavigate();
 

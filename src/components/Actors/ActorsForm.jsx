@@ -40,7 +40,7 @@ function ActorForm() {
   }, [dispatch]);
 
   const { id } = useParams();
-  const currentActor = actors.find((actor) => actor.id === Number(id));
+  const currentActor = actors.find((actor) => Number(actor.id) === Number(id));
 
   const navigate = useNavigate();
 
