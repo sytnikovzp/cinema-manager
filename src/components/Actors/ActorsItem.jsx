@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 // =============================================
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -12,7 +13,6 @@ import EditIcon from '@mui/icons-material/Edit';
 // =============================================
 import { buttonMainStyle } from '../../services/styleService';
 import { emptyActor } from '../../constants';
-import { useEffect } from 'react';
 import { getAllActors, updateActor } from '../../store/slices/actorsSlice';
 
 function ActorsItem() {
@@ -26,6 +26,7 @@ function ActorsItem() {
   const actors = useSelector((state) => state.actorsList.actors);
 
   const { actorId } = useParams();
+  console.log('Actor ID:', actorId);
 
   useEffect(() => {
     dispatch(getAllActors());
@@ -68,7 +69,7 @@ function ActorsItem() {
           startIcon={<EditIcon />}
           onClick={onItemEdit}
           component={Link}
-          to={`/actors/new/${actor.id}`}
+          to={`/actors/new/${actorId}`}
         >
           Edit
         </Button>
@@ -76,7 +77,7 @@ function ActorsItem() {
 
       <Box
         sx={{
-          minHeight: '57vh',
+          minHeight: '60vh',
           overflowY: 'auto',
         }}
       >
