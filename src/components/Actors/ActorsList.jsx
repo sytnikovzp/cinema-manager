@@ -25,10 +25,7 @@ import MuiAlert from '@mui/material/Alert';
 import { itemListStyle } from '../../services/styleService';
 import { buttonMainStyle } from '../../services/styleService';
 // =============================================
-import {
-  getAllActors,
-  deleteActor,
-} from '../../store/slices/actorsSlice';
+import { getAllActors, deleteActor } from '../../store/slices/actorsSlice';
 
 const StyledAvatar = styled(Avatar)({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
@@ -113,7 +110,9 @@ function ActorsList() {
                     <StyledAvatar src={actor.image} />
                   </ListItemAvatar>
                   <ListItemText
-                    primary={`${actor.fullName}, ${actor.nationality}`}
+                    primary={`${actor.fullName}, ${
+                      actor.nationality ? actor.nationality : 'Unknown'
+                    }`}
                   />
                 </ListItemButton>
 

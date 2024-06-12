@@ -113,6 +113,17 @@
       "birthYear": "1949",
       "nationality": "USA",
       "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Sigourney_Weaver_by_Gage_Skidmore_4.jpg/250px-Sigourney_Weaver_by_Gage_Skidmore_4.jpg"
+    },
+    {
+      "id": 10,
+      "movies": [
+        "Film 1",
+        "Film 2"
+      ],
+      "fullName": "Test User",
+      "birthYear": 2017,
+      "nationality": "Ukraine",
+      "image": ""
     }
   ],
   "directors": [

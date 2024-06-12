@@ -88,7 +88,11 @@ function ActorsItem() {
               <CardMedia
                 component='img'
                 height='100%'
-                image={currentActor.image}
+                image={
+                  currentActor.image
+                    ? currentActor.image
+                    : 'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
+                }
                 alt={currentActor.fullName}
               />
             </Card>
@@ -104,13 +108,15 @@ function ActorsItem() {
               FullName: {currentActor.fullName}
             </Typography>
             <Typography variant='body1' component='div'>
-              Birth Year: {currentActor.birthYear}
+              Birth Year:{' '}
+              {currentActor.birthYear ? currentActor.birthYear : 'Unknown'}
             </Typography>
             <Typography variant='body1' component='div'>
-              Nationality: {currentActor.nationality}
+              Nationality:{' '}
+              {currentActor.nationality ? currentActor.nationality : 'Unknown'}
             </Typography>
             <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
-              Movies: {formattedMovies}
+              Movies: {formattedMovies ? formattedMovies : 'Unknown'}
             </Typography>
           </Box>
         </Box>
