@@ -151,7 +151,7 @@ function ActorForm() {
                 },
               }) => {
                 return (
-                  <Stack spacing={2}>
+                  <Stack spacing={2} sx={{ width: '100%' }}>
                     {movies.map((movie, index) => {
                       return (
                         <Stack spacing={2} key={index} direction='row'>
