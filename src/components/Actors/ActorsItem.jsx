@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 // =============================================
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -10,10 +10,14 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import EditIcon from '@mui/icons-material/Edit';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 // =============================================
 import { buttonMainStyle } from '../../services/styleService';
 import { emptyActor } from '../../constants';
-import { getAllActors } from '../../store/slices/actorsSlice';
+import { getAllActors, resetStatus } from '../../store/slices/actorsSlice';
+// =============================================
+import useSnackbar from '../../hooks';
 
 function ActorsItem() {
   const navigate = useNavigate();
@@ -24,12 +28,33 @@ function ActorsItem() {
   };
 
   const actors = useSelector((state) => state.actorsList.actors);
+  const status = useSelector((state) => state.actorsList.status);
+
+  const { snackbar, showSnackbar, handleClose } = useSnackbar(() =>
+    dispatch(resetStatus())
+  );
+
+  const prevStatusRef = useRef();
 
   const { id } = useParams();
 
   useEffect(() => {
     dispatch(getAllActors());
   }, [dispatch]);
+
+  useEffect(() => {
+    const prevStatus = prevStatusRef.current;
+    const currentStatus = status;
+
+    if (currentStatus && currentStatus !== prevStatus) {
+      const severity = currentStatus.toLowerCase().includes('success')
+        ? 'success'
+        : 'error';
+      showSnackbar(currentStatus, severity);
+    }
+
+    prevStatusRef.current = currentStatus;
+  }, [status, showSnackbar]);
 
   const actor = actors.find((actor) => Number(actor.id) === Number(id));
 
@@ -121,6 +146,21 @@ function ActorsItem() {
           </Box>
         </Box>
       </Box>
+
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={1000}
+        onClose={handleClose}
+      >
+        <Alert
+          onClose={handleClose}
+          severity={snackbar.severity}
+          variant='filled'
+          sx={{ width: '100%' }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </>
   );
 }

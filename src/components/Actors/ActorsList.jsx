@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // =============================================
 import { Link } from 'react-router-dom';
@@ -25,7 +25,11 @@ import Alert from '@mui/material/Alert';
 import { itemListStyle } from '../../services/styleService';
 import { buttonMainStyle } from '../../services/styleService';
 // =============================================
-import { getAllActors, deleteActor } from '../../store/slices/actorsSlice';
+import {
+  getAllActors,
+  deleteActor,
+  resetStatus,
+} from '../../store/slices/actorsSlice';
 // =============================================
 import useSnackbar from '../../hooks';
 
@@ -42,7 +46,9 @@ function ActorsList() {
   const actors = useSelector((state) => state.actorsList.actors);
   const status = useSelector((state) => state.actorsList.status);
 
-  const { snackbar, showSnackbar, handleClose } = useSnackbar();
+  const { snackbar, showSnackbar, handleClose } = useSnackbar(() =>
+    dispatch(resetStatus())
+  );
 
   const prevStatusRef = useRef();
 
@@ -144,7 +150,7 @@ function ActorsList() {
 
       <Snackbar
         open={snackbar.open}
-        autoHideDuration={2000}
+        autoHideDuration={1000}
         onClose={handleClose}
       >
         <Alert

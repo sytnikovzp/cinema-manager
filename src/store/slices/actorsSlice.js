@@ -70,13 +70,17 @@ export const deleteActor = createAsyncThunk(
 const actorsSlice = createSlice({
   name: ACTORS_SLICE_NAME,
   initialState,
-  reducers: {},
+  reducers: {
+    resetStatus(state) {
+      state.status = null;
+    },
+  },
 
   extraReducers: (builder) => {
     // Success
     builder.addCase(getAllActors.fulfilled, (state, { payload }) => {
       state.actors = payload;
-      // state.status = null;
+      state.status = null;
       state.error = null;
     });
     builder.addCase(createActor.fulfilled, (state, { payload }) => {
@@ -110,5 +114,7 @@ const actorsSlice = createSlice({
     builder.addCase(deleteActor.rejected, setError);
   },
 });
+
+export const { resetStatus } = actorsSlice.actions;
 
 export default actorsSlice.reducer;

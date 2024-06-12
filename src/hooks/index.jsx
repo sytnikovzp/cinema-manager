@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
-const useSnackbar = () => {
+const useSnackbar = (onCloseCallback) => {
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: '',
@@ -15,12 +15,15 @@ const useSnackbar = () => {
     });
   };
 
-  const handleClose = (event, reason) => {
+  const handleClose = useCallback((event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
     setSnackbar({ ...snackbar, open: false });
-  };
+    if (onCloseCallback) {
+      onCloseCallback();
+    }
+  }, [snackbar, onCloseCallback]);
 
   return {
     snackbar,
