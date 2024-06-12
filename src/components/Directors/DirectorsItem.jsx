@@ -133,12 +133,10 @@ function DirectorsItem() {
               FullName: {currentDirector.fullName}
             </Typography>
             <Typography variant='body1' component='div'>
-              Birth Year:{' '}
-              {currentDirector.birthYear ? currentDirector.birthYear : 'Unknown'}
+              Birth year: {currentDirector.birthYear ? currentDirector.birthYear : 'Unknown'}
             </Typography>
             <Typography variant='body1' component='div'>
-              Nationality:{' '}
-              {currentDirector.nationality ? currentDirector.nationality : 'Unknown'}
+              Nationality: {currentDirector.nationality ? currentDirector.nationality : 'Unknown'}
             </Typography>
             <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
               Movies: {formattedMovies ? formattedMovies : 'Unknown'}

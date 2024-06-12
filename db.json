@@ -271,6 +271,16 @@
         "Alien"
       ],
       "logo": "https://upload.wikimedia.org/wikipedia/ru/thumb/5/5e/20th_Century_Studios.svg/250px-20th_Century_Studios.svg.png"
+    },
+    {
+      "id": 3,
+      "title": "Test studio",
+      "location": "Ukraine",
+      "foundationYear": 2018,
+      "movies": [
+        "Movie 1"
+      ],
+      "logo": ""
     }
   ],
   "genres": [

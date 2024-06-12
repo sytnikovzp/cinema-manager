@@ -133,12 +133,10 @@ function ActorsItem() {
               FullName: {currentActor.fullName}
             </Typography>
             <Typography variant='body1' component='div'>
-              Birth Year:{' '}
-              {currentActor.birthYear ? currentActor.birthYear : 'Unknown'}
+              Birth year: {currentActor.birthYear ? currentActor.birthYear : 'Unknown'}
             </Typography>
             <Typography variant='body1' component='div'>
-              Nationality:{' '}
-              {currentActor.nationality ? currentActor.nationality : 'Unknown'}
+              Nationality: {currentActor.nationality ? currentActor.nationality : 'Unknown'}
             </Typography>
             <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
               Movies: {formattedMovies ? formattedMovies : 'Unknown'}

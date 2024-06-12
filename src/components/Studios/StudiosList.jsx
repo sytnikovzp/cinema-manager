@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+// =============================================
+import { Link } from 'react-router-dom';
 // =============================================
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -9,18 +11,27 @@ import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
 import { styled } from '@mui/system';
 import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
+import Alert from '@mui/material/Alert';
 // =============================================
-import { useNavigate } from 'react-router-dom';
-// =============================================
-import { deleteStudio } from '../../store/slices/studiosSlice';
 import { itemListStyle } from '../../services/styleService';
+import { buttonMainStyle } from '../../services/styleService';
+// =============================================
+import {
+  getAllStudios,
+  deleteStudio,
+  resetStatus,
+} from '../../store/slices/studiosSlice';
+// =============================================
+import useSnackbar from '../../hooks';
 
 const StyledAvatar = styled(Avatar)({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
@@ -29,42 +40,35 @@ const StyledAvatar = styled(Avatar)({
   },
 });
 
-function StudiosList({ studios }) {
+function StudiosList() {
   const dispatch = useDispatch();
 
-  const navigate = useNavigate();
-
+  const studios = useSelector((state) => state.studiosList.studios);
   const status = useSelector((state) => state.studiosList.status);
 
-  const [open, setOpen] = useState(false);
-  const [severity, setSeverity] = useState();
+  const { snackbar, showSnackbar, handleClose } = useSnackbar(() =>
+    dispatch(resetStatus())
+  );
+
+  const prevStatusRef = useRef();
 
   useEffect(() => {
-    if (status && status !== null) {
-      setOpen(true);
-      if (status.toLowerCase().includes('success')) {
-        setSeverity('success');
-      } else {
-        return setSeverity('error');
-      }
+    dispatch(getAllStudios());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const prevStatus = prevStatusRef.current;
+    const currentStatus = status;
+
+    if (currentStatus && currentStatus !== prevStatus) {
+      const severity = currentStatus.toLowerCase().includes('success')
+        ? 'success'
+        : 'error';
+      showSnackbar(currentStatus, severity);
     }
-  }, [status]);
 
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpen(false);
-  };
-
-  const onItemOpen = (id) => {
-    navigate(`/studios/${id}`);
-  };
-
-  const onItemEdit = (event, id) => {
-    event.stopPropagation();
-    navigate(`/studios/new/${id}`);
-  };
+    prevStatusRef.current = currentStatus;
+  }, [status, showSnackbar]);
 
   const onItemDelete = (event, id) => {
     event.stopPropagation();
@@ -73,13 +77,23 @@ function StudiosList({ studios }) {
 
   return (
     <>
-      <Typography
-        variant='h4'
-        component='h2'
-        sx={{ marginTop: -7, textAlign: 'left' }}
-      >
-        Studios list
-      </Typography>
+      <Stack direction='row' justifyContent='space-between'>
+        <Typography variant='h4' component='h2'>
+          Studios list
+        </Typography>
+
+        <Button
+          component={Link}
+          to='new'
+          type='button'
+          variant='contained'
+          color='success'
+          sx={buttonMainStyle}
+          startIcon={<GroupAddIcon />}
+        >
+          Add studio
+        </Button>
+      </Stack>
 
       <Box
         sx={{
@@ -91,51 +105,62 @@ function StudiosList({ studios }) {
           {studios.map((studio) => (
             <Stack key={studio.id} direction='column' marginBottom={1}>
               <ListItem
-                onClick={() => onItemOpen(studio.id)}
+                component={Link}
+                to={`/studios/${studio.id}`}
                 disablePadding
                 sx={itemListStyle}
-                secondaryAction={
+              >
+                <ListItemButton sx={{ borderRadius: 5 }}>
+                  <ListItemAvatar>
+                    <StyledAvatar src={studio.logo} />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={`${studio.title}, ${
+                      studio.location ? studio.location : 'Unknown'
+                    }`}
+                  />
+                </ListItemButton>
+
+                <ListItemSecondaryAction>
                   <Stack direction='row' spacing={1}>
                     <IconButton
                       edge='end'
                       aria-label='edit'
-                      onClick={(event) => onItemEdit(event, studio.id)}
+                      component={Link}
+                      to={`/studios/new/${studio.id}`}
                     >
                       <EditIcon />
                     </IconButton>
                     <IconButton
                       edge='end'
                       aria-label='delete'
-                      onClick={(event) => onItemDelete(event, studio.id)}
+                      onClick={(event) => {
+                        onItemDelete(event, studio.id);
+                      }}
                     >
                       <HighlightOffIcon />
                     </IconButton>
                   </Stack>
-                }
-              >
-                <ListItemButton>
-                  <ListItemAvatar>
-                    <StyledAvatar src={studio.logo} />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={`${studio.title}, ${studio.foundationYear}, ${studio.location}`}
-                  />
-                </ListItemButton>
+                </ListItemSecondaryAction>
               </ListItem>
             </Stack>
           ))}
         </List>
       </Box>
 
-      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-        <MuiAlert
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={1000}
+        onClose={handleClose}
+      >
+        <Alert
           onClose={handleClose}
-          severity={severity}
+          severity={snackbar.severity}
           variant='filled'
           sx={{ width: '100%' }}
         >
-          {status}
-        </MuiAlert>
+          {snackbar.message}
+        </Alert>
       </Snackbar>
     </>
   );
