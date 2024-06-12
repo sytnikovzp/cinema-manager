@@ -20,6 +20,7 @@ import ClearAllIcon from '@mui/icons-material/ClearAll';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
+import { Typography } from '@mui/material';
 // =============================================
 import {
   getAllActors,
@@ -160,9 +161,12 @@ function ActorForm() {
                       paddingLeft: '10px',
                       paddingRight: '10px',
                       paddingBottom: '10px',
+                      borderRadius: '5px',
                     }}
                   >
-                    <legend>Movies</legend>
+                    <Typography component='legend' variant='h6' gutterBottom>
+                      Movies
+                    </Typography>
                     {movies.map((movie, index) => (
                       <Stack spacing={2} key={index} direction='row'>
                         <Field
