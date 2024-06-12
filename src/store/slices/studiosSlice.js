@@ -70,7 +70,11 @@ export const deleteStudio = createAsyncThunk(
 const studiosSlice = createSlice({
   name: STUDIOS_SLICE_NAME,
   initialState,
-  reducers: {},
+  reducers: {
+    resetStatus(state) {
+      state.status = null;
+    },
+  },
 
   extraReducers: (builder) => {
     // Success
@@ -110,5 +114,7 @@ const studiosSlice = createSlice({
     builder.addCase(deleteStudio.rejected, setError);
   },
 });
+
+export const { resetStatus } = studiosSlice.actions;
 
 export default studiosSlice.reducer;

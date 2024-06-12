@@ -70,7 +70,11 @@ export const deleteMovie = createAsyncThunk(
 const moviesSlice = createSlice({
   name: MOVIES_SLICE_NAME,
   initialState,
-  reducers: {},
+  reducers: {
+    resetStatus(state) {
+      state.status = null;
+    },
+  },
 
   extraReducers: (builder) => {
     // Success
@@ -110,5 +114,7 @@ const moviesSlice = createSlice({
     builder.addCase(deleteMovie.rejected, setError);
   },
 });
+
+export const { resetStatus } = moviesSlice.actions;
 
 export default moviesSlice.reducer;

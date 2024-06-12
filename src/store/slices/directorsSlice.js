@@ -70,7 +70,11 @@ export const deleteDirector = createAsyncThunk(
 const directorsSlice = createSlice({
   name: DIRECTORS_SLICE_NAME,
   initialState,
-  reducers: {},
+  reducers: {
+    resetStatus(state) {
+      state.status = null;
+    },
+  },
 
   extraReducers: (builder) => {
     // Success
@@ -110,5 +114,7 @@ const directorsSlice = createSlice({
     builder.addCase(deleteDirector.rejected, setError);
   },
 });
+
+export const { resetStatus } = directorsSlice.actions;
 
 export default directorsSlice.reducer;
