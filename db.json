@@ -120,7 +120,7 @@
         "Film 1",
         "Film 2"
       ],
-      "fullName": "Test User",
+      "fullName": "Test actor",
       "birthYear": 2017,
       "nationality": "Ukraine",
       "image": ""
@@ -169,7 +169,7 @@
         "Movie 1",
         "Movie 2"
       ],
-      "fullName": "Test",
+      "fullName": "Test director",
       "birthYear": 2018,
       "nationality": "China",
       "image": ""
