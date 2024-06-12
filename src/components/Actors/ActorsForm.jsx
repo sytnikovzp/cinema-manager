@@ -149,34 +149,43 @@ function ActorForm() {
                 form: {
                   values: { movies },
                 },
-              }) => {
-                return (
-                  <Stack spacing={2} sx={{ width: '100%' }}>
-                    {movies.map((movie, index) => {
-                      return (
-                        <Stack spacing={2} key={index} direction='row'>
-                          <Field
-                            name={`movies[${index}]`}
-                            as={TextField}
-                            label='Movie'
-                            fullWidth
-                            error={touched.movies && Boolean(errors.movies)}
-                            helperText={touched.movies && errors.movies}
-                          />
-                          {index > 0 && (
-                            <IconButton onClick={() => remove(index)}>
-                              <RemoveIcon />
-                            </IconButton>
-                          )}
-                          <IconButton onClick={() => push('')}>
-                            <AddIcon />
+              }) => (
+                <>
+                  <Stack
+                    component='fieldset'
+                    form='actor-form'
+                    spacing={2}
+                    sx={{
+                      width: '100%',
+                      paddingLeft: '10px',
+                      paddingRight: '10px',
+                      paddingBottom: '10px',
+                    }}
+                  >
+                    <legend>Movies</legend>
+                    {movies.map((movie, index) => (
+                      <Stack spacing={2} key={index} direction='row'>
+                        <Field
+                          name={`movies[${index}]`}
+                          as={TextField}
+                          label='Movie'
+                          fullWidth
+                          error={touched.movies && Boolean(errors.movies)}
+                          helperText={touched.movies && errors.movies}
+                        />
+                        {index > 0 && (
+                          <IconButton onClick={() => remove(index)}>
+                            <RemoveIcon />
                           </IconButton>
-                        </Stack>
-                      );
-                    })}
+                        )}
+                        <IconButton onClick={() => push('')}>
+                          <AddIcon />
+                        </IconButton>
+                      </Stack>
+                    ))}
                   </Stack>
-                );
-              }}
+                </>
+              )}
             </FieldArray>
           </Box>
           <Stack direction='row' justifyContent='center' spacing={1}>
