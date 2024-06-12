@@ -179,11 +179,14 @@
     {
       "id": 1,
       "title": "Indiana Johns",
+      "movieYear": 1981,
+      "genre": "Action",
       "directors": [
-        "Stiven Spilberg"
+        "Stiven Spilberg",
+        "James Cameron"
       ],
       "actors": [
-        "Harrison  Ford",
+        "Harrison Ford",
         "Sean Connery"
       ],
       "studios": [
@@ -194,6 +197,8 @@
     {
       "id": 2,
       "title": "Alien",
+      "movieYear": 1979,
+      "genre": "Horror",
       "directors": [
         "Ridley Scott"
       ],
@@ -208,6 +213,8 @@
     {
       "id": 3,
       "title": "Aliens",
+      "movieYear": 1986,
+      "genre": "Sequel",
       "directors": [
         "James Cameron"
       ],
@@ -222,6 +229,8 @@
     {
       "id": 4,
       "title": "Pirates of the Caribbean",
+      "movieYear": 2003,
+      "genre": "Fantasy",
       "directors": [
         "Gregor (Gore) Verbinski"
       ],
@@ -237,6 +246,8 @@
     {
       "id": 1658475813029,
       "title": "The Lord Of The Rings",
+      "movieYear": 2001,
+      "genre": "Adventures",
       "directors": [
         "Peter Jackson"
       ],
@@ -245,9 +256,24 @@
         "Ian McKellen"
       ],
       "studios": [
-        "New Line Cinema "
+        "New Line Cinema"
       ],
       "poster": "https://upload.wikimedia.org/wikipedia/ru/thumb/0/08/The_Lord_of_the_Rings._The_Fellowship_of_the_Ring_%E2%80%94_movie.jpg/203px-The_Lord_of_the_Rings._The_Fellowship_of_the_Ring_%E2%80%94_movie.jpg"
+    },
+    {
+      "id": 1658475813030,
+      "title": "Test movie",
+      "directors": [
+        "Test director"
+      ],
+      "actors": [
+        "Test actor"
+      ],
+      "studios": [
+        "Test studio"
+      ],
+      "poster": "",
+      "movieYear": 2024
     }
   ],
   "studios": [
@@ -281,76 +307,6 @@
         "Movie 1"
       ],
       "logo": ""
-    }
-  ],
-  "genres": [
-    {
-      "id": 1,
-      "genre": "Fantazy"
-    },
-    {
-      "id": 2,
-      "genre": "Action"
-    },
-    {
-      "id": 3,
-      "genre": "Drama"
-    },
-    {
-      "id": 4,
-      "genre": "Western"
-    },
-    {
-      "id": 5,
-      "genre": "Horror"
-    },
-    {
-      "id": 6,
-      "genre": "Documentary"
-    },
-    {
-      "id": 7,
-      "genre": "Thriller"
-    },
-    {
-      "id": 8,
-      "genre": "Comedy"
-    },
-    {
-      "id": 9,
-      "genre": "Adventure"
-    },
-    {
-      "id": 10,
-      "genre": "Anime"
-    },
-    {
-      "id": 11,
-      "genre": "Science fiction"
-    },
-    {
-      "id": 12,
-      "genre": "Historic"
-    },
-    {
-      "id": 13,
-      "genre": "Serial"
-    },
-    {
-      "id": 14,
-      "genre": "Biopic"
-    },
-    {
-      "id": 15,
-      "genre": "Melodrama"
-    },
-    {
-      "id": 16,
-      "genre": "Music"
-    },
-    {
-      "id": 17,
-      "genre": "Peplum"
     }
   ]
 }

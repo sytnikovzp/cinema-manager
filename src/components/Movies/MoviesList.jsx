@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+// =============================================
+import { Link } from 'react-router-dom';
 // =============================================
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -9,18 +11,27 @@ import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
 import { styled } from '@mui/system';
 import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
+import Alert from '@mui/material/Alert';
 // =============================================
-import { useNavigate } from 'react-router-dom';
-// =============================================
-import { deleteMovie } from '../../store/slices/moviesSlice';
 import { itemListStyle } from '../../services/styleService';
+import { buttonMainStyle } from '../../services/styleService';
+// =============================================
+import {
+  getAllMovies,
+  deleteMovie,
+  resetStatus,
+} from '../../store/slices/moviesSlice';
+// =============================================
+import useSnackbar from '../../hooks';
 
 const StyledAvatar = styled(Avatar)({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
@@ -29,42 +40,35 @@ const StyledAvatar = styled(Avatar)({
   },
 });
 
-function MoviesList({ movies }) {
+function MoviesList() {
   const dispatch = useDispatch();
 
-  const navigate = useNavigate();
-
+  const movies = useSelector((state) => state.moviesList.movies);
   const status = useSelector((state) => state.moviesList.status);
 
-  const [open, setOpen] = useState(false);
-  const [severity, setSeverity] = useState();
+  const { snackbar, showSnackbar, handleClose } = useSnackbar(() =>
+    dispatch(resetStatus())
+  );
+
+  const prevStatusRef = useRef();
 
   useEffect(() => {
-    if (status && status !== null) {
-      setOpen(true);
-      if (status.toLowerCase().includes('success')) {
-        setSeverity('success');
-      } else {
-        return setSeverity('error');
-      }
+    dispatch(getAllMovies());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const prevStatus = prevStatusRef.current;
+    const currentStatus = status;
+
+    if (currentStatus && currentStatus !== prevStatus) {
+      const severity = currentStatus.toLowerCase().includes('success')
+        ? 'success'
+        : 'error';
+      showSnackbar(currentStatus, severity);
     }
-  }, [status]);
 
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpen(false);
-  };
-
-  const onItemOpen = (id) => {
-    navigate(`/movies/${id}`);
-  };
-
-  const onItemEdit = (event, id) => {
-    event.stopPropagation();
-    navigate(`/movies/new/${id}`);
-  };
+    prevStatusRef.current = currentStatus;
+  }, [status, showSnackbar]);
 
   const onItemDelete = (event, id) => {
     event.stopPropagation();
@@ -73,13 +77,23 @@ function MoviesList({ movies }) {
 
   return (
     <>
-      <Typography
-        variant='h4'
-        component='h2'
-        sx={{ marginTop: -7, textAlign: 'left' }}
-      >
-        Movies list
-      </Typography>
+      <Stack direction='row' justifyContent='space-between'>
+        <Typography variant='h4' component='h2'>
+          Movies list
+        </Typography>
+
+        <Button
+          component={Link}
+          to='new'
+          type='button'
+          variant='contained'
+          color='success'
+          sx={buttonMainStyle}
+          startIcon={<GroupAddIcon />}
+        >
+          Add movie
+        </Button>
+      </Stack>
 
       <Box
         sx={{
@@ -91,51 +105,62 @@ function MoviesList({ movies }) {
           {movies.map((movie) => (
             <Stack key={movie.id} direction='column' marginBottom={1}>
               <ListItem
-                onClick={() => onItemOpen(movie.id)}
+                component={Link}
+                to={`/movies/${movie.id}`}
                 disablePadding
                 sx={itemListStyle}
-                secondaryAction={
+              >
+                <ListItemButton sx={{ borderRadius: 5 }}>
+                  <ListItemAvatar>
+                    <StyledAvatar src={movie.poster} />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={`${movie.title}, ${
+                      movie.movieYear ? movie.movieYear : 'Unknown'
+                    }`}
+                  />
+                </ListItemButton>
+
+                <ListItemSecondaryAction>
                   <Stack direction='row' spacing={1}>
                     <IconButton
                       edge='end'
                       aria-label='edit'
-                      onClick={(event) => onItemEdit(event, movie.id)}
+                      component={Link}
+                      to={`/movies/new/${movie.id}`}
                     >
                       <EditIcon />
                     </IconButton>
                     <IconButton
                       edge='end'
                       aria-label='delete'
-                      onClick={(event) => onItemDelete(event, movie.id)}
+                      onClick={(event) => {
+                        onItemDelete(event, movie.id);
+                      }}
                     >
                       <HighlightOffIcon />
                     </IconButton>
                   </Stack>
-                }
-              >
-                <ListItemButton>
-                  <ListItemAvatar>
-                    <StyledAvatar src={movie.poster} />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={`${movie.title}, ${movie.studios}`}
-                  />
-                </ListItemButton>
+                </ListItemSecondaryAction>
               </ListItem>
             </Stack>
           ))}
         </List>
       </Box>
 
-      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-        <MuiAlert
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={1000}
+        onClose={handleClose}
+      >
+        <Alert
           onClose={handleClose}
-          severity={severity}
+          severity={snackbar.severity}
           variant='filled'
           sx={{ width: '100%' }}
         >
-          {status}
-        </MuiAlert>
+          {snackbar.message}
+        </Alert>
       </Snackbar>
     </>
   );

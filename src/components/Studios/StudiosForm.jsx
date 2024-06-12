@@ -53,7 +53,7 @@ function StudioForm() {
   };
 
   const schema = Yup.object().shape({
-    title: Yup.string().required('Title is a required field'),
+    title: Yup.string().required('Studio title is a required field'),
     foundationYear: Yup.date(),
     location: Yup.string(),
     logo: Yup.string().url('Invalid URL logo'),
