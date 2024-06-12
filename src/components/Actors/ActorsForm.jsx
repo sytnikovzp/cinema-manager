@@ -41,10 +41,17 @@ function ActorForm() {
 
   const { id } = useParams();
   const currentActor = actors.find((actor) => actor.id === Number(id));
+
+  console.log(id);
+
   const navigate = useNavigate();
 
   const goBack = () => {
-    navigate(`/actors/${id}`);
+    if (id !== ':id') {
+      navigate(`/actors/${id}`);
+    } else {
+      navigate(`/actors`);
+    }
   };
 
   const schema = Yup.object().shape({
