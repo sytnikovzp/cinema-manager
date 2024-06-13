@@ -14,7 +14,12 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 // =============================================
-import { buttonMainStyle, itemComponentBoxMainStyle, itemComponentBoxSecondaryStyle } from '../../services/styleService';
+import {
+  buttonMainStyle,
+  itemComponentBoxMainStyle,
+  itemComponentBoxSecondaryStyle,
+  itemComponentBoxThirdStyle,
+} from '../../services/styleService';
 import { emptyMovie } from '../../constants';
 import { getAllMovies, resetStatus } from '../../store/slices/moviesSlice';
 // =============================================
@@ -110,12 +115,8 @@ function MoviesItem() {
           overflowY: 'auto',
         }}
       >
-        <Box
-          sx={itemComponentBoxMainStyle}
-        >
-          <Box
-            sx={itemComponentBoxSecondaryStyle}
-          >
+        <Box sx={itemComponentBoxMainStyle}>
+          <Box sx={itemComponentBoxSecondaryStyle}>
             <Card>
               <CardMedia
                 component='img'
@@ -129,18 +130,13 @@ function MoviesItem() {
               />
             </Card>
           </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              width: '60%',
-            }}
-          >
+          <Box sx={itemComponentBoxThirdStyle}>
             <Typography variant='h6' component='div'>
               Title: {currentMovie.title}
             </Typography>
             <Typography variant='body1' component='div'>
-              Movie year: {currentMovie.movieYear ? currentMovie.movieYear : 'Unknown'}
+              Movie year:{' '}
+              {currentMovie.movieYear ? currentMovie.movieYear : 'Unknown'}
             </Typography>
             <Typography variant='body1' component='div'>
               Genre: {currentMovie.genre ? currentMovie.genre : 'Unknown'}

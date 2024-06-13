@@ -83,3 +83,9 @@ export const itemComponentBoxSecondaryStyle = {
   flexDirection: 'column',
   width: '40%',
 };
+
+export const itemComponentBoxThirdStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  width: '60%',
+};

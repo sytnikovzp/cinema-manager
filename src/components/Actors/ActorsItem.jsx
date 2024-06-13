@@ -14,7 +14,12 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 // =============================================
-import { buttonMainStyle, itemComponentBoxMainStyle, itemComponentBoxSecondaryStyle } from '../../services/styleService';
+import {
+  buttonMainStyle,
+  itemComponentBoxMainStyle,
+  itemComponentBoxSecondaryStyle,
+  itemComponentBoxThirdStyle,
+} from '../../services/styleService';
 import { emptyActor } from '../../constants';
 import { getAllActors, resetStatus } from '../../store/slices/actorsSlice';
 // =============================================
@@ -102,12 +107,8 @@ function ActorsItem() {
           overflowY: 'auto',
         }}
       >
-        <Box
-          sx={itemComponentBoxMainStyle}
-        >
-          <Box
-            sx={itemComponentBoxSecondaryStyle}
-          >
+        <Box sx={itemComponentBoxMainStyle}>
+          <Box sx={itemComponentBoxSecondaryStyle}>
             <Card>
               <CardMedia
                 component='img'
@@ -121,21 +122,17 @@ function ActorsItem() {
               />
             </Card>
           </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              width: '60%',
-            }}
-          >
+          <Box sx={itemComponentBoxThirdStyle}>
             <Typography variant='h6' component='div'>
               FullName: {currentActor.fullName}
             </Typography>
             <Typography variant='body1' component='div'>
-              Birth year: {currentActor.birthYear ? currentActor.birthYear : 'Unknown'}
+              Birth year:{' '}
+              {currentActor.birthYear ? currentActor.birthYear : 'Unknown'}
             </Typography>
             <Typography variant='body1' component='div'>
-              Nationality: {currentActor.nationality ? currentActor.nationality : 'Unknown'}
+              Nationality:{' '}
+              {currentActor.nationality ? currentActor.nationality : 'Unknown'}
             </Typography>
             <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
               Movies: {formattedMovies ? formattedMovies : 'Unknown'}

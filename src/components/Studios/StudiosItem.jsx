@@ -14,7 +14,12 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 // =============================================
-import { buttonMainStyle, itemComponentBoxMainStyle, itemComponentBoxSecondaryStyle } from '../../services/styleService';
+import {
+  buttonMainStyle,
+  itemComponentBoxMainStyle,
+  itemComponentBoxSecondaryStyle,
+  itemComponentBoxThirdStyle,
+} from '../../services/styleService';
 import { emptyStudio } from '../../constants';
 import { getAllStudios, resetStatus } from '../../store/slices/studiosSlice';
 // =============================================
@@ -102,12 +107,8 @@ function StudiosItem() {
           overflowY: 'auto',
         }}
       >
-        <Box
-          sx={itemComponentBoxMainStyle}
-        >
-          <Box
-            sx={itemComponentBoxSecondaryStyle}
-          >
+        <Box sx={itemComponentBoxMainStyle}>
+          <Box sx={itemComponentBoxSecondaryStyle}>
             <Card>
               <CardMedia
                 component='img'
@@ -121,13 +122,7 @@ function StudiosItem() {
               />
             </Card>
           </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              width: '60%',
-            }}
-          >
+          <Box sx={itemComponentBoxThirdStyle}>
             <Typography variant='h6' component='div'>
               Title: {currentStudio.title}
             </Typography>

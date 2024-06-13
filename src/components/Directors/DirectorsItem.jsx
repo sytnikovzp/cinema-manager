@@ -14,9 +14,17 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 // =============================================
-import { buttonMainStyle, itemComponentBoxMainStyle, itemComponentBoxSecondaryStyle } from '../../services/styleService';
+import {
+  buttonMainStyle,
+  itemComponentBoxMainStyle,
+  itemComponentBoxSecondaryStyle,
+  itemComponentBoxThirdStyle,
+} from '../../services/styleService';
 import { emptyDirector } from '../../constants';
-import { getAllDirectors, resetStatus } from '../../store/slices/directorsSlice';
+import {
+  getAllDirectors,
+  resetStatus,
+} from '../../store/slices/directorsSlice';
 // =============================================
 import useSnackbar from '../../hooks';
 
@@ -57,7 +65,9 @@ function DirectorsItem() {
     prevStatusRef.current = currentStatus;
   }, [status, showSnackbar]);
 
-  const director = directors.find((director) => Number(director.id) === Number(id));
+  const director = directors.find(
+    (director) => Number(director.id) === Number(id)
+  );
 
   const currentDirector = director ? director : emptyDirector;
 
@@ -102,12 +112,8 @@ function DirectorsItem() {
           overflowY: 'auto',
         }}
       >
-        <Box
-          sx={itemComponentBoxMainStyle}
-        >
-          <Box
-            sx={itemComponentBoxSecondaryStyle}
-          >
+        <Box sx={itemComponentBoxMainStyle}>
+          <Box sx={itemComponentBoxSecondaryStyle}>
             <Card>
               <CardMedia
                 component='img'
@@ -121,21 +127,21 @@ function DirectorsItem() {
               />
             </Card>
           </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              width: '60%',
-            }}
-          >
+          <Box sx={itemComponentBoxThirdStyle}>
             <Typography variant='h6' component='div'>
               FullName: {currentDirector.fullName}
             </Typography>
             <Typography variant='body1' component='div'>
-              Birth year: {currentDirector.birthYear ? currentDirector.birthYear : 'Unknown'}
+              Birth year:{' '}
+              {currentDirector.birthYear
+                ? currentDirector.birthYear
+                : 'Unknown'}
             </Typography>
             <Typography variant='body1' component='div'>
-              Nationality: {currentDirector.nationality ? currentDirector.nationality : 'Unknown'}
+              Nationality:{' '}
+              {currentDirector.nationality
+                ? currentDirector.nationality
+                : 'Unknown'}
             </Typography>
             <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
               Movies: {formattedMovies ? formattedMovies : 'Unknown'}
