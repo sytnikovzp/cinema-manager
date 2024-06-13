@@ -15,7 +15,7 @@ import RecentActorsIcon from '@mui/icons-material/RecentActors';
 import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 import AssuredWorkloadIcon from '@mui/icons-material/AssuredWorkload';
 // =============================================
-import { itemTextStyle } from '../../services/styleService';
+import { navItemTextStyle } from '../../services/styleService';
 
 function NavBar() {
   return (
@@ -33,7 +33,7 @@ function NavBar() {
                   <HomeIcon />
                 </ListItemIcon>
                 <ListItemText
-                  sx={itemTextStyle}
+                  sx={navItemTextStyle}
                   primary='Home'
                 ></ListItemText>
               </ListItemButton>
@@ -44,7 +44,7 @@ function NavBar() {
                   <MovieFilterIcon />
                 </ListItemIcon>
                 <ListItemText
-                  sx={itemTextStyle}
+                  sx={navItemTextStyle}
                   primary='Movies'
                 ></ListItemText>
               </ListItemButton>
@@ -55,7 +55,7 @@ function NavBar() {
                   <RecentActorsIcon />
                 </ListItemIcon>
                 <ListItemText
-                  sx={itemTextStyle}
+                  sx={navItemTextStyle}
                   primary='Actors'
                 ></ListItemText>
               </ListItemButton>
@@ -66,7 +66,7 @@ function NavBar() {
                   <VideoCameraFrontIcon />
                 </ListItemIcon>
                 <ListItemText
-                  sx={itemTextStyle}
+                  sx={navItemTextStyle}
                   primary='Directors'
                 ></ListItemText>
               </ListItemButton>
@@ -77,7 +77,7 @@ function NavBar() {
                   <AssuredWorkloadIcon />
                 </ListItemIcon>
                 <ListItemText
-                  sx={itemTextStyle}
+                  sx={navItemTextStyle}
                   primary='Studios'
                 ></ListItemText>
               </ListItemButton>
@@ -92,7 +92,7 @@ function NavBar() {
                 <ListItemIcon>
                   <MiscellaneousServicesIcon />
                 </ListItemIcon>
-                <ListItemText sx={itemTextStyle} primary='Service' />
+                <ListItemText sx={navItemTextStyle} primary='Service' />
               </ListItemButton>
             </ListItem>
           </List>

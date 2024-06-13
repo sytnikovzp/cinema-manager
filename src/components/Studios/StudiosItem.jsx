@@ -19,7 +19,7 @@ import {
   buttonMainStyle,
   itemComponentBoxMainStyle,
   itemComponentBoxSecondaryStyle,
-  itemComponentBoxThirdStyle,
+  itemInformationBoxStyle,
 } from '../../services/styleService';
 // =============================================
 import { emptyStudio } from '../../constants';
@@ -119,7 +119,7 @@ function StudiosItem() {
               />
             </Card>
           </Box>
-          <Box sx={itemComponentBoxThirdStyle}>
+          <Box sx={itemInformationBoxStyle}>
             <Typography variant='h6' component='div'>
               Title: {currentStudio.title}
             </Typography>

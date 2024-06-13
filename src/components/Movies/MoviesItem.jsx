@@ -19,7 +19,7 @@ import {
   buttonMainStyle,
   itemComponentBoxMainStyle,
   itemComponentBoxSecondaryStyle,
-  itemComponentBoxThirdStyle,
+  itemInformationBoxStyle,
 } from '../../services/styleService';
 // =============================================
 import { emptyMovie } from '../../constants';
@@ -127,7 +127,7 @@ function MoviesItem() {
               />
             </Card>
           </Box>
-          <Box sx={itemComponentBoxThirdStyle}>
+          <Box sx={itemInformationBoxStyle}>
             <Typography variant='h6' component='div'>
               Title: {currentMovie.title}
             </Typography>

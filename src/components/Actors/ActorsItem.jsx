@@ -19,7 +19,7 @@ import {
   buttonMainStyle,
   itemComponentBoxMainStyle,
   itemComponentBoxSecondaryStyle,
-  itemComponentBoxThirdStyle,
+  itemInformationBoxStyle,
 } from '../../services/styleService';
 // =============================================
 import { emptyActor } from '../../constants';
@@ -119,7 +119,7 @@ function ActorsItem() {
               />
             </Card>
           </Box>
-          <Box sx={itemComponentBoxThirdStyle}>
+          <Box sx={itemInformationBoxStyle}>
             <Typography variant='h6' component='div'>
               FullName: {currentActor.fullName}
             </Typography>

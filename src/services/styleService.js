@@ -1,3 +1,34 @@
+// =============================================
+// General style
+
+export const rootComponentPaperStyle = {
+  borderRadius: 1,
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 3,
+  padding: '10px',
+};
+
+export const buttonMainStyle = {
+  height: '40px',
+  width: '170px',
+};
+
+export const scrollBoxStyle = {
+  height: '60vh',
+  overflowY: 'auto',
+};
+
+// =============================================
+// NavBar component
+
+export const navItemTextStyle = {
+  color: 'text.primary',
+};
+
+// =============================================
+// HomePage component
+
 export const carouselStyles = {
   imgContainerStyle: {
     position: 'relative',
@@ -18,40 +49,8 @@ export const carouselStyles = {
   },
 };
 
-export const itemTextStyle = {
-  color: 'text.primary',
-};
-
-export const buttonMainStyle = {
-  height: '40px',
-  width: '170px',
-};
-
-export const buttonFormStyle = {
-  height: '40px',
-  width: '100px',
-};
-
-export const itemListStyle = {
-  color: 'text.primary',
-  border: '1px solid #009688',
-  borderRadius: 5,
-};
-
-export const formItemStyle = {
-  display: 'flex',
-  alignItems: 'baseline',
-  gap: 1,
-  width: '90%',
-};
-
-export const rootComponentPaperStyle = {
-  borderRadius: 1,
-  display: 'flex',
-  flexDirection: 'column',
-  gap: 3,
-  padding: '10px',
-};
+// =============================================
+// *form components
 
 export const formStyle = {
   borderRadius: 0,
@@ -63,6 +62,13 @@ export const formStyle = {
   paddingBottom: '10px',
 };
 
+export const formItemStyle = {
+  display: 'flex',
+  alignItems: 'baseline',
+  gap: 1,
+  width: '90%',
+};
+
 export const fieldArrayStyle = {
   width: '100%',
   paddingLeft: '10px',
@@ -70,6 +76,23 @@ export const fieldArrayStyle = {
   paddingBottom: '10px',
   borderRadius: '5px',
 };
+
+export const buttonFormStyle = {
+  height: '40px',
+  width: '100px',
+};
+
+// =============================================
+// *list components
+
+export const itemListStyle = {
+  color: 'text.primary',
+  border: '1px solid #009688',
+  borderRadius: 5,
+};
+
+// =============================================
+// *item components
 
 export const itemComponentBoxMainStyle = {
   display: 'flex',
@@ -84,13 +107,8 @@ export const itemComponentBoxSecondaryStyle = {
   width: '40%',
 };
 
-export const itemComponentBoxThirdStyle = {
+export const itemInformationBoxStyle = {
   display: 'flex',
   flexDirection: 'column',
   width: '60%',
-};
-
-export const scrollBoxStyle = {
-  height: '60vh',
-  overflowY: 'auto',
 };
