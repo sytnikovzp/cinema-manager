@@ -29,7 +29,11 @@ import {
 } from '../../store/slices/studiosSlice';
 import { emptyStudio } from '../../constants';
 // =============================================
-import { formItemStyle, buttonFormStyle } from '../../services/styleService';
+import {
+  formStyle,
+  formItemStyle,
+  buttonFormStyle,
+} from '../../services/styleService';
 
 function StudioForm() {
   const dispatch = useDispatch();
@@ -40,7 +44,9 @@ function StudioForm() {
   }, [dispatch]);
 
   const { id } = useParams();
-  const currentStudio = studios.find((studio) => Number(studio.id) === Number(id));
+  const currentStudio = studios.find(
+    (studio) => Number(studio.id) === Number(id)
+  );
 
   const navigate = useNavigate();
 
@@ -73,17 +79,7 @@ function StudioForm() {
   const renderForm = ({ values, errors, touched, setFieldValue }) => {
     return (
       <Form id='studio-form'>
-        <Box
-          sx={{
-            borderRadius: 0,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: 3,
-            paddingTop: '10px',
-            paddingBottom: '10px',
-          }}
-        >
+        <Box sx={formStyle}>
           <Box sx={formItemStyle}>
             <Field
               name='title'
@@ -103,7 +99,11 @@ function StudioForm() {
               <DatePicker
                 name='foundationYear'
                 label='Foundation year'
-                value={values.foundationYear ? dayjs().year(values.foundationYear) : null}
+                value={
+                  values.foundationYear
+                    ? dayjs().year(values.foundationYear)
+                    : null
+                }
                 views={['year']}
                 onChange={(value) =>
                   setFieldValue('foundationYear', value ? value.year() : '')
@@ -111,7 +111,8 @@ function StudioForm() {
                 sx={{ width: '400px' }}
                 slotProps={{
                   textField: {
-                    error: touched.foundationYear && Boolean(errors.foundationYear),
+                    error:
+                      touched.foundationYear && Boolean(errors.foundationYear),
                     helperText: touched.foundationYear && errors.foundationYear,
                   },
                 }}

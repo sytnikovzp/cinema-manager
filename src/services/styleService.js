@@ -52,3 +52,13 @@ export const rootComponentPaperStyle = {
   gap: 3,
   padding: '10px',
 };
+
+export const formStyle = {
+  borderRadius: 0,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: 3,
+  paddingTop: '10px',
+  paddingBottom: '10px',
+};

@@ -29,7 +29,11 @@ import {
 } from '../../store/slices/directorsSlice';
 import { emptyDirector } from '../../constants';
 // =============================================
-import { formItemStyle, buttonFormStyle } from '../../services/styleService';
+import {
+  formStyle,
+  formItemStyle,
+  buttonFormStyle,
+} from '../../services/styleService';
 
 function DirectorForm() {
   const dispatch = useDispatch();
@@ -40,7 +44,9 @@ function DirectorForm() {
   }, [dispatch]);
 
   const { id } = useParams();
-  const currentDirector = directors.find((director) => Number(director.id) === Number(id));
+  const currentDirector = directors.find(
+    (director) => Number(director.id) === Number(id)
+  );
 
   const navigate = useNavigate();
 
@@ -73,17 +79,7 @@ function DirectorForm() {
   const renderForm = ({ values, errors, touched, setFieldValue }) => {
     return (
       <Form id='director-form'>
-        <Box
-          sx={{
-            borderRadius: 0,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: 3,
-            paddingTop: '10px',
-            paddingBottom: '10px',
-          }}
-        >
+        <Box sx={formStyle}>
           <Box sx={formItemStyle}>
             <Field
               name='fullName'

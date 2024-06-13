@@ -29,7 +29,11 @@ import {
 } from '../../store/slices/actorsSlice';
 import { emptyActor } from '../../constants';
 // =============================================
-import { formItemStyle, buttonFormStyle } from '../../services/styleService';
+import {
+  formStyle,
+  formItemStyle,
+  buttonFormStyle,
+} from '../../services/styleService';
 
 function ActorForm() {
   const dispatch = useDispatch();
@@ -73,17 +77,7 @@ function ActorForm() {
   const renderForm = ({ values, errors, touched, setFieldValue }) => {
     return (
       <Form id='actor-form'>
-        <Box
-          sx={{
-            borderRadius: 0,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: 3,
-            paddingTop: '10px',
-            paddingBottom: '10px',
-          }}
-        >
+        <Box sx={formStyle}>
           <Box sx={formItemStyle}>
             <Field
               name='fullName'
