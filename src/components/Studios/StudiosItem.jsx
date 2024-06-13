@@ -12,6 +12,7 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import EditIcon from '@mui/icons-material/Edit';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import Divider from '@mui/material/Divider';
 // =============================================
 import { buttonMainStyle } from '../../services/styleService';
 import { emptyStudio } from '../../constants';
@@ -92,6 +93,8 @@ function StudiosItem() {
           Edit
         </Button>
       </Stack>
+
+      <Divider />
 
       <Box
         sx={{
