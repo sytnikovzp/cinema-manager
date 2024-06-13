@@ -295,7 +295,7 @@ function MovieForm() {
               type='submit'
               variant='contained'
               color='success'
-              style={buttonFormStyle}
+              sx={buttonFormStyle}
               startIcon={<SaveIcon />}
             >
               Save
@@ -305,7 +305,7 @@ function MovieForm() {
               type='reset'
               variant='contained'
               color='error'
-              style={buttonFormStyle}
+              sx={buttonFormStyle}
               startIcon={<ClearAllIcon />}
             >
               Reset
@@ -314,7 +314,7 @@ function MovieForm() {
             <Button
               type='button'
               variant='contained'
-              style={buttonFormStyle}
+              sx={buttonFormStyle}
               onClick={goBack}
               startIcon={<ArrowBackIcon />}
             >

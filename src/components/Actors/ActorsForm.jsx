@@ -191,7 +191,7 @@ function ActorForm() {
               type='submit'
               variant='contained'
               color='success'
-              style={buttonFormStyle}
+              sx={buttonFormStyle}
               startIcon={<SaveIcon />}
             >
               Save
@@ -201,7 +201,7 @@ function ActorForm() {
               type='reset'
               variant='contained'
               color='error'
-              style={buttonFormStyle}
+              sx={buttonFormStyle}
               startIcon={<ClearAllIcon />}
             >
               Reset
@@ -210,7 +210,7 @@ function ActorForm() {
             <Button
               type='button'
               variant='contained'
-              style={buttonFormStyle}
+              sx={buttonFormStyle}
               onClick={goBack}
               startIcon={<ArrowBackIcon />}
             >

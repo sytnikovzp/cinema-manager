@@ -193,7 +193,7 @@ function DirectorForm() {
               type='submit'
               variant='contained'
               color='success'
-              style={buttonFormStyle}
+              sx={buttonFormStyle}
               startIcon={<SaveIcon />}
             >
               Save
@@ -203,7 +203,7 @@ function DirectorForm() {
               type='reset'
               variant='contained'
               color='error'
-              style={buttonFormStyle}
+              sx={buttonFormStyle}
               startIcon={<ClearAllIcon />}
             >
               Reset
@@ -212,7 +212,7 @@ function DirectorForm() {
             <Button
               type='button'
               variant='contained'
-              style={buttonFormStyle}
+              sx={buttonFormStyle}
               onClick={goBack}
               startIcon={<ArrowBackIcon />}
             >
