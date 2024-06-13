@@ -14,7 +14,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 // =============================================
-import { buttonMainStyle, itemComponentBoxMainStyle } from '../../services/styleService';
+import { buttonMainStyle, itemComponentBoxMainStyle, itemComponentBoxSecondaryStyle } from '../../services/styleService';
 import { emptyStudio } from '../../constants';
 import { getAllStudios, resetStatus } from '../../store/slices/studiosSlice';
 // =============================================
@@ -106,11 +106,7 @@ function StudiosItem() {
           sx={itemComponentBoxMainStyle}
         >
           <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              width: '40%',
-            }}
+            sx={itemComponentBoxSecondaryStyle}
           >
             <Card>
               <CardMedia

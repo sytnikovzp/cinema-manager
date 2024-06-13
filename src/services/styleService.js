@@ -77,3 +77,9 @@ export const itemComponentBoxMainStyle = {
   gap: 2,
   width: '100%',
 };
+
+export const itemComponentBoxSecondaryStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  width: '40%',
+};
