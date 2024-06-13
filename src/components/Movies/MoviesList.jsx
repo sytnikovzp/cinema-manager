@@ -14,8 +14,8 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import Button from '@mui/material/Button'
+import VideoCallIcon from '@mui/icons-material/VideoCall';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
 import { styled } from '@mui/system';
@@ -90,7 +90,7 @@ function MoviesList() {
           variant='contained'
           color='success'
           sx={buttonMainStyle}
-          startIcon={<GroupAddIcon />}
+          startIcon={<VideoCallIcon />}
         >
           Add movie
         </Button>
