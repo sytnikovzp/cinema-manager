@@ -70,3 +70,10 @@ export const fieldArrayStyle = {
   paddingBottom: '10px',
   borderRadius: '5px',
 };
+
+export const itemComponentBoxMainStyle = {
+  display: 'flex',
+  flexDirection: 'row',
+  gap: 2,
+  width: '100%',
+};

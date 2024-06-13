@@ -14,7 +14,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 // =============================================
-import { buttonMainStyle } from '../../services/styleService';
+import { buttonMainStyle, itemComponentBoxMainStyle } from '../../services/styleService';
 import { emptyStudio } from '../../constants';
 import { getAllStudios, resetStatus } from '../../store/slices/studiosSlice';
 // =============================================
@@ -103,7 +103,7 @@ function StudiosItem() {
         }}
       >
         <Box
-          sx={{ display: 'flex', flexDirection: 'row', gap: 2, width: '100%' }}
+          sx={itemComponentBoxMainStyle}
         >
           <Box
             sx={{
