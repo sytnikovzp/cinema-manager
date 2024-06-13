@@ -21,6 +21,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { styled } from '@mui/system';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import Divider from '@mui/material/Divider';
 // =============================================
 import { itemListStyle } from '../../services/styleService';
 import { buttonMainStyle } from '../../services/styleService';
@@ -94,6 +95,8 @@ function StudiosList() {
           Add studio
         </Button>
       </Stack>
+
+      <Divider />
 
       <Box
         sx={{
