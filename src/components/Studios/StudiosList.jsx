@@ -23,8 +23,11 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 // =============================================
-import { itemListStyle } from '../../services/styleService';
-import { buttonMainStyle } from '../../services/styleService';
+import {
+  scrollBoxStyle,
+  buttonMainStyle,
+  itemListStyle,
+} from '../../services/styleService';
 // =============================================
 import {
   getAllStudios,
@@ -98,12 +101,7 @@ function StudiosList() {
 
       <Divider />
 
-      <Box
-        sx={{
-          height: '60vh',
-          overflowY: 'auto',
-        }}
-      >
+      <Box sx={scrollBoxStyle}>
         <List>
           {studios.map((studio) => (
             <Stack key={studio.id} direction='column' marginBottom={1}>

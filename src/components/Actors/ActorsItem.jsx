@@ -15,11 +15,13 @@ import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 // =============================================
 import {
+  scrollBoxStyle,
   buttonMainStyle,
   itemComponentBoxMainStyle,
   itemComponentBoxSecondaryStyle,
   itemComponentBoxThirdStyle,
 } from '../../services/styleService';
+// =============================================
 import { emptyActor } from '../../constants';
 import { getAllActors, resetStatus } from '../../store/slices/actorsSlice';
 // =============================================
@@ -101,12 +103,7 @@ function ActorsItem() {
 
       <Divider />
 
-      <Box
-        sx={{
-          minHeight: '60vh',
-          overflowY: 'auto',
-        }}
-      >
+      <Box sx={scrollBoxStyle}>
         <Box sx={itemComponentBoxMainStyle}>
           <Box sx={itemComponentBoxSecondaryStyle}>
             <Card>

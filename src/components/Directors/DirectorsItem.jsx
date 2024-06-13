@@ -15,11 +15,13 @@ import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 // =============================================
 import {
+  scrollBoxStyle,
   buttonMainStyle,
   itemComponentBoxMainStyle,
   itemComponentBoxSecondaryStyle,
   itemComponentBoxThirdStyle,
 } from '../../services/styleService';
+// =============================================
 import { emptyDirector } from '../../constants';
 import {
   getAllDirectors,
@@ -106,12 +108,7 @@ function DirectorsItem() {
 
       <Divider />
 
-      <Box
-        sx={{
-          minHeight: '60vh',
-          overflowY: 'auto',
-        }}
-      >
+      <Box sx={scrollBoxStyle}>
         <Box sx={itemComponentBoxMainStyle}>
           <Box sx={itemComponentBoxSecondaryStyle}>
             <Card>

@@ -15,11 +15,13 @@ import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 // =============================================
 import {
+  scrollBoxStyle,
   buttonMainStyle,
   itemComponentBoxMainStyle,
   itemComponentBoxSecondaryStyle,
   itemComponentBoxThirdStyle,
 } from '../../services/styleService';
+// =============================================
 import { emptyMovie } from '../../constants';
 import { getAllMovies, resetStatus } from '../../store/slices/moviesSlice';
 // =============================================
@@ -109,12 +111,7 @@ function MoviesItem() {
 
       <Divider />
 
-      <Box
-        sx={{
-          minHeight: '60vh',
-          overflowY: 'auto',
-        }}
-      >
+      <Box sx={scrollBoxStyle}>
         <Box sx={itemComponentBoxMainStyle}>
           <Box sx={itemComponentBoxSecondaryStyle}>
             <Card>

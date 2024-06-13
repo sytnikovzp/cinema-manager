@@ -14,7 +14,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button'
+import Button from '@mui/material/Button';
 import VideoCallIcon from '@mui/icons-material/VideoCall';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
@@ -23,8 +23,11 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 // =============================================
-import { itemListStyle } from '../../services/styleService';
-import { buttonMainStyle } from '../../services/styleService';
+import {
+  scrollBoxStyle,
+  buttonMainStyle,
+  itemListStyle,
+} from '../../services/styleService';
 // =============================================
 import {
   getAllMovies,
@@ -98,12 +101,7 @@ function MoviesList() {
 
       <Divider />
 
-      <Box
-        sx={{
-          height: '60vh',
-          overflowY: 'auto',
-        }}
-      >
+      <Box sx={scrollBoxStyle}>
         <List>
           {movies.map((movie) => (
             <Stack key={movie.id} direction='column' marginBottom={1}>

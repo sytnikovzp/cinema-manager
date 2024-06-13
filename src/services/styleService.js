@@ -89,3 +89,8 @@ export const itemComponentBoxThirdStyle = {
   flexDirection: 'column',
   width: '60%',
 };
+
+export const scrollBoxStyle = {
+  height: '60vh',
+  overflowY: 'auto',
+};
