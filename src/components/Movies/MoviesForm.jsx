@@ -32,6 +32,7 @@ import { emptyMovie } from '../../constants';
 import {
   formStyle,
   formItemStyle,
+  fieldArrayStyle,
   buttonFormStyle,
 } from '../../services/styleService';
 
@@ -158,13 +159,7 @@ function MovieForm() {
                     component='fieldset'
                     form='movie-form'
                     spacing={2}
-                    sx={{
-                      width: '100%',
-                      paddingLeft: '10px',
-                      paddingRight: '10px',
-                      paddingBottom: '10px',
-                      borderRadius: '5px',
-                    }}
+                    sx={fieldArrayStyle}
                   >
                     <Typography component='legend' variant='h6' gutterBottom>
                       Directors

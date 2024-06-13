@@ -62,3 +62,11 @@ export const formStyle = {
   paddingTop: '10px',
   paddingBottom: '10px',
 };
+
+export const fieldArrayStyle = {
+  width: '100%',
+  paddingLeft: '10px',
+  paddingRight: '10px',
+  paddingBottom: '10px',
+  borderRadius: '5px',
+};
