@@ -127,7 +127,7 @@ function MoviesItem() {
                 image={
                   currentMovie.poster
                     ? currentMovie.poster
-                    : 'https://upload.wikimedia.org/wikipedia/commons/c/c2/No_image_poster.png'
+                    : 'https://www.prokerala.com/movies/assets/img/no-poster-available.jpg'
                 }
                 alt={currentMovie.title}
               />
