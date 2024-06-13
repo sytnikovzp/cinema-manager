@@ -44,3 +44,11 @@ export const formItemStyle = {
   gap: 1,
   width: '90%',
 };
+
+export const rootComponentPaperStyle = {
+  borderRadius: 1,
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 3,
+  padding: '10px',
+};

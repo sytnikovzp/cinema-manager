@@ -3,6 +3,8 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 // =============================================
+import { rootComponentPaperStyle } from '../../services/styleService';
+// =============================================
 import MoviesItem from './MoviesItem';
 import MoviesList from './MoviesList';
 
@@ -13,16 +15,7 @@ function Movies() {
         m: 2,
       }}
     >
-      <Paper
-        elevation={3}
-        sx={{
-          borderRadius: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 3,
-          padding: '10px',
-        }}
-      >
+      <Paper elevation={3} sx={rootComponentPaperStyle}>
         <Routes>
           <Route path='/' element={<MoviesList />} />
           <Route path=':id' element={<MoviesItem />} />
