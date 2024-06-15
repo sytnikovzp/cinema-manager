@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
@@ -22,11 +21,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import { Typography } from '@mui/material';
 // =============================================
-import {
-  getAllMovies,
-  createMovie,
-  updateMovie,
-} from '../../store/slices/moviesSlice';
+import { createMovie, updateMovie } from '../../store/slices/moviesSlice';
 import { emptyMovie } from '../../constants';
 // =============================================
 import {
@@ -39,10 +34,6 @@ import {
 function MovieForm() {
   const dispatch = useDispatch();
   const movies = useSelector((state) => state.moviesList.movies);
-
-  useEffect(() => {
-    dispatch(getAllMovies());
-  }, [dispatch]);
 
   const { id } = useParams();
   const currentMovie = movies.find((movie) => Number(movie.id) === Number(id));

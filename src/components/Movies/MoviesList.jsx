@@ -29,11 +29,7 @@ import {
   itemListStyle,
 } from '../../services/styleService';
 // =============================================
-import {
-  getAllMovies,
-  deleteMovie,
-  resetStatus,
-} from '../../store/slices/moviesSlice';
+import { deleteMovie, resetStatus } from '../../store/slices/moviesSlice';
 // =============================================
 import useSnackbar from '../../hooks';
 
@@ -55,10 +51,6 @@ function MoviesList() {
   );
 
   const prevStatusRef = useRef();
-
-  useEffect(() => {
-    dispatch(getAllMovies());
-  }, [dispatch]);
 
   useEffect(() => {
     const prevStatus = prevStatusRef.current;

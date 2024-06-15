@@ -23,7 +23,7 @@ import {
 } from '../../services/styleService';
 // =============================================
 import { emptyMovie } from '../../constants';
-import { getAllMovies, resetStatus } from '../../store/slices/moviesSlice';
+import { resetStatus } from '../../store/slices/moviesSlice';
 // =============================================
 import useSnackbar from '../../hooks';
 
@@ -45,10 +45,6 @@ function MoviesItem() {
   const prevStatusRef = useRef();
 
   const { id } = useParams();
-
-  useEffect(() => {
-    dispatch(getAllMovies());
-  }, [dispatch]);
 
   useEffect(() => {
     const prevStatus = prevStatusRef.current;
