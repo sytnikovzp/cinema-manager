@@ -129,7 +129,7 @@ function DirectorsItem() {
             </Card>
           </Box>
           <Box sx={itemInformationBoxStyle}>
-            <Typography variant='h6' component='div'>
+            <Typography variant='h5' component='div'>
               FullName:{' '}
               {currentDirector.fullName ? currentDirector.fullName : 'Unknown'}
             </Typography>

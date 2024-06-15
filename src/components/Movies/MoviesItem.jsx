@@ -137,7 +137,7 @@ function MoviesItem() {
             </Card>
           </Box>
           <Box sx={itemInformationBoxStyle}>
-            <Typography variant='h6' component='div'>
+            <Typography variant='h5' component='div'>
               Title: {currentMovie.title ? currentMovie.title : 'Unknown'}
             </Typography>
             <Typography variant='body1' component='div'>

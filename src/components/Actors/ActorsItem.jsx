@@ -127,7 +127,7 @@ function ActorsItem() {
             </Card>
           </Box>
           <Box sx={itemInformationBoxStyle}>
-            <Typography variant='h6' component='div'>
+            <Typography variant='h5' component='div'>
               FullName:{' '}
               {currentActor.fullName ? currentActor.fullName : 'Unknown'}
             </Typography>
