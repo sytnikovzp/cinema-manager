@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 // =============================================
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import DomainAddIcon from '@mui/icons-material/DomainAdd';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
@@ -87,13 +88,25 @@ function StudiosItem() {
           id='goBack-btn'
           type='button'
           variant='contained'
-          color='success'
+          color='warning'
           sx={buttonMainStyle}
           startIcon={<EditIcon />}
           component={Link}
           to={`/studios/new/${id}`}
         >
           Edit
+        </Button>
+
+        <Button
+          component={Link}
+          to='/studios/new'
+          type='button'
+          variant='contained'
+          color='success'
+          sx={buttonMainStyle}
+          startIcon={<DomainAddIcon />}
+        >
+          Add studio
         </Button>
       </Stack>
 
