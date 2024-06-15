@@ -75,7 +75,6 @@ function DirectorsItem() {
     <>
       <Stack direction='row' justifyContent='space-between'>
         <Button
-          id='goBack-btn'
           type='button'
           variant='contained'
           color='info'
@@ -87,7 +86,6 @@ function DirectorsItem() {
         </Button>
 
         <Button
-          id='goBack-btn'
           type='button'
           variant='contained'
           color='warning'

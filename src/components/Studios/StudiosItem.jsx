@@ -73,7 +73,6 @@ function StudiosItem() {
     <>
       <Stack direction='row' justifyContent='space-between'>
         <Button
-          id='goBack-btn'
           type='button'
           variant='contained'
           color='info'
@@ -85,7 +84,6 @@ function StudiosItem() {
         </Button>
 
         <Button
-          id='goBack-btn'
           type='button'
           variant='contained'
           color='warning'
