@@ -15,7 +15,7 @@ export const buttonMainStyle = {
 };
 
 export const scrollBoxStyle = {
-  height: '60vh',
+  height: '70vh',
   overflowY: 'auto',
 };
 
