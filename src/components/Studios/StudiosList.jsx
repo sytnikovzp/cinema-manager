@@ -108,7 +108,7 @@ function StudiosList() {
                     <StyledAvatar src={studio.logo} />
                   </ListItemAvatar>
                   <ListItemText
-                    primary={`${studio.title}, ${
+                    primary={`${studio.title ? studio.title : 'Unknown'}, ${
                       studio.location ? studio.location : 'Unknown'
                     }`}
                   />

@@ -108,7 +108,9 @@ function DirectorsList() {
                     <StyledAvatar src={director.image} />
                   </ListItemAvatar>
                   <ListItemText
-                    primary={`${director.fullName}, ${
+                    primary={`${
+                      director.fullName ? director.fullName : 'Unknown'
+                    }, ${
                       director.nationality ? director.nationality : 'Unknown'
                     }`}
                   />
