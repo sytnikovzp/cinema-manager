@@ -23,7 +23,7 @@ import {
 } from '../../services/styleService';
 // =============================================
 import { emptyActor } from '../../constants';
-import { getAllActors, resetStatus } from '../../store/slices/actorsSlice';
+import { resetStatus } from '../../store/slices/actorsSlice';
 // =============================================
 import useSnackbar from '../../hooks';
 
@@ -45,10 +45,6 @@ function ActorsItem() {
   const prevStatusRef = useRef();
 
   const { id } = useParams();
-
-  useEffect(() => {
-    dispatch(getAllActors());
-  }, [dispatch]);
 
   useEffect(() => {
     const prevStatus = prevStatusRef.current;

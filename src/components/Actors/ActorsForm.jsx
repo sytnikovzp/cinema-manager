@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
@@ -22,11 +21,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import { Typography } from '@mui/material';
 // =============================================
-import {
-  getAllActors,
-  createActor,
-  updateActor,
-} from '../../store/slices/actorsSlice';
+import { createActor, updateActor } from '../../store/slices/actorsSlice';
 import { emptyActor } from '../../constants';
 // =============================================
 import {
@@ -39,10 +34,6 @@ import {
 function ActorForm() {
   const dispatch = useDispatch();
   const actors = useSelector((state) => state.actorsList.actors);
-
-  useEffect(() => {
-    dispatch(getAllActors());
-  }, [dispatch]);
 
   const { id } = useParams();
   const currentActor = actors.find((actor) => Number(actor.id) === Number(id));

@@ -29,11 +29,7 @@ import {
   itemListStyle,
 } from '../../services/styleService';
 // =============================================
-import {
-  getAllActors,
-  deleteActor,
-  resetStatus,
-} from '../../store/slices/actorsSlice';
+import { deleteActor, resetStatus } from '../../store/slices/actorsSlice';
 // =============================================
 import useSnackbar from '../../hooks';
 
@@ -55,10 +51,6 @@ function ActorsList() {
   );
 
   const prevStatusRef = useRef();
-
-  useEffect(() => {
-    dispatch(getAllActors());
-  }, [dispatch]);
 
   useEffect(() => {
     const prevStatus = prevStatusRef.current;

@@ -1,3 +1,5 @@
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 // =============================================
 import Paper from '@mui/material/Paper';
@@ -5,10 +7,18 @@ import Box from '@mui/material/Box';
 // =============================================
 import { rootComponentPaperStyle } from '../../services/styleService';
 // =============================================
+import { getAllActors } from '../../store/slices/actorsSlice';
+// =============================================
 import ActorsItem from './ActorsItem';
 import ActorsList from './ActorsList';
 
 function Actors() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllActors());
+  }, [dispatch]);
+
   return (
     <Box
       sx={{
