@@ -29,6 +29,7 @@ export const moviesState = [
     actors: [''],
     studios: [''],
     poster: '',
+    trailer: '',
   },
 ];
 

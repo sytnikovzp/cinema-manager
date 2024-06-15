@@ -56,6 +56,7 @@ function MovieForm() {
     actors: Yup.array(),
     studios: Yup.array(),
     poster: Yup.string().url('Invalid URL poster'),
+    trailer: Yup.string().url('Invalid Youtube URL trailer'),
   });
 
   const onFormSubmit = (values) => {
@@ -132,6 +133,19 @@ function MovieForm() {
               helperText={touched.poster && errors.poster}
             />
             <IconButton onClick={() => setFieldValue('poster', '')}>
+              <BackspaceIcon />
+            </IconButton>
+          </Box>
+          <Box sx={formItemStyle}>
+            <Field
+              name='trailer'
+              as={TextField}
+              label='Trailer URL (Youtube only)'
+              fullWidth
+              error={touched.trailer && Boolean(errors.trailer)}
+              helperText={touched.trailer && errors.trailer}
+            />
+            <IconButton onClick={() => setFieldValue('trailer', '')}>
               <BackspaceIcon />
             </IconButton>
           </Box>
