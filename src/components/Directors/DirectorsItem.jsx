@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 // =============================================
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
@@ -89,13 +90,25 @@ function DirectorsItem() {
           id='goBack-btn'
           type='button'
           variant='contained'
-          color='success'
+          color='warning'
           sx={buttonMainStyle}
           startIcon={<EditIcon />}
           component={Link}
           to={`/directors/new/${id}`}
         >
           Edit
+        </Button>
+
+        <Button
+          component={Link}
+          to='/directors/new'
+          type='button'
+          variant='contained'
+          color='success'
+          sx={buttonMainStyle}
+          startIcon={<GroupAddIcon />}
+        >
+          Add director
         </Button>
       </Stack>
 
