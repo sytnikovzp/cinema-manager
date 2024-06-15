@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 // =============================================
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import VideoCallIcon from '@mui/icons-material/VideoCall';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
@@ -95,13 +96,25 @@ function MoviesItem() {
           id='goBack-btn'
           type='button'
           variant='contained'
-          color='success'
+          color='warning'
           sx={buttonMainStyle}
           startIcon={<EditIcon />}
           component={Link}
           to={`/movies/new/${id}`}
         >
           Edit
+        </Button>
+
+        <Button
+          component={Link}
+          to='/movies/new'
+          type='button'
+          variant='contained'
+          color='success'
+          sx={buttonMainStyle}
+          startIcon={<VideoCallIcon />}
+        >
+          Add movie
         </Button>
       </Stack>
 
