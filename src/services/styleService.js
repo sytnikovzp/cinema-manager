@@ -15,7 +15,7 @@ export const buttonMainStyle = {
 };
 
 export const scrollBoxStyle = {
-  height: '60vh',
+  height: '70vh',
   overflowY: 'auto',
 };
 
@@ -104,11 +104,11 @@ export const itemComponentBoxMainStyle = {
 export const itemComponentBoxSecondaryStyle = {
   display: 'flex',
   flexDirection: 'column',
-  width: '40%',
+  width: '35%',
 };
 
 export const itemInformationBoxStyle = {
   display: 'flex',
   flexDirection: 'column',
-  width: '60%',
+  width: '65%',
 };

@@ -27,6 +27,8 @@ import { emptyMovie } from '../../constants';
 import { resetStatus } from '../../store/slices/moviesSlice';
 // =============================================
 import useSnackbar from '../../hooks';
+// =============================================
+import MoviesPlayer from './MoviesPlayer';
 
 function MoviesItem() {
   const navigate = useNavigate();
@@ -156,6 +158,7 @@ function MoviesItem() {
             </Typography>
           </Box>
         </Box>
+        {currentMovie.trailer ? <MoviesPlayer /> : ''}
       </Box>
 
       <Snackbar
