@@ -128,7 +128,7 @@ function StudiosItem() {
           </Box>
           <Box sx={itemInformationBoxStyle}>
             <Typography variant='h6' component='div'>
-              Title: {currentStudio.title}
+              Title: {currentStudio.title ? currentStudio.title : 'Unknown'}
             </Typography>
             <Typography variant='body1' component='div'>
               Foundation year:{' '}

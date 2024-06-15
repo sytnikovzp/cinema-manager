@@ -130,7 +130,8 @@ function DirectorsItem() {
           </Box>
           <Box sx={itemInformationBoxStyle}>
             <Typography variant='h6' component='div'>
-              FullName: {currentDirector.fullName}
+              FullName:{' '}
+              {currentDirector.fullName ? currentDirector.fullName : 'Unknown'}
             </Typography>
             <Typography variant='body1' component='div'>
               Birth year:{' '}

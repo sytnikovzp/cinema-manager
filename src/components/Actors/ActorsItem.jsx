@@ -128,7 +128,8 @@ function ActorsItem() {
           </Box>
           <Box sx={itemInformationBoxStyle}>
             <Typography variant='h6' component='div'>
-              FullName: {currentActor.fullName}
+              FullName:{' '}
+              {currentActor.fullName ? currentActor.fullName : 'Unknown'}
             </Typography>
             <Typography variant='body1' component='div'>
               Birth year:{' '}
