@@ -29,11 +29,7 @@ import {
   itemListStyle,
 } from '../../services/styleService';
 // =============================================
-import {
-  getAllDirectors,
-  deleteDirector,
-  resetStatus,
-} from '../../store/slices/directorsSlice';
+import { deleteDirector, resetStatus } from '../../store/slices/directorsSlice';
 // =============================================
 import useSnackbar from '../../hooks';
 
@@ -55,10 +51,6 @@ function DirectorsList() {
   );
 
   const prevStatusRef = useRef();
-
-  useEffect(() => {
-    dispatch(getAllDirectors());
-  }, [dispatch]);
 
   useEffect(() => {
     const prevStatus = prevStatusRef.current;

@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
@@ -23,7 +22,6 @@ import AddIcon from '@mui/icons-material/Add';
 import { Typography } from '@mui/material';
 // =============================================
 import {
-  getAllDirectors,
   createDirector,
   updateDirector,
 } from '../../store/slices/directorsSlice';
@@ -39,10 +37,6 @@ import {
 function DirectorForm() {
   const dispatch = useDispatch();
   const directors = useSelector((state) => state.directorsList.directors);
-
-  useEffect(() => {
-    dispatch(getAllDirectors());
-  }, [dispatch]);
 
   const { id } = useParams();
   const currentDirector = directors.find(

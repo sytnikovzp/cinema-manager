@@ -23,10 +23,7 @@ import {
 } from '../../services/styleService';
 // =============================================
 import { emptyDirector } from '../../constants';
-import {
-  getAllDirectors,
-  resetStatus,
-} from '../../store/slices/directorsSlice';
+import { resetStatus } from '../../store/slices/directorsSlice';
 // =============================================
 import useSnackbar from '../../hooks';
 
@@ -48,10 +45,6 @@ function DirectorsItem() {
   const prevStatusRef = useRef();
 
   const { id } = useParams();
-
-  useEffect(() => {
-    dispatch(getAllDirectors());
-  }, [dispatch]);
 
   useEffect(() => {
     const prevStatus = prevStatusRef.current;
