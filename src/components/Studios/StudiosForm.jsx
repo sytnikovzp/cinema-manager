@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
@@ -22,11 +21,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import { Typography } from '@mui/material';
 // =============================================
-import {
-  getAllStudios,
-  createStudio,
-  updateStudio,
-} from '../../store/slices/studiosSlice';
+import { createStudio, updateStudio } from '../../store/slices/studiosSlice';
 import { emptyStudio } from '../../constants';
 // =============================================
 import {
@@ -39,10 +34,6 @@ import {
 function StudioForm() {
   const dispatch = useDispatch();
   const studios = useSelector((state) => state.studiosList.studios);
-
-  useEffect(() => {
-    dispatch(getAllStudios());
-  }, [dispatch]);
 
   const { id } = useParams();
   const currentStudio = studios.find(

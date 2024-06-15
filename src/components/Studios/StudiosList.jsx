@@ -29,11 +29,7 @@ import {
   itemListStyle,
 } from '../../services/styleService';
 // =============================================
-import {
-  getAllStudios,
-  deleteStudio,
-  resetStatus,
-} from '../../store/slices/studiosSlice';
+import { deleteStudio, resetStatus } from '../../store/slices/studiosSlice';
 // =============================================
 import useSnackbar from '../../hooks';
 
@@ -55,10 +51,6 @@ function StudiosList() {
   );
 
   const prevStatusRef = useRef();
-
-  useEffect(() => {
-    dispatch(getAllStudios());
-  }, [dispatch]);
 
   useEffect(() => {
     const prevStatus = prevStatusRef.current;

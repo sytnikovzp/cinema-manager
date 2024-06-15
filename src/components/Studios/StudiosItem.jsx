@@ -23,7 +23,7 @@ import {
 } from '../../services/styleService';
 // =============================================
 import { emptyStudio } from '../../constants';
-import { getAllStudios, resetStatus } from '../../store/slices/studiosSlice';
+import { resetStatus } from '../../store/slices/studiosSlice';
 // =============================================
 import useSnackbar from '../../hooks';
 
@@ -45,10 +45,6 @@ function StudiosItem() {
   const prevStatusRef = useRef();
 
   const { id } = useParams();
-
-  useEffect(() => {
-    dispatch(getAllStudios());
-  }, [dispatch]);
 
   useEffect(() => {
     const prevStatus = prevStatusRef.current;
