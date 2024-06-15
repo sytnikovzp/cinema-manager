@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 // =============================================
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
@@ -72,7 +73,6 @@ function ActorsItem() {
     <>
       <Stack direction='row' justifyContent='space-between'>
         <Button
-          id='goBack-btn'
           type='button'
           variant='contained'
           color='info'
@@ -84,16 +84,27 @@ function ActorsItem() {
         </Button>
 
         <Button
-          id='goBack-btn'
           type='button'
           variant='contained'
-          color='success'
+          color='warning'
           sx={buttonMainStyle}
           startIcon={<EditIcon />}
           component={Link}
           to={`/actors/new/${id}`}
         >
           Edit
+        </Button>
+
+        <Button
+          component={Link}
+          to='/actors/new'
+          type='button'
+          variant='contained'
+          color='success'
+          sx={buttonMainStyle}
+          startIcon={<GroupAddIcon />}
+        >
+          Add actor
         </Button>
       </Stack>
 
