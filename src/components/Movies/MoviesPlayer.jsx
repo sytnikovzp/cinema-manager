@@ -5,6 +5,8 @@ import ReactPlayer from 'react-player/lazy';
 import { Box } from '@mui/material';
 // =============================================
 import { emptyMovie } from '../../constants';
+// =============================================
+import { playerStyle } from '../../services/styleService';
 
 function MoviesPlayer() {
   const movies = useSelector((state) => state.moviesList.movies);
@@ -16,7 +18,7 @@ function MoviesPlayer() {
   const currentMovie = movie ? movie : emptyMovie;
 
   return (
-    <Box sx={{ m: 3}}>
+    <Box sx={playerStyle}>
       <ReactPlayer url={currentMovie.trailer} light playing width='100%' />
     </Box>
   );

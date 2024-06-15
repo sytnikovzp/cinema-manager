@@ -15,7 +15,7 @@ export const buttonMainStyle = {
 };
 
 export const scrollBoxStyle = {
-  height: '70vh',
+  height: '60vh',
   overflowY: 'auto',
 };
 
@@ -111,4 +111,12 @@ export const itemInformationBoxStyle = {
   display: 'flex',
   flexDirection: 'column',
   width: '65%',
+};
+
+// =============================================
+// MoviesPlayer component
+
+export const playerStyle = {
+  m: 3,
+  boxShadow: '0 10px 15px rgba(0, 0, 0, 0.7)',
 };

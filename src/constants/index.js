@@ -47,7 +47,7 @@ export const emptyStudio = {
 export const posters = [
   {
     id: 1,
-    url: 'https://pluggedin.ru/images/upload/1655926482.jpg',
+    url: 'https://www.tallengestore.com/cdn/shop/products/HouseOfTheDragon_GoT_-TVShowPoster2_a69da114-1374-4a54-8a66-bf67c1922b9e.jpg',
     alt: 'poster',
   },
   {
@@ -72,7 +72,7 @@ export const posters = [
   },
   {
     id: 6,
-    url: 'https://xage.ru/media/uploads/2008/2/posteryi-luchshih-filmov-poluchivshih-oskar/posteryi-luchshih-filmov-poluchivshih-oskar_1.jpg',
+    url: 'https://m.media-amazon.com/images/I/81EBp0vOZZL._AC_SY879_.jpg',
     alt: 'poster',
   },
   {
