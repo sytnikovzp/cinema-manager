@@ -24,6 +24,7 @@ export const moviesState = [
   {
     id: null,
     title: '',
+    genre: '',
     directors: [''],
     actors: [''],
     studios: [''],

@@ -114,7 +114,6 @@ function MovieForm() {
               name='genre'
               as={TextField}
               label='Genre film'
-              value={values.genre}
               fullWidth
               error={touched.genre && Boolean(errors.genre)}
               helperText={touched.genre && errors.genre}
