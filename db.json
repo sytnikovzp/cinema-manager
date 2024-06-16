@@ -24,7 +24,8 @@
       "fullName": "Johnny Depp",
       "birthYear": "1963",
       "nationality": "USA",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Johnny_Depp_Deauville_2019.jpg/220px-Johnny_Depp_Deauville_2019.jpg"
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Johnny_Depp_Deauville_2019.jpg/220px-Johnny_Depp_Deauville_2019.jpg",
+      "biography": "Test biography information"
     },
     {
       "id": 3,

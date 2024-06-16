@@ -122,6 +122,19 @@ function ActorForm() {
           </Box>
           <Box sx={formItemStyle}>
             <Field
+              name='biography'
+              as={TextField}
+              label='Biography'
+              fullWidth
+              error={touched.biography && Boolean(errors.biography)}
+              helperText={touched.biography && errors.biography}
+            />
+            <IconButton onClick={() => setFieldValue('biography', '')}>
+              <BackspaceIcon />
+            </IconButton>
+          </Box>
+          <Box sx={formItemStyle}>
+            <Field
               name='image'
               as={TextField}
               label='Image URL'
