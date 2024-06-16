@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 // =============================================
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -14,6 +14,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 // =============================================
 import {
   scrollListBoxStyle,
@@ -21,6 +23,7 @@ import {
   itemComponentBoxMainStyle,
   itemComponentBoxSecondaryStyle,
   itemInformationBoxStyle,
+  scrollMovieBoxStyle,
 } from '../../services/styleService';
 // =============================================
 import { emptyActor } from '../../constants';
@@ -31,11 +34,7 @@ import useSnackbar from '../../hooks';
 function ActorsItem() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const goBack = () => {
-    navigate('/actors');
-  };
-
+  const { id } = useParams();
   const actors = useSelector((state) => state.actorsList.actors);
   const status = useSelector((state) => state.actorsList.status);
 
@@ -44,8 +43,7 @@ function ActorsItem() {
   );
 
   const prevStatusRef = useRef();
-
-  const { id } = useParams();
+  const [tabIndex, setTabIndex] = useState(0);
 
   useEffect(() => {
     const prevStatus = prevStatusRef.current;
@@ -68,6 +66,14 @@ function ActorsItem() {
   const formattedMovies = currentActor.movies
     ? currentActor.movies.join(', ')
     : 'No movies available';
+
+  const goBack = () => {
+    navigate('/actors');
+  };
+
+  const handleTabChange = (event, newValue) => {
+    setTabIndex(newValue);
+  };
 
   return (
     <>
@@ -109,42 +115,60 @@ function ActorsItem() {
       </Stack>
 
       <Divider />
+      <Tabs
+        value={tabIndex}
+        onChange={handleTabChange}
+        aria-label='actor details tabs'
+      >
+        <Tab label='Brief information' />
+        {currentActor.image && <Tab label='Actor biography' />}
+      </Tabs>
 
-      <Box sx={scrollListBoxStyle}>
-        <Box sx={itemComponentBoxMainStyle}>
-          <Box sx={itemComponentBoxSecondaryStyle}>
-            <Card>
-              <CardMedia
-                component='img'
-                height='100%'
-                image={
-                  currentActor.image
-                    ? currentActor.image
-                    : 'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
-                }
-                alt={currentActor.fullName}
-              />
-            </Card>
-          </Box>
-          <Box sx={itemInformationBoxStyle}>
-            <Typography variant='h5' component='div'>
-              FullName:{' '}
-              {currentActor.fullName ? currentActor.fullName : 'Unknown'}
-            </Typography>
-            <Typography variant='body1' component='div'>
-              Birth year:{' '}
-              {currentActor.birthYear ? currentActor.birthYear : 'Unknown'}
-            </Typography>
-            <Typography variant='body1' component='div'>
-              Nationality:{' '}
-              {currentActor.nationality ? currentActor.nationality : 'Unknown'}
-            </Typography>
-            <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
-              Movies: {formattedMovies ? formattedMovies : 'Unknown'}
-            </Typography>
+      {tabIndex === 0 && (
+        <Box sx={scrollListBoxStyle}>
+          <Box sx={itemComponentBoxMainStyle}>
+            <Box sx={itemComponentBoxSecondaryStyle}>
+              <Card>
+                <CardMedia
+                  component='img'
+                  height='100%'
+                  image={
+                    currentActor.image
+                      ? currentActor.image
+                      : 'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
+                  }
+                  alt={currentActor.fullName}
+                />
+              </Card>
+            </Box>
+            <Box sx={itemInformationBoxStyle}>
+              <Typography variant='h5' component='div'>
+                FullName:{' '}
+                {currentActor.fullName ? currentActor.fullName : 'Unknown'}
+              </Typography>
+              <Typography variant='body1' component='div'>
+                Birth year:{' '}
+                {currentActor.birthYear ? currentActor.birthYear : 'Unknown'}
+              </Typography>
+              <Typography variant='body1' component='div'>
+                Nationality:{' '}
+                {currentActor.nationality
+                  ? currentActor.nationality
+                  : 'Unknown'}
+              </Typography>
+              <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
+                Movies: {formattedMovies ? formattedMovies : 'Unknown'}
+              </Typography>
+            </Box>
           </Box>
         </Box>
-      </Box>
+      )}
+
+      {tabIndex === 1 && currentActor.image && (
+        <Box sx={scrollMovieBoxStyle}>
+          {/* <MoviesPlayer trailer={currentMovie.trailer} /> */}
+        </Box>
+      )}
 
       <Snackbar
         open={snackbar.open}
