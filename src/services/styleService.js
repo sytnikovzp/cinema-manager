@@ -15,7 +15,7 @@ export const buttonMainStyle = {
 };
 
 export const scrollBoxStyle = {
-  height: '70vh',
+  height: '65vh',
   overflowY: 'auto',
 };
 
@@ -117,6 +117,8 @@ export const itemInformationBoxStyle = {
 // MoviesPlayer component
 
 export const playerStyle = {
-  m: 3,
+  ml: 2,
+  mr: 2,
+  mb: 2,
   boxShadow: '0 10px 15px rgba(0, 0, 0, 0.7)',
 };

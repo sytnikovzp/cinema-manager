@@ -1,6 +1,6 @@
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
 // =============================================
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -14,6 +14,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 // =============================================
 import {
   scrollBoxStyle,
@@ -33,11 +35,7 @@ import MoviesPlayer from './MoviesPlayer';
 function MoviesItem() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const goBack = () => {
-    navigate('/movies');
-  };
-
+  const { id } = useParams();
   const movies = useSelector((state) => state.moviesList.movies);
   const status = useSelector((state) => state.moviesList.status);
 
@@ -46,8 +44,11 @@ function MoviesItem() {
   );
 
   const prevStatusRef = useRef();
+  const [tabIndex, setTabIndex] = useState(0);
 
-  const { id } = useParams();
+  const goBack = () => {
+    navigate('/movies');
+  };
 
   useEffect(() => {
     const prevStatus = prevStatusRef.current;
@@ -64,7 +65,6 @@ function MoviesItem() {
   }, [status, showSnackbar]);
 
   const movie = movies.find((movie) => Number(movie.id) === Number(id));
-
   const currentMovie = movie ? movie : emptyMovie;
 
   const formattedDirectors = currentMovie.directors
@@ -78,6 +78,10 @@ function MoviesItem() {
   const formattedStudios = currentMovie.studios
     ? currentMovie.studios.join(', ')
     : 'No movies available';
+
+  const handleTabChange = (event, newValue) => {
+    setTabIndex(newValue);
+  };
 
   return (
     <>
@@ -120,46 +124,62 @@ function MoviesItem() {
 
       <Divider />
 
-      <Box sx={scrollBoxStyle}>
-        <Box sx={itemComponentBoxMainStyle}>
-          <Box sx={itemComponentBoxSecondaryStyle}>
-            <Card>
-              <CardMedia
-                component='img'
-                height='100%'
-                image={
-                  currentMovie.poster
-                    ? currentMovie.poster
-                    : 'https://www.prokerala.com/movies/assets/img/no-poster-available.jpg'
-                }
-                alt={currentMovie.title}
-              />
-            </Card>
-          </Box>
-          <Box sx={itemInformationBoxStyle}>
-            <Typography variant='h5' component='div'>
-              Title: {currentMovie.title ? currentMovie.title : 'Unknown'}
-            </Typography>
-            <Typography variant='body1' component='div'>
-              Movie year:{' '}
-              {currentMovie.movieYear ? currentMovie.movieYear : 'Unknown'}
-            </Typography>
-            <Typography variant='body1' component='div'>
-              Genre: {currentMovie.genre ? currentMovie.genre : 'Unknown'}
-            </Typography>
-            <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
-              Directors: {formattedDirectors ? formattedDirectors : 'Unknown'}
-            </Typography>
-            <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
-              Actors: {formattedActors ? formattedActors : 'Unknown'}
-            </Typography>
-            <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
-              Studios: {formattedStudios ? formattedStudios : 'Unknown'}
-            </Typography>
+      <Tabs
+        value={tabIndex}
+        onChange={handleTabChange}
+        aria-label='movie details tabs'
+      >
+        <Tab label='Movie information' />
+        {currentMovie.trailer && <Tab label='Movie trailer' />}
+      </Tabs>
+
+      {tabIndex === 0 && (
+        <Box sx={scrollBoxStyle}>
+          <Box sx={itemComponentBoxMainStyle}>
+            <Box sx={itemComponentBoxSecondaryStyle}>
+              <Card>
+                <CardMedia
+                  component='img'
+                  height='100%'
+                  image={
+                    currentMovie.poster
+                      ? currentMovie.poster
+                      : 'https://www.prokerala.com/movies/assets/img/no-poster-available.jpg'
+                  }
+                  alt={currentMovie.title}
+                />
+              </Card>
+            </Box>
+            <Box sx={itemInformationBoxStyle}>
+              <Typography variant='h5' component='div'>
+                Title: {currentMovie.title ? currentMovie.title : 'Unknown'}
+              </Typography>
+              <Typography variant='body1' component='div'>
+                Movie year:{' '}
+                {currentMovie.movieYear ? currentMovie.movieYear : 'Unknown'}
+              </Typography>
+              <Typography variant='body1' component='div'>
+                Genre: {currentMovie.genre ? currentMovie.genre : 'Unknown'}
+              </Typography>
+              <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
+                Directors: {formattedDirectors ? formattedDirectors : 'Unknown'}
+              </Typography>
+              <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
+                Actors: {formattedActors ? formattedActors : 'Unknown'}
+              </Typography>
+              <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
+                Studios: {formattedStudios ? formattedStudios : 'Unknown'}
+              </Typography>
+            </Box>
           </Box>
         </Box>
-        {currentMovie.trailer ? <MoviesPlayer /> : ''}
-      </Box>
+      )}
+
+      {tabIndex === 1 && currentMovie.trailer && (
+        <Box sx={scrollBoxStyle}>
+          <MoviesPlayer trailer={currentMovie.trailer} />
+        </Box>
+      )}
 
       <Snackbar
         open={snackbar.open}
