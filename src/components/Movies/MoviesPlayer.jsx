@@ -19,7 +19,26 @@ function MoviesPlayer() {
 
   return (
     <Box sx={playerStyle}>
-      <ReactPlayer url={currentMovie.trailer} light playing width='100%' />
+      <ReactPlayer
+        url={currentMovie.trailer}
+        light
+        width='100%'
+        config={{
+          youtube: {
+            playerVars: {
+              autoplay: 1,
+              iv_load_policy: 3,
+              rel: 0,
+              showinfo: 0,
+              modestbranding: 1,
+              cc_load_policy: 1,
+            },
+            embedOptions: {
+              host: 'https://www.youtube-nocookie.com',
+            },
+          },
+        }}
+      />
     </Box>
   );
 }
