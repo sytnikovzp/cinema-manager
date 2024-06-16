@@ -32,6 +32,7 @@ function MoviesPlayer() {
               showinfo: 0,
               modestbranding: 1,
               cc_load_policy: 1,
+              origin: 'http://localhost:3000',
             },
             embedOptions: {
               host: 'https://www.youtube-nocookie.com',
