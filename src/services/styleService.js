@@ -14,11 +14,6 @@ export const buttonMainStyle = {
   width: '170px',
 };
 
-export const scrollBoxStyle = {
-  height: '65vh',
-  overflowY: 'auto',
-};
-
 // =============================================
 // NavBar component
 
@@ -85,6 +80,11 @@ export const buttonFormStyle = {
 // =============================================
 // *list components
 
+export const scrollListBoxStyle = {
+  height: '70vh',
+  overflowY: 'auto',
+};
+
 export const itemListStyle = {
   color: 'text.primary',
   border: '1px solid #009688',
@@ -93,6 +93,10 @@ export const itemListStyle = {
 
 // =============================================
 // *item components
+
+export const scrollMovieBoxStyle = {
+  height: '63vh',
+};
 
 export const itemComponentBoxMainStyle = {
   display: 'flex',

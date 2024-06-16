@@ -16,7 +16,7 @@ import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 // =============================================
 import {
-  scrollBoxStyle,
+  scrollListBoxStyle,
   buttonMainStyle,
   itemComponentBoxMainStyle,
   itemComponentBoxSecondaryStyle,
@@ -110,7 +110,7 @@ function ActorsItem() {
 
       <Divider />
 
-      <Box sx={scrollBoxStyle}>
+      <Box sx={scrollListBoxStyle}>
         <Box sx={itemComponentBoxMainStyle}>
           <Box sx={itemComponentBoxSecondaryStyle}>
             <Card>

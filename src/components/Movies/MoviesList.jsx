@@ -24,7 +24,7 @@ import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 // =============================================
 import {
-  scrollBoxStyle,
+  scrollListBoxStyle,
   buttonMainStyle,
   itemListStyle,
 } from '../../services/styleService';
@@ -93,7 +93,7 @@ function MoviesList() {
 
       <Divider />
 
-      <Box sx={scrollBoxStyle}>
+      <Box sx={scrollListBoxStyle}>
         <List>
           {movies.map((movie) => (
             <Stack key={movie.id} direction='column' marginBottom={1}>

@@ -18,7 +18,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 // =============================================
 import {
-  scrollBoxStyle,
+  scrollMovieBoxStyle,
   buttonMainStyle,
   itemComponentBoxMainStyle,
   itemComponentBoxSecondaryStyle,
@@ -121,9 +121,7 @@ function MoviesItem() {
           Add movie
         </Button>
       </Stack>
-
       <Divider />
-
       <Tabs
         value={tabIndex}
         onChange={handleTabChange}
@@ -134,7 +132,7 @@ function MoviesItem() {
       </Tabs>
 
       {tabIndex === 0 && (
-        <Box sx={scrollBoxStyle}>
+        <Box sx={scrollMovieBoxStyle}>
           <Box sx={itemComponentBoxMainStyle}>
             <Box sx={itemComponentBoxSecondaryStyle}>
               <Card>
@@ -176,7 +174,7 @@ function MoviesItem() {
       )}
 
       {tabIndex === 1 && currentMovie.trailer && (
-        <Box sx={scrollBoxStyle}>
+        <Box sx={scrollMovieBoxStyle}>
           <MoviesPlayer trailer={currentMovie.trailer} />
         </Box>
       )}
