@@ -30,6 +30,8 @@ import { emptyActor } from '../../constants';
 import { resetStatus } from '../../store/slices/actorsSlice';
 // =============================================
 import useSnackbar from '../../hooks';
+// =============================================
+import ActorsBiography from './ActorsBiography';
 
 function ActorsItem() {
   const navigate = useNavigate();
@@ -121,7 +123,7 @@ function ActorsItem() {
         aria-label='actor details tabs'
       >
         <Tab label='Brief information' />
-        {currentActor.image && <Tab label='Actor biography' />}
+        {currentActor.biography && <Tab label='Actor biography' />}
       </Tabs>
 
       {tabIndex === 0 && (
@@ -164,9 +166,9 @@ function ActorsItem() {
         </Box>
       )}
 
-      {tabIndex === 1 && currentActor.image && (
+      {tabIndex === 1 && currentActor.biography && (
         <Box sx={scrollMovieBoxStyle}>
-          {/* <MoviesPlayer trailer={currentMovie.trailer} /> */}
+          <ActorsBiography  />
         </Box>
       )}
 
