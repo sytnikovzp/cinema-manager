@@ -21,10 +21,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import { Typography } from '@mui/material';
 // =============================================
-import {
-  createDirector,
-  updateDirector,
-} from '../../store/slices/directorsSlice';
+import { createDirector, updateDirector } from '../../store/slices/directorsSlice';
 import { emptyDirector } from '../../constants';
 // =============================================
 import {
@@ -39,9 +36,7 @@ function DirectorForm() {
   const directors = useSelector((state) => state.directorsList.directors);
 
   const { id } = useParams();
-  const currentDirector = directors.find(
-    (director) => Number(director.id) === Number(id)
-  );
+  const currentDirector = directors.find((director) => Number(director.id) === Number(id));
 
   const navigate = useNavigate();
 
@@ -59,6 +54,7 @@ function DirectorForm() {
     nationality: Yup.string(),
     image: Yup.string().url('Invalid URL image'),
     movies: Yup.array(),
+    biography: Yup.string(),
   });
 
   const onFormSubmit = (values) => {
@@ -181,6 +177,22 @@ function DirectorForm() {
                 </>
               )}
             </FieldArray>
+          </Box>
+          <Box sx={formItemStyle}>
+            <Field
+              name='biography'
+              as={TextField}
+              label='Brief biography of the director...'
+              fullWidth
+              multiline
+              minRows={2}
+              maxRows={4}
+              error={touched.biography && Boolean(errors.biography)}
+              helperText={touched.biography && errors.biography}
+            />
+            <IconButton onClick={() => setFieldValue('biography', '')}>
+              <BackspaceIcon />
+            </IconButton>
           </Box>
           <Stack direction='row' justifyContent='center' spacing={1}>
             <Button

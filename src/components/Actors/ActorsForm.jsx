@@ -54,6 +54,7 @@ function ActorForm() {
     nationality: Yup.string(),
     image: Yup.string().url('Invalid URL image'),
     movies: Yup.array(),
+    biography: Yup.string(),
   });
 
   const onFormSubmit = (values) => {

@@ -23,6 +23,7 @@ export const emptyDirector = {
   birthYear: '',
   nationality: '',
   image: '',
+  biography: '',
 };
 
 export const emptyMovie = {

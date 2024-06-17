@@ -18,6 +18,7 @@ export const directorsState = [
     birthYear: '',
     nationality: '',
     image: '',
+    biography: '',
   },
 ];
 

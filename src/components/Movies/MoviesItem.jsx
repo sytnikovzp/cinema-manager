@@ -223,7 +223,7 @@ function MoviesItem() {
               </Stack>
               <Divider sx={{ marginTop: 2 }} />
               <Typography variant='body1' component='div' sx={textIndentStyle}>
-                {currentMovie.storyline || 'Unknown storyline'}
+                {currentMovie.storyline || ''}
               </Typography>
             </Box>
           </Box>
