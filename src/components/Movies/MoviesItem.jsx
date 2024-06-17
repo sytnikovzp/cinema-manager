@@ -230,11 +230,7 @@ function MoviesItem() {
         </Box>
       )}
 
-      {tabIndex === 1 && currentMovie.trailer && (
-        <Box sx={scrollItemBoxStyle}>
-          <MoviesPlayer trailer={currentMovie.trailer} />
-        </Box>
-      )}
+      {tabIndex === 1 && currentMovie.trailer && <MoviesPlayer />}
 
       <Snackbar
         open={snackbar.open}

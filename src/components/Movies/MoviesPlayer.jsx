@@ -6,7 +6,7 @@ import { Box } from '@mui/material';
 // =============================================
 import { emptyMovie } from '../../constants';
 // =============================================
-import { playerStyle } from '../../services/styleService';
+import { playerStyle, scrollItemBoxStyle } from '../../services/styleService';
 
 function MoviesPlayer() {
   const movies = useSelector((state) => state.moviesList.movies);
@@ -18,28 +18,30 @@ function MoviesPlayer() {
   const currentMovie = movie ? movie : emptyMovie;
 
   return (
-    <Box sx={playerStyle}>
-      <ReactPlayer
-        url={currentMovie.trailer}
-        light
-        width='100%'
-        config={{
-          youtube: {
-            playerVars: {
-              autoplay: 1,
-              iv_load_policy: 3,
-              rel: 0,
-              showinfo: 0,
-              modestbranding: 1,
-              cc_load_policy: 1,
-              origin: 'http://localhost:3000',
+    <Box sx={scrollItemBoxStyle}>
+      <Box sx={playerStyle}>
+        <ReactPlayer
+          url={currentMovie.trailer}
+          light
+          width='100%'
+          config={{
+            youtube: {
+              playerVars: {
+                autoplay: 1,
+                iv_load_policy: 3,
+                rel: 0,
+                showinfo: 0,
+                modestbranding: 1,
+                cc_load_policy: 1,
+                origin: 'http://localhost:3000',
+              },
+              embedOptions: {
+                host: 'https://www.youtube-nocookie.com',
+              },
             },
-            embedOptions: {
-              host: 'https://www.youtube-nocookie.com',
-            },
-          },
-        }}
-      />
+          }}
+        />
+      </Box>
     </Box>
   );
 }
