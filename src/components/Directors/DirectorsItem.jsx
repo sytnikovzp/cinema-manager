@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 // =============================================
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -14,6 +14,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 // =============================================
 import {
   scrollListBoxStyle,
@@ -27,15 +29,13 @@ import { emptyDirector } from '../../constants';
 import { resetStatus } from '../../store/slices/directorsSlice';
 // =============================================
 import useSnackbar from '../../hooks';
+// =============================================
+import DirectorsBiography from './DirectorsBiography';
 
 function DirectorsItem() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const goBack = () => {
-    navigate('/directors');
-  };
-
+  const { id } = useParams();
   const directors = useSelector((state) => state.directorsList.directors);
   const status = useSelector((state) => state.directorsList.status);
 
@@ -44,8 +44,7 @@ function DirectorsItem() {
   );
 
   const prevStatusRef = useRef();
-
-  const { id } = useParams();
+  const [tabIndex, setTabIndex] = useState(0);
 
   useEffect(() => {
     const prevStatus = prevStatusRef.current;
@@ -67,9 +66,16 @@ function DirectorsItem() {
 
   const currentDirector = director ? director : emptyDirector;
 
-  const formattedMovies = currentDirector.movies
-    ? currentDirector.movies.join(', ')
-    : 'No movies available';
+  const formattedMovies =
+    currentDirector.movies.join(', ') || 'No movies available';
+
+  const goBack = () => {
+    navigate('/directors');
+  };
+
+  const handleTabChange = (event, newValue) => {
+    setTabIndex(newValue);
+  };
 
   return (
     <>
@@ -111,6 +117,14 @@ function DirectorsItem() {
       </Stack>
 
       <Divider />
+      <Tabs
+        value={tabIndex}
+        onChange={handleTabChange}
+        aria-label='director details tabs'
+      >
+        <Tab label='About of director' />
+        {currentDirector.biography && <Tab label='Brief biography' />}
+      </Tabs>
 
       <Box sx={scrollListBoxStyle}>
         <Box sx={itemComponentBoxMainStyle}>
@@ -120,34 +134,72 @@ function DirectorsItem() {
                 component='img'
                 height='100%'
                 image={
-                  currentDirector.image
-                    ? currentDirector.image
-                    : 'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
+                  currentDirector.image ||
+                  'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
                 }
                 alt={currentDirector.fullName}
               />
             </Card>
           </Box>
           <Box sx={itemInformationBoxStyle}>
-            <Typography variant='h5' component='div'>
-              FullName:{' '}
-              {currentDirector.fullName ? currentDirector.fullName : 'Unknown'}
+            <Typography
+              variant='h5'
+              component='div'
+              sx={{ fontWeight: 'bold' }}
+            >
+              {currentDirector.fullName || 'Unknown director'}
             </Typography>
-            <Typography variant='body1' component='div'>
-              Birth year:{' '}
-              {currentDirector.birthYear
-                ? currentDirector.birthYear
-                : 'Unknown'}
-            </Typography>
-            <Typography variant='body1' component='div'>
-              Nationality:{' '}
-              {currentDirector.nationality
-                ? currentDirector.nationality
-                : 'Unknown'}
-            </Typography>
-            <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
-              Movies: {formattedMovies ? formattedMovies : 'Unknown'}
-            </Typography>
+
+            <Stack direction='row' spacing={1}>
+              <Typography
+                variant='body1'
+                sx={{
+                  fontWeight: 'bold',
+                }}
+                component='div'
+              >
+                Birth year:
+              </Typography>
+              <Typography variant='body1' component='div'>
+                {currentDirector.birthYear || 'Unknown'}
+              </Typography>
+            </Stack>
+
+            <Stack direction='row' spacing={1}>
+              <Typography
+                variant='body1'
+                sx={{
+                  fontWeight: 'bold',
+                }}
+                component='div'
+              >
+                Nationality:
+              </Typography>
+              <Typography variant='body1' component='div'>
+                {currentDirector.nationality || 'Unknown'}
+              </Typography>
+            </Stack>
+
+            {tabIndex === 0 && (
+              <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
+                <Typography
+                  variant='body1'
+                  sx={{
+                    fontWeight: 'bold',
+                  }}
+                  component='div'
+                >
+                  Movies:
+                </Typography>
+                <Typography variant='body1' component='div'>
+                  {formattedMovies}
+                </Typography>
+              </Stack>
+            )}
+
+            {tabIndex === 1 && currentDirector.biography && (
+              <DirectorsBiography />
+            )}
           </Box>
         </Box>
       </Box>

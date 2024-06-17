@@ -168,12 +168,11 @@
     {
       "id": 4,
       "movies": [
-        "Movie 1",
-        "Movie 2"
+        ""
       ],
-      "fullName": "Test director",
-      "birthYear": 2018,
-      "nationality": "China",
+      "fullName": "",
+      "birthYear": "",
+      "nationality": "",
       "image": ""
     }
   ],
