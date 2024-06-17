@@ -109,7 +109,7 @@ function ActorsList() {
                   </ListItemAvatar>
                   <ListItemText
                     primary={`${actor.fullName || 'Unknown actor'}, ${
-                      actor.nationality || 'Unknown nationality'
+                      actor.nationality || 'unknown nationality'
                     }`}
                   />
                 </ListItemButton>
