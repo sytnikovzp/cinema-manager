@@ -90,6 +90,29 @@ function MovieForm() {
             </IconButton>
           </Box>
           <Box sx={formItemStyle}>
+            <Field name='genre'>
+              {({ field }) => (
+                <TextField
+                  {...field}
+                  id='genre-select'
+                  select
+                  fullWidth
+                  label='Genre movie'
+                  error={touched.genre && Boolean(errors.genre)}
+                  helperText={touched.genre && errors.genre}
+                >
+                  <MenuItem value=''>
+                    <b>Genre select:</b>
+                  </MenuItem>
+                  {genres.map((option) => (
+                    <MenuItem key={option.id} value={option.genre}>
+                      {option.genre}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              )}
+            </Field>
+
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 name='date'
@@ -99,7 +122,7 @@ function MovieForm() {
                 onChange={(value) =>
                   setFieldValue('movieYear', value ? value.year() : '')
                 }
-                sx={{ width: '400px' }}
+                sx={{ width: '250px' }}
                 slotProps={{
                   textField: {
                     error: touched.movieYear && Boolean(errors.movieYear),
@@ -108,24 +131,6 @@ function MovieForm() {
                 }}
               />
             </LocalizationProvider>
-            <IconButton onClick={() => setFieldValue('movieYear', '')}>
-              <BackspaceIcon />
-            </IconButton>
-          </Box>
-          <Box sx={formItemStyle}>
-            <Field
-              as={TextField}
-              name='genre'
-              label='Genre film'
-              select
-              fullWidth
-            >
-              {genres.map((option) => (
-                <MenuItem key={option.id} value={option.genre}>
-                  {option.genre}
-                </MenuItem>
-              ))}
-            </Field>
           </Box>
           <Box sx={formItemStyle}>
             <Field
