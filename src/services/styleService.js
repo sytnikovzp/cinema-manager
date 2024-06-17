@@ -96,6 +96,7 @@ export const itemListStyle = {
 
 export const scrollItemBoxStyle = {
   height: '63vh',
+  overflowY: 'auto',
 };
 
 export const itemComponentBoxMainStyle = {
@@ -115,6 +116,13 @@ export const itemInformationBoxStyle = {
   display: 'flex',
   flexDirection: 'column',
   width: '65%',
+  textAlign: 'justify',
+};
+
+export const textIndentStyle = {
+  textIndent: '2em',
+  fontWeight: 'medium',
+  paddingRight: 2,
 };
 
 // =============================================

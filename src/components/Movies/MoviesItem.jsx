@@ -23,6 +23,7 @@ import {
   itemComponentBoxMainStyle,
   itemComponentBoxSecondaryStyle,
   itemInformationBoxStyle,
+  textIndentStyle,
 } from '../../services/styleService';
 // =============================================
 import { emptyMovie } from '../../constants';
@@ -160,17 +161,25 @@ function MoviesItem() {
                 Genre: {currentMovie.genre ? currentMovie.genre : 'Unknown'}
               </Typography>
               <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
-                Directors: {formattedDirectors ? formattedDirectors : 'Unknown'}
-              </Typography>
-              <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
-                Actors: {formattedActors ? formattedActors : 'Unknown'}
-              </Typography>
-              <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
                 Studios: {formattedStudios ? formattedStudios : 'Unknown'}
               </Typography>
               <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
-                Storyline:{' '}
-                {currentMovie.storyline ? currentMovie.storyline : 'Unknown'}
+                Directors: {formattedDirectors ? formattedDirectors : 'Unknown'}
+              </Typography>
+              <Typography
+                variant='body1'
+                component='div'
+                sx={{ marginTop: 2, marginBottom: 2 }}
+              >
+                Actors: {formattedActors ? formattedActors : 'Unknown'}
+              </Typography>{' '}
+              <Divider />
+              <Typography
+                variant='body1'
+                component='div'
+                sx={textIndentStyle}
+              >
+                {currentMovie.storyline ? currentMovie.storyline : 'Storyline is unknown'}
               </Typography>
             </Box>
           </Box>
