@@ -93,7 +93,7 @@ export const genres = [
   },
   {
     id: 2,
-    genre: 'Adventure',
+    genre: 'Adventures',
   },
   {
     id: 3,
@@ -121,7 +121,7 @@ export const genres = [
   },
   {
     id: 9,
-    genre: 'Fantazy',
+    genre: 'Fantasy',
   },
   {
     id: 10,
@@ -153,10 +153,14 @@ export const genres = [
   },
   {
     id: 17,
-    genre: 'Thriller',
+    genre: 'Sequel',
   },
   {
     id: 18,
+    genre: 'Thriller',
+  },
+  {
+    id: 19,
     genre: 'Western',
   },
 ];

@@ -19,10 +19,11 @@ import ClearAllIcon from '@mui/icons-material/ClearAll';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
-import { Typography } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
+import Typography from '@mui/material/Typography';
 // =============================================
 import { createMovie, updateMovie } from '../../store/slices/moviesSlice';
-import { emptyMovie } from '../../constants';
+import { emptyMovie, genres } from '../../constants';
 // =============================================
 import {
   formStyle,
@@ -113,16 +114,18 @@ function MovieForm() {
           </Box>
           <Box sx={formItemStyle}>
             <Field
-              name='genre'
               as={TextField}
+              name='genre'
               label='Genre film'
+              select
               fullWidth
-              error={touched.genre && Boolean(errors.genre)}
-              helperText={touched.genre && errors.genre}
-            />
-            <IconButton onClick={() => setFieldValue('genre', '')}>
-              <BackspaceIcon />
-            </IconButton>
+            >
+              {genres.map((option) => (
+                <MenuItem key={option.id} value={option.genre}>
+                  {option.genre}
+                </MenuItem>
+              ))}
+            </Field>
           </Box>
           <Box sx={formItemStyle}>
             <Field
