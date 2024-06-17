@@ -102,7 +102,7 @@ export const itemListStyle = {
 // *item components
 
 export const scrollItemBoxStyle = {
-  height: '63vh',
+  height: '65vh',
   overflowY: 'auto',
 };
 
@@ -113,7 +113,7 @@ export const itemComponentBoxMainStyle = {
   width: '100%',
 };
 
-export const itemComponentBoxSecondaryStyle = {
+export const itemCardMediaBoxStyle = {
   display: 'flex',
   flexDirection: 'column',
   width: '35%',

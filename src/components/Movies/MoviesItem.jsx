@@ -21,7 +21,7 @@ import {
   scrollItemBoxStyle,
   buttonMainStyle,
   itemComponentBoxMainStyle,
-  itemComponentBoxSecondaryStyle,
+  itemCardMediaBoxStyle,
   itemInformationBoxStyle,
   textIndentStyle,
 } from '../../services/styleService';
@@ -130,7 +130,7 @@ function MoviesItem() {
       {tabIndex === 0 && (
         <Box sx={scrollItemBoxStyle}>
           <Box sx={itemComponentBoxMainStyle}>
-            <Box sx={itemComponentBoxSecondaryStyle}>
+            <Box sx={itemCardMediaBoxStyle}>
               <Card>
                 <CardMedia
                   component='img'

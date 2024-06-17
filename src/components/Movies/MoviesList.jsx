@@ -24,9 +24,9 @@ import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 // =============================================
 import {
-  scrollListBoxStyle,
   buttonMainStyle,
   itemListStyle,
+  scrollListBoxStyle,
 } from '../../services/styleService';
 // =============================================
 import { deleteMovie, resetStatus } from '../../store/slices/moviesSlice';

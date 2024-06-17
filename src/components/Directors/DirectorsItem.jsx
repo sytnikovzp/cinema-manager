@@ -18,10 +18,10 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 // =============================================
 import {
-  scrollListBoxStyle,
+  scrollItemBoxStyle,
   buttonMainStyle,
   itemComponentBoxMainStyle,
-  itemComponentBoxSecondaryStyle,
+  itemCardMediaBoxStyle,
   itemInformationBoxStyle,
 } from '../../services/styleService';
 // =============================================
@@ -126,9 +126,9 @@ function DirectorsItem() {
         {currentDirector.biography && <Tab label='Brief biography' />}
       </Tabs>
 
-      <Box sx={scrollListBoxStyle}>
+      <Box sx={scrollItemBoxStyle}>
         <Box sx={itemComponentBoxMainStyle}>
-          <Box sx={itemComponentBoxSecondaryStyle}>
+          <Box sx={itemCardMediaBoxStyle}>
             <Card>
               <CardMedia
                 component='img'
