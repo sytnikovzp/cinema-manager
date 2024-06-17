@@ -85,3 +85,78 @@ export const posters = [
     alt: 'poster',
   },
 ];
+
+export const genres = [
+  {
+    id: 1,
+    genre: 'Action',
+  },
+  {
+    id: 2,
+    genre: 'Adventure',
+  },
+  {
+    id: 3,
+    genre: 'Anime',
+  },
+  {
+    id: 4,
+    genre: 'Biopic',
+  },
+  {
+    id: 5,
+    genre: 'Comedy',
+  },
+  {
+    id: 6,
+    genre: 'Crime film',
+  },
+  {
+    id: 7,
+    genre: 'Documentary',
+  },
+  {
+    id: 8,
+    genre: 'Drama',
+  },
+  {
+    id: 9,
+    genre: 'Fantazy',
+  },
+  {
+    id: 10,
+    genre: 'Historic',
+  },
+  {
+    id: 11,
+    genre: 'Horror',
+  },
+  {
+    id: 12,
+    genre: 'Melodrama',
+  },
+  {
+    id: 13,
+    genre: 'Music',
+  },
+  {
+    id: 14,
+    genre: 'Peplum',
+  },
+  {
+    id: 15,
+    genre: 'Science fiction',
+  },
+  {
+    id: 16,
+    genre: 'Serial',
+  },
+  {
+    id: 17,
+    genre: 'Thriller',
+  },
+  {
+    id: 18,
+    genre: 'Western',
+  },
+];
