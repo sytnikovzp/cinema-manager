@@ -122,19 +122,6 @@ function ActorForm() {
           </Box>
           <Box sx={formItemStyle}>
             <Field
-              name='biography'
-              as={TextField}
-              label='Biography'
-              fullWidth
-              error={touched.biography && Boolean(errors.biography)}
-              helperText={touched.biography && errors.biography}
-            />
-            <IconButton onClick={() => setFieldValue('biography', '')}>
-              <BackspaceIcon />
-            </IconButton>
-          </Box>
-          <Box sx={formItemStyle}>
-            <Field
               name='image'
               as={TextField}
               label='Image URL'
@@ -189,6 +176,22 @@ function ActorForm() {
                 </>
               )}
             </FieldArray>
+          </Box>
+          <Box sx={formItemStyle}>
+            <Field
+              name='biography'
+              as={TextField}
+              label='Brief biography of the actor...'
+              fullWidth
+              multiline
+              minRows={2}
+              maxRows={4}
+              error={touched.biography && Boolean(errors.biography)}
+              helperText={touched.biography && errors.biography}
+            />
+            <IconButton onClick={() => setFieldValue('biography', '')}>
+              <BackspaceIcon />
+            </IconButton>
           </Box>
           <Stack direction='row' justifyContent='center' spacing={1}>
             <Button

@@ -50,7 +50,7 @@ function ActorsBiography() {
             {currentActor.nationality ? currentActor.nationality : 'Unknown'}
           </Typography>
           <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
-            Biography: {currentActor.biography ? currentActor.biography : 'Unknown'}
+            {currentActor.biography ? currentActor.biography : 'Unknown'}
           </Typography>
         </Box>
       </Box>

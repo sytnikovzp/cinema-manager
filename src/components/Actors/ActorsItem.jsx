@@ -23,7 +23,7 @@ import {
   itemComponentBoxMainStyle,
   itemComponentBoxSecondaryStyle,
   itemInformationBoxStyle,
-  scrollMovieBoxStyle,
+  scrollItemBoxStyle,
 } from '../../services/styleService';
 // =============================================
 import { emptyActor } from '../../constants';
@@ -122,8 +122,8 @@ function ActorsItem() {
         onChange={handleTabChange}
         aria-label='actor details tabs'
       >
-        <Tab label='Brief information' />
-        {currentActor.biography && <Tab label='Actor biography' />}
+        <Tab label='About of actor' />
+        {currentActor.biography && <Tab label='Brief biography' />}
       </Tabs>
 
       {tabIndex === 0 && (
@@ -167,7 +167,7 @@ function ActorsItem() {
       )}
 
       {tabIndex === 1 && currentActor.biography && (
-        <Box sx={scrollMovieBoxStyle}>
+        <Box sx={scrollItemBoxStyle}>
           <ActorsBiography  />
         </Box>
       )}
