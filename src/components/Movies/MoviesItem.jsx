@@ -123,7 +123,7 @@ function MoviesItem() {
         onChange={handleTabChange}
         aria-label='movie details tabs'
       >
-        <Tab label='About of movie' />
+        <Tab label='About the movie' />
         {currentMovie.trailer && <Tab label='Movie trailer' />}
       </Tabs>
 

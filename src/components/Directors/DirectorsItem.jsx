@@ -122,7 +122,7 @@ function DirectorsItem() {
         onChange={handleTabChange}
         aria-label='director details tabs'
       >
-        <Tab label='About of director' />
+        <Tab label='About the director' />
         {currentDirector.biography && <Tab label='Brief biography' />}
       </Tabs>
 

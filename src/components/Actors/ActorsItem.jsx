@@ -120,7 +120,7 @@ function ActorsItem() {
         onChange={handleTabChange}
         aria-label='actor details tabs'
       >
-        <Tab label='About of actor' />
+        <Tab label='About the actor' />
         {currentActor.biography && <Tab label='Brief biography' />}
       </Tabs>
 

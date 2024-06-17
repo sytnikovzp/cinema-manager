@@ -120,7 +120,7 @@ function StudiosItem() {
         onChange={handleTabChange}
         aria-label='studio details tabs'
       >
-        <Tab label='About of studio' />
+        <Tab label='About the studio' />
         {currentStudio.genInfo && <Tab label='General information' />}
       </Tabs>
 
