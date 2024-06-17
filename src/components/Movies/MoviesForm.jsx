@@ -21,6 +21,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
+import InputAdornment from '@mui/material/InputAdornment';
 // =============================================
 import { createMovie, updateMovie } from '../../store/slices/moviesSlice';
 import { emptyMovie, genres } from '../../constants';
@@ -82,12 +83,22 @@ function MovieForm() {
               label='Title film'
               value={values.title}
               fullWidth
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label='Clear field'
+                      onClick={() => setFieldValue('title', '')}
+                      edge='end'
+                    >
+                      <BackspaceIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
               error={touched.title && Boolean(errors.title)}
               helperText={touched.title && errors.title}
             />
-            <IconButton onClick={() => setFieldValue('title', '')}>
-              <BackspaceIcon />
-            </IconButton>
           </Box>
           <Box sx={formItemStyle}>
             <Field name='genre'>
@@ -138,12 +149,22 @@ function MovieForm() {
               as={TextField}
               label='Poster URL'
               fullWidth
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label='Clear field'
+                      onClick={() => setFieldValue('poster', '')}
+                      edge='end'
+                    >
+                      <BackspaceIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
               error={touched.poster && Boolean(errors.poster)}
               helperText={touched.poster && errors.poster}
             />
-            <IconButton onClick={() => setFieldValue('poster', '')}>
-              <BackspaceIcon />
-            </IconButton>
           </Box>
           <Box sx={formItemStyle}>
             <Field
@@ -151,12 +172,22 @@ function MovieForm() {
               as={TextField}
               label='Trailer URL (Youtube only)'
               fullWidth
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label='Clear field'
+                      onClick={() => setFieldValue('trailer', '')}
+                      edge='end'
+                    >
+                      <BackspaceIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
               error={touched.trailer && Boolean(errors.trailer)}
               helperText={touched.trailer && errors.trailer}
             />
-            <IconButton onClick={() => setFieldValue('trailer', '')}>
-              <BackspaceIcon />
-            </IconButton>
           </Box>
           <Box sx={formItemStyle}>
             <FieldArray name='directors'>
@@ -311,12 +342,22 @@ function MovieForm() {
               multiline
               minRows={2}
               maxRows={4}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label='Clear field'
+                      onClick={() => setFieldValue('storyline', '')}
+                      edge='end'
+                    >
+                      <BackspaceIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
               error={touched.storyline && Boolean(errors.storyline)}
               helperText={touched.storyline && errors.storyline}
             />
-            <IconButton onClick={() => setFieldValue('storyline', '')}>
-              <BackspaceIcon />
-            </IconButton>
           </Box>
 
           <Stack direction='row' justifyContent='center' spacing={1}>
