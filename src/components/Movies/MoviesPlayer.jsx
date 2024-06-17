@@ -28,6 +28,7 @@ function MoviesPlayer() {
             youtube: {
               playerVars: {
                 autoplay: 1,
+                controls: 2,
                 iv_load_policy: 3,
                 rel: 0,
                 showinfo: 0,
