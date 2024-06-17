@@ -31,6 +31,7 @@ export const moviesState = [
     studios: [''],
     poster: '',
     trailer: '',
+    storyline: '',
   },
 ];
 

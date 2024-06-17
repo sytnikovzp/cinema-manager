@@ -293,6 +293,22 @@ function MovieForm() {
               )}
             </FieldArray>
           </Box>
+          <Box sx={formItemStyle}>
+            <Field
+              name='storyline'
+              as={TextField}
+              label='Brief storyline of the movie...'
+              fullWidth
+              multiline
+              minRows={2}
+              maxRows={4}
+              error={touched.storyline && Boolean(errors.storyline)}
+              helperText={touched.storyline && errors.storyline}
+            />
+            <IconButton onClick={() => setFieldValue('storyline', '')}>
+              <BackspaceIcon />
+            </IconButton>
+          </Box>
 
           <Stack direction='row' justifyContent='center' spacing={1}>
             <Button

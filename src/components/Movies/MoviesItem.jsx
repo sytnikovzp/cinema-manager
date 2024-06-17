@@ -127,7 +127,7 @@ function MoviesItem() {
         onChange={handleTabChange}
         aria-label='movie details tabs'
       >
-        <Tab label='Movie information' />
+        <Tab label='About of movie' />
         {currentMovie.trailer && <Tab label='Movie trailer' />}
       </Tabs>
 
@@ -167,6 +167,10 @@ function MoviesItem() {
               </Typography>
               <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
                 Studios: {formattedStudios ? formattedStudios : 'Unknown'}
+              </Typography>
+              <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
+                Storyline:{' '}
+                {currentMovie.storyline ? currentMovie.storyline : 'Unknown'}
               </Typography>
             </Box>
           </Box>

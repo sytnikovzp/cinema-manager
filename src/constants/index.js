@@ -34,6 +34,7 @@ export const emptyMovie = {
   studios: [''],
   poster: '',
   trailer: '',
+  storyline: '',
 };
 
 export const emptyStudio = {
