@@ -23,7 +23,6 @@ import {
   itemComponentBoxMainStyle,
   itemComponentBoxSecondaryStyle,
   itemInformationBoxStyle,
-  scrollItemBoxStyle,
 } from '../../services/styleService';
 // =============================================
 import { emptyActor } from '../../constants';
@@ -126,23 +125,23 @@ function ActorsItem() {
         {currentActor.biography && <Tab label='Brief biography' />}
       </Tabs>
 
-      {tabIndex === 0 && (
-        <Box sx={scrollListBoxStyle}>
-          <Box sx={itemComponentBoxMainStyle}>
-            <Box sx={itemComponentBoxSecondaryStyle}>
-              <Card>
-                <CardMedia
-                  component='img'
-                  height='100%'
-                  image={
-                    currentActor.image
-                      ? currentActor.image
-                      : 'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
-                  }
-                  alt={currentActor.fullName}
-                />
-              </Card>
-            </Box>
+      <Box sx={scrollListBoxStyle}>
+        <Box sx={itemComponentBoxMainStyle}>
+          <Box sx={itemComponentBoxSecondaryStyle}>
+            <Card>
+              <CardMedia
+                component='img'
+                height='100%'
+                image={
+                  currentActor.image
+                    ? currentActor.image
+                    : 'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
+                }
+                alt={currentActor.fullName}
+              />
+            </Card>
+          </Box>
+          {tabIndex === 0 && (
             <Box sx={itemInformationBoxStyle}>
               <Typography variant='h5' component='div'>
                 FullName:{' '}
@@ -162,15 +161,11 @@ function ActorsItem() {
                 Movies: {formattedMovies ? formattedMovies : 'Unknown'}
               </Typography>
             </Box>
-          </Box>
-        </Box>
-      )}
+          )}
 
-      {tabIndex === 1 && currentActor.biography && (
-        <Box sx={scrollItemBoxStyle}>
-          <ActorsBiography  />
+          {tabIndex === 1 && currentActor.biography && <ActorsBiography />}
         </Box>
-      )}
+      </Box>
 
       <Snackbar
         open={snackbar.open}

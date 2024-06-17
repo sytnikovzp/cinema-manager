@@ -94,7 +94,7 @@ export const itemListStyle = {
 // =============================================
 // *item components
 
-export const scrollMovieBoxStyle = {
+export const scrollItemBoxStyle = {
   height: '63vh',
 };
 
