@@ -22,7 +22,7 @@ function StudiosGenInfo() {
   return (
     <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
       <Typography variant='body1' component='div' sx={textIndentStyle}>
-        {currentStudio.biography}
+        {currentStudio.genInfo}
       </Typography>
     </Stack>
   );
