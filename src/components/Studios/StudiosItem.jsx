@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 // =============================================
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import DomainAddIcon from '@mui/icons-material/DomainAdd';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
@@ -14,6 +14,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 // =============================================
 import {
   scrollListBoxStyle,
@@ -27,15 +29,13 @@ import { emptyStudio } from '../../constants';
 import { resetStatus } from '../../store/slices/studiosSlice';
 // =============================================
 import useSnackbar from '../../hooks';
+// =============================================
+import StudiosGenInfo from './StudiosGenInfo';
 
 function StudiosItem() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const goBack = () => {
-    navigate('/studios');
-  };
-
+  const { id } = useParams();
   const studios = useSelector((state) => state.studiosList.studios);
   const status = useSelector((state) => state.studiosList.status);
 
@@ -44,8 +44,7 @@ function StudiosItem() {
   );
 
   const prevStatusRef = useRef();
-
-  const { id } = useParams();
+  const [tabIndex, setTabIndex] = useState(0);
 
   useEffect(() => {
     const prevStatus = prevStatusRef.current;
@@ -65,9 +64,16 @@ function StudiosItem() {
 
   const currentStudio = studio ? studio : emptyStudio;
 
-  const formattedMovies = currentStudio.movies
-    ? currentStudio.movies.join(', ')
-    : 'No movies available';
+  const formattedMovies =
+    currentStudio.movies.join(', ') || 'No movies available';
+
+  const goBack = () => {
+    navigate('/studios');
+  };
+
+  const handleTabChange = (event, newValue) => {
+    setTabIndex(newValue);
+  };
 
   return (
     <>
@@ -102,13 +108,21 @@ function StudiosItem() {
           variant='contained'
           color='success'
           sx={buttonMainStyle}
-          startIcon={<DomainAddIcon />}
+          startIcon={<GroupAddIcon />}
         >
           Add studio
         </Button>
       </Stack>
 
       <Divider />
+      <Tabs
+        value={tabIndex}
+        onChange={handleTabChange}
+        aria-label='studio details tabs'
+      >
+        <Tab label='About of studio' />
+        {currentStudio.genInfo && <Tab label='General information' />}
+      </Tabs>
 
       <Box sx={scrollListBoxStyle}>
         <Box sx={itemComponentBoxMainStyle}>
@@ -118,31 +132,70 @@ function StudiosItem() {
                 component='img'
                 height='100%'
                 image={
-                  currentStudio.logo
-                    ? currentStudio.logo
-                    : 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1200px-No-Image-Placeholder.svg.png'
+                  currentStudio.logo ||
+                  'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
                 }
                 alt={currentStudio.title}
               />
             </Card>
           </Box>
           <Box sx={itemInformationBoxStyle}>
-            <Typography variant='h5' component='div'>
-              Title: {currentStudio.title ? currentStudio.title : 'Unknown'}
+            <Typography
+              variant='h5'
+              component='div'
+              sx={{ fontWeight: 'bold' }}
+            >
+              {currentStudio.title || 'Unknown studio'}
             </Typography>
-            <Typography variant='body1' component='div'>
-              Foundation year:{' '}
-              {currentStudio.foundationYear
-                ? currentStudio.foundationYear
-                : 'Unknown'}
-            </Typography>
-            <Typography variant='body1' component='div'>
-              Location:{' '}
-              {currentStudio.location ? currentStudio.location : 'Unknown'}
-            </Typography>
-            <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
-              Movies: {formattedMovies ? formattedMovies : 'Unknown'}
-            </Typography>
+
+            <Stack direction='row' spacing={1}>
+              <Typography
+                variant='body1'
+                sx={{
+                  fontWeight: 'bold',
+                }}
+                component='div'
+              >
+                Foundation year:
+              </Typography>
+              <Typography variant='body1' component='div'>
+                {currentStudio.foundationYear || 'Unknown'}
+              </Typography>
+            </Stack>
+
+            <Stack direction='row' spacing={1}>
+              <Typography
+                variant='body1'
+                sx={{
+                  fontWeight: 'bold',
+                }}
+                component='div'
+              >
+                Location:
+              </Typography>
+              <Typography variant='body1' component='div'>
+                {currentStudio.location || 'Unknown'}
+              </Typography>
+            </Stack>
+
+            {tabIndex === 0 && (
+              <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
+                <Typography
+                  variant='body1'
+                  sx={{
+                    fontWeight: 'bold',
+                  }}
+                  component='div'
+                >
+                  Movies:
+                </Typography>
+                <Typography variant='body1' component='div'>
+                  {formattedMovies}
+                </Typography>
+              </Stack>
+            )}
+
+            {tabIndex === 1 && currentStudio.genInfo && <StudiosGenInfo />}
           </Box>
         </Box>
       </Box>
