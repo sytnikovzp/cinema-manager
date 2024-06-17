@@ -150,8 +150,12 @@ function MoviesItem() {
               </Card>
             </Box>
             <Box sx={itemInformationBoxStyle}>
-              <Typography variant='h5' component='div'>
-                Title: {currentMovie.title ? currentMovie.title : 'Unknown'}
+              <Typography
+                variant='h5'
+                component='div'
+                sx={{ fontWeight: 'bold' }}
+              >
+                {currentMovie.title ? currentMovie.title : 'Unknown'}
               </Typography>
               <Typography variant='body1' component='div'>
                 Movie year:{' '}
@@ -174,12 +178,10 @@ function MoviesItem() {
                 Actors: {formattedActors ? formattedActors : 'Unknown'}
               </Typography>{' '}
               <Divider />
-              <Typography
-                variant='body1'
-                component='div'
-                sx={textIndentStyle}
-              >
-                {currentMovie.storyline ? currentMovie.storyline : 'Storyline is unknown'}
+              <Typography variant='body1' component='div' sx={textIndentStyle}>
+                {currentMovie.storyline
+                  ? currentMovie.storyline
+                  : 'Storyline is unknown'}
               </Typography>
             </Box>
           </Box>
