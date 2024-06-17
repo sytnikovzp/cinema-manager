@@ -45,6 +45,7 @@ export const emptyStudio = {
   foundationYear: '',
   movies: [''],
   logo: '',
+  genInfo: '',
 };
 
 export const posters = [

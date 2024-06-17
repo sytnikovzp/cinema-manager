@@ -56,6 +56,7 @@ function StudioForm() {
     location: Yup.string(),
     logo: Yup.string().url('Invalid URL logo'),
     movies: Yup.array(),
+    genInfo: Yup.string(),
   });
 
   const onFormSubmit = (values) => {
@@ -183,6 +184,22 @@ function StudioForm() {
                 </>
               )}
             </FieldArray>
+          </Box>
+          <Box sx={formItemStyle}>
+            <Field
+              name='genInfo'
+              as={TextField}
+              label='General information about the studio...'
+              fullWidth
+              multiline
+              minRows={2}
+              maxRows={4}
+              error={touched.genInfo && Boolean(errors.genInfo)}
+              helperText={touched.genInfo && errors.genInfo}
+            />
+            <IconButton onClick={() => setFieldValue('genInfo', '')}>
+              <BackspaceIcon />
+            </IconButton>
           </Box>
           <Stack direction='row' justifyContent='center' spacing={1}>
             <Button

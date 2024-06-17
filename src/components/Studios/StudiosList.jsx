@@ -15,7 +15,7 @@ import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
-import DomainAddIcon from '@mui/icons-material/DomainAdd';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
 import { styled } from '@mui/system';
@@ -85,7 +85,7 @@ function StudiosList() {
           variant='contained'
           color='success'
           sx={buttonMainStyle}
-          startIcon={<DomainAddIcon />}
+          startIcon={<GroupAddIcon />}
         >
           Add studio
         </Button>
@@ -108,8 +108,8 @@ function StudiosList() {
                     <StyledAvatar src={studio.logo} />
                   </ListItemAvatar>
                   <ListItemText
-                    primary={`${studio.title ? studio.title : 'Unknown'}, ${
-                      studio.location ? studio.location : 'Unknown'
+                    primary={`${studio.title || 'Unknown studio'}, ${
+                      studio.foundationYear || 'unknown year'
                     }`}
                   />
                 </ListItemButton>

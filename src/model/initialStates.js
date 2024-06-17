@@ -44,5 +44,6 @@ export const studiosState = [
     foundationYear: '',
     movies: [''],
     logo: '',
+    genInfo: '',
   },
 ];

@@ -57,6 +57,7 @@ function MovieForm() {
     studios: Yup.array(),
     poster: Yup.string().url('Invalid URL poster'),
     trailer: Yup.string().url('Invalid Youtube URL trailer'),
+    storyline: Yup.string(),
   });
 
   const onFormSubmit = (values) => {

@@ -314,11 +314,11 @@
     },
     {
       "id": 3,
-      "title": "Test studio",
-      "location": "Ukraine",
-      "foundationYear": 2018,
+      "title": "",
+      "location": "",
+      "foundationYear": "",
       "movies": [
-        "Movie 1"
+        ""
       ],
       "logo": ""
     }
