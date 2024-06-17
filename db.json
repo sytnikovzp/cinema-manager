@@ -119,12 +119,11 @@
     {
       "id": 10,
       "movies": [
-        "Film 1",
-        "Film 2"
+        ""
       ],
-      "fullName": "Test actor",
-      "birthYear": 2017,
-      "nationality": "Ukraine",
+      "fullName": "",
+      "birthYear": "",
+      "nationality": "",
       "image": ""
     }
   ],

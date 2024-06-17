@@ -64,9 +64,8 @@ function ActorsItem() {
 
   const currentActor = actor ? actor : emptyActor;
 
-  const formattedMovies = currentActor.movies
-    ? currentActor.movies.join(', ')
-    : 'No movies available';
+  const formattedMovies =
+    currentActor.movies.join(', ') || 'No movies available';
 
   const goBack = () => {
     navigate('/actors');
@@ -133,37 +132,71 @@ function ActorsItem() {
                 component='img'
                 height='100%'
                 image={
-                  currentActor.image
-                    ? currentActor.image
-                    : 'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
+                  currentActor.image ||
+                  'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
                 }
                 alt={currentActor.fullName}
               />
             </Card>
           </Box>
-          {tabIndex === 0 && (
-            <Box sx={itemInformationBoxStyle}>
-              <Typography variant='h5' component='div'>
-                FullName:{' '}
-                {currentActor.fullName ? currentActor.fullName : 'Unknown'}
-              </Typography>
-              <Typography variant='body1' component='div'>
-                Birth year:{' '}
-                {currentActor.birthYear ? currentActor.birthYear : 'Unknown'}
-              </Typography>
-              <Typography variant='body1' component='div'>
-                Nationality:{' '}
-                {currentActor.nationality
-                  ? currentActor.nationality
-                  : 'Unknown'}
-              </Typography>
-              <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
-                Movies: {formattedMovies ? formattedMovies : 'Unknown'}
-              </Typography>
-            </Box>
-          )}
+          <Box sx={itemInformationBoxStyle}>
+            <Typography
+              variant='h5'
+              component='div'
+              sx={{ fontWeight: 'bold' }}
+            >
+              {currentActor.fullName || 'Unknown actor'}
+            </Typography>
 
-          {tabIndex === 1 && currentActor.biography && <ActorsBiography />}
+            <Stack direction='row' spacing={1}>
+              <Typography
+                variant='body1'
+                sx={{
+                  fontWeight: 'bold',
+                }}
+                component='div'
+              >
+                Birth year:
+              </Typography>
+              <Typography variant='body1' component='div'>
+                {currentActor.birthYear || 'Unknown'}
+              </Typography>
+            </Stack>
+
+            <Stack direction='row' spacing={1}>
+              <Typography
+                variant='body1'
+                sx={{
+                  fontWeight: 'bold',
+                }}
+                component='div'
+              >
+                Nationality:
+              </Typography>
+              <Typography variant='body1' component='div'>
+                {currentActor.nationality || 'Unknown'}
+              </Typography>
+            </Stack>
+
+            {tabIndex === 0 && (
+              <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
+                <Typography
+                  variant='body1'
+                  sx={{
+                    fontWeight: 'bold',
+                  }}
+                  component='div'
+                >
+                  Movies:
+                </Typography>
+                <Typography variant='body1' component='div'>
+                  {formattedMovies}
+                </Typography>
+              </Stack>
+            )}
+
+            {tabIndex === 1 && currentActor.biography && <ActorsBiography />}
+          </Box>
         </Box>
       </Box>
 

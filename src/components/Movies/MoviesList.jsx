@@ -109,7 +109,7 @@ function MoviesList() {
                   </ListItemAvatar>
                   <ListItemText
                     primary={`${movie.title ? movie.title : 'Unknown movie'}, ${
-                      movie.movieYear ? movie.movieYear : 'Unknown'
+                      movie.movieYear ? movie.movieYear : 'Unknown year'
                     }`}
                   />
                 </ListItemButton>

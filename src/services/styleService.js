@@ -14,6 +14,12 @@ export const buttonMainStyle = {
   width: '170px',
 };
 
+export const textIndentStyle = {
+  textIndent: '2em',
+  fontWeight: 'medium',
+  paddingRight: 2,
+};
+
 // =============================================
 // NavBar component
 
@@ -32,6 +38,7 @@ export const carouselStyles = {
     overflow: 'hidden',
     color: 'red',
   },
+
   imgStyle: {
     borderRadius: '15px',
     padding: '5px',
@@ -117,12 +124,6 @@ export const itemInformationBoxStyle = {
   flexDirection: 'column',
   width: '65%',
   textAlign: 'justify',
-};
-
-export const textIndentStyle = {
-  textIndent: '2em',
-  fontWeight: 'medium',
-  paddingRight: 2,
 };
 
 // =============================================
