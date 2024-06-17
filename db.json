@@ -274,18 +274,18 @@
     },
     {
       "id": 1658475813030,
-      "title": "Test movie",
+      "title": "",
       "directors": [
-        "Test director"
+        ""
       ],
       "actors": [
-        "Test actor"
+        ""
       ],
       "studios": [
-        "Test studio"
+        ""
       ],
       "poster": "",
-      "movieYear": 2024
+      "movieYear": ""
     }
   ],
   "studios": [

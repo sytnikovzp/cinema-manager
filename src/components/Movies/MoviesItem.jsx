@@ -68,17 +68,12 @@ function MoviesItem() {
   const movie = movies.find((movie) => Number(movie.id) === Number(id));
   const currentMovie = movie ? movie : emptyMovie;
 
-  const formattedDirectors = currentMovie.directors
-    ? currentMovie.directors.join(', ')
-    : 'No movies available';
-
-  const formattedActors = currentMovie.actors
-    ? currentMovie.actors.join(', ')
-    : 'No movies available';
-
-  const formattedStudios = currentMovie.studios
-    ? currentMovie.studios.join(', ')
-    : 'No movies available';
+  const formattedDirectors =
+    currentMovie.directors.join(', ') || 'No directors available';
+  const formattedActors =
+    currentMovie.actors.join(', ') || 'No actors available';
+  const formattedStudios =
+    currentMovie.studios.join(', ') || 'No studios available';
 
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
@@ -141,9 +136,8 @@ function MoviesItem() {
                   component='img'
                   height='100%'
                   image={
-                    currentMovie.poster
-                      ? currentMovie.poster
-                      : 'https://www.prokerala.com/movies/assets/img/no-poster-available.jpg'
+                    currentMovie.poster ||
+                    'https://www.prokerala.com/movies/assets/img/no-poster-available.jpg'
                   }
                   alt={currentMovie.title}
                 />
@@ -155,33 +149,81 @@ function MoviesItem() {
                 component='div'
                 sx={{ fontWeight: 'bold' }}
               >
-                {currentMovie.title ? currentMovie.title : 'Unknown'}
+                {currentMovie.title || 'Unknown movie'}
               </Typography>
-              <Typography variant='body1' component='div'>
-                Movie year:{' '}
-                {currentMovie.movieYear ? currentMovie.movieYear : 'Unknown'}
-              </Typography>
-              <Typography variant='body1' component='div'>
-                Genre: {currentMovie.genre ? currentMovie.genre : 'Unknown'}
-              </Typography>
-              <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
-                Studios: {formattedStudios ? formattedStudios : 'Unknown'}
-              </Typography>
-              <Typography variant='body1' component='div' sx={{ marginTop: 2 }}>
-                Directors: {formattedDirectors ? formattedDirectors : 'Unknown'}
-              </Typography>
-              <Typography
-                variant='body1'
-                component='div'
-                sx={{ marginTop: 2, marginBottom: 2 }}
-              >
-                Actors: {formattedActors ? formattedActors : 'Unknown'}
-              </Typography>{' '}
-              <Divider />
+              <Stack direction='row' spacing={1}>
+                <Typography
+                  variant='body1'
+                  sx={{
+                    fontWeight: 'bold',
+                  }}
+                  component='div'
+                >
+                  Movie year:
+                </Typography>
+                <Typography variant='body1' component='div'>
+                  {currentMovie.movieYear || 'Unknown'}
+                </Typography>
+              </Stack>
+              <Stack direction='row' spacing={1}>
+                <Typography
+                  variant='body1'
+                  sx={{
+                    fontWeight: 'bold',
+                  }}
+                  component='div'
+                >
+                  Genre:
+                </Typography>
+                <Typography variant='body1' component='div'>
+                  {currentMovie.genre || 'Unknown'}
+                </Typography>
+              </Stack>
+              <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
+                <Typography
+                  variant='body1'
+                  sx={{
+                    fontWeight: 'bold',
+                  }}
+                  component='div'
+                >
+                  Studios:
+                </Typography>
+                <Typography variant='body1' component='div'>
+                  {formattedStudios}
+                </Typography>
+              </Stack>
+              <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
+                <Typography
+                  variant='body1'
+                  sx={{
+                    fontWeight: 'bold',
+                  }}
+                  component='div'
+                >
+                  Directors:
+                </Typography>
+                <Typography variant='body1' component='div'>
+                  {formattedDirectors}
+                </Typography>
+              </Stack>
+              <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
+                <Typography
+                  variant='body1'
+                  sx={{
+                    fontWeight: 'bold',
+                  }}
+                  component='div'
+                >
+                  Actors:
+                </Typography>
+                <Typography variant='body1' component='div'>
+                  {formattedActors}
+                </Typography>
+              </Stack>
+              <Divider sx={{ marginTop: 2 }} />
               <Typography variant='body1' component='div' sx={textIndentStyle}>
-                {currentMovie.storyline
-                  ? currentMovie.storyline
-                  : 'Storyline is unknown'}
+                {currentMovie.storyline || 'Unknown storyline'}
               </Typography>
             </Box>
           </Box>
