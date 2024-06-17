@@ -362,6 +362,16 @@ function MovieForm() {
 
           <Stack direction='row' justifyContent='center' spacing={1}>
             <Button
+              type='button'
+              variant='contained'
+              sx={buttonFormStyle}
+              onClick={goBack}
+              startIcon={<ArrowBackIcon />}
+            >
+              Back
+            </Button>
+
+            <Button
               type='submit'
               variant='contained'
               color='success'
@@ -379,16 +389,6 @@ function MovieForm() {
               startIcon={<ClearAllIcon />}
             >
               Reset
-            </Button>
-
-            <Button
-              type='button'
-              variant='contained'
-              sx={buttonFormStyle}
-              onClick={goBack}
-              startIcon={<ArrowBackIcon />}
-            >
-              Back
             </Button>
           </Stack>
         </Box>
