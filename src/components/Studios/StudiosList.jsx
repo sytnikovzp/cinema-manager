@@ -15,7 +15,7 @@ import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import DomainAddIcon from '@mui/icons-material/DomainAdd';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
 import { styled } from '@mui/system';
@@ -85,7 +85,7 @@ function StudiosList() {
           variant='contained'
           color='success'
           sx={buttonMainStyle}
-          startIcon={<GroupAddIcon />}
+          startIcon={<DomainAddIcon />}
         >
           Add studio
         </Button>

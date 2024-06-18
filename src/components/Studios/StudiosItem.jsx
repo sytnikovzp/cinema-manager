@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 // =============================================
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import DomainAddIcon from '@mui/icons-material/DomainAdd';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
@@ -108,7 +108,7 @@ function StudiosItem() {
           variant='contained'
           color='success'
           sx={buttonMainStyle}
-          startIcon={<GroupAddIcon />}
+          startIcon={<DomainAddIcon />}
         >
           Add studio
         </Button>

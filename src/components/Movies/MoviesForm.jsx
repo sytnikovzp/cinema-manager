@@ -128,13 +128,13 @@ function MovieForm() {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 name='date'
-                label='Movie year'
+                label='Release year'
                 value={values.movieYear ? dayjs().year(values.movieYear) : null}
                 views={['year']}
                 onChange={(value) =>
                   setFieldValue('movieYear', value ? value.year() : '')
                 }
-                sx={{ width: '250px' }}
+                sx={{ width: '330px' }}
                 slotProps={{
                   textField: {
                     error: touched.movieYear && Boolean(errors.movieYear),

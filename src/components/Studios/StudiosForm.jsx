@@ -19,10 +19,10 @@ import ClearAllIcon from '@mui/icons-material/ClearAll';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
-import { Typography } from '@mui/material';
+import { InputAdornment, MenuItem, Typography } from '@mui/material';
 // =============================================
 import { createStudio, updateStudio } from '../../store/slices/studiosSlice';
-import { emptyStudio } from '../../constants';
+import { emptyStudio, locations } from '../../constants';
 // =============================================
 import {
   formStyle,
@@ -78,17 +78,50 @@ function StudioForm() {
             <Field
               name='title'
               as={TextField}
-              label='Title studio'
+              label='Studio title'
               value={values.title}
               fullWidth
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label='Clear field'
+                      onClick={() => setFieldValue('title', '')}
+                      edge='end'
+                    >
+                      <BackspaceIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
               error={touched.title && Boolean(errors.title)}
               helperText={touched.title && errors.title}
             />
-            <IconButton onClick={() => setFieldValue('title', '')}>
-              <BackspaceIcon />
-            </IconButton>
           </Box>
           <Box sx={formItemStyle}>
+            <Field name='location'>
+              {({ field }) => (
+                <TextField
+                  {...field}
+                  id='location-select'
+                  select
+                  fullWidth
+                  label='Location'
+                  error={touched.location && Boolean(errors.location)}
+                  helperText={touched.location && errors.location}
+                >
+                  <MenuItem value=''>
+                    <b>Location select:</b>
+                  </MenuItem>
+                  {locations.map((option) => (
+                    <MenuItem key={option.id} value={option.title}>
+                      {option.title}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              )}
+            </Field>
+
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 name='foundationYear'
@@ -102,7 +135,7 @@ function StudioForm() {
                 onChange={(value) =>
                   setFieldValue('foundationYear', value ? value.year() : '')
                 }
-                sx={{ width: '400px' }}
+                sx={{ width: '330px' }}
                 slotProps={{
                   textField: {
                     error:
@@ -112,35 +145,30 @@ function StudioForm() {
                 }}
               />
             </LocalizationProvider>
-            <IconButton onClick={() => setFieldValue('foundationYear', '')}>
-              <BackspaceIcon />
-            </IconButton>
-          </Box>
-          <Box sx={formItemStyle}>
-            <Field
-              name='location'
-              as={TextField}
-              label='Location'
-              fullWidth
-              error={touched.location && Boolean(errors.location)}
-              helperText={touched.location && errors.location}
-            />
-            <IconButton onClick={() => setFieldValue('location', '')}>
-              <BackspaceIcon />
-            </IconButton>
           </Box>
           <Box sx={formItemStyle}>
             <Field
               name='logo'
               as={TextField}
               label='Logo URL'
+              value={values.logo}
               fullWidth
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label='Clear field'
+                      onClick={() => setFieldValue('logo', '')}
+                      edge='end'
+                    >
+                      <BackspaceIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
               error={touched.logo && Boolean(errors.logo)}
               helperText={touched.logo && errors.logo}
             />
-            <IconButton onClick={() => setFieldValue('logo', '')}>
-              <BackspaceIcon />
-            </IconButton>
           </Box>
           <Box sx={formItemStyle}>
             <FieldArray name='movies'>
@@ -191,18 +219,39 @@ function StudioForm() {
               name='genInfo'
               as={TextField}
               label='General information about the studio...'
+              value={values.genInfo}
               fullWidth
               multiline
               minRows={2}
               maxRows={4}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label='Clear field'
+                      onClick={() => setFieldValue('genInfo', '')}
+                      edge='end'
+                    >
+                      <BackspaceIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
               error={touched.genInfo && Boolean(errors.genInfo)}
               helperText={touched.genInfo && errors.genInfo}
             />
-            <IconButton onClick={() => setFieldValue('genInfo', '')}>
-              <BackspaceIcon />
-            </IconButton>
           </Box>
           <Stack direction='row' justifyContent='center' spacing={1}>
+            <Button
+              type='button'
+              variant='contained'
+              sx={buttonFormStyle}
+              onClick={goBack}
+              startIcon={<ArrowBackIcon />}
+            >
+              Back
+            </Button>
+
             <Button
               type='submit'
               variant='contained'
@@ -221,16 +270,6 @@ function StudioForm() {
               startIcon={<ClearAllIcon />}
             >
               Reset
-            </Button>
-
-            <Button
-              type='button'
-              variant='contained'
-              sx={buttonFormStyle}
-              onClick={goBack}
-              startIcon={<ArrowBackIcon />}
-            >
-              Back
             </Button>
           </Stack>
         </Box>
