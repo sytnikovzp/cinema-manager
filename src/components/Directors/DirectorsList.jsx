@@ -22,6 +22,7 @@ import { styled } from '@mui/system';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
+import Skeleton from '@mui/material/Skeleton';
 // =============================================
 import {
   buttonMainStyle,
@@ -56,7 +57,11 @@ function DirectorsList() {
     const prevStatus = prevStatusRef.current;
     const currentStatus = status;
 
-    if (currentStatus && currentStatus !== prevStatus) {
+    if (
+      currentStatus &&
+      currentStatus !== prevStatus &&
+      currentStatus !== 'loading'
+    ) {
       const severity = currentStatus.toLowerCase().includes('success')
         ? 'success'
         : 'error';
@@ -70,6 +75,42 @@ function DirectorsList() {
     event.stopPropagation();
     dispatch(deleteDirector(id));
   };
+
+  const renderLoadingSkeleton = () => (
+    <Stack direction='column' marginBottom={1}>
+      <ListItem disablePadding sx={itemListStyle}>
+        <ListItemButton sx={{ borderRadius: 5 }}>
+          <ListItemAvatar>
+            <Skeleton
+              variant='circular'
+              animation='wave'
+              width={40}
+              height={40}
+            />
+          </ListItemAvatar>
+          <ListItemText
+            primary={<Skeleton variant='text' animation='wave' width='80%' />}
+          />
+        </ListItemButton>
+        <ListItemSecondaryAction>
+          <Stack direction='row' spacing={1}>
+            <Skeleton
+              variant='circular'
+              animation='wave'
+              width={40}
+              height={40}
+            />
+            <Skeleton
+              variant='circular'
+              animation='wave'
+              width={40}
+              height={40}
+            />
+          </Stack>
+        </ListItemSecondaryAction>
+      </ListItem>
+    </Stack>
+  );
 
   return (
     <>
@@ -95,49 +136,55 @@ function DirectorsList() {
 
       <Box sx={scrollListBoxStyle}>
         <List>
-          {directors.map((director) => (
-            <Stack key={director.id} direction='column' marginBottom={1}>
-              <ListItem
-                component={Link}
-                to={`/directors/${director.id}`}
-                disablePadding
-                sx={itemListStyle}
-              >
-                <ListItemButton sx={{ borderRadius: 5 }}>
-                  <ListItemAvatar>
-                    <StyledAvatar src={director.image} />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={`${director.fullName || 'Unknown director'}, ${
-                      director.nationality || 'unknown nationality'
-                    }`}
-                  />
-                </ListItemButton>
+          {status === 'loading'
+            ? Array(5)
+                .fill()
+                .map((_, index) => (
+                  <Box key={index}>{renderLoadingSkeleton()}</Box>
+                ))
+            : directors.map((director) => (
+                <Stack key={director.id} direction='column' marginBottom={1}>
+                  <ListItem
+                    component={Link}
+                    to={`/directors/${director.id}`}
+                    disablePadding
+                    sx={itemListStyle}
+                  >
+                    <ListItemButton sx={{ borderRadius: 5 }}>
+                      <ListItemAvatar>
+                        <StyledAvatar src={director.image} />
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={`${director.fullName || 'Unknown director'}, ${
+                          director.nationality || 'unknown nationality'
+                        }`}
+                      />
+                    </ListItemButton>
 
-                <ListItemSecondaryAction>
-                  <Stack direction='row' spacing={1}>
-                    <IconButton
-                      edge='end'
-                      aria-label='edit'
-                      component={Link}
-                      to={`/directors/new/${director.id}`}
-                    >
-                      <EditIcon />
-                    </IconButton>
-                    <IconButton
-                      edge='end'
-                      aria-label='delete'
-                      onClick={(event) => {
-                        onItemDelete(event, director.id);
-                      }}
-                    >
-                      <HighlightOffIcon />
-                    </IconButton>
-                  </Stack>
-                </ListItemSecondaryAction>
-              </ListItem>
-            </Stack>
-          ))}
+                    <ListItemSecondaryAction>
+                      <Stack direction='row' spacing={1}>
+                        <IconButton
+                          edge='end'
+                          aria-label='edit'
+                          component={Link}
+                          to={`/directors/new/${director.id}`}
+                        >
+                          <EditIcon />
+                        </IconButton>
+                        <IconButton
+                          edge='end'
+                          aria-label='delete'
+                          onClick={(event) => {
+                            onItemDelete(event, director.id);
+                          }}
+                        >
+                          <HighlightOffIcon />
+                        </IconButton>
+                      </Stack>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                </Stack>
+              ))}
         </List>
       </Box>
 
