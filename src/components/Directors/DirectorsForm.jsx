@@ -19,10 +19,12 @@ import ClearAllIcon from '@mui/icons-material/ClearAll';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
-import { Typography } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import InputAdornment from '@mui/material/InputAdornment';
+import MenuItem from '@mui/material/MenuItem';
 // =============================================
 import { createDirector, updateDirector } from '../../store/slices/directorsSlice';
-import { emptyDirector } from '../../constants';
+import { emptyDirector, nationalities } from '../../constants';
 // =============================================
 import {
   formStyle,
@@ -78,14 +80,47 @@ function DirectorForm() {
               label='Full name'
               value={values.fullName}
               fullWidth
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label='Clear field'
+                      onClick={() => setFieldValue('fullName', '')}
+                      edge='end'
+                    >
+                      <BackspaceIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
               error={touched.fullName && Boolean(errors.fullName)}
               helperText={touched.fullName && errors.fullName}
             />
-            <IconButton onClick={() => setFieldValue('fullName', '')}>
-              <BackspaceIcon />
-            </IconButton>
           </Box>
           <Box sx={formItemStyle}>
+            <Field name='nationality'>
+              {({ field }) => (
+                <TextField
+                  {...field}
+                  id='nationality-select'
+                  select
+                  fullWidth
+                  label='Nationality'
+                  error={touched.nationality && Boolean(errors.nationality)}
+                  helperText={touched.nationality && errors.nationality}
+                >
+                  <MenuItem value=''>
+                    <b>Nationality select:</b>
+                  </MenuItem>
+                  {nationalities.map((option) => (
+                    <MenuItem key={option.id} value={option.description}>
+                      {option.description}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              )}
+            </Field>
+
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 name='birthYear'
@@ -95,7 +130,7 @@ function DirectorForm() {
                 onChange={(value) =>
                   setFieldValue('birthYear', value ? value.year() : '')
                 }
-                sx={{ width: '400px' }}
+                sx={{ width: '250px' }}
                 slotProps={{
                   textField: {
                     error: touched.birthYear && Boolean(errors.birthYear),
@@ -104,35 +139,30 @@ function DirectorForm() {
                 }}
               />
             </LocalizationProvider>
-            <IconButton onClick={() => setFieldValue('birthYear', '')}>
-              <BackspaceIcon />
-            </IconButton>
-          </Box>
-          <Box sx={formItemStyle}>
-            <Field
-              name='nationality'
-              as={TextField}
-              label='Nationality'
-              fullWidth
-              error={touched.nationality && Boolean(errors.nationality)}
-              helperText={touched.nationality && errors.nationality}
-            />
-            <IconButton onClick={() => setFieldValue('nationality', '')}>
-              <BackspaceIcon />
-            </IconButton>
           </Box>
           <Box sx={formItemStyle}>
             <Field
               name='image'
               as={TextField}
               label='Image URL'
+              value={values.image}
               fullWidth
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label='Clear field'
+                      onClick={() => setFieldValue('image', '')}
+                      edge='end'
+                    >
+                      <BackspaceIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
               error={touched.image && Boolean(errors.image)}
               helperText={touched.image && errors.image}
             />
-            <IconButton onClick={() => setFieldValue('image', '')}>
-              <BackspaceIcon />
-            </IconButton>
           </Box>
           <Box sx={formItemStyle}>
             <FieldArray name='movies'>
@@ -183,18 +213,39 @@ function DirectorForm() {
               name='biography'
               as={TextField}
               label='Brief biography of the director...'
+              value={values.biography}
               fullWidth
               multiline
               minRows={2}
               maxRows={4}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label='Clear field'
+                      onClick={() => setFieldValue('biography', '')}
+                      edge='end'
+                    >
+                      <BackspaceIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
               error={touched.biography && Boolean(errors.biography)}
               helperText={touched.biography && errors.biography}
             />
-            <IconButton onClick={() => setFieldValue('biography', '')}>
-              <BackspaceIcon />
-            </IconButton>
           </Box>
           <Stack direction='row' justifyContent='center' spacing={1}>
+            <Button
+              type='button'
+              variant='contained'
+              sx={buttonFormStyle}
+              onClick={goBack}
+              startIcon={<ArrowBackIcon />}
+            >
+              Back
+            </Button>
+
             <Button
               type='submit'
               variant='contained'
@@ -213,16 +264,6 @@ function DirectorForm() {
               startIcon={<ClearAllIcon />}
             >
               Reset
-            </Button>
-
-            <Button
-              type='button'
-              variant='contained'
-              sx={buttonFormStyle}
-              onClick={goBack}
-              startIcon={<ArrowBackIcon />}
-            >
-              Back
             </Button>
           </Stack>
         </Box>
