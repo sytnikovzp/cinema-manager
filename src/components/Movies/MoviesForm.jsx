@@ -80,7 +80,7 @@ function MovieForm() {
             <Field
               name='title'
               as={TextField}
-              label='Title film'
+              label='Movie title'
               value={values.title}
               fullWidth
               InputProps={{
