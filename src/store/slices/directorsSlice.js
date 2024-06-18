@@ -29,7 +29,10 @@ export const createDirector = createAsyncThunk(
   `${DIRECTORS_SLICE_NAME}/createDirector`,
   async (director, { rejectWithValue }) => {
     try {
-      const { status, data } = await api.post(`/${DIRECTORS_SLICE_NAME}`, director);
+      const { status, data } = await api.post(
+        `/${DIRECTORS_SLICE_NAME}`,
+        director
+      );
       if (status >= 400) throw new Error(`Error create director ${status}`);
       return data;
     } catch (error) {
@@ -96,7 +99,9 @@ const directorsSlice = createSlice({
       state.error = null;
     });
     builder.addCase(deleteDirector.fulfilled, (state, { payload }) => {
-      state.directors = state.directors.filter((director) => director.id !== payload);
+      state.directors = state.directors.filter(
+        (director) => director.id !== payload
+      );
       state.status = 'Director deleted successfully!';
       state.error = null;
     });
@@ -109,9 +114,18 @@ const directorsSlice = createSlice({
 
     // Error
     builder.addCase(getAllDirectors.rejected, setError);
-    builder.addCase(createDirector.rejected, setError);
-    builder.addCase(updateDirector.rejected, setError);
-    builder.addCase(deleteDirector.rejected, setError);
+    builder.addCase(createDirector.rejected, (state, { payload }) => {
+      state.status = 'Failed to create director!';
+      state.error = payload;
+    });
+    builder.addCase(updateDirector.rejected, (state, { payload }) => {
+      state.status = 'Failed to update director!';
+      state.error = payload;
+    });
+    builder.addCase(deleteDirector.rejected, (state, { payload }) => {
+      state.status = 'Failed to delete director!';
+      state.error = payload;
+    });
   },
 });
 

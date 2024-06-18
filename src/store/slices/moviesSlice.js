@@ -109,9 +109,18 @@ const moviesSlice = createSlice({
 
     // Error
     builder.addCase(getAllMovies.rejected, setError);
-    builder.addCase(createMovie.rejected, setError);
-    builder.addCase(updateMovie.rejected, setError);
-    builder.addCase(deleteMovie.rejected, setError);
+    builder.addCase(createMovie.rejected, (state, { payload }) => {
+      state.status = 'Failed to create movie!';
+      state.error = payload;
+    });
+    builder.addCase(updateMovie.rejected, (state, { payload }) => {
+      state.status = 'Failed to update movie!';
+      state.error = payload;
+    });
+    builder.addCase(deleteMovie.rejected, (state, { payload }) => {
+      state.status = 'Failed to delete movie!';
+      state.error = payload;
+    });
   },
 });
 

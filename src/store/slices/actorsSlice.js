@@ -109,9 +109,18 @@ const actorsSlice = createSlice({
 
     // Error
     builder.addCase(getAllActors.rejected, setError);
-    builder.addCase(createActor.rejected, setError);
-    builder.addCase(updateActor.rejected, setError);
-    builder.addCase(deleteActor.rejected, setError);
+    builder.addCase(createActor.rejected, (state, { payload }) => {
+      state.status = 'Failed to create actor!';
+      state.error = payload;
+    });
+    builder.addCase(updateActor.rejected, (state, { payload }) => {
+      state.status = 'Failed to update actor!';
+      state.error = payload;
+    });
+    builder.addCase(deleteActor.rejected, (state, { payload }) => {
+      state.status = 'Failed to delete actor!';
+      state.error = payload;
+    });
   },
 });
 

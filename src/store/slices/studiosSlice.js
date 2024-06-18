@@ -109,9 +109,18 @@ const studiosSlice = createSlice({
 
     // Error
     builder.addCase(getAllStudios.rejected, setError);
-    builder.addCase(createStudio.rejected, setError);
-    builder.addCase(updateStudio.rejected, setError);
-    builder.addCase(deleteStudio.rejected, setError);
+    builder.addCase(createStudio.rejected, (state, { payload }) => {
+      state.status = 'Failed to create studio!';
+      state.error = payload;
+    });
+    builder.addCase(updateStudio.rejected, (state, { payload }) => {
+      state.status = 'Failed to update studio!';
+      state.error = payload;
+    });
+    builder.addCase(deleteStudio.rejected, (state, { payload }) => {
+      state.status = 'Failed to delete studio!';
+      state.error = payload;
+    });
   },
 });
 
