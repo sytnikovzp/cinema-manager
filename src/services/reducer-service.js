@@ -1,6 +1,6 @@
 export const setError = (state, { payload }) => {
   state.error = payload;
-  state.status = 'rejected';
+  state.status = 'Error loading data!';
 };
 
 export const setStatus = (state) => {
