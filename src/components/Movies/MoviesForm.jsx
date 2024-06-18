@@ -116,8 +116,8 @@ function MovieForm() {
                     <b>Genre select:</b>
                   </MenuItem>
                   {genres.map((option) => (
-                    <MenuItem key={option.id} value={option.genre}>
-                      {option.genre}
+                    <MenuItem key={option.id} value={option.title}>
+                      {option.title}
                     </MenuItem>
                   ))}
                 </TextField>

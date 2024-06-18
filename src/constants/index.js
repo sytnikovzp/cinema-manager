@@ -89,79 +89,79 @@ export const posters = [
 export const genres = [
   {
     id: 1,
-    genre: 'Action',
+    title: 'Action',
   },
   {
     id: 2,
-    genre: 'Adventures',
+    title: 'Adventures',
   },
   {
     id: 3,
-    genre: 'Anime',
+    title: 'Anime',
   },
   {
     id: 4,
-    genre: 'Biopic',
+    title: 'Biopic',
   },
   {
     id: 5,
-    genre: 'Comedy',
+    title: 'Comedy',
   },
   {
     id: 6,
-    genre: 'Crime film',
+    title: 'Crime film',
   },
   {
     id: 7,
-    genre: 'Documentary',
+    title: 'Documentary',
   },
   {
     id: 8,
-    genre: 'Drama',
+    title: 'Drama',
   },
   {
     id: 9,
-    genre: 'Fantasy',
+    title: 'Fantasy',
   },
   {
     id: 10,
-    genre: 'Historic',
+    title: 'Historic',
   },
   {
     id: 11,
-    genre: 'Horror',
+    title: 'Horror',
   },
   {
     id: 12,
-    genre: 'Melodrama',
+    title: 'Melodrama',
   },
   {
     id: 13,
-    genre: 'Music',
+    title: 'Music',
   },
   {
     id: 14,
-    genre: 'Peplum',
+    title: 'Peplum',
   },
   {
     id: 15,
-    genre: 'Science fiction',
+    title: 'Science fiction',
   },
   {
     id: 16,
-    genre: 'Serial',
+    title: 'Serial',
   },
   {
     id: 17,
-    genre: 'Sequel',
+    title: 'Sequel',
   },
   {
     id: 18,
-    genre: 'Thriller',
+    title: 'Thriller',
   },
   {
     id: 19,
-    genre: 'Western',
+    title: 'Western',
   },
 ];
 
@@ -182,7 +182,7 @@ export const nationalities = [
   { id: 14, title: 'IT', description: 'Italy' },
   { id: 15, title: 'CA', description: 'Canada' },
   { id: 16, title: 'CN', description: 'China' },
-  { id: 17, title: 'KR', description: 'Korea, Republic of' },
+  { id: 17, title: 'KR', description: 'Korea' },
   { id: 18, title: 'LV', description: 'Latvia' },
   { id: 19, title: 'LT', description: 'Lithuania' },
   { id: 20, title: 'NL', description: 'Netherlands' },
@@ -203,4 +203,35 @@ export const nationalities = [
   { id: 35, title: 'FIN', description: 'Finland' },
   { id: 36, title: 'RU', description: 'Russian' },
   { id: 37, title: 'ISL', description: 'Iceland' },
+];
+
+export const locations = [
+  {
+    id: 1,
+    title: 'San Francisco',
+  },
+  {
+    id: 2,
+    title: 'Los Angeles',
+  },
+  {
+    id: 3,
+    title: 'Culver City',
+  },
+  {
+    id: 4,
+    title: 'Universal City',
+  },
+  {
+    id: 5,
+    title: 'London',
+  },
+  {
+    id: 6,
+    title: 'Burbank',
+  },
+  {
+    id: 7,
+    title: 'Toronto',
+  },
 ];
