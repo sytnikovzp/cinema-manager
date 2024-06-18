@@ -22,6 +22,7 @@ import { styled } from '@mui/system';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
+import Skeleton from '@mui/material/Skeleton';
 // =============================================
 import {
   buttonMainStyle,
@@ -56,7 +57,11 @@ function ActorsList() {
     const prevStatus = prevStatusRef.current;
     const currentStatus = status;
 
-    if (currentStatus && currentStatus !== prevStatus) {
+    if (
+      currentStatus &&
+      currentStatus !== prevStatus &&
+      currentStatus !== 'loading'
+    ) {
       const severity = currentStatus.toLowerCase().includes('success')
         ? 'success'
         : 'error';
@@ -70,6 +75,42 @@ function ActorsList() {
     event.stopPropagation();
     dispatch(deleteActor(id));
   };
+
+  const renderLoadingSkeleton = () => (
+    <Stack direction='column' marginBottom={1}>
+      <ListItem disablePadding sx={itemListStyle}>
+        <ListItemButton sx={{ borderRadius: 5 }}>
+          <ListItemAvatar>
+            <Skeleton
+              variant='circular'
+              animation='wave'
+              width={40}
+              height={40}
+            />
+          </ListItemAvatar>
+          <ListItemText
+            primary={<Skeleton variant='text' animation='wave' width='80%' />}
+          />
+        </ListItemButton>
+        <ListItemSecondaryAction>
+          <Stack direction='row' spacing={1}>
+            <Skeleton
+              variant='circular'
+              animation='wave'
+              width={40}
+              height={40}
+            />
+            <Skeleton
+              variant='circular'
+              animation='wave'
+              width={40}
+              height={40}
+            />
+          </Stack>
+        </ListItemSecondaryAction>
+      </ListItem>
+    </Stack>
+  );
 
   return (
     <>
@@ -95,49 +136,55 @@ function ActorsList() {
 
       <Box sx={scrollListBoxStyle}>
         <List>
-          {actors.map((actor) => (
-            <Stack key={actor.id} direction='column' marginBottom={1}>
-              <ListItem
-                component={Link}
-                to={`/actors/${actor.id}`}
-                disablePadding
-                sx={itemListStyle}
-              >
-                <ListItemButton sx={{ borderRadius: 5 }}>
-                  <ListItemAvatar>
-                    <StyledAvatar src={actor.image} />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={`${actor.fullName || 'Unknown actor'}, ${
-                      actor.nationality || 'unknown nationality'
-                    }`}
-                  />
-                </ListItemButton>
+          {status === 'loading'
+            ? Array(5)
+                .fill()
+                .map((_, index) => (
+                  <Box key={index}>{renderLoadingSkeleton()}</Box>
+                ))
+            : actors.map((actor) => (
+                <Stack key={actor.id} direction='column' marginBottom={1}>
+                  <ListItem
+                    component={Link}
+                    to={`/actors/${actor.id}`}
+                    disablePadding
+                    sx={itemListStyle}
+                  >
+                    <ListItemButton sx={{ borderRadius: 5 }}>
+                      <ListItemAvatar>
+                        <StyledAvatar src={actor.image} />
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={`${actor.fullName || 'Unknown actor'}, ${
+                          actor.nationality || 'unknown nationality'
+                        }`}
+                      />
+                    </ListItemButton>
 
-                <ListItemSecondaryAction>
-                  <Stack direction='row' spacing={1}>
-                    <IconButton
-                      edge='end'
-                      aria-label='edit'
-                      component={Link}
-                      to={`/actors/new/${actor.id}`}
-                    >
-                      <EditIcon />
-                    </IconButton>
-                    <IconButton
-                      edge='end'
-                      aria-label='delete'
-                      onClick={(event) => {
-                        onItemDelete(event, actor.id);
-                      }}
-                    >
-                      <HighlightOffIcon />
-                    </IconButton>
-                  </Stack>
-                </ListItemSecondaryAction>
-              </ListItem>
-            </Stack>
-          ))}
+                    <ListItemSecondaryAction>
+                      <Stack direction='row' spacing={1}>
+                        <IconButton
+                          edge='end'
+                          aria-label='edit'
+                          component={Link}
+                          to={`/actors/new/${actor.id}`}
+                        >
+                          <EditIcon />
+                        </IconButton>
+                        <IconButton
+                          edge='end'
+                          aria-label='delete'
+                          onClick={(event) => {
+                            onItemDelete(event, actor.id);
+                          }}
+                        >
+                          <HighlightOffIcon />
+                        </IconButton>
+                      </Stack>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                </Stack>
+              ))}
         </List>
       </Box>
 
