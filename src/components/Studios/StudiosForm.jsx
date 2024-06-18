@@ -29,6 +29,7 @@ import {
   formItemStyle,
   fieldArrayStyle,
   buttonFormStyle,
+  saveButtonFormStyle,
 } from '../../services/styleService';
 
 function StudioForm() {
@@ -206,7 +207,7 @@ function StudioForm() {
               type='submit'
               variant='contained'
               color='success'
-              sx={buttonFormStyle}
+              sx={saveButtonFormStyle}
               startIcon={<SaveIcon />}
             >
               Save

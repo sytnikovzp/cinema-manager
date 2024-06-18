@@ -84,6 +84,11 @@ export const buttonFormStyle = {
   width: '100px',
 };
 
+export const saveButtonFormStyle = {
+  height: '40px',
+  width: '120px',
+};
+
 // =============================================
 // *list components
 

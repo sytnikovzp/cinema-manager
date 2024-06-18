@@ -31,6 +31,7 @@ import {
   formItemStyle,
   fieldArrayStyle,
   buttonFormStyle,
+  saveButtonFormStyle,
 } from '../../services/styleService';
 
 function DirectorForm() {
@@ -250,7 +251,7 @@ function DirectorForm() {
               type='submit'
               variant='contained'
               color='success'
-              sx={buttonFormStyle}
+              sx={saveButtonFormStyle}
               startIcon={<SaveIcon />}
             >
               Save
