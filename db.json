@@ -44,78 +44,211 @@
     {
       "id": 4,
       "movies": [
-        "Indiana Johns",
-        "The star wars",
-        "Patriot Games",
-        "Gentelmens of fortune"
+        ""
       ],
-      "fullName": "Harrison Ford 1",
-      "birthYear": "1942",
-      "nationality": "United States of America",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Harrison_Ford_by_Gage_Skidmore_3.jpg/274px-Harrison_Ford_by_Gage_Skidmore_3.jpg"
+      "fullName": "Phoebe Waller-Bridge",
+      "birthYear": 1985,
+      "nationality": "Great Britain",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Nicola_Benedetti_Humza_Yousaf_Phoebe_Waller-Bridge_-_All_Festivals_Reception_%28Waller-Bridge_cropped%29_%28cropped%29.jpg/440px-Nicola_Benedetti_Humza_Yousaf_Phoebe_Waller-Bridge_-_All_Festivals_Reception_%28Waller-Bridge_cropped%29_%28cropped%29.jpg",
+      "biography": "Phoebe Mary Waller-Bridge (born 14 July 1985) is an English actress, screenwriter and producer. As the creator, head writer, and star of the comedy series Fleabag (2016–2019), she won three Primetime Emmy Awards, two Golden Globes and a British Academy Television Award. She received further Emmy and Golden Globe nominations for writing and producing the spy thriller series Killing Eve (2018–2022).\n\nWaller-Bridge has also created, written, and starred in the comedy series Crashing (2016). She has also acted in the comedy series The Café (2011–2013), in the second season of Broadchurch (2015), and in the films Albert Nobbs (2011), The Iron Lady (2011), Goodbye Christopher Robin (2017), and Solo: A Star Wars Story (2018). She contributed to the screenplay of the James Bond film No Time to Die (2021) and starred in the adventure film Indiana Jones and the Dial of Destiny (2023).\n\nPhoebe Mary Waller-Bridge was born in Hammersmith, London, on 14 July 1985, the daughter of Michael Cyprian Waller-Bridge, founder of the electronic trading platform Tradepoint, and Theresa Mary, daughter of Sir John Edward Longueville Clerke, 12th Baronet, employed by the Worshipful Company of Ironmongers. The Bridge, later Waller-Bridge, family were soldiers and clergymen, who came to rank among the landed gentry of Cuckfield in Sussex. Her grandfather, Cyprian Waller-Bridge (1918-1960), \"a Wodehousian sort of character... 'the eccentric son of an eccentric vicar'\", was an actor and BBC announcer. On her father's side, she is a descendant of the Revd Sir Egerton Leigh, 2nd Baronet, and a distant relative of politician and author Egerton Leigh, Conservative MP for Mid Cheshire from 1873 to his death in 1876.\n\nWaller-Bridge grew up in Ealing in London and has two siblings: an older sister, Isobel Waller-Bridge, a composer, with whom she has collaborated; and a younger brother, Jasper. Her parents are divorced. She was educated at St Augustine's Priory, a Catholic independent school for girls, followed by the independent sixth form college DLD College London in the Marylebone area of London. She graduated from the Royal Academy of Dramatic Art in London."
     },
     {
       "id": 5,
       "movies": [
-        "Sleepy Hollow",
-        "Pirates of the Caribbean",
-        "The Tourist",
-        "Alice in Wonderland"
+        ""
       ],
-      "fullName": "Johnny Depp 1",
-      "birthYear": "1963",
-      "nationality": "United States of America",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Johnny_Depp_Deauville_2019.jpg/220px-Johnny_Depp_Deauville_2019.jpg"
+      "fullName": "Mads Mikkelsen",
+      "birthYear": 1965,
+      "nationality": "Denmark",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Mads_Mikkelsen_by_Gage_Skidmore_2.jpg/440px-Mads_Mikkelsen_by_Gage_Skidmore_2.jpg",
+      "biography": "Mads Dittmann Mikkelsen (born 22 November 1965) is a Danish actor, former gymnast and dancer. He rose to fame in Denmark as an actor for his roles such as Tonny in the first two films of the Pusher film trilogy (1996, 2004), Detective Sergeant Allan Fischer in the television series Rejseholdet (2000–2004), Niels in Open Hearts (2002), Svend in The Green Butchers (2003), Ivan in Adam's Apples (2005) and Jacob Petersen in After the Wedding (2006).\n\nMikkelsen achieved worldwide recognition for playing the main antagonist Le Chiffre in the twenty-first James Bond film, Casino Royale (2006). His other film roles include Igor Stravinsky in Coco Chanel & Igor Stravinsky (2008), Johann Friedrich Struensee in A Royal Affair (2012), his Cannes Film Festival Best Actor Award-winning performance as Lucas in the Danish film The Hunt (2012), Kaecilius in Marvel's Doctor Strange (2016), Galen Erso in Lucasfilm's Rogue One (2016), his BAFTA-nominated role as Martin in Another Round (2020), Gellert Grindelwald in Fantastic Beasts: The Secrets of Dumbledore (2022), Dr Jürgen Voller in Indiana Jones and the Dial of Destiny (2023), and Captain Ludwig Kahlen in The Promised Land (2023). Outside of film, he is known for his roles as Dr. Hannibal Lecter in the television series Hannibal (2013–2015) and Cliff Unger in Hideo Kojima's video game Death Stranding (2019).\n\nA. O. Scott of The New York Times remarked that in the Hollywood scene, Mikkelsen has \"become a reliable character actor with an intriguing mug\" but stated that on the domestic front \"he is something else: a star, an axiom, a face of the resurgent Danish cinema\"."
     },
     {
       "id": 6,
       "movies": [
-        "Alien",
-        "Avatar",
-        "Aliens"
+        ""
       ],
-      "fullName": "Sigourney Weaver 1",
-      "birthYear": "1949",
+      "fullName": "Shia LaBeouf",
+      "birthYear": 1986,
       "nationality": "United States of America",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Sigourney_Weaver_by_Gage_Skidmore_4.jpg/250px-Sigourney_Weaver_by_Gage_Skidmore_4.jpg"
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Shia_LaBeouf_2022.jpg/440px-Shia_LaBeouf_2022.jpg",
+      "biography": "Shia Saide LaBeouf (born June 11, 1986) is an American actor, performance artist, and filmmaker. He played Louis Stevens in the Disney Channel series Even Stevens, a role for which he received Young Artist Award nominations in 2001 and 2002 and won a Daytime Emmy Award in 2003. He made his film debut in The Christmas Path (1998). In 2004, he made his directorial debut with the short film Let's Love Hate and later directed a short film titled Maniac (2011), starring American rappers Cage and Kid Cudi.\n\nIn 2007, LaBeouf starred in the commercially successful films Disturbia and Surf's Up. From 2007 to 2011, LaBeouf starred in the film Transformers and its sequels Transformers: Revenge of the Fallen and Transformers: Dark of the Moon, playing protagonist Sam Witwicky. The three films were commercially successful. In 2008, he played Henry \"Mutt Williams\" Jones III in Indiana Jones and the Kingdom of the Crystal Skull.\n\nHis other credits include the films Holes (2003), Constantine (2005), Wall Street: Money Never Sleeps (2010), Lawless (2012), The Company You Keep (2012), Nymphomaniac (2013), Charlie Countryman (2013), Fury (2014), American Honey (2016), Borg vs McEnroe (2017), Honey Boy (2019), The Peanut Butter Falcon (2019), Pieces of a Woman (2020), and Padre Pio (2022).\n\nSince 2014, LaBeouf has pursued a variety of public performance art projects with LaBeouf, Rönkkö & Turner."
     },
     {
       "id": 7,
       "movies": [
-        "Indiana Johns",
-        "The star wars",
-        "Patriot Games",
-        "Gentelmens of fortune"
+        ""
       ],
-      "fullName": "Harrison Ford 2",
-      "birthYear": "1942",
+      "fullName": "Karen Allen",
+      "birthYear": 1951,
       "nationality": "United States of America",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Harrison_Ford_by_Gage_Skidmore_3.jpg/274px-Harrison_Ford_by_Gage_Skidmore_3.jpg"
+      "image": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Karenallen17_cropped.jpg",
+      "biography": "Allen was born on October 5, 1951, in Carrollton, Illinois, to Ruth Patricia (née Howell) (1927–2020), a university professor, and Carroll Thompson Allen (1925–2015), an FBI agent. She is of English, Irish, Scottish, and Welsh descent. Her father's job forced the family to move often. \"I grew up moving almost every year and so I was always the new kid in school and always, in a way, was deprived of ever really having any lasting friendships\", Allen said in 1987. Although Allen says her father was very much involved in the family, she felt that she and her two sisters grew up in a very female-dominated household.\n\nAfter she graduated from DuVal High School, in Lanham, Maryland, at 17, she moved to New York City to study art and design at Fashion Institute of Technology for two years. Allen later ran a boutique on the University of Maryland campus and spent time traveling through South and Central Asia. She attended George Washington University and began to study and perform with the experimental company, the Washington Theatre Laboratory, in Washington, D.C. In 1974, Allen joined Shakespeare & Company in Massachusetts. Three years later, she moved back to New York City and studied at the Lee Strasberg Theater Institute.\n\nHer critical and commercial breakthrough came when she portrayed Marion Ravenwood opposite Harrison Ford in Raiders of the Lost Ark (1981), for which she won the Saturn Award for Best Actress. She later co-starred in Shoot the Moon (1982), Starman (1984), for which she was again nominated for the Saturn Award for Best Actress, and Scrooged (1988). She has also received recognition for her work in The Glass Menagerie (1987), Year by the Sea (2016), and Colewell (2019). She reprised her role as Marion Ravenwood in Indiana Jones and the Kingdom of the Crystal Skull (2008) and Indiana Jones and the Dial of Destiny (2023)."
     },
     {
       "id": 8,
       "movies": [
-        "Sleepy Hollow",
-        "Pirates of the Caribbean",
-        "The Tourist",
-        "Alice in Wonderland"
+        ""
       ],
-      "fullName": "Johnny Depp 2",
-      "birthYear": "1963",
+      "fullName": "Tom Skerritt",
+      "birthYear": 1933,
       "nationality": "United States of America",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Johnny_Depp_Deauville_2019.jpg/220px-Johnny_Depp_Deauville_2019.jpg"
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Tom_Skerritt_2014_%28cropped%29.jpg/440px-Tom_Skerritt_2014_%28cropped%29.jpg",
+      "biography": "Thomas Roy Skerritt (born August 25, 1933) is an American actor who has appeared in over 40 films and more than 200 television episodes since 1962. He is known for his film roles in M*A*S*H, Alien, The Dead Zone, Top Gun, A River Runs Through It, Poltergeist III, and Up in Smoke, and the television series Picket Fences and Cheers. Skerritt has earned several nominations and awards, including winning the Primetime Emmy Award for Outstanding Lead Actor in a Drama Series in 1993 for Picket Fences.\n\nSkerritt was born in Detroit, Michigan, the son of Helen, a homemaker, and Roy Skerritt, a businessman. He is the youngest of three children. A 1951 graduate of Detroit's Mackenzie High School, Skerritt attended Wayne State University and the University of California, Los Angeles.\n\nSkerritt enlisted just after graduating from high school, and served a four-year tour of duty in the United States Air Force as a classifications specialist. Most of his enlistment was spent at Bergstrom Field, Austin, Texas."
     },
     {
       "id": 9,
       "movies": [
-        "Alien",
-        "Avatar",
-        "Aliens"
+        ""
       ],
-      "fullName": "Sigourney Weaver 2",
-      "birthYear": "1949",
+      "fullName": "Veronica Cartwright",
+      "birthYear": 1949,
+      "nationality": "Great Britain",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Veronica_Cartwright_2022.jpg/440px-Veronica_Cartwright_2022.jpg",
+      "biography": "Veronica Cartwright (born April 20, 1949) is a British-born American actress. She is known for appearing in science fiction and horror films, and has earned numerous accolades, including three Primetime Emmy Award nominations. Her younger sister is actress Angela Cartwright.\n\nAs a child actress, Cartwright appeared in supporting roles in The Children's Hour and The Birds, the latter of which was her first commercial success. She made her transition into mainstream, mature roles with 1978's Invasion of the Body Snatchers. She played Lambert in the science-fiction horror film Alien, which earned her recognition and a Saturn Award for Best Supporting Actress, and additionally appeared in the films The Right Stuff and The Witches of Eastwick which earned her praise. In the 1990s, she received three nominations for the Primetime Emmy Award for Outstanding Guest Actress in a Drama Series, one of which was for her role on ER and two of which were for her role in The X-Files.\n\nCartwright was born in Bristol, England, and grew up in Los Angeles, having emigrated to the US shortly after the birth of her younger sister, actress Angela Cartwright."
+    },
+    {
+      "id": 10,
+      "movies": [
+        ""
+      ],
+      "fullName": "John Hurt",
+      "birthYear": 1940,
+      "nationality": "Great Britain",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/John_Hurt_at_the_2009_Tribeca_Film_Festival.jpg/440px-John_Hurt_at_the_2009_Tribeca_Film_Festival.jpg",
+      "biography": "John Vincent Hurt was born on January 22, 1940, in Chesterfield, Derbyshire, the son of Phyllis (née Massey; 1907–1975), an engineer and one-time actress, and Arnold Herbert Hurt (1904–1999), a mathematician who became a Church of England clergyman and served as vicar of Holy Trinity Church in Shirebrook, Derbyshire. His father was previously vicar of St John's parish in Sunderland, County Durham. In 1937, he moved his family to Derbyshire, where he became Perpetual Curate of Holy Trinity Church. When Hurt was five, his father became the vicar of St Stephen's Church in Woodville, Derbyshire, and remained there until 1953.\n\nAt the age of eight, Hurt was sent to the Anglican St Michael's Preparatory School in Otford, Kent, where he eventually developed his passion for acting. He decided he wanted to become an actor after his first role as a girl in a school production of The Blue Bird by Maurice Maeterlinck. Hurt stated that a senior master at the school would abuse him and others by removing his two false front teeth and putting his tongue in the boys' mouths, as well as rubbing their faces with his stubble, and that the experience affected him hugely. Hurt, aged 12, became a boarder at Lincoln School (then a grammar school) because he had failed the entrance examination for admission to his brother's school. His headmaster at Lincoln School laughed when Hurt told him he wanted to be an actor, telling him, \"Well, you may be all right in school plays but you wouldn't stand a chance in the profession.\"\n\nHurt reprised his role as Quentin Crisp in An Englishman in New York (2009), which brought his seventh BAFTA nomination. He portrayed an incarnation of the Doctor known as the War Doctor in Doctor Who. He voiced roles in Watership Down (1978), The Lord of the Rings (1978), The Plague Dogs (1982), The Black Cauldron (1985), Dogville (2003), Valiant (2005) and BBC's Merlin (2008–2012), as well as The Gruffalo's Child (2011), and Thomas & Friends: Sodor's Legend of the Lost Treasure (2015)."
+    },
+    {
+      "id": 11,
+      "movies": [
+        ""
+      ],
+      "fullName": "Ian Holm",
+      "birthYear": 1931,
+      "nationality": "Great Britain",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Ian_Holm.jpg/440px-Ian_Holm.jpg",
+      "biography": "Ian Holm Cuthbert was born on 12 September 1931 in Goodmayes, Essex, to Scottish parents, James Cuthbert and his wife Jean (née Holm). His father was a psychiatrist who worked as the superintendent of the West Ham Corporation Mental Hospital and was one of the pioneers of electric shock therapy; his mother was a nurse. He had an older brother, who died when Ian was 12 years old. Holm was educated at the independent Chigwell School in Essex. His parents retired to Mortehoe in Devon and then to Worthing, where he joined an amateur dramatic society.\n\nA chance encounter with Henry Baynton, a well-known provincial Shakespearean actor, helped Holm train for admission to the Royal Academy of Dramatic Art, where he secured a place from 1950. His studies were interrupted a year later when he was called up for National Service in the British Army, during which he was posted to Klagenfurt, Austria, and attained the rank of Lance Corporal. They were interrupted a second time when he volunteered to go on an acting tour of the United States in 1952. Holm graduated from the Royal Academy of Dramatic Art in 1953.\n\nHe made his stage debut in 1954, at Stratford-upon-Avon, playing a spear carrier in a staging of Othello. Two years later, he made his London stage debut in Love Affair.\n\nHolm won the 1967 Tony Award for Best Featured Actor for his performance as Lenny in the Harold Pinter play The Homecoming. He won the Laurence Olivier Award for Best Actor for his performance in the title role in the 1998 West End production of King Lear. For his television roles he received two Primetime Emmy Awards for King Lear (1998), and the HBO film The Last of the Blonde Bombshells (2003).\n\nHe gained acclaim for his role in The Bofors Gun (1968) winning the BAFTA Award for Best Actor in a Supporting Role. He was nominated for an Academy Award for Best Supporting Actor, and won a second BAFTA Award for his role as athletics trainer Sam Mussabini in Chariots of Fire (1981). Other notable films he appeared in include Alien (1979), Brazil (1985), Henry V (1989), Naked Lunch (1991), The Madness of King George (1994), The Fifth Element (1997), The Sweet Hereafter (1997), and The Aviator (2004). He played Napoleon in three different films. He gained wider appreciation for his role as the elderly Bilbo Baggins in Peter Jackson's The Lord of the Rings and The Hobbit trilogies."
+    },
+    {
+      "id": 12,
+      "movies": [
+        ""
+      ],
+      "fullName": "Bill Paxton",
+      "birthYear": 1955,
       "nationality": "United States of America",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Sigourney_Weaver_by_Gage_Skidmore_4.jpg/250px-Sigourney_Weaver_by_Gage_Skidmore_4.jpg"
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Bill_Paxton_by_Gage_Skidmore.jpg/440px-Bill_Paxton_by_Gage_Skidmore.jpg",
+      "biography": "Paxton was born in Fort Worth, Texas, on May 17, 1955, the son of Mary Lou (née Gray; 1926–2016) and John Lane Paxton (1920–2011). His mother was a Roman Catholic who raised him and his siblings in her faith. His father was a businessman, lumber wholesaler, museum executive, and (during his son's career) an occasional actor, notably appearing in Sam Raimi's Spider-Man films as Bernard Houseman and alongside Paxton in A Simple Plan (1998). Paxton was of Austrian, Dutch, English, French, German, Norwegian, Irish, Scotch-Irish, Scottish, Swiss, and Welsh descent. His great-great-grandfather was Elisha Franklin Paxton (1828–1863), a brigadier general in the Confederate Army during the Civil War who was killed commanding the Stonewall Brigade at the Battle of Chancellorsville.\n\nPaxton is distantly related to actress Sara Paxton and was the great-nephew of Mary Paxton Keeley, a prominent journalist and close friend of Bess Truman. At the age of eight, he was in the crowd when President John F. Kennedy emerged from the Hotel Texas in Fort Worth on the morning of his assassination on November 22, 1963. Photographs of Paxton being lifted above the crowd are on display at the Sixth Floor Museum at Dealey Plaza in Dallas, Texas. He later co-produced the film Parkland about the assassination. He graduated from Arlington Heights High School in Fort Worth in 1973, after which he studied at Richmond College in London, alongside his old high-school friend Danny Martin. There, they met fellow Texas native Tom Huckabee, with whom they made Super 8 short films for which they built their own sets. One of Paxton's first lead roles was in Huckabee's experimental film Taking Tiger Mountain. Paxton subsequently moved to Los Angeles, where he worked in props and art departments and as a parking valet at the Beverly Hills Hotel. After being rejected by film schools in Southern California, he switched his ambitions from directing to acting."
+    },
+    {
+      "id": 13,
+      "movies": [
+        ""
+      ],
+      "fullName": "Michael Biehn",
+      "birthYear": 1956,
+      "nationality": "United States of America",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Michael_Biehn_by_Gage_Skidmore.jpg/440px-Michael_Biehn_by_Gage_Skidmore.jpg",
+      "biography": "Michael Biehn (born July 31, 1956) is an American actor, primarily known for his roles in science fiction films directed by James Cameron; as Sgt. Kyle Reese in The Terminator (1984), Cpl. Dwayne Hicks in Aliens (1986), and Lt. Coffey in The Abyss (1989). His other films include The Fan (1981), The Seventh Sign (1988), Navy SEALs (1990), Tombstone (1993), The Rock (1996), Mojave Moon (1996), Megiddo: The Omega Code 2 (2001), Clockstoppers (2002), and Planet Terror (2007). On television, he has appeared in Hill Street Blues (1984), The Magnificent Seven (1998–2000), and Adventure Inc. (2002–2003). Biehn received a Best Actor Saturn Award nomination for Aliens.\n\nBiehn was born in Anniston, Alabama, the second of three boys born to Marcia (née Connell) and Don Biehn, a lawyer. He is of German, English, Irish and Scottish descent; his surname is of German origin.\n\nWhen he was young, he moved with his family to Lincoln, Nebraska, and then to Lake Havasu City, Arizona, where he was a member of the high school drama club before graduating. He attended the drama program at the University of Arizona, where he was a member of the Sigma Nu fraternity before moving to Hollywood."
+    },
+    {
+      "id": 14,
+      "movies": [
+        ""
+      ],
+      "fullName": "Lance Henriksen",
+      "birthYear": 1940,
+      "nationality": "United States of America",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Lance_Henriksen_by_Gage_Skidmore.jpg/440px-Lance_Henriksen_by_Gage_Skidmore.jpg",
+      "biography": "Henriksen was born on May 5, 1940, in Manhattan, New York. His father, James Henriksen, was a Norwegian merchant sailor and boxer nicknamed \"Icewater\" who spent most of his life at sea, while his mother, Margueritte Werner, struggled to find work as a dance instructor, waitress and model. His parents divorced when he was two years old, and his mother struggled to raise him and his brother, leading to his spending part of his childhood in foster care. During an interview, Henriksen recounted how, at the age of seven, his mother handed him his birth certificate and said, \"You'll always know who you are\", then pushed him out of his home. Henriksen did not actually leave home until he was 12, saying he'd \"had enough\" of his home life, and that he had been physically assaulted by multiple family members: \"I got bludgeoned a lot. Different people, relatives. I remember every single face from my childhood. My alcoholic uncles, whoever. I'm not having a pity party here; I'm not Quasimodo. That's just how it was\". On another occasion, two of his uncles tried to persuade him to take Methadrine and then take part in a staged car accident for the insurance money.\n\nGrowing up, Henriksen had a reputation for getting into trouble in the various schools he attended, and even spent time in a children's home. He left school after completing first grade, and was illiterate until the age of 30."
+    },
+    {
+      "id": 15,
+      "movies": [
+        ""
+      ],
+      "fullName": "Jenette Goldstein",
+      "birthYear": 1960,
+      "nationality": "United States of America",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Jenette_Goldstein_Comic_Con_2023_%28cropped%29.jpg/440px-Jenette_Goldstein_Comic_Con_2023_%28cropped%29.jpg",
+      "biography": "Jenette Elise Goldstein (born February 4, 1960) is an American actress. She is known for starring as Private Vasquez in the sci-fi horror film Aliens (1986), which won her the Saturn Award for Best Supporting Actress. She also played Diamondback in Near Dark (1987) which earned her a second Saturn Award nomination, Megan Shapiro in Lethal Weapon 2 (1989) and Janelle Voight in Terminator 2 (1991). She made cameo appearances in Star Trek Generations (1994) and Titanic (1997) and appeared in two episodes of the television series Star Trek: Short Treks (2019).\n\nGoldstein was born in Los Angeles, California, and raised in Beverly Hills. Her family is from Russia, Morocco, and Brazil. Goldstein trained to be a gymnast before she started her acting career."
+    },
+    {
+      "id": 16,
+      "movies": [
+        ""
+      ],
+      "fullName": "Keira Knightley",
+      "birthYear": 1985,
+      "nationality": "Great Britain",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/b/b1/KeiraKnightleyByAndreaRaffin2011_%28cropped%29.jpg",
+      "biography": "Keira Christina Knightley OBE (born 26 March 1985) is an English actress. Known for her work in independent films and blockbusters, particularly period dramas, she has received numerous accolades, including nominations for two Academy Awards, two BAFTAs, three Golden Globes, and a Laurence Olivier Award. In 2018, she was appointed an OBE at Buckingham Palace for services to drama and charity.\n\nBorn in London to actors Will Knightley and Sharman Macdonald, Knightley obtained an agent at age six and initially worked in commercials and television films. Following a minor role as Sabé in Star Wars: Episode I – The Phantom Menace (1999), her breakthrough came when she played a tomboy footballer in Bend It Like Beckham (2002) and co-starred in Love Actually (2003). She went on to achieve global recognition for playing Elizabeth Swann in the Pirates of the Caribbean film series (2003–2007, 2017).\n\nFor her portrayal of Elizabeth Bennet in Pride & Prejudice (2005), Knightley was nominated for the Academy Award for Best Actress. She starred in several more period films over the next few years, including Atonement (2007), The Duchess (2008), A Dangerous Method (2011), and Anna Karenina (2012). She then forayed into contemporary pieces, with headline parts in Seeking a Friend for the End of the World (2012), Begin Again (2013), and Jack Ryan: Shadow Recruit (2014). Knightley returned to historical films playing Joan Clarke in The Imitation Game (2014), earning a nomination for the Academy Award for Best Supporting Actress. She later starred as the title character in Colette (2018) and journalist Loretta McLaughlin in Boston Strangler (2023).\n\nOn stage, Knightley has appeared in two West End productions: The Misanthrope in 2009, which earned her an Olivier Award nomination, and The Children's Hour in 2011. She also starred as the titular heroine in the 2015 Broadway production of Thérèse Raquin. Knightley is known for her outspoken stance on social issues and has worked extensively with Amnesty International, Oxfam, and Comic Relief. She is married to musician James Righton, with whom she has two daughters."
+    },
+    {
+      "id": 17,
+      "movies": [
+        ""
+      ],
+      "fullName": "Orlando Bloom",
+      "birthYear": 1977,
+      "nationality": "Great Britain",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Orlando_Bloom_Cannes_2013.jpg/440px-Orlando_Bloom_Cannes_2013.jpg",
+      "biography": "Orlando Jonathan Blanchard Copeland Bloom (born 13 January 1977) is an English actor. He made his breakthrough as the character Legolas in The Lord of the Rings film series (2001–03). He reprised his role in The Hobbit film series (2013–14). Considered by some to be the Errol Flynn of his time, he gained further notice appearing in epic fantasy, historical, and adventure films, notably as Will Turner in the Pirates of the Caribbean film series (2003–07, 2017), Paris in Troy (2004), Balian de Ibelin in Kingdom of Heaven (2005), and the Duke of Buckingham in The Three Musketeers (2011).\n\nBloom appeared in Hollywood films such as the war film Black Hawk Down (2001), the Australian Western Ned Kelly (2003), the romantic comedy Elizabethtown (2005), and New York, I Love You (2007). In 2020 he gained acclaim for the Afghanistan War drama film The Outpost (2020). He also starred in the Amazon Prime Video series Carnival Row (2019–2023).\n\nHe made his professional stage debut in In Celebration at the Duke of York's Theatre in the West End in 2007 and starred in a Broadway adaptation of William Shakespeare's Romeo and Juliet in 2013. He returned to the theatre in a West End revival of Tracy Letts' Killer Joe in 2018. In 2009, Bloom was named a UNICEF Goodwill Ambassador. In 2015 he received the BAFTA Britannia Humanitarian Award."
+    },
+    {
+      "id": 18,
+      "movies": [
+        ""
+      ],
+      "fullName": "Geoffrey Rush",
+      "birthYear": 1951,
+      "nationality": "Australia",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Geoffrey_Rush_Final_Portrait_Red_Carpet_Berlinale_2017_01_%28cropped%29.jpg/440px-Geoffrey_Rush_Final_Portrait_Red_Carpet_Berlinale_2017_01_%28cropped%29.jpg",
+      "biography": "Geoffrey Roy Rush AC (born 6 July 1951) is an Australian actor. Known for often playing eccentric roles on both stage and screen, he has received numerous accolades, including an Academy Award, a Primetime Emmy Award and a Tony Award, making him the only Australian to achieve the Triple Crown of Acting, in addition to three BAFTA Awards and two Golden Globe Awards. Rush is the founding president of the Australian Academy of Cinema and Television Arts and was named the 2012 Australian of the Year.\n\nRush began his professional acting career with the Queensland Theatre Company in 1971. He studied for two years at the L'École Internationale de Théâtre Jacques Lecoq starting in 1975. Rush starred in international productions of Waiting for Godot, The Winter's Tale and The Importance of Being Earnest. He made his Broadway debut in the absurdist comedy Exit the King in 2009, where he received a Tony Award for Best Actor in a Play for his performance. He received a nomination for Drama Desk Award for Outstanding Actor in a Play for Diary of a Madman in 2011.\n\nHe gained prominence for his role in Shine (1996), for which he won an Academy Award for Best Actor. His other Oscar-nominated roles were for Shakespeare in Love (1998), Quills (2000), and The King's Speech (2010). Rush gained mainstream popularity for his role as Captain Hector Barbossa in the Pirates of the Caribbean franchise (2003–2017). His other notable films include in Elizabeth (1998), Les Misérables (1998), Frida (2002), Finding Nemo (2003), Intolerable Cruelty (2003), Munich (2005), Elizabeth: The Golden Age (2007) and The Book Thief (2013).\n\nRush is also known for his performances in television receiving Primetime Emmy Award for Outstanding Lead Actor in a Limited or Anthology Series or Movie nominations for his portrayals of comedian Peter Sellers in the HBO film The Life and Death of Peter Sellers (2004), and scientist Albert Einstein in National Geographic anthology series Genius (2017), winning for the former."
+    },
+    {
+      "id": 19,
+      "movies": [
+        ""
+      ],
+      "fullName": "Kevin McNally",
+      "birthYear": 1956,
+      "nationality": "Great Britain",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Kevin_McNally_by_Gage_Skidmore.jpg/440px-Kevin_McNally_by_Gage_Skidmore.jpg",
+      "biography": "McNally was born in Bristol. McNally spent his early years in Birmingham, attending Redhill Junior School in Hay Mills and Mapledene Junior School (now Mapledene Primary School) in Sheldon. He went to Central Grammar School for Boys on Gressel Lane in Tile Cross.\n\nMcNally's first professional acting work, at age 16, was at the Birmingham Repertory Theatre. In 1973 he received a scholarship to attend the Royal Academy of Dramatic Art where, in 1975, he won the Best Actor Bancroft Gold Medal.\n\nIn 1976, he appeared in BBC's I, Claudius and, in 1977, was a regular in the second series of Poldark playing Drake Carne, younger brother of Demelza Poldark. From 1991 to 1994, he wrote nine episodes of Minder, under the pseudonym Kevin Sperring, with writing partner Bernard Dempsey. He also wrote two episodes of Boon, and two episodes of Lock, Stock with Dempsey.\n\nMcNally played Joshamee Gibbs in the Pirates of the Caribbean films. He is one of only three actors who appear in all five films, and reprised the role in Kingdom Hearts III, making him the only actor from the film series to reprise a role in Kingdom Hearts. He also reprised the role in 2021 for Sea of Thieves' \"A Pirate's Life\" Tall Tale series.\n\nAlong with fellow British actors Ian McNeice and Kenneth Branagh, McNally appeared in two Second World War films, Valkyrie and Conspiracy, that depict behind the scenes activities of high-ranking officials in Nazi Germany.\n\nIn 2011, he was cast in the American television series Supernatural as Frank. In 2012, he performed as a voice actor for the best selling videogame Assassin's Creed III, providing the likeness and voice of the character of Robert Faulkner. In 2013, he began working on a science-fiction animation project, Starship Goldfish.\n\nIn 2014, he played the lead role in re-recorded radio plays of five lost episodes of Hancock's Half Hour for BBC Radio 4. Following this, a further video episode was re-recorded and broadcast on BBC Four as part of the Lost Sitcoms series.\n\nFrom 2014 to 2017, McNally played Judge Richard Woodhull of Setauket, Long Island, in the AMC series Turn: Washington's Spies. In July 2019, he guest-starred as Inspector Grandjean in Season 2, Episode 1 of Amazon's mystery series Maigret.\n\nIn 2019, McNally portrayed Captain Mainwaring in a series of re-enactments of otherwise lost episodes of the sitcom Dad's Army."
+    },
+    {
+      "id": 20,
+      "movies": [
+        ""
+      ],
+      "fullName": "Elijah Wood",
+      "birthYear": 1981,
+      "nationality": "United States of America",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Elijah_Wood_%2847955397556%29_%28cropped%29.jpg/440px-Elijah_Wood_%2847955397556%29_%28cropped%29.jpg",
+      "biography": "Elijah Jordan Wood (born January 28, 1981) is an American actor and producer. He rose to international fame for his portrayal of Frodo Baggins in The Lord of the Rings film trilogy (2001–2003) and The Hobbit: An Unexpected Journey (2012).\n\nWood made his film debut with a small part in Back to the Future Part II (1989). He went on to achieve recognition as a child actor with multiple roles such as Avalon (1990) and The Good Son (1993). As a teenager, he starred in several films including North (1994), Flipper (1996), and The Ice Storm (1997). Following the success of The Lord of the Rings, Wood has appeared in a wide range of films, including Eternal Sunshine of the Spotless Mind (2004), Paris, je t'aime (2006), and I Don't Feel at Home in This World Anymore (2017).\n\nWood's voice roles include Mumble in the Happy Feet film franchise (2006–2011), the title protagonist in 9 (2009), Spyro the Dragon in the Legend of Spyro video game trilogy (2006–2008), Beck on Disney XD's Tron: Uprising (2012–2013), Sigma in Season 10 of Red vs. Blue, and Wirt in the Cartoon Network miniseries Over the Garden Wall (2014). He played Ryan Newman on the FX dark comedy series Wilfred (2011–2014), for which he received a Satellite Award nomination for Best Actor, and Todd Brotzman in the BBC America series Dirk Gently's Holistic Detective Agency (2016–2017).\n\nWood founded the record label Simian Records in 2005, which was dissolved in 2015. He directed the 2007 music video \"Energy\" for The Apples in Stereo. In 2010, Wood co-founded a film production company for horror films, The Woodshed, renamed SpectreVision in 2013. Wood is a disc jockey, and has toured globally with his friend Zach Cowie as the duo Wooden Wisdom."
+    },
+    {
+      "id": 21,
+      "movies": [
+        ""
+      ],
+      "fullName": "Ian McKellen",
+      "birthYear": 1939,
+      "nationality": "Great Britain",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/SDCC13_-_Ian_McKellen.jpg/440px-SDCC13_-_Ian_McKellen.jpg",
+      "biography": "Sir Ian Murray McKellen CH CBE (born 25 May 1939) is an English actor. With a career spanning more than sixty years, he is noted for his roles on the screen and stage in genres ranging from Shakespearean dramas and modern theatre to popular fantasy and science fiction. He is regarded as a British cultural icon and was knighted by Queen Elizabeth II in 1991. He has received numerous accolades, including a Tony Award, six Olivier Awards, and a Golden Globe Award as well as nominations for two Academy Awards, five BAFTA Awards and five Emmy Awards.\n\nMcKellen made his stage debut in 1961 at the Belgrade Theatre as a member of its repertory company, and in 1965 made his first West End appearance. In 1969, he was invited to join the Prospect Theatre Company to play the lead parts in Shakespeare's Richard II and Marlowe's Edward II. In the 1970s McKellen became a stalwart of the Royal Shakespeare Company and the National Theatre of Great Britain. He has earned five Olivier Awards for his roles in Pillars of the Community (1977), The Alchemist (1978), Bent (1979), Wild Honey (1984), and Richard III (1995). McKellen made his Broadway debut in The Promise (1965). He went on to receive the Tony Award for Best Actor in a Play for his role as Antonio Salieri in Amadeus (1980). He was further nominated for Ian McKellen: Acting Shakespeare (1984). He returned to Broadway in Wild Honey (1986), Dance of Death (1990), No Man's Land (2013), and Waiting for Godot (2013), the latter being a joint production with Patrick Stewart.\n\nMcKellen achieved worldwide fame for his film roles, including the titular King in Richard III (1995), James Whale in Gods and Monsters (1998), Magneto in the X-Men films, and Gandalf in The Lord of the Rings (2001–2003) and The Hobbit (2012–2014) trilogies. Other notable film roles include A Touch of Love (1969), Plenty (1985), Six Degrees of Separation (1993), Restoration (1995), Mr. Holmes (2015), and The Good Liar (2019)."
+    },
+    {
+      "id": 22,
+      "movies": [
+        ""
+      ],
+      "fullName": "Viggo Mortensen",
+      "birthYear": 1958,
+      "nationality": "United States of America",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Viggo_Mortensen_B_%282020%29.jpg/440px-Viggo_Mortensen_B_%282020%29.jpg",
+      "biography": "Viggo Peter Mortensen Jr. R (born October 20, 1958) is an American actor, musician, and filmmaker. He is the recipient of various accolades, including nominations for three Academy Awards for Best Actor, three BAFTA Awards, four Golden Globe Awards, and an Independent Spirit Award.\n\nBorn in New York City and raised mainly in Argentina and Denmark, Mortensen made his film debut in a small role in Peter Weir's 1985 thriller Witness. He went on to play supporting roles in several notable films during the 1990s, including The Indian Runner (1991), Carlito's Way (1993), Crimson Tide (1995), Daylight (1996), The Portrait of a Lady (1996), G.I. Jane (1997), A Perfect Murder (1998), A Walk on the Moon (1999), and 28 Days (2000).\n\nMortensen gained international attention for playing Aragorn in the fantasy trilogy The Lord of the Rings (2001–2003). He gained acclaim for his collaborations with filmmaker David Cronenberg in the thrillers A History of Violence (2005), Eastern Promises (2007), for which he was nominated for the Academy Award for Best Actor, and A Dangerous Method (2011). He gained additional Academy Award nominations for his leading roles as an anarchist father in Captain Fantastic (2016) and as Tony Lip in Green Book (2018). Mortensen made his directorial debut with Falling (2020), in which he also starred, and which was nominated for the Goya Award for Best European Film.\n\nAside from acting, Mortensen has explored fine arts, photography, poetry, and music. In 2002, he founded the Perceval Press to publish both his works and the works of little-known artists and authors. Mortensen sang and composed for part of The Lord of the Rings soundtrack and has collaborated with guitarist Buckethead on several albums."
     }
   ],
   "directors": [
@@ -157,24 +290,60 @@
       "nationality": "Canada",
       "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/James_Cameron_by_Gage_Skidmore.jpg/240px-James_Cameron_by_Gage_Skidmore.jpg",
       "biography": "James Francis Cameron (born August 16, 1954) is a Canadian filmmaker. He is a major figure in the post-New Hollywood era. He often uses novel technologies with a classical filmmaking style. He first gained recognition for writing and directing The Terminator (1984) and found further success with Aliens (1986), The Abyss (1989), Terminator 2: Judgment Day (1991), True Lies (1994), as well as Avatar (2009) and its sequels. He directed, wrote, co-produced, and co-edited Titanic (1997), winning three Academy Awards for Best Picture, Best Director, and Best Film Editing. He is a recipient of various other industry accolades, and three of his films have been selected for preservation in the National Film Registry by the Library of Congress.\n\nCameron co-founded the production companies Lightstorm Entertainment, Digital Domain, and Earthship Productions. In addition to filmmaking, he is a National Geographic explorer-in-residence and has produced many documentaries on deep-ocean exploration, including Ghosts of the Abyss (2003) and Aliens of the Deep (2005). Cameron has also contributed to underwater filming and remote vehicle technologies and helped create the digital 3D Fusion Camera System. In 2012, Cameron became the first person to do a solo descent to the bottom of the Mariana Trench, the deepest part of the Earth's ocean, in the Deepsea Challenger submersible."
+    },
+    {
+      "id": 4,
+      "movies": [
+        ""
+      ],
+      "fullName": "James Mangold",
+      "birthYear": 1963,
+      "nationality": "United States of America",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/James_Mangold_Press_Conference_Logan_Berlinale_2017_03.jpg/440px-James_Mangold_Press_Conference_Logan_Berlinale_2017_03.jpg",
+      "biography": "James Allen Mangold (born December 16, 1963) is an American film director, producer and screenwriter. Noted for his versatility in tackling a range of genres, Mangold made his debut as a film director with Heavy (1995), and is best known for the films Cop Land (1997), Girl, Interrupted (1999), Identity (2003), Walk the Line (2005), 3:10 to Yuma (2007), and two films in the X-Men franchise with The Wolverine (2013) and Logan (2017), the latter of which earned him a nomination for the Academy Award for Best Adapted Screenplay. He then directed the sports drama film Ford v Ferrari (2019), which earned him a nomination for the Academy Award for Best Picture, and directed and co-wrote Indiana Jones and the Dial of Destiny (2023), the fifth and final installment in the Indiana Jones series.\n\nMangold was born in New York City in 1963, and is the son of Jewish artists Robert Mangold and Sylvia Plimack Mangold. He was raised in Hudson Valley and graduated from Washingtonville High School.\n\nHe attended the California Institute of the Arts film/video program where he studied under Alexander Mackendrick. During Mangold's third year, Mackendrick suggested that he should study at CalArts School of Theater as an actor, alongside his regular film studies."
+    },
+    {
+      "id": 5,
+      "movies": [
+        ""
+      ],
+      "fullName": "Gore Verbinski",
+      "birthYear": 1964,
+      "nationality": "United States of America",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Verbinski_gore.jpg/440px-Verbinski_gore.jpg",
+      "biography": "Gregor Justin \"Gore\" Verbinski (born March 16, 1964) is an American film director, screenwriter, and producer. He is best known for directing Mouse Hunt, The Ring, the first three Pirates of the Caribbean films, and Rango. For his work on Rango, Verbinski won both the Academy Award and BAFTA Award for Best Animated Film.\n\nHis first films were a series of 8 mm films called \"The Driver Files\" c. 1979, when he was a young teen. After graduating from film school at UCLA, he got his first job as a script reader at the commercial production company Limelight in 1987. After director Julien Temple viewed some of his work, he signed to his production company Nitrate Films, and later Palomar Pictures, where he directed music videos for bands like Vicious Rumors, Bad Religion, NOFX, 24-7 Spyz and Monster Magnet. Verbinski moved from music videos to commercials, where he worked for many brand names including Nike, Coca-Cola, Canon, Skittles and United Airlines. One of his most famous commercials was for Budweiser, featuring frogs who croak the brand name. For his efforts in commercials, Verbinski won four Clio Awards and one Cannes Advertising Silver Lion.\n\nVerbinski started Blind Wink Productions in April 2005.\n\nAfter completing a short film, The Ritual (which he both wrote and directed), Verbinski made his feature film directing debut in 1997 with Mouse Hunt, which became a global hit. Following that film's success, Verbinski planned and developed several aborted projects; The Sky Is Falling, Mission to Mars, Where the Wild Things Are, The Big Ticket, The Light Princess and an unpublished manuscript by William Monahan titled The Lighthouse.\n\nVerbinski returned in 2001 with the action/comedy The Mexican, starring Julia Roberts and Brad Pitt. The film received mixed reviews, and performed modestly at the box-office, earning $68 million domestically which was quite meager considering its star power (it was technically successful due to its moderately low $38 million budget). Verbinski followed it up with the horror film remake The Ring (2002), which struck gold globally, grossing well over $200 million worldwide. Verbinski also had a directorial hand in The Time Machine that year, temporarily taking over for an exhausted Simon Wells. Verbinski directed some of the underground Morlock sequences and is given a Thanks to credit in the film."
+    },
+    {
+      "id": 6,
+      "movies": [
+        ""
+      ],
+      "fullName": "Peter Jackson",
+      "birthYear": 1961,
+      "nationality": "New Zealand",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Peter_Jackson_SDCC_2014.jpg/440px-Peter_Jackson_SDCC_2014.jpg",
+      "biography": "Sir Peter Robert Jackson ONZ KNZM (born 31 October 1961) is a New Zealand film director, screenwriter and producer. He is best known as the director, writer and producer of the Lord of the Rings trilogy (2001–2003) and the Hobbit trilogy (2012–2014), both of which are adapted from the novels of the same name by J. R. R. Tolkien. Other notable films include the critically lauded drama Heavenly Creatures (1994), the horror comedy The Frighteners (1996), the epic monster remake film King Kong (2005), the World War I documentary film They Shall Not Grow Old (2018) and the documentary The Beatles: Get Back (2021). He is the fourth-highest-grossing film director of all-time, his films having made over $6.5 billion worldwide.\n\nJackson began his career with the \"splatstick\" horror comedy Bad Taste (1987) and the black comedy Meet the Feebles (1989) before filming the zombie comedy Braindead (1992). He shared a nomination for Academy Award for Best Original Screenplay with his partner Fran Walsh[2] for Heavenly Creatures, which brought him to mainstream prominence in the film industry. Jackson has been awarded three Academy Awards for The Lord of the Rings: The Return of the King (2003), including Best Picture, Best Director, and Best Adapted Screenplay. His other awards include three BAFTAs, a Golden Globe, two Primetime Emmy Awards and four Saturn Awards among others.\n\nHis production company is WingNut Films, and his most regular collaborators are co-writers and producers Walsh and Philippa Boyens. Jackson was made a Companion of the New Zealand Order of Merit in 2002. He was later knighted (as a Knight Companion of the order) by Sir Anand Satyanand, the Governor-General of New Zealand, at a ceremony in Wellington in April 2010. In December 2014, Jackson was awarded a star on the Hollywood Walk of Fame."
     }
   ],
   "movies": [
     {
       "id": 1,
-      "title": "Indiana Johns",
+      "title": "Indiana Jones",
       "movieYear": 1981,
       "genre": "Action",
       "directors": [
-        "Stiven Spilberg",
-        "James Cameron"
+        "James Mangold",
+        "Steven Spielberg"
       ],
       "actors": [
         "Harrison Ford",
-        "Sean Connery"
+        "Phoebe Waller-Bridge",
+        "Mads Mikkelsen",
+        "Shia LaBeouf",
+        "Karen Allen"
       ],
       "studios": [
-        "Lukas Film"
+        "Lucasfilm Ltd. LLC"
       ],
       "poster": "https://upload.wikimedia.org/wikipedia/ru/thumb/8/8b/IJandCrystalSkull.jpg/220px-IJandCrystalSkull.jpg",
       "trailer": "https://www.youtube.com/watch?v=0xQSIdSRlAk",
@@ -189,7 +358,11 @@
         "Ridley Scott"
       ],
       "actors": [
-        "Sigourney Weaver"
+        "Sigourney Weaver",
+        "Tom Skerritt",
+        "Veronica Cartwright",
+        "John Hurt",
+        "Ian Holm"
       ],
       "studios": [
         "20th Century Studios, Inc."
@@ -207,7 +380,11 @@
         "James Cameron"
       ],
       "actors": [
-        "Sigourney Weaver"
+        "Sigourney Weaver",
+        "Bill Paxton",
+        "Michael Biehn",
+        "Lance Henriksen",
+        "Jenette Goldstein"
       ],
       "studios": [
         "20th Century Studios, Inc."
@@ -222,11 +399,14 @@
       "movieYear": 2003,
       "genre": "Fantasy",
       "directors": [
-        "Gregor (Gore) Verbinski"
+        "Gore Verbinski"
       ],
       "actors": [
         "Johnny Depp",
-        "Orlando Bloom"
+        "Orlando Bloom",
+        "Keira Knightley",
+        "Geoffrey Rush",
+        "Kevin McNally"
       ],
       "studios": [
         "Walt Disney Pictures"
@@ -245,7 +425,10 @@
       ],
       "actors": [
         "Elijah Wood",
-        "Ian McKellen"
+        "Ian McKellen",
+        "Viggo Mortensen",
+        "Orlando Bloom",
+        "Ian Holm"
       ],
       "studios": [
         "New Line Cinema"
@@ -258,11 +441,11 @@
   "studios": [
     {
       "id": 1,
-      "title": "Lucasfilm Ltd. LLC",
+      "title": "Lucasfilm Ltd.",
       "location": "San Francisco",
       "foundationYear": "1971",
       "movies": [
-        "Indiana Johns"
+        "Indiana Jones"
       ],
       "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Lucasfilm_logo.svg/250px-Lucasfilm_logo.svg.png",
       "genInfo": "Lucasfilm Ltd. LLC is an American film and television production company founded by filmmaker George Lucas in 1971 in San Rafael, California, though most of the company's operations were moved to San Francisco in 2005. It has been a subsidiary of The Walt Disney Studios since 2012 and is best known for creating and producing the Star Wars and Indiana Jones franchises, as well as its leadership in developing special effects, sound, and computer animation for films.\n\nThe company's films Star Wars: Episode I – The Phantom Menace (1999), Star Wars: The Force Awakens (2015), Rogue One: A Star Wars Story (2016), Star Wars: The Last Jedi (2017), and Star Wars: The Rise of Skywalker (2019) are all among the 50 highest-grossing films of all time, with The Force Awakens becoming the highest-grossing film in the United States and Canada. On October 30, 2012, Disney acquired Lucasfilm for $4.05 billion in the form of cash and $1.855 billion in stock."
@@ -276,8 +459,30 @@
         "Aliens",
         "Alien"
       ],
-      "logo": "https://yt3.googleusercontent.com/ytc/APkrFKYsxcT2lRG8mlglQs5wozvrhHZf6Jzws62DF4ZgnA=s900-c-k-c0x00ffffff-no-rj",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlWG8HxHW6-VKfUD-QiVpnFeHfh4u_qYguFA&s",
       "genInfo": "20th Century Studios, Inc. is an American film studio owned by the Walt Disney Studios, a division of Disney Entertainment, in turn a division of The Walt Disney Company. It is headquartered at the Fox Studio Lot in the Century City area of Los Angeles, leased from Fox Corporation. Walt Disney Studios Motion Pictures distributes and markets the films produced by 20th Century Studios in theatrical markets.\n\nFor over 80 years, 20th Century was one of the major American film studios. It was formed in 1935 as Twentieth Century-Fox Film Corporation by the merger of Fox Film and Twentieth Century Pictures, and one of the original \"Big Five\" among eight majors of Hollywood's Golden Age. In 1985, the studio removed the hyphen in the name (becoming Twentieth Century Fox Film Corporation) after being acquired by Rupert Murdoch's News Corporation, which was renamed 21st Century Fox in 2013 after it spun off its publishing assets. Disney purchased most of 21st Century Fox's assets, which included 20th Century Fox, on March 20, 2019. The studio adopted its current name as a trade name on January 17, 2020, in order to avoid confusion with Fox Corporation, and subsequently started to use it for the copyright of 20th Century and Searchlight Pictures productions on December 4."
+    },
+    {
+      "id": 3,
+      "title": "Walt Disney Pictures",
+      "location": "California",
+      "foundationYear": 1929,
+      "movies": [
+        ""
+      ],
+      "logo": "https://i.insider.com/5f5770dee6ff30001d4e7684?width=800&format=jpeg&auto=webp",
+      "genInfo": "Walt Disney Pictures (credited as Disney in theatrical releases) is an American film production company and subsidiary of Walt Disney Studios, a division of Disney Entertainment, which is owned by The Walt Disney Company. The studio is the flagship producer of live-action feature films within the Walt Disney Studios unit, and is based at the Walt Disney Studios in Burbank, California. Animated films produced by Walt Disney Animation Studios and Pixar Animation Studios are also released under the studio banner. Walt Disney Studios Motion Pictures distributes and markets the films produced by Walt Disney Pictures.\n\nDisney began producing live-action films in the 1950s. The live-action division became Walt Disney Pictures in 1983, when Disney reorganized its entire studio division; which included the separation from the feature animation division and the subsequent creation of Touchstone Pictures. At the end of that decade, combined with Touchstone's output, Walt Disney Pictures elevated Disney to one of Hollywood's major film studios.\n\nWalt Disney Pictures is currently one of five live-action film studios within the Walt Disney Studios, alongside 20th Century Studios, Marvel Studios, Lucasfilm, and Searchlight Pictures. The 2019 remake of The Lion King is the studio's highest-grossing film worldwide with $1.6 billion, and Pirates of the Caribbean is the studio's most successful film series, with five films earning a total of over $4.5 billion in worldwide box office gross."
+    },
+    {
+      "id": 4,
+      "title": "New Line Cinema",
+      "location": "Los Angeles",
+      "foundationYear": 1967,
+      "movies": [
+        ""
+      ],
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC-5SpIGPcNSnOT5_jDBdLa9zAE3yESllFFw&s",
+      "genInfo": "New Line Productions, Inc., doing business as New Line Cinema, is an American film and television production studio owned by Warner Bros. Discovery (WBD). Since 2008, it has been operating as a unit of Warner Bros. Pictures.\n\nNew Line Cinema was established in 1967 by the then 27-year-old Robert Shaye as a film distribution company, supplying foreign and art films for college campuses in the United States. Shaye operated New Line's offices out of his apartment at 14th Street and Second Avenue in New York City. One of the company's early successes was its distribution of the 1936 anti-cannabis propaganda film Reefer Madness, which became a cult hit on American college campuses in the early 1970s. New Line also released many classic foreign-language films, like Stay As You Are, Immoral Tales and Get Out Your Handkerchiefs (which became the first New Line film to win an Oscar). The studio has also released many of the films of John Waters.\n\nIn 1976, New Line secured funding to produce its first full-length feature, Stunts (1977), directed by Mark L. Lester. Although not considered a critical success, the film performed well commercially on the international market and on television.\n\nIn 1980, Shaye's law school classmate Michael Lynne became outside counsel and adviser to the company and renegotiated its debt.\n\nIn 1983, Bryanston Distributing Company, the company that first distributed the original The Texas Chain Saw Massacre, lost the rights to that film, and the rights reverted to the original owners. New Line bought the rights and re-released the film to theatres that same year. It became very successful for the studio.\n\nNew Line expanded its film production in the early 1980s, producing or co-producing films including Polyester, directed by John Waters, and Alone in the Dark. Polyester was one of the first films to introduce a novelty cinema experience named Odorama, where members of the audience were provided with a set of \"scratch and sniff\" cards to be scratched and sniffed at specific times during the film, which provided an additional sensory connection to the viewed image. In 1983, Lynne joined the board. In 1984, Dawn Altyn and Jeff Youngs joined New Line, respectively as sales manager, eastern and southern divisions of New Line Distribution, and national print controller of the studio, to distribute new projects."
     }
   ]
 }

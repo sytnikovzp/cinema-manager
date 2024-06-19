@@ -234,4 +234,8 @@ export const locations = [
     id: 7,
     title: 'Toronto',
   },
+  {
+    id: 8,
+    title: 'California',
+  },
 ];
