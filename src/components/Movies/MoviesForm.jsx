@@ -22,6 +22,7 @@ import AddIcon from '@mui/icons-material/Add';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
+import Select from '@mui/material/Select';
 // =============================================
 import { createMovie, updateMovie } from '../../store/slices/moviesSlice';
 import { emptyMovie, genres } from '../../constants';
@@ -37,6 +38,9 @@ import {
 function MovieForm() {
   const dispatch = useDispatch();
   const movies = useSelector((state) => state.moviesList.movies);
+  const actList = useSelector((state) => state.actorsList.actors);
+  const dirList = useSelector((state) => state.directorsList.directors);
+  const studList = useSelector((state) => state.studiosList.studios);
 
   const { id } = useParams();
   const currentMovie = movies.find((movie) => Number(movie.id) === Number(id));
@@ -55,9 +59,9 @@ function MovieForm() {
     title: Yup.string().required('Movie title is a required field'),
     movieYear: Yup.date(),
     genre: Yup.string(),
-    directors: Yup.array(),
-    actors: Yup.array(),
-    studios: Yup.array(),
+    // directors: Yup.array(),
+    // actors: Yup.array(),
+    // studios: Yup.array(),
     poster: Yup.string().url('Invalid URL poster'),
     trailer: Yup.string().url('Invalid Youtube URL trailer'),
     storyline: Yup.string(),
@@ -213,12 +217,18 @@ function MovieForm() {
                       <Stack spacing={2} key={index} direction='row'>
                         <Field
                           name={`directors[${index}]`}
-                          as={TextField}
-                          label='Director'
+                          as={Select}
                           fullWidth
-                          error={touched.directors && Boolean(errors.directors)}
-                          helperText={touched.directors && errors.directors}
-                        />
+                        >
+                          <MenuItem value=''>
+                            <b>Director select:</b>
+                          </MenuItem>
+                          {dirList.map((option) => (
+                            <MenuItem key={option.id} value={option.fullName}>
+                              {option.fullName}
+                            </MenuItem>
+                          ))}
+                        </Field>
                         {index > 0 && (
                           <IconButton onClick={() => remove(index)}>
                             <RemoveIcon />
@@ -248,27 +258,23 @@ function MovieForm() {
                     component='fieldset'
                     form='movie-form'
                     spacing={2}
-                    sx={{
-                      width: '100%',
-                      paddingLeft: '10px',
-                      paddingRight: '10px',
-                      paddingBottom: '10px',
-                      borderRadius: '5px',
-                    }}
+                    sx={fieldArrayStyle}
                   >
                     <Typography component='legend' variant='h6' gutterBottom>
                       Actors
                     </Typography>
                     {actors.map((actor, index) => (
                       <Stack spacing={2} key={index} direction='row'>
-                        <Field
-                          name={`actors[${index}]`}
-                          as={TextField}
-                          label='Actor'
-                          fullWidth
-                          error={touched.actors && Boolean(errors.actors)}
-                          helperText={touched.actors && errors.actors}
-                        />
+                        <Field name={`actors[${index}]`} as={Select} fullWidth>
+                          <MenuItem value=''>
+                            <b>Actor select:</b>
+                          </MenuItem>
+                          {actList.map((option) => (
+                            <MenuItem key={option.id} value={option.fullName}>
+                              {option.fullName}
+                            </MenuItem>
+                          ))}
+                        </Field>
                         {index > 0 && (
                           <IconButton onClick={() => remove(index)}>
                             <RemoveIcon />
@@ -298,27 +304,23 @@ function MovieForm() {
                     component='fieldset'
                     form='movie-form'
                     spacing={2}
-                    sx={{
-                      width: '100%',
-                      paddingLeft: '10px',
-                      paddingRight: '10px',
-                      paddingBottom: '10px',
-                      borderRadius: '5px',
-                    }}
+                    sx={fieldArrayStyle}
                   >
                     <Typography component='legend' variant='h6' gutterBottom>
                       Studios
                     </Typography>
                     {studios.map((studio, index) => (
                       <Stack spacing={2} key={index} direction='row'>
-                        <Field
-                          name={`studios[${index}]`}
-                          as={TextField}
-                          label='Studio'
-                          fullWidth
-                          error={touched.studios && Boolean(errors.studios)}
-                          helperText={touched.studios && errors.studios}
-                        />
+                        <Field name={`studios[${index}]`} as={Select} fullWidth>
+                          <MenuItem value=''>
+                            <b>Studio select:</b>
+                          </MenuItem>
+                          {studList.map((option) => (
+                            <MenuItem key={option.id} value={option.title}>
+                              {option.title}
+                            </MenuItem>
+                          ))}
+                        </Field>
                         {index > 0 && (
                           <IconButton onClick={() => remove(index)}>
                             <RemoveIcon />

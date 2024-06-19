@@ -8,6 +8,9 @@ import Box from '@mui/material/Box';
 import { rootComponentPaperStyle } from '../../services/styleService';
 // =============================================
 import { getAllMovies } from '../../store/slices/moviesSlice';
+import { getAllActors } from '../../store/slices/actorsSlice';
+import { getAllDirectors } from '../../store/slices/directorsSlice';
+import { getAllStudios } from '../../store/slices/studiosSlice';
 // =============================================
 import MoviesItem from './MoviesItem';
 import MoviesList from './MoviesList';
@@ -17,6 +20,18 @@ function Movies() {
 
   useEffect(() => {
     dispatch(getAllMovies());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getAllActors());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getAllDirectors());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getAllStudios());
   }, [dispatch]);
 
   return (
