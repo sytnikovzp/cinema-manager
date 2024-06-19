@@ -62,6 +62,7 @@ export const formStyle = {
   gap: 3,
   paddingTop: '10px',
   paddingBottom: '10px',
+  minHeight: '65vh',
 };
 
 export const formItemStyle = {

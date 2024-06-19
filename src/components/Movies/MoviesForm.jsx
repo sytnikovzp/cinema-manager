@@ -33,8 +33,8 @@ import {
   formStyle,
   formItemStyle,
   fieldArrayStyle,
-  // buttonFormStyle,
-  // saveButtonFormStyle,
+  buttonFormStyle,
+  saveButtonFormStyle,
 } from '../../services/styleService';
 
 function MovieForm() {
@@ -49,13 +49,13 @@ function MovieForm() {
 
   const navigate = useNavigate();
 
-  // const goBack = () => {
-  //   if (id !== ':id') {
-  //     navigate(`/movies/${id}`);
-  //   } else {
-  //     navigate(`/movies`);
-  //   }
-  // };
+  const goBack = () => {
+    if (id !== ':id') {
+      navigate(`/movies/${id}`);
+    } else {
+      navigate(`/movies`);
+    }
+  };
 
   const steps = [
     'Movie Details',
@@ -419,19 +419,32 @@ function MovieForm() {
           )}
 
           <Stack direction='row' justifyContent='center' spacing={1}>
-            <Button
-              disabled={activeStep === 0}
-              variant='contained'
-              onClick={handleBack}
-              startIcon={<ArrowBackIcon />}
-            >
-              Back
-            </Button>
+            {activeStep === 0 ? (
+              <Button
+                type='button'
+                variant='contained'
+                color='warning'
+                sx={buttonFormStyle}
+                onClick={goBack}
+                startIcon={<ArrowBackIcon />}
+              >
+                Return
+              </Button>
+            ) : (
+              <Button
+                variant='contained'
+                sx={buttonFormStyle}
+                onClick={handleBack}
+                startIcon={<ArrowBackIcon />}
+              >
+                Back
+              </Button>
+            )}
 
             {activeStep < steps.length - 1 ? (
               <Button
                 variant='contained'
-                color='primary'
+                sx={buttonFormStyle}
                 onClick={handleNext}
                 startIcon={<ArrowForwardIcon />}
                 type='button'
@@ -442,10 +455,8 @@ function MovieForm() {
               <Button
                 type='submit'
                 variant='contained'
-                sx={{
-                  backgroundColor: 'success.main',
-                  color: 'success.contrastText',
-                }}
+                color='success'
+                sx={saveButtonFormStyle}
                 startIcon={<SaveIcon />}
               >
                 Save
@@ -458,10 +469,7 @@ function MovieForm() {
                 variant='contained'
                 color='error'
                 onClick={handleReset}
-                sx={{
-                  backgroundColor: 'error.main',
-                  color: 'error.contrastText',
-                }}
+                sx={buttonFormStyle}
                 startIcon={<ClearAllIcon />}
               >
                 Reset

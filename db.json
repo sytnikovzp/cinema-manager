@@ -116,16 +116,6 @@
       "birthYear": "1949",
       "nationality": "United States of America",
       "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Sigourney_Weaver_by_Gage_Skidmore_4.jpg/250px-Sigourney_Weaver_by_Gage_Skidmore_4.jpg"
-    },
-    {
-      "id": 10,
-      "movies": [
-        ""
-      ],
-      "fullName": "",
-      "birthYear": "",
-      "nationality": "",
-      "image": ""
     }
   ],
   "directors": [
@@ -167,16 +157,6 @@
       "nationality": "Canada",
       "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/James_Cameron_by_Gage_Skidmore.jpg/240px-James_Cameron_by_Gage_Skidmore.jpg",
       "biography": "James Francis Cameron (born August 16, 1954) is a Canadian filmmaker. He is a major figure in the post-New Hollywood era. He often uses novel technologies with a classical filmmaking style. He first gained recognition for writing and directing The Terminator (1984) and found further success with Aliens (1986), The Abyss (1989), Terminator 2: Judgment Day (1991), True Lies (1994), as well as Avatar (2009) and its sequels. He directed, wrote, co-produced, and co-edited Titanic (1997), winning three Academy Awards for Best Picture, Best Director, and Best Film Editing. He is a recipient of various other industry accolades, and three of his films have been selected for preservation in the National Film Registry by the Library of Congress.\n\nCameron co-founded the production companies Lightstorm Entertainment, Digital Domain, and Earthship Productions. In addition to filmmaking, he is a National Geographic explorer-in-residence and has produced many documentaries on deep-ocean exploration, including Ghosts of the Abyss (2003) and Aliens of the Deep (2005). Cameron has also contributed to underwater filming and remote vehicle technologies and helped create the digital 3D Fusion Camera System. In 2012, Cameron became the first person to do a solo descent to the bottom of the Mariana Trench, the deepest part of the Earth's ocean, in the Deepsea Challenger submersible."
-    },
-    {
-      "id": 4,
-      "movies": [
-        ""
-      ],
-      "fullName": "",
-      "birthYear": "",
-      "nationality": "",
-      "image": ""
     }
   ],
   "movies": [
@@ -273,21 +253,6 @@
       "poster": "https://upload.wikimedia.org/wikipedia/en/f/fb/Lord_Rings_Fellowship_Ring.jpg",
       "trailer": "https://www.youtube.com/watch?v=_nZdmwHrcnw",
       "storyline": "In the Second Age of Middle-earth, the lords of Elves, Dwarves, and Men are given Rings of Power. Unbeknownst to them, the Dark Lord Sauron forges the One Ring in Mount Doom, instilling into it a great part of his power, to dominate the other Rings and conquer Middle-earth. A final alliance of Men and Elves battles Sauron's forces in Mordor. Isildur of Gondor severs Sauron's finger and the Ring with it, thereby vanquishing Sauron and returning him to spirit form. With Sauron's first defeat, the Third Age of Middle-earth begins. The Ring's influence corrupts Isildur, who takes it for himself and is later killed by Orcs. The Ring is lost in a river for 2,500 years until it is found by Gollum, who owns it for over four and a half centuries. The Ring abandons Gollum and it is subsequently found by a hobbit named Bilbo Baggins, who is unaware of its history."
-    },
-    {
-      "id": 6,
-      "title": "",
-      "directors": [
-        ""
-      ],
-      "actors": [
-        ""
-      ],
-      "studios": [
-        ""
-      ],
-      "poster": "",
-      "movieYear": ""
     }
   ],
   "studios": [
@@ -313,16 +278,6 @@
       ],
       "logo": "https://yt3.googleusercontent.com/ytc/APkrFKYsxcT2lRG8mlglQs5wozvrhHZf6Jzws62DF4ZgnA=s900-c-k-c0x00ffffff-no-rj",
       "genInfo": "20th Century Studios, Inc. is an American film studio owned by the Walt Disney Studios, a division of Disney Entertainment, in turn a division of The Walt Disney Company. It is headquartered at the Fox Studio Lot in the Century City area of Los Angeles, leased from Fox Corporation. Walt Disney Studios Motion Pictures distributes and markets the films produced by 20th Century Studios in theatrical markets.\n\nFor over 80 years, 20th Century was one of the major American film studios. It was formed in 1935 as Twentieth Century-Fox Film Corporation by the merger of Fox Film and Twentieth Century Pictures, and one of the original \"Big Five\" among eight majors of Hollywood's Golden Age. In 1985, the studio removed the hyphen in the name (becoming Twentieth Century Fox Film Corporation) after being acquired by Rupert Murdoch's News Corporation, which was renamed 21st Century Fox in 2013 after it spun off its publishing assets. Disney purchased most of 21st Century Fox's assets, which included 20th Century Fox, on March 20, 2019. The studio adopted its current name as a trade name on January 17, 2020, in order to avoid confusion with Fox Corporation, and subsequently started to use it for the copyright of 20th Century and Searchlight Pictures productions on December 4."
-    },
-    {
-      "id": 3,
-      "title": "",
-      "location": "",
-      "foundationYear": "",
-      "movies": [
-        ""
-      ],
-      "logo": ""
     }
   ]
 }
