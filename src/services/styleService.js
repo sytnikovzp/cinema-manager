@@ -17,7 +17,6 @@ export const buttonMainStyle = {
 export const textIndentStyle = {
   textIndent: '2em',
   fontWeight: 'medium',
-  paddingRight: 2,
 };
 
 // =============================================
@@ -130,6 +129,7 @@ export const itemInformationBoxStyle = {
   flexDirection: 'column',
   width: '65%',
   textAlign: 'justify',
+  paddingRight: 2,
 };
 
 // =============================================
