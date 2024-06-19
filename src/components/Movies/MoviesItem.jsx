@@ -55,7 +55,11 @@ function MoviesItem() {
     const prevStatus = prevStatusRef.current;
     const currentStatus = status;
 
-    if (currentStatus && currentStatus !== prevStatus) {
+    if (
+      currentStatus &&
+      currentStatus !== prevStatus &&
+      currentStatus !== 'loading'
+    ) {
       const severity = currentStatus.toLowerCase().includes('success')
         ? 'success'
         : 'error';
