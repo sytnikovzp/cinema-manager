@@ -225,10 +225,19 @@ function MoviesItem() {
                   {formattedActors}
                 </Typography>
               </Stack>
-              <Divider sx={{ marginTop: 2 }} />
-              <Typography variant='body1' component='div' sx={textIndentStyle}>
-                {currentMovie.storyline || ''}
-              </Typography>
+
+              {currentMovie.storyline && (
+                <>
+                  <Divider sx={{ marginTop: 2 }} />
+                  <Typography
+                    variant='body1'
+                    component='div'
+                    sx={textIndentStyle}
+                  >
+                    {currentMovie.storyline}
+                  </Typography>
+                </>
+              )}
             </Box>
           </Box>
         </Box>
