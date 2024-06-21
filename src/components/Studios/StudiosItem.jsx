@@ -124,8 +124,8 @@ function StudiosItem() {
         onChange={handleTabChange}
         aria-label='studio details tabs'
       >
-        <Tab label='About the studio' />
-        {currentStudio.genInfo && <Tab label='General information' />}
+        <Tab label='General information' />
+        {currentStudio.genInfo && <Tab label='About the studio' />}
       </Tabs>
 
       <Box sx={scrollItemBoxStyle}>

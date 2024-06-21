@@ -126,8 +126,8 @@ function DirectorsItem() {
         onChange={handleTabChange}
         aria-label='director details tabs'
       >
-        <Tab label='About the director' />
-        {currentDirector.biography && <Tab label='Brief biography' />}
+        <Tab label='General information' />
+        {currentDirector.biography && <Tab label='About the director' />}
       </Tabs>
 
       <Box sx={scrollItemBoxStyle}>

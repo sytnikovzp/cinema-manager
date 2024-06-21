@@ -124,8 +124,8 @@ function ActorsItem() {
         onChange={handleTabChange}
         aria-label='actor details tabs'
       >
-        <Tab label='About the actor' />
-        {currentActor.biography && <Tab label='Brief biography' />}
+        <Tab label='General information' />
+        {currentActor.biography && <Tab label='About the actor' />}
       </Tabs>
 
       <Box sx={scrollItemBoxStyle}>
