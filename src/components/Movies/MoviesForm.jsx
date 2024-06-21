@@ -67,9 +67,14 @@ function MovieForm() {
 
   const [activeStep, setActiveStep] = useState(0);
 
-  const handleNext = (event) => {
+  const handleNext = async (event, validateForm, setTouched) => {
     event.preventDefault();
-    if (activeStep < steps.length - 1) {
+    setTouched({
+      title: true,
+    });
+
+    const errors = await validateForm();
+    if (Object.keys(errors).length === 0 && activeStep < steps.length - 1) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
   };
@@ -106,7 +111,14 @@ function MovieForm() {
     }
   };
 
-  const renderForm = ({ values, errors, touched, setFieldValue }) => {
+  const renderForm = ({
+    values,
+    errors,
+    touched,
+    setFieldValue,
+    validateForm,
+    setTouched,
+  }) => {
     return (
       <Form id='movie-form'>
         <Box sx={formStyle}>
@@ -445,7 +457,7 @@ function MovieForm() {
               <Button
                 variant='contained'
                 sx={buttonFormStyle}
-                onClick={handleNext}
+                onClick={(event) => handleNext(event, validateForm, setTouched)}
                 startIcon={<ArrowForwardIcon />}
                 type='button'
               >
