@@ -198,11 +198,12 @@ function StudioForm() {
             <Button
               type='button'
               variant='contained'
+              color='warning'
               sx={buttonFormStyle}
               onClick={goBack}
               startIcon={<ArrowBackIcon />}
             >
-              Back
+              Return
             </Button>
 
             <Button
