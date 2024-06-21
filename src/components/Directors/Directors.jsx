@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import { rootComponentPaperStyle } from '../../services/styleService';
 // =============================================
 import { getAllDirectors } from '../../store/slices/directorsSlice';
+import { getAllMovies } from '../../store/slices/moviesSlice';
 // =============================================
 import DirectorsItem from './DirectorsItem';
 import DirectorsList from './DirectorsList';
@@ -17,6 +18,10 @@ function Directors() {
 
   useEffect(() => {
     dispatch(getAllDirectors());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getAllMovies());
   }, [dispatch]);
 
   return (

@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import { rootComponentPaperStyle } from '../../services/styleService';
 // =============================================
 import { getAllStudios } from '../../store/slices/studiosSlice';
+import { getAllMovies } from '../../store/slices/moviesSlice';
 // =============================================
 import StudiosItem from './StudiosItem';
 import StudiosList from './StudiosList';
@@ -17,6 +18,10 @@ function Studios() {
 
   useEffect(() => {
     dispatch(getAllStudios());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getAllMovies());
   }, [dispatch]);
 
   return (

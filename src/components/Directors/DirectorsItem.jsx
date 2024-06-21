@@ -37,6 +37,7 @@ function DirectorsItem() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const directors = useSelector((state) => state.directorsList.directors);
+  const moviesList = useSelector((state) => state.moviesList.movies);
   const status = useSelector((state) => state.directorsList.status);
 
   const { snackbar, showSnackbar, handleClose } = useSnackbar(() =>
@@ -70,8 +71,12 @@ function DirectorsItem() {
 
   const currentDirector = director ? director : emptyDirector;
 
+  const filteredMoviesList = moviesList
+    .filter((movie) => movie.directors.includes(currentDirector.fullName))
+    .map((movie) => movie.title);
+
   const formattedMovies =
-    currentDirector.movies.join(', ') || 'No movies available';
+    filteredMoviesList.join(', ') || 'No movies available';
 
   const goBack = () => {
     navigate('/directors');

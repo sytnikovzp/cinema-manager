@@ -37,6 +37,7 @@ function StudiosItem() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const studios = useSelector((state) => state.studiosList.studios);
+  const moviesList = useSelector((state) => state.moviesList.movies);
   const status = useSelector((state) => state.studiosList.status);
 
   const { snackbar, showSnackbar, handleClose } = useSnackbar(() =>
@@ -68,8 +69,12 @@ function StudiosItem() {
 
   const currentStudio = studio ? studio : emptyStudio;
 
+  const filteredMoviesList = moviesList
+    .filter((movie) => movie.studios.includes(currentStudio.title))
+    .map((movie) => movie.title);
+
   const formattedMovies =
-    currentStudio.movies.join(', ') || 'No movies available';
+    filteredMoviesList.join(', ') || 'No movies available';
 
   const goBack = () => {
     navigate('/studios');

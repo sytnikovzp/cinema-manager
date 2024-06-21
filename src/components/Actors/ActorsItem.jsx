@@ -37,6 +37,7 @@ function ActorsItem() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const actors = useSelector((state) => state.actorsList.actors);
+  const moviesList = useSelector((state) => state.moviesList.movies);
   const status = useSelector((state) => state.actorsList.status);
 
   const { snackbar, showSnackbar, handleClose } = useSnackbar(() =>
@@ -68,8 +69,12 @@ function ActorsItem() {
 
   const currentActor = actor ? actor : emptyActor;
 
+  const filteredMoviesList = moviesList
+    .filter((movie) => movie.actors.includes(currentActor.fullName))
+    .map((movie) => movie.title);
+
   const formattedMovies =
-    currentActor.movies.join(', ') || 'No movies available';
+    filteredMoviesList.join(', ') || 'No movies available';
 
   const goBack = () => {
     navigate('/actors');
