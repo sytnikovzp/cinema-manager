@@ -200,6 +200,7 @@ export const nationalities = [
   { id: 35, title: 'FIN', description: 'Finland' },
   { id: 36, title: 'RU', description: 'Russian' },
   { id: 37, title: 'ISL', description: 'Iceland' },
+  { id: 38, title: 'AU', description: 'Austria' },
 ];
 
 export const locations = [
