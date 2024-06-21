@@ -58,6 +58,7 @@ export const formStyle = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
+  // justifyContent: 'space-between',
   gap: 3,
   paddingTop: '10px',
   paddingBottom: '10px',
@@ -87,6 +88,11 @@ export const buttonFormStyle = {
 export const saveButtonFormStyle = {
   height: '40px',
   width: '120px',
+};
+
+export const addButtonFormStyle = {
+  height: '40px',
+  width: '200px',
 };
 
 // =============================================

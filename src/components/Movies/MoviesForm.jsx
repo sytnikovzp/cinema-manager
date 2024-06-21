@@ -18,13 +18,14 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import SaveIcon from '@mui/icons-material/Save';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import RemoveIcon from '@mui/icons-material/Remove';
-import AddIcon from '@mui/icons-material/Add';
+import DomainAddIcon from '@mui/icons-material/DomainAdd';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
 import Select from '@mui/material/Select';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ClearIcon from '@mui/icons-material/Clear';
 // =============================================
 import { createMovie, updateMovie } from '../../store/slices/moviesSlice';
 import { emptyMovie, genres } from '../../constants';
@@ -35,6 +36,7 @@ import {
   fieldArrayStyle,
   buttonFormStyle,
   saveButtonFormStyle,
+  addButtonFormStyle,
 } from '../../services/styleService';
 
 function MovieForm() {
@@ -278,16 +280,22 @@ function MovieForm() {
                               </MenuItem>
                             ))}
                           </Field>
-                          {index > 0 && (
-                            <IconButton onClick={() => remove(index)}>
-                              <RemoveIcon />
-                            </IconButton>
-                          )}
-                          <IconButton onClick={() => push('')}>
-                            <AddIcon />
+                          <IconButton onClick={() => remove(index)}>
+                            <ClearIcon />
                           </IconButton>
                         </Stack>
                       ))}
+                      <Stack alignItems='center'>
+                        <Button
+                          variant='contained'
+                          sx={addButtonFormStyle}
+                          onClick={() => push('')}
+                          startIcon={<GroupAddIcon />}
+                          type='button'
+                        >
+                          Add director
+                        </Button>
+                      </Stack>
                     </Stack>
                   </>
                 )}
@@ -331,16 +339,22 @@ function MovieForm() {
                               </MenuItem>
                             ))}
                           </Field>
-                          {index > 0 && (
-                            <IconButton onClick={() => remove(index)}>
-                              <RemoveIcon />
-                            </IconButton>
-                          )}
-                          <IconButton onClick={() => push('')}>
-                            <AddIcon />
+                          <IconButton onClick={() => remove(index)}>
+                            <ClearIcon />
                           </IconButton>
                         </Stack>
                       ))}
+                      <Stack alignItems='center'>
+                        <Button
+                          variant='contained'
+                          sx={addButtonFormStyle}
+                          onClick={() => push('')}
+                          startIcon={<GroupAddIcon />}
+                          type='button'
+                        >
+                          Add actor
+                        </Button>
+                      </Stack>
                     </Stack>
                   </>
                 )}
@@ -384,16 +398,22 @@ function MovieForm() {
                               </MenuItem>
                             ))}
                           </Field>
-                          {index > 0 && (
-                            <IconButton onClick={() => remove(index)}>
-                              <RemoveIcon />
-                            </IconButton>
-                          )}
-                          <IconButton onClick={() => push('')}>
-                            <AddIcon />
+                          <IconButton onClick={() => remove(index)}>
+                            <ClearIcon />
                           </IconButton>
                         </Stack>
                       ))}
+                      <Stack alignItems='center'>
+                        <Button
+                          variant='contained'
+                          sx={addButtonFormStyle}
+                          onClick={() => push('')}
+                          startIcon={<DomainAddIcon />}
+                          type='button'
+                        >
+                          Add studio
+                        </Button>
+                      </Stack>
                     </Stack>
                   </>
                 )}
