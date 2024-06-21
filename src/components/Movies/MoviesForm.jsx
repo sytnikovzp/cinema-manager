@@ -409,8 +409,8 @@ function MovieForm() {
                 label='Brief storyline of the movie...'
                 fullWidth
                 multiline
-                minRows={2}
-                maxRows={4}
+                minRows={7}
+                maxRows={12}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position='end'>
