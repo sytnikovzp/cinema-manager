@@ -30,7 +30,7 @@ import { resetStatus } from '../../store/slices/studiosSlice';
 // =============================================
 import useSnackbar from '../../hooks';
 // =============================================
-import StudiosGenInfo from './StudiosGenInfo';
+import StudiosAbout from './StudiosAbout';
 
 function StudiosItem() {
   const navigate = useNavigate();
@@ -125,7 +125,7 @@ function StudiosItem() {
         aria-label='studio details tabs'
       >
         <Tab label='General information' />
-        {currentStudio.genInfo && <Tab label='About the studio' />}
+        {currentStudio.about && <Tab label='About the studio' />}
       </Tabs>
 
       <Box sx={scrollItemBoxStyle}>
@@ -199,7 +199,7 @@ function StudiosItem() {
               </Stack>
             )}
 
-            {tabIndex === 1 && currentStudio.genInfo && <StudiosGenInfo />}
+            {tabIndex === 1 && currentStudio.about && <StudiosAbout />}
           </Box>
         </Box>
       </Box>

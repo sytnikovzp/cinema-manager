@@ -8,7 +8,7 @@ import { textIndentStyle } from '../../services/styleService';
 // =============================================
 import { emptyStudio } from '../../constants';
 
-function StudiosGenInfo() {
+function StudiosAbout() {
   const studios = useSelector((state) => state.studiosList.studios);
 
   const { id } = useParams();
@@ -22,10 +22,10 @@ function StudiosGenInfo() {
   return (
     <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
       <Typography variant='body1' component='div' sx={textIndentStyle}>
-        {currentStudio.genInfo}
+        {currentStudio.about}
       </Typography>
     </Stack>
   );
 }
 
-export default StudiosGenInfo;
+export default StudiosAbout;
