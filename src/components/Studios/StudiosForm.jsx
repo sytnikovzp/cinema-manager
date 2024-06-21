@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 // =============================================
-import { Formik, Form, Field, FieldArray } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 // =============================================
 import Box from '@mui/material/Box';
@@ -17,9 +17,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import SaveIcon from '@mui/icons-material/Save';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import RemoveIcon from '@mui/icons-material/Remove';
-import AddIcon from '@mui/icons-material/Add';
-import { InputAdornment, MenuItem, Typography } from '@mui/material';
+import { InputAdornment, MenuItem } from '@mui/material';
 // =============================================
 import { createStudio, updateStudio } from '../../store/slices/studiosSlice';
 import { emptyStudio, locations } from '../../constants';
@@ -27,7 +25,6 @@ import { emptyStudio, locations } from '../../constants';
 import {
   formStyle,
   formItemStyle,
-  fieldArrayStyle,
   buttonFormStyle,
   saveButtonFormStyle,
 } from '../../services/styleService';
@@ -171,50 +168,6 @@ function StudioForm() {
             />
           </Box>
           <Box sx={formItemStyle}>
-            <FieldArray name='movies'>
-              {({
-                push,
-                remove,
-                form: {
-                  values: { movies },
-                },
-              }) => (
-                <>
-                  <Stack
-                    component='fieldset'
-                    form='studio-form'
-                    spacing={2}
-                    sx={fieldArrayStyle}
-                  >
-                    <Typography component='legend' variant='h6' gutterBottom>
-                      Movies
-                    </Typography>
-                    {movies.map((movie, index) => (
-                      <Stack spacing={2} key={index} direction='row'>
-                        <Field
-                          name={`movies[${index}]`}
-                          as={TextField}
-                          label='Movie'
-                          fullWidth
-                          error={touched.movies && Boolean(errors.movies)}
-                          helperText={touched.movies && errors.movies}
-                        />
-                        {index > 0 && (
-                          <IconButton onClick={() => remove(index)}>
-                            <RemoveIcon />
-                          </IconButton>
-                        )}
-                        <IconButton onClick={() => push('')}>
-                          <AddIcon />
-                        </IconButton>
-                      </Stack>
-                    ))}
-                  </Stack>
-                </>
-              )}
-            </FieldArray>
-          </Box>
-          <Box sx={formItemStyle}>
             <Field
               name='about'
               as={TextField}
@@ -222,8 +175,8 @@ function StudioForm() {
               value={values.about}
               fullWidth
               multiline
-              minRows={2}
-              maxRows={4}
+              minRows={5}
+              maxRows={7}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position='end'>

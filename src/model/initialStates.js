@@ -1,7 +1,6 @@
 export const actorsState = [
   {
     id: null,
-    movies: [''],
     fullName: '',
     birthYear: '',
     nationality: '',
@@ -13,7 +12,6 @@ export const actorsState = [
 export const directorsState = [
   {
     id: null,
-    movies: [''],
     fullName: '',
     birthYear: '',
     nationality: '',
@@ -42,7 +40,6 @@ export const studiosState = [
     title: '',
     location: '',
     foundationYear: '',
-    movies: [''],
     logo: '',
     about: '',
   },

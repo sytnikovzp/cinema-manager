@@ -8,7 +8,6 @@ export const STUDIOS_SLICE_NAME = 'studios';
 
 export const emptyActor = {
   id: null,
-  movies: [''],
   fullName: '',
   birthYear: '',
   nationality: '',
@@ -18,7 +17,6 @@ export const emptyActor = {
 
 export const emptyDirector = {
   id: null,
-  movies: [''],
   fullName: '',
   birthYear: '',
   nationality: '',
@@ -43,7 +41,6 @@ export const emptyStudio = {
   title: '',
   location: '',
   foundationYear: '',
-  movies: [''],
   logo: '',
   about: '',
 };

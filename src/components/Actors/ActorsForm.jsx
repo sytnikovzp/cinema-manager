@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 // =============================================
-import { Formik, Form, Field, FieldArray } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 // =============================================
 import Box from '@mui/material/Box';
@@ -17,9 +17,6 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import SaveIcon from '@mui/icons-material/Save';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import RemoveIcon from '@mui/icons-material/Remove';
-import AddIcon from '@mui/icons-material/Add';
-import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
 import MenuItem from '@mui/material/MenuItem';
 // =============================================
@@ -29,7 +26,6 @@ import { emptyActor, nationalities } from '../../constants';
 import {
   formStyle,
   formItemStyle,
-  fieldArrayStyle,
   buttonFormStyle,
   saveButtonFormStyle,
 } from '../../services/styleService';
@@ -166,50 +162,6 @@ function ActorForm() {
             />
           </Box>
           <Box sx={formItemStyle}>
-            <FieldArray name='movies'>
-              {({
-                push,
-                remove,
-                form: {
-                  values: { movies },
-                },
-              }) => (
-                <>
-                  <Stack
-                    component='fieldset'
-                    form='actor-form'
-                    spacing={2}
-                    sx={fieldArrayStyle}
-                  >
-                    <Typography component='legend' variant='h6' gutterBottom>
-                      Movies
-                    </Typography>
-                    {movies.map((movie, index) => (
-                      <Stack spacing={2} key={index} direction='row'>
-                        <Field
-                          name={`movies[${index}]`}
-                          as={TextField}
-                          label='Movie'
-                          fullWidth
-                          error={touched.movies && Boolean(errors.movies)}
-                          helperText={touched.movies && errors.movies}
-                        />
-                        {index > 0 && (
-                          <IconButton onClick={() => remove(index)}>
-                            <RemoveIcon />
-                          </IconButton>
-                        )}
-                        <IconButton onClick={() => push('')}>
-                          <AddIcon />
-                        </IconButton>
-                      </Stack>
-                    ))}
-                  </Stack>
-                </>
-              )}
-            </FieldArray>
-          </Box>
-          <Box sx={formItemStyle}>
             <Field
               name='biography'
               as={TextField}
@@ -217,8 +169,8 @@ function ActorForm() {
               value={values.biography}
               fullWidth
               multiline
-              minRows={2}
-              maxRows={4}
+              minRows={5}
+              maxRows={7}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position='end'>
