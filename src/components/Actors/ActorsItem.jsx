@@ -165,12 +165,29 @@ function ActorsItem() {
                 }}
                 component='div'
               >
-                Birth year:
+                Birth date:
               </Typography>
               <Typography variant='body1' component='div'>
-                {currentActor.birthYear || 'Unknown'}
+                {currentActor.birthDate || 'Unknown'}
               </Typography>
             </Stack>
+
+            {currentActor.deathDate && (
+              <Stack direction='row' spacing={1}>
+                <Typography
+                  variant='body1'
+                  sx={{
+                    fontWeight: 'bold',
+                  }}
+                  component='div'
+                >
+                  Death date:
+                </Typography>
+                <Typography variant='body1' component='div'>
+                  {currentActor.deathDate || 'Unknown'}
+                </Typography>
+              </Stack>
+            )}
 
             <Stack direction='row' spacing={1}>
               <Typography

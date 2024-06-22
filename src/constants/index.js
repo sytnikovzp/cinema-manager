@@ -9,8 +9,9 @@ export const STUDIOS_SLICE_NAME = 'studios';
 export const emptyActor = {
   id: null,
   fullName: '',
-  birthYear: '',
   nationality: '',
+  birthDate: '',
+  deathDate: '',
   image: '',
   biography: '',
 };
@@ -18,8 +19,9 @@ export const emptyActor = {
 export const emptyDirector = {
   id: null,
   fullName: '',
-  birthYear: '',
   nationality: '',
+  birthDate: '',
+  deathDate: '',
   image: '',
   biography: '',
 };
@@ -28,11 +30,12 @@ export const emptyMovie = {
   id: null,
   title: '',
   genre: '',
+  releaseYear: '',
+  poster: '',
+  trailer: '',
   directors: [''],
   actors: [''],
   studios: [''],
-  poster: '',
-  trailer: '',
   storyline: '',
 };
 

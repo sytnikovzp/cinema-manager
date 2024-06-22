@@ -51,10 +51,9 @@ function StudioForm() {
 
   const schema = Yup.object().shape({
     title: Yup.string().required('Studio title is a required field'),
-    foundationYear: Yup.date(),
     location: Yup.string(),
+    foundationYear: Yup.date(),
     logo: Yup.string().url('Invalid URL logo'),
-    movies: Yup.array(),
     about: Yup.string(),
   });
 
@@ -176,8 +175,8 @@ function StudioForm() {
               value={values.about}
               fullWidth
               multiline
-              minRows={5}
-              maxRows={8}
+              minRows={4}
+              maxRows={6}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position='end'>

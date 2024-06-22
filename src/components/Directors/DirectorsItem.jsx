@@ -167,12 +167,29 @@ function DirectorsItem() {
                 }}
                 component='div'
               >
-                Birth year:
+                Birth date:
               </Typography>
               <Typography variant='body1' component='div'>
-                {currentDirector.birthYear || 'Unknown'}
+                {currentDirector.birthDate || 'Unknown'}
               </Typography>
             </Stack>
+
+            {currentDirector.deathDate && (
+              <Stack direction='row' spacing={1}>
+                <Typography
+                  variant='body1'
+                  sx={{
+                    fontWeight: 'bold',
+                  }}
+                  component='div'
+                >
+                  Death date:
+                </Typography>
+                <Typography variant='body1' component='div'>
+                  {currentDirector.deathDate || 'Unknown'}
+                </Typography>
+              </Stack>
+            )}
 
             <Stack direction='row' spacing={1}>
               <Typography

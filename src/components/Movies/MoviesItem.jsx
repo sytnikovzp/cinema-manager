@@ -166,7 +166,7 @@ function MoviesItem() {
                   Movie year:
                 </Typography>
                 <Typography variant='body1' component='div'>
-                  {currentMovie.movieYear || 'Unknown'}
+                  {currentMovie.releaseYear || 'Unknown'}
                 </Typography>
               </Stack>
               <Stack direction='row' spacing={1}>
