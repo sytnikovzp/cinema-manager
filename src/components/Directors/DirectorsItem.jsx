@@ -78,6 +78,21 @@ function DirectorsItem() {
   const formattedMovies =
     filteredMoviesList.join(', ') || 'No movies available';
 
+  function formatDate(dateString) {
+    if (
+      typeof dateString !== 'string' ||
+      !/^\d{4}-\d{2}-\d{2}$/.test(dateString)
+    ) {
+      return '00-00-0000';
+    }
+
+    const parts = dateString.split('-');
+    return parts[2] + '-' + parts[1] + '-' + parts[0];
+  }
+
+  const formattedBirthDate = formatDate(currentDirector.birthDate);
+  const formattedDeathDate = formatDate(currentDirector.deathDate);
+
   const goBack = () => {
     navigate('/directors');
   };
@@ -170,7 +185,7 @@ function DirectorsItem() {
                 Birth date:
               </Typography>
               <Typography variant='body1' component='div'>
-                {currentDirector.birthDate || 'Unknown'}
+                {currentDirector.birthDate ? formattedBirthDate : 'Unknown'}
               </Typography>
             </Stack>
 
@@ -186,7 +201,7 @@ function DirectorsItem() {
                   Death date:
                 </Typography>
                 <Typography variant='body1' component='div'>
-                  {currentDirector.deathDate || 'Unknown'}
+                  {formattedDeathDate}
                 </Typography>
               </Stack>
             )}

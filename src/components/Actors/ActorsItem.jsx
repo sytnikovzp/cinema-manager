@@ -76,6 +76,21 @@ function ActorsItem() {
   const formattedMovies =
     filteredMoviesList.join(', ') || 'No movies available';
 
+  function formatDate(dateString) {
+    if (
+      typeof dateString !== 'string' ||
+      !/^\d{4}-\d{2}-\d{2}$/.test(dateString)
+    ) {
+      return '00-00-0000';
+    }
+
+    const parts = dateString.split('-');
+    return parts[2] + '-' + parts[1] + '-' + parts[0];
+  }
+
+  const formattedBirthDate = formatDate(currentActor.birthDate);
+  const formattedDeathDate = formatDate(currentActor.deathDate);
+
   const goBack = () => {
     navigate('/actors');
   };
@@ -168,7 +183,7 @@ function ActorsItem() {
                 Birth date:
               </Typography>
               <Typography variant='body1' component='div'>
-                {currentActor.birthDate || 'Unknown'}
+                {currentActor.birthDate ? formattedBirthDate : 'Unknown'}
               </Typography>
             </Stack>
 
@@ -184,7 +199,7 @@ function ActorsItem() {
                   Death date:
                 </Typography>
                 <Typography variant='body1' component='div'>
-                  {currentActor.deathDate || 'Unknown'}
+                  {formattedDeathDate}
                 </Typography>
               </Stack>
             )}
