@@ -27,6 +27,7 @@ import {
   formItemStyle,
   buttonFormStyle,
   saveButtonFormStyle,
+  stackButtonFormStyle,
 } from '../../services/styleService';
 
 function StudioForm() {
@@ -176,7 +177,7 @@ function StudioForm() {
               fullWidth
               multiline
               minRows={5}
-              maxRows={7}
+              maxRows={8}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position='end'>
@@ -194,39 +195,44 @@ function StudioForm() {
               helperText={touched.about && errors.about}
             />
           </Box>
-          <Stack direction='row' justifyContent='center' spacing={1}>
-            <Button
-              type='button'
-              variant='contained'
-              color='warning'
-              sx={buttonFormStyle}
-              onClick={goBack}
-              startIcon={<ArrowBackIcon />}
-            >
-              Return
-            </Button>
-
-            <Button
-              type='submit'
-              variant='contained'
-              color='success'
-              sx={saveButtonFormStyle}
-              startIcon={<SaveIcon />}
-            >
-              Save
-            </Button>
-
-            <Button
-              type='reset'
-              variant='contained'
-              color='error'
-              sx={buttonFormStyle}
-              startIcon={<ClearAllIcon />}
-            >
-              Reset
-            </Button>
-          </Stack>
         </Box>
+        <Stack
+          direction='row'
+          justifyContent='center'
+          spacing={1}
+          sx={stackButtonFormStyle}
+        >
+          <Button
+            type='button'
+            variant='contained'
+            color='warning'
+            sx={buttonFormStyle}
+            onClick={goBack}
+            startIcon={<ArrowBackIcon />}
+          >
+            Return
+          </Button>
+
+          <Button
+            type='submit'
+            variant='contained'
+            color='success'
+            sx={saveButtonFormStyle}
+            startIcon={<SaveIcon />}
+          >
+            Save
+          </Button>
+
+          <Button
+            type='reset'
+            variant='contained'
+            color='error'
+            sx={buttonFormStyle}
+            startIcon={<ClearAllIcon />}
+          >
+            Reset
+          </Button>
+        </Stack>
       </Form>
     );
   };

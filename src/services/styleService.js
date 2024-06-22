@@ -58,11 +58,9 @@ export const formStyle = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  // justifyContent: 'space-between',
   gap: 3,
   paddingTop: '10px',
-  paddingBottom: '10px',
-  minHeight: '65vh',
+  minHeight: '45vh',
 };
 
 export const formItemStyle = {
@@ -78,6 +76,10 @@ export const fieldArrayStyle = {
   paddingRight: '10px',
   paddingBottom: '10px',
   borderRadius: '5px',
+};
+
+export const stackButtonFormStyle = {
+  padding: '20px',
 };
 
 export const buttonFormStyle = {

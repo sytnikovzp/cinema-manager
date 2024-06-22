@@ -37,6 +37,7 @@ import {
   buttonFormStyle,
   saveButtonFormStyle,
   addButtonFormStyle,
+  stackButtonFormStyle,
 } from '../../services/styleService';
 
 function MovieForm() {
@@ -429,8 +430,8 @@ function MovieForm() {
                 label='Brief storyline of the movie...'
                 fullWidth
                 multiline
-                minRows={7}
-                maxRows={12}
+                minRows={10}
+                maxRows={15}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position='end'>
@@ -449,66 +450,70 @@ function MovieForm() {
               />
             </Box>
           )}
-
-          <Stack direction='row' justifyContent='center' spacing={1}>
-            {activeStep === 0 ? (
-              <Button
-                type='button'
-                variant='contained'
-                color='warning'
-                sx={buttonFormStyle}
-                onClick={goBack}
-                startIcon={<ArrowBackIcon />}
-              >
-                Return
-              </Button>
-            ) : (
-              <Button
-                variant='contained'
-                sx={buttonFormStyle}
-                onClick={handleBack}
-                startIcon={<ArrowBackIcon />}
-              >
-                Back
-              </Button>
-            )}
-
-            {activeStep < steps.length - 1 ? (
-              <Button
-                variant='contained'
-                sx={buttonFormStyle}
-                onClick={(event) => handleNext(event, validateForm, setTouched)}
-                startIcon={<ArrowForwardIcon />}
-                type='button'
-              >
-                Next
-              </Button>
-            ) : (
-              <Button
-                type='submit'
-                variant='contained'
-                color='success'
-                sx={saveButtonFormStyle}
-                startIcon={<SaveIcon />}
-              >
-                Save
-              </Button>
-            )}
-
-            {activeStep === steps.length - 1 && (
-              <Button
-                type='reset'
-                variant='contained'
-                color='error'
-                onClick={handleReset}
-                sx={buttonFormStyle}
-                startIcon={<ClearAllIcon />}
-              >
-                Reset
-              </Button>
-            )}
-          </Stack>
         </Box>
+        <Stack
+          direction='row'
+          justifyContent='center'
+          spacing={1}
+          sx={stackButtonFormStyle}
+        >
+          {activeStep === 0 ? (
+            <Button
+              type='button'
+              variant='contained'
+              color='warning'
+              sx={buttonFormStyle}
+              onClick={goBack}
+              startIcon={<ArrowBackIcon />}
+            >
+              Return
+            </Button>
+          ) : (
+            <Button
+              variant='contained'
+              sx={buttonFormStyle}
+              onClick={handleBack}
+              startIcon={<ArrowBackIcon />}
+            >
+              Back
+            </Button>
+          )}
+
+          {activeStep < steps.length - 1 ? (
+            <Button
+              variant='contained'
+              sx={buttonFormStyle}
+              onClick={(event) => handleNext(event, validateForm, setTouched)}
+              startIcon={<ArrowForwardIcon />}
+              type='button'
+            >
+              Next
+            </Button>
+          ) : (
+            <Button
+              type='submit'
+              variant='contained'
+              color='success'
+              sx={saveButtonFormStyle}
+              startIcon={<SaveIcon />}
+            >
+              Save
+            </Button>
+          )}
+
+          {activeStep === steps.length - 1 && (
+            <Button
+              type='reset'
+              variant='contained'
+              color='error'
+              onClick={handleReset}
+              sx={buttonFormStyle}
+              startIcon={<ClearAllIcon />}
+            >
+              Reset
+            </Button>
+          )}
+        </Stack>
       </Form>
     );
   };
