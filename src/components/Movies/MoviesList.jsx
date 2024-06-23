@@ -18,7 +18,7 @@ import Button from '@mui/material/Button';
 import VideoCallIcon from '@mui/icons-material/VideoCall';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
-import { styled } from '@mui/system';
+import { styled } from '@mui/material/styles';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
