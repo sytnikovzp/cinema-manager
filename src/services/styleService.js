@@ -87,7 +87,7 @@ export const buttonFormStyle = {
   width: '100px',
 };
 
-export const saveButtonFormStyle = {
+export const wideButtonFormStyle = {
   height: '40px',
   width: '120px',
 };

@@ -35,7 +35,7 @@ import {
   formItemStyle,
   fieldArrayStyle,
   buttonFormStyle,
-  saveButtonFormStyle,
+  wideButtonFormStyle,
   addButtonFormStyle,
   stackButtonFormStyle,
 } from '../../services/styleService';
@@ -87,9 +87,10 @@ function MovieForm() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleReset = (event) => {
+  const handleReset = (event, resetForm) => {
     event.preventDefault();
-    setActiveStep(0);
+    // setActiveStep(0);
+    resetForm();
   };
 
   const schema = Yup.object().shape({
@@ -121,6 +122,7 @@ function MovieForm() {
     setFieldValue,
     validateForm,
     setTouched,
+    resetForm,
   }) => {
     return (
       <Form id='movie-form'>
@@ -180,7 +182,9 @@ function MovieForm() {
                     name='date'
                     label='Release year'
                     value={
-                      values.releaseYear ? dayjs().year(values.releaseYear) : null
+                      values.releaseYear
+                        ? dayjs().year(values.releaseYear)
+                        : null
                     }
                     views={['year']}
                     onChange={(value) =>
@@ -189,7 +193,8 @@ function MovieForm() {
                     sx={{ width: '330px' }}
                     slotProps={{
                       textField: {
-                        error: touched.releaseYear && Boolean(errors.releaseYear),
+                        error:
+                          touched.releaseYear && Boolean(errors.releaseYear),
                         helperText: touched.releaseYear && errors.releaseYear,
                       },
                       field: {
@@ -486,7 +491,7 @@ function MovieForm() {
           {activeStep < steps.length - 1 ? (
             <Button
               variant='contained'
-              sx={buttonFormStyle}
+              sx={wideButtonFormStyle}
               onClick={(event) => handleNext(event, validateForm, setTouched)}
               startIcon={<ArrowForwardIcon />}
               type='button'
@@ -498,25 +503,23 @@ function MovieForm() {
               type='submit'
               variant='contained'
               color='success'
-              sx={saveButtonFormStyle}
+              sx={wideButtonFormStyle}
               startIcon={<SaveIcon />}
             >
               Save
             </Button>
           )}
 
-          {activeStep === steps.length - 1 && (
             <Button
               type='reset'
               variant='contained'
               color='error'
-              onClick={handleReset}
+              onClick={(event) => handleReset(event, resetForm)}
               sx={buttonFormStyle}
               startIcon={<ClearAllIcon />}
             >
               Reset
             </Button>
-          )}
         </Stack>
       </Form>
     );

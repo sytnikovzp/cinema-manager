@@ -28,7 +28,7 @@ import {
   formStyle,
   formItemStyle,
   buttonFormStyle,
-  saveButtonFormStyle,
+  wideButtonFormStyle,
   stackButtonFormStyle,
 } from '../../services/styleService';
 
@@ -263,7 +263,7 @@ function ActorForm() {
             type='submit'
             variant='contained'
             color='success'
-            sx={saveButtonFormStyle}
+            sx={wideButtonFormStyle}
             startIcon={<SaveIcon />}
           >
             Save
