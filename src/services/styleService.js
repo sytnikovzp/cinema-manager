@@ -70,6 +70,13 @@ export const formItemStyle = {
   width: '90%',
 };
 
+export const movieFormItemStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 2,
+  mt: 2,
+};
+
 export const fieldArrayStyle = {
   width: '100%',
   paddingLeft: '10px',

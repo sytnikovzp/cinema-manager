@@ -26,13 +26,17 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Select from '@mui/material/Select';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ClearIcon from '@mui/icons-material/Clear';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepContent from '@mui/material/StepContent';
+import StepLabel from '@mui/material/StepLabel';
 // =============================================
 import { createMovie, updateMovie } from '../../store/slices/moviesSlice';
 import { emptyMovie, genres } from '../../constants';
 // =============================================
 import {
   formStyle,
-  formItemStyle,
+  movieFormItemStyle,
   fieldArrayStyle,
   buttonFormStyle,
   wideButtonFormStyle,
@@ -60,12 +64,353 @@ function MovieForm() {
     }
   };
 
-  const steps = [
-    'Movie Details',
-    'Directors',
-    'Actors',
-    'Studios',
-    'Storyline',
+  const stepForms = [
+    {
+      label: 'Movie details',
+      renderForm: ({ values, errors, touched, setFieldValue }) => (
+        <Box sx={movieFormItemStyle}>
+          <Box>
+            <Field
+              name='title'
+              as={TextField}
+              label='Movie title'
+              value={values.title}
+              fullWidth
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label='Clear field'
+                      onClick={() => setFieldValue('title', '')}
+                      edge='end'
+                    >
+                      <BackspaceIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              error={touched.title && Boolean(errors.title)}
+              helperText={touched.title && errors.title}
+            />
+          </Box>
+          <Box>
+            <Field name='genre'>
+              {({ field }) => (
+                <TextField
+                  {...field}
+                  id='genre-select'
+                  select
+                  fullWidth
+                  label='Genre movie'
+                  error={touched.genre && Boolean(errors.genre)}
+                  helperText={touched.genre && errors.genre}
+                >
+                  <MenuItem value=''>
+                    <b>Genre select:</b>
+                  </MenuItem>
+                  {genres.map((option) => (
+                    <MenuItem key={option.id} value={option.title}>
+                      {option.title}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              )}
+            </Field>
+          </Box>
+
+          <Box>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                name='date'
+                label='Release year'
+                value={
+                  values.releaseYear ? dayjs().year(values.releaseYear) : null
+                }
+                views={['year']}
+                onChange={(value) =>
+                  setFieldValue('releaseYear', value ? value.year() : '')
+                }
+                slotProps={{
+                  textField: {
+                    fullWidth: true,
+                    error: touched.releaseYear && Boolean(errors.releaseYear),
+                    helperText: touched.releaseYear && errors.releaseYear,
+                  },
+                  field: {
+                    clearable: true,
+                    onClear: () => setFieldValue('releaseYear', ''),
+                  },
+                }}
+              />
+            </LocalizationProvider>
+          </Box>
+          <Box>
+            <Field
+              name='poster'
+              as={TextField}
+              label='Poster URL'
+              fullWidth
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label='Clear field'
+                      onClick={() => setFieldValue('poster', '')}
+                      edge='end'
+                    >
+                      <BackspaceIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              error={touched.poster && Boolean(errors.poster)}
+              helperText={touched.poster && errors.poster}
+            />
+          </Box>
+          <Box>
+            <Field
+              name='trailer'
+              as={TextField}
+              label='Trailer URL (Youtube only)'
+              fullWidth
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label='Clear field'
+                      onClick={() => setFieldValue('trailer', '')}
+                      edge='end'
+                    >
+                      <BackspaceIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              error={touched.trailer && Boolean(errors.trailer)}
+              helperText={touched.trailer && errors.trailer}
+            />
+          </Box>
+        </Box>
+      ),
+    },
+
+    {
+      label: 'Directors',
+      renderForm: () => (
+        <>
+          <Box>
+            <FieldArray name='directors'>
+              {({
+                push,
+                remove,
+                form: {
+                  values: { directors },
+                },
+              }) => (
+                <>
+                  <Stack
+                    component='fieldset'
+                    form='movie-form'
+                    spacing={2}
+                    sx={fieldArrayStyle}
+                  >
+                    <Typography component='legend' variant='h6' gutterBottom>
+                      Directors
+                    </Typography>
+                    {directors.map((director, index) => (
+                      <Stack spacing={2} key={index} direction='row'>
+                        <Field
+                          name={`directors[${index}]`}
+                          as={Select}
+                          fullWidth
+                        >
+                          <MenuItem value=''>
+                            <b>Director select:</b>
+                          </MenuItem>
+                          {directorsList.map((option) => (
+                            <MenuItem key={option.id} value={option.fullName}>
+                              {option.fullName}
+                            </MenuItem>
+                          ))}
+                        </Field>
+                        <IconButton onClick={() => remove(index)}>
+                          <ClearIcon />
+                        </IconButton>
+                      </Stack>
+                    ))}
+                    <Stack alignItems='center'>
+                      <Button
+                        variant='contained'
+                        sx={addButtonFormStyle}
+                        onClick={() => push('')}
+                        startIcon={<GroupAddIcon />}
+                        type='button'
+                      >
+                        Add director
+                      </Button>
+                    </Stack>
+                  </Stack>
+                </>
+              )}
+            </FieldArray>
+          </Box>
+        </>
+      ),
+    },
+
+    {
+      label: 'Actors',
+      renderForm: () => (
+        <>
+          <Box>
+            <FieldArray name='actors'>
+              {({
+                push,
+                remove,
+                form: {
+                  values: { actors },
+                },
+              }) => (
+                <>
+                  <Stack
+                    component='fieldset'
+                    form='movie-form'
+                    spacing={2}
+                    sx={fieldArrayStyle}
+                  >
+                    <Typography component='legend' variant='h6' gutterBottom>
+                      Actors
+                    </Typography>
+                    {actors.map((actor, index) => (
+                      <Stack spacing={2} key={index} direction='row'>
+                        <Field name={`actors[${index}]`} as={Select} fullWidth>
+                          <MenuItem value=''>
+                            <b>Actor select:</b>
+                          </MenuItem>
+                          {actorsList.map((option) => (
+                            <MenuItem key={option.id} value={option.fullName}>
+                              {option.fullName}
+                            </MenuItem>
+                          ))}
+                        </Field>
+                        <IconButton onClick={() => remove(index)}>
+                          <ClearIcon />
+                        </IconButton>
+                      </Stack>
+                    ))}
+                    <Stack alignItems='center'>
+                      <Button
+                        variant='contained'
+                        sx={addButtonFormStyle}
+                        onClick={() => push('')}
+                        startIcon={<GroupAddIcon />}
+                        type='button'
+                      >
+                        Add actor
+                      </Button>
+                    </Stack>
+                  </Stack>
+                </>
+              )}
+            </FieldArray>
+          </Box>
+        </>
+      ),
+    },
+
+    {
+      label: 'Studios',
+      renderForm: () => (
+        <>
+          <Box>
+            <FieldArray name='studios'>
+              {({
+                push,
+                remove,
+                form: {
+                  values: { studios },
+                },
+              }) => (
+                <>
+                  <Stack
+                    component='fieldset'
+                    form='movie-form'
+                    spacing={2}
+                    sx={fieldArrayStyle}
+                  >
+                    <Typography component='legend' variant='h6' gutterBottom>
+                      Studios
+                    </Typography>
+                    {studios.map((studio, index) => (
+                      <Stack spacing={2} key={index} direction='row'>
+                        <Field name={`studios[${index}]`} as={Select} fullWidth>
+                          <MenuItem value=''>
+                            <b>Studio select:</b>
+                          </MenuItem>
+                          {studiosList.map((option) => (
+                            <MenuItem key={option.id} value={option.title}>
+                              {option.title}
+                            </MenuItem>
+                          ))}
+                        </Field>
+                        <IconButton onClick={() => remove(index)}>
+                          <ClearIcon />
+                        </IconButton>
+                      </Stack>
+                    ))}
+                    <Stack alignItems='center'>
+                      <Button
+                        variant='contained'
+                        sx={addButtonFormStyle}
+                        onClick={() => push('')}
+                        startIcon={<DomainAddIcon />}
+                        type='button'
+                      >
+                        Add studio
+                      </Button>
+                    </Stack>
+                  </Stack>
+                </>
+              )}
+            </FieldArray>
+          </Box>
+        </>
+      ),
+    },
+
+    {
+      label: 'Storyline',
+      renderForm: ({ errors, touched, setFieldValue }) => (
+        <>
+          <Box>
+            <Field
+              name='storyline'
+              as={TextField}
+              label='Brief storyline of the movie...'
+              fullWidth
+              multiline
+              minRows={10}
+              maxRows={15}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label='Clear field'
+                      onClick={() => setFieldValue('storyline', '')}
+                      edge='end'
+                    >
+                      <BackspaceIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              error={touched.storyline && Boolean(errors.storyline)}
+              helperText={touched.storyline && errors.storyline}
+            />
+          </Box>
+        </>
+      ),
+    },
   ];
 
   const [activeStep, setActiveStep] = useState(0);
@@ -77,7 +422,7 @@ function MovieForm() {
     });
 
     const errors = await validateForm();
-    if (Object.keys(errors).length === 0 && activeStep < steps.length - 1) {
+    if (Object.keys(errors).length === 0 && activeStep < stepForms.length - 1) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
   };
@@ -127,338 +472,30 @@ function MovieForm() {
     return (
       <Form id='movie-form'>
         <Box sx={formStyle}>
-          {activeStep === 0 && (
-            <>
-              <Box sx={formItemStyle}>
-                <Field
-                  name='title'
-                  as={TextField}
-                  label='Movie title'
-                  value={values.title}
-                  fullWidth
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position='end'>
-                        <IconButton
-                          aria-label='Clear field'
-                          onClick={() => setFieldValue('title', '')}
-                          edge='end'
-                        >
-                          <BackspaceIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                  error={touched.title && Boolean(errors.title)}
-                  helperText={touched.title && errors.title}
-                />
-              </Box>
-              <Box sx={formItemStyle}>
-                <Field name='genre'>
-                  {({ field }) => (
-                    <TextField
-                      {...field}
-                      id='genre-select'
-                      select
-                      fullWidth
-                      label='Genre movie'
-                      error={touched.genre && Boolean(errors.genre)}
-                      helperText={touched.genre && errors.genre}
-                    >
-                      <MenuItem value=''>
-                        <b>Genre select:</b>
-                      </MenuItem>
-                      {genres.map((option) => (
-                        <MenuItem key={option.id} value={option.title}>
-                          {option.title}
-                        </MenuItem>
-                      ))}
-                    </TextField>
+          <Stepper
+            activeStep={activeStep}
+            orientation='vertical'
+            sx={{ width: '90%' }}
+          >
+            {stepForms.map(({ label, renderForm: FormComponent }, index) => (
+              <Step key={label} completed={index < activeStep}>
+                <StepLabel>{label}</StepLabel>
+                <StepContent>
+                  {activeStep === index && (
+                    <FormComponent
+                      values={values}
+                      errors={errors}
+                      touched={touched}
+                      setFieldValue={setFieldValue}
+                      validateForm={validateForm}
+                      setTouched={setTouched}
+                      resetForm={resetForm}
+                    />
                   )}
-                </Field>
-
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker
-                    name='date'
-                    label='Release year'
-                    value={
-                      values.releaseYear
-                        ? dayjs().year(values.releaseYear)
-                        : null
-                    }
-                    views={['year']}
-                    onChange={(value) =>
-                      setFieldValue('releaseYear', value ? value.year() : '')
-                    }
-                    sx={{ width: '330px' }}
-                    slotProps={{
-                      textField: {
-                        error:
-                          touched.releaseYear && Boolean(errors.releaseYear),
-                        helperText: touched.releaseYear && errors.releaseYear,
-                      },
-                      field: {
-                        clearable: true,
-                        onClear: () => setFieldValue('releaseYear', ''),
-                      },
-                    }}
-                  />
-                </LocalizationProvider>
-              </Box>
-              <Box sx={formItemStyle}>
-                <Field
-                  name='poster'
-                  as={TextField}
-                  label='Poster URL'
-                  fullWidth
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position='end'>
-                        <IconButton
-                          aria-label='Clear field'
-                          onClick={() => setFieldValue('poster', '')}
-                          edge='end'
-                        >
-                          <BackspaceIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                  error={touched.poster && Boolean(errors.poster)}
-                  helperText={touched.poster && errors.poster}
-                />
-              </Box>
-              <Box sx={formItemStyle}>
-                <Field
-                  name='trailer'
-                  as={TextField}
-                  label='Trailer URL (Youtube only)'
-                  fullWidth
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position='end'>
-                        <IconButton
-                          aria-label='Clear field'
-                          onClick={() => setFieldValue('trailer', '')}
-                          edge='end'
-                        >
-                          <BackspaceIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                  error={touched.trailer && Boolean(errors.trailer)}
-                  helperText={touched.trailer && errors.trailer}
-                />
-              </Box>
-            </>
-          )}
-
-          {activeStep === 1 && (
-            <Box sx={formItemStyle}>
-              <FieldArray name='directors'>
-                {({
-                  push,
-                  remove,
-                  form: {
-                    values: { directors },
-                  },
-                }) => (
-                  <>
-                    <Stack
-                      component='fieldset'
-                      form='movie-form'
-                      spacing={2}
-                      sx={fieldArrayStyle}
-                    >
-                      <Typography component='legend' variant='h6' gutterBottom>
-                        Directors
-                      </Typography>
-                      {directors.map((director, index) => (
-                        <Stack spacing={2} key={index} direction='row'>
-                          <Field
-                            name={`directors[${index}]`}
-                            as={Select}
-                            fullWidth
-                          >
-                            <MenuItem value=''>
-                              <b>Director select:</b>
-                            </MenuItem>
-                            {directorsList.map((option) => (
-                              <MenuItem key={option.id} value={option.fullName}>
-                                {option.fullName}
-                              </MenuItem>
-                            ))}
-                          </Field>
-                          <IconButton onClick={() => remove(index)}>
-                            <ClearIcon />
-                          </IconButton>
-                        </Stack>
-                      ))}
-                      <Stack alignItems='center'>
-                        <Button
-                          variant='contained'
-                          sx={addButtonFormStyle}
-                          onClick={() => push('')}
-                          startIcon={<GroupAddIcon />}
-                          type='button'
-                        >
-                          Add director
-                        </Button>
-                      </Stack>
-                    </Stack>
-                  </>
-                )}
-              </FieldArray>
-            </Box>
-          )}
-
-          {activeStep === 2 && (
-            <Box sx={formItemStyle}>
-              <FieldArray name='actors'>
-                {({
-                  push,
-                  remove,
-                  form: {
-                    values: { actors },
-                  },
-                }) => (
-                  <>
-                    <Stack
-                      component='fieldset'
-                      form='movie-form'
-                      spacing={2}
-                      sx={fieldArrayStyle}
-                    >
-                      <Typography component='legend' variant='h6' gutterBottom>
-                        Actors
-                      </Typography>
-                      {actors.map((actor, index) => (
-                        <Stack spacing={2} key={index} direction='row'>
-                          <Field
-                            name={`actors[${index}]`}
-                            as={Select}
-                            fullWidth
-                          >
-                            <MenuItem value=''>
-                              <b>Actor select:</b>
-                            </MenuItem>
-                            {actorsList.map((option) => (
-                              <MenuItem key={option.id} value={option.fullName}>
-                                {option.fullName}
-                              </MenuItem>
-                            ))}
-                          </Field>
-                          <IconButton onClick={() => remove(index)}>
-                            <ClearIcon />
-                          </IconButton>
-                        </Stack>
-                      ))}
-                      <Stack alignItems='center'>
-                        <Button
-                          variant='contained'
-                          sx={addButtonFormStyle}
-                          onClick={() => push('')}
-                          startIcon={<GroupAddIcon />}
-                          type='button'
-                        >
-                          Add actor
-                        </Button>
-                      </Stack>
-                    </Stack>
-                  </>
-                )}
-              </FieldArray>
-            </Box>
-          )}
-
-          {activeStep === 3 && (
-            <Box sx={formItemStyle}>
-              <FieldArray name='studios'>
-                {({
-                  push,
-                  remove,
-                  form: {
-                    values: { studios },
-                  },
-                }) => (
-                  <>
-                    <Stack
-                      component='fieldset'
-                      form='movie-form'
-                      spacing={2}
-                      sx={fieldArrayStyle}
-                    >
-                      <Typography component='legend' variant='h6' gutterBottom>
-                        Studios
-                      </Typography>
-                      {studios.map((studio, index) => (
-                        <Stack spacing={2} key={index} direction='row'>
-                          <Field
-                            name={`studios[${index}]`}
-                            as={Select}
-                            fullWidth
-                          >
-                            <MenuItem value=''>
-                              <b>Studio select:</b>
-                            </MenuItem>
-                            {studiosList.map((option) => (
-                              <MenuItem key={option.id} value={option.title}>
-                                {option.title}
-                              </MenuItem>
-                            ))}
-                          </Field>
-                          <IconButton onClick={() => remove(index)}>
-                            <ClearIcon />
-                          </IconButton>
-                        </Stack>
-                      ))}
-                      <Stack alignItems='center'>
-                        <Button
-                          variant='contained'
-                          sx={addButtonFormStyle}
-                          onClick={() => push('')}
-                          startIcon={<DomainAddIcon />}
-                          type='button'
-                        >
-                          Add studio
-                        </Button>
-                      </Stack>
-                    </Stack>
-                  </>
-                )}
-              </FieldArray>
-            </Box>
-          )}
-
-          {activeStep === 4 && (
-            <Box sx={formItemStyle}>
-              <Field
-                name='storyline'
-                as={TextField}
-                label='Brief storyline of the movie...'
-                fullWidth
-                multiline
-                minRows={10}
-                maxRows={15}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position='end'>
-                      <IconButton
-                        aria-label='Clear field'
-                        onClick={() => setFieldValue('storyline', '')}
-                        edge='end'
-                      >
-                        <BackspaceIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-                error={touched.storyline && Boolean(errors.storyline)}
-                helperText={touched.storyline && errors.storyline}
-              />
-            </Box>
-          )}
+                </StepContent>
+              </Step>
+            ))}
+          </Stepper>
         </Box>
         <Stack
           direction='row'
@@ -488,7 +525,7 @@ function MovieForm() {
             </Button>
           )}
 
-          {activeStep < steps.length - 1 ? (
+          {activeStep < stepForms.length - 1 ? (
             <Button
               variant='contained'
               sx={wideButtonFormStyle}
@@ -510,16 +547,16 @@ function MovieForm() {
             </Button>
           )}
 
-            <Button
-              type='reset'
-              variant='contained'
-              color='error'
-              onClick={(event) => handleReset(event, resetForm)}
-              sx={buttonFormStyle}
-              startIcon={<ClearAllIcon />}
-            >
-              Reset
-            </Button>
+          <Button
+            type='reset'
+            variant='contained'
+            color='error'
+            onClick={(event) => handleReset(event, resetForm)}
+            sx={buttonFormStyle}
+            startIcon={<ClearAllIcon />}
+          >
+            Reset
+          </Button>
         </Stack>
       </Form>
     );
