@@ -11,10 +11,11 @@ import Directors from './components/Directors/Directors';
 import Studios from './components/Studios/Studios';
 import HomePage from './components/HomePage/HomePage';
 import Layout from './components/Layout';
+import { ToggleColorMode } from './components/Layout';
 
 function App() {
   return (
-    <>
+    <ToggleColorMode>
       <Router>
         <Routes>
           <Route path='*' element={<Layout />}>
@@ -27,7 +28,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
-    </>
+    </ToggleColorMode>
   );
 }
 

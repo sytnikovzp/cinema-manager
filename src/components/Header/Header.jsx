@@ -28,13 +28,12 @@ const settings = ['Profile', 'Account', 'Logout'];
 
 function Header() {
   const theme = useTheme();
+  const colorMode = useContext(ColorModeContext);
 
   const themeModeDescription =
     theme.palette.mode === 'dark'
       ? 'Switch to light mode'
       : 'Switch to dark mode';
-
-  const colorMode = useContext(ColorModeContext);
 
   const [anchorElUser, setAnchorElUser] = useState(null);
 

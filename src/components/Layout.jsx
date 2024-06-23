@@ -31,7 +31,7 @@ function Layout() {
         }}
       >
         <Grid item lg={12} md={12} xl={12} sm={12} xs={12}>
-          <Header></Header>
+          <Header />
         </Grid>
         <Grid container sx={{ mt: '1rem', mb: '1rem', flex: 1 }}>
           <Grid item lg={2} md={2} xl={2} sm={2} xs={2}>
@@ -52,7 +52,9 @@ function Layout() {
   );
 }
 
-export default function ToggleColorMode() {
+export default Layout;
+
+export function ToggleColorMode({ children }) {
   const getInitialMode = () => {
     const savedMode = localStorage.getItem('cinemaThemeMode');
     return savedMode ? savedMode : 'light';
@@ -85,9 +87,7 @@ export default function ToggleColorMode() {
 
   return (
     <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        <Layout />
-      </ThemeProvider>
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </ColorModeContext.Provider>
   );
 }
