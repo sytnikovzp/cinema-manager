@@ -192,6 +192,10 @@ function MovieForm() {
                         error: touched.releaseYear && Boolean(errors.releaseYear),
                         helperText: touched.releaseYear && errors.releaseYear,
                       },
+                      field: {
+                        clearable: true,
+                        onClear: () => setFieldValue('releaseYear', ''),
+                      },
                     }}
                   />
                 </LocalizationProvider>

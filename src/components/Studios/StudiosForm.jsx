@@ -139,6 +139,10 @@ function StudioForm() {
                       touched.foundationYear && Boolean(errors.foundationYear),
                     helperText: touched.foundationYear && errors.foundationYear,
                   },
+                  field: {
+                    clearable: true,
+                    onClear: () => setFieldValue('foundationYear', ''),
+                  },
                 }}
               />
             </LocalizationProvider>
