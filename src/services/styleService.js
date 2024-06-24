@@ -60,12 +60,11 @@ export const formStyle = {
   alignItems: 'center',
   gap: 3,
   paddingTop: '10px',
-  minHeight: '45vh',
+  minHeight: '65vh',
 };
 
 export const formItemStyle = {
   display: 'flex',
-  alignItems: 'baseline',
   gap: 1,
   width: '90%',
 };
