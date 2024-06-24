@@ -52,7 +52,7 @@ function DirectorForm() {
   const schema = Yup.object().shape({
     full_name: Yup.string().required('Full name is a required field'),
     nationality: Yup.string(),
-    birthDate: Yup.date(),
+    birth_date: Yup.date(),
     deathDate: Yup.date(),
     photo: Yup.string().url('Invalid URL photo'),
     biography: Yup.string(),
@@ -126,17 +126,17 @@ function DirectorForm() {
               adapterLocale='en-gb'
             >
               <DatePicker
-                name='birthDate'
+                name='birth_date'
                 label='Birth date'
                 value={
-                  values.birthDate
-                    ? dayjs(values.birthDate, 'YYYY-MM-DD')
+                  values.birth_date
+                    ? dayjs(values.birth_date, 'YYYY-MM-DD')
                     : null
                 }
                 views={['year', 'month', 'day']}
                 onChange={(value) =>
                   setFieldValue(
-                    'birthDate',
+                    'birth_date',
                     value ? value.format('YYYY-MM-DD') : ''
                   )
                 }
@@ -146,12 +146,12 @@ function DirectorForm() {
                     InputProps: {
                       style: { fontSize: 14 },
                     },
-                    error: touched.birthDate && Boolean(errors.birthDate),
-                    helperText: touched.birthDate && errors.birthDate,
+                    error: touched.birth_date && Boolean(errors.birth_date),
+                    helperText: touched.birth_date && errors.birth_date,
                   },
                   field: {
                     clearable: true,
-                    onClear: () => setFieldValue('birthDate', ''),
+                    onClear: () => setFieldValue('birth_date', ''),
                   },
                 }}
               />

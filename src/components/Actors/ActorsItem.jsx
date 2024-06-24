@@ -81,7 +81,7 @@ function ActorsItem() {
     return `${day}-${month}-${year}`;
   };
 
-  const formattedBirthDate = formatDate(currentActor.birthDate);
+  const formattedbirth_date = formatDate(currentActor.birth_date);
   const formattedDeathDate = formatDate(currentActor.deathDate);
 
   const goBack = () => {
@@ -176,7 +176,7 @@ function ActorsItem() {
                 Birth date:
               </Typography>
               <Typography variant='body1' component='div'>
-                {currentActor.birthDate ? formattedBirthDate : 'Unknown'}
+                {currentActor.birth_date ? formattedbirth_date : 'Unknown'}
               </Typography>
             </Stack>
 

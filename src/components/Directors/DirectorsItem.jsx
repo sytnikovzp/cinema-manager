@@ -83,7 +83,7 @@ function DirectorsItem() {
     return `${day}-${month}-${year}`;
   };
 
-  const formattedBirthDate = formatDate(currentDirector.birthDate);
+  const formattedbirth_date = formatDate(currentDirector.birth_date);
   const formattedDeathDate = formatDate(currentDirector.deathDate);
 
   const goBack = () => {
@@ -178,7 +178,7 @@ function DirectorsItem() {
                 Birth date:
               </Typography>
               <Typography variant='body1' component='div'>
-                {currentDirector.birthDate ? formattedBirthDate : 'Unknown'}
+                {currentDirector.birth_date ? formattedbirth_date : 'Unknown'}
               </Typography>
             </Stack>
 
