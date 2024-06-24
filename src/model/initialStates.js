@@ -5,7 +5,7 @@ export const actorsState = [
     nationality: '',
     birthDate: '',
     deathDate: '',
-    image: '',
+    photo: '',
     biography: '',
   },
 ];
@@ -17,7 +17,7 @@ export const directorsState = [
     nationality: '',
     birthDate: '',
     deathDate: '',
-    image: '',
+    photo: '',
     biography: '',
   },
 ];

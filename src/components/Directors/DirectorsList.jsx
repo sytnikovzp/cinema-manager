@@ -152,7 +152,7 @@ function DirectorsList() {
                   >
                     <ListItemButton sx={{ borderRadius: 5 }}>
                       <ListItemAvatar>
-                        <StyledAvatar src={director.image} />
+                        <StyledAvatar src={director.photo} />
                       </ListItemAvatar>
                       <ListItemText
                         primary={`${director.fullName || 'Unknown director'}, ${

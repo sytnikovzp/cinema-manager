@@ -12,7 +12,7 @@ export const emptyActor = {
   nationality: '',
   birthDate: '',
   deathDate: '',
-  image: '',
+  photo: '',
   biography: '',
 };
 
@@ -22,7 +22,7 @@ export const emptyDirector = {
   nationality: '',
   birthDate: '',
   deathDate: '',
-  image: '',
+  photo: '',
   biography: '',
 };
 

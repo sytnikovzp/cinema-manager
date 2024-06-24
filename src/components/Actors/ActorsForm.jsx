@@ -54,7 +54,7 @@ function ActorForm() {
     nationality: Yup.string(),
     birthDate: Yup.date(),
     deathDate: Yup.date(),
-    image: Yup.string().url('Invalid URL image'),
+    photo: Yup.string().url('Invalid URL photo'),
     biography: Yup.string(),
   });
 
@@ -192,17 +192,17 @@ function ActorForm() {
 
           <Box sx={formItemStyle}>
             <Field
-              name='image'
+              name='photo'
               as={TextField}
-              label='Image URL'
-              value={values.image}
+              label='Photo URL'
+              value={values.photo}
               fullWidth
               InputProps={{
                 endAdornment: (
                   <InputAdornment position='end'>
                     <IconButton
                       aria-label='Clear field'
-                      onClick={() => setFieldValue('image', '')}
+                      onClick={() => setFieldValue('photo', '')}
                       edge='end'
                     >
                       <BackspaceIcon />
@@ -210,8 +210,8 @@ function ActorForm() {
                   </InputAdornment>
                 ),
               }}
-              error={touched.image && Boolean(errors.image)}
-              helperText={touched.image && errors.image}
+              error={touched.photo && Boolean(errors.photo)}
+              helperText={touched.photo && errors.photo}
             />
           </Box>
           <Box sx={formItemStyle}>

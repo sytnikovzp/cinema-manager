@@ -151,7 +151,7 @@ function DirectorsItem() {
                 component='img'
                 height='100%'
                 image={
-                  currentDirector.image ||
+                  currentDirector.photo ||
                   'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
                 }
                 alt={currentDirector.fullName}

@@ -149,7 +149,7 @@ function ActorsItem() {
                 component='img'
                 height='100%'
                 image={
-                  currentActor.image ||
+                  currentActor.photo ||
                   'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
                 }
                 alt={currentActor.fullName}

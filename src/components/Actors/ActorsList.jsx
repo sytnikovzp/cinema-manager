@@ -152,7 +152,7 @@ function ActorsList() {
                   >
                     <ListItemButton sx={{ borderRadius: 5 }}>
                       <ListItemAvatar>
-                        <StyledAvatar src={actor.image} />
+                        <StyledAvatar src={actor.photo} />
                       </ListItemAvatar>
                       <ListItemText
                         primary={`${actor.fullName || 'Unknown actor'}, ${
