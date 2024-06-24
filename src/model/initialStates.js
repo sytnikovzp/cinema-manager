@@ -1,7 +1,7 @@
 export const actorsState = [
   {
     id: null,
-    fullName: '',
+    full_name: '',
     nationality: '',
     birthDate: '',
     deathDate: '',
@@ -13,7 +13,7 @@ export const actorsState = [
 export const directorsState = [
   {
     id: null,
-    fullName: '',
+    full_name: '',
     nationality: '',
     birthDate: '',
     deathDate: '',

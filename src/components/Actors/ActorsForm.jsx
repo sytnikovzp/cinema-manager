@@ -50,7 +50,7 @@ function ActorForm() {
   };
 
   const schema = Yup.object().shape({
-    fullName: Yup.string().required('Full name is a required field'),
+    full_name: Yup.string().required('Full name is a required field'),
     nationality: Yup.string(),
     birthDate: Yup.date(),
     deathDate: Yup.date(),
@@ -74,17 +74,17 @@ function ActorForm() {
         <Box sx={formStyle}>
           <Box sx={formItemStyle}>
             <Field
-              name='fullName'
+              name='full_name'
               as={TextField}
               label='Full name'
-              value={values.fullName}
+              value={values.full_name}
               fullWidth
               InputProps={{
                 endAdornment: (
                   <InputAdornment position='end'>
                     <IconButton
                       aria-label='Clear field'
-                      onClick={() => setFieldValue('fullName', '')}
+                      onClick={() => setFieldValue('full_name', '')}
                       edge='end'
                     >
                       <BackspaceIcon />
@@ -92,8 +92,8 @@ function ActorForm() {
                   </InputAdornment>
                 ),
               }}
-              error={touched.fullName && Boolean(errors.fullName)}
-              helperText={touched.fullName && errors.fullName}
+              error={touched.full_name && Boolean(errors.full_name)}
+              helperText={touched.full_name && errors.full_name}
             />
           </Box>
           <Box sx={formItemStyle}>

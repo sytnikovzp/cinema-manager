@@ -72,7 +72,7 @@ function DirectorsItem() {
   const currentDirector = director ? director : emptyDirector;
 
   const filteredMoviesList = moviesList
-    .filter((movie) => movie.directors.includes(currentDirector.fullName))
+    .filter((movie) => movie.directors.includes(currentDirector.full_name))
     .map((movie) => movie.title);
 
   const formattedMovies =
@@ -154,7 +154,7 @@ function DirectorsItem() {
                   currentDirector.photo ||
                   'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
                 }
-                alt={currentDirector.fullName}
+                alt={currentDirector.full_name}
               />
             </Card>
           </Box>
@@ -164,7 +164,7 @@ function DirectorsItem() {
               component='div'
               sx={{ fontWeight: 'bold' }}
             >
-              {currentDirector.fullName || 'Unknown director'}
+              {currentDirector.full_name || 'Unknown director'}
             </Typography>
 
             <Stack direction='row' spacing={1}>

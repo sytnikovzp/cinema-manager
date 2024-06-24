@@ -289,8 +289,8 @@ function MovieForm() {
                               <b>Director select:</b>
                             </MenuItem>
                             {directorsList.map((option) => (
-                              <MenuItem key={option.id} value={option.fullName}>
-                                {option.fullName}
+                              <MenuItem key={option.id} value={option.full_name}>
+                                {option.full_name}
                               </MenuItem>
                             ))}
                           </Field>
@@ -348,8 +348,8 @@ function MovieForm() {
                               <b>Actor select:</b>
                             </MenuItem>
                             {actorsList.map((option) => (
-                              <MenuItem key={option.id} value={option.fullName}>
-                                {option.fullName}
+                              <MenuItem key={option.id} value={option.full_name}>
+                                {option.full_name}
                               </MenuItem>
                             ))}
                           </Field>

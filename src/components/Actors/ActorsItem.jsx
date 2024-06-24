@@ -70,7 +70,7 @@ function ActorsItem() {
   const currentActor = actor ? actor : emptyActor;
 
   const filteredMoviesList = moviesList
-    .filter((movie) => movie.actors.includes(currentActor.fullName))
+    .filter((movie) => movie.actors.includes(currentActor.full_name))
     .map((movie) => movie.title);
 
   const formattedMovies =
@@ -152,7 +152,7 @@ function ActorsItem() {
                   currentActor.photo ||
                   'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
                 }
-                alt={currentActor.fullName}
+                alt={currentActor.full_name}
               />
             </Card>
           </Box>
@@ -162,7 +162,7 @@ function ActorsItem() {
               component='div'
               sx={{ fontWeight: 'bold' }}
             >
-              {currentActor.fullName || 'Unknown actor'}
+              {currentActor.full_name || 'Unknown actor'}
             </Typography>
 
             <Stack direction='row' spacing={1}>
