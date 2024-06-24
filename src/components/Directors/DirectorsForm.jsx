@@ -53,7 +53,7 @@ function DirectorForm() {
     full_name: Yup.string().required('Full name is a required field'),
     nationality: Yup.string(),
     birth_date: Yup.date(),
-    deathDate: Yup.date(),
+    death_date: Yup.date(),
     photo: Yup.string().url('Invalid URL photo'),
     biography: Yup.string(),
   });
@@ -157,17 +157,17 @@ function DirectorForm() {
               />
 
               <DatePicker
-                name='deathDate'
+                name='death_date'
                 label='Death date'
                 value={
-                  values.deathDate
-                    ? dayjs(values.deathDate, 'YYYY-MM-DD')
+                  values.death_date
+                    ? dayjs(values.death_date, 'YYYY-MM-DD')
                     : null
                 }
                 views={['year', 'month', 'day']}
                 onChange={(value) =>
                   setFieldValue(
-                    'deathDate',
+                    'death_date',
                     value ? value.format('YYYY-MM-DD') : ''
                   )
                 }
@@ -178,12 +178,12 @@ function DirectorForm() {
                     InputProps: {
                       style: { fontSize: 14 },
                     },
-                    error: touched.deathDate && Boolean(errors.deathDate),
-                    helperText: touched.deathDate && errors.deathDate,
+                    error: touched.death_date && Boolean(errors.death_date),
+                    helperText: touched.death_date && errors.death_date,
                   },
                   field: {
                     clearable: true,
-                    onClear: () => setFieldValue('deathDate', ''),
+                    onClear: () => setFieldValue('death_date', ''),
                   },
                 }}
               />

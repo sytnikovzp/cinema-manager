@@ -82,7 +82,7 @@ function ActorsItem() {
   };
 
   const formattedbirth_date = formatDate(currentActor.birth_date);
-  const formattedDeathDate = formatDate(currentActor.deathDate);
+  const formatteddeath_date = formatDate(currentActor.death_date);
 
   const goBack = () => {
     navigate('/actors');
@@ -180,7 +180,7 @@ function ActorsItem() {
               </Typography>
             </Stack>
 
-            {currentActor.deathDate && (
+            {currentActor.death_date && (
               <Stack direction='row' spacing={1}>
                 <Typography
                   variant='body1'
@@ -192,7 +192,7 @@ function ActorsItem() {
                   Death date:
                 </Typography>
                 <Typography variant='body1' component='div'>
-                  {formattedDeathDate}
+                  {formatteddeath_date}
                 </Typography>
               </Stack>
             )}

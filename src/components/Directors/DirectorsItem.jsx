@@ -84,7 +84,7 @@ function DirectorsItem() {
   };
 
   const formattedbirth_date = formatDate(currentDirector.birth_date);
-  const formattedDeathDate = formatDate(currentDirector.deathDate);
+  const formatteddeath_date = formatDate(currentDirector.death_date);
 
   const goBack = () => {
     navigate('/directors');
@@ -182,7 +182,7 @@ function DirectorsItem() {
               </Typography>
             </Stack>
 
-            {currentDirector.deathDate && (
+            {currentDirector.death_date && (
               <Stack direction='row' spacing={1}>
                 <Typography
                   variant='body1'
@@ -194,7 +194,7 @@ function DirectorsItem() {
                   Death date:
                 </Typography>
                 <Typography variant='body1' component='div'>
-                  {formattedDeathDate}
+                  {formatteddeath_date}
                 </Typography>
               </Stack>
             )}

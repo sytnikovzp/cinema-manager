@@ -92,7 +92,7 @@ function MovieForm() {
   const schema = Yup.object().shape({
     title: Yup.string().required('Movie title is a required field'),
     genre: Yup.string(),
-    releaseYear: Yup.date(),
+    release_year: Yup.date(),
     poster: Yup.string().url('Invalid URL poster'),
     trailer: Yup.string().url('Invalid Youtube URL trailer'),
     directors: Yup.array(),
@@ -186,24 +186,24 @@ function MovieForm() {
                     name='date'
                     label='Release year'
                     value={
-                      values.releaseYear
-                        ? dayjs().year(values.releaseYear)
+                      values.release_year
+                        ? dayjs().year(values.release_year)
                         : null
                     }
                     views={['year']}
                     onChange={(value) =>
-                      setFieldValue('releaseYear', value ? value.year() : '')
+                      setFieldValue('release_year', value ? value.year() : '')
                     }
                     sx={{ width: '330px' }}
                     slotProps={{
                       textField: {
                         error:
-                          touched.releaseYear && Boolean(errors.releaseYear),
-                        helperText: touched.releaseYear && errors.releaseYear,
+                          touched.release_year && Boolean(errors.release_year),
+                        helperText: touched.release_year && errors.release_year,
                       },
                       field: {
                         clearable: true,
-                        onClear: () => setFieldValue('releaseYear', ''),
+                        onClear: () => setFieldValue('release_year', ''),
                       },
                     }}
                   />

@@ -11,7 +11,7 @@ export const emptyActor = {
   full_name: '',
   nationality: '',
   birth_date: '',
-  deathDate: '',
+  death_date: '',
   photo: '',
   biography: '',
 };
@@ -21,7 +21,7 @@ export const emptyDirector = {
   full_name: '',
   nationality: '',
   birth_date: '',
-  deathDate: '',
+  death_date: '',
   photo: '',
   biography: '',
 };
@@ -30,7 +30,7 @@ export const emptyMovie = {
   id: null,
   title: '',
   genre: '',
-  releaseYear: '',
+  release_year: '',
   poster: '',
   trailer: '',
   directors: [''],

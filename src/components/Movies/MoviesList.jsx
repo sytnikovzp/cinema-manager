@@ -158,7 +158,7 @@ function MoviesList() {
                         primary={`${
                           movie.title ? movie.title : 'Unknown movie'
                         }, ${
-                          movie.releaseYear ? movie.releaseYear : 'unknown year'
+                          movie.release_year ? movie.release_year : 'unknown year'
                         }`}
                       />
                     </ListItemButton>
