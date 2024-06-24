@@ -78,17 +78,10 @@ function DirectorsItem() {
   const formattedMovies =
     filteredMoviesList.join(', ') || 'No movies available';
 
-  function formatDate(dateString) {
-    if (
-      typeof dateString !== 'string' ||
-      !/^\d{4}-\d{2}-\d{2}$/.test(dateString)
-    ) {
-      return '00-00-0000';
-    }
-
-    const parts = dateString.split('-');
-    return parts[2] + '-' + parts[1] + '-' + parts[0];
-  }
+  const formatDate = (dateString) => {
+    const [year, month, day] = dateString.split('-');
+    return `${day}-${month}-${year}`;
+  };
 
   const formattedBirthDate = formatDate(currentDirector.birthDate);
   const formattedDeathDate = formatDate(currentDirector.deathDate);
