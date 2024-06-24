@@ -492,72 +492,74 @@ function MovieForm() {
                       resetForm={resetForm}
                     />
                   )}
+                  <Stack
+                    direction='row'
+                    justifyContent='center'
+                    spacing={1}
+                    sx={stackButtonFormStyle}
+                  >
+                    {activeStep === 0 ? (
+                      <Button
+                        type='button'
+                        variant='contained'
+                        color='warning'
+                        sx={buttonFormStyle}
+                        onClick={goBack}
+                        startIcon={<ArrowBackIcon />}
+                      >
+                        Return
+                      </Button>
+                    ) : (
+                      <Button
+                        variant='contained'
+                        sx={buttonFormStyle}
+                        onClick={handleBack}
+                        startIcon={<ArrowBackIcon />}
+                      >
+                        Back
+                      </Button>
+                    )}
+
+                    {activeStep < stepForms.length - 1 ? (
+                      <Button
+                        variant='contained'
+                        sx={wideButtonFormStyle}
+                        onClick={(event) =>
+                          handleNext(event, validateForm, setTouched)
+                        }
+                        startIcon={<ArrowForwardIcon />}
+                        type='button'
+                      >
+                        Next
+                      </Button>
+                    ) : (
+                      <Button
+                        type='submit'
+                        variant='contained'
+                        color='success'
+                        sx={wideButtonFormStyle}
+                        startIcon={<SaveIcon />}
+                      >
+                        Save
+                      </Button>
+                    )}
+
+                    <Button
+                      type='reset'
+                      variant='contained'
+                      color='error'
+                      onClick={(event) => handleReset(event, resetForm)}
+                      sx={buttonFormStyle}
+                      startIcon={<ClearAllIcon />}
+                    >
+                      Reset
+                    </Button>
+                  </Stack>
                 </StepContent>
               </Step>
             ))}
           </Stepper>
         </Box>
-        <Stack
-          direction='row'
-          justifyContent='center'
-          spacing={1}
-          sx={stackButtonFormStyle}
-        >
-          {activeStep === 0 ? (
-            <Button
-              type='button'
-              variant='contained'
-              color='warning'
-              sx={buttonFormStyle}
-              onClick={goBack}
-              startIcon={<ArrowBackIcon />}
-            >
-              Return
-            </Button>
-          ) : (
-            <Button
-              variant='contained'
-              sx={buttonFormStyle}
-              onClick={handleBack}
-              startIcon={<ArrowBackIcon />}
-            >
-              Back
-            </Button>
-          )}
-
-          {activeStep < stepForms.length - 1 ? (
-            <Button
-              variant='contained'
-              sx={wideButtonFormStyle}
-              onClick={(event) => handleNext(event, validateForm, setTouched)}
-              startIcon={<ArrowForwardIcon />}
-              type='button'
-            >
-              Next
-            </Button>
-          ) : (
-            <Button
-              type='submit'
-              variant='contained'
-              color='success'
-              sx={wideButtonFormStyle}
-              startIcon={<SaveIcon />}
-            >
-              Save
-            </Button>
-          )}
-
-          <Button
-            type='reset'
-            variant='contained'
-            color='error'
-            onClick={(event) => handleReset(event, resetForm)}
-            sx={buttonFormStyle}
-            startIcon={<ClearAllIcon />}
-          >
-            Reset
-          </Button>
-        </Stack>
       </Form>
     );
   };
