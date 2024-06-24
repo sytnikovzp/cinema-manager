@@ -52,7 +52,7 @@ function StudioForm() {
   const schema = Yup.object().shape({
     title: Yup.string().required('Studio title is a required field'),
     location: Yup.string(),
-    foundationYear: Yup.date(),
+    foundation_year: Yup.date(),
     logo: Yup.string().url('Invalid URL logo'),
     about: Yup.string(),
   });
@@ -121,27 +121,27 @@ function StudioForm() {
 
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
-                name='foundationYear'
+                name='foundation_year'
                 label='Foundation year'
                 value={
-                  values.foundationYear
-                    ? dayjs().year(values.foundationYear)
+                  values.foundation_year
+                    ? dayjs().year(values.foundation_year)
                     : null
                 }
                 views={['year']}
                 onChange={(value) =>
-                  setFieldValue('foundationYear', value ? value.year() : '')
+                  setFieldValue('foundation_year', value ? value.year() : '')
                 }
                 sx={{ width: '330px' }}
                 slotProps={{
                   textField: {
                     error:
-                      touched.foundationYear && Boolean(errors.foundationYear),
-                    helperText: touched.foundationYear && errors.foundationYear,
+                      touched.foundation_year && Boolean(errors.foundation_year),
+                    helperText: touched.foundation_year && errors.foundation_year,
                   },
                   field: {
                     clearable: true,
-                    onClear: () => setFieldValue('foundationYear', ''),
+                    onClear: () => setFieldValue('foundation_year', ''),
                   },
                 }}
               />

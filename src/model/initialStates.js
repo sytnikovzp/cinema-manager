@@ -42,7 +42,7 @@ export const studiosState = [
     id: null,
     title: '',
     location: '',
-    foundationYear: '',
+    foundation_year: '',
     logo: '',
     about: '',
   },

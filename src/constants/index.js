@@ -43,7 +43,7 @@ export const emptyStudio = {
   id: null,
   title: '',
   location: '',
-  foundationYear: '',
+  foundation_year: '',
   logo: '',
   about: '',
 };

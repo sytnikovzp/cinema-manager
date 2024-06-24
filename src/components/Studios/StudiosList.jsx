@@ -156,7 +156,7 @@ function StudiosList() {
                       </ListItemAvatar>
                       <ListItemText
                         primary={`${studio.title || 'Unknown studio'}, ${
-                          studio.foundationYear || 'unknown year'
+                          studio.foundation_year || 'unknown year'
                         }`}
                       />
                     </ListItemButton>
