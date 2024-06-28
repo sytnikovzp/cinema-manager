@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 // =============================================
 import Carousel from 'react-material-ui-carousel';
 // =============================================
@@ -26,11 +27,13 @@ function HomePage() {
         {lastSevenMovies.map((movie) => {
           return (
             <Box key={movie.id} style={carouselStyles.imgContainerStyle}>
-              <img
-                src={movie.poster}
-                alt={movie.title}
-                style={carouselStyles.imgStyle}
-              />
+              <Link to={`/movies/${movie.id}`}>
+                <img
+                  src={movie.poster}
+                  alt={movie.title}
+                  style={carouselStyles.imgStyle}
+                />
+              </Link>
             </Box>
           );
         })}
