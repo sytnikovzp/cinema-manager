@@ -31,22 +31,17 @@ export const navItemTextStyle = {
 
 export const carouselStyles = {
   imgContainerStyle: {
-    position: 'relative',
-    maxWidth: '100%',
     height: '70vh',
-    overflow: 'hidden',
-    color: 'red',
+    padding: '15px',
   },
 
   imgStyle: {
     borderRadius: '15px',
-    padding: '5px',
-    maxWidth: '100%',
-    maxHeight: '100%',
     position: 'absolute',
     left: '50%',
     transform: 'translate(-50%, 0)',
-    objectFit: 'contain',
+    width: 'inherit',
+    height: '95%',
   },
 };
 
