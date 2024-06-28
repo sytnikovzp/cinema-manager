@@ -63,6 +63,20 @@ function MovieForm() {
     }
   };
 
+  const sortedActorsList = actorsList
+    .slice()
+    .sort((a, b) => a.full_name.localeCompare(b.full_name));
+
+  const sortedDirectorsList = directorsList
+    .slice()
+    .sort((a, b) => a.full_name.localeCompare(b.full_name));
+
+  const sortedStudiosList = studiosList
+    .slice()
+    .sort((a, b) => a.title.localeCompare(b.title));
+
+  const sortedGenres = genres.sort((a, b) => a - b);
+
   const steps = ['General', 'Directors', 'Actors', 'Studios', 'Storyline'];
 
   const [activeStep, setActiveStep] = useState(0);
@@ -172,7 +186,7 @@ function MovieForm() {
                       <MenuItem value=''>
                         <b>Genre select:</b>
                       </MenuItem>
-                      {genres.map((option) => (
+                      {sortedGenres.map((option) => (
                         <MenuItem key={option.id} value={option.title}>
                           {option.title}
                         </MenuItem>
@@ -288,8 +302,11 @@ function MovieForm() {
                             <MenuItem value=''>
                               <b>Director select:</b>
                             </MenuItem>
-                            {directorsList.map((option) => (
-                              <MenuItem key={option.id} value={option.full_name}>
+                            {sortedDirectorsList.map((option) => (
+                              <MenuItem
+                                key={option.id}
+                                value={option.full_name}
+                              >
                                 {option.full_name}
                               </MenuItem>
                             ))}
@@ -347,8 +364,11 @@ function MovieForm() {
                             <MenuItem value=''>
                               <b>Actor select:</b>
                             </MenuItem>
-                            {actorsList.map((option) => (
-                              <MenuItem key={option.id} value={option.full_name}>
+                            {sortedActorsList.map((option) => (
+                              <MenuItem
+                                key={option.id}
+                                value={option.full_name}
+                              >
                                 {option.full_name}
                               </MenuItem>
                             ))}
@@ -406,7 +426,7 @@ function MovieForm() {
                             <MenuItem value=''>
                               <b>Studio select:</b>
                             </MenuItem>
-                            {studiosList.map((option) => (
+                            {sortedStudiosList.map((option) => (
                               <MenuItem key={option.id} value={option.title}>
                                 {option.title}
                               </MenuItem>
