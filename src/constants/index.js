@@ -167,7 +167,7 @@ export const genres = [
 
 export const nationalities = [
   { id: 1, title: 'USA', description: 'United States of America' },
-  { id: 2, title: 'GB', description: 'Great Britain' },
+  { id: 2, title: 'GB', description: 'Great Britain (England)' },
   { id: 3, title: 'UA', description: 'Ukraine' },
   { id: 4, title: 'DE', description: 'Deutschland' },
   { id: 5, title: 'FR', description: 'France' },
