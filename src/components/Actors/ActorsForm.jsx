@@ -49,6 +49,10 @@ function ActorForm() {
     }
   };
 
+  const sortedNationalities = nationalities
+    .slice()
+    .sort((a, b) => a.description.localeCompare(b.description));
+
   const schema = Yup.object().shape({
     full_name: Yup.string().required('Full name is a required field'),
     nationality: Yup.string(),
@@ -111,7 +115,7 @@ function ActorForm() {
                   <MenuItem value=''>
                     <b>Nationality select:</b>
                   </MenuItem>
-                  {nationalities.map((option) => (
+                  {sortedNationalities.map((option) => (
                     <MenuItem key={option.id} value={option.description}>
                       {option.description}
                     </MenuItem>

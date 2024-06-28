@@ -75,7 +75,11 @@ function MovieForm() {
     .slice()
     .sort((a, b) => a.title.localeCompare(b.title));
 
-  const sortedGenres = genres.sort((a, b) => a - b);
+  const sortedGenres = genres
+    .slice()
+    .sort((a, b) => a.title.localeCompare(b.title));
+
+  console.log(sortedGenres);
 
   const steps = ['General', 'Directors', 'Actors', 'Studios', 'Storyline'];
 

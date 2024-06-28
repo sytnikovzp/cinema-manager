@@ -49,6 +49,10 @@ function StudioForm() {
     }
   };
 
+  const sortedLocations = locations
+    .slice()
+    .sort((a, b) => a.title.localeCompare(b.title));
+
   const schema = Yup.object().shape({
     title: Yup.string().required('Studio title is a required field'),
     location: Yup.string(),
@@ -110,7 +114,7 @@ function StudioForm() {
                   <MenuItem value=''>
                     <b>Location select:</b>
                   </MenuItem>
-                  {locations.map((option) => (
+                  {sortedLocations.map((option) => (
                     <MenuItem key={option.id} value={option.title}>
                       {option.title}
                     </MenuItem>
