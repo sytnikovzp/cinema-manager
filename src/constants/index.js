@@ -165,6 +165,7 @@ export const nationalities = [
   { id: 35, title: 'RU', description: 'Russian' },
   { id: 36, title: 'ISL', description: 'Iceland' },
   { id: 37, title: 'AU', description: 'Austria' },
+  { id: 38, title: 'ES', description: 'Spain' },
 ];
 
 export const locations = [
@@ -199,5 +200,9 @@ export const locations = [
   {
     id: 8,
     title: 'California',
+  },
+  {
+    id: 9,
+    title: 'New York',
   },
 ];
