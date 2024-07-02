@@ -17,7 +17,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import SaveIcon from '@mui/icons-material/Save';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { InputAdornment, MenuItem } from '@mui/material';
+import InputAdornment from '@mui/material/InputAdornment';
+import Autocomplete from '@mui/material/Autocomplete';
 // =============================================
 import { createStudio, updateStudio } from '../../store/slices/studiosSlice';
 import { emptyStudio, locations } from '../../constants';
@@ -101,26 +102,39 @@ function StudioForm() {
           </Box>
           <Box sx={formItemStyle}>
             <Field name='location'>
-              {({ field }) => (
-                <TextField
-                  {...field}
-                  id='location-select'
-                  select
-                  fullWidth
-                  label='Location'
-                  error={touched.location && Boolean(errors.location)}
-                  helperText={touched.location && errors.location}
-                >
-                  <MenuItem value=''>
-                    <b>Location select:</b>
-                  </MenuItem>
-                  {sortedLocations.map((option) => (
-                    <MenuItem key={option.id} value={option.title}>
-                      {option.title}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              )}
+              {({ field, form }) => {
+                const currentValue =
+                  sortedLocations.find(
+                    (option) => option.title === field.value
+                  ) || null;
+
+                return (
+                  <Autocomplete
+                    disablePortal
+                    id='location-select'
+                    options={sortedLocations}
+                    getOptionLabel={(option) => option.title}
+                    fullWidth
+                    value={currentValue}
+                    onChange={(event, value) =>
+                      form.setFieldValue(field.name, value ? value.title : '')
+                    }
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label='Location'
+                        error={
+                          form.touched[field.name] &&
+                          Boolean(form.errors[field.name])
+                        }
+                        helperText={
+                          form.touched[field.name] && form.errors[field.name]
+                        }
+                      />
+                    )}
+                  />
+                );
+              }}
             </Field>
 
             <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -140,8 +154,10 @@ function StudioForm() {
                 slotProps={{
                   textField: {
                     error:
-                      touched.foundation_year && Boolean(errors.foundation_year),
-                    helperText: touched.foundation_year && errors.foundation_year,
+                      touched.foundation_year &&
+                      Boolean(errors.foundation_year),
+                    helperText:
+                      touched.foundation_year && errors.foundation_year,
                   },
                   field: {
                     clearable: true,
