@@ -29,6 +29,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
+import Autocomplete from '@mui/material/Autocomplete';
 // =============================================
 import { createMovie, updateMovie } from '../../store/slices/moviesSlice';
 import { emptyMovie, genres } from '../../constants';
@@ -78,8 +79,6 @@ function MovieForm() {
   const sortedGenres = genres
     .slice()
     .sort((a, b) => a.title.localeCompare(b.title));
-
-  console.log(sortedGenres);
 
   const steps = ['General', 'Directors', 'Actors', 'Studios', 'Storyline'];
 
@@ -177,26 +176,43 @@ function MovieForm() {
               </Box>
               <Box sx={formItemStyle}>
                 <Field name='genre'>
-                  {({ field }) => (
-                    <TextField
-                      {...field}
-                      id='genre-select'
-                      select
-                      fullWidth
-                      label='Genre movie'
-                      error={touched.genre && Boolean(errors.genre)}
-                      helperText={touched.genre && errors.genre}
-                    >
-                      <MenuItem value=''>
-                        <b>Genre select:</b>
-                      </MenuItem>
-                      {sortedGenres.map((option) => (
-                        <MenuItem key={option.id} value={option.title}>
-                          {option.title}
-                        </MenuItem>
-                      ))}
-                    </TextField>
-                  )}
+                  {({ field, form }) => {
+                    const currentValue =
+                      sortedGenres.find(
+                        (option) => option.title === field.value
+                      ) || null;
+
+                    return (
+                      <Autocomplete
+                        disablePortal
+                        id='genre-select'
+                        options={sortedGenres}
+                        getOptionLabel={(option) => option.title}
+                        fullWidth
+                        value={currentValue}
+                        onChange={(event, value) =>
+                          form.setFieldValue(
+                            field.name,
+                            value ? value.title : ''
+                          )
+                        }
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            label='Genre movie'
+                            error={
+                              form.touched[field.name] &&
+                              Boolean(form.errors[field.name])
+                            }
+                            helperText={
+                              form.touched[field.name] &&
+                              form.errors[field.name]
+                            }
+                          />
+                        )}
+                      />
+                    );
+                  }}
                 </Field>
 
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
