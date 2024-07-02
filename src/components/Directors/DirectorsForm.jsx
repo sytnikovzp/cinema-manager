@@ -19,9 +19,12 @@ import SaveIcon from '@mui/icons-material/Save';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import InputAdornment from '@mui/material/InputAdornment';
-import MenuItem from '@mui/material/MenuItem';
+import Autocomplete from '@mui/material/Autocomplete';
 // =============================================
-import { createDirector, updateDirector } from '../../store/slices/directorsSlice';
+import {
+  createDirector,
+  updateDirector,
+} from '../../store/slices/directorsSlice';
 import { emptyDirector, nationalities } from '../../constants';
 // =============================================
 import {
@@ -37,7 +40,9 @@ function DirectorForm() {
   const directors = useSelector((state) => state.directorsList.directors);
 
   const { id } = useParams();
-  const currentDirector = directors.find((director) => Number(director.id) === Number(id));
+  const currentDirector = directors.find(
+    (director) => Number(director.id) === Number(id)
+  );
 
   const navigate = useNavigate();
 
@@ -102,26 +107,42 @@ function DirectorForm() {
           </Box>
           <Box sx={formItemStyle}>
             <Field name='nationality'>
-              {({ field }) => (
-                <TextField
-                  {...field}
-                  id='nationality-select'
-                  select
-                  fullWidth
-                  label='Nationality'
-                  error={touched.nationality && Boolean(errors.nationality)}
-                  helperText={touched.nationality && errors.nationality}
-                >
-                  <MenuItem value=''>
-                    <b>Nationality select:</b>
-                  </MenuItem>
-                  {sortedNationalities.map((option) => (
-                    <MenuItem key={option.id} value={option.description}>
-                      {option.description}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              )}
+              {({ field, form }) => {
+                const currentValue =
+                  sortedNationalities.find(
+                    (option) => option.description === field.value
+                  ) || null;
+
+                return (
+                  <Autocomplete
+                    disablePortal
+                    id='nationality-select'
+                    options={sortedNationalities}
+                    getOptionLabel={(option) => option.description}
+                    fullWidth
+                    value={currentValue}
+                    onChange={(event, value) =>
+                      form.setFieldValue(
+                        field.name,
+                        value ? value.description : ''
+                      )
+                    }
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label='Nationality'
+                        error={
+                          form.touched[field.name] &&
+                          Boolean(form.errors[field.name])
+                        }
+                        helperText={
+                          form.touched[field.name] && form.errors[field.name]
+                        }
+                      />
+                    )}
+                  />
+                );
+              }}
             </Field>
           </Box>
           <Box sx={formItemStyle}>
