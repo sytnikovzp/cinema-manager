@@ -162,11 +162,9 @@ export const nationalities = [
   { id: 32, title: 'MLT', description: 'Malta' },
   { id: 33, title: 'BEN', description: 'Benin' },
   { id: 34, title: 'SWE', description: 'Sweden' },
-  { id: 35, title: 'FIN', description: 'Finland' },
-  { id: 36, title: 'RU', description: 'Russian' },
-  { id: 37, title: 'ISL', description: 'Iceland' },
-  { id: 38, title: 'AU', description: 'Austria' },
-  { id: 39, title: 'BJ', description: 'Benin' },
+  { id: 35, title: 'RU', description: 'Russian' },
+  { id: 36, title: 'ISL', description: 'Iceland' },
+  { id: 37, title: 'AU', description: 'Austria' },
 ];
 
 export const locations = [
