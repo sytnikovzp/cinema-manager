@@ -120,10 +120,7 @@ function MoviesList() {
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = reversedMovies.slice(
-    indexOfFirstItem,
-    indexOfLastItem
-  );
+  const currentItems = reversedMovies.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
@@ -154,7 +151,7 @@ function MoviesList() {
       <Box sx={scrollListBoxStyle}>
         <List>
           {status === 'loading'
-            ? Array(5)
+            ? Array(itemsPerPage)
                 .fill()
                 .map((_, index) => (
                   <Box key={index}>{renderLoadingSkeleton()}</Box>
@@ -175,7 +172,9 @@ function MoviesList() {
                         primary={`${
                           movie.title ? movie.title : 'Unknown movie'
                         }, ${
-                          movie.release_year ? movie.release_year : 'unknown year'
+                          movie.release_year
+                            ? movie.release_year
+                            : 'unknown year'
                         }`}
                       />
                     </ListItemButton>

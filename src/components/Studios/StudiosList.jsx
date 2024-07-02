@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // =============================================
 import { Link } from 'react-router-dom';
@@ -23,6 +23,8 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 import Skeleton from '@mui/material/Skeleton';
+import Pagination from '@mui/material/Pagination';
+import { useMediaQuery } from '@mui/material';
 // =============================================
 import {
   buttonMainStyle,
@@ -114,6 +116,16 @@ function StudiosList() {
     </Stack>
   );
 
+  const itemsPerPage = useItemsPerPage();
+  const [currentPage, setCurrentPage] = useState(1);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = reversedStudios.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
   return (
     <>
       <Stack direction='row' justifyContent='space-between'>
@@ -139,12 +151,12 @@ function StudiosList() {
       <Box sx={scrollListBoxStyle}>
         <List>
           {status === 'loading'
-            ? Array(5)
+            ? Array(itemsPerPage)
                 .fill()
                 .map((_, index) => (
                   <Box key={index}>{renderLoadingSkeleton()}</Box>
                 ))
-            : reversedStudios.map((studio) => (
+            : currentItems.map((studio) => (
                 <Stack key={studio.id} direction='column' marginBottom={1}>
                   <ListItem
                     component={Link}
@@ -190,6 +202,15 @@ function StudiosList() {
         </List>
       </Box>
 
+      <Stack spacing={2} alignItems='center' marginTop={2}>
+        <Pagination
+          count={Math.ceil(reversedStudios.length / itemsPerPage)}
+          page={currentPage}
+          onChange={handlePageChange}
+          color='primary'
+        />
+      </Stack>
+
       <Snackbar
         open={snackbar.open}
         autoHideDuration={1000}
@@ -209,3 +230,18 @@ function StudiosList() {
 }
 
 export default StudiosList;
+
+const useItemsPerPage = () => {
+  const isXs = useMediaQuery((theme) => theme.breakpoints.down('xs'));
+  const isSm = useMediaQuery((theme) => theme.breakpoints.between('sm', 'md'));
+  const isMd = useMediaQuery((theme) => theme.breakpoints.between('md', 'lg'));
+  const isLg = useMediaQuery((theme) => theme.breakpoints.between('lg', 'xl'));
+  const isXl = useMediaQuery((theme) => theme.breakpoints.up('xl'));
+
+  if (isXs) return 3;
+  if (isSm) return 4;
+  if (isMd) return 5;
+  if (isLg) return 6;
+  if (isXl) return 10;
+  return 5;
+};

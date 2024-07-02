@@ -120,10 +120,7 @@ function ActorsList() {
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = reversedActors.slice(
-    indexOfFirstItem,
-    indexOfLastItem
-  );
+  const currentItems = reversedActors.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
@@ -154,7 +151,7 @@ function ActorsList() {
       <Box sx={scrollListBoxStyle}>
         <List>
           {status === 'loading'
-            ? Array(5)
+            ? Array(itemsPerPage)
                 .fill()
                 .map((_, index) => (
                   <Box key={index}>{renderLoadingSkeleton()}</Box>
