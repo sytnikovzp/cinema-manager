@@ -20,10 +20,8 @@ import ClearAllIcon from '@mui/icons-material/ClearAll';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DomainAddIcon from '@mui/icons-material/DomainAdd';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
-import Select from '@mui/material/Select';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ClearIcon from '@mui/icons-material/Clear';
 import Stepper from '@mui/material/Stepper';
@@ -64,17 +62,38 @@ function MovieForm() {
     }
   };
 
-  const sortedActorsList = actorsList
-    .slice()
-    .sort((a, b) => a.full_name.localeCompare(b.full_name));
+  const optionsForActors =
+    actorsList.length > 1
+      ? actorsList.map((option) => {
+          const firstLetter = option.full_name[0].toUpperCase();
+          return {
+            firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
+            ...option,
+          };
+        })
+      : [];
 
-  const sortedDirectorsList = directorsList
-    .slice()
-    .sort((a, b) => a.full_name.localeCompare(b.full_name));
+  const optionsForDirectors =
+    directorsList.length > 1
+      ? directorsList.map((option) => {
+          const firstLetter = option.full_name[0].toUpperCase();
+          return {
+            firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
+            ...option,
+          };
+        })
+      : [];
 
-  const sortedStudiosList = studiosList
-    .slice()
-    .sort((a, b) => a.title.localeCompare(b.title));
+  const optionsForStudios =
+    studiosList.length > 1
+      ? studiosList.map((option) => {
+          const firstLetter = option.title[0].toUpperCase();
+          return {
+            firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
+            ...option,
+          };
+        })
+      : [];
 
   const sortedGenres = genres
     .slice()
@@ -314,22 +333,49 @@ function MovieForm() {
                       </Typography>
                       {directors.map((director, index) => (
                         <Stack spacing={2} key={index} direction='row'>
-                          <Field
-                            name={`directors[${index}]`}
-                            as={Select}
-                            fullWidth
-                          >
-                            <MenuItem value=''>
-                              <b>Director select:</b>
-                            </MenuItem>
-                            {sortedDirectorsList.map((option) => (
-                              <MenuItem
-                                key={option.id}
-                                value={option.full_name}
-                              >
-                                {option.full_name}
-                              </MenuItem>
-                            ))}
+                          <Field name={`directors[${index}]`}>
+                            {({ field, form }) => {
+                              const currentValue =
+                                optionsForDirectors.find(
+                                  (option) => option.full_name === field.value
+                                ) || null;
+
+                              return (
+                                <Autocomplete
+                                  disablePortal
+                                  id={`directors-${index}`}
+                                  options={optionsForDirectors.sort(
+                                    (a, b) =>
+                                      -b.firstLetter.localeCompare(
+                                        a.firstLetter
+                                      )
+                                  )}
+                                  groupBy={(option) => option.firstLetter}
+                                  getOptionLabel={(option) => option.full_name}
+                                  fullWidth
+                                  value={currentValue}
+                                  onChange={(event, value) =>
+                                    form.setFieldValue(
+                                      field.name,
+                                      value ? value.full_name : ''
+                                    )
+                                  }
+                                  renderInput={(params) => (
+                                    <TextField
+                                      {...params}
+                                      error={
+                                        form.touched[field.name] &&
+                                        Boolean(form.errors[field.name])
+                                      }
+                                      helperText={
+                                        form.touched[field.name] &&
+                                        form.errors[field.name]
+                                      }
+                                    />
+                                  )}
+                                />
+                              );
+                            }}
                           </Field>
                           <IconButton onClick={() => remove(index)}>
                             <ClearIcon />
@@ -376,22 +422,49 @@ function MovieForm() {
                       </Typography>
                       {actors.map((actor, index) => (
                         <Stack spacing={2} key={index} direction='row'>
-                          <Field
-                            name={`actors[${index}]`}
-                            as={Select}
-                            fullWidth
-                          >
-                            <MenuItem value=''>
-                              <b>Actor select:</b>
-                            </MenuItem>
-                            {sortedActorsList.map((option) => (
-                              <MenuItem
-                                key={option.id}
-                                value={option.full_name}
-                              >
-                                {option.full_name}
-                              </MenuItem>
-                            ))}
+                          <Field name={`actors[${index}]`}>
+                            {({ field, form }) => {
+                              const currentValue =
+                                optionsForActors.find(
+                                  (option) => option.full_name === field.value
+                                ) || null;
+
+                              return (
+                                <Autocomplete
+                                  disablePortal
+                                  id={`actors-${index}`}
+                                  options={optionsForActors.sort(
+                                    (a, b) =>
+                                      -b.firstLetter.localeCompare(
+                                        a.firstLetter
+                                      )
+                                  )}
+                                  groupBy={(option) => option.firstLetter}
+                                  getOptionLabel={(option) => option.full_name}
+                                  fullWidth
+                                  value={currentValue}
+                                  onChange={(event, value) =>
+                                    form.setFieldValue(
+                                      field.name,
+                                      value ? value.full_name : ''
+                                    )
+                                  }
+                                  renderInput={(params) => (
+                                    <TextField
+                                      {...params}
+                                      error={
+                                        form.touched[field.name] &&
+                                        Boolean(form.errors[field.name])
+                                      }
+                                      helperText={
+                                        form.touched[field.name] &&
+                                        form.errors[field.name]
+                                      }
+                                    />
+                                  )}
+                                />
+                              );
+                            }}
                           </Field>
                           <IconButton onClick={() => remove(index)}>
                             <ClearIcon />
@@ -438,19 +511,49 @@ function MovieForm() {
                       </Typography>
                       {studios.map((studio, index) => (
                         <Stack spacing={2} key={index} direction='row'>
-                          <Field
-                            name={`studios[${index}]`}
-                            as={Select}
-                            fullWidth
-                          >
-                            <MenuItem value=''>
-                              <b>Studio select:</b>
-                            </MenuItem>
-                            {sortedStudiosList.map((option) => (
-                              <MenuItem key={option.id} value={option.title}>
-                                {option.title}
-                              </MenuItem>
-                            ))}
+                          <Field name={`studios[${index}]`}>
+                            {({ field, form }) => {
+                              const currentValue =
+                                optionsForStudios.find(
+                                  (option) => option.title === field.value
+                                ) || null;
+
+                              return (
+                                <Autocomplete
+                                  disablePortal
+                                  id={`studios-${index}`}
+                                  options={optionsForStudios.sort(
+                                    (a, b) =>
+                                      -b.firstLetter.localeCompare(
+                                        a.firstLetter
+                                      )
+                                  )}
+                                  groupBy={(option) => option.firstLetter}
+                                  getOptionLabel={(option) => option.title}
+                                  fullWidth
+                                  value={currentValue}
+                                  onChange={(event, value) =>
+                                    form.setFieldValue(
+                                      field.name,
+                                      value ? value.title : ''
+                                    )
+                                  }
+                                  renderInput={(params) => (
+                                    <TextField
+                                      {...params}
+                                      error={
+                                        form.touched[field.name] &&
+                                        Boolean(form.errors[field.name])
+                                      }
+                                      helperText={
+                                        form.touched[field.name] &&
+                                        form.errors[field.name]
+                                      }
+                                    />
+                                  )}
+                                />
+                              );
+                            }}
                           </Field>
                           <IconButton onClick={() => remove(index)}>
                             <ClearIcon />
