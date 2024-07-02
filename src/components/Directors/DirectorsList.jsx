@@ -45,6 +45,8 @@ function DirectorsList() {
   const dispatch = useDispatch();
 
   const directors = useSelector((state) => state.directorsList.directors);
+  const reversedDirectors = [...directors].reverse();
+
   const status = useSelector((state) => state.directorsList.status);
 
   const { snackbar, showSnackbar, handleClose } = useSnackbar(() =>
@@ -142,7 +144,7 @@ function DirectorsList() {
                 .map((_, index) => (
                   <Box key={index}>{renderLoadingSkeleton()}</Box>
                 ))
-            : directors.map((director) => (
+            : reversedDirectors.map((director) => (
                 <Stack key={director.id} direction='column' marginBottom={1}>
                   <ListItem
                     component={Link}

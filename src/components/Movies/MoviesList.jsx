@@ -45,6 +45,8 @@ function MoviesList() {
   const dispatch = useDispatch();
 
   const movies = useSelector((state) => state.moviesList.movies);
+  const reversedMovies = [...movies].reverse();
+
   const status = useSelector((state) => state.moviesList.status);
 
   const { snackbar, showSnackbar, handleClose } = useSnackbar(() =>
@@ -142,7 +144,7 @@ function MoviesList() {
                 .map((_, index) => (
                   <Box key={index}>{renderLoadingSkeleton()}</Box>
                 ))
-            : movies.map((movie) => (
+            : reversedMovies.map((movie) => (
                 <Stack key={movie.id} direction='column' marginBottom={1}>
                   <ListItem
                     component={Link}

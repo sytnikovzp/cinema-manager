@@ -45,6 +45,8 @@ function ActorsList() {
   const dispatch = useDispatch();
 
   const actors = useSelector((state) => state.actorsList.actors);
+  const reversedActors = [...actors].reverse();
+
   const status = useSelector((state) => state.actorsList.status);
 
   const { snackbar, showSnackbar, handleClose } = useSnackbar(() =>
@@ -142,7 +144,7 @@ function ActorsList() {
                 .map((_, index) => (
                   <Box key={index}>{renderLoadingSkeleton()}</Box>
                 ))
-            : actors.map((actor) => (
+            : reversedActors.map((actor) => (
                 <Stack key={actor.id} direction='column' marginBottom={1}>
                   <ListItem
                     component={Link}

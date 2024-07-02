@@ -45,6 +45,8 @@ function StudiosList() {
   const dispatch = useDispatch();
 
   const studios = useSelector((state) => state.studiosList.studios);
+  const reversedStudios = [...studios].reverse();
+
   const status = useSelector((state) => state.studiosList.status);
 
   const { snackbar, showSnackbar, handleClose } = useSnackbar(() =>
@@ -142,7 +144,7 @@ function StudiosList() {
                 .map((_, index) => (
                   <Box key={index}>{renderLoadingSkeleton()}</Box>
                 ))
-            : studios.map((studio) => (
+            : reversedStudios.map((studio) => (
                 <Stack key={studio.id} direction='column' marginBottom={1}>
                   <ListItem
                     component={Link}
