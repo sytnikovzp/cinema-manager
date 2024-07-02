@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // =============================================
 import { Link } from 'react-router-dom';
@@ -23,6 +23,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 import Skeleton from '@mui/material/Skeleton';
+import Pagination from '@mui/material/Pagination';
 // =============================================
 import {
   buttonMainStyle,
@@ -114,6 +115,20 @@ function DirectorsList() {
     </Stack>
   );
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = reversedDirectors.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
   return (
     <>
       <Stack direction='row' justifyContent='space-between'>
@@ -144,7 +159,7 @@ function DirectorsList() {
                 .map((_, index) => (
                   <Box key={index}>{renderLoadingSkeleton()}</Box>
                 ))
-            : reversedDirectors.map((director) => (
+            : currentItems.map((director) => (
                 <Stack key={director.id} direction='column' marginBottom={1}>
                   <ListItem
                     component={Link}
@@ -157,9 +172,9 @@ function DirectorsList() {
                         <StyledAvatar src={director.photo} />
                       </ListItemAvatar>
                       <ListItemText
-                        primary={`${director.full_name || 'Unknown director'}, ${
-                          director.nationality || 'unknown nationality'
-                        }`}
+                        primary={`${
+                          director.full_name || 'Unknown director'
+                        }, ${director.nationality || 'unknown nationality'}`}
                       />
                     </ListItemButton>
 
@@ -189,6 +204,15 @@ function DirectorsList() {
               ))}
         </List>
       </Box>
+
+      <Stack spacing={2} alignItems='center' marginTop={2}>
+        <Pagination
+          count={Math.ceil(reversedDirectors.length / itemsPerPage)}
+          page={currentPage}
+          onChange={handlePageChange}
+          color='primary'
+        />
+      </Stack>
 
       <Snackbar
         open={snackbar.open}
