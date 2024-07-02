@@ -28,7 +28,7 @@ import {
 import { emptyActor } from '../../constants';
 import { resetStatus } from '../../store/slices/actorsSlice';
 // =============================================
-import useSnackbar from '../../hooks';
+import useSnackbar from '../../hooks/useSnackbar';
 // =============================================
 import ActorsBiography from './ActorsBiography';
 

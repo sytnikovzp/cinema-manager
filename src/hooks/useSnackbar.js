@@ -15,15 +15,18 @@ const useSnackbar = (onCloseCallback) => {
     });
   };
 
-  const handleClose = useCallback((event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setSnackbar({ ...snackbar, open: false });
-    if (onCloseCallback) {
-      onCloseCallback();
-    }
-  }, [snackbar, onCloseCallback]);
+  const handleClose = useCallback(
+    (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setSnackbar({ ...snackbar, open: false });
+      if (onCloseCallback) {
+        onCloseCallback();
+      }
+    },
+    [snackbar, onCloseCallback]
+  );
 
   return {
     snackbar,

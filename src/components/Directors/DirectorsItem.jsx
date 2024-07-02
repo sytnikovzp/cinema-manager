@@ -28,7 +28,7 @@ import {
 import { emptyDirector } from '../../constants';
 import { resetStatus } from '../../store/slices/directorsSlice';
 // =============================================
-import useSnackbar from '../../hooks';
+import useSnackbar from '../../hooks/useSnackbar';
 // =============================================
 import DirectorsBiography from './DirectorsBiography';
 

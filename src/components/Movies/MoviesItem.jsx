@@ -29,7 +29,7 @@ import {
 import { emptyMovie } from '../../constants';
 import { resetStatus } from '../../store/slices/moviesSlice';
 // =============================================
-import useSnackbar from '../../hooks';
+import useSnackbar from '../../hooks/useSnackbar';
 // =============================================
 import MoviesPlayer from './MoviesPlayer';
 

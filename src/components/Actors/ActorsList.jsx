@@ -24,7 +24,6 @@ import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 import Skeleton from '@mui/material/Skeleton';
 import Pagination from '@mui/material/Pagination';
-import { useMediaQuery } from '@mui/material';
 // =============================================
 import {
   buttonMainStyle,
@@ -34,7 +33,8 @@ import {
 // =============================================
 import { deleteActor, resetStatus } from '../../store/slices/actorsSlice';
 // =============================================
-import useSnackbar from '../../hooks';
+import useSnackbar from '../../hooks/useSnackbar';
+import useItemsPerPage from '../../hooks/useItemsPerPage';
 
 const StyledAvatar = styled(Avatar)({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
@@ -230,18 +230,3 @@ function ActorsList() {
 }
 
 export default ActorsList;
-
-const useItemsPerPage = () => {
-  const isXs = useMediaQuery((theme) => theme.breakpoints.down('xs'));
-  const isSm = useMediaQuery((theme) => theme.breakpoints.between('sm', 'md'));
-  const isMd = useMediaQuery((theme) => theme.breakpoints.between('md', 'lg'));
-  const isLg = useMediaQuery((theme) => theme.breakpoints.between('lg', 'xl'));
-  const isXl = useMediaQuery((theme) => theme.breakpoints.up('xl'));
-
-  if (isXs) return 3;
-  if (isSm) return 4;
-  if (isMd) return 5;
-  if (isLg) return 6;
-  if (isXl) return 10;
-  return 5;
-};

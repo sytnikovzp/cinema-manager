@@ -28,7 +28,7 @@ import {
 import { emptyStudio } from '../../constants';
 import { resetStatus } from '../../store/slices/studiosSlice';
 // =============================================
-import useSnackbar from '../../hooks';
+import useSnackbar from '../../hooks/useSnackbar';
 // =============================================
 import StudiosAbout from './StudiosAbout';
 
