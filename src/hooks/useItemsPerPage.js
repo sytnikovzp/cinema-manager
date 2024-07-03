@@ -11,7 +11,7 @@ const useItemsPerPage = () => {
   if (isSm) return 4;
   if (isMd) return 5;
   if (isLg) return 6;
-  if (isXl) return 10;
+  if (isXl) return 8;
   return 5;
 };
 
