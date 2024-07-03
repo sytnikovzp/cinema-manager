@@ -95,7 +95,7 @@ function StudiosItem() {
           startIcon={<KeyboardBackspaceIcon />}
           onClick={goBack}
         >
-          Go back
+          To studios
         </Button>
 
         <Button

@@ -116,7 +116,7 @@ function ActorsItem() {
           startIcon={<KeyboardBackspaceIcon />}
           onClick={goBack}
         >
-          Go back
+          To actors
         </Button>
 
         <Button

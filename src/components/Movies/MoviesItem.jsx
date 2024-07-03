@@ -94,7 +94,7 @@ function MoviesItem() {
           startIcon={<KeyboardBackspaceIcon />}
           onClick={goBack}
         >
-          Go back
+          To movies
         </Button>
 
         <Button

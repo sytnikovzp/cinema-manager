@@ -118,7 +118,7 @@ function DirectorsItem() {
           startIcon={<KeyboardBackspaceIcon />}
           onClick={goBack}
         >
-          Go back
+          To directors
         </Button>
 
         <Button
