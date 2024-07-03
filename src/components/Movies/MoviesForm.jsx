@@ -259,6 +259,8 @@ function MovieForm() {
                         onClear: () => setFieldValue('release_year', ''),
                       },
                     }}
+                    minDate={dayjs().year(1950)}
+                    maxDate={dayjs().year(dayjs().year())}
                   />
                 </LocalizationProvider>
               </Box>

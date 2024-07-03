@@ -179,6 +179,7 @@ function DirectorForm() {
                     onClear: () => setFieldValue('birth_date', ''),
                   },
                 }}
+                maxDate={dayjs()}
               />
 
               <DatePicker
@@ -211,6 +212,7 @@ function DirectorForm() {
                     onClear: () => setFieldValue('death_date', ''),
                   },
                 }}
+                maxDate={dayjs()}
               />
             </LocalizationProvider>
           </Box>

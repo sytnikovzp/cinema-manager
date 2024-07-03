@@ -164,6 +164,7 @@ function StudioForm() {
                     onClear: () => setFieldValue('foundation_year', ''),
                   },
                 }}
+                maxDate={dayjs().year(dayjs().year())}
               />
             </LocalizationProvider>
           </Box>

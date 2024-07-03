@@ -174,6 +174,7 @@ function ActorForm() {
                     onClear: () => setFieldValue('birth_date', ''),
                   },
                 }}
+                maxDate={dayjs()}
               />
 
               <DatePicker
@@ -206,6 +207,7 @@ function ActorForm() {
                     onClear: () => setFieldValue('death_date', ''),
                   },
                 }}
+                maxDate={dayjs()}
               />
             </LocalizationProvider>
           </Box>
