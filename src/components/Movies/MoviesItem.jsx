@@ -24,6 +24,7 @@ import {
   itemCardMediaBoxStyle,
   itemInformationBoxStyle,
   textIndentStyle,
+  itemLinkStyle,
 } from '../../services/styleService';
 // =============================================
 import { emptyMovie } from '../../constants';
@@ -38,6 +39,10 @@ function MoviesItem() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const movies = useSelector((state) => state.moviesList.movies);
+  const studiosList = useSelector((state) => state.studiosList.studios);
+  const directorsList = useSelector((state) => state.directorsList.directors);
+  const actorsList = useSelector((state) => state.actorsList.actors);
+
   const status = useSelector((state) => state.moviesList.status);
 
   const { snackbar, showSnackbar, handleClose } = useSnackbar(() =>
@@ -72,12 +77,83 @@ function MoviesItem() {
   const movie = movies.find((movie) => Number(movie.id) === Number(id));
   const currentMovie = movie ? movie : emptyMovie;
 
-  const formattedDirectors =
-    currentMovie.directors.join(', ') || 'No directors available';
-  const formattedActors =
-    currentMovie.actors.join(', ') || 'No actors available';
+  const filteredStudiosList = studiosList
+    .filter((studio) => {
+      for (let i = 0; i < currentMovie.studios.length; i++) {
+        if (studio.title.includes(currentMovie.studios[i])) {
+          return true;
+        }
+      }
+      return false;
+    })
+    .map((studio) => ({ id: studio.id, title: studio.title }));
+
   const formattedStudios =
-    currentMovie.studios.join(', ') || 'No studios available';
+    filteredStudiosList.length > 0
+      ? filteredStudiosList
+          .map((studio) => (
+            <Link
+              key={studio.id}
+              to={`/studios/${studio.id}`}
+              style={itemLinkStyle}
+            >
+              {studio.title}
+            </Link>
+          ))
+          .reduce((prev, curr) => [prev, ', ', curr])
+      : 'No studios available';
+
+  const filteredDirectorsList = directorsList
+    .filter((director) => {
+      for (let i = 0; i < currentMovie.directors.length; i++) {
+        if (director.full_name.includes(currentMovie.directors[i])) {
+          return true;
+        }
+      }
+      return false;
+    })
+    .map((director) => ({ id: director.id, full_name: director.full_name }));
+
+  const formattedDirectors =
+    filteredDirectorsList.length > 0
+      ? filteredDirectorsList
+          .map((director) => (
+            <Link
+              key={director.id}
+              to={`/directors/${director.id}`}
+              style={itemLinkStyle}
+            >
+              {director.full_name}
+            </Link>
+          ))
+          .reduce((prev, curr) => [prev, ', ', curr])
+      : 'No directors available';
+
+  const filteredActorsList = actorsList
+    .filter((actor) => {
+      for (let i = 0; i < currentMovie.actors.length; i++) {
+        if (actor.full_name.includes(currentMovie.actors[i])) {
+          return true;
+        }
+      }
+      return false;
+    })
+    .map((actor) => ({ id: actor.id, full_name: actor.full_name }));
+
+  const formattedActors =
+    filteredActorsList.length > 0
+      ? filteredActorsList
+          .map((actor) => (
+            <Link
+              key={actor.id}
+              to={`/actors/${actor.id}`}
+              style={itemLinkStyle}
+            >
+              {actor.full_name}
+            </Link>
+          ))
+          .reduce((prev, curr) => [prev, ', ', curr])
+      : 'No actors available';
 
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
