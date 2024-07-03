@@ -23,6 +23,7 @@ import {
   itemComponentBoxMainStyle,
   itemCardMediaBoxStyle,
   itemInformationBoxStyle,
+  itemLinkStyle,
 } from '../../services/styleService';
 // =============================================
 import { emptyStudio } from '../../constants';
@@ -71,10 +72,22 @@ function StudiosItem() {
 
   const filteredMoviesList = moviesList
     .filter((movie) => movie.studios.includes(currentStudio.title))
-    .map((movie) => movie.title);
+    .map((movie) => ({ id: movie.id, title: movie.title }));
 
   const formattedMovies =
-    filteredMoviesList.join(', ') || 'No movies available';
+    filteredMoviesList.length > 0
+      ? filteredMoviesList
+          .map((movie) => (
+            <Link
+              key={movie.id}
+              to={`/movies/${movie.id}`}
+              style={itemLinkStyle}
+            >
+              {movie.title}
+            </Link>
+          ))
+          .reduce((prev, curr) => [prev, ', ', curr])
+      : 'No movies available';
 
   const goBack = () => {
     navigate('/studios');
