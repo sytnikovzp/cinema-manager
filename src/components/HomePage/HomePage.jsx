@@ -19,7 +19,7 @@ function HomePage() {
 
   const movies = useSelector((state) => state.moviesList.movies);
 
-  const lastSevenMovies = movies.slice(-7);
+  const lastSevenMovies = movies.slice(-7).reverse();
 
   return (
     <>
