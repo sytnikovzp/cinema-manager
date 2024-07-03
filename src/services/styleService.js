@@ -141,6 +141,11 @@ export const itemInformationBoxStyle = {
   paddingRight: 2,
 };
 
+export const itemLinkStyle = {
+  textDecoration: 'underline dotted',
+  color: 'inherit',
+};
+
 // =============================================
 // MoviesPlayer component
 
