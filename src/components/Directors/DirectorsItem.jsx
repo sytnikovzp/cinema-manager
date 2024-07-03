@@ -25,7 +25,7 @@ import {
   itemInformationBoxStyle,
 } from '../../services/styleService';
 // =============================================
-import { emptyDirector } from '../../constants';
+import { emptyDirector, calculateAge, formatDate } from '../../constants';
 import { resetStatus } from '../../store/slices/directorsSlice';
 // =============================================
 import useSnackbar from '../../hooks/useSnackbar';
@@ -78,13 +78,13 @@ function DirectorsItem() {
   const formattedMovies =
     filteredMoviesList.join(', ') || 'No movies available';
 
-  const formatDate = (dateString) => {
-    const [year, month, day] = dateString.split('-');
-    return `${day}-${month}-${year}`;
-  };
-
   const formattedbirth_date = formatDate(currentDirector.birth_date);
   const formatteddeath_date = formatDate(currentDirector.death_date);
+
+  const calculatedAge = calculateAge(
+    currentDirector.birth_date,
+    currentDirector.death_date
+  );
 
   const goBack = () => {
     navigate('/directors');
@@ -179,6 +179,10 @@ function DirectorsItem() {
               </Typography>
               <Typography variant='body1' component='div'>
                 {currentDirector.birth_date ? formattedbirth_date : 'Unknown'}
+                {currentDirector.birth_date &&
+                  (currentDirector.birth_date && currentDirector.death_date
+                    ? ` (aged ${calculatedAge})`
+                    : ` (age ${calculatedAge})`)}
               </Typography>
             </Stack>
 

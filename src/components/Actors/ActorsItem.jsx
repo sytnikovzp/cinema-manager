@@ -25,7 +25,7 @@ import {
   itemInformationBoxStyle,
 } from '../../services/styleService';
 // =============================================
-import { emptyActor } from '../../constants';
+import { emptyActor, calculateAge, formatDate } from '../../constants';
 import { resetStatus } from '../../store/slices/actorsSlice';
 // =============================================
 import useSnackbar from '../../hooks/useSnackbar';
@@ -76,13 +76,13 @@ function ActorsItem() {
   const formattedMovies =
     filteredMoviesList.join(', ') || 'No movies available';
 
-  const formatDate = (dateString) => {
-    const [year, month, day] = dateString.split('-');
-    return `${day}-${month}-${year}`;
-  };
-
   const formattedbirth_date = formatDate(currentActor.birth_date);
   const formatteddeath_date = formatDate(currentActor.death_date);
+
+  const calculatedAge = calculateAge(
+    currentActor.birth_date,
+    currentActor.death_date
+  );
 
   const goBack = () => {
     navigate('/actors');
@@ -177,6 +177,10 @@ function ActorsItem() {
               </Typography>
               <Typography variant='body1' component='div'>
                 {currentActor.birth_date ? formattedbirth_date : 'Unknown'}
+                {currentActor.birth_date &&
+                  (currentActor.birth_date && currentActor.death_date
+                    ? ` (aged ${calculatedAge})`
+                    : ` (age ${calculatedAge})`)}
               </Typography>
             </Stack>
 
