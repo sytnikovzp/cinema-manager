@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 // =============================================
 import Carousel from 'react-material-ui-carousel';
@@ -7,16 +6,8 @@ import Carousel from 'react-material-ui-carousel';
 import Box from '@mui/material/Box';
 // =============================================
 import { carouselStyles } from '../../services/styleService';
-// =============================================
-import { getAllMovies } from '../../store/slices/moviesSlice';
 
 function HomePage() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllMovies());
-  }, [dispatch]);
-
   const movies = useSelector((state) => state.moviesList.movies);
 
   const lastSevenMovies = movies.slice(-15).reverse();

@@ -1,9 +1,16 @@
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from 'react-router-dom';
+// =============================================
+import { getAllMovies } from './store/slices/moviesSlice';
+import { getAllActors } from './store/slices/actorsSlice';
+import { getAllDirectors } from './store/slices/directorsSlice';
+import { getAllStudios } from './store/slices/studiosSlice';
 // =============================================
 import Movies from './components/Movies/Movies';
 import Actors from './components/Actors/Actors';
@@ -14,6 +21,24 @@ import Layout from './components/Layout';
 import { ToggleColorMode } from './components/Layout';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllMovies());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getAllActors());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getAllDirectors());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getAllStudios());
+  }, [dispatch]);
+
   return (
     <ToggleColorMode>
       <Router>

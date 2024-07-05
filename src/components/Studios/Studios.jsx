@@ -1,5 +1,3 @@
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 // =============================================
 import Paper from '@mui/material/Paper';
@@ -7,23 +5,10 @@ import Box from '@mui/material/Box';
 // =============================================
 import { rootComponentPaperStyle } from '../../services/styleService';
 // =============================================
-import { getAllStudios } from '../../store/slices/studiosSlice';
-import { getAllMovies } from '../../store/slices/moviesSlice';
-// =============================================
 import StudiosItem from './StudiosItem';
 import StudiosList from './StudiosList';
 
 function Studios() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllStudios());
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(getAllMovies());
-  }, [dispatch]);
-
   return (
     <Box
       sx={{

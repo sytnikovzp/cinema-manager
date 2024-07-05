@@ -1,5 +1,3 @@
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 // =============================================
 import Paper from '@mui/material/Paper';
@@ -7,23 +5,10 @@ import Box from '@mui/material/Box';
 // =============================================
 import { rootComponentPaperStyle } from '../../services/styleService';
 // =============================================
-import { getAllDirectors } from '../../store/slices/directorsSlice';
-import { getAllMovies } from '../../store/slices/moviesSlice';
-// =============================================
 import DirectorsItem from './DirectorsItem';
 import DirectorsList from './DirectorsList';
 
 function Directors() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllDirectors());
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(getAllMovies());
-  }, [dispatch]);
-
   return (
     <Box
       sx={{
