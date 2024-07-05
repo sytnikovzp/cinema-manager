@@ -45,6 +45,14 @@ export const carouselStyles = {
   },
 };
 
+export const skeletonStyles = {
+  height: '70vh',
+  marginLeft: '25%',
+  padding: '15px',
+  borderRadius: '15px',
+  width: '50%',
+};
+
 // =============================================
 // *form components
 
