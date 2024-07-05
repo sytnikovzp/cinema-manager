@@ -77,7 +77,7 @@ export const genres = [
   },
   {
     id: 2,
-    title: 'Adventures',
+    title: 'Adventure',
   },
   {
     id: 3,
@@ -188,6 +188,7 @@ export const nationalities = [
   { id: 36, title: 'ISL', description: 'Iceland' },
   { id: 37, title: 'AU', description: 'Austria' },
   { id: 38, title: 'ES', description: 'Spain' },
+  { id: 39, title: 'MX', description: 'Mexico' },
 ];
 
 export const locations = [
@@ -226,5 +227,17 @@ export const locations = [
   {
     id: 9,
     title: 'New York',
+  },
+  {
+    id: 10,
+    title: 'Sydney',
+  },
+  {
+    id: 11,
+    title: 'Paris',
+  },
+  {
+    id: 12,
+    title: 'Munchen',
   },
 ];
