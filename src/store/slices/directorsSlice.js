@@ -4,7 +4,7 @@ import { directorsState } from '../../model/initialStates';
 import { DIRECTORS_SLICE_NAME } from '../../constants';
 // =============================================
 import api from '../../api';
-import { setError, setStatus } from '../../services/reducer-service';
+import { setError, setLoading } from '../../services/reducerService';
 
 const initialState = {
   directors: directorsState,
@@ -107,10 +107,10 @@ const directorsSlice = createSlice({
     });
 
     // Pending
-    builder.addCase(getAllDirectors.pending, setStatus);
-    builder.addCase(createDirector.pending, setStatus);
-    builder.addCase(updateDirector.pending, setStatus);
-    builder.addCase(deleteDirector.pending, setStatus);
+    builder.addCase(getAllDirectors.pending, setLoading);
+    builder.addCase(createDirector.pending, setLoading);
+    builder.addCase(updateDirector.pending, setLoading);
+    builder.addCase(deleteDirector.pending, setLoading);
 
     // Error
     builder.addCase(getAllDirectors.rejected, setError);

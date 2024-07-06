@@ -4,7 +4,7 @@ import { studiosState } from '../../model/initialStates';
 import { STUDIOS_SLICE_NAME } from '../../constants';
 // =============================================
 import api from '../../api';
-import { setError, setStatus } from '../../services/reducer-service';
+import { setError, setLoading } from '../../services/reducerService';
 
 const initialState = {
   studios: studiosState,
@@ -102,10 +102,10 @@ const studiosSlice = createSlice({
     });
 
     // Pending
-    builder.addCase(getAllStudios.pending, setStatus);
-    builder.addCase(createStudio.pending, setStatus);
-    builder.addCase(updateStudio.pending, setStatus);
-    builder.addCase(deleteStudio.pending, setStatus);
+    builder.addCase(getAllStudios.pending, setLoading);
+    builder.addCase(createStudio.pending, setLoading);
+    builder.addCase(updateStudio.pending, setLoading);
+    builder.addCase(deleteStudio.pending, setLoading);
 
     // Error
     builder.addCase(getAllStudios.rejected, setError);

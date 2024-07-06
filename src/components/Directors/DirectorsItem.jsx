@@ -26,7 +26,8 @@ import {
   itemLinkStyle,
 } from '../../services/styleService';
 // =============================================
-import { emptyDirector, calculateAge, formatDate } from '../../constants';
+import { emptyDirector } from '../../constants';
+import { calculateAge, formatDate } from '../../services/itemService';
 import { resetStatus } from '../../store/slices/directorsSlice';
 // =============================================
 import useSnackbar from '../../hooks/useSnackbar';

@@ -3,7 +3,7 @@ export const setError = (state, { payload }) => {
   state.error = payload;
 };
 
-export const setStatus = (state) => {
+export const setLoading = (state) => {
   state.status = 'loading';
   state.error = null;
 };

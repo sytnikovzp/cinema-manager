@@ -4,7 +4,7 @@ import { moviesState } from '../../model/initialStates';
 import { MOVIES_SLICE_NAME } from '../../constants';
 // =============================================
 import api from '../../api';
-import { setError, setStatus } from '../../services/reducer-service';
+import { setError, setLoading } from '../../services/reducerService';
 
 const initialState = {
   movies: moviesState,
@@ -102,10 +102,10 @@ const moviesSlice = createSlice({
     });
 
     // Pending
-    builder.addCase(getAllMovies.pending, setStatus);
-    builder.addCase(createMovie.pending, setStatus);
-    builder.addCase(updateMovie.pending, setStatus);
-    builder.addCase(deleteMovie.pending, setStatus);
+    builder.addCase(getAllMovies.pending, setLoading);
+    builder.addCase(createMovie.pending, setLoading);
+    builder.addCase(updateMovie.pending, setLoading);
+    builder.addCase(deleteMovie.pending, setLoading);
 
     // Error
     builder.addCase(getAllMovies.rejected, setError);

@@ -4,7 +4,7 @@ import { actorsState } from '../../model/initialStates';
 import { ACTORS_SLICE_NAME } from '../../constants';
 // =============================================
 import api from '../../api';
-import { setError, setStatus } from '../../services/reducer-service';
+import { setError, setLoading } from '../../services/reducerService';
 
 const initialState = {
   actors: actorsState,
@@ -102,10 +102,10 @@ const actorsSlice = createSlice({
     });
 
     // Pending
-    builder.addCase(getAllActors.pending, setStatus);
-    builder.addCase(createActor.pending, setStatus);
-    builder.addCase(updateActor.pending, setStatus);
-    builder.addCase(deleteActor.pending, setStatus);
+    builder.addCase(getAllActors.pending, setLoading);
+    builder.addCase(createActor.pending, setLoading);
+    builder.addCase(updateActor.pending, setLoading);
+    builder.addCase(deleteActor.pending, setLoading);
 
     // Error
     builder.addCase(getAllActors.rejected, setError);

@@ -26,7 +26,8 @@ import {
   itemLinkStyle,
 } from '../../services/styleService';
 // =============================================
-import { emptyActor, calculateAge, formatDate } from '../../constants';
+import { emptyActor } from '../../constants';
+import { calculateAge, formatDate } from '../../services/itemService';
 import { resetStatus } from '../../store/slices/actorsSlice';
 // =============================================
 import useSnackbar from '../../hooks/useSnackbar';
