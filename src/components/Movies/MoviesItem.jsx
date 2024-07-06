@@ -80,7 +80,7 @@ function MoviesItem() {
   const filteredStudiosList = studiosList
     .filter((studio) => {
       for (let i = 0; i < currentMovie.studios.length; i++) {
-        if (studio.title.includes(currentMovie.studios[i])) {
+        if (studio.title === currentMovie.studios[i]) {
           return true;
         }
       }
@@ -106,7 +106,7 @@ function MoviesItem() {
   const filteredDirectorsList = directorsList
     .filter((director) => {
       for (let i = 0; i < currentMovie.directors.length; i++) {
-        if (director.full_name.includes(currentMovie.directors[i])) {
+        if (director.full_name === currentMovie.directors[i]) {
           return true;
         }
       }
@@ -132,7 +132,7 @@ function MoviesItem() {
   const filteredActorsList = actorsList
     .filter((actor) => {
       for (let i = 0; i < currentMovie.actors.length; i++) {
-        if (actor.full_name.includes(currentMovie.actors[i])) {
+        if (actor.full_name === currentMovie.actors[i]) {
           return true;
         }
       }
