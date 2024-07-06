@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 // =============================================
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
@@ -9,13 +9,20 @@ import StudiosItem from './StudiosItem';
 import StudiosList from './StudiosList';
 
 function Studios() {
+  const location = useLocation();
+  const applyPaperStyles =
+    !location.pathname.includes('/edit') && !location.pathname.includes('/new');
+
   return (
     <Box
       sx={{
         m: 2,
       }}
     >
-      <Paper elevation={3} sx={rootComponentPaperStyle}>
+      <Paper
+        elevation={3}
+        sx={applyPaperStyles ? rootComponentPaperStyle : undefined}
+      >
         <Routes>
           <Route path='/' element={<StudiosList />} />
           <Route path=':id' element={<StudiosItem />} />

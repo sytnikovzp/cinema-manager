@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 // =============================================
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
@@ -9,13 +9,20 @@ import DirectorsItem from './DirectorsItem';
 import DirectorsList from './DirectorsList';
 
 function Directors() {
+  const location = useLocation();
+  const applyPaperStyles =
+    !location.pathname.includes('/edit') && !location.pathname.includes('/new');
+
   return (
     <Box
       sx={{
         m: 2,
       }}
     >
-      <Paper elevation={3} sx={rootComponentPaperStyle}>
+      <Paper
+        elevation={3}
+        sx={applyPaperStyles ? rootComponentPaperStyle : undefined}
+      >
         <Routes>
           <Route path='/' element={<DirectorsList />} />
           <Route path=':id' element={<DirectorsItem />} />
