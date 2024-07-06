@@ -129,7 +129,7 @@ function DirectorsItem() {
           sx={buttonMainStyle}
           startIcon={<EditIcon />}
           component={Link}
-          to={`/directors/new/${id}`}
+          to={`/directors/edit/${id}`}
         >
           Edit
         </Button>

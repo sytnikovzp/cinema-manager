@@ -118,7 +118,7 @@ function StudiosItem() {
           sx={buttonMainStyle}
           startIcon={<EditIcon />}
           component={Link}
-          to={`/studios/new/${id}`}
+          to={`/studios/edit/${id}`}
         >
           Edit
         </Button>

@@ -184,7 +184,7 @@ function DirectorsList() {
                           edge='end'
                           aria-label='edit'
                           component={Link}
-                          to={`/directors/new/${director.id}`}
+                          to={`/directors/edit/${director.id}`}
                         >
                           <EditIcon />
                         </IconButton>

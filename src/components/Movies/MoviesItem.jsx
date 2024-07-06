@@ -180,7 +180,7 @@ function MoviesItem() {
           sx={buttonMainStyle}
           startIcon={<EditIcon />}
           component={Link}
-          to={`/movies/new/${id}`}
+          to={`/movies/edit/${id}`}
         >
           Edit
         </Button>

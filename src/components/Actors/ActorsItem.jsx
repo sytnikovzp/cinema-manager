@@ -127,7 +127,7 @@ function ActorsItem() {
           sx={buttonMainStyle}
           startIcon={<EditIcon />}
           component={Link}
-          to={`/actors/new/${id}`}
+          to={`/actors/edit/${id}`}
         >
           Edit
         </Button>

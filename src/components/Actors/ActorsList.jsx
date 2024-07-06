@@ -181,7 +181,7 @@ function ActorsList() {
                           edge='end'
                           aria-label='edit'
                           component={Link}
-                          to={`/actors/new/${actor.id}`}
+                          to={`/actors/edit/${actor.id}`}
                         >
                           <EditIcon />
                         </IconButton>

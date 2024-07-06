@@ -181,7 +181,7 @@ function StudiosList() {
                           edge='end'
                           aria-label='edit'
                           component={Link}
-                          to={`/studios/new/${studio.id}`}
+                          to={`/studios/edit/${studio.id}`}
                         >
                           <EditIcon />
                         </IconButton>

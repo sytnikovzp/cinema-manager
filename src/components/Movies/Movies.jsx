@@ -20,6 +20,7 @@ function Movies() {
           <Route path='/' element={<MoviesList />} />
           <Route path=':id' element={<MoviesItem />} />
           <Route path='new' element={<Navigate to='/movies/new/:id' />} />
+          <Route path='edit' element={<Navigate to='/movies/edit/:id' />} />
         </Routes>
       </Paper>
     </Box>

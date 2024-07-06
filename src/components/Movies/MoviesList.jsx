@@ -185,7 +185,7 @@ function MoviesList() {
                           edge='end'
                           aria-label='edit'
                           component={Link}
-                          to={`/movies/new/${movie.id}`}
+                          to={`/movies/edit/${movie.id}`}
                         >
                           <EditIcon />
                         </IconButton>
