@@ -110,7 +110,7 @@ export const addButtonFormStyle = {
 // *list components
 
 export const scrollListBoxStyle = {
-  height: '70vh',
+  height: '65vh',
   overflowY: 'auto',
 };
 
