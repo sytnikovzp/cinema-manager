@@ -69,7 +69,7 @@ function ActorsItem() {
 
   const actor = actors.find((actor) => Number(actor.id) === Number(id));
 
-  const currentActor = actor ? actor : emptyActor;
+  const currentActor = actor || emptyActor;
 
   const filteredMoviesList = moviesList
     .filter((movie) => movie.actors.includes(currentActor.full_name))

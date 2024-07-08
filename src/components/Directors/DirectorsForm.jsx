@@ -312,7 +312,7 @@ function DirectorForm() {
 
   return (
     <Formik
-      initialValues={currentDirector ? currentDirector : emptyDirector}
+      initialValues={currentDirector || emptyDirector}
       onSubmit={onFormSubmit}
       validationSchema={schema}
       enableReinitialize

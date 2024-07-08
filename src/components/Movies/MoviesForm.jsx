@@ -676,7 +676,7 @@ function MovieForm() {
 
   return (
     <Formik
-      initialValues={currentMovie ? currentMovie : emptyMovie}
+      initialValues={currentMovie || emptyMovie}
       onSubmit={onFormSubmit}
       validationSchema={schema}
       enableReinitialize

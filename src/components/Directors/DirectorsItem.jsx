@@ -71,7 +71,7 @@ function DirectorsItem() {
     (director) => Number(director.id) === Number(id)
   );
 
-  const currentDirector = director ? director : emptyDirector;
+  const currentDirector = director || emptyDirector;
 
   const filteredMoviesList = moviesList
     .filter((movie) => movie.directors.includes(currentDirector.full_name))

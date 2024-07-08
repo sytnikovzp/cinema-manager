@@ -17,7 +17,7 @@ function StudiosAbout() {
     (studio) => Number(studio.id) === Number(id)
   );
 
-  const currentStudio = studio ? studio : emptyStudio;
+  const currentStudio = studio || emptyStudio;
 
   return (
     <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>

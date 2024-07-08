@@ -263,7 +263,7 @@ function StudioForm() {
 
   return (
     <Formik
-      initialValues={currentStudio ? currentStudio : emptyStudio}
+      initialValues={currentStudio || emptyStudio}
       onSubmit={onFormSubmit}
       validationSchema={schema}
       enableReinitialize

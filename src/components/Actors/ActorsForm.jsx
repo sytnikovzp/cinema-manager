@@ -307,7 +307,7 @@ function ActorForm() {
 
   return (
     <Formik
-      initialValues={currentActor ? currentActor : emptyActor}
+      initialValues={currentActor || emptyActor}
       onSubmit={onFormSubmit}
       validationSchema={schema}
       enableReinitialize

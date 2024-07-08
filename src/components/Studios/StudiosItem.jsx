@@ -68,7 +68,7 @@ function StudiosItem() {
 
   const studio = studios.find((studio) => Number(studio.id) === Number(id));
 
-  const currentStudio = studio ? studio : emptyStudio;
+  const currentStudio = studio || emptyStudio;
 
   const filteredMoviesList = moviesList
     .filter((movie) => movie.studios.includes(currentStudio.title))

@@ -15,7 +15,7 @@ function ActorsBiography() {
 
   const actor = actors.find((actor) => Number(actor.id) === Number(id));
 
-  const currentActor = actor ? actor : emptyActor;
+  const currentActor = actor || emptyActor;
 
   return (
     <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>

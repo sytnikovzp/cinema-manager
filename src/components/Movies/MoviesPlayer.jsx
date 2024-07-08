@@ -15,7 +15,7 @@ function MoviesPlayer() {
 
   const movie = movies.find((movie) => Number(movie.id) === Number(id));
 
-  const currentMovie = movie ? movie : emptyMovie;
+  const currentMovie = movie || emptyMovie;
 
   return (
     <Box sx={scrollItemBoxStyle}>

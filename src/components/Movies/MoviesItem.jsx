@@ -75,7 +75,7 @@ function MoviesItem() {
   }, [status, showSnackbar]);
 
   const movie = movies.find((movie) => Number(movie.id) === Number(id));
-  const currentMovie = movie ? movie : emptyMovie;
+  const currentMovie = movie || emptyMovie;
 
   const filteredStudiosList = studiosList
     .filter((studio) => {

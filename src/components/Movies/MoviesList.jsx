@@ -169,12 +169,8 @@ function MoviesList() {
                         <StyledAvatar src={movie.poster} />
                       </ListItemAvatar>
                       <ListItemText
-                        primary={`${
-                          movie.title ? movie.title : 'Unknown movie'
-                        }, ${
-                          movie.release_year
-                            ? movie.release_year
-                            : 'unknown year'
+                        primary={`${movie.title || 'Unknown movie'}, ${
+                          movie.release_year || 'unknown year'
                         }`}
                       />
                     </ListItemButton>

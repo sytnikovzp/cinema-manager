@@ -17,7 +17,7 @@ function DirectorsBiography() {
     (director) => Number(director.id) === Number(id)
   );
 
-  const currentDirector = director ? director : emptyDirector;
+  const currentDirector = director || emptyDirector;
 
   return (
     <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
