@@ -333,57 +333,67 @@ function MovieForm() {
                       <Typography component='legend' variant='h6' gutterBottom>
                         Directors
                       </Typography>
-                      {directors.map((director, index) => (
-                        <Stack spacing={2} key={index} direction='row'>
-                          <Field name={`directors[${index}]`}>
-                            {({ field, form }) => {
-                              const currentValue =
-                                optionsForDirectors.find(
-                                  (option) => option.full_name === field.value
-                                ) || null;
+                      {directors.map((director, index) => {
+                        const filteredOptions = optionsForDirectors.filter(
+                          (option) =>
+                            !values.directors.includes(option.full_name) ||
+                            option.full_name === director
+                        );
 
-                              return (
-                                <Autocomplete
-                                  disablePortal
-                                  id={`directors-${index}`}
-                                  options={optionsForDirectors.sort(
-                                    (a, b) =>
-                                      -b.firstLetter.localeCompare(
-                                        a.firstLetter
+                        return (
+                          <Stack spacing={2} key={index} direction='row'>
+                            <Field name={`directors[${index}]`}>
+                              {({ field, form }) => {
+                                const currentValue =
+                                  optionsForDirectors.find(
+                                    (option) => option.full_name === field.value
+                                  ) || null;
+
+                                return (
+                                  <Autocomplete
+                                    disablePortal
+                                    id={`directors-${index}`}
+                                    options={filteredOptions.sort(
+                                      (a, b) =>
+                                        -b.firstLetter.localeCompare(
+                                          a.firstLetter
+                                        )
+                                    )}
+                                    groupBy={(option) => option.firstLetter}
+                                    getOptionLabel={(option) =>
+                                      option.full_name
+                                    }
+                                    fullWidth
+                                    value={currentValue}
+                                    onChange={(event, value) =>
+                                      form.setFieldValue(
+                                        field.name,
+                                        value ? value.full_name : ''
                                       )
-                                  )}
-                                  groupBy={(option) => option.firstLetter}
-                                  getOptionLabel={(option) => option.full_name}
-                                  fullWidth
-                                  value={currentValue}
-                                  onChange={(event, value) =>
-                                    form.setFieldValue(
-                                      field.name,
-                                      value ? value.full_name : ''
-                                    )
-                                  }
-                                  renderInput={(params) => (
-                                    <TextField
-                                      {...params}
-                                      error={
-                                        form.touched[field.name] &&
-                                        Boolean(form.errors[field.name])
-                                      }
-                                      helperText={
-                                        form.touched[field.name] &&
-                                        form.errors[field.name]
-                                      }
-                                    />
-                                  )}
-                                />
-                              );
-                            }}
-                          </Field>
-                          <IconButton onClick={() => remove(index)}>
-                            <ClearIcon />
-                          </IconButton>
-                        </Stack>
-                      ))}
+                                    }
+                                    renderInput={(params) => (
+                                      <TextField
+                                        {...params}
+                                        error={
+                                          form.touched[field.name] &&
+                                          Boolean(form.errors[field.name])
+                                        }
+                                        helperText={
+                                          form.touched[field.name] &&
+                                          form.errors[field.name]
+                                        }
+                                      />
+                                    )}
+                                  />
+                                );
+                              }}
+                            </Field>
+                            <IconButton onClick={() => remove(index)}>
+                              <ClearIcon />
+                            </IconButton>
+                          </Stack>
+                        );
+                      })}
                       <Stack alignItems='center'>
                         <Button
                           variant='contained'
@@ -422,57 +432,67 @@ function MovieForm() {
                       <Typography component='legend' variant='h6' gutterBottom>
                         Actors
                       </Typography>
-                      {actors.map((actor, index) => (
-                        <Stack spacing={2} key={index} direction='row'>
-                          <Field name={`actors[${index}]`}>
-                            {({ field, form }) => {
-                              const currentValue =
-                                optionsForActors.find(
-                                  (option) => option.full_name === field.value
-                                ) || null;
+                      {actors.map((actor, index) => {
+                        const filteredOptions = optionsForActors.filter(
+                          (option) =>
+                            !values.actors.includes(option.full_name) ||
+                            option.full_name === actor
+                        );
 
-                              return (
-                                <Autocomplete
-                                  disablePortal
-                                  id={`actors-${index}`}
-                                  options={optionsForActors.sort(
-                                    (a, b) =>
-                                      -b.firstLetter.localeCompare(
-                                        a.firstLetter
+                        return (
+                          <Stack spacing={2} key={index} direction='row'>
+                            <Field name={`actors[${index}]`}>
+                              {({ field, form }) => {
+                                const currentValue =
+                                  optionsForActors.find(
+                                    (option) => option.full_name === field.value
+                                  ) || null;
+
+                                return (
+                                  <Autocomplete
+                                    disablePortal
+                                    id={`actors-${index}`}
+                                    options={filteredOptions.sort(
+                                      (a, b) =>
+                                        -b.firstLetter.localeCompare(
+                                          a.firstLetter
+                                        )
+                                    )}
+                                    groupBy={(option) => option.firstLetter}
+                                    getOptionLabel={(option) =>
+                                      option.full_name
+                                    }
+                                    fullWidth
+                                    value={currentValue}
+                                    onChange={(event, value) =>
+                                      form.setFieldValue(
+                                        field.name,
+                                        value ? value.full_name : ''
                                       )
-                                  )}
-                                  groupBy={(option) => option.firstLetter}
-                                  getOptionLabel={(option) => option.full_name}
-                                  fullWidth
-                                  value={currentValue}
-                                  onChange={(event, value) =>
-                                    form.setFieldValue(
-                                      field.name,
-                                      value ? value.full_name : ''
-                                    )
-                                  }
-                                  renderInput={(params) => (
-                                    <TextField
-                                      {...params}
-                                      error={
-                                        form.touched[field.name] &&
-                                        Boolean(form.errors[field.name])
-                                      }
-                                      helperText={
-                                        form.touched[field.name] &&
-                                        form.errors[field.name]
-                                      }
-                                    />
-                                  )}
-                                />
-                              );
-                            }}
-                          </Field>
-                          <IconButton onClick={() => remove(index)}>
-                            <ClearIcon />
-                          </IconButton>
-                        </Stack>
-                      ))}
+                                    }
+                                    renderInput={(params) => (
+                                      <TextField
+                                        {...params}
+                                        error={
+                                          form.touched[field.name] &&
+                                          Boolean(form.errors[field.name])
+                                        }
+                                        helperText={
+                                          form.touched[field.name] &&
+                                          form.errors[field.name]
+                                        }
+                                      />
+                                    )}
+                                  />
+                                );
+                              }}
+                            </Field>
+                            <IconButton onClick={() => remove(index)}>
+                              <ClearIcon />
+                            </IconButton>
+                          </Stack>
+                        );
+                      })}
                       <Stack alignItems='center'>
                         <Button
                           variant='contained'
@@ -511,57 +531,65 @@ function MovieForm() {
                       <Typography component='legend' variant='h6' gutterBottom>
                         Studios
                       </Typography>
-                      {studios.map((studio, index) => (
-                        <Stack spacing={2} key={index} direction='row'>
-                          <Field name={`studios[${index}]`}>
-                            {({ field, form }) => {
-                              const currentValue =
-                                optionsForStudios.find(
-                                  (option) => option.title === field.value
-                                ) || null;
+                      {studios.map((studio, index) => {
+                        const filteredOptions = optionsForStudios.filter(
+                          (option) =>
+                            !values.studios.includes(option.title) ||
+                            option.title === studio
+                        );
 
-                              return (
-                                <Autocomplete
-                                  disablePortal
-                                  id={`studios-${index}`}
-                                  options={optionsForStudios.sort(
-                                    (a, b) =>
-                                      -b.firstLetter.localeCompare(
-                                        a.firstLetter
+                        return (
+                          <Stack spacing={2} key={index} direction='row'>
+                            <Field name={`studios[${index}]`}>
+                              {({ field, form }) => {
+                                const currentValue =
+                                  optionsForStudios.find(
+                                    (option) => option.title === field.value
+                                  ) || null;
+
+                                return (
+                                  <Autocomplete
+                                    disablePortal
+                                    id={`studios-${index}`}
+                                    options={filteredOptions.sort(
+                                      (a, b) =>
+                                        -b.firstLetter.localeCompare(
+                                          a.firstLetter
+                                        )
+                                    )}
+                                    groupBy={(option) => option.firstLetter}
+                                    getOptionLabel={(option) => option.title}
+                                    fullWidth
+                                    value={currentValue}
+                                    onChange={(event, value) =>
+                                      form.setFieldValue(
+                                        field.name,
+                                        value ? value.title : ''
                                       )
-                                  )}
-                                  groupBy={(option) => option.firstLetter}
-                                  getOptionLabel={(option) => option.title}
-                                  fullWidth
-                                  value={currentValue}
-                                  onChange={(event, value) =>
-                                    form.setFieldValue(
-                                      field.name,
-                                      value ? value.title : ''
-                                    )
-                                  }
-                                  renderInput={(params) => (
-                                    <TextField
-                                      {...params}
-                                      error={
-                                        form.touched[field.name] &&
-                                        Boolean(form.errors[field.name])
-                                      }
-                                      helperText={
-                                        form.touched[field.name] &&
-                                        form.errors[field.name]
-                                      }
-                                    />
-                                  )}
-                                />
-                              );
-                            }}
-                          </Field>
-                          <IconButton onClick={() => remove(index)}>
-                            <ClearIcon />
-                          </IconButton>
-                        </Stack>
-                      ))}
+                                    }
+                                    renderInput={(params) => (
+                                      <TextField
+                                        {...params}
+                                        error={
+                                          form.touched[field.name] &&
+                                          Boolean(form.errors[field.name])
+                                        }
+                                        helperText={
+                                          form.touched[field.name] &&
+                                          form.errors[field.name]
+                                        }
+                                      />
+                                    )}
+                                  />
+                                );
+                              }}
+                            </Field>
+                            <IconButton onClick={() => remove(index)}>
+                              <ClearIcon />
+                            </IconButton>
+                          </Stack>
+                        );
+                      })}
                       <Stack alignItems='center'>
                         <Button
                           variant='contained'
