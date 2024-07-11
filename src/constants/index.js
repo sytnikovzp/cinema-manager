@@ -1,5 +1,5 @@
-export const BASE_URL = 'http://localhost:5000';
-// export const BASE_URL = 'https://sytnikov.site:5000';
+export const BASE_URL = 'http://localhost:5000/api';
+// export const BASE_URL = 'http://sytnikov.site:5000/api';
 
 export const ACTORS_SLICE_NAME = 'actors';
 export const DIRECTORS_SLICE_NAME = 'directors';
