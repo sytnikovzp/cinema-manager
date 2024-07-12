@@ -12,7 +12,9 @@ function HomePage() {
   const movies = useSelector((state) => state.moviesList.movies);
   const status = useSelector((state) => state.directorsList.status);
 
-  const lastSevenMovies = movies.slice(-15).reverse();
+  const filteredMovies = movies.filter((movie) => movie.poster);
+
+  const lastMovies = filteredMovies.slice(-15).reverse();
 
   return (
     <>
@@ -26,7 +28,7 @@ function HomePage() {
         </Box>
       ) : (
         <Carousel stopAutoPlayOnHover>
-          {lastSevenMovies.map((movie) => {
+          {lastMovies.map((movie) => {
             return (
               <Box key={movie.id} style={carouselStyles.imgContainerStyle}>
                 <Link to={`/movies/${movie.id}`}>
