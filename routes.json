@@ -1,6 +1,0 @@
-{
-  "/api/actors": "/actors",
-  "/api/directors": "/directors",
-  "/api/movies": "/movies",
-  "/api/studios": "/studios"
-}
