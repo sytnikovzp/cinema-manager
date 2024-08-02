@@ -47,7 +47,6 @@ function MoviesList() {
   const dispatch = useDispatch();
 
   const movies = useSelector((state) => state.moviesList.movies);
-  const reversedMovies = [...movies].reverse();
 
   const status = useSelector((state) => state.moviesList.status);
 
@@ -120,7 +119,7 @@ function MoviesList() {
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = reversedMovies.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = movies.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
@@ -204,7 +203,7 @@ function MoviesList() {
 
       <Stack spacing={2} alignItems='center' marginTop={2}>
         <Pagination
-          count={Math.ceil(reversedMovies.length / itemsPerPage)}
+          count={Math.ceil(movies.length / itemsPerPage)}
           page={currentPage}
           onChange={handlePageChange}
           color='primary'

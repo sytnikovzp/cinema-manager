@@ -47,7 +47,6 @@ function DirectorsList() {
   const dispatch = useDispatch();
 
   const directors = useSelector((state) => state.directorsList.directors);
-  const reversedDirectors = [...directors].reverse();
 
   const status = useSelector((state) => state.directorsList.status);
 
@@ -120,10 +119,7 @@ function DirectorsList() {
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = reversedDirectors.slice(
-    indexOfFirstItem,
-    indexOfLastItem
-  );
+  const currentItems = directors.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
@@ -207,7 +203,7 @@ function DirectorsList() {
 
       <Stack spacing={2} alignItems='center' marginTop={2}>
         <Pagination
-          count={Math.ceil(reversedDirectors.length / itemsPerPage)}
+          count={Math.ceil(directors.length / itemsPerPage)}
           page={currentPage}
           onChange={handlePageChange}
           color='primary'

@@ -10,11 +10,10 @@ import { carouselStyles, skeletonStyles } from '../../services/styleService';
 
 function HomePage() {
   const movies = useSelector((state) => state.moviesList.movies);
-  const status = useSelector((state) => state.directorsList.status);
+  const status = useSelector((state) => state.moviesList.status);
 
   const filteredMovies = movies.filter((movie) => movie.poster);
-
-  const lastMovies = filteredMovies.slice(-15).reverse();
+  const lastMovies = filteredMovies.slice(0, 15);
 
   return (
     <>

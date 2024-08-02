@@ -47,7 +47,6 @@ function StudiosList() {
   const dispatch = useDispatch();
 
   const studios = useSelector((state) => state.studiosList.studios);
-  const reversedStudios = [...studios].reverse();
 
   const status = useSelector((state) => state.studiosList.status);
 
@@ -120,7 +119,7 @@ function StudiosList() {
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = reversedStudios.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = studios.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
@@ -204,7 +203,7 @@ function StudiosList() {
 
       <Stack spacing={2} alignItems='center' marginTop={2}>
         <Pagination
-          count={Math.ceil(reversedStudios.length / itemsPerPage)}
+          count={Math.ceil(studios.length / itemsPerPage)}
           page={currentPage}
           onChange={handlePageChange}
           color='primary'

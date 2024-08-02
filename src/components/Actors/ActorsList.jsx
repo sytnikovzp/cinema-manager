@@ -47,7 +47,6 @@ function ActorsList() {
   const dispatch = useDispatch();
 
   const actors = useSelector((state) => state.actorsList.actors);
-  const reversedActors = [...actors].reverse();
 
   const status = useSelector((state) => state.actorsList.status);
 
@@ -120,7 +119,7 @@ function ActorsList() {
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = reversedActors.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = actors.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
@@ -204,7 +203,7 @@ function ActorsList() {
 
       <Stack spacing={2} alignItems='center' marginTop={2}>
         <Pagination
-          count={Math.ceil(reversedActors.length / itemsPerPage)}
+          count={Math.ceil(actors.length / itemsPerPage)}
           page={currentPage}
           onChange={handlePageChange}
           color='primary'
