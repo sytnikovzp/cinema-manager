@@ -1,8 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-// =============================================
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-// =============================================
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -25,14 +22,8 @@ import Divider from '@mui/material/Divider';
 import Skeleton from '@mui/material/Skeleton';
 import Pagination from '@mui/material/Pagination';
 // =============================================
-import {
-  buttonMainStyle,
-  itemListStyle,
-  scrollListBoxStyle,
-} from '../../services/styleService';
-// =============================================
-import { deleteActor, resetStatus } from '../../store/slices/actorsSlice';
-// =============================================
+import { buttonMainStyle, itemListStyle, scrollListBoxStyle } from '../../services/styleService';
+import api from '../../api'; // Импортируйте ваш API сервис
 import useSnackbar from '../../hooks/useSnackbar';
 import useItemsPerPage from '../../hooks/useItemsPerPage';
 
@@ -44,39 +35,48 @@ const StyledAvatar = styled(Avatar)({
 });
 
 function ActorsList() {
-  const dispatch = useDispatch();
-
-  const actors = useSelector((state) => state.actorsList.actors);
-
-  const status = useSelector((state) => state.actorsList.status);
+  const [actors, setActors] = useState([]);
+  const [status, setStatus] = useState('loading'); 
+  const [error, setError] = useState(null);
 
   const { snackbar, showSnackbar, handleClose } = useSnackbar(() =>
-    dispatch(resetStatus())
+    setStatus('idle')
   );
 
-  const prevStatusRef = useRef();
+  const itemsPerPage = useItemsPerPage();
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    const prevStatus = prevStatusRef.current;
-    const currentStatus = status;
+    const fetchActors = async () => {
+      try {
+        setStatus('loading');
+        const { data } = await api.get('/actors');
+        setActors(data);
+        setStatus('idle');
+      } catch (err) {
+        setError(err.message);
+        setStatus('failed');
+      }
+    };
 
-    if (
-      currentStatus &&
-      currentStatus !== prevStatus &&
-      currentStatus !== 'loading'
-    ) {
-      const severity = currentStatus.toLowerCase().includes('success')
-        ? 'success'
-        : 'error';
-      showSnackbar(currentStatus, severity);
+    fetchActors();
+  }, []);
+
+  useEffect(() => {
+    if (status === 'failed' && error) {
+      showSnackbar(error, 'error');
     }
+  }, [status, error, showSnackbar]);
 
-    prevStatusRef.current = currentStatus;
-  }, [status, showSnackbar]);
-
-  const onItemDelete = (event, id) => {
+  const onItemDelete = async (event, id) => {
     event.stopPropagation();
-    dispatch(deleteActor(id));
+    try {
+      await api.delete(`/actors/${id}`);
+      setActors((prevActors) => prevActors.filter((actor) => actor.id !== id));
+      showSnackbar('Actor deleted successfully!', 'success');
+    } catch (err) {
+      showSnackbar('Failed to delete actor!', 'error');
+    }
   };
 
   const renderLoadingSkeleton = () => (
@@ -84,39 +84,20 @@ function ActorsList() {
       <ListItem disablePadding sx={itemListStyle}>
         <ListItemButton sx={{ borderRadius: 5 }}>
           <ListItemAvatar>
-            <Skeleton
-              variant='circular'
-              animation='wave'
-              width={40}
-              height={40}
-            />
+            <Skeleton variant='circular' animation='wave' width={40} height={40} />
           </ListItemAvatar>
-          <ListItemText
-            primary={<Skeleton variant='text' animation='wave' width='80%' />}
-          />
+          <ListItemText primary={<Skeleton variant='text' animation='wave' width='80%' />} />
         </ListItemButton>
         <ListItemSecondaryAction>
           <Stack direction='row' spacing={1}>
-            <Skeleton
-              variant='circular'
-              animation='wave'
-              width={40}
-              height={40}
-            />
-            <Skeleton
-              variant='circular'
-              animation='wave'
-              width={40}
-              height={40}
-            />
+            <Skeleton variant='circular' animation='wave' width={40} height={40} />
+            <Skeleton variant='circular' animation='wave' width={40} height={40} />
           </Stack>
         </ListItemSecondaryAction>
       </ListItem>
     </Stack>
   );
 
-  const itemsPerPage = useItemsPerPage();
-  const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = actors.slice(indexOfFirstItem, indexOfLastItem);
@@ -150,11 +131,9 @@ function ActorsList() {
       <Box sx={scrollListBoxStyle}>
         <List>
           {status === 'loading'
-            ? Array(itemsPerPage)
-                .fill()
-                .map((_, index) => (
-                  <Box key={index}>{renderLoadingSkeleton()}</Box>
-                ))
+            ? Array(itemsPerPage).fill().map((_, index) => (
+                <Box key={index}>{renderLoadingSkeleton()}</Box>
+              ))
             : currentItems.map((actor) => (
                 <Stack key={actor.id} direction='column' marginBottom={1}>
                   <ListItem
@@ -168,9 +147,7 @@ function ActorsList() {
                         <StyledAvatar src={actor.photo} />
                       </ListItemAvatar>
                       <ListItemText
-                        primary={`${actor.full_name || 'Unknown actor'}, ${
-                          actor.nationality || 'unknown nationality'
-                        }`}
+                        primary={`${actor.full_name || 'Unknown actor'}, ${actor.nationality || 'unknown nationality'}`}
                       />
                     </ListItemButton>
 
@@ -187,9 +164,7 @@ function ActorsList() {
                         <IconButton
                           edge='end'
                           aria-label='delete'
-                          onClick={(event) => {
-                            onItemDelete(event, actor.id);
-                          }}
+                          onClick={(event) => onItemDelete(event, actor.id)}
                         >
                           <HighlightOffIcon />
                         </IconButton>
