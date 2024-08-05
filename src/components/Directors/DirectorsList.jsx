@@ -1,6 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-// =============================================
+import { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 // =============================================
 import Box from '@mui/material/Box';
@@ -31,10 +29,12 @@ import {
   scrollListBoxStyle,
 } from '../../services/styleService';
 // =============================================
-import { deleteDirector, resetStatus } from '../../store/slices/directorsSlice';
+import api from '../../api';
+import { DIRECTORS_SLICE_NAME } from '../../constants';
 // =============================================
 import useSnackbar from '../../hooks/useSnackbar';
 import useItemsPerPage from '../../hooks/useItemsPerPage';
+import usePaginatedData from '../../hooks/usePaginatedData';
 
 const StyledAvatar = styled(Avatar)({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
@@ -44,40 +44,34 @@ const StyledAvatar = styled(Avatar)({
 });
 
 function DirectorsList() {
-  const dispatch = useDispatch();
+  const itemsPerPage = useItemsPerPage();
+  const [currentPage, setCurrentPage] = useState(1);
+  const {
+    data: directors,
+    totalItems,
+    loading,
+    refetch,
+  } = usePaginatedData(`/${DIRECTORS_SLICE_NAME}`, itemsPerPage, currentPage);
 
-  const directors = useSelector((state) => state.directorsList.directors);
+  const { snackbar, showSnackbar, handleClose } = useSnackbar();
 
-  const status = useSelector((state) => state.directorsList.status);
-
-  const { snackbar, showSnackbar, handleClose } = useSnackbar(() =>
-    dispatch(resetStatus())
-  );
-
-  const prevStatusRef = useRef();
-
-  useEffect(() => {
-    const prevStatus = prevStatusRef.current;
-    const currentStatus = status;
-
-    if (
-      currentStatus &&
-      currentStatus !== prevStatus &&
-      currentStatus !== 'loading'
-    ) {
-      const severity = currentStatus.toLowerCase().includes('success')
-        ? 'success'
-        : 'error';
-      showSnackbar(currentStatus, severity);
-    }
-
-    prevStatusRef.current = currentStatus;
-  }, [status, showSnackbar]);
-
-  const onItemDelete = (event, id) => {
-    event.stopPropagation();
-    dispatch(deleteDirector(id));
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
   };
+
+  const onItemDelete = useCallback(
+    async (event, id) => {
+      event.stopPropagation();
+      try {
+        await api.delete(`/${DIRECTORS_SLICE_NAME}/${id}`);
+        refetch();
+        showSnackbar('director deleted successfully!', 'success');
+      } catch (err) {
+        showSnackbar('Failed to delete director!', 'error');
+      }
+    },
+    [refetch, showSnackbar]
+  );
 
   const renderLoadingSkeleton = () => (
     <Stack direction='column' marginBottom={1}>
@@ -115,16 +109,6 @@ function DirectorsList() {
     </Stack>
   );
 
-  const itemsPerPage = useItemsPerPage();
-  const [currentPage, setCurrentPage] = useState(1);
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = directors.slice(indexOfFirstItem, indexOfLastItem);
-
-  const handlePageChange = (event, value) => {
-    setCurrentPage(value);
-  };
-
   return (
     <>
       <Stack direction='row' justifyContent='space-between'>
@@ -149,17 +133,17 @@ function DirectorsList() {
 
       <Box sx={scrollListBoxStyle}>
         <List>
-          {status === 'loading'
+          {loading
             ? Array(itemsPerPage)
                 .fill()
                 .map((_, index) => (
                   <Box key={index}>{renderLoadingSkeleton()}</Box>
                 ))
-            : currentItems.map((director) => (
+            : directors.map((director) => (
                 <Stack key={director.id} direction='column' marginBottom={1}>
                   <ListItem
                     component={Link}
-                    to={`/directors/${director.id}`}
+                    to={`/${DIRECTORS_SLICE_NAME}/${director.id}`}
                     disablePadding
                     sx={itemListStyle}
                   >
@@ -180,7 +164,7 @@ function DirectorsList() {
                           edge='end'
                           aria-label='edit'
                           component={Link}
-                          to={`/directors/edit/${director.id}`}
+                          to={`/${DIRECTORS_SLICE_NAME}/edit/${director.id}`}
                         >
                           <EditIcon />
                         </IconButton>
@@ -203,7 +187,7 @@ function DirectorsList() {
 
       <Stack spacing={2} alignItems='center' marginTop={2}>
         <Pagination
-          count={Math.ceil(directors.length / itemsPerPage)}
+          count={Math.ceil(totalItems / itemsPerPage)}
           page={currentPage}
           onChange={handlePageChange}
           color='primary'

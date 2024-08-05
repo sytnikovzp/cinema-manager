@@ -143,7 +143,7 @@ function ActorsList() {
                 <Stack key={actor.id} direction='column' marginBottom={1}>
                   <ListItem
                     component={Link}
-                    to={`/actors/${actor.id}`}
+                    to={`/${ACTORS_SLICE_NAME}/${actor.id}`}
                     disablePadding
                     sx={itemListStyle}
                   >
@@ -164,7 +164,7 @@ function ActorsList() {
                           edge='end'
                           aria-label='edit'
                           component={Link}
-                          to={`/actors/edit/${actor.id}`}
+                          to={`/${ACTORS_SLICE_NAME}/edit/${actor.id}`}
                         >
                           <EditIcon />
                         </IconButton>
