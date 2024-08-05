@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -22,10 +22,15 @@ import Divider from '@mui/material/Divider';
 import Skeleton from '@mui/material/Skeleton';
 import Pagination from '@mui/material/Pagination';
 // =============================================
-import { buttonMainStyle, itemListStyle, scrollListBoxStyle } from '../../services/styleService';
-import api from '../../api'; // Импортируйте ваш API сервис
+import {
+  buttonMainStyle,
+  itemListStyle,
+  scrollListBoxStyle,
+} from '../../services/styleService';
+import api from '../../api';
 import useSnackbar from '../../hooks/useSnackbar';
 import useItemsPerPage from '../../hooks/useItemsPerPage';
+import usePaginatedData from '../../hooks/usePaginatedData';
 
 const StyledAvatar = styled(Avatar)({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
@@ -35,76 +40,70 @@ const StyledAvatar = styled(Avatar)({
 });
 
 function ActorsList() {
-  const [actors, setActors] = useState([]);
-  const [status, setStatus] = useState('loading'); 
-  const [error, setError] = useState(null);
-
-  const { snackbar, showSnackbar, handleClose } = useSnackbar(() =>
-    setStatus('idle')
-  );
-
   const itemsPerPage = useItemsPerPage();
   const [currentPage, setCurrentPage] = useState(1);
+  const {
+    data: actors,
+    totalItems,
+    loading,
+    refetch,
+  } = usePaginatedData('/actors', itemsPerPage, currentPage);
 
-  useEffect(() => {
-    const fetchActors = async () => {
-      try {
-        setStatus('loading');
-        const { data } = await api.get('/actors');
-        setActors(data);
-        setStatus('idle');
-      } catch (err) {
-        setError(err.message);
-        setStatus('failed');
-      }
-    };
+  const { snackbar, showSnackbar, handleClose } = useSnackbar();
 
-    fetchActors();
-  }, []);
-
-  useEffect(() => {
-    if (status === 'failed' && error) {
-      showSnackbar(error, 'error');
-    }
-  }, [status, error, showSnackbar]);
-
-  const onItemDelete = async (event, id) => {
-    event.stopPropagation();
-    try {
-      await api.delete(`/actors/${id}`);
-      setActors((prevActors) => prevActors.filter((actor) => actor.id !== id));
-      showSnackbar('Actor deleted successfully!', 'success');
-    } catch (err) {
-      showSnackbar('Failed to delete actor!', 'error');
-    }
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
   };
+
+  const onItemDelete = useCallback(
+    async (event, id) => {
+      event.stopPropagation();
+      try {
+        await api.delete(`/actors/${id}`);
+        refetch();
+        showSnackbar('Actor deleted successfully!', 'success');
+      } catch (err) {
+        showSnackbar('Failed to delete actor!', 'error');
+      }
+    },
+    [refetch, showSnackbar]
+  );
 
   const renderLoadingSkeleton = () => (
     <Stack direction='column' marginBottom={1}>
       <ListItem disablePadding sx={itemListStyle}>
         <ListItemButton sx={{ borderRadius: 5 }}>
           <ListItemAvatar>
-            <Skeleton variant='circular' animation='wave' width={40} height={40} />
+            <Skeleton
+              variant='circular'
+              animation='wave'
+              width={40}
+              height={40}
+            />
           </ListItemAvatar>
-          <ListItemText primary={<Skeleton variant='text' animation='wave' width='80%' />} />
+          <ListItemText
+            primary={<Skeleton variant='text' animation='wave' width='80%' />}
+          />
         </ListItemButton>
         <ListItemSecondaryAction>
           <Stack direction='row' spacing={1}>
-            <Skeleton variant='circular' animation='wave' width={40} height={40} />
-            <Skeleton variant='circular' animation='wave' width={40} height={40} />
+            <Skeleton
+              variant='circular'
+              animation='wave'
+              width={40}
+              height={40}
+            />
+            <Skeleton
+              variant='circular'
+              animation='wave'
+              width={40}
+              height={40}
+            />
           </Stack>
         </ListItemSecondaryAction>
       </ListItem>
     </Stack>
   );
-
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = actors.slice(indexOfFirstItem, indexOfLastItem);
-
-  const handlePageChange = (event, value) => {
-    setCurrentPage(value);
-  };
 
   return (
     <>
@@ -130,11 +129,13 @@ function ActorsList() {
 
       <Box sx={scrollListBoxStyle}>
         <List>
-          {status === 'loading'
-            ? Array(itemsPerPage).fill().map((_, index) => (
-                <Box key={index}>{renderLoadingSkeleton()}</Box>
-              ))
-            : currentItems.map((actor) => (
+          {loading
+            ? Array(itemsPerPage)
+                .fill()
+                .map((_, index) => (
+                  <Box key={index}>{renderLoadingSkeleton()}</Box>
+                ))
+            : actors.map((actor) => (
                 <Stack key={actor.id} direction='column' marginBottom={1}>
                   <ListItem
                     component={Link}
@@ -147,7 +148,9 @@ function ActorsList() {
                         <StyledAvatar src={actor.photo} />
                       </ListItemAvatar>
                       <ListItemText
-                        primary={`${actor.full_name || 'Unknown actor'}, ${actor.nationality || 'unknown nationality'}`}
+                        primary={`${actor.full_name || 'Unknown actor'}, ${
+                          actor.nationality || 'unknown nationality'
+                        }`}
                       />
                     </ListItemButton>
 
@@ -178,7 +181,7 @@ function ActorsList() {
 
       <Stack spacing={2} alignItems='center' marginTop={2}>
         <Pagination
-          count={Math.ceil(actors.length / itemsPerPage)}
+          count={Math.ceil(totalItems / itemsPerPage)}
           page={currentPage}
           onChange={handlePageChange}
           color='primary'
