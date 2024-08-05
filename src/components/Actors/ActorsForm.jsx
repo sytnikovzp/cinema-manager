@@ -1,5 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+// =============================================
 import dayjs from 'dayjs';
 import 'dayjs/locale/en-gb';
 // =============================================
@@ -20,8 +21,14 @@ import ClearAllIcon from '@mui/icons-material/ClearAll';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import InputAdornment from '@mui/material/InputAdornment';
 import Autocomplete from '@mui/material/Autocomplete';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 // =============================================
-import { createActor, updateActor } from '../../store/slices/actorsSlice';
+import {
+  createActor,
+  updateActor,
+  getActorById,
+} from '../../services/actorService';
 import { emptyActor, nationalities } from '../../constants';
 // =============================================
 import {
@@ -31,15 +38,29 @@ import {
   wideButtonFormStyle,
   stackButtonFormStyle,
 } from '../../services/styleService';
+// =============================================
+import useSnackbar from '../../hooks/useSnackbar';
 
 function ActorForm() {
-  const dispatch = useDispatch();
-  const actors = useSelector((state) => state.actorsList.actors);
-
+  const { snackbar, showSnackbar, handleClose } = useSnackbar();
   const { id } = useParams();
-  const currentActor = actors.find((actor) => Number(actor.id) === Number(id));
-
   const navigate = useNavigate();
+  const [initialValues, setInitialValues] = useState(emptyActor);
+
+  const fetchActor = useCallback(async () => {
+    if (id !== ':id') {
+      try {
+        const actor = await getActorById(id);
+        setInitialValues(actor);
+      } catch (error) {
+        showSnackbar('Failed to fetch actor data!', 'error');
+      }
+    }
+  }, [id, showSnackbar]);
+
+  useEffect(() => {
+    fetchActor();
+  }, [fetchActor]);
 
   const goBack = () => {
     if (id !== ':id') {
@@ -62,13 +83,18 @@ function ActorForm() {
     biography: Yup.string(),
   });
 
-  const onFormSubmit = (values) => {
-    if (values.id) {
-      dispatch(updateActor(values));
-      navigate(`/actors/${id}`);
-    } else {
-      dispatch(createActor(values));
+  const onFormSubmit = async (values) => {
+    try {
+      if (values.id) {
+        await updateActor(values);
+        showSnackbar('Actor updated successfully!', 'success');
+      } else {
+        await createActor(values);
+        showSnackbar('Actor created successfully!', 'success');
+      }
       navigate(`/actors`);
+    } catch (error) {
+      showSnackbar('Failed to save actor data!', 'error');
     }
   };
 
@@ -306,14 +332,31 @@ function ActorForm() {
   };
 
   return (
-    <Formik
-      initialValues={currentActor || emptyActor}
-      onSubmit={onFormSubmit}
-      validationSchema={schema}
-      enableReinitialize
-    >
-      {renderForm}
-    </Formik>
+    <>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onFormSubmit}
+        validationSchema={schema}
+        enableReinitialize
+      >
+        {renderForm}
+      </Formik>
+
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={1000}
+        onClose={handleClose}
+      >
+        <Alert
+          onClose={handleClose}
+          severity={snackbar.severity}
+          variant='filled'
+          sx={{ width: '100%' }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
+    </>
   );
 }
 
