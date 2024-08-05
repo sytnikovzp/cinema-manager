@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+// =============================================
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -27,7 +28,10 @@ import {
   itemListStyle,
   scrollListBoxStyle,
 } from '../../services/styleService';
+// =============================================
 import api from '../../api';
+import { ACTORS_SLICE_NAME } from '../../constants';
+// =============================================
 import useSnackbar from '../../hooks/useSnackbar';
 import useItemsPerPage from '../../hooks/useItemsPerPage';
 import usePaginatedData from '../../hooks/usePaginatedData';
@@ -47,7 +51,7 @@ function ActorsList() {
     totalItems,
     loading,
     refetch,
-  } = usePaginatedData('/actors', itemsPerPage, currentPage);
+  } = usePaginatedData(`/${ACTORS_SLICE_NAME}`, itemsPerPage, currentPage);
 
   const { snackbar, showSnackbar, handleClose } = useSnackbar();
 
@@ -59,7 +63,7 @@ function ActorsList() {
     async (event, id) => {
       event.stopPropagation();
       try {
-        await api.delete(`/actors/${id}`);
+        await api.delete(`/${ACTORS_SLICE_NAME}/${id}`);
         refetch();
         showSnackbar('Actor deleted successfully!', 'success');
       } catch (err) {
