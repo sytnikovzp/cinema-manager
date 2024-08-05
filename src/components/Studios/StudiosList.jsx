@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 // =============================================
 import Box from '@mui/material/Box';
@@ -50,10 +50,17 @@ function StudiosList() {
     data: studios,
     totalItems,
     loading,
+    error,
     refetch,
   } = usePaginatedData(`/${STUDIOS_SLICE_NAME}`, itemsPerPage, currentPage);
 
   const { snackbar, showSnackbar, handleClose } = useSnackbar();
+
+  useEffect(() => {
+    if (error && snackbar.message !== error) {
+      showSnackbar(error, 'error');
+    }
+  }, [error, showSnackbar, snackbar.message]);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);

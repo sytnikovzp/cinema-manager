@@ -25,7 +25,6 @@ const usePaginatedData = (url, itemsPerPage, currentPage) => {
       setTotalItems(parseInt(response.headers['x-total-count'], 10));
     } catch (error) {
       setError(error.message || 'An error occurred');
-      console.error('Error fetching data:', error);
     }
     setLoading(false);
   }, [url, itemsPerPage, currentPage]);
