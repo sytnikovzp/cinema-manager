@@ -1,6 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-// =============================================
+import { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 // =============================================
 import Box from '@mui/material/Box';
@@ -31,10 +29,12 @@ import {
   scrollListBoxStyle,
 } from '../../services/styleService';
 // =============================================
-import { deleteMovie, resetStatus } from '../../store/slices/moviesSlice';
+import api from '../../api';
+import { MOVIES_SLICE_NAME } from '../../constants';
 // =============================================
 import useSnackbar from '../../hooks/useSnackbar';
 import useItemsPerPage from '../../hooks/useItemsPerPage';
+import usePaginatedData from '../../hooks/usePaginatedData';
 
 const StyledAvatar = styled(Avatar)({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
@@ -44,40 +44,34 @@ const StyledAvatar = styled(Avatar)({
 });
 
 function MoviesList() {
-  const dispatch = useDispatch();
+  const itemsPerPage = useItemsPerPage();
+  const [currentPage, setCurrentPage] = useState(1);
+  const {
+    data: movies,
+    totalItems,
+    loading,
+    refetch,
+  } = usePaginatedData(`/${MOVIES_SLICE_NAME}`, itemsPerPage, currentPage);
 
-  const movies = useSelector((state) => state.moviesList.movies);
+  const { snackbar, showSnackbar, handleClose } = useSnackbar();
 
-  const status = useSelector((state) => state.moviesList.status);
-
-  const { snackbar, showSnackbar, handleClose } = useSnackbar(() =>
-    dispatch(resetStatus())
-  );
-
-  const prevStatusRef = useRef();
-
-  useEffect(() => {
-    const prevStatus = prevStatusRef.current;
-    const currentStatus = status;
-
-    if (
-      currentStatus &&
-      currentStatus !== prevStatus &&
-      currentStatus !== 'loading'
-    ) {
-      const severity = currentStatus.toLowerCase().includes('success')
-        ? 'success'
-        : 'error';
-      showSnackbar(currentStatus, severity);
-    }
-
-    prevStatusRef.current = currentStatus;
-  }, [status, showSnackbar]);
-
-  const onItemDelete = (event, id) => {
-    event.stopPropagation();
-    dispatch(deleteMovie(id));
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
   };
+
+  const onItemDelete = useCallback(
+    async (event, id) => {
+      event.stopPropagation();
+      try {
+        await api.delete(`/${MOVIES_SLICE_NAME}/${id}`);
+        refetch();
+        showSnackbar('Movie deleted successfully!', 'success');
+      } catch (err) {
+        showSnackbar('Failed to delete movie!', 'error');
+      }
+    },
+    [refetch, showSnackbar]
+  );
 
   const renderLoadingSkeleton = () => (
     <Stack direction='column' marginBottom={1}>
@@ -115,16 +109,6 @@ function MoviesList() {
     </Stack>
   );
 
-  const itemsPerPage = useItemsPerPage();
-  const [currentPage, setCurrentPage] = useState(1);
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = movies.slice(indexOfFirstItem, indexOfLastItem);
-
-  const handlePageChange = (event, value) => {
-    setCurrentPage(value);
-  };
-
   return (
     <>
       <Stack direction='row' justifyContent='space-between'>
@@ -149,17 +133,17 @@ function MoviesList() {
 
       <Box sx={scrollListBoxStyle}>
         <List>
-          {status === 'loading'
+          {loading
             ? Array(itemsPerPage)
                 .fill()
                 .map((_, index) => (
                   <Box key={index}>{renderLoadingSkeleton()}</Box>
                 ))
-            : currentItems.map((movie) => (
+            : movies.map((movie) => (
                 <Stack key={movie.id} direction='column' marginBottom={1}>
                   <ListItem
                     component={Link}
-                    to={`/movies/${movie.id}`}
+                    to={`/${MOVIES_SLICE_NAME}/${movie.id}`}
                     disablePadding
                     sx={itemListStyle}
                   >
@@ -180,7 +164,7 @@ function MoviesList() {
                           edge='end'
                           aria-label='edit'
                           component={Link}
-                          to={`/movies/edit/${movie.id}`}
+                          to={`/${MOVIES_SLICE_NAME}/edit/${movie.id}`}
                         >
                           <EditIcon />
                         </IconButton>
@@ -203,7 +187,7 @@ function MoviesList() {
 
       <Stack spacing={2} alignItems='center' marginTop={2}>
         <Pagination
-          count={Math.ceil(movies.length / itemsPerPage)}
+          count={Math.ceil(totalItems / itemsPerPage)}
           page={currentPage}
           onChange={handlePageChange}
           color='primary'
