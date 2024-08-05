@@ -29,7 +29,7 @@ import {
   scrollListBoxStyle,
 } from '../../services/styleService';
 // =============================================
-import api from '../../api';
+import { deleteActor } from '../../services/actorService';
 import { ACTORS_SLICE_NAME } from '../../constants';
 // =============================================
 import useSnackbar from '../../hooks/useSnackbar';
@@ -70,9 +70,11 @@ function ActorsList() {
     async (event, id) => {
       event.stopPropagation();
       try {
-        await api.delete(`/${ACTORS_SLICE_NAME}/${id}`);
-        refetch();
-        showSnackbar('Actor deleted successfully!', 'success');
+        await deleteActor(id);
+        setTimeout(() => {
+          refetch();
+          showSnackbar('Actor deleted successfully!', 'success');
+        }, 500);
       } catch (err) {
         showSnackbar('Failed to delete actor!', 'error');
       }

@@ -15,9 +15,9 @@ import ActorsList from './ActorsList';
 function Actors() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAllActors());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getAllActors());
+  // }, [dispatch]);
 
   const location = useLocation();
   const applyPaperStyles =
