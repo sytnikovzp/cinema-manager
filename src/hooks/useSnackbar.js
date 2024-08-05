@@ -20,12 +20,15 @@ const useSnackbar = (onCloseCallback) => {
       if (reason === 'clickaway') {
         return;
       }
-      setSnackbar({ ...snackbar, open: false });
+      setSnackbar((prevSnackbar) => ({
+        ...prevSnackbar,
+        open: false,
+      }));
       if (onCloseCallback) {
         onCloseCallback();
       }
     },
-    [snackbar, onCloseCallback]
+    [onCloseCallback]
   );
 
   return {

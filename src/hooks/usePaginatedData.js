@@ -5,9 +5,11 @@ const usePaginatedData = (url, itemsPerPage, currentPage) => {
   const [data, setData] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
+    setError(null);
     try {
       const response = await api.get(url, {
         params: {
@@ -22,6 +24,7 @@ const usePaginatedData = (url, itemsPerPage, currentPage) => {
       setData(response.data);
       setTotalItems(parseInt(response.headers['x-total-count'], 10));
     } catch (error) {
+      setError(error.message || 'An error occurred');
       console.error('Error fetching data:', error);
     }
     setLoading(false);
@@ -31,7 +34,7 @@ const usePaginatedData = (url, itemsPerPage, currentPage) => {
     fetchData();
   }, [fetchData]);
 
-  return { data, totalItems, loading, refetch: fetchData };
+  return { data, totalItems, loading, error, refetch: fetchData };
 };
 
 export default usePaginatedData;
