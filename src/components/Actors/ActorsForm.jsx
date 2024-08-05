@@ -26,7 +26,7 @@ import Snackbar from '@mui/material/Snackbar';
 // =============================================
 import {
   createActor,
-  updateActor,
+  patchActor,
   getActorById,
 } from '../../services/actorService';
 import { emptyActor, nationalities } from '../../constants';
@@ -48,19 +48,21 @@ function ActorForm() {
   const [initialValues, setInitialValues] = useState(emptyActor);
 
   const fetchActor = useCallback(async () => {
-    if (id !== ':id') {
-      try {
-        const actor = await getActorById(id);
-        setInitialValues(actor);
-      } catch (error) {
-        showSnackbar('Failed to fetch actor data!', 'error');
-      }
+    try {
+      const actor = await getActorById(id);
+      setInitialValues(actor);
+    } catch (error) {
+      showSnackbar('Failed to fetch actor data!', 'error');
     }
   }, [id, showSnackbar]);
 
   useEffect(() => {
-    fetchActor();
-  }, [fetchActor]);
+    if (id === ':id' || id === undefined) {
+      setInitialValues(emptyActor);
+    } else {
+      fetchActor();
+    }
+  }, [id, fetchActor]);
 
   const goBack = () => {
     if (id !== ':id') {
@@ -86,7 +88,7 @@ function ActorForm() {
   const onFormSubmit = async (values) => {
     try {
       if (values.id) {
-        await updateActor(values);
+        await patchActor(values);
         showSnackbar('Actor updated successfully!', 'success');
       } else {
         await createActor(values);

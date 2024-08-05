@@ -71,10 +71,13 @@ function ActorsList() {
       event.stopPropagation();
       try {
         await deleteActor(id);
-        setTimeout(() => {
-          refetch();
-          showSnackbar('Actor deleted successfully!', 'success');
-        }, 500);
+        refetch();
+        showSnackbar('Actor deleted successfully!', 'success');
+
+        // setTimeout(() => {
+        //   refetch();
+        //   showSnackbar('Actor deleted successfully!', 'success');
+        // }, 500);
       } catch (err) {
         showSnackbar('Failed to delete actor!', 'error');
       }

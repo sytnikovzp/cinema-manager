@@ -7,13 +7,13 @@ const useSnackbar = (onCloseCallback) => {
     severity: 'success',
   });
 
-  const showSnackbar = (message, severity = 'success') => {
+  const showSnackbar = useCallback((message, severity = 'success') => {
     setSnackbar({
       open: true,
       message,
       severity,
     });
-  };
+  }, []);
 
   const handleClose = useCallback(
     (event, reason) => {

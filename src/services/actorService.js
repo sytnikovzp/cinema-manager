@@ -32,18 +32,18 @@ export const createActor = async (actorData) => {
   }
 };
 
-export const updateActor = async (id, actorData) => {
+export const updateActor = async (actorData) => {
   try {
-    const response = await api.put(`/actors/${id}`, actorData);
+    const response = await api.put(`/actors/${actorData.id}`, actorData);
     return response.data;
   } catch (error) {
     handleError(error, 'Failed to update actor');
   }
 };
 
-export const patchActor = async (id, actorData) => {
+export const patchActor = async (actorData) => {
   try {
-    const response = await api.patch(`/actors/${id}`, actorData);
+    const response = await api.patch(`/actors/${actorData.id}`, actorData);
     return response.data;
   } catch (error) {
     handleError(error, 'Failed to patch actor');

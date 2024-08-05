@@ -11,6 +11,7 @@ const usePaginatedData = (url, itemsPerPage, currentPage) => {
     setLoading(true);
     setError(null);
     try {
+      // await new Promise((resolve) => setTimeout(resolve, 500));
       const response = await api.get(url, {
         params: {
           _limit: itemsPerPage,
