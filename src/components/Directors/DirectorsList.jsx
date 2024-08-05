@@ -65,7 +65,7 @@ function DirectorsList() {
       try {
         await api.delete(`/${DIRECTORS_SLICE_NAME}/${id}`);
         refetch();
-        showSnackbar('director deleted successfully!', 'success');
+        showSnackbar('Director deleted successfully!', 'success');
       } catch (err) {
         showSnackbar('Failed to delete director!', 'error');
       }

@@ -1,6 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-// =============================================
+import { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 // =============================================
 import Box from '@mui/material/Box';
@@ -31,10 +29,12 @@ import {
   scrollListBoxStyle,
 } from '../../services/styleService';
 // =============================================
-import { deleteStudio, resetStatus } from '../../store/slices/studiosSlice';
+import api from '../../api';
+import { STUDIOS_SLICE_NAME } from '../../constants';
 // =============================================
 import useSnackbar from '../../hooks/useSnackbar';
 import useItemsPerPage from '../../hooks/useItemsPerPage';
+import usePaginatedData from '../../hooks/usePaginatedData';
 
 const StyledAvatar = styled(Avatar)({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
@@ -44,40 +44,34 @@ const StyledAvatar = styled(Avatar)({
 });
 
 function StudiosList() {
-  const dispatch = useDispatch();
+  const itemsPerPage = useItemsPerPage();
+  const [currentPage, setCurrentPage] = useState(1);
+  const {
+    data: studios,
+    totalItems,
+    loading,
+    refetch,
+  } = usePaginatedData(`/${STUDIOS_SLICE_NAME}`, itemsPerPage, currentPage);
 
-  const studios = useSelector((state) => state.studiosList.studios);
+  const { snackbar, showSnackbar, handleClose } = useSnackbar();
 
-  const status = useSelector((state) => state.studiosList.status);
-
-  const { snackbar, showSnackbar, handleClose } = useSnackbar(() =>
-    dispatch(resetStatus())
-  );
-
-  const prevStatusRef = useRef();
-
-  useEffect(() => {
-    const prevStatus = prevStatusRef.current;
-    const currentStatus = status;
-
-    if (
-      currentStatus &&
-      currentStatus !== prevStatus &&
-      currentStatus !== 'loading'
-    ) {
-      const severity = currentStatus.toLowerCase().includes('success')
-        ? 'success'
-        : 'error';
-      showSnackbar(currentStatus, severity);
-    }
-
-    prevStatusRef.current = currentStatus;
-  }, [status, showSnackbar]);
-
-  const onItemDelete = (event, id) => {
-    event.stopPropagation();
-    dispatch(deleteStudio(id));
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
   };
+
+  const onItemDelete = useCallback(
+    async (event, id) => {
+      event.stopPropagation();
+      try {
+        await api.delete(`/${STUDIOS_SLICE_NAME}/${id}`);
+        refetch();
+        showSnackbar('Studio deleted successfully!', 'success');
+      } catch (err) {
+        showSnackbar('Failed to delete studio!', 'error');
+      }
+    },
+    [refetch, showSnackbar]
+  );
 
   const renderLoadingSkeleton = () => (
     <Stack direction='column' marginBottom={1}>
@@ -115,16 +109,6 @@ function StudiosList() {
     </Stack>
   );
 
-  const itemsPerPage = useItemsPerPage();
-  const [currentPage, setCurrentPage] = useState(1);
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = studios.slice(indexOfFirstItem, indexOfLastItem);
-
-  const handlePageChange = (event, value) => {
-    setCurrentPage(value);
-  };
-
   return (
     <>
       <Stack direction='row' justifyContent='space-between'>
@@ -149,17 +133,17 @@ function StudiosList() {
 
       <Box sx={scrollListBoxStyle}>
         <List>
-          {status === 'loading'
+          {loading
             ? Array(itemsPerPage)
                 .fill()
                 .map((_, index) => (
                   <Box key={index}>{renderLoadingSkeleton()}</Box>
                 ))
-            : currentItems.map((studio) => (
+            : studios.map((studio) => (
                 <Stack key={studio.id} direction='column' marginBottom={1}>
                   <ListItem
                     component={Link}
-                    to={`/studios/${studio.id}`}
+                    to={`/${STUDIOS_SLICE_NAME}/${studio.id}`}
                     disablePadding
                     sx={itemListStyle}
                   >
@@ -180,7 +164,7 @@ function StudiosList() {
                           edge='end'
                           aria-label='edit'
                           component={Link}
-                          to={`/studios/edit/${studio.id}`}
+                          to={`/${STUDIOS_SLICE_NAME}/edit/${studio.id}`}
                         >
                           <EditIcon />
                         </IconButton>
@@ -203,7 +187,7 @@ function StudiosList() {
 
       <Stack spacing={2} alignItems='center' marginTop={2}>
         <Pagination
-          count={Math.ceil(studios.length / itemsPerPage)}
+          count={Math.ceil(totalItems / itemsPerPage)}
           page={currentPage}
           onChange={handlePageChange}
           color='primary'
