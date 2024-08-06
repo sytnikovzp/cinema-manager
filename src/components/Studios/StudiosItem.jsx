@@ -33,6 +33,8 @@ import {
   itemLinkStyle,
 } from '../../services/styleService';
 // =============================================
+import { renderItemSkeleton } from '../../services/skeletonService';
+// =============================================
 import usePaginatedData from '../../hooks/usePaginatedData';
 // =============================================
 import StudiosAbout from './StudiosAbout';
@@ -43,6 +45,7 @@ function StudiosItem() {
 
   const [studio, setStudio] = useState(emptyStudio);
   const [tabIndex, setTabIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const { data: movies, error } = usePaginatedData(
     `/${MOVIES_ENTITY_NAME}`,
@@ -58,12 +61,15 @@ function StudiosItem() {
       setStudio(data);
     } catch (error) {
       showSnackbar('Failed to fetch studio data!', 'error');
+    } finally {
+      setLoading(false);
     }
   }, [id, showSnackbar]);
 
   useEffect(() => {
     if (id === ':id' || id === undefined) {
       setStudio(emptyStudio);
+      setLoading(false);
     } else {
       fetchStudio();
     }
@@ -155,61 +161,33 @@ function StudiosItem() {
       </Tabs>
 
       <Box sx={scrollItemBoxStyle}>
-        <Box sx={itemComponentBoxMainStyle}>
-          <Box sx={itemCardMediaBoxStyle}>
-            <Card>
-              <CardMedia
-                component='img'
-                height='100%'
-                image={
-                  studio.logo ||
-                  'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
-                }
-                alt={studio.title}
-              />
-            </Card>
-          </Box>
-          <Box sx={itemInformationBoxStyle}>
-            <Typography
-              variant='h5'
-              component='div'
-              sx={{ fontWeight: 'bold' }}
-            >
-              {studio.title || 'Unknown studio'}
-            </Typography>
-
-            <Stack direction='row' spacing={1}>
+        {loading ? (
+          renderItemSkeleton()
+        ) : (
+          <Box sx={itemComponentBoxMainStyle}>
+            <Box sx={itemCardMediaBoxStyle}>
+              <Card>
+                <CardMedia
+                  component='img'
+                  height='100%'
+                  image={
+                    studio.logo ||
+                    'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
+                  }
+                  alt={studio.title}
+                />
+              </Card>
+            </Box>
+            <Box sx={itemInformationBoxStyle}>
               <Typography
-                variant='body1'
-                sx={{
-                  fontWeight: 'bold',
-                }}
+                variant='h5'
                 component='div'
+                sx={{ fontWeight: 'bold' }}
               >
-                Foundation year:
+                {studio.title || 'Unknown studio'}
               </Typography>
-              <Typography variant='body1' component='div'>
-                {studio.foundation_year || 'Unknown'}
-              </Typography>
-            </Stack>
 
-            <Stack direction='row' spacing={1}>
-              <Typography
-                variant='body1'
-                sx={{
-                  fontWeight: 'bold',
-                }}
-                component='div'
-              >
-                Location:
-              </Typography>
-              <Typography variant='body1' component='div'>
-                {studio.location || 'Unknown'}
-              </Typography>
-            </Stack>
-
-            {tabIndex === 0 && (
-              <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
+              <Stack direction='row' spacing={1}>
                 <Typography
                   variant='body1'
                   sx={{
@@ -217,19 +195,51 @@ function StudiosItem() {
                   }}
                   component='div'
                 >
-                  Movies:
+                  Foundation year:
                 </Typography>
                 <Typography variant='body1' component='div'>
-                  {formattedMovies}
+                  {studio.foundation_year || 'Unknown'}
                 </Typography>
               </Stack>
-            )}
 
-            {tabIndex === 1 && studio.about && (
-              <StudiosAbout about={studio.about} />
-            )}
+              <Stack direction='row' spacing={1}>
+                <Typography
+                  variant='body1'
+                  sx={{
+                    fontWeight: 'bold',
+                  }}
+                  component='div'
+                >
+                  Location:
+                </Typography>
+                <Typography variant='body1' component='div'>
+                  {studio.location || 'Unknown'}
+                </Typography>
+              </Stack>
+
+              {tabIndex === 0 && (
+                <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
+                  <Typography
+                    variant='body1'
+                    sx={{
+                      fontWeight: 'bold',
+                    }}
+                    component='div'
+                  >
+                    Movies:
+                  </Typography>
+                  <Typography variant='body1' component='div'>
+                    {formattedMovies}
+                  </Typography>
+                </Stack>
+              )}
+
+              {tabIndex === 1 && studio.about && (
+                <StudiosAbout about={studio.about} />
+              )}
+            </Box>
           </Box>
-        </Box>
+        )}
       </Box>
     </>
   );

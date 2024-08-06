@@ -34,6 +34,8 @@ import {
   itemLinkStyle,
 } from '../../services/styleService';
 // =============================================
+import { renderItemSkeleton } from '../../services/skeletonService';
+// =============================================
 import usePaginatedData from '../../hooks/usePaginatedData';
 // =============================================
 import DirectorsBiography from './DirectorsBiography';
@@ -44,6 +46,7 @@ function DirectorsItem() {
 
   const [director, setDirector] = useState(emptyDirector);
   const [tabIndex, setTabIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const { data: movies, error } = usePaginatedData(
     `/${MOVIES_ENTITY_NAME}`,
@@ -59,12 +62,15 @@ function DirectorsItem() {
       setDirector(data);
     } catch (error) {
       showSnackbar('Failed to fetch director data!', 'error');
+    } finally {
+      setLoading(false);
     }
   }, [id, showSnackbar]);
 
   useEffect(() => {
     if (id === ':id' || id === undefined) {
       setDirector(emptyDirector);
+      setLoading(false);
     } else {
       fetchDirector();
     }
@@ -160,47 +166,31 @@ function DirectorsItem() {
       </Tabs>
 
       <Box sx={scrollItemBoxStyle}>
-        <Box sx={itemComponentBoxMainStyle}>
-          <Box sx={itemCardMediaBoxStyle}>
-            <Card>
-              <CardMedia
-                component='img'
-                height='100%'
-                image={
-                  director.photo ||
-                  'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
-                }
-                alt={director.full_name}
-              />
-            </Card>
-          </Box>
-          <Box sx={itemInformationBoxStyle}>
-            <Typography
-              variant='h5'
-              component='div'
-              sx={{ fontWeight: 'bold' }}
-            >
-              {director.full_name || 'Unknown director'}
-            </Typography>
-            <Stack direction='row' spacing={1}>
+        {loading ? (
+          renderItemSkeleton()
+        ) : (
+          <Box sx={itemComponentBoxMainStyle}>
+            <Box sx={itemCardMediaBoxStyle}>
+              <Card>
+                <CardMedia
+                  component='img'
+                  height='100%'
+                  image={
+                    director.photo ||
+                    'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
+                  }
+                  alt={director.full_name}
+                />
+              </Card>
+            </Box>
+            <Box sx={itemInformationBoxStyle}>
               <Typography
-                variant='body1'
-                sx={{
-                  fontWeight: 'bold',
-                }}
+                variant='h5'
                 component='div'
+                sx={{ fontWeight: 'bold' }}
               >
-                Birth date:
+                {director.full_name || 'Unknown director'}
               </Typography>
-              <Typography variant='body1' component='div'>
-                {director.birth_date ? formattedbirth_date : 'Unknown'}
-                {director.birth_date &&
-                  (director.birth_date && director.death_date
-                    ? ` (aged ${calculatedAge})`
-                    : ` (age ${calculatedAge})`)}
-              </Typography>
-            </Stack>
-            {director.death_date && (
               <Stack direction='row' spacing={1}>
                 <Typography
                   variant='body1'
@@ -209,29 +199,33 @@ function DirectorsItem() {
                   }}
                   component='div'
                 >
-                  Death date:
+                  Birth date:
                 </Typography>
                 <Typography variant='body1' component='div'>
-                  {formatteddeath_date}
+                  {director.birth_date ? formattedbirth_date : 'Unknown'}
+                  {director.birth_date &&
+                    (director.birth_date && director.death_date
+                      ? ` (aged ${calculatedAge})`
+                      : ` (age ${calculatedAge})`)}
                 </Typography>
               </Stack>
-            )}
-            <Stack direction='row' spacing={1}>
-              <Typography
-                variant='body1'
-                sx={{
-                  fontWeight: 'bold',
-                }}
-                component='div'
-              >
-                Nationality:
-              </Typography>
-              <Typography variant='body1' component='div'>
-                {director.nationality || 'Unknown'}
-              </Typography>
-            </Stack>
-            {tabIndex === 0 && (
-              <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
+              {director.death_date && (
+                <Stack direction='row' spacing={1}>
+                  <Typography
+                    variant='body1'
+                    sx={{
+                      fontWeight: 'bold',
+                    }}
+                    component='div'
+                  >
+                    Death date:
+                  </Typography>
+                  <Typography variant='body1' component='div'>
+                    {formatteddeath_date}
+                  </Typography>
+                </Stack>
+              )}
+              <Stack direction='row' spacing={1}>
                 <Typography
                   variant='body1'
                   sx={{
@@ -239,18 +233,34 @@ function DirectorsItem() {
                   }}
                   component='div'
                 >
-                  Movies:
+                  Nationality:
                 </Typography>
                 <Typography variant='body1' component='div'>
-                  {formattedMovies}
+                  {director.nationality || 'Unknown'}
                 </Typography>
               </Stack>
-            )}
-            {tabIndex === 1 && director.biography && (
-              <DirectorsBiography biography={director.biography} />
-            )}{' '}
+              {tabIndex === 0 && (
+                <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
+                  <Typography
+                    variant='body1'
+                    sx={{
+                      fontWeight: 'bold',
+                    }}
+                    component='div'
+                  >
+                    Movies:
+                  </Typography>
+                  <Typography variant='body1' component='div'>
+                    {formattedMovies}
+                  </Typography>
+                </Stack>
+              )}
+              {tabIndex === 1 && director.biography && (
+                <DirectorsBiography biography={director.biography} />
+              )}{' '}
+            </Box>
           </Box>
-        </Box>
+        )}
       </Box>
     </>
   );

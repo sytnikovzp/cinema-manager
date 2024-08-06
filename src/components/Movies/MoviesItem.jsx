@@ -36,6 +36,8 @@ import {
   itemLinkStyle,
 } from '../../services/styleService';
 // =============================================
+import { renderItemSkeleton } from '../../services/skeletonService';
+// =============================================
 import usePaginatedData from '../../hooks/usePaginatedData';
 // =============================================
 import MoviesPlayer from './MoviesPlayer';
@@ -46,6 +48,7 @@ function MoviesItem() {
 
   const [movie, setMovie] = useState(emptyMovie);
   const [tabIndex, setTabIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const useEntityData = (entityName) => {
     return usePaginatedData(`/${entityName}`, 500, 1);
@@ -67,12 +70,15 @@ function MoviesItem() {
       setMovie(data);
     } catch (error) {
       showSnackbar('Failed to fetch movie data!', 'error');
+    } finally {
+      setLoading(false);
     }
   }, [id, showSnackbar]);
 
   useEffect(() => {
     if (id === ':id' || id === undefined) {
       setMovie(emptyMovie);
+      setLoading(false);
     } else {
       fetchMovie();
     }
@@ -230,113 +236,117 @@ function MoviesItem() {
 
       {tabIndex === 0 && (
         <Box sx={scrollItemBoxStyle}>
-          <Box sx={itemComponentBoxMainStyle}>
-            <Box sx={itemCardMediaBoxStyle}>
-              <Card>
-                <CardMedia
-                  component='img'
-                  height='100%'
-                  image={
-                    movie.poster ||
-                    'https://www.prokerala.com/movies/assets/img/no-poster-available.jpg'
-                  }
-                  alt={movie.title}
-                />
-              </Card>
-            </Box>
-            <Box sx={itemInformationBoxStyle}>
-              <Typography
-                variant='h5'
-                component='div'
-                sx={{ fontWeight: 'bold' }}
-              >
-                {movie.title || 'Unknown movie'}
-              </Typography>
-              <Stack direction='row' spacing={1}>
+          {loading ? (
+            renderItemSkeleton()
+          ) : (
+            <Box sx={itemComponentBoxMainStyle}>
+              <Box sx={itemCardMediaBoxStyle}>
+                <Card>
+                  <CardMedia
+                    component='img'
+                    height='100%'
+                    image={
+                      movie.poster ||
+                      'https://www.prokerala.com/movies/assets/img/no-poster-available.jpg'
+                    }
+                    alt={movie.title}
+                  />
+                </Card>
+              </Box>
+              <Box sx={itemInformationBoxStyle}>
                 <Typography
-                  variant='body1'
-                  sx={{
-                    fontWeight: 'bold',
-                  }}
+                  variant='h5'
                   component='div'
+                  sx={{ fontWeight: 'bold' }}
                 >
-                  Movie year:
+                  {movie.title || 'Unknown movie'}
                 </Typography>
-                <Typography variant='body1' component='div'>
-                  {movie.release_year || 'Unknown'}
-                </Typography>
-              </Stack>
-              <Stack direction='row' spacing={1}>
-                <Typography
-                  variant='body1'
-                  sx={{
-                    fontWeight: 'bold',
-                  }}
-                  component='div'
-                >
-                  Genre:
-                </Typography>
-                <Typography variant='body1' component='div'>
-                  {movie.genre || 'Unknown'}
-                </Typography>
-              </Stack>
-              <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
-                <Typography
-                  variant='body1'
-                  sx={{
-                    fontWeight: 'bold',
-                  }}
-                  component='div'
-                >
-                  Studios:
-                </Typography>
-                <Typography variant='body1' component='div'>
-                  {formattedStudios}
-                </Typography>
-              </Stack>
-              <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
-                <Typography
-                  variant='body1'
-                  sx={{
-                    fontWeight: 'bold',
-                  }}
-                  component='div'
-                >
-                  Directors:
-                </Typography>
-                <Typography variant='body1' component='div'>
-                  {formattedDirectors}
-                </Typography>
-              </Stack>
-              <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
-                <Typography
-                  variant='body1'
-                  sx={{
-                    fontWeight: 'bold',
-                  }}
-                  component='div'
-                >
-                  Actors:
-                </Typography>
-                <Typography variant='body1' component='div'>
-                  {formattedActors}
-                </Typography>
-              </Stack>
-
-              {movie.storyline && (
-                <>
-                  <Divider sx={{ marginTop: 2 }} />
+                <Stack direction='row' spacing={1}>
                   <Typography
                     variant='body1'
+                    sx={{
+                      fontWeight: 'bold',
+                    }}
                     component='div'
-                    sx={textIndentStyle}
                   >
-                    {movie.storyline}
+                    Movie year:
                   </Typography>
-                </>
-              )}
+                  <Typography variant='body1' component='div'>
+                    {movie.release_year || 'Unknown'}
+                  </Typography>
+                </Stack>
+                <Stack direction='row' spacing={1}>
+                  <Typography
+                    variant='body1'
+                    sx={{
+                      fontWeight: 'bold',
+                    }}
+                    component='div'
+                  >
+                    Genre:
+                  </Typography>
+                  <Typography variant='body1' component='div'>
+                    {movie.genre || 'Unknown'}
+                  </Typography>
+                </Stack>
+                <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
+                  <Typography
+                    variant='body1'
+                    sx={{
+                      fontWeight: 'bold',
+                    }}
+                    component='div'
+                  >
+                    Studios:
+                  </Typography>
+                  <Typography variant='body1' component='div'>
+                    {formattedStudios}
+                  </Typography>
+                </Stack>
+                <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
+                  <Typography
+                    variant='body1'
+                    sx={{
+                      fontWeight: 'bold',
+                    }}
+                    component='div'
+                  >
+                    Directors:
+                  </Typography>
+                  <Typography variant='body1' component='div'>
+                    {formattedDirectors}
+                  </Typography>
+                </Stack>
+                <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
+                  <Typography
+                    variant='body1'
+                    sx={{
+                      fontWeight: 'bold',
+                    }}
+                    component='div'
+                  >
+                    Actors:
+                  </Typography>
+                  <Typography variant='body1' component='div'>
+                    {formattedActors}
+                  </Typography>
+                </Stack>
+
+                {movie.storyline && (
+                  <>
+                    <Divider sx={{ marginTop: 2 }} />
+                    <Typography
+                      variant='body1'
+                      component='div'
+                      sx={textIndentStyle}
+                    >
+                      {movie.storyline}
+                    </Typography>
+                  </>
+                )}
+              </Box>
             </Box>
-          </Box>
+          )}
         </Box>
       )}
 
