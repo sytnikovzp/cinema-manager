@@ -16,7 +16,11 @@ import Tab from '@mui/material/Tab';
 // =============================================
 import SnackbarContext from '../../contexts/SnackbarContext';
 // =============================================
-import { ACTORS_ENTITY_NAME, emptyActor } from '../../constants';
+import {
+  MOVIES_ENTITY_NAME,
+  ACTORS_ENTITY_NAME,
+  emptyActor,
+} from '../../constants';
 // =============================================
 import { getActorById } from '../../services/actorService';
 import { formatDate, calculateAge } from '../../services/itemService';
@@ -27,8 +31,10 @@ import {
   itemComponentBoxMainStyle,
   itemCardMediaBoxStyle,
   itemInformationBoxStyle,
-  // itemLinkStyle,
+  itemLinkStyle,
 } from '../../services/styleService';
+// =============================================
+import usePaginatedData from '../../hooks/usePaginatedData';
 // =============================================
 import ActorsBiography from './ActorsBiography';
 
@@ -38,6 +44,12 @@ function ActorsItem() {
 
   const [actor, setActor] = useState(emptyActor);
   const [tabIndex, setTabIndex] = useState(0);
+
+  const { data: movies, error } = usePaginatedData(
+    `/${MOVIES_ENTITY_NAME}`,
+    500,
+    1
+  );
 
   const { showSnackbar } = useContext(SnackbarContext);
 
@@ -58,6 +70,12 @@ function ActorsItem() {
     }
   }, [id, fetchActor]);
 
+  useEffect(() => {
+    if (error) {
+      showSnackbar(error, 'error');
+    }
+  }, [error, showSnackbar]);
+
   const goBack = () => {
     navigate(`/${ACTORS_ENTITY_NAME}`);
   };
@@ -66,19 +84,27 @@ function ActorsItem() {
     setTabIndex(newValue);
   };
 
-  // const filteredMoviesList = moviesList
-  //   .filter((movie) => movie.actors.includes(currentActor.full_name))
-  //   .map((movie) => ({ id: movie.id, title: movie.title }));
+  const filteredMoviesList =
+    movies.length > 0
+      ? movies
+          .filter((movie) => movie.actors.includes(actor.full_name))
+          .map((movie) => ({ id: movie.id, title: movie.title }))
+      : [];
 
-  // const formattedMovies = filteredMoviesList
-  //   .map((movie) => (
-  //     <Link key={movie.id} to={`/movies/${movie.id}`} style={itemLinkStyle}>
-  //       {movie.title}
-  //     </Link>
-  //   ))
-  //   .reduce((prev, curr) => [prev, ', ', curr]);
-
-  const formattedMovies = [];
+  const formattedMovies =
+    filteredMoviesList.length > 0
+      ? filteredMoviesList
+          .map((movie) => (
+            <Link
+              key={movie.id}
+              to={`/movies/${movie.id}`}
+              style={itemLinkStyle}
+            >
+              {movie.title}
+            </Link>
+          ))
+          .reduce((prev, curr) => [prev, ', ', curr])
+      : 'No movies available';
 
   const formattedbirth_date = formatDate(actor.birth_date);
   const formatteddeath_date = formatDate(actor.death_date);
@@ -221,9 +247,7 @@ function ActorsItem() {
                   Movies:
                 </Typography>
                 <Typography variant='body1' component='div'>
-                  {formattedMovies.length > 0
-                    ? formattedMovies
-                    : 'No movies available'}
+                  {formattedMovies}
                 </Typography>
               </Stack>
             )}

@@ -16,7 +16,11 @@ import Tab from '@mui/material/Tab';
 // =============================================
 import SnackbarContext from '../../contexts/SnackbarContext';
 // =============================================
-import { DIRECTORS_ENTITY_NAME, emptyDirector } from '../../constants';
+import {
+  MOVIES_ENTITY_NAME,
+  DIRECTORS_ENTITY_NAME,
+  emptyDirector,
+} from '../../constants';
 // =============================================
 import { getDirectorById } from '../../services/directorService';
 import { formatDate, calculateAge } from '../../services/itemService';
@@ -27,8 +31,10 @@ import {
   itemComponentBoxMainStyle,
   itemCardMediaBoxStyle,
   itemInformationBoxStyle,
-  // itemLinkStyle,
+  itemLinkStyle,
 } from '../../services/styleService';
+// =============================================
+import usePaginatedData from '../../hooks/usePaginatedData';
 // =============================================
 import DirectorsBiography from './DirectorsBiography';
 
@@ -38,6 +44,12 @@ function DirectorsItem() {
 
   const [director, setDirector] = useState(emptyDirector);
   const [tabIndex, setTabIndex] = useState(0);
+
+  const { data: movies, error } = usePaginatedData(
+    `/${MOVIES_ENTITY_NAME}`,
+    500,
+    1
+  );
 
   const { showSnackbar } = useContext(SnackbarContext);
 
@@ -58,6 +70,12 @@ function DirectorsItem() {
     }
   }, [id, fetchDirector]);
 
+  useEffect(() => {
+    if (error) {
+      showSnackbar(error, 'error');
+    }
+  }, [error, showSnackbar]);
+
   const goBack = () => {
     navigate(`/${DIRECTORS_ENTITY_NAME}`);
   };
@@ -66,19 +84,27 @@ function DirectorsItem() {
     setTabIndex(newValue);
   };
 
-  // const filteredMoviesList = moviesList
-  //   .filter((movie) => movie.directors.includes(director.full_name))
-  //   .map((movie) => ({ id: movie.id, title: movie.title }));
+  const filteredMoviesList =
+    movies.length > 0
+      ? movies
+          .filter((movie) => movie.directors.includes(director.full_name))
+          .map((movie) => ({ id: movie.id, title: movie.title }))
+      : [];
 
-  // const formattedMovies = filteredMoviesList
-  //   .map((movie) => (
-  //     <Link key={movie.id} to={`/movies/${movie.id}`} style={itemLinkStyle}>
-  //       {movie.title}
-  //     </Link>
-  //   ))
-  //   .reduce((prev, curr) => [prev, ', ', curr]);
-
-  const formattedMovies = [];
+  const formattedMovies =
+    filteredMoviesList.length > 0
+      ? filteredMoviesList
+          .map((movie) => (
+            <Link
+              key={movie.id}
+              to={`/movies/${movie.id}`}
+              style={itemLinkStyle}
+            >
+              {movie.title}
+            </Link>
+          ))
+          .reduce((prev, curr) => [prev, ', ', curr])
+      : 'No movies available';
 
   const formattedbirth_date = formatDate(director.birth_date);
   const formatteddeath_date = formatDate(director.death_date);
@@ -216,9 +242,7 @@ function DirectorsItem() {
                   Movies:
                 </Typography>
                 <Typography variant='body1' component='div'>
-                  {formattedMovies.length > 0
-                    ? formattedMovies
-                    : 'No movies available'}
+                  {formattedMovies}
                 </Typography>
               </Stack>
             )}
