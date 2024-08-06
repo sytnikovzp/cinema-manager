@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+// =============================================
 import dayjs from 'dayjs';
 // =============================================
 import { Formik, Form, Field, FieldArray } from 'formik';
@@ -29,8 +29,22 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Autocomplete from '@mui/material/Autocomplete';
 // =============================================
-import { createMovie, updateMovie } from '../../store/slices/moviesSlice';
-import { emptyMovie, genres } from '../../constants';
+import SnackbarContext from '../../contexts/SnackbarContext';
+// =============================================
+import {
+  MOVIES_ENTITY_NAME,
+  ACTORS_ENTITY_NAME,
+  DIRECTORS_ENTITY_NAME,
+  STUDIOS_ENTITY_NAME,
+  emptyMovie,
+  genres,
+} from '../../constants';
+// =============================================
+import {
+  getMovieById,
+  createMovie,
+  patchMovie,
+} from '../../services/movieService';
 // =============================================
 import {
   formStyle,
@@ -41,30 +55,72 @@ import {
   addButtonFormStyle,
   stackButtonFormStyle,
 } from '../../services/styleService';
+// =============================================
+import usePaginatedData from '../../hooks/usePaginatedData';
 
 function MovieForm() {
-  const dispatch = useDispatch();
-  const movies = useSelector((state) => state.moviesList.movies);
-  const actorsList = useSelector((state) => state.actorsList.actors);
-  const directorsList = useSelector((state) => state.directorsList.directors);
-  const studiosList = useSelector((state) => state.studiosList.studios);
-
   const { id } = useParams();
-  const currentMovie = movies.find((movie) => Number(movie.id) === Number(id));
-
   const navigate = useNavigate();
+
+  const [movie, setMovie] = useState(emptyMovie);
+  const [activeStep, setActiveStep] = useState(0);
+
+  const useEntityData = (entityName) => {
+    return usePaginatedData(`/${entityName}`, 500, 1);
+  };
+
+  const { data: actors, error: actorsError } =
+    useEntityData(ACTORS_ENTITY_NAME);
+  const { data: directors, error: directorsError } = useEntityData(
+    DIRECTORS_ENTITY_NAME
+  );
+  const { data: studios, error: studiosError } =
+    useEntityData(STUDIOS_ENTITY_NAME);
+
+  const { showSnackbar } = useContext(SnackbarContext);
+
+  const fetchMovie = useCallback(async () => {
+    try {
+      const movie = await getMovieById(id);
+      setMovie(movie);
+    } catch (error) {
+      showSnackbar('Failed to fetch movie data!', 'error');
+    }
+  }, [id, showSnackbar]);
+
+  useEffect(() => {
+    if (id === ':id' || id === undefined) {
+      setMovie(emptyMovie);
+    } else {
+      fetchMovie();
+    }
+  }, [id, fetchMovie]);
+
+  useEffect(() => {
+    const errors = [
+      { error: actorsError, key: 'actorsError' },
+      { error: directorsError, key: 'directorsError' },
+      { error: studiosError, key: 'studiosError' },
+    ];
+
+    errors.forEach(({ error, key }) => {
+      if (error) {
+        showSnackbar(error, key);
+      }
+    });
+  }, [actorsError, directorsError, studiosError, showSnackbar]);
 
   const goBack = () => {
     if (id !== ':id') {
-      navigate(`/movies/${id}`);
+      navigate(`/${MOVIES_ENTITY_NAME}/${id}`);
     } else {
-      navigate(`/movies`);
+      navigate(`/${MOVIES_ENTITY_NAME}`);
     }
   };
 
   const optionsForActors =
-    actorsList.length > 1
-      ? actorsList.map((option) => {
+    actors.length > 1
+      ? actors.map((option) => {
           const firstLetter = option.full_name[0].toUpperCase();
           return {
             firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
@@ -74,8 +130,8 @@ function MovieForm() {
       : [];
 
   const optionsForDirectors =
-    directorsList.length > 1
-      ? directorsList.map((option) => {
+    directors.length > 1
+      ? directors.map((option) => {
           const firstLetter = option.full_name[0].toUpperCase();
           return {
             firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
@@ -85,8 +141,8 @@ function MovieForm() {
       : [];
 
   const optionsForStudios =
-    studiosList.length > 1
-      ? studiosList.map((option) => {
+    studios.length > 1
+      ? studios.map((option) => {
           const firstLetter = option.title[0].toUpperCase();
           return {
             firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
@@ -100,8 +156,6 @@ function MovieForm() {
     .sort((a, b) => a.title.localeCompare(b.title));
 
   const steps = ['General', 'Directors', 'Actors', 'Studios', 'Storyline'];
-
-  const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = async (event, validateForm, setTouched) => {
     event.preventDefault();
@@ -137,13 +191,18 @@ function MovieForm() {
     storyline: Yup.string(),
   });
 
-  const onFormSubmit = (values) => {
-    if (values.id) {
-      dispatch(updateMovie(values));
-      navigate(`/movies/${id}`);
-    } else {
-      dispatch(createMovie(values));
-      navigate(`/movies`);
+  const onFormSubmit = async (values) => {
+    try {
+      if (values.id) {
+        await patchMovie(values);
+        showSnackbar('Movie updated successfully!', 'success');
+      } else {
+        await createMovie(values);
+        showSnackbar('Movie created successfully!', 'success');
+      }
+      navigate(`/${MOVIES_ENTITY_NAME}`);
+    } catch (error) {
+      showSnackbar('Failed to save movie data!', 'error');
     }
   };
 
@@ -704,7 +763,7 @@ function MovieForm() {
 
   return (
     <Formik
-      initialValues={currentMovie || emptyMovie}
+      initialValues={movie}
       onSubmit={onFormSubmit}
       validationSchema={schema}
       enableReinitialize

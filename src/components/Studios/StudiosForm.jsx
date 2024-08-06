@@ -2,7 +2,6 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 // =============================================
 import dayjs from 'dayjs';
-import 'dayjs/locale/en-gb';
 // =============================================
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
