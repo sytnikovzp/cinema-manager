@@ -94,11 +94,12 @@ function DirectorForm() {
       if (values.id) {
         await patchDirector(values);
         showSnackbar('Director updated successfully!', 'success');
+        navigate(`/${DIRECTORS_ENTITY_NAME}/${id}`);
       } else {
         await createDirector(values);
         showSnackbar('Director created successfully!', 'success');
+        navigate(`/${DIRECTORS_ENTITY_NAME}`);
       }
-      navigate(`/${DIRECTORS_ENTITY_NAME}`);
     } catch (error) {
       showSnackbar('Failed to save director data!', 'error');
     }

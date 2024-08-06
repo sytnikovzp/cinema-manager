@@ -34,18 +34,6 @@ export const createStudio = async (studioData) => {
   }
 };
 
-export const updateStudio = async (studioData) => {
-  try {
-    const response = await api.put(
-      `/${STUDIOS_ENTITY_NAME}/${studioData.id}`,
-      studioData
-    );
-    return response.data;
-  } catch (error) {
-    handleError(error, 'Failed to update studio');
-  }
-};
-
 export const patchStudio = async (studioData) => {
   try {
     const response = await api.patch(

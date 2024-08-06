@@ -34,18 +34,6 @@ export const createDirector = async (directorData) => {
   }
 };
 
-export const updateDirector = async (directorData) => {
-  try {
-    const response = await api.put(
-      `/${DIRECTORS_ENTITY_NAME}/${directorData.id}`,
-      directorData
-    );
-    return response.data;
-  } catch (error) {
-    handleError(error, 'Failed to update director');
-  }
-};
-
 export const patchDirector = async (directorData) => {
   try {
     const response = await api.patch(

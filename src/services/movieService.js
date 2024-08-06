@@ -34,18 +34,6 @@ export const createMovie = async (movieData) => {
   }
 };
 
-export const updateMovie = async (movieData) => {
-  try {
-    const response = await api.put(
-      `/${MOVIES_ENTITY_NAME}/${movieData.id}`,
-      movieData
-    );
-    return response.data;
-  } catch (error) {
-    handleError(error, 'Failed to update movie');
-  }
-};
-
 export const patchMovie = async (movieData) => {
   try {
     const response = await api.patch(

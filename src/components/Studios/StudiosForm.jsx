@@ -88,11 +88,12 @@ function StudioForm() {
       if (values.id) {
         await patchStudio(values);
         showSnackbar('Studio updated successfully!', 'success');
+        navigate(`/${STUDIOS_ENTITY_NAME}/${id}`);
       } else {
         await createStudio(values);
         showSnackbar('Studio created successfully!', 'success');
+        navigate(`/${STUDIOS_ENTITY_NAME}`);
       }
-      navigate(`/${STUDIOS_ENTITY_NAME}`);
     } catch (error) {
       showSnackbar('Failed to save studio data!', 'error');
     }

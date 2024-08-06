@@ -90,11 +90,12 @@ function ActorForm() {
       if (values.id) {
         await patchActor(values);
         showSnackbar('Actor updated successfully!', 'success');
+        navigate(`/${ACTORS_ENTITY_NAME}/${id}`);
       } else {
         await createActor(values);
         showSnackbar('Actor created successfully!', 'success');
+        navigate(`/${ACTORS_ENTITY_NAME}`);
       }
-      navigate(`/${ACTORS_ENTITY_NAME}`);
     } catch (error) {
       showSnackbar('Failed to save actor data!', 'error');
     }

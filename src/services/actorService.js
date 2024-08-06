@@ -34,18 +34,6 @@ export const createActor = async (actorData) => {
   }
 };
 
-export const updateActor = async (actorData) => {
-  try {
-    const response = await api.put(
-      `/${ACTORS_ENTITY_NAME}/${actorData.id}`,
-      actorData
-    );
-    return response.data;
-  } catch (error) {
-    handleError(error, 'Failed to update actor');
-  }
-};
-
 export const patchActor = async (actorData) => {
   try {
     const response = await api.patch(

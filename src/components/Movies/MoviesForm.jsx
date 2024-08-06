@@ -62,27 +62,23 @@ function MovieForm() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [movie, setMovie] = useState(emptyMovie);
+  const [initialValues, setInitialValues] = useState(emptyMovie);
   const [activeStep, setActiveStep] = useState(0);
 
   const useEntityData = (entityName) => {
     return usePaginatedData(`/${entityName}`, 500, 1);
   };
 
-  const { data: actors, error: actorsError } =
-    useEntityData(ACTORS_ENTITY_NAME);
-  const { data: directors, error: directorsError } = useEntityData(
-    DIRECTORS_ENTITY_NAME
-  );
-  const { data: studios, error: studiosError } =
-    useEntityData(STUDIOS_ENTITY_NAME);
+  const { data: actors } = useEntityData(ACTORS_ENTITY_NAME);
+  const { data: directors } = useEntityData(DIRECTORS_ENTITY_NAME);
+  const { data: studios } = useEntityData(STUDIOS_ENTITY_NAME);
 
   const { showSnackbar } = useContext(SnackbarContext);
 
   const fetchMovie = useCallback(async () => {
     try {
       const movie = await getMovieById(id);
-      setMovie(movie);
+      setInitialValues(movie);
     } catch (error) {
       showSnackbar('Failed to fetch movie data!', 'error');
     }
@@ -90,25 +86,11 @@ function MovieForm() {
 
   useEffect(() => {
     if (id === ':id' || id === undefined) {
-      setMovie(emptyMovie);
+      setInitialValues(emptyMovie);
     } else {
       fetchMovie();
     }
   }, [id, fetchMovie]);
-
-  useEffect(() => {
-    const errors = [
-      { error: actorsError, key: 'actorsError' },
-      { error: directorsError, key: 'directorsError' },
-      { error: studiosError, key: 'studiosError' },
-    ];
-
-    errors.forEach(({ error, key }) => {
-      if (error) {
-        showSnackbar(error, key);
-      }
-    });
-  }, [actorsError, directorsError, studiosError, showSnackbar]);
 
   const goBack = () => {
     if (id !== ':id') {
@@ -196,11 +178,12 @@ function MovieForm() {
       if (values.id) {
         await patchMovie(values);
         showSnackbar('Movie updated successfully!', 'success');
+        navigate(`/${MOVIES_ENTITY_NAME}/${id}`);
       } else {
         await createMovie(values);
         showSnackbar('Movie created successfully!', 'success');
+        navigate(`/${MOVIES_ENTITY_NAME}`);
       }
-      navigate(`/${MOVIES_ENTITY_NAME}`);
     } catch (error) {
       showSnackbar('Failed to save movie data!', 'error');
     }
@@ -763,7 +746,7 @@ function MovieForm() {
 
   return (
     <Formik
-      initialValues={movie}
+      initialValues={initialValues}
       onSubmit={onFormSubmit}
       validationSchema={schema}
       enableReinitialize
