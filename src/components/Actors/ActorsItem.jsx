@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 // =============================================
 import Box from '@mui/material/Box';
@@ -15,66 +14,75 @@ import Divider from '@mui/material/Divider';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 // =============================================
+import SnackbarContext from '../../contexts/SnackbarContext';
+// =============================================
+import { ACTORS_SLICE_NAME, emptyActor } from '../../constants';
+// =============================================
+import { getActorById } from '../../services/actorService';
+import { formatDate, calculateAge } from '../../services/itemService';
+// =============================================
 import {
   scrollItemBoxStyle,
   buttonMainStyle,
   itemComponentBoxMainStyle,
   itemCardMediaBoxStyle,
   itemInformationBoxStyle,
-  itemLinkStyle,
+  // itemLinkStyle,
 } from '../../services/styleService';
-// =============================================
-import { emptyActor } from '../../constants';
-import { calculateAge, formatDate } from '../../services/itemService';
 // =============================================
 import ActorsBiography from './ActorsBiography';
 
 function ActorsItem() {
-  const navigate = useNavigate();
   const { id } = useParams();
-  const actors = useSelector((state) => state.actorsList.actors);
-  const moviesList = useSelector((state) => state.moviesList.movies);
+  const navigate = useNavigate();
 
+  const [actor, setActor] = useState(emptyActor);
   const [tabIndex, setTabIndex] = useState(0);
 
-  const actor = actors.find((actor) => Number(actor.id) === Number(id));
+  const { showSnackbar } = useContext(SnackbarContext);
 
-  const currentActor = actor || emptyActor;
+  const fetchActor = useCallback(async () => {
+    try {
+      const data = await getActorById(id);
+      setActor(data);
+    } catch (error) {
+      showSnackbar('Failed to fetch actor data!', 'error');
+    }
+  }, [id, showSnackbar]);
 
-  const filteredMoviesList = moviesList
-    .filter((movie) => movie.actors.includes(currentActor.full_name))
-    .map((movie) => ({ id: movie.id, title: movie.title }));
-
-  const formattedMovies =
-    filteredMoviesList.length > 0
-      ? filteredMoviesList
-          .map((movie) => (
-            <Link
-              key={movie.id}
-              to={`/movies/${movie.id}`}
-              style={itemLinkStyle}
-            >
-              {movie.title}
-            </Link>
-          ))
-          .reduce((prev, curr) => [prev, ', ', curr])
-      : 'No movies available';
-
-  const formattedbirth_date = formatDate(currentActor.birth_date);
-  const formatteddeath_date = formatDate(currentActor.death_date);
-
-  const calculatedAge = calculateAge(
-    currentActor.birth_date,
-    currentActor.death_date
-  );
+  useEffect(() => {
+    if (id === ':id' || id === undefined) {
+      setActor(emptyActor);
+    } else {
+      fetchActor();
+    }
+  }, [id, fetchActor]);
 
   const goBack = () => {
-    navigate('/actors');
+    navigate(`/${ACTORS_SLICE_NAME}`);
   };
 
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
   };
+
+  // const filteredMoviesList = moviesList
+  //   .filter((movie) => movie.actors.includes(currentActor.full_name))
+  //   .map((movie) => ({ id: movie.id, title: movie.title }));
+
+  // const formattedMovies = filteredMoviesList
+  //   .map((movie) => (
+  //     <Link key={movie.id} to={`/movies/${movie.id}`} style={itemLinkStyle}>
+  //       {movie.title}
+  //     </Link>
+  //   ))
+  //   .reduce((prev, curr) => [prev, ', ', curr]);
+
+  const formattedMovies = [];
+
+  const formattedbirth_date = formatDate(actor.birth_date);
+  const formatteddeath_date = formatDate(actor.death_date);
+  const calculatedAge = calculateAge(actor.birth_date, actor.death_date);
 
   return (
     <>
@@ -97,14 +105,14 @@ function ActorsItem() {
           sx={buttonMainStyle}
           startIcon={<EditIcon />}
           component={Link}
-          to={`/actors/edit/${id}`}
+          to={`/${ACTORS_SLICE_NAME}/edit/${id}`}
         >
           Edit
         </Button>
 
         <Button
           component={Link}
-          to='/actors/new'
+          to={`/${ACTORS_SLICE_NAME}/new`}
           type='button'
           variant='contained'
           color='success'
@@ -116,13 +124,14 @@ function ActorsItem() {
       </Stack>
 
       <Divider />
+
       <Tabs
         value={tabIndex}
         onChange={handleTabChange}
         aria-label='actor details tabs'
       >
         <Tab label='General information' />
-        {currentActor.biography && <Tab label='About the actor' />}
+        {actor.biography && <Tab label='About the actor' />}
       </Tabs>
 
       <Box sx={scrollItemBoxStyle}>
@@ -133,10 +142,10 @@ function ActorsItem() {
                 component='img'
                 height='100%'
                 image={
-                  currentActor.photo ||
+                  actor.photo ||
                   'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
                 }
-                alt={currentActor.full_name}
+                alt={actor.full_name}
               />
             </Card>
           </Box>
@@ -146,7 +155,7 @@ function ActorsItem() {
               component='div'
               sx={{ fontWeight: 'bold' }}
             >
-              {currentActor.full_name || 'Unknown actor'}
+              {actor.full_name || 'Unknown actor'}
             </Typography>
 
             <Stack direction='row' spacing={1}>
@@ -160,15 +169,15 @@ function ActorsItem() {
                 Birth date:
               </Typography>
               <Typography variant='body1' component='div'>
-                {currentActor.birth_date ? formattedbirth_date : 'Unknown'}
-                {currentActor.birth_date &&
-                  (currentActor.birth_date && currentActor.death_date
+                {actor.birth_date ? formattedbirth_date : 'Unknown'}
+                {actor.birth_date &&
+                  (actor.birth_date && actor.death_date
                     ? ` (aged ${calculatedAge})`
                     : ` (age ${calculatedAge})`)}
               </Typography>
             </Stack>
 
-            {currentActor.death_date && (
+            {actor.death_date && (
               <Stack direction='row' spacing={1}>
                 <Typography
                   variant='body1'
@@ -196,7 +205,7 @@ function ActorsItem() {
                 Nationality:
               </Typography>
               <Typography variant='body1' component='div'>
-                {currentActor.nationality || 'Unknown'}
+                {actor.nationality || 'Unknown'}
               </Typography>
             </Stack>
 
@@ -212,12 +221,14 @@ function ActorsItem() {
                   Movies:
                 </Typography>
                 <Typography variant='body1' component='div'>
-                  {formattedMovies}
+                  {formattedMovies.length > 0
+                    ? formattedMovies
+                    : 'No movies available'}
                 </Typography>
               </Stack>
             )}
 
-            {tabIndex === 1 && currentActor.biography && <ActorsBiography />}
+            {tabIndex === 1 && actor.biography && <ActorsBiography />}
           </Box>
         </Box>
       </Box>

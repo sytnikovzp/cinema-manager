@@ -1,26 +1,44 @@
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 // =============================================
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 // =============================================
+import SnackbarContext from '../../contexts/SnackbarContext';
+// =============================================
 import { textIndentStyle } from '../../services/styleService';
 // =============================================
+import { getActorById } from '../../services/actorService';
 import { emptyActor } from '../../constants';
 
 function ActorsBiography() {
-  const actors = useSelector((state) => state.actorsList.actors);
-
   const { id } = useParams();
 
-  const actor = actors.find((actor) => Number(actor.id) === Number(id));
+  const [actor, setActor] = useState(emptyActor);
 
-  const currentActor = actor || emptyActor;
+  const { showSnackbar } = useContext(SnackbarContext);
+
+  const fetchActor = useCallback(async () => {
+    try {
+      const data = await getActorById(id);
+      setActor(data);
+    } catch (error) {
+      showSnackbar('Failed to fetch actor data!', 'error');
+    }
+  }, [id, showSnackbar]);
+
+  useEffect(() => {
+    if (id === ':id' || id === undefined) {
+      setActor(emptyActor);
+    } else {
+      fetchActor();
+    }
+  }, [id, fetchActor]);
 
   return (
     <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
       <Typography variant='body1' component='div' sx={textIndentStyle}>
-        {currentActor.biography}
+        {actor.biography || 'No biography available'}
       </Typography>
     </Stack>
   );
