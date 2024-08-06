@@ -65,7 +65,7 @@ function StudiosList() {
     setCurrentPage(value);
   };
 
-  const onItemDelete = useCallback(
+  const onStudioDelete = useCallback(
     async (event, id) => {
       event.stopPropagation();
       try {
@@ -178,7 +178,7 @@ function StudiosList() {
                           edge='end'
                           aria-label='delete'
                           onClick={(event) => {
-                            onItemDelete(event, studio.id);
+                            onStudioDelete(event, studio.id);
                           }}
                         >
                           <HighlightOffIcon />

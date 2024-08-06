@@ -66,7 +66,7 @@ function MoviesList() {
     setCurrentPage(value);
   };
 
-  const onItemDelete = useCallback(
+  const onMovieDelete = useCallback(
     async (event, id) => {
       event.stopPropagation();
       try {
@@ -179,7 +179,7 @@ function MoviesList() {
                           edge='end'
                           aria-label='delete'
                           onClick={(event) => {
-                            onItemDelete(event, movie.id);
+                            onMovieDelete(event, movie.id);
                           }}
                         >
                           <HighlightOffIcon />

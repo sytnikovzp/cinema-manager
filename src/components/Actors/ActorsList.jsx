@@ -65,7 +65,7 @@ function ActorsList() {
     setCurrentPage(value);
   };
 
-  const onItemDelete = useCallback(
+  const onActorDelete = useCallback(
     async (event, id) => {
       event.stopPropagation();
       try {
@@ -177,7 +177,7 @@ function ActorsList() {
                         <IconButton
                           edge='end'
                           aria-label='delete'
-                          onClick={(event) => onItemDelete(event, actor.id)}
+                          onClick={(event) => onActorDelete(event, actor.id)}
                         >
                           <HighlightOffIcon />
                         </IconButton>

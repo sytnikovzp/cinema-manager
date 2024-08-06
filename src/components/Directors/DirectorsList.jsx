@@ -65,7 +65,7 @@ function DirectorsList() {
     setCurrentPage(value);
   };
 
-  const onItemDelete = useCallback(
+  const onDirectorDelete = useCallback(
     async (event, id) => {
       event.stopPropagation();
       try {
@@ -178,7 +178,7 @@ function DirectorsList() {
                           edge='end'
                           aria-label='delete'
                           onClick={(event) => {
-                            onItemDelete(event, director.id);
+                            onDirectorDelete(event, director.id);
                           }}
                         >
                           <HighlightOffIcon />
