@@ -228,7 +228,9 @@ function ActorsItem() {
               </Stack>
             )}
 
-            {tabIndex === 1 && actor.biography && <ActorsBiography />}
+            {tabIndex === 1 && actor.biography && (
+              <ActorsBiography biography={actor.biography} />
+            )}
           </Box>
         </Box>
       </Box>
