@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 // =============================================
 import dayjs from 'dayjs';
@@ -21,15 +21,16 @@ import ClearAllIcon from '@mui/icons-material/ClearAll';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import InputAdornment from '@mui/material/InputAdornment';
 import Autocomplete from '@mui/material/Autocomplete';
-import Alert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
+// =============================================
+import SnackbarContext from '../../contexts/SnackbarContext';
+// =============================================
+import { ACTORS_SLICE_NAME, emptyActor, nationalities } from '../../constants';
 // =============================================
 import {
+  getActorById,
   createActor,
   patchActor,
-  getActorById,
 } from '../../services/actorService';
-import { emptyActor, nationalities } from '../../constants';
 // =============================================
 import {
   formStyle,
@@ -38,14 +39,13 @@ import {
   wideButtonFormStyle,
   stackButtonFormStyle,
 } from '../../services/styleService';
-// =============================================
-import useSnackbar from '../../hooks/useSnackbar';
 
 function ActorForm() {
-  const { snackbar, showSnackbar, handleClose } = useSnackbar();
   const { id } = useParams();
   const navigate = useNavigate();
   const [initialValues, setInitialValues] = useState(emptyActor);
+
+  const { showSnackbar } = useContext(SnackbarContext);
 
   const fetchActor = useCallback(async () => {
     try {
@@ -66,9 +66,9 @@ function ActorForm() {
 
   const goBack = () => {
     if (id !== ':id') {
-      navigate(`/actors/${id}`);
+      navigate(`/${ACTORS_SLICE_NAME}/${id}`);
     } else {
-      navigate(`/actors`);
+      navigate(`/${ACTORS_SLICE_NAME}`);
     }
   };
 
@@ -94,7 +94,7 @@ function ActorForm() {
         await createActor(values);
         showSnackbar('Actor created successfully!', 'success');
       }
-      navigate(`/actors`);
+      navigate(`/${ACTORS_SLICE_NAME}`);
     } catch (error) {
       showSnackbar('Failed to save actor data!', 'error');
     }
@@ -343,21 +343,6 @@ function ActorForm() {
       >
         {renderForm}
       </Formik>
-
-      <Snackbar
-        open={snackbar.open}
-        autoHideDuration={1000}
-        onClose={handleClose}
-      >
-        <Alert
-          onClose={handleClose}
-          severity={snackbar.severity}
-          variant='filled'
-          sx={{ width: '100%' }}
-        >
-          {snackbar.message}
-        </Alert>
-      </Snackbar>
     </>
   );
 }

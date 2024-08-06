@@ -10,24 +10,29 @@ import Actors from './components/Actors/Actors';
 import Directors from './components/Directors/Directors';
 import Studios from './components/Studios/Studios';
 import HomePage from './components/HomePage/HomePage';
+import SnackbarComponent from './components/SnackbarComponent';
 import Layout from './components/Layout';
 import { ToggleColorMode } from './components/Layout';
+import { SnackbarProvider } from './contexts/SnackbarContext';
 
 function App() {
   return (
     <ToggleColorMode>
-      <Router>
-        <Routes>
-          <Route path='*' element={<Layout />}>
-            <Route path='movies/*' element={<Movies />} />
-            <Route path='actors/*' element={<Actors />} />
-            <Route path='directors/*' element={<Directors />} />
-            <Route path='studios/*' element={<Studios />} />
-            <Route index element={<HomePage />} />
-            <Route path='*' element={<Navigate to='movies' replace />} />
-          </Route>
-        </Routes>
-      </Router>
+      <SnackbarProvider>
+        <Router>
+          <Routes>
+            <Route path='*' element={<Layout />}>
+              <Route path='movies/*' element={<Movies />} />
+              <Route path='actors/*' element={<Actors />} />
+              <Route path='directors/*' element={<Directors />} />
+              <Route path='studios/*' element={<Studios />} />
+              <Route index element={<HomePage />} />
+              <Route path='*' element={<Navigate to='movies' replace />} />
+            </Route>
+          </Routes>
+          <SnackbarComponent />
+        </Router>
+      </SnackbarProvider>
     </ToggleColorMode>
   );
 }
