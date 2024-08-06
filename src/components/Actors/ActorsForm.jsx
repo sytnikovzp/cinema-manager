@@ -24,7 +24,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 // =============================================
 import SnackbarContext from '../../contexts/SnackbarContext';
 // =============================================
-import { ACTORS_SLICE_NAME, emptyActor, nationalities } from '../../constants';
+import { ACTORS_ENTITY_NAME, emptyActor, nationalities } from '../../constants';
 // =============================================
 import {
   getActorById,
@@ -66,9 +66,9 @@ function ActorForm() {
 
   const goBack = () => {
     if (id !== ':id') {
-      navigate(`/${ACTORS_SLICE_NAME}/${id}`);
+      navigate(`/${ACTORS_ENTITY_NAME}/${id}`);
     } else {
-      navigate(`/${ACTORS_SLICE_NAME}`);
+      navigate(`/${ACTORS_ENTITY_NAME}`);
     }
   };
 
@@ -94,7 +94,7 @@ function ActorForm() {
         await createActor(values);
         showSnackbar('Actor created successfully!', 'success');
       }
-      navigate(`/${ACTORS_SLICE_NAME}`);
+      navigate(`/${ACTORS_ENTITY_NAME}`);
     } catch (error) {
       showSnackbar('Failed to save actor data!', 'error');
     }

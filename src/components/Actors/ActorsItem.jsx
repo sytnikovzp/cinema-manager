@@ -16,7 +16,7 @@ import Tab from '@mui/material/Tab';
 // =============================================
 import SnackbarContext from '../../contexts/SnackbarContext';
 // =============================================
-import { ACTORS_SLICE_NAME, emptyActor } from '../../constants';
+import { ACTORS_ENTITY_NAME, emptyActor } from '../../constants';
 // =============================================
 import { getActorById } from '../../services/actorService';
 import { formatDate, calculateAge } from '../../services/itemService';
@@ -59,7 +59,7 @@ function ActorsItem() {
   }, [id, fetchActor]);
 
   const goBack = () => {
-    navigate(`/${ACTORS_SLICE_NAME}`);
+    navigate(`/${ACTORS_ENTITY_NAME}`);
   };
 
   const handleTabChange = (event, newValue) => {
@@ -105,14 +105,14 @@ function ActorsItem() {
           sx={buttonMainStyle}
           startIcon={<EditIcon />}
           component={Link}
-          to={`/${ACTORS_SLICE_NAME}/edit/${id}`}
+          to={`/${ACTORS_ENTITY_NAME}/edit/${id}`}
         >
           Edit
         </Button>
 
         <Button
           component={Link}
-          to={`/${ACTORS_SLICE_NAME}/new`}
+          to={`/${ACTORS_ENTITY_NAME}/new`}
           type='button'
           variant='contained'
           color='success'

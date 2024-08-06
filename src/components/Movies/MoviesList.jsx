@@ -30,7 +30,7 @@ import {
 } from '../../services/styleService';
 // =============================================
 import api from '../../api';
-import { MOVIES_SLICE_NAME } from '../../constants';
+import { MOVIES_ENTITY_NAME } from '../../constants';
 // =============================================
 import useSnackbar from '../../hooks/useSnackbar';
 import useItemsPerPage from '../../hooks/useItemsPerPage';
@@ -52,7 +52,7 @@ function MoviesList() {
     loading,
     error,
     refetch,
-  } = usePaginatedData(`/${MOVIES_SLICE_NAME}`, itemsPerPage, currentPage);
+  } = usePaginatedData(`/${MOVIES_ENTITY_NAME}`, itemsPerPage, currentPage);
 
   const { snackbar, showSnackbar, handleClose } = useSnackbar();
 
@@ -70,7 +70,7 @@ function MoviesList() {
     async (event, id) => {
       event.stopPropagation();
       try {
-        await api.delete(`/${MOVIES_SLICE_NAME}/${id}`);
+        await api.delete(`/${MOVIES_ENTITY_NAME}/${id}`);
         refetch();
         showSnackbar('Movie deleted successfully!', 'success');
       } catch (err) {
@@ -150,7 +150,7 @@ function MoviesList() {
                 <Stack key={movie.id} direction='column' marginBottom={1}>
                   <ListItem
                     component={Link}
-                    to={`/${MOVIES_SLICE_NAME}/${movie.id}`}
+                    to={`/${MOVIES_ENTITY_NAME}/${movie.id}`}
                     disablePadding
                     sx={itemListStyle}
                   >
@@ -171,7 +171,7 @@ function MoviesList() {
                           edge='end'
                           aria-label='edit'
                           component={Link}
-                          to={`/${MOVIES_SLICE_NAME}/edit/${movie.id}`}
+                          to={`/${MOVIES_ENTITY_NAME}/edit/${movie.id}`}
                         >
                           <EditIcon />
                         </IconButton>

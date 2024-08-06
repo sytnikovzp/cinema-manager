@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 // =============================================
 import { directorsState } from '../../model/initialStates';
-import { DIRECTORS_SLICE_NAME } from '../../constants';
+import { DIRECTORS_ENTITY_NAME } from '../../constants';
 // =============================================
 import api from '../../api';
 import { setError, setLoading } from '../../services/reducerService';
@@ -13,10 +13,10 @@ const initialState = {
 };
 
 export const getAllDirectors = createAsyncThunk(
-  `${DIRECTORS_SLICE_NAME}/getAllDirectors`,
+  `${DIRECTORS_ENTITY_NAME}/getAllDirectors`,
   async (_, { rejectWithValue }) => {
     try {
-      const { status, data } = await api.get(`/${DIRECTORS_SLICE_NAME}`);
+      const { status, data } = await api.get(`/${DIRECTORS_ENTITY_NAME}`);
       if (status >= 400) throw new Error(`Error getting directors ${status}`);
       return data;
     } catch (error) {
@@ -26,11 +26,11 @@ export const getAllDirectors = createAsyncThunk(
 );
 
 export const createDirector = createAsyncThunk(
-  `${DIRECTORS_SLICE_NAME}/createDirector`,
+  `${DIRECTORS_ENTITY_NAME}/createDirector`,
   async (director, { rejectWithValue }) => {
     try {
       const { status, data } = await api.post(
-        `/${DIRECTORS_SLICE_NAME}`,
+        `/${DIRECTORS_ENTITY_NAME}`,
         director
       );
       if (status >= 400) throw new Error(`Error create director ${status}`);
@@ -42,11 +42,11 @@ export const createDirector = createAsyncThunk(
 );
 
 export const updateDirector = createAsyncThunk(
-  `${DIRECTORS_SLICE_NAME}/updateDirector`,
+  `${DIRECTORS_ENTITY_NAME}/updateDirector`,
   async (director, { rejectWithValue }) => {
     try {
       const { status, data } = await api.put(
-        `/${DIRECTORS_SLICE_NAME}/${director.id}`,
+        `/${DIRECTORS_ENTITY_NAME}/${director.id}`,
         director
       );
       if (status >= 400) throw new Error(`Error update director ${status}`);
@@ -58,10 +58,10 @@ export const updateDirector = createAsyncThunk(
 );
 
 export const deleteDirector = createAsyncThunk(
-  `${DIRECTORS_SLICE_NAME}/deleteDirector`,
+  `${DIRECTORS_ENTITY_NAME}/deleteDirector`,
   async (id, { rejectWithValue }) => {
     try {
-      const { status } = await api.delete(`/${DIRECTORS_SLICE_NAME}/${id}`);
+      const { status } = await api.delete(`/${DIRECTORS_ENTITY_NAME}/${id}`);
       if (status >= 400) throw new Error(`Error delete director ${status}`);
       return id;
     } catch (error) {
@@ -71,7 +71,7 @@ export const deleteDirector = createAsyncThunk(
 );
 
 const directorsSlice = createSlice({
-  name: DIRECTORS_SLICE_NAME,
+  name: DIRECTORS_ENTITY_NAME,
   initialState,
   reducers: {
     resetStatus(state) {

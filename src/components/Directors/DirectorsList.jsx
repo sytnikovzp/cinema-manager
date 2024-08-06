@@ -30,7 +30,7 @@ import {
 } from '../../services/styleService';
 // =============================================
 import api from '../../api';
-import { DIRECTORS_SLICE_NAME } from '../../constants';
+import { DIRECTORS_ENTITY_NAME } from '../../constants';
 // =============================================
 import useSnackbar from '../../hooks/useSnackbar';
 import useItemsPerPage from '../../hooks/useItemsPerPage';
@@ -52,7 +52,7 @@ function DirectorsList() {
     loading,
     error,
     refetch,
-  } = usePaginatedData(`/${DIRECTORS_SLICE_NAME}`, itemsPerPage, currentPage);
+  } = usePaginatedData(`/${DIRECTORS_ENTITY_NAME}`, itemsPerPage, currentPage);
 
   const { snackbar, showSnackbar, handleClose } = useSnackbar();
 
@@ -70,7 +70,7 @@ function DirectorsList() {
     async (event, id) => {
       event.stopPropagation();
       try {
-        await api.delete(`/${DIRECTORS_SLICE_NAME}/${id}`);
+        await api.delete(`/${DIRECTORS_ENTITY_NAME}/${id}`);
         refetch();
         showSnackbar('Director deleted successfully!', 'success');
       } catch (err) {
@@ -150,7 +150,7 @@ function DirectorsList() {
                 <Stack key={director.id} direction='column' marginBottom={1}>
                   <ListItem
                     component={Link}
-                    to={`/${DIRECTORS_SLICE_NAME}/${director.id}`}
+                    to={`/${DIRECTORS_ENTITY_NAME}/${director.id}`}
                     disablePadding
                     sx={itemListStyle}
                   >
@@ -171,7 +171,7 @@ function DirectorsList() {
                           edge='end'
                           aria-label='edit'
                           component={Link}
-                          to={`/${DIRECTORS_SLICE_NAME}/edit/${director.id}`}
+                          to={`/${DIRECTORS_ENTITY_NAME}/edit/${director.id}`}
                         >
                           <EditIcon />
                         </IconButton>

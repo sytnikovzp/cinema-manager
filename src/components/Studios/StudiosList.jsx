@@ -30,7 +30,7 @@ import {
 } from '../../services/styleService';
 // =============================================
 import api from '../../api';
-import { STUDIOS_SLICE_NAME } from '../../constants';
+import { STUDIOS_ENTITY_NAME } from '../../constants';
 // =============================================
 import useSnackbar from '../../hooks/useSnackbar';
 import useItemsPerPage from '../../hooks/useItemsPerPage';
@@ -52,7 +52,7 @@ function StudiosList() {
     loading,
     error,
     refetch,
-  } = usePaginatedData(`/${STUDIOS_SLICE_NAME}`, itemsPerPage, currentPage);
+  } = usePaginatedData(`/${STUDIOS_ENTITY_NAME}`, itemsPerPage, currentPage);
 
   const { snackbar, showSnackbar, handleClose } = useSnackbar();
 
@@ -70,7 +70,7 @@ function StudiosList() {
     async (event, id) => {
       event.stopPropagation();
       try {
-        await api.delete(`/${STUDIOS_SLICE_NAME}/${id}`);
+        await api.delete(`/${STUDIOS_ENTITY_NAME}/${id}`);
         refetch();
         showSnackbar('Studio deleted successfully!', 'success');
       } catch (err) {
@@ -150,7 +150,7 @@ function StudiosList() {
                 <Stack key={studio.id} direction='column' marginBottom={1}>
                   <ListItem
                     component={Link}
-                    to={`/${STUDIOS_SLICE_NAME}/${studio.id}`}
+                    to={`/${STUDIOS_ENTITY_NAME}/${studio.id}`}
                     disablePadding
                     sx={itemListStyle}
                   >
@@ -171,7 +171,7 @@ function StudiosList() {
                           edge='end'
                           aria-label='edit'
                           component={Link}
-                          to={`/${STUDIOS_SLICE_NAME}/edit/${studio.id}`}
+                          to={`/${STUDIOS_ENTITY_NAME}/edit/${studio.id}`}
                         >
                           <EditIcon />
                         </IconButton>

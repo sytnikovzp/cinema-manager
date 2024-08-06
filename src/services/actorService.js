@@ -1,4 +1,6 @@
 import api from '../api';
+// =============================================
+import { ACTORS_ENTITY_NAME } from '../constants';
 
 const handleError = (error, defaultMessage) => {
   const errorMessage = error.response?.data?.message || defaultMessage;
@@ -7,7 +9,7 @@ const handleError = (error, defaultMessage) => {
 
 export const getAllActors = async () => {
   try {
-    const response = await api.get('/actors');
+    const response = await api.get(`/${ACTORS_ENTITY_NAME}`);
     return response.data;
   } catch (error) {
     handleError(error, 'Failed to get all actors');
@@ -16,7 +18,7 @@ export const getAllActors = async () => {
 
 export const getActorById = async (id) => {
   try {
-    const response = await api.get(`/actors/${id}`);
+    const response = await api.get(`/${ACTORS_ENTITY_NAME}/${id}`);
     return response.data;
   } catch (error) {
     handleError(error, 'Failed to get actor by id');
@@ -25,7 +27,7 @@ export const getActorById = async (id) => {
 
 export const createActor = async (actorData) => {
   try {
-    const response = await api.post('/actors', actorData);
+    const response = await api.post(`/${ACTORS_ENTITY_NAME}`, actorData);
     return response.data;
   } catch (error) {
     handleError(error, 'Failed to create actor');
@@ -34,7 +36,10 @@ export const createActor = async (actorData) => {
 
 export const updateActor = async (actorData) => {
   try {
-    const response = await api.put(`/actors/${actorData.id}`, actorData);
+    const response = await api.put(
+      `/${ACTORS_ENTITY_NAME}/${actorData.id}`,
+      actorData
+    );
     return response.data;
   } catch (error) {
     handleError(error, 'Failed to update actor');
@@ -43,7 +48,10 @@ export const updateActor = async (actorData) => {
 
 export const patchActor = async (actorData) => {
   try {
-    const response = await api.patch(`/actors/${actorData.id}`, actorData);
+    const response = await api.patch(
+      `/${ACTORS_ENTITY_NAME}/${actorData.id}`,
+      actorData
+    );
     return response.data;
   } catch (error) {
     handleError(error, 'Failed to patch actor');
@@ -52,7 +60,7 @@ export const patchActor = async (actorData) => {
 
 export const deleteActor = async (id) => {
   try {
-    const response = await api.delete(`/actors/${id}`);
+    const response = await api.delete(`/${ACTORS_ENTITY_NAME}/${id}`);
     return response.data;
   } catch (error) {
     handleError(error, 'Failed to delete actor');

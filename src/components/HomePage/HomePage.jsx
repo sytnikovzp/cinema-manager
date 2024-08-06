@@ -10,7 +10,7 @@ import { carouselStyles, skeletonStyles } from '../../services/styleService';
 // =============================================
 import SnackbarContext from '../../contexts/SnackbarContext';
 // =============================================
-import { MOVIES_SLICE_NAME } from '../../constants';
+import { MOVIES_ENTITY_NAME } from '../../constants';
 // =============================================
 import usePaginatedData from '../../hooks/usePaginatedData';
 
@@ -21,7 +21,7 @@ function HomePage() {
     data: movies,
     loading,
     error,
-  } = usePaginatedData(`/${MOVIES_SLICE_NAME}`, ITEMS_PER_PAGE, 1);
+  } = usePaginatedData(`/${MOVIES_ENTITY_NAME}`, ITEMS_PER_PAGE, 1);
 
   const { showSnackbar } = useContext(SnackbarContext);
 
@@ -48,7 +48,7 @@ function HomePage() {
         <Carousel stopAutoPlayOnHover>
           {lastMovies.map((movie) => (
             <Box key={movie.id} style={carouselStyles.imgContainerStyle}>
-              <Link to={`/${MOVIES_SLICE_NAME}/${movie.id}`}>
+              <Link to={`/${MOVIES_ENTITY_NAME}/${movie.id}`}>
                 <img
                   src={movie.poster}
                   alt={movie.title}

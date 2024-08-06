@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 // =============================================
 import { actorsState } from '../../model/initialStates';
-import { ACTORS_SLICE_NAME } from '../../constants';
+import { ACTORS_ENTITY_NAME } from '../../constants';
 // =============================================
 import api from '../../api';
 import { setError, setLoading } from '../../services/reducerService';
@@ -13,10 +13,10 @@ const initialState = {
 };
 
 export const getAllActors = createAsyncThunk(
-  `${ACTORS_SLICE_NAME}/getAllActors`,
+  `${ACTORS_ENTITY_NAME}/getAllActors`,
   async (_, { rejectWithValue }) => {
     try {
-      const { status, data } = await api.get(`/${ACTORS_SLICE_NAME}`);
+      const { status, data } = await api.get(`/${ACTORS_ENTITY_NAME}`);
       if (status >= 400) throw new Error(`Error getting actors ${status}`);
       return data;
     } catch (error) {
@@ -26,10 +26,10 @@ export const getAllActors = createAsyncThunk(
 );
 
 export const createActor = createAsyncThunk(
-  `${ACTORS_SLICE_NAME}/createActor`,
+  `${ACTORS_ENTITY_NAME}/createActor`,
   async (actor, { rejectWithValue }) => {
     try {
-      const { status, data } = await api.post(`/${ACTORS_SLICE_NAME}`, actor);
+      const { status, data } = await api.post(`/${ACTORS_ENTITY_NAME}`, actor);
       if (status >= 400) throw new Error(`Error create actor ${status}`);
       return data;
     } catch (error) {
@@ -39,11 +39,11 @@ export const createActor = createAsyncThunk(
 );
 
 export const updateActor = createAsyncThunk(
-  `${ACTORS_SLICE_NAME}/updateActor`,
+  `${ACTORS_ENTITY_NAME}/updateActor`,
   async (actor, { rejectWithValue }) => {
     try {
       const { status, data } = await api.put(
-        `/${ACTORS_SLICE_NAME}/${actor.id}`,
+        `/${ACTORS_ENTITY_NAME}/${actor.id}`,
         actor
       );
       if (status >= 400) throw new Error(`Error update actor ${status}`);
@@ -55,10 +55,10 @@ export const updateActor = createAsyncThunk(
 );
 
 export const deleteActor = createAsyncThunk(
-  `${ACTORS_SLICE_NAME}/deleteActor`,
+  `${ACTORS_ENTITY_NAME}/deleteActor`,
   async (id, { rejectWithValue }) => {
     try {
-      const { status } = await api.delete(`/${ACTORS_SLICE_NAME}/${id}`);
+      const { status } = await api.delete(`/${ACTORS_ENTITY_NAME}/${id}`);
       if (status >= 400) throw new Error(`Error delete actor ${status}`);
       return id;
     } catch (error) {
@@ -68,7 +68,7 @@ export const deleteActor = createAsyncThunk(
 );
 
 const actorsSlice = createSlice({
-  name: ACTORS_SLICE_NAME,
+  name: ACTORS_ENTITY_NAME,
   initialState,
   reducers: {
     resetStatus(state) {

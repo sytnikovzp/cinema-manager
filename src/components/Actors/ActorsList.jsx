@@ -27,7 +27,7 @@ import {
   scrollListBoxStyle,
 } from '../../services/styleService';
 // =============================================
-import { ACTORS_SLICE_NAME } from '../../constants';
+import { ACTORS_ENTITY_NAME } from '../../constants';
 import { deleteActor } from '../../services/actorService';
 // =============================================
 import SnackbarContext from '../../contexts/SnackbarContext';
@@ -51,7 +51,7 @@ function ActorsList() {
     loading,
     error,
     refetch,
-  } = usePaginatedData(`/${ACTORS_SLICE_NAME}`, itemsPerPage, currentPage);
+  } = usePaginatedData(`/${ACTORS_ENTITY_NAME}`, itemsPerPage, currentPage);
 
   const { showSnackbar } = useContext(SnackbarContext);
 
@@ -149,7 +149,7 @@ function ActorsList() {
                 <Stack key={actor.id} direction='column' marginBottom={1}>
                   <ListItem
                     component={Link}
-                    to={`/${ACTORS_SLICE_NAME}/${actor.id}`}
+                    to={`/${ACTORS_ENTITY_NAME}/${actor.id}`}
                     disablePadding
                     sx={itemListStyle}
                   >
@@ -170,7 +170,7 @@ function ActorsList() {
                           edge='end'
                           aria-label='edit'
                           component={Link}
-                          to={`/${ACTORS_SLICE_NAME}/edit/${actor.id}`}
+                          to={`/${ACTORS_ENTITY_NAME}/edit/${actor.id}`}
                         >
                           <EditIcon />
                         </IconButton>

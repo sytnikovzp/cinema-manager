@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 // =============================================
 import { moviesState } from '../../model/initialStates';
-import { MOVIES_SLICE_NAME } from '../../constants';
+import { MOVIES_ENTITY_NAME } from '../../constants';
 // =============================================
 import api from '../../api';
 import { setError, setLoading } from '../../services/reducerService';
@@ -13,10 +13,10 @@ const initialState = {
 };
 
 export const getAllMovies = createAsyncThunk(
-  `${MOVIES_SLICE_NAME}/getAllMovies`,
+  `${MOVIES_ENTITY_NAME}/getAllMovies`,
   async (_, { rejectWithValue }) => {
     try {
-      const { status, data } = await api.get(`/${MOVIES_SLICE_NAME}`);
+      const { status, data } = await api.get(`/${MOVIES_ENTITY_NAME}`);
       if (status >= 400) throw new Error(`Error getting movies ${status}`);
       return data;
     } catch (error) {
@@ -26,10 +26,10 @@ export const getAllMovies = createAsyncThunk(
 );
 
 export const createMovie = createAsyncThunk(
-  `${MOVIES_SLICE_NAME}/createMovie`,
+  `${MOVIES_ENTITY_NAME}/createMovie`,
   async (movie, { rejectWithValue }) => {
     try {
-      const { status, data } = await api.post(`/${MOVIES_SLICE_NAME}`, movie);
+      const { status, data } = await api.post(`/${MOVIES_ENTITY_NAME}`, movie);
       if (status >= 400) throw new Error(`Error create movie ${status}`);
       return data;
     } catch (error) {
@@ -39,11 +39,11 @@ export const createMovie = createAsyncThunk(
 );
 
 export const updateMovie = createAsyncThunk(
-  `${MOVIES_SLICE_NAME}/updateMovie`,
+  `${MOVIES_ENTITY_NAME}/updateMovie`,
   async (movie, { rejectWithValue }) => {
     try {
       const { status, data } = await api.put(
-        `/${MOVIES_SLICE_NAME}/${movie.id}`,
+        `/${MOVIES_ENTITY_NAME}/${movie.id}`,
         movie
       );
       if (status >= 400) throw new Error(`Error update movie ${status}`);
@@ -55,10 +55,10 @@ export const updateMovie = createAsyncThunk(
 );
 
 export const deleteMovie = createAsyncThunk(
-  `${MOVIES_SLICE_NAME}/deleteMovie`,
+  `${MOVIES_ENTITY_NAME}/deleteMovie`,
   async (id, { rejectWithValue }) => {
     try {
-      const { status } = await api.delete(`/${MOVIES_SLICE_NAME}/${id}`);
+      const { status } = await api.delete(`/${MOVIES_ENTITY_NAME}/${id}`);
       if (status >= 400) throw new Error(`Error delete movie ${status}`);
       return id;
     } catch (error) {
@@ -68,7 +68,7 @@ export const deleteMovie = createAsyncThunk(
 );
 
 const moviesSlice = createSlice({
-  name: MOVIES_SLICE_NAME,
+  name: MOVIES_ENTITY_NAME,
   initialState,
   reducers: {
     resetStatus(state) {

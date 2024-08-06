@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 // =============================================
 import { studiosState } from '../../model/initialStates';
-import { STUDIOS_SLICE_NAME } from '../../constants';
+import { STUDIOS_ENTITY_NAME } from '../../constants';
 // =============================================
 import api from '../../api';
 import { setError, setLoading } from '../../services/reducerService';
@@ -13,10 +13,10 @@ const initialState = {
 };
 
 export const getAllStudios = createAsyncThunk(
-  `${STUDIOS_SLICE_NAME}/getAllStudios`,
+  `${STUDIOS_ENTITY_NAME}/getAllStudios`,
   async (_, { rejectWithValue }) => {
     try {
-      const { status, data } = await api.get(`/${STUDIOS_SLICE_NAME}`);
+      const { status, data } = await api.get(`/${STUDIOS_ENTITY_NAME}`);
       if (status >= 400) throw new Error(`Error getting studios ${status}`);
       return data;
     } catch (error) {
@@ -26,10 +26,13 @@ export const getAllStudios = createAsyncThunk(
 );
 
 export const createStudio = createAsyncThunk(
-  `${STUDIOS_SLICE_NAME}/createStudio`,
+  `${STUDIOS_ENTITY_NAME}/createStudio`,
   async (studio, { rejectWithValue }) => {
     try {
-      const { status, data } = await api.post(`/${STUDIOS_SLICE_NAME}`, studio);
+      const { status, data } = await api.post(
+        `/${STUDIOS_ENTITY_NAME}`,
+        studio
+      );
       if (status >= 400) throw new Error(`Error create studio ${status}`);
       return data;
     } catch (error) {
@@ -39,11 +42,11 @@ export const createStudio = createAsyncThunk(
 );
 
 export const updateStudio = createAsyncThunk(
-  `${STUDIOS_SLICE_NAME}/updateStudio`,
+  `${STUDIOS_ENTITY_NAME}/updateStudio`,
   async (studio, { rejectWithValue }) => {
     try {
       const { status, data } = await api.put(
-        `/${STUDIOS_SLICE_NAME}/${studio.id}`,
+        `/${STUDIOS_ENTITY_NAME}/${studio.id}`,
         studio
       );
       if (status >= 400) throw new Error(`Error update studio ${status}`);
@@ -55,10 +58,10 @@ export const updateStudio = createAsyncThunk(
 );
 
 export const deleteStudio = createAsyncThunk(
-  `${STUDIOS_SLICE_NAME}/deleteStudio`,
+  `${STUDIOS_ENTITY_NAME}/deleteStudio`,
   async (id, { rejectWithValue }) => {
     try {
-      const { status } = await api.delete(`/${STUDIOS_SLICE_NAME}/${id}`);
+      const { status } = await api.delete(`/${STUDIOS_ENTITY_NAME}/${id}`);
       if (status >= 400) throw new Error(`Error delete studio ${status}`);
       return id;
     } catch (error) {
@@ -68,7 +71,7 @@ export const deleteStudio = createAsyncThunk(
 );
 
 const studiosSlice = createSlice({
-  name: STUDIOS_SLICE_NAME,
+  name: STUDIOS_ENTITY_NAME,
   initialState,
   reducers: {
     resetStatus(state) {

@@ -1,10 +1,10 @@
 export const BASE_URL = 'http://localhost:5000/api';
 // export const BASE_URL = 'https://sytnikov.site:5000/api';
 
-export const ACTORS_SLICE_NAME = 'actors';
-export const DIRECTORS_SLICE_NAME = 'directors';
-export const MOVIES_SLICE_NAME = 'movies';
-export const STUDIOS_SLICE_NAME = 'studios';
+export const ACTORS_ENTITY_NAME = 'actors';
+export const DIRECTORS_ENTITY_NAME = 'directors';
+export const MOVIES_ENTITY_NAME = 'movies';
+export const STUDIOS_ENTITY_NAME = 'studios';
 
 export const emptyActor = {
   id: null,
