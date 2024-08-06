@@ -1,6 +1,5 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
 // =============================================
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -11,11 +10,15 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import EditIcon from '@mui/icons-material/Edit';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+// =============================================
+import SnackbarContext from '../../contexts/SnackbarContext';
+// =============================================
+import { STUDIOS_ENTITY_NAME, emptyStudio } from '../../constants';
+// =============================================
+import { getStudioById } from '../../services/studioService';
 // =============================================
 import {
   scrollItemBoxStyle,
@@ -23,79 +26,58 @@ import {
   itemComponentBoxMainStyle,
   itemCardMediaBoxStyle,
   itemInformationBoxStyle,
-  itemLinkStyle,
+  // itemLinkStyle,
 } from '../../services/styleService';
-// =============================================
-import { emptyStudio } from '../../constants';
-import { resetStatus } from '../../store/slices/studiosSlice';
-// =============================================
-import useSnackbar from '../../hooks/useSnackbar';
 // =============================================
 import StudiosAbout from './StudiosAbout';
 
 function StudiosItem() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { id } = useParams();
-  const studios = useSelector((state) => state.studiosList.studios);
-  const moviesList = useSelector((state) => state.moviesList.movies);
-  const status = useSelector((state) => state.studiosList.status);
+  const navigate = useNavigate();
 
-  const { snackbar, showSnackbar, handleClose } = useSnackbar(() =>
-    dispatch(resetStatus())
-  );
-
-  const prevStatusRef = useRef();
+  const [studio, setStudio] = useState(emptyStudio);
   const [tabIndex, setTabIndex] = useState(0);
 
-  useEffect(() => {
-    const prevStatus = prevStatusRef.current;
-    const currentStatus = status;
+  const { showSnackbar } = useContext(SnackbarContext);
 
-    if (
-      currentStatus &&
-      currentStatus !== prevStatus &&
-      currentStatus !== 'loading'
-    ) {
-      const severity = currentStatus.toLowerCase().includes('success')
-        ? 'success'
-        : 'error';
-      showSnackbar(currentStatus, severity);
+  const fetchStudio = useCallback(async () => {
+    try {
+      const data = await getStudioById(id);
+      setStudio(data);
+    } catch (error) {
+      showSnackbar('Failed to fetch studio data!', 'error');
     }
+  }, [id, showSnackbar]);
 
-    prevStatusRef.current = currentStatus;
-  }, [status, showSnackbar]);
-
-  const studio = studios.find((studio) => Number(studio.id) === Number(id));
-
-  const currentStudio = studio || emptyStudio;
-
-  const filteredMoviesList = moviesList
-    .filter((movie) => movie.studios.includes(currentStudio.title))
-    .map((movie) => ({ id: movie.id, title: movie.title }));
-
-  const formattedMovies =
-    filteredMoviesList.length > 0
-      ? filteredMoviesList
-          .map((movie) => (
-            <Link
-              key={movie.id}
-              to={`/movies/${movie.id}`}
-              style={itemLinkStyle}
-            >
-              {movie.title}
-            </Link>
-          ))
-          .reduce((prev, curr) => [prev, ', ', curr])
-      : 'No movies available';
+  useEffect(() => {
+    if (id === ':id' || id === undefined) {
+      setStudio(emptyStudio);
+    } else {
+      fetchStudio();
+    }
+  }, [id, fetchStudio]);
 
   const goBack = () => {
-    navigate('/studios');
+    navigate(`/${STUDIOS_ENTITY_NAME}`);
   };
 
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
   };
+
+  // const filteredMoviesList = moviesList
+  //   .filter((movie) => movie.studios.includes(studio.title))
+  //   .map((movie) => ({ id: movie.id, title: movie.title }));
+
+  // const formattedMovies = filteredMoviesList
+  //   .map((movie) => (
+  //     <Link key={movie.id} to={`/movies/${movie.id}`} style={itemLinkStyle}>
+  //       {movie.title}
+  //     </Link>
+  //   ))
+  //   .reduce((prev, curr) => [prev, ', ', curr]);
+
+  const formattedMovies = [];
 
   return (
     <>
@@ -118,14 +100,14 @@ function StudiosItem() {
           sx={buttonMainStyle}
           startIcon={<EditIcon />}
           component={Link}
-          to={`/studios/edit/${id}`}
+          to={`/${STUDIOS_ENTITY_NAME}/edit/${id}`}
         >
           Edit
         </Button>
 
         <Button
           component={Link}
-          to='/studios/new'
+          to={`/${STUDIOS_ENTITY_NAME}/new`}
           type='button'
           variant='contained'
           color='success'
@@ -143,7 +125,7 @@ function StudiosItem() {
         aria-label='studio details tabs'
       >
         <Tab label='General information' />
-        {currentStudio.about && <Tab label='About the studio' />}
+        {studio.about && <Tab label='About the studio' />}
       </Tabs>
 
       <Box sx={scrollItemBoxStyle}>
@@ -154,10 +136,10 @@ function StudiosItem() {
                 component='img'
                 height='100%'
                 image={
-                  currentStudio.logo ||
+                  studio.logo ||
                   'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
                 }
-                alt={currentStudio.title}
+                alt={studio.title}
               />
             </Card>
           </Box>
@@ -167,7 +149,7 @@ function StudiosItem() {
               component='div'
               sx={{ fontWeight: 'bold' }}
             >
-              {currentStudio.title || 'Unknown studio'}
+              {studio.title || 'Unknown studio'}
             </Typography>
 
             <Stack direction='row' spacing={1}>
@@ -181,7 +163,7 @@ function StudiosItem() {
                 Foundation year:
               </Typography>
               <Typography variant='body1' component='div'>
-                {currentStudio.foundation_year || 'Unknown'}
+                {studio.foundation_year || 'Unknown'}
               </Typography>
             </Stack>
 
@@ -196,7 +178,7 @@ function StudiosItem() {
                 Location:
               </Typography>
               <Typography variant='body1' component='div'>
-                {currentStudio.location || 'Unknown'}
+                {studio.location || 'Unknown'}
               </Typography>
             </Stack>
 
@@ -212,30 +194,19 @@ function StudiosItem() {
                   Movies:
                 </Typography>
                 <Typography variant='body1' component='div'>
-                  {formattedMovies}
+                  {formattedMovies.length > 0
+                    ? formattedMovies
+                    : 'No movies available'}
                 </Typography>
               </Stack>
             )}
 
-            {tabIndex === 1 && currentStudio.about && <StudiosAbout />}
+            {tabIndex === 1 && studio.about && (
+              <StudiosAbout about={studio.about} />
+            )}
           </Box>
         </Box>
       </Box>
-
-      <Snackbar
-        open={snackbar.open}
-        autoHideDuration={1000}
-        onClose={handleClose}
-      >
-        <Alert
-          onClose={handleClose}
-          severity={snackbar.severity}
-          variant='filled'
-          sx={{ width: '100%' }}
-        >
-          {snackbar.message}
-        </Alert>
-      </Snackbar>
     </>
   );
 }

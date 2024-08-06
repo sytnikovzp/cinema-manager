@@ -1,5 +1,5 @@
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+// import { useDispatch } from 'react-redux';
+// import { useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 // =============================================
 import Paper from '@mui/material/Paper';
@@ -7,17 +7,17 @@ import Box from '@mui/material/Box';
 // =============================================
 import { rootComponentPaperStyle } from '../../services/styleService';
 // =============================================
-import { getAllStudios } from '../../store/slices/studiosSlice';
+// import { getAllStudios } from '../../store/slices/studiosSlice';
 // =============================================
 import StudiosItem from './StudiosItem';
 import StudiosList from './StudiosList';
 
 function Studios() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAllStudios());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getAllStudios());
+  // }, [dispatch]);
 
   const location = useLocation();
   const applyPaperStyles =

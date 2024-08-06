@@ -1,6 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+// =============================================
 import dayjs from 'dayjs';
+import 'dayjs/locale/en-gb';
 // =============================================
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
@@ -20,8 +22,15 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import InputAdornment from '@mui/material/InputAdornment';
 import Autocomplete from '@mui/material/Autocomplete';
 // =============================================
-import { createStudio, updateStudio } from '../../store/slices/studiosSlice';
-import { emptyStudio, locations } from '../../constants';
+import SnackbarContext from '../../contexts/SnackbarContext';
+// =============================================
+import { STUDIOS_ENTITY_NAME, emptyStudio, locations } from '../../constants';
+// =============================================
+import {
+  getStudioById,
+  createStudio,
+  patchStudio,
+} from '../../services/studioService';
 // =============================================
 import {
   formStyle,
@@ -32,21 +41,34 @@ import {
 } from '../../services/styleService';
 
 function StudioForm() {
-  const dispatch = useDispatch();
-  const studios = useSelector((state) => state.studiosList.studios);
-
   const { id } = useParams();
-  const currentStudio = studios.find(
-    (studio) => Number(studio.id) === Number(id)
-  );
-
   const navigate = useNavigate();
+  const [initialValues, setInitialValues] = useState(emptyStudio);
+
+  const { showSnackbar } = useContext(SnackbarContext);
+
+  const fetchStudio = useCallback(async () => {
+    try {
+      const studio = await getStudioById(id);
+      setInitialValues(studio);
+    } catch (error) {
+      showSnackbar('Failed to fetch studio data!', 'error');
+    }
+  }, [id, showSnackbar]);
+
+  useEffect(() => {
+    if (id === ':id' || id === undefined) {
+      setInitialValues(emptyStudio);
+    } else {
+      fetchStudio();
+    }
+  }, [id, fetchStudio]);
 
   const goBack = () => {
     if (id !== ':id') {
-      navigate(`/studios/${id}`);
+      navigate(`/${STUDIOS_ENTITY_NAME}/${id}`);
     } else {
-      navigate(`/studios`);
+      navigate(`/${STUDIOS_ENTITY_NAME}`);
     }
   };
 
@@ -62,13 +84,18 @@ function StudioForm() {
     about: Yup.string(),
   });
 
-  const onFormSubmit = (values) => {
-    if (values.id) {
-      dispatch(updateStudio(values));
-      navigate(`/studios/${id}`);
-    } else {
-      dispatch(createStudio(values));
-      navigate(`/studios`);
+  const onFormSubmit = async (values) => {
+    try {
+      if (values.id) {
+        await patchStudio(values);
+        showSnackbar('Studio updated successfully!', 'success');
+      } else {
+        await createStudio(values);
+        showSnackbar('Studio created successfully!', 'success');
+      }
+      navigate(`/${STUDIOS_ENTITY_NAME}`);
+    } catch (error) {
+      showSnackbar('Failed to save studio data!', 'error');
     }
   };
 
@@ -263,7 +290,7 @@ function StudioForm() {
 
   return (
     <Formik
-      initialValues={currentStudio || emptyStudio}
+      initialValues={initialValues}
       onSubmit={onFormSubmit}
       validationSchema={schema}
       enableReinitialize

@@ -1,31 +1,21 @@
-import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-// =============================================
+import PropTypes from 'prop-types';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 // =============================================
 import { textIndentStyle } from '../../services/styleService';
-// =============================================
-import { emptyStudio } from '../../constants';
 
-function StudiosAbout() {
-  const studios = useSelector((state) => state.studiosList.studios);
-
-  const { id } = useParams();
-
-  const studio = studios.find(
-    (studio) => Number(studio.id) === Number(id)
-  );
-
-  const currentStudio = studio || emptyStudio;
-
+function StudiosBiography({ about }) {
   return (
     <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
       <Typography variant='body1' component='div' sx={textIndentStyle}>
-        {currentStudio.about}
+        {about}
       </Typography>
     </Stack>
   );
 }
 
-export default StudiosAbout;
+StudiosBiography.propTypes = {
+  about: PropTypes.string.isRequired,
+};
+
+export default StudiosBiography;
