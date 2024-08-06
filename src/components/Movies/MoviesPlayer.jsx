@@ -1,27 +1,16 @@
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player/lazy';
 // =============================================
 import { Box } from '@mui/material';
 // =============================================
-import { emptyMovie } from '../../constants';
-// =============================================
 import { playerStyle, scrollItemBoxStyle } from '../../services/styleService';
 
-function MoviesPlayer() {
-  const movies = useSelector((state) => state.moviesList.movies);
-
-  const { id } = useParams();
-
-  const movie = movies.find((movie) => Number(movie.id) === Number(id));
-
-  const currentMovie = movie || emptyMovie;
-
+function MoviesPlayer({ trailer }) {
   return (
     <Box sx={scrollItemBoxStyle}>
       <Box sx={playerStyle}>
         <ReactPlayer
-          url={currentMovie.trailer}
+          url={trailer}
           light
           width='100%'
           config={{
@@ -34,7 +23,10 @@ function MoviesPlayer() {
                 showinfo: 0,
                 modestbranding: 1,
                 cc_load_policy: 1,
-                origin: 'http://localhost:3000',
+                origin:
+                  window.location.hostname === 'sytnikov.site'
+                    ? 'https://sytnikov.site'
+                    : 'http://localhost:3000',
               },
               embedOptions: {
                 host: 'https://www.youtube-nocookie.com',
@@ -46,5 +38,9 @@ function MoviesPlayer() {
     </Box>
   );
 }
+
+MoviesPlayer.propTypes = {
+  trailer: PropTypes.string.isRequired,
+};
 
 export default MoviesPlayer;

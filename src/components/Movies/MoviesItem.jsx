@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 // =============================================
 import Box from '@mui/material/Box';
@@ -11,11 +10,21 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import EditIcon from '@mui/icons-material/Edit';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+// =============================================
+import SnackbarContext from '../../contexts/SnackbarContext';
+// =============================================
+import {
+  MOVIES_ENTITY_NAME,
+  ACTORS_ENTITY_NAME,
+  DIRECTORS_ENTITY_NAME,
+  STUDIOS_ENTITY_NAME,
+  emptyMovie,
+} from '../../constants';
+// =============================================
+import { getMovieById } from '../../services/movieService';
 // =============================================
 import {
   scrollItemBoxStyle,
@@ -27,112 +36,74 @@ import {
   itemLinkStyle,
 } from '../../services/styleService';
 // =============================================
-import { emptyMovie } from '../../constants';
-import { resetStatus } from '../../store/slices/moviesSlice';
-// =============================================
-import useSnackbar from '../../hooks/useSnackbar';
+import usePaginatedData from '../../hooks/usePaginatedData';
 // =============================================
 import MoviesPlayer from './MoviesPlayer';
 
 function MoviesItem() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { id } = useParams();
-  const movies = useSelector((state) => state.moviesList.movies);
-  const studiosList = useSelector((state) => state.studiosList.studios);
-  const directorsList = useSelector((state) => state.directorsList.directors);
-  const actorsList = useSelector((state) => state.actorsList.actors);
+  const navigate = useNavigate();
 
-  const status = useSelector((state) => state.moviesList.status);
-
-  const { snackbar, showSnackbar, handleClose } = useSnackbar(() =>
-    dispatch(resetStatus())
-  );
-
-  const prevStatusRef = useRef();
+  const [movie, setMovie] = useState(emptyMovie);
   const [tabIndex, setTabIndex] = useState(0);
 
-  const goBack = () => {
-    navigate('/movies');
+  const useEntityData = (entityName) => {
+    return usePaginatedData(`/${entityName}`, 500, 1);
   };
 
-  useEffect(() => {
-    const prevStatus = prevStatusRef.current;
-    const currentStatus = status;
+  const { data: actors, error: actorsError } =
+    useEntityData(ACTORS_ENTITY_NAME);
+  const { data: directors, error: directorsError } = useEntityData(
+    DIRECTORS_ENTITY_NAME
+  );
+  const { data: studios, error: studiosError } =
+    useEntityData(STUDIOS_ENTITY_NAME);
 
-    if (
-      currentStatus &&
-      currentStatus !== prevStatus &&
-      currentStatus !== 'loading'
-    ) {
-      const severity = currentStatus.toLowerCase().includes('success')
-        ? 'success'
-        : 'error';
-      showSnackbar(currentStatus, severity);
+  const { showSnackbar } = useContext(SnackbarContext);
+
+  const fetchMovie = useCallback(async () => {
+    try {
+      const data = await getMovieById(id);
+      setMovie(data);
+    } catch (error) {
+      showSnackbar('Failed to fetch movie data!', 'error');
     }
+  }, [id, showSnackbar]);
 
-    prevStatusRef.current = currentStatus;
-  }, [status, showSnackbar]);
+  useEffect(() => {
+    if (id === ':id' || id === undefined) {
+      setMovie(emptyMovie);
+    } else {
+      fetchMovie();
+    }
+  }, [id, fetchMovie]);
 
-  const movie = movies.find((movie) => Number(movie.id) === Number(id));
-  const currentMovie = movie || emptyMovie;
+  useEffect(() => {
+    const errors = [
+      { error: actorsError, key: 'actorsError' },
+      { error: directorsError, key: 'directorsError' },
+      { error: studiosError, key: 'studiosError' },
+    ];
 
-  const filteredStudiosList = studiosList
-    .filter((studio) => {
-      for (let i = 0; i < currentMovie.studios.length; i++) {
-        if (studio.title === currentMovie.studios[i]) {
-          return true;
-        }
+    errors.forEach(({ error, key }) => {
+      if (error) {
+        showSnackbar(error, key);
       }
-      return false;
-    })
-    .map((studio) => ({ id: studio.id, title: studio.title }));
+    });
+  }, [actorsError, directorsError, studiosError, showSnackbar]);
 
-  const formattedStudios =
-    filteredStudiosList.length > 0
-      ? filteredStudiosList
-          .map((studio) => (
-            <Link
-              key={studio.id}
-              to={`/studios/${studio.id}`}
-              style={itemLinkStyle}
-            >
-              {studio.title}
-            </Link>
-          ))
-          .reduce((prev, curr) => [prev, ', ', curr])
-      : 'No studios available';
+  const goBack = () => {
+    navigate(`/${MOVIES_ENTITY_NAME}`);
+  };
 
-  const filteredDirectorsList = directorsList
-    .filter((director) => {
-      for (let i = 0; i < currentMovie.directors.length; i++) {
-        if (director.full_name === currentMovie.directors[i]) {
-          return true;
-        }
-      }
-      return false;
-    })
-    .map((director) => ({ id: director.id, full_name: director.full_name }));
+  const handleTabChange = (event, newValue) => {
+    setTabIndex(newValue);
+  };
 
-  const formattedDirectors =
-    filteredDirectorsList.length > 0
-      ? filteredDirectorsList
-          .map((director) => (
-            <Link
-              key={director.id}
-              to={`/directors/${director.id}`}
-              style={itemLinkStyle}
-            >
-              {director.full_name}
-            </Link>
-          ))
-          .reduce((prev, curr) => [prev, ', ', curr])
-      : 'No directors available';
-
-  const filteredActorsList = actorsList
+  const filteredActorsList = actors
     .filter((actor) => {
-      for (let i = 0; i < currentMovie.actors.length; i++) {
-        if (actor.full_name === currentMovie.actors[i]) {
+      for (let i = 0; i < movie.actors.length; i++) {
+        if (actor.full_name === movie.actors[i]) {
           return true;
         }
       }
@@ -146,7 +117,7 @@ function MoviesItem() {
           .map((actor) => (
             <Link
               key={actor.id}
-              to={`/actors/${actor.id}`}
+              to={`/${ACTORS_ENTITY_NAME}/${actor.id}`}
               style={itemLinkStyle}
             >
               {actor.full_name}
@@ -155,9 +126,57 @@ function MoviesItem() {
           .reduce((prev, curr) => [prev, ', ', curr])
       : 'No actors available';
 
-  const handleTabChange = (event, newValue) => {
-    setTabIndex(newValue);
-  };
+  const filteredDirectorsList = directors
+    .filter((director) => {
+      for (let i = 0; i < movie.directors.length; i++) {
+        if (director.full_name === movie.directors[i]) {
+          return true;
+        }
+      }
+      return false;
+    })
+    .map((director) => ({ id: director.id, full_name: director.full_name }));
+
+  const formattedDirectors =
+    filteredDirectorsList.length > 0
+      ? filteredDirectorsList
+          .map((director) => (
+            <Link
+              key={director.id}
+              to={`/${DIRECTORS_ENTITY_NAME}/${director.id}`}
+              style={itemLinkStyle}
+            >
+              {director.full_name}
+            </Link>
+          ))
+          .reduce((prev, curr) => [prev, ', ', curr])
+      : 'No directors available';
+
+  const filteredStudiosList = studios
+    .filter((studio) => {
+      for (let i = 0; i < movie.studios.length; i++) {
+        if (studio.title === movie.studios[i]) {
+          return true;
+        }
+      }
+      return false;
+    })
+    .map((studio) => ({ id: studio.id, title: studio.title }));
+
+  const formattedStudios =
+    filteredStudiosList.length > 0
+      ? filteredStudiosList
+          .map((studio) => (
+            <Link
+              key={studio.id}
+              to={`/${STUDIOS_ENTITY_NAME}/${studio.id}`}
+              style={itemLinkStyle}
+            >
+              {studio.title}
+            </Link>
+          ))
+          .reduce((prev, curr) => [prev, ', ', curr])
+      : 'No studios available';
 
   return (
     <>
@@ -180,14 +199,14 @@ function MoviesItem() {
           sx={buttonMainStyle}
           startIcon={<EditIcon />}
           component={Link}
-          to={`/movies/edit/${id}`}
+          to={`/${MOVIES_ENTITY_NAME}/edit/${id}`}
         >
           Edit
         </Button>
 
         <Button
           component={Link}
-          to='/movies/new'
+          to={`/${MOVIES_ENTITY_NAME}/new`}
           type='button'
           variant='contained'
           color='success'
@@ -197,14 +216,16 @@ function MoviesItem() {
           Add movie
         </Button>
       </Stack>
+
       <Divider />
+
       <Tabs
         value={tabIndex}
         onChange={handleTabChange}
         aria-label='movie details tabs'
       >
         <Tab label='About the movie' />
-        {currentMovie.trailer && <Tab label='Movie trailer' />}
+        {movie.trailer && <Tab label='Movie trailer' />}
       </Tabs>
 
       {tabIndex === 0 && (
@@ -216,10 +237,10 @@ function MoviesItem() {
                   component='img'
                   height='100%'
                   image={
-                    currentMovie.poster ||
+                    movie.poster ||
                     'https://www.prokerala.com/movies/assets/img/no-poster-available.jpg'
                   }
-                  alt={currentMovie.title}
+                  alt={movie.title}
                 />
               </Card>
             </Box>
@@ -229,7 +250,7 @@ function MoviesItem() {
                 component='div'
                 sx={{ fontWeight: 'bold' }}
               >
-                {currentMovie.title || 'Unknown movie'}
+                {movie.title || 'Unknown movie'}
               </Typography>
               <Stack direction='row' spacing={1}>
                 <Typography
@@ -242,7 +263,7 @@ function MoviesItem() {
                   Movie year:
                 </Typography>
                 <Typography variant='body1' component='div'>
-                  {currentMovie.release_year || 'Unknown'}
+                  {movie.release_year || 'Unknown'}
                 </Typography>
               </Stack>
               <Stack direction='row' spacing={1}>
@@ -256,7 +277,7 @@ function MoviesItem() {
                   Genre:
                 </Typography>
                 <Typography variant='body1' component='div'>
-                  {currentMovie.genre || 'Unknown'}
+                  {movie.genre || 'Unknown'}
                 </Typography>
               </Stack>
               <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
@@ -302,7 +323,7 @@ function MoviesItem() {
                 </Typography>
               </Stack>
 
-              {currentMovie.storyline && (
+              {movie.storyline && (
                 <>
                   <Divider sx={{ marginTop: 2 }} />
                   <Typography
@@ -310,7 +331,7 @@ function MoviesItem() {
                     component='div'
                     sx={textIndentStyle}
                   >
-                    {currentMovie.storyline}
+                    {movie.storyline}
                   </Typography>
                 </>
               )}
@@ -319,22 +340,9 @@ function MoviesItem() {
         </Box>
       )}
 
-      {tabIndex === 1 && currentMovie.trailer && <MoviesPlayer />}
-
-      <Snackbar
-        open={snackbar.open}
-        autoHideDuration={1000}
-        onClose={handleClose}
-      >
-        <Alert
-          onClose={handleClose}
-          severity={snackbar.severity}
-          variant='filled'
-          sx={{ width: '100%' }}
-        >
-          {snackbar.message}
-        </Alert>
-      </Snackbar>
+      {tabIndex === 1 && movie.trailer && (
+        <MoviesPlayer trailer={movie.trailer} />
+      )}
     </>
   );
 }
