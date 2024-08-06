@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 // =============================================
 import Box from '@mui/material/Box';
@@ -17,8 +17,6 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
 import { styled } from '@mui/material/styles';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 import Skeleton from '@mui/material/Skeleton';
 import Pagination from '@mui/material/Pagination';
@@ -29,10 +27,11 @@ import {
   scrollListBoxStyle,
 } from '../../services/styleService';
 // =============================================
-import api from '../../api';
 import { DIRECTORS_ENTITY_NAME } from '../../constants';
+import { deleteDirector } from '../../services/directorService';
 // =============================================
-import useSnackbar from '../../hooks/useSnackbar';
+import SnackbarContext from '../../contexts/SnackbarContext';
+// =============================================
 import useItemsPerPage from '../../hooks/useItemsPerPage';
 import usePaginatedData from '../../hooks/usePaginatedData';
 
@@ -54,13 +53,13 @@ function DirectorsList() {
     refetch,
   } = usePaginatedData(`/${DIRECTORS_ENTITY_NAME}`, itemsPerPage, currentPage);
 
-  const { snackbar, showSnackbar, handleClose } = useSnackbar();
+  const { showSnackbar } = useContext(SnackbarContext);
 
   useEffect(() => {
-    if (error && snackbar.message !== error) {
+    if (error) {
       showSnackbar(error, 'error');
     }
-  }, [error, showSnackbar, snackbar.message]);
+  }, [error, showSnackbar]);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
@@ -70,7 +69,7 @@ function DirectorsList() {
     async (event, id) => {
       event.stopPropagation();
       try {
-        await api.delete(`/${DIRECTORS_ENTITY_NAME}/${id}`);
+        await deleteDirector(id);
         refetch();
         showSnackbar('Director deleted successfully!', 'success');
       } catch (err) {
@@ -200,21 +199,6 @@ function DirectorsList() {
           color='primary'
         />
       </Stack>
-
-      <Snackbar
-        open={snackbar.open}
-        autoHideDuration={1000}
-        onClose={handleClose}
-      >
-        <Alert
-          onClose={handleClose}
-          severity={snackbar.severity}
-          variant='filled'
-          sx={{ width: '100%' }}
-        >
-          {snackbar.message}
-        </Alert>
-      </Snackbar>
     </>
   );
 }

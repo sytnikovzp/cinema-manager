@@ -334,16 +334,14 @@ function ActorForm() {
   };
 
   return (
-    <>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={onFormSubmit}
-        validationSchema={schema}
-        enableReinitialize
-      >
-        {renderForm}
-      </Formik>
-    </>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={onFormSubmit}
+      validationSchema={schema}
+      enableReinitialize
+    >
+      {renderForm}
+    </Formik>
   );
 }
 

@@ -1,6 +1,5 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
 // =============================================
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -11,11 +10,16 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import EditIcon from '@mui/icons-material/Edit';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
 import Divider from '@mui/material/Divider';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+// =============================================
+import SnackbarContext from '../../contexts/SnackbarContext';
+// =============================================
+import { DIRECTORS_ENTITY_NAME, emptyDirector } from '../../constants';
+// =============================================
+import { getDirectorById } from '../../services/directorService';
+import { formatDate, calculateAge } from '../../services/itemService';
 // =============================================
 import {
   scrollItemBoxStyle,
@@ -23,90 +27,62 @@ import {
   itemComponentBoxMainStyle,
   itemCardMediaBoxStyle,
   itemInformationBoxStyle,
-  itemLinkStyle,
+  // itemLinkStyle,
 } from '../../services/styleService';
-// =============================================
-import { emptyDirector } from '../../constants';
-import { calculateAge, formatDate } from '../../services/itemService';
-import { resetStatus } from '../../store/slices/directorsSlice';
-// =============================================
-import useSnackbar from '../../hooks/useSnackbar';
 // =============================================
 import DirectorsBiography from './DirectorsBiography';
 
 function DirectorsItem() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { id } = useParams();
-  const directors = useSelector((state) => state.directorsList.directors);
-  const moviesList = useSelector((state) => state.moviesList.movies);
-  const status = useSelector((state) => state.directorsList.status);
+  const navigate = useNavigate();
 
-  const { snackbar, showSnackbar, handleClose } = useSnackbar(() =>
-    dispatch(resetStatus())
-  );
-
-  const prevStatusRef = useRef();
+  const [director, setDirector] = useState(emptyDirector);
   const [tabIndex, setTabIndex] = useState(0);
 
-  useEffect(() => {
-    const prevStatus = prevStatusRef.current;
-    const currentStatus = status;
+  const { showSnackbar } = useContext(SnackbarContext);
 
-    if (
-      currentStatus &&
-      currentStatus !== prevStatus &&
-      currentStatus !== 'loading'
-    ) {
-      const severity = currentStatus.toLowerCase().includes('success')
-        ? 'success'
-        : 'error';
-      showSnackbar(currentStatus, severity);
+  const fetchDirector = useCallback(async () => {
+    try {
+      const data = await getDirectorById(id);
+      setDirector(data);
+    } catch (error) {
+      showSnackbar('Failed to fetch director data!', 'error');
     }
+  }, [id, showSnackbar]);
 
-    prevStatusRef.current = currentStatus;
-  }, [status, showSnackbar]);
-
-  const director = directors.find(
-    (director) => Number(director.id) === Number(id)
-  );
-
-  const currentDirector = director || emptyDirector;
-
-  const filteredMoviesList = moviesList
-    .filter((movie) => movie.directors.includes(currentDirector.full_name))
-    .map((movie) => ({ id: movie.id, title: movie.title }));
-
-  const formattedMovies =
-    filteredMoviesList.length > 0
-      ? filteredMoviesList
-          .map((movie) => (
-            <Link
-              key={movie.id}
-              to={`/movies/${movie.id}`}
-              style={itemLinkStyle}
-            >
-              {movie.title}
-            </Link>
-          ))
-          .reduce((prev, curr) => [prev, ', ', curr])
-      : 'No movies available';
-
-  const formattedbirth_date = formatDate(currentDirector.birth_date);
-  const formatteddeath_date = formatDate(currentDirector.death_date);
-
-  const calculatedAge = calculateAge(
-    currentDirector.birth_date,
-    currentDirector.death_date
-  );
+  useEffect(() => {
+    if (id === ':id' || id === undefined) {
+      setDirector(emptyDirector);
+    } else {
+      fetchDirector();
+    }
+  }, [id, fetchDirector]);
 
   const goBack = () => {
-    navigate('/directors');
+    navigate(`/${DIRECTORS_ENTITY_NAME}`);
   };
 
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
   };
+
+  // const filteredMoviesList = moviesList
+  //   .filter((movie) => movie.directors.includes(director.full_name))
+  //   .map((movie) => ({ id: movie.id, title: movie.title }));
+
+  // const formattedMovies = filteredMoviesList
+  //   .map((movie) => (
+  //     <Link key={movie.id} to={`/movies/${movie.id}`} style={itemLinkStyle}>
+  //       {movie.title}
+  //     </Link>
+  //   ))
+  //   .reduce((prev, curr) => [prev, ', ', curr]);
+
+  const formattedMovies = [];
+
+  const formattedbirth_date = formatDate(director.birth_date);
+  const formatteddeath_date = formatDate(director.death_date);
+  const calculatedAge = calculateAge(director.birth_date, director.death_date);
 
   return (
     <>
@@ -129,14 +105,14 @@ function DirectorsItem() {
           sx={buttonMainStyle}
           startIcon={<EditIcon />}
           component={Link}
-          to={`/directors/edit/${id}`}
+          to={`/${DIRECTORS_ENTITY_NAME}/edit/${id}`}
         >
           Edit
         </Button>
 
         <Button
           component={Link}
-          to='/directors/new'
+          to={`/${DIRECTORS_ENTITY_NAME}/new`}
           type='button'
           variant='contained'
           color='success'
@@ -154,7 +130,7 @@ function DirectorsItem() {
         aria-label='director details tabs'
       >
         <Tab label='General information' />
-        {currentDirector.biography && <Tab label='About the director' />}
+        {director.biography && <Tab label='About the director' />}
       </Tabs>
 
       <Box sx={scrollItemBoxStyle}>
@@ -165,10 +141,10 @@ function DirectorsItem() {
                 component='img'
                 height='100%'
                 image={
-                  currentDirector.photo ||
+                  director.photo ||
                   'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
                 }
-                alt={currentDirector.full_name}
+                alt={director.full_name}
               />
             </Card>
           </Box>
@@ -178,9 +154,8 @@ function DirectorsItem() {
               component='div'
               sx={{ fontWeight: 'bold' }}
             >
-              {currentDirector.full_name || 'Unknown director'}
+              {director.full_name || 'Unknown director'}
             </Typography>
-
             <Stack direction='row' spacing={1}>
               <Typography
                 variant='body1'
@@ -192,15 +167,14 @@ function DirectorsItem() {
                 Birth date:
               </Typography>
               <Typography variant='body1' component='div'>
-                {currentDirector.birth_date ? formattedbirth_date : 'Unknown'}
-                {currentDirector.birth_date &&
-                  (currentDirector.birth_date && currentDirector.death_date
+                {director.birth_date ? formattedbirth_date : 'Unknown'}
+                {director.birth_date &&
+                  (director.birth_date && director.death_date
                     ? ` (aged ${calculatedAge})`
                     : ` (age ${calculatedAge})`)}
               </Typography>
             </Stack>
-
-            {currentDirector.death_date && (
+            {director.death_date && (
               <Stack direction='row' spacing={1}>
                 <Typography
                   variant='body1'
@@ -216,7 +190,6 @@ function DirectorsItem() {
                 </Typography>
               </Stack>
             )}
-
             <Stack direction='row' spacing={1}>
               <Typography
                 variant='body1'
@@ -228,10 +201,9 @@ function DirectorsItem() {
                 Nationality:
               </Typography>
               <Typography variant='body1' component='div'>
-                {currentDirector.nationality || 'Unknown'}
+                {director.nationality || 'Unknown'}
               </Typography>
             </Stack>
-
             {tabIndex === 0 && (
               <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
                 <Typography
@@ -244,32 +216,18 @@ function DirectorsItem() {
                   Movies:
                 </Typography>
                 <Typography variant='body1' component='div'>
-                  {formattedMovies}
+                  {formattedMovies.length > 0
+                    ? formattedMovies
+                    : 'No movies available'}
                 </Typography>
               </Stack>
             )}
-
-            {tabIndex === 1 && currentDirector.biography && (
-              <DirectorsBiography />
-            )}
+            {tabIndex === 1 && director.biography && (
+              <DirectorsBiography biography={director.biography} />
+            )}{' '}
           </Box>
         </Box>
       </Box>
-
-      <Snackbar
-        open={snackbar.open}
-        autoHideDuration={1000}
-        onClose={handleClose}
-      >
-        <Alert
-          onClose={handleClose}
-          severity={snackbar.severity}
-          variant='filled'
-          sx={{ width: '100%' }}
-        >
-          {snackbar.message}
-        </Alert>
-      </Snackbar>
     </>
   );
 }

@@ -1,5 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+// =============================================
 import dayjs from 'dayjs';
 import 'dayjs/locale/en-gb';
 // =============================================
@@ -21,11 +22,19 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import InputAdornment from '@mui/material/InputAdornment';
 import Autocomplete from '@mui/material/Autocomplete';
 // =============================================
+import SnackbarContext from '../../contexts/SnackbarContext';
+// =============================================
 import {
+  DIRECTORS_ENTITY_NAME,
+  emptyDirector,
+  nationalities,
+} from '../../constants';
+// =============================================
+import {
+  getDirectorById,
   createDirector,
-  updateDirector,
-} from '../../store/slices/directorsSlice';
-import { emptyDirector, nationalities } from '../../constants';
+  patchDirector,
+} from '../../services/directorService';
 // =============================================
 import {
   formStyle,
@@ -36,21 +45,34 @@ import {
 } from '../../services/styleService';
 
 function DirectorForm() {
-  const dispatch = useDispatch();
-  const directors = useSelector((state) => state.directorsList.directors);
-
   const { id } = useParams();
-  const currentDirector = directors.find(
-    (director) => Number(director.id) === Number(id)
-  );
-
   const navigate = useNavigate();
+  const [initialValues, setInitialValues] = useState(emptyDirector);
+
+  const { showSnackbar } = useContext(SnackbarContext);
+
+  const fetchDirector = useCallback(async () => {
+    try {
+      const director = await getDirectorById(id);
+      setInitialValues(director);
+    } catch (error) {
+      showSnackbar('Failed to fetch director data!', 'error');
+    }
+  }, [id, showSnackbar]);
+
+  useEffect(() => {
+    if (id === ':id' || id === undefined) {
+      setInitialValues(emptyDirector);
+    } else {
+      fetchDirector();
+    }
+  }, [id, fetchDirector]);
 
   const goBack = () => {
     if (id !== ':id') {
-      navigate(`/directors/${id}`);
+      navigate(`/${DIRECTORS_ENTITY_NAME}/${id}`);
     } else {
-      navigate(`/directors`);
+      navigate(`/${DIRECTORS_ENTITY_NAME}`);
     }
   };
 
@@ -67,13 +89,18 @@ function DirectorForm() {
     biography: Yup.string(),
   });
 
-  const onFormSubmit = (values) => {
-    if (values.id) {
-      dispatch(updateDirector(values));
-      navigate(`/directors/${id}`);
-    } else {
-      dispatch(createDirector(values));
-      navigate(`/directors`);
+  const onFormSubmit = async (values) => {
+    try {
+      if (values.id) {
+        await patchDirector(values);
+        showSnackbar('Director updated successfully!', 'success');
+      } else {
+        await createDirector(values);
+        showSnackbar('Director created successfully!', 'success');
+      }
+      navigate(`/${DIRECTORS_ENTITY_NAME}`);
+    } catch (error) {
+      showSnackbar('Failed to save director data!', 'error');
     }
   };
 
@@ -312,7 +339,7 @@ function DirectorForm() {
 
   return (
     <Formik
-      initialValues={currentDirector || emptyDirector}
+      initialValues={initialValues}
       onSubmit={onFormSubmit}
       validationSchema={schema}
       enableReinitialize

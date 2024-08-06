@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+// import { useEffect } from 'react';
+// import { useDispatch } from 'react-redux';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 // =============================================
 import Paper from '@mui/material/Paper';
@@ -7,17 +7,17 @@ import Box from '@mui/material/Box';
 // =============================================
 import { rootComponentPaperStyle } from '../../services/styleService';
 // =============================================
-import { getAllDirectors } from '../../store/slices/directorsSlice';
+// import { getAllDirectors } from '../../store/slices/directorsSlice';
 // =============================================
 import DirectorsItem from './DirectorsItem';
 import DirectorsList from './DirectorsList';
 
 function Directors() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAllDirectors());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getAllDirectors());
+  // }, [dispatch]);
 
   const location = useLocation();
   const applyPaperStyles =
