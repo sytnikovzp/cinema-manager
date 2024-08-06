@@ -1,35 +1,35 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 // =============================================
 import Carousel from 'react-material-ui-carousel';
 // =============================================
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
 // =============================================
 import { carouselStyles, skeletonStyles } from '../../services/styleService';
 // =============================================
+import SnackbarContext from '../../contexts/SnackbarContext';
+// =============================================
 import { MOVIES_SLICE_NAME } from '../../constants';
 // =============================================
-import useSnackbar from '../../hooks/useSnackbar';
 import usePaginatedData from '../../hooks/usePaginatedData';
 
 const ITEMS_PER_PAGE = 15;
 
 function HomePage() {
-  const { snackbar, showSnackbar, handleClose } = useSnackbar();
   const {
     data: movies,
     loading,
     error,
   } = usePaginatedData(`/${MOVIES_SLICE_NAME}`, ITEMS_PER_PAGE, 1);
 
+  const { showSnackbar } = useContext(SnackbarContext);
+
   useEffect(() => {
-    if (error && snackbar.message !== error) {
+    if (error) {
       showSnackbar(error, 'error');
     }
-  }, [error, showSnackbar, snackbar.message]);
+  }, [error, showSnackbar]);
 
   const filteredMovies = movies.filter((movie) => movie.poster);
   const lastMovies = filteredMovies.slice(0, ITEMS_PER_PAGE);
@@ -59,21 +59,6 @@ function HomePage() {
           ))}
         </Carousel>
       )}
-
-      <Snackbar
-        open={snackbar.open}
-        autoHideDuration={3000}
-        onClose={handleClose}
-      >
-        <Alert
-          onClose={handleClose}
-          severity={snackbar.severity}
-          variant='filled'
-          sx={{ width: '100%' }}
-        >
-          {snackbar.message}
-        </Alert>
-      </Snackbar>
     </>
   );
 }
