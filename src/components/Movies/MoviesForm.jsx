@@ -156,13 +156,20 @@ function MovieForm() {
   });
 
   const onFormSubmit = async (values) => {
+    const cleanValues = {
+      ...values,
+      directors: values.directors.filter((v) => v),
+      actors: values.actors.filter((v) => v),
+      studios: values.studios.filter((v) => v),
+    };
+
     try {
-      if (values.id) {
-        await patchMovie(values);
+      if (cleanValues.id) {
+        await patchMovie(cleanValues);
         showSnackbar('Movie updated successfully!', 'success');
         navigate(`/${MOVIES_ENTITY_NAME}/${id}`);
       } else {
-        await createMovie(values);
+        await createMovie(cleanValues);
         showSnackbar('Movie created successfully!', 'success');
         navigate(`/${MOVIES_ENTITY_NAME}`);
       }
