@@ -2,7 +2,14 @@ import { Route, Routes } from 'react-router-dom';
 // =============================================
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import { Typography } from '@mui/material';
+import Typography from '@mui/material/Typography';
+// =============================================
+import {
+  ACTORS_ENTITY_NAME,
+  DIRECTORS_ENTITY_NAME,
+  MOVIES_ENTITY_NAME,
+  STUDIOS_ENTITY_NAME,
+} from '../../constants';
 // =============================================
 import ActorsForm from '../Actors/ActorsForm';
 import DirectorsForm from '../Directors/DirectorsForm';
@@ -28,22 +35,64 @@ function CinemaService() {
           Cinema service
         </Typography>
         <Routes>
-          <Route path='/actors/new' element={<ActorsForm />} />
-          <Route path='/actors/new/:id' element={<ActorsForm />} />
-          <Route path='/actors/edit' element={<ActorsForm />} />
-          <Route path='/actors/edit/:id' element={<ActorsForm />} />
-          <Route path='/directors/new' element={<DirectorsForm />} />
-          <Route path='/directors/new/:id' element={<DirectorsForm />} />
-          <Route path='/directors/edit' element={<DirectorsForm />} />
-          <Route path='/directors/edit/:id' element={<DirectorsForm />} />
-          <Route path='/movies/new' element={<MoviesForm />} />
-          <Route path='/movies/new/:id' element={<MoviesForm />} />
-          <Route path='/movies/edit' element={<MoviesForm />} />
-          <Route path='/movies/edit/:id' element={<MoviesForm />} />
-          <Route path='/studios/new' element={<StudiosForm />} />
-          <Route path='/studios/new/:id' element={<StudiosForm />} />
-          <Route path='/studios/edit' element={<StudiosForm />} />
-          <Route path='/studios/edit/:id' element={<StudiosForm />} />
+          <Route path={`/${ACTORS_ENTITY_NAME}/new`} element={<ActorsForm />} />
+          <Route
+            path={`/${ACTORS_ENTITY_NAME}/new/:id`}
+            element={<ActorsForm />}
+          />
+          <Route
+            path={`/${ACTORS_ENTITY_NAME}/edit`}
+            element={<ActorsForm />}
+          />
+          <Route
+            path={`/${ACTORS_ENTITY_NAME}/edit/:id`}
+            element={<ActorsForm />}
+          />
+          <Route
+            path={`/${DIRECTORS_ENTITY_NAME}/new`}
+            element={<DirectorsForm />}
+          />
+          <Route
+            path={`/${DIRECTORS_ENTITY_NAME}/new/:id`}
+            element={<DirectorsForm />}
+          />
+          <Route
+            path={`/${DIRECTORS_ENTITY_NAME}/edit`}
+            element={<DirectorsForm />}
+          />
+          <Route
+            path={`/${DIRECTORS_ENTITY_NAME}/edit/:id`}
+            element={<DirectorsForm />}
+          />
+          <Route path={`/${MOVIES_ENTITY_NAME}/new`} element={<MoviesForm />} />
+          <Route
+            path={`/${MOVIES_ENTITY_NAME}/new/:id`}
+            element={<MoviesForm />}
+          />
+          <Route
+            path={`/${MOVIES_ENTITY_NAME}/edit`}
+            element={<MoviesForm />}
+          />
+          <Route
+            path={`/${MOVIES_ENTITY_NAME}/edit/:id`}
+            element={<MoviesForm />}
+          />
+          <Route
+            path={`/${STUDIOS_ENTITY_NAME}/new`}
+            element={<StudiosForm />}
+          />
+          <Route
+            path={`/${STUDIOS_ENTITY_NAME}/new/:id`}
+            element={<StudiosForm />}
+          />
+          <Route
+            path={`/${STUDIOS_ENTITY_NAME}/edit`}
+            element={<StudiosForm />}
+          />
+          <Route
+            path={`/${STUDIOS_ENTITY_NAME}/edit/:id`}
+            element={<StudiosForm />}
+          />
         </Routes>
       </Paper>
     </Box>

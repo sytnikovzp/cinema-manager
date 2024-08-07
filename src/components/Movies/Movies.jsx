@@ -7,6 +7,8 @@ import Box from '@mui/material/Box';
 // =============================================
 import { rootComponentPaperStyle } from '../../services/styleService';
 // =============================================
+import { MOVIES_ENTITY_NAME } from '../../constants';
+// =============================================
 // import { getAllMovies } from '../../store/slices/moviesSlice';
 // import { getAllActors } from '../../store/slices/actorsSlice';
 // import { getAllDirectors } from '../../store/slices/directorsSlice';
@@ -51,8 +53,14 @@ function Movies() {
         <Routes>
           <Route path='/' element={<MoviesList />} />
           <Route path=':id' element={<MoviesItem />} />
-          <Route path='new' element={<Navigate to='/movies/new/:id' />} />
-          <Route path='edit' element={<Navigate to='/movies/edit/:id' />} />
+          <Route
+            path='new'
+            element={<Navigate to={`/${MOVIES_ENTITY_NAME}/new/:id`} />}
+          />
+          <Route
+            path='edit'
+            element={<Navigate to={`/${MOVIES_ENTITY_NAME}/edit/:id`} />}
+          />
         </Routes>
       </Paper>
     </Box>

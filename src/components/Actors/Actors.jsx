@@ -7,6 +7,8 @@ import Box from '@mui/material/Box';
 // =============================================
 import { rootComponentPaperStyle } from '../../services/styleService';
 // =============================================
+import { ACTORS_ENTITY_NAME } from '../../constants';
+// =============================================
 // import { getAllActors } from '../../store/slices/actorsSlice';
 // =============================================
 import ActorsItem from './ActorsItem';
@@ -36,8 +38,14 @@ function Actors() {
         <Routes>
           <Route path='/' element={<ActorsList />} />
           <Route path=':id' element={<ActorsItem />} />
-          <Route path='new' element={<Navigate to='/actors/new/:id' />} />
-          <Route path='edit' element={<Navigate to='/actors/edit/:id' />} />
+          <Route
+            path='new'
+            element={<Navigate to={`/${ACTORS_ENTITY_NAME}/new/:id`} />}
+          />
+          <Route
+            path='edit'
+            element={<Navigate to={`/${ACTORS_ENTITY_NAME}/edit/:id`} />}
+          />
         </Routes>
       </Paper>
     </Box>

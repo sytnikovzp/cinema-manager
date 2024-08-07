@@ -1,8 +1,7 @@
 import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 // =============================================
-import { useTheme } from '@mui/material/styles';
-import { styled, alpha } from '@mui/material/styles';
+import { useTheme, styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';

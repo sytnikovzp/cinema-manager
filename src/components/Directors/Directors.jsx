@@ -7,6 +7,8 @@ import Box from '@mui/material/Box';
 // =============================================
 import { rootComponentPaperStyle } from '../../services/styleService';
 // =============================================
+import { DIRECTORS_ENTITY_NAME } from '../../constants';
+// =============================================
 // import { getAllDirectors } from '../../store/slices/directorsSlice';
 // =============================================
 import DirectorsItem from './DirectorsItem';
@@ -36,8 +38,14 @@ function Directors() {
         <Routes>
           <Route path='/' element={<DirectorsList />} />
           <Route path=':id' element={<DirectorsItem />} />
-          <Route path='new' element={<Navigate to='/directors/new/:id' />} />
-          <Route path='edit' element={<Navigate to='/directors/edit/:id' />} />
+          <Route
+            path='new'
+            element={<Navigate to={`/${DIRECTORS_ENTITY_NAME}/new/:id`} />}
+          />
+          <Route
+            path='edit'
+            element={<Navigate to={`/${DIRECTORS_ENTITY_NAME}/edit/:id`} />}
+          />
         </Routes>
       </Paper>
     </Box>

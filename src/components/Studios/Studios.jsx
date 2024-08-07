@@ -7,6 +7,8 @@ import Box from '@mui/material/Box';
 // =============================================
 import { rootComponentPaperStyle } from '../../services/styleService';
 // =============================================
+import { STUDIOS_ENTITY_NAME } from '../../constants';
+// =============================================
 // import { getAllStudios } from '../../store/slices/studiosSlice';
 // =============================================
 import StudiosItem from './StudiosItem';
@@ -36,8 +38,14 @@ function Studios() {
         <Routes>
           <Route path='/' element={<StudiosList />} />
           <Route path=':id' element={<StudiosItem />} />
-          <Route path='new' element={<Navigate to='/studios/new/:id' />} />
-          <Route path='edit' element={<Navigate to='/studios/edit/:id' />} />
+          <Route
+            path='new'
+            element={<Navigate to={`/${STUDIOS_ENTITY_NAME}/new/:id`} />}
+          />
+          <Route
+            path='edit'
+            element={<Navigate to={`/${STUDIOS_ENTITY_NAME}/edit/:id`} />}
+          />
         </Routes>
       </Paper>
     </Box>

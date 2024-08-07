@@ -103,7 +103,7 @@ function DirectorsItem() {
           .map((movie) => (
             <Link
               key={movie.id}
-              to={`/movies/${movie.id}`}
+              to={`/${MOVIES_ENTITY_NAME}/${movie.id}`}
               style={itemLinkStyle}
             >
               {movie.title}
