@@ -240,7 +240,7 @@ function ActorsItem() {
                   Nationality:
                 </Typography>
                 <Typography variant='body1' component='div'>
-                  {actor.nationality || 'Unknown'}
+                  {actor.country || 'Unknown'}
                 </Typography>
               </Stack>
 

@@ -125,7 +125,7 @@ function DirectorsList() {
                       <ListItemText
                         primary={`${
                           director.full_name || 'Unknown director'
-                        }, ${director.nationality || 'unknown nationality'}`}
+                        }, ${director.country || 'unknown country'}`}
                       />
                     </ListItemButton>
 

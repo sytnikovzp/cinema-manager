@@ -2,7 +2,7 @@ export const actorsState = [
   {
     id: null,
     full_name: '',
-    nationality: '',
+    country: '',
     birth_date: '',
     death_date: '',
     photo: '',
@@ -14,7 +14,7 @@ export const directorsState = [
   {
     id: null,
     full_name: '',
-    nationality: '',
+    country: '',
     birth_date: '',
     death_date: '',
     photo: '',

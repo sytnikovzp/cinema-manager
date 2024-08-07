@@ -236,7 +236,7 @@ function DirectorsItem() {
                   Nationality:
                 </Typography>
                 <Typography variant='body1' component='div'>
-                  {director.nationality || 'Unknown'}
+                  {director.country || 'Unknown'}
                 </Typography>
               </Stack>
               {tabIndex === 0 && (

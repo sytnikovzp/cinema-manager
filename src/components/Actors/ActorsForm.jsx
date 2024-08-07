@@ -24,7 +24,11 @@ import Autocomplete from '@mui/material/Autocomplete';
 // =============================================
 import SnackbarContext from '../../contexts/SnackbarContext';
 // =============================================
-import { ACTORS_ENTITY_NAME, emptyActor, nationalities } from '../../constants';
+import {
+  ACTORS_ENTITY_NAME,
+  COUNTRIES_ENTITY_NAME,
+  emptyActor,
+} from '../../constants';
 // =============================================
 import {
   getActorById,
@@ -39,11 +43,19 @@ import {
   wideButtonFormStyle,
   stackButtonFormStyle,
 } from '../../services/styleService';
+// =============================================
+import usePaginatedData from '../../hooks/usePaginatedData';
 
 function ActorForm() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [initialValues, setInitialValues] = useState(emptyActor);
+
+  const { data: countries } = usePaginatedData(
+    `/${COUNTRIES_ENTITY_NAME}`,
+    500,
+    1
+  );
 
   const { showSnackbar } = useContext(SnackbarContext);
 
@@ -72,13 +84,13 @@ function ActorForm() {
     }
   };
 
-  const sortedNationalities = nationalities
+  const sortedCountries = countries
     .slice()
-    .sort((a, b) => a.description.localeCompare(b.description));
+    .sort((a, b) => a.title.localeCompare(b.title));
 
   const schema = Yup.object().shape({
     full_name: Yup.string().required('Full name is a required field'),
-    nationality: Yup.string(),
+    country: Yup.string(),
     birth_date: Yup.date(),
     death_date: Yup.date(),
     photo: Yup.string().url('Invalid URL photo'),
@@ -130,26 +142,23 @@ function ActorForm() {
             />
           </Box>
           <Box sx={formItemStyle}>
-            <Field name='nationality'>
+            <Field name='country'>
               {({ field, form }) => {
                 const currentValue =
-                  sortedNationalities.find(
-                    (option) => option.description === field.value
+                  sortedCountries.find(
+                    (option) => option.title === field.value
                   ) || null;
 
                 return (
                   <Autocomplete
                     disablePortal
-                    id='nationality-select'
-                    options={sortedNationalities}
-                    getOptionLabel={(option) => option.description}
+                    id='country-select'
+                    options={sortedCountries}
+                    getOptionLabel={(option) => option.title}
                     fullWidth
                     value={currentValue}
                     onChange={(event, value) =>
-                      form.setFieldValue(
-                        field.name,
-                        value ? value.description : ''
-                      )
+                      form.setFieldValue(field.name, value ? value.title : '')
                     }
                     renderInput={(params) => (
                       <TextField

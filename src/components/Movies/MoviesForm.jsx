@@ -36,8 +36,8 @@ import {
   ACTORS_ENTITY_NAME,
   DIRECTORS_ENTITY_NAME,
   STUDIOS_ENTITY_NAME,
+  GENRES_ENTITY_NAME,
   emptyMovie,
-  genres,
 } from '../../constants';
 // =============================================
 import {
@@ -72,6 +72,7 @@ function MovieForm() {
   const { data: actors } = useEntityData(ACTORS_ENTITY_NAME);
   const { data: directors } = useEntityData(DIRECTORS_ENTITY_NAME);
   const { data: studios } = useEntityData(STUDIOS_ENTITY_NAME);
+  const { data: genres } = useEntityData(GENRES_ENTITY_NAME);
 
   const { showSnackbar } = useContext(SnackbarContext);
 

@@ -23,7 +23,11 @@ import Autocomplete from '@mui/material/Autocomplete';
 // =============================================
 import SnackbarContext from '../../contexts/SnackbarContext';
 // =============================================
-import { STUDIOS_ENTITY_NAME, emptyStudio, locations } from '../../constants';
+import {
+  STUDIOS_ENTITY_NAME,
+  LOCATIONS_ENTITY_NAME,
+  emptyStudio,
+} from '../../constants';
 // =============================================
 import {
   getStudioById,
@@ -38,11 +42,19 @@ import {
   wideButtonFormStyle,
   stackButtonFormStyle,
 } from '../../services/styleService';
+// =============================================
+import usePaginatedData from '../../hooks/usePaginatedData';
 
 function StudioForm() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [initialValues, setInitialValues] = useState(emptyStudio);
+
+  const { data: locations } = usePaginatedData(
+    `/${LOCATIONS_ENTITY_NAME}`,
+    500,
+    1
+  );
 
   const { showSnackbar } = useContext(SnackbarContext);
 
