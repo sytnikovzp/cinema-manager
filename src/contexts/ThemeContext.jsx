@@ -7,7 +7,7 @@ export const ThemeContext = createContext({
   toggleColorMode: () => {},
 });
 
-export function ThemeProvider({ children }) {
+export function ColorThemeProvider({ children }) {
   const getInitialMode = () => {
     const savedMode = localStorage.getItem('cinemaThemeMode');
     return savedMode ? savedMode : 'dark';

@@ -5,20 +5,20 @@ import {
   Navigate,
 } from 'react-router-dom';
 // =============================================
-import { ThemeProvider } from './contexts/ThemeContext';
+import { ColorThemeProvider } from './contexts/ThemeContext';
 import { SnackbarProvider } from './contexts/SnackbarContext';
 // =============================================
+import HomePage from './components/HomePage/HomePage';
 import Movies from './components/Movies/Movies';
 import Actors from './components/Actors/Actors';
 import Directors from './components/Directors/Directors';
 import Studios from './components/Studios/Studios';
-import HomePage from './components/HomePage/HomePage';
-import SnackbarComponent from './components/SnackbarComponent';
 import Layout from './components/Layout';
+import SnackbarComponent from './components/SnackbarComponent';
 
 function App() {
   return (
-    <ThemeProvider>
+    <ColorThemeProvider>
       <SnackbarProvider>
         <Router>
           <Routes>
@@ -34,7 +34,7 @@ function App() {
           <SnackbarComponent />
         </Router>
       </SnackbarProvider>
-    </ThemeProvider>
+    </ColorThemeProvider>
   );
 }
 

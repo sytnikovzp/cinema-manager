@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 // =============================================
-import { ThemeProvider } from '../contexts/ThemeContext';
+import { ColorThemeProvider } from '../contexts/ThemeContext';
 // =============================================
 import Header from './Header/Header';
 import NavBar from './Navigation/NavBar';
@@ -12,7 +12,7 @@ import Footer from './Footer/Footer';
 
 function Layout() {
   return (
-    <ThemeProvider>
+    <ColorThemeProvider>
       <Box
         sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}
       >
@@ -47,7 +47,7 @@ function Layout() {
           </Grid>
         </Grid>
       </Box>
-    </ThemeProvider>
+    </ColorThemeProvider>
   );
 }
 
