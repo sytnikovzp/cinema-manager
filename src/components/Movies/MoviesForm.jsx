@@ -57,6 +57,8 @@ import {
 } from '../../services/styleService';
 // =============================================
 import usePaginatedData from '../../hooks/usePaginatedData';
+// =============================================
+import BasicAutocompleteField from '../Autocomplete/BasicAutocompleteField';
 
 function MovieForm() {
   const { id } = useParams();
@@ -216,45 +218,13 @@ function MovieForm() {
                 />
               </Box>
               <Box sx={formItemStyle}>
-                <Field name='genre'>
-                  {({ field, form }) => {
-                    const currentValue =
-                      sortedGenres.find(
-                        (option) => option.title === field.value
-                      ) || null;
-
-                    return (
-                      <Autocomplete
-                        disablePortal
-                        id='genre-select'
-                        options={sortedGenres}
-                        getOptionLabel={(option) => option.title}
-                        fullWidth
-                        value={currentValue}
-                        onChange={(event, value) =>
-                          form.setFieldValue(
-                            field.name,
-                            value ? value.title : ''
-                          )
-                        }
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            label='Genre movie'
-                            error={
-                              form.touched[field.name] &&
-                              Boolean(form.errors[field.name])
-                            }
-                            helperText={
-                              form.touched[field.name] &&
-                              form.errors[field.name]
-                            }
-                          />
-                        )}
-                      />
-                    );
-                  }}
-                </Field>
+                <BasicAutocompleteField
+                  name='genre'
+                  options={sortedGenres}
+                  getOptionLabel={(option) => option.title}
+                  label='Genre movie'
+                  setFieldValue={setFieldValue}
+                />
 
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
@@ -635,6 +605,7 @@ function MovieForm() {
               <Field
                 name='storyline'
                 as={TextField}
+                id='storyline-textarea'
                 label='Brief storyline of the movie...'
                 fullWidth
                 multiline

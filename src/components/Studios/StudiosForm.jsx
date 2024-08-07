@@ -19,7 +19,6 @@ import SaveIcon from '@mui/icons-material/Save';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import InputAdornment from '@mui/material/InputAdornment';
-import Autocomplete from '@mui/material/Autocomplete';
 // =============================================
 import SnackbarContext from '../../contexts/SnackbarContext';
 // =============================================
@@ -44,6 +43,8 @@ import {
 } from '../../services/styleService';
 // =============================================
 import usePaginatedData from '../../hooks/usePaginatedData';
+// =============================================
+import BasicAutocompleteField from '../Autocomplete/BasicAutocompleteField';
 
 function StudioForm() {
   const { id } = useParams();
@@ -87,7 +88,7 @@ function StudioForm() {
     .slice()
     .sort((a, b) => a.title.localeCompare(b.title));
 
-  const schema = Yup.object().shape({
+  const validationSchema = Yup.object().shape({
     title: Yup.string().required('Studio title is a required field'),
     location: Yup.string(),
     foundation_year: Yup.date(),
@@ -140,41 +141,13 @@ function StudioForm() {
             />
           </Box>
           <Box sx={formItemStyle}>
-            <Field name='location'>
-              {({ field, form }) => {
-                const currentValue =
-                  sortedLocations.find(
-                    (option) => option.title === field.value
-                  ) || null;
-
-                return (
-                  <Autocomplete
-                    disablePortal
-                    id='location-select'
-                    options={sortedLocations}
-                    getOptionLabel={(option) => option.title}
-                    fullWidth
-                    value={currentValue}
-                    onChange={(event, value) =>
-                      form.setFieldValue(field.name, value ? value.title : '')
-                    }
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label='Location'
-                        error={
-                          form.touched[field.name] &&
-                          Boolean(form.errors[field.name])
-                        }
-                        helperText={
-                          form.touched[field.name] && form.errors[field.name]
-                        }
-                      />
-                    )}
-                  />
-                );
-              }}
-            </Field>
+            <BasicAutocompleteField
+              name='location'
+              options={sortedLocations}
+              getOptionLabel={(option) => option.title}
+              label='Location'
+              setFieldValue={setFieldValue}
+            />
 
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
@@ -235,6 +208,7 @@ function StudioForm() {
             <Field
               name='about'
               as={TextField}
+              id='about-textarea'
               label='General information about the studio...'
               value={values.about}
               fullWidth
@@ -303,8 +277,8 @@ function StudioForm() {
   return (
     <Formik
       initialValues={initialValues}
+      validationSchema={validationSchema}
       onSubmit={onFormSubmit}
-      validationSchema={schema}
       enableReinitialize
     >
       {renderForm}

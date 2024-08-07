@@ -20,7 +20,6 @@ import SaveIcon from '@mui/icons-material/Save';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import InputAdornment from '@mui/material/InputAdornment';
-import Autocomplete from '@mui/material/Autocomplete';
 // =============================================
 import SnackbarContext from '../../contexts/SnackbarContext';
 // =============================================
@@ -45,6 +44,8 @@ import {
 } from '../../services/styleService';
 // =============================================
 import usePaginatedData from '../../hooks/usePaginatedData';
+// =============================================
+import BasicAutocompleteField from '../Autocomplete/BasicAutocompleteField';
 
 function DirectorForm() {
   const { id } = useParams();
@@ -88,7 +89,7 @@ function DirectorForm() {
     .slice()
     .sort((a, b) => a.title.localeCompare(b.title));
 
-  const schema = Yup.object().shape({
+  const validationSchema = Yup.object().shape({
     full_name: Yup.string().required('Full name is a required field'),
     country: Yup.string(),
     birth_date: Yup.date(),
@@ -142,41 +143,13 @@ function DirectorForm() {
             />
           </Box>
           <Box sx={formItemStyle}>
-            <Field name='country'>
-              {({ field, form }) => {
-                const currentValue =
-                  sortedCountries.find(
-                    (option) => option.title === field.value
-                  ) || null;
-
-                return (
-                  <Autocomplete
-                    disablePortal
-                    id='country-select'
-                    options={sortedCountries}
-                    getOptionLabel={(option) => option.title}
-                    fullWidth
-                    value={currentValue}
-                    onChange={(event, value) =>
-                      form.setFieldValue(field.name, value ? value.title : '')
-                    }
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label='Nationality'
-                        error={
-                          form.touched[field.name] &&
-                          Boolean(form.errors[field.name])
-                        }
-                        helperText={
-                          form.touched[field.name] && form.errors[field.name]
-                        }
-                      />
-                    )}
-                  />
-                );
-              }}
-            </Field>
+            <BasicAutocompleteField
+              name='country'
+              options={sortedCountries}
+              getOptionLabel={(option) => option.title}
+              label='Nationality'
+              setFieldValue={setFieldValue}
+            />
           </Box>
           <Box sx={formItemStyle}>
             <LocalizationProvider
@@ -278,6 +251,7 @@ function DirectorForm() {
             <Field
               name='biography'
               as={TextField}
+              id='biography-textarea'
               label='Brief biography of the director...'
               value={values.biography}
               fullWidth
@@ -346,8 +320,8 @@ function DirectorForm() {
   return (
     <Formik
       initialValues={initialValues}
+      validationSchema={validationSchema}
       onSubmit={onFormSubmit}
-      validationSchema={schema}
       enableReinitialize
     >
       {renderForm}
