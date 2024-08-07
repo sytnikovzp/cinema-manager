@@ -165,12 +165,19 @@ function ActorForm() {
                     : null
                 }
                 views={['year', 'month', 'day']}
-                onChange={(value) =>
+                onChange={(value) => {
                   setFieldValue(
                     'birth_date',
                     value ? value.format('YYYY-MM-DD') : ''
-                  )
-                }
+                  );
+                  if (
+                    value &&
+                    values.death_date &&
+                    dayjs(values.death_date).isBefore(value)
+                  ) {
+                    setFieldValue('death_date', '');
+                  }
+                }}
                 sx={{ width: '100%' }}
                 slotProps={{
                   textField: {
@@ -219,6 +226,7 @@ function ActorForm() {
                   },
                 }}
                 maxDate={dayjs()}
+                minDate={values.birth_date ? dayjs(values.birth_date) : null}
               />
             </LocalizationProvider>
           </Box>
