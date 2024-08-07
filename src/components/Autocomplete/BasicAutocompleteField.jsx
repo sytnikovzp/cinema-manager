@@ -1,7 +1,8 @@
+import PropTypes from 'prop-types';
+import { Field } from 'formik';
+// =============================================
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-// =============================================
-import { Field } from 'formik';
 
 const BasicAutocompleteField = ({ name, options, getOptionLabel, label }) => {
   return (
@@ -34,6 +35,14 @@ const BasicAutocompleteField = ({ name, options, getOptionLabel, label }) => {
       }}
     </Field>
   );
+};
+
+BasicAutocompleteField.propTypes = {
+  name: PropTypes.string.isRequired,
+  options: PropTypes.array.isRequired,
+  getOptionLabel: PropTypes.func.isRequired,
+  label: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
 };
 
 export default BasicAutocompleteField;

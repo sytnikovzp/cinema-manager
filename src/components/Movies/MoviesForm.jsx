@@ -27,7 +27,6 @@ import ClearIcon from '@mui/icons-material/Clear';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import Autocomplete from '@mui/material/Autocomplete';
 // =============================================
 import SnackbarContext from '../../contexts/SnackbarContext';
 // =============================================
@@ -59,6 +58,7 @@ import {
 import usePaginatedData from '../../hooks/usePaginatedData';
 // =============================================
 import BasicAutocompleteField from '../Autocomplete/BasicAutocompleteField';
+import GroupedAutocompleteField from '../Autocomplete/GroupedAutocompleteField';
 
 function MovieForm() {
   const { id } = useParams();
@@ -315,90 +315,52 @@ function MovieForm() {
                     values: { directors },
                   },
                 }) => (
-                  <>
-                    <Stack
-                      component='fieldset'
-                      form='movie-form'
-                      spacing={2}
-                      sx={fieldArrayStyle}
-                    >
-                      <Typography component='legend' variant='h6' gutterBottom>
-                        Directors
-                      </Typography>
-                      {directors.map((director, index) => {
-                        const filteredOptions = optionsForDirectors.filter(
-                          (option) =>
-                            !values.directors.includes(option.full_name) ||
-                            option.full_name === director
-                        );
+                  <Stack
+                    component='fieldset'
+                    form='movie-form'
+                    spacing={2}
+                    sx={fieldArrayStyle}
+                  >
+                    <Typography component='legend' variant='h6' gutterBottom>
+                      Directors
+                    </Typography>
+                    {directors.map((director, index) => {
+                      const filteredOptions = optionsForDirectors.filter(
+                        (option) =>
+                          !values.directors.includes(option.full_name) ||
+                          option.full_name === director
+                      );
 
-                        return (
-                          <Stack spacing={2} key={index} direction='row'>
-                            <Field name={`directors[${index}]`}>
-                              {({ field, form }) => {
-                                const currentValue =
-                                  optionsForDirectors.find(
-                                    (option) => option.full_name === field.value
-                                  ) || null;
-
-                                return (
-                                  <Autocomplete
-                                    disablePortal
-                                    id={`directors-${index}`}
-                                    options={filteredOptions.sort(
-                                      (a, b) =>
-                                        -b.firstLetter.localeCompare(
-                                          a.firstLetter
-                                        )
-                                    )}
-                                    groupBy={(option) => option.firstLetter}
-                                    getOptionLabel={(option) =>
-                                      option.full_name
-                                    }
-                                    fullWidth
-                                    value={currentValue}
-                                    onChange={(event, value) =>
-                                      form.setFieldValue(
-                                        field.name,
-                                        value ? value.full_name : ''
-                                      )
-                                    }
-                                    renderInput={(params) => (
-                                      <TextField
-                                        {...params}
-                                        error={
-                                          form.touched[field.name] &&
-                                          Boolean(form.errors[field.name])
-                                        }
-                                        helperText={
-                                          form.touched[field.name] &&
-                                          form.errors[field.name]
-                                        }
-                                      />
-                                    )}
-                                  />
-                                );
-                              }}
-                            </Field>
-                            <IconButton onClick={() => remove(index)}>
-                              <ClearIcon />
-                            </IconButton>
-                          </Stack>
-                        );
-                      })}
-                      <Stack alignItems='center'>
-                        <Button
-                          variant='contained'
-                          sx={addButtonFormStyle}
-                          onClick={() => push('')}
-                          startIcon={<GroupAddIcon />}
-                          type='button'
-                        >
-                          Add director
-                        </Button>
-                      </Stack>
+                      return (
+                        <Stack spacing={2} key={index} direction='row'>
+                          <GroupedAutocompleteField
+                            id={`directors-${index}`}
+                            name={`directors[${index}]`}
+                            options={filteredOptions.sort(
+                              (a, b) =>
+                                -b.firstLetter.localeCompare(a.firstLetter)
+                            )}
+                            groupBy={(option) => option.firstLetter}
+                            getOptionLabel={(option) => option.full_name}
+                          />
+                          <IconButton onClick={() => remove(index)}>
+                            <ClearIcon />
+                          </IconButton>
+                        </Stack>
+                      );
+                    })}
+                    <Stack alignItems='center'>
+                      <Button
+                        variant='contained'
+                        sx={addButtonFormStyle}
+                        onClick={() => push('')}
+                        startIcon={<GroupAddIcon />}
+                        type='button'
+                      >
+                        Add director
+                      </Button>
                     </Stack>
-                  </>
+                  </Stack>
                 )}
               </FieldArray>
             </Box>
@@ -414,90 +376,52 @@ function MovieForm() {
                     values: { actors },
                   },
                 }) => (
-                  <>
-                    <Stack
-                      component='fieldset'
-                      form='movie-form'
-                      spacing={2}
-                      sx={fieldArrayStyle}
-                    >
-                      <Typography component='legend' variant='h6' gutterBottom>
-                        Actors
-                      </Typography>
-                      {actors.map((actor, index) => {
-                        const filteredOptions = optionsForActors.filter(
-                          (option) =>
-                            !values.actors.includes(option.full_name) ||
-                            option.full_name === actor
-                        );
+                  <Stack
+                    component='fieldset'
+                    form='movie-form'
+                    spacing={2}
+                    sx={fieldArrayStyle}
+                  >
+                    <Typography component='legend' variant='h6' gutterBottom>
+                      Actors
+                    </Typography>
+                    {actors.map((actor, index) => {
+                      const filteredOptions = optionsForActors.filter(
+                        (option) =>
+                          !values.actors.includes(option.full_name) ||
+                          option.full_name === actor
+                      );
 
-                        return (
-                          <Stack spacing={2} key={index} direction='row'>
-                            <Field name={`actors[${index}]`}>
-                              {({ field, form }) => {
-                                const currentValue =
-                                  optionsForActors.find(
-                                    (option) => option.full_name === field.value
-                                  ) || null;
-
-                                return (
-                                  <Autocomplete
-                                    disablePortal
-                                    id={`actors-${index}`}
-                                    options={filteredOptions.sort(
-                                      (a, b) =>
-                                        -b.firstLetter.localeCompare(
-                                          a.firstLetter
-                                        )
-                                    )}
-                                    groupBy={(option) => option.firstLetter}
-                                    getOptionLabel={(option) =>
-                                      option.full_name
-                                    }
-                                    fullWidth
-                                    value={currentValue}
-                                    onChange={(event, value) =>
-                                      form.setFieldValue(
-                                        field.name,
-                                        value ? value.full_name : ''
-                                      )
-                                    }
-                                    renderInput={(params) => (
-                                      <TextField
-                                        {...params}
-                                        error={
-                                          form.touched[field.name] &&
-                                          Boolean(form.errors[field.name])
-                                        }
-                                        helperText={
-                                          form.touched[field.name] &&
-                                          form.errors[field.name]
-                                        }
-                                      />
-                                    )}
-                                  />
-                                );
-                              }}
-                            </Field>
-                            <IconButton onClick={() => remove(index)}>
-                              <ClearIcon />
-                            </IconButton>
-                          </Stack>
-                        );
-                      })}
-                      <Stack alignItems='center'>
-                        <Button
-                          variant='contained'
-                          sx={addButtonFormStyle}
-                          onClick={() => push('')}
-                          startIcon={<GroupAddIcon />}
-                          type='button'
-                        >
-                          Add actor
-                        </Button>
-                      </Stack>
+                      return (
+                        <Stack spacing={2} key={index} direction='row'>
+                          <GroupedAutocompleteField
+                            id={`actors-${index}`}
+                            name={`actors[${index}]`}
+                            options={filteredOptions.sort(
+                              (a, b) =>
+                                -b.firstLetter.localeCompare(a.firstLetter)
+                            )}
+                            groupBy={(option) => option.firstLetter}
+                            getOptionLabel={(option) => option.full_name}
+                          />
+                          <IconButton onClick={() => remove(index)}>
+                            <ClearIcon />
+                          </IconButton>
+                        </Stack>
+                      );
+                    })}
+                    <Stack alignItems='center'>
+                      <Button
+                        variant='contained'
+                        sx={addButtonFormStyle}
+                        onClick={() => push('')}
+                        startIcon={<GroupAddIcon />}
+                        type='button'
+                      >
+                        Add actor
+                      </Button>
                     </Stack>
-                  </>
+                  </Stack>
                 )}
               </FieldArray>
             </Box>
@@ -513,88 +437,52 @@ function MovieForm() {
                     values: { studios },
                   },
                 }) => (
-                  <>
-                    <Stack
-                      component='fieldset'
-                      form='movie-form'
-                      spacing={2}
-                      sx={fieldArrayStyle}
-                    >
-                      <Typography component='legend' variant='h6' gutterBottom>
-                        Studios
-                      </Typography>
-                      {studios.map((studio, index) => {
-                        const filteredOptions = optionsForStudios.filter(
-                          (option) =>
-                            !values.studios.includes(option.title) ||
-                            option.title === studio
-                        );
+                  <Stack
+                    component='fieldset'
+                    form='movie-form'
+                    spacing={2}
+                    sx={fieldArrayStyle}
+                  >
+                    <Typography component='legend' variant='h6' gutterBottom>
+                      Studios
+                    </Typography>
+                    {studios.map((studio, index) => {
+                      const filteredOptions = optionsForStudios.filter(
+                        (option) =>
+                          !values.studios.includes(option.title) ||
+                          option.title === studio
+                      );
 
-                        return (
-                          <Stack spacing={2} key={index} direction='row'>
-                            <Field name={`studios[${index}]`}>
-                              {({ field, form }) => {
-                                const currentValue =
-                                  optionsForStudios.find(
-                                    (option) => option.title === field.value
-                                  ) || null;
-
-                                return (
-                                  <Autocomplete
-                                    disablePortal
-                                    id={`studios-${index}`}
-                                    options={filteredOptions.sort(
-                                      (a, b) =>
-                                        -b.firstLetter.localeCompare(
-                                          a.firstLetter
-                                        )
-                                    )}
-                                    groupBy={(option) => option.firstLetter}
-                                    getOptionLabel={(option) => option.title}
-                                    fullWidth
-                                    value={currentValue}
-                                    onChange={(event, value) =>
-                                      form.setFieldValue(
-                                        field.name,
-                                        value ? value.title : ''
-                                      )
-                                    }
-                                    renderInput={(params) => (
-                                      <TextField
-                                        {...params}
-                                        error={
-                                          form.touched[field.name] &&
-                                          Boolean(form.errors[field.name])
-                                        }
-                                        helperText={
-                                          form.touched[field.name] &&
-                                          form.errors[field.name]
-                                        }
-                                      />
-                                    )}
-                                  />
-                                );
-                              }}
-                            </Field>
-                            <IconButton onClick={() => remove(index)}>
-                              <ClearIcon />
-                            </IconButton>
-                          </Stack>
-                        );
-                      })}
-                      <Stack alignItems='center'>
-                        <Button
-                          variant='contained'
-                          sx={addButtonFormStyle}
-                          onClick={() => push('')}
-                          startIcon={<DomainAddIcon />}
-                          type='button'
-                        >
-                          Add studio
-                        </Button>
-                      </Stack>
+                      return (
+                        <Stack spacing={2} key={index} direction='row'>
+                          <GroupedAutocompleteField
+                            id={`studios-${index}`}
+                            name={`studios[${index}]`}
+                            options={filteredOptions.sort(
+                              (a, b) =>
+                                -b.firstLetter.localeCompare(a.firstLetter)
+                            )}
+                            groupBy={(option) => option.firstLetter}
+                            getOptionLabel={(option) => option.title}
+                          />
+                          <IconButton onClick={() => remove(index)}>
+                            <ClearIcon />
+                          </IconButton>
+                        </Stack>
+                      );
+                    })}
+                    <Stack alignItems='center'>
+                      <Button
+                        variant='contained'
+                        sx={addButtonFormStyle}
+                        onClick={() => push('')}
+                        startIcon={<DomainAddIcon />}
+                        type='button'
+                      >
+                        Add studio
+                      </Button>
                     </Stack>
-                  </>
+                  </Stack>
                 )}
               </FieldArray>
             </Box>
@@ -701,6 +589,8 @@ function MovieForm() {
       onSubmit={onFormSubmit}
       validationSchema={validationSchema}
       enableReinitialize
+      validateOnChange={false}
+      validateOnBlur={false}
     >
       {renderForm}
     </Formik>
