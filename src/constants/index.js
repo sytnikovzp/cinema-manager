@@ -5,6 +5,9 @@ export const ACTORS_ENTITY_NAME = 'actors';
 export const DIRECTORS_ENTITY_NAME = 'directors';
 export const MOVIES_ENTITY_NAME = 'movies';
 export const STUDIOS_ENTITY_NAME = 'studios';
+export const GENRES_ENTITY_NAME = 'genres';
+export const COUNTRIES_ENTITY_NAME = 'countries';
+export const LOCATIONS_ENTITY_NAME = 'locations';
 
 export const emptyActor = {
   id: null,
