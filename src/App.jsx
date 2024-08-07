@@ -5,6 +5,9 @@ import {
   Navigate,
 } from 'react-router-dom';
 // =============================================
+import { ThemeProvider } from './contexts/ThemeContext';
+import { SnackbarProvider } from './contexts/SnackbarContext';
+// =============================================
 import Movies from './components/Movies/Movies';
 import Actors from './components/Actors/Actors';
 import Directors from './components/Directors/Directors';
@@ -12,12 +15,10 @@ import Studios from './components/Studios/Studios';
 import HomePage from './components/HomePage/HomePage';
 import SnackbarComponent from './components/SnackbarComponent';
 import Layout from './components/Layout';
-import { ToggleColorMode } from './components/Layout';
-import { SnackbarProvider } from './contexts/SnackbarContext';
 
 function App() {
   return (
-    <ToggleColorMode>
+    <ThemeProvider>
       <SnackbarProvider>
         <Router>
           <Routes>
@@ -33,7 +34,7 @@ function App() {
           <SnackbarComponent />
         </Router>
       </SnackbarProvider>
-    </ToggleColorMode>
+    </ThemeProvider>
   );
 }
 

@@ -21,14 +21,13 @@ import Badge from '@mui/material/Badge';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 // =============================================
-import { ColorModeContext } from '../Layout';
-// =============================================
+import { ThemeContext } from '../../contexts/ThemeContext';
 
 const settings = ['Profile', 'Account', 'Logout'];
 
 function Header() {
   const theme = useTheme();
-  const colorMode = useContext(ColorModeContext);
+  const colorMode = useContext(ThemeContext);
 
   const themeModeDescription =
     theme.palette.mode === 'dark'
