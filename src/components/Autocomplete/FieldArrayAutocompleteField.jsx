@@ -4,7 +4,7 @@ import { Field } from 'formik';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 
-const GroupedAutocompleteField = ({
+const FieldArrayAutocompleteField = ({
   id,
   name,
   options,
@@ -51,7 +51,7 @@ const GroupedAutocompleteField = ({
   );
 };
 
-GroupedAutocompleteField.propTypes = {
+FieldArrayAutocompleteField.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
@@ -61,4 +61,4 @@ GroupedAutocompleteField.propTypes = {
   onChange: PropTypes.func,
 };
 
-export default GroupedAutocompleteField;
+export default FieldArrayAutocompleteField;

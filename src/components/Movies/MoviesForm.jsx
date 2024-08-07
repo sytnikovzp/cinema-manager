@@ -58,7 +58,7 @@ import {
 import usePaginatedData from '../../hooks/usePaginatedData';
 // =============================================
 import BasicAutocompleteField from '../Autocomplete/BasicAutocompleteField';
-import GroupedAutocompleteField from '../Autocomplete/GroupedAutocompleteField';
+import FieldArrayAutocompleteField from '../Autocomplete/FieldArrayAutocompleteField';
 
 function MovieForm() {
   const { id } = useParams();
@@ -333,7 +333,7 @@ function MovieForm() {
 
                       return (
                         <Stack spacing={2} key={index} direction='row'>
-                          <GroupedAutocompleteField
+                          <FieldArrayAutocompleteField
                             id={`directors-${index}`}
                             name={`directors[${index}]`}
                             options={filteredOptions.sort(
@@ -394,7 +394,7 @@ function MovieForm() {
 
                       return (
                         <Stack spacing={2} key={index} direction='row'>
-                          <GroupedAutocompleteField
+                          <FieldArrayAutocompleteField
                             id={`actors-${index}`}
                             name={`actors[${index}]`}
                             options={filteredOptions.sort(
@@ -455,7 +455,7 @@ function MovieForm() {
 
                       return (
                         <Stack spacing={2} key={index} direction='row'>
-                          <GroupedAutocompleteField
+                          <FieldArrayAutocompleteField
                             id={`studios-${index}`}
                             name={`studios[${index}]`}
                             options={filteredOptions.sort(
