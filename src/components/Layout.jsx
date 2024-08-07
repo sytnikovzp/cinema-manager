@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 // =============================================
 import Box from '@mui/material/Box';
@@ -11,6 +12,16 @@ import CinemaService from './Service/CinemaService';
 import Footer from './Footer/Footer';
 
 function Layout() {
+  const [isNavBarOpen, setIsNavBarOpen] = useState(false);
+
+  const handleToggleNavBar = () => {
+    setIsNavBarOpen((prev) => !prev);
+  };
+
+  const handleCloseNavBar = () => {
+    setIsNavBarOpen(false);
+  };
+
   return (
     <ColorThemeProvider>
       <Box
@@ -29,11 +40,28 @@ function Layout() {
           }}
         >
           <Grid item xs={12}>
-            <Header />
+            <Header onToggleNavBar={handleToggleNavBar} />
           </Grid>
           <Grid container sx={{ mt: '1rem', mb: '1rem', flex: 1 }}>
-            <Grid item lg={2} md={2} sm={12} xs={12}>
+            <Grid
+              item
+              lg={2}
+              md={2}
+              sm={12}
+              xs={12}
+              sx={{ display: { xs: 'none', md: 'block' } }}
+            >
               <NavBar />
+            </Grid>
+            <Grid
+              item
+              lg={2}
+              md={2}
+              sm={12}
+              xs={12}
+              sx={{ display: { xs: 'block', md: 'none' } }}
+            >
+              {isNavBarOpen && <NavBar onClose={handleCloseNavBar} />}
             </Grid>
             <Grid item lg={6} md={6} sm={12} xs={12}>
               <Outlet />

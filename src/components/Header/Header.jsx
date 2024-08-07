@@ -1,4 +1,5 @@
-import { useContext, useState } from 'react';
+import { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 // =============================================
 import { useTheme } from '@mui/material/styles';
 import { styled, alpha } from '@mui/material/styles';
@@ -22,12 +23,23 @@ import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 // =============================================
 import { ThemeContext } from '../../contexts/ThemeContext';
+// =============================================
+import NavBar from '../Navigation/NavBar';
 
 const settings = ['Profile', 'Account', 'Logout'];
 
 function Header() {
   const theme = useTheme();
   const colorMode = useContext(ThemeContext);
+  const [navBarOpen, setNavBarOpen] = useState(false);
+
+  const handleToggleNavBar = () => {
+    setNavBarOpen(!navBarOpen);
+  };
+
+  const handleCloseNavBar = () => {
+    setNavBarOpen(false);
+  };
 
   const themeModeDescription =
     theme.palette.mode === 'dark'
@@ -84,40 +96,49 @@ function Header() {
       },
     },
   }));
-
   return (
     <AppBar position='static'>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
-          <LocalMoviesIcon
-            fontSize='large'
-            sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}
-          />
-          <Typography
-            variant='h6'
-            noWrap
-            component='a'
-            href='/'
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
+          <Link
+            to='/'
+            style={{
+              display: 'flex',
+              alignItems: 'center',
               textDecoration: 'none',
+              color: 'inherit',
             }}
           >
-            CINEMA MANAGER
-          </Typography>
+            <LocalMoviesIcon
+              fontSize='large'
+              sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}
+            />
+            <Typography
+              variant='h6'
+              noWrap
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              CINEMA MANAGER
+            </Typography>
+          </Link>
 
           <LocalMoviesIcon
             sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}
+            onClick={handleToggleNavBar}
           />
           <Typography
             variant='h6'
             noWrap
             component='a'
+            onClick={handleToggleNavBar}
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -159,7 +180,6 @@ function Header() {
               </IconButton>
             </Tooltip>
           </Box>
-
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title='Show 4 new mails'>
               <IconButton size='large' color='inherit'>
@@ -215,7 +235,9 @@ function Header() {
           </Box>
         </Toolbar>
       </Container>
+      {navBarOpen && <NavBar onClose={handleCloseNavBar} />}
     </AppBar>
   );
 }
+
 export default Header;
