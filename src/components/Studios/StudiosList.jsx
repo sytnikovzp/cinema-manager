@@ -18,7 +18,6 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
 import { styled } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
-import Skeleton from '@mui/material/Skeleton';
 import Pagination from '@mui/material/Pagination';
 // =============================================
 import {
@@ -26,6 +25,8 @@ import {
   itemListStyle,
   scrollListBoxStyle,
 } from '../../services/styleService';
+// =============================================
+import { renderListSkeleton } from '../../services/skeletonService';
 // =============================================
 import { STUDIOS_ENTITY_NAME } from '../../constants';
 import { deleteStudio } from '../../services/studioService';
@@ -79,42 +80,6 @@ function StudiosList() {
     [refetch, showSnackbar]
   );
 
-  const renderLoadingSkeleton = () => (
-    <Stack direction='column' marginBottom={1}>
-      <ListItem disablePadding sx={itemListStyle}>
-        <ListItemButton sx={{ borderRadius: 5 }}>
-          <ListItemAvatar>
-            <Skeleton
-              variant='circular'
-              animation='wave'
-              width={40}
-              height={40}
-            />
-          </ListItemAvatar>
-          <ListItemText
-            primary={<Skeleton variant='text' animation='wave' width='80%' />}
-          />
-        </ListItemButton>
-        <ListItemSecondaryAction>
-          <Stack direction='row' spacing={1}>
-            <Skeleton
-              variant='circular'
-              animation='wave'
-              width={40}
-              height={40}
-            />
-            <Skeleton
-              variant='circular'
-              animation='wave'
-              width={40}
-              height={40}
-            />
-          </Stack>
-        </ListItemSecondaryAction>
-      </ListItem>
-    </Stack>
-  );
-
   return (
     <>
       <Stack direction='row' justifyContent='space-between'>
@@ -143,7 +108,7 @@ function StudiosList() {
             ? Array(itemsPerPage)
                 .fill()
                 .map((_, index) => (
-                  <Box key={index}>{renderLoadingSkeleton()}</Box>
+                  <Box key={index}>{renderListSkeleton()}</Box>
                 ))
             : studios.map((studio) => (
                 <Stack key={studio.id} direction='column' marginBottom={1}>

@@ -45,7 +45,7 @@ export const carouselStyles = {
   },
 };
 
-export const skeletonStyles = {
+export const skeletonHomePageStyles = {
   height: '70vh',
   marginLeft: '25%',
   padding: '15px',

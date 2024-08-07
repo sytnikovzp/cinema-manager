@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 // =============================================
 import Carousel from 'react-material-ui-carousel';
 // =============================================
-import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
 // =============================================
-import { carouselStyles, skeletonStyles } from '../../services/styleService';
+import { carouselStyles } from '../../services/styleService';
+// =============================================
+import { renderHomePageSkeleton } from '../../services/skeletonService';
 // =============================================
 import SnackbarContext from '../../contexts/SnackbarContext';
 // =============================================
@@ -37,13 +38,7 @@ function HomePage() {
   return (
     <>
       {loading ? (
-        <Box>
-          <Skeleton
-            variant='rectangular'
-            animation='wave'
-            sx={skeletonStyles}
-          />
-        </Box>
+        renderHomePageSkeleton()
       ) : (
         <Carousel stopAutoPlayOnHover>
           {lastMovies.map((movie) => (

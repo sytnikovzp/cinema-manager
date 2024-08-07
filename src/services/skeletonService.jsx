@@ -14,7 +14,18 @@ import {
   itemCardMediaBoxStyle,
   itemInformationBoxStyle,
   itemListStyle,
+  skeletonHomePageStyles,
 } from '../services/styleService';
+
+export const renderHomePageSkeleton = () => (
+  <Box>
+    <Skeleton
+      variant='rectangular'
+      animation='wave'
+      sx={skeletonHomePageStyles}
+    />
+  </Box>
+);
 
 export const renderItemSkeleton = () => (
   <Box sx={itemComponentBoxMainStyle}>
@@ -52,12 +63,7 @@ export const renderListSkeleton = () => (
     <ListItem disablePadding sx={itemListStyle}>
       <ListItemButton sx={{ borderRadius: 5 }}>
         <ListItemAvatar>
-          <Skeleton
-            variant='circular'
-            animation='wave'
-            width={40}
-            height={40}
-          />
+          <Skeleton variant='circular' width={40} height={40} />
         </ListItemAvatar>
         <ListItemText
           primary={<Skeleton variant='text' animation='wave' width='80%' />}
@@ -65,18 +71,8 @@ export const renderListSkeleton = () => (
       </ListItemButton>
       <ListItemSecondaryAction>
         <Stack direction='row' spacing={1}>
-          <Skeleton
-            variant='circular'
-            animation='wave'
-            width={40}
-            height={40}
-          />
-          <Skeleton
-            variant='circular'
-            animation='wave'
-            width={40}
-            height={40}
-          />
+          <Skeleton variant='circular' width={40} height={40} />
+          <Skeleton variant='circular' width={40} height={40} />
         </Stack>
       </ListItemSecondaryAction>
     </ListItem>
