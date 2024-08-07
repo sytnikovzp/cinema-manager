@@ -65,14 +65,14 @@ function MovieForm() {
   const [initialValues, setInitialValues] = useState(emptyMovie);
   const [activeStep, setActiveStep] = useState(0);
 
-  const useEntityData = (entityName) => {
-    return usePaginatedData(`/${entityName}`, 500, 1);
-  };
-
-  const { data: actors } = useEntityData(ACTORS_ENTITY_NAME);
-  const { data: directors } = useEntityData(DIRECTORS_ENTITY_NAME);
-  const { data: studios } = useEntityData(STUDIOS_ENTITY_NAME);
-  const { data: genres } = useEntityData(GENRES_ENTITY_NAME);
+  const { data: actors } = usePaginatedData(`/${ACTORS_ENTITY_NAME}`, 500, 1);
+  const { data: directors } = usePaginatedData(
+    `/${DIRECTORS_ENTITY_NAME}`,
+    500,
+    1
+  );
+  const { data: studios } = usePaginatedData(`/${STUDIOS_ENTITY_NAME}`, 500, 1);
+  const { data: genres } = usePaginatedData(`/${GENRES_ENTITY_NAME}`, 500, 1);
 
   const { showSnackbar } = useContext(SnackbarContext);
 
@@ -101,10 +101,10 @@ function MovieForm() {
     }
   };
 
-  const optionsForActors =
-    actors.length > 1
-      ? actors.map((option) => {
-          const firstLetter = option.full_name[0].toUpperCase();
+  const optionsForEntities = (entities, key) =>
+    entities.length > 1
+      ? entities.map((option) => {
+          const firstLetter = option[key][0].toUpperCase();
           return {
             firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
             ...option,
@@ -112,27 +112,9 @@ function MovieForm() {
         })
       : [];
 
-  const optionsForDirectors =
-    directors.length > 1
-      ? directors.map((option) => {
-          const firstLetter = option.full_name[0].toUpperCase();
-          return {
-            firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
-            ...option,
-          };
-        })
-      : [];
-
-  const optionsForStudios =
-    studios.length > 1
-      ? studios.map((option) => {
-          const firstLetter = option.title[0].toUpperCase();
-          return {
-            firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
-            ...option,
-          };
-        })
-      : [];
+  const optionsForActors = optionsForEntities(actors, 'full_name');
+  const optionsForDirectors = optionsForEntities(directors, 'full_name');
+  const optionsForStudios = optionsForEntities(studios, 'title');
 
   const sortedGenres = genres
     .slice()
@@ -142,10 +124,7 @@ function MovieForm() {
 
   const handleNext = async (event, validateForm, setTouched) => {
     event.preventDefault();
-    setTouched({
-      title: true,
-    });
-
+    setTouched({ title: true, poster: true, trailer: true });
     const errors = await validateForm();
     if (Object.keys(errors).length === 0 && activeStep < steps.length - 1) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -162,12 +141,12 @@ function MovieForm() {
     resetForm();
   };
 
-  const schema = Yup.object().shape({
+  const validationSchema = Yup.object().shape({
     title: Yup.string().required('Movie title is a required field'),
     genre: Yup.string(),
     release_year: Yup.date(),
     poster: Yup.string().url('Invalid URL poster'),
-    trailer: Yup.string().url('Invalid Youtube URL trailer'),
+    trailer: Yup.string().url('Invalid Youtube URL'),
     directors: Yup.array(),
     actors: Yup.array(),
     studios: Yup.array(),
@@ -749,7 +728,7 @@ function MovieForm() {
     <Formik
       initialValues={initialValues}
       onSubmit={onFormSubmit}
-      validationSchema={schema}
+      validationSchema={validationSchema}
       enableReinitialize
     >
       {renderForm}
