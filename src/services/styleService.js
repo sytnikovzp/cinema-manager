@@ -120,6 +120,11 @@ export const itemListStyle = {
   borderRadius: 5,
 };
 
+export const scrollGenresListBoxStyle = {
+  height: '56vh',
+  overflowY: 'auto',
+};
+
 // =============================================
 // *item components
 

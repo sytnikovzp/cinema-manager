@@ -50,3 +50,22 @@ export const emptyStudio = {
   logo: '',
   about: '',
 };
+
+export const emptyGenre = {
+  id: null,
+  title: '',
+  logo: '',
+};
+
+export const emptyCountry = {
+  id: null,
+  title: '',
+  flag: '',
+};
+
+export const emptyLocation = {
+  id: null,
+  title: '',
+  country: '',
+  coat_of_arms: '',
+};

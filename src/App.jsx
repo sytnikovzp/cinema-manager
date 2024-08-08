@@ -13,6 +13,7 @@ import Movies from './components/Movies/Movies';
 import Actors from './components/Actors/Actors';
 import Directors from './components/Directors/Directors';
 import Studios from './components/Studios/Studios';
+import Genres from './components/Service/Genres';
 import Layout from './components/Layout';
 import SnackbarComponent from './components/SnackbarComponent';
 
@@ -27,6 +28,7 @@ function App() {
               <Route path='actors/*' element={<Actors />} />
               <Route path='directors/*' element={<Directors />} />
               <Route path='studios/*' element={<Studios />} />
+              <Route path='genres/*' element={<Genres />} />
               <Route index element={<HomePage />} />
               <Route path='*' element={<Navigate to='movies' replace />} />
             </Route>
