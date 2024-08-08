@@ -59,36 +59,6 @@ function ServicesList() {
   const [tabIndex, setTabIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const useEntityData = (entityName) => {
-    return usePaginatedData(
-      `/${entityName}`,
-      adjustedItemsPerPage,
-      currentPage
-    );
-  };
-
-  const {
-    data: genres,
-    totalItems: genresTotalItems,
-    loading: genresLoading,
-    error: genresError,
-    refetch: refetchGenres,
-  } = useEntityData(GENRES_ENTITY_NAME);
-  const {
-    data: countries,
-    totalItems: countriesTotalItems,
-    loading: countriesLoading,
-    error: countriesError,
-    refetch: refetchCountries,
-  } = useEntityData(COUNTRIES_ENTITY_NAME);
-  const {
-    data: locations,
-    totalItems: locationsTotalItems,
-    loading: locationsLoading,
-    error: locationsError,
-    refetch: refetchLocations,
-  } = useEntityData(LOCATIONS_ENTITY_NAME);
-
   const { showSnackbar } = useContext(SnackbarContext);
 
   const handleTabChange = (event, newValue) => {
@@ -105,27 +75,41 @@ function ServicesList() {
     [showSnackbar]
   );
 
+  const genresData = usePaginatedData(
+    `/${GENRES_ENTITY_NAME}`,
+    adjustedItemsPerPage,
+    currentPage
+  );
+  const countriesData = usePaginatedData(
+    `/${COUNTRIES_ENTITY_NAME}`,
+    adjustedItemsPerPage,
+    currentPage
+  );
+  const locationsData = usePaginatedData(
+    `/${LOCATIONS_ENTITY_NAME}`,
+    adjustedItemsPerPage,
+    currentPage
+  );
+
+  const { data, totalItems, loading, error, refetch } = {
+    0: genresData,
+    1: countriesData,
+    2: locationsData,
+  }[tabIndex];
+
   useEffect(() => {
-    handleError(genresError, 'error');
-    handleError(countriesError, 'error');
-    handleError(locationsError, 'error');
-  }, [genresError, countriesError, locationsError, handleError]);
+    handleError(error, 'error');
+  }, [error, handleError]);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
 
-  const onDelete = async (
-    event,
-    id,
-    deleteFunction,
-    refetchFunction,
-    successMessage
-  ) => {
+  const onDelete = async (event, id, deleteFunction, successMessage) => {
     event.stopPropagation();
     try {
       await deleteFunction(id);
-      refetchFunction();
+      refetch();
       setCurrentPage(1);
       showSnackbar(successMessage, 'success');
     } catch (err) {
@@ -172,7 +156,9 @@ function ServicesList() {
                   <ListItem disablePadding sx={itemListStyle}>
                     <ListItemButton sx={{ borderRadius: 5 }}>
                       <ListItemAvatar>
-                        <StyledAvatar src={item.logo} />
+                        <StyledAvatar
+                          src={item.logo || item.flag || item.coat_of_arms}
+                        />
                       </ListItemAvatar>
                       <ListItemText
                         primary={`${item.title || 'Unknown ${entityName}'}${
@@ -206,13 +192,7 @@ function ServicesList() {
       </Box>
       <Stack spacing={2} alignItems='center' marginTop={2}>
         <Pagination
-          count={Math.ceil(
-            {
-              0: genresTotalItems,
-              1: countriesTotalItems,
-              2: locationsTotalItems,
-            }[tabIndex] / adjustedItemsPerPage
-          )}
+          count={Math.ceil(totalItems / adjustedItemsPerPage)}
           page={currentPage}
           onChange={handlePageChange}
           color='primary'
@@ -254,44 +234,26 @@ function ServicesList() {
 
       {tabIndex === 0 &&
         renderList(
-          genres,
-          genresLoading,
+          data,
+          loading,
           (e, id) =>
-            onDelete(
-              e,
-              id,
-              deleteGenre,
-              refetchGenres,
-              'Genre deleted successfully!'
-            ),
+            onDelete(e, id, deleteGenre, 'Genre deleted successfully!'),
           GENRES_ENTITY_NAME
         )}
       {tabIndex === 1 &&
         renderList(
-          countries,
-          countriesLoading,
+          data,
+          loading,
           (e, id) =>
-            onDelete(
-              e,
-              id,
-              deleteCountry,
-              refetchCountries,
-              'Country deleted successfully!'
-            ),
+            onDelete(e, id, deleteCountry, 'Country deleted successfully!'),
           COUNTRIES_ENTITY_NAME
         )}
       {tabIndex === 2 &&
         renderList(
-          locations,
-          locationsLoading,
+          data,
+          loading,
           (e, id) =>
-            onDelete(
-              e,
-              id,
-              deleteLocation,
-              refetchLocations,
-              'Location deleted successfully!'
-            ),
+            onDelete(e, id, deleteLocation, 'Location deleted successfully!'),
           LOCATIONS_ENTITY_NAME
         )}
     </>

@@ -92,7 +92,7 @@ function StudioForm() {
     title: Yup.string().required('Studio title is a required field'),
     location: Yup.string(),
     foundation_year: Yup.date(),
-    logo: Yup.string().url('Invalid URL logo'),
+    logo: Yup.string().url('Invalid logo URL'),
     about: Yup.string(),
   });
 

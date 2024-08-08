@@ -147,7 +147,7 @@ function MovieForm() {
     title: Yup.string().required('Movie title is a required field'),
     genre: Yup.string(),
     release_year: Yup.date(),
-    poster: Yup.string().url('Invalid URL poster'),
+    poster: Yup.string().url('Invalid poster URL'),
     trailer: Yup.string().url('Invalid Youtube URL'),
     directors: Yup.array(),
     actors: Yup.array(),

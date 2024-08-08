@@ -94,7 +94,7 @@ function ActorForm() {
     country: Yup.string(),
     birth_date: Yup.date(),
     death_date: Yup.date(),
-    photo: Yup.string().url('Invalid URL photo'),
+    photo: Yup.string().url('Invalid photo URL'),
     biography: Yup.string(),
   });
 
