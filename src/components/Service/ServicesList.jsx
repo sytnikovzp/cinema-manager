@@ -24,16 +24,18 @@ import { Tab, Tabs } from '@mui/material';
 import {
   buttonMainStyle,
   itemListStyle,
-  scrollGenresListBoxStyle,
+  scrollServicesListBoxStyle,
 } from '../../services/styleService';
 // =============================================
 import { renderListSkeleton } from '../../services/skeletonService';
 // =============================================
 import {
+  SERVICES_ENTITY_NAME,
   GENRES_ENTITY_NAME,
   COUNTRIES_ENTITY_NAME,
   LOCATIONS_ENTITY_NAME,
 } from '../../constants';
+// =============================================
 import { deleteGenre } from '../../services/genreService';
 import { deleteCountry } from '../../services/countryService';
 import { deleteLocation } from '../../services/locationService';
@@ -50,7 +52,7 @@ const StyledAvatar = styled(Avatar)({
   },
 });
 
-function GenresList() {
+function ServicesList() {
   const itemsPerPage = useItemsPerPage();
   const adjustedItemsPerPage = itemsPerPage - 1;
 
@@ -136,17 +138,17 @@ function GenresList() {
       case 0:
         return {
           text: 'Add genre',
-          link: `/${GENRES_ENTITY_NAME}/new-${GENRES_ENTITY_NAME}`,
+          link: `/${SERVICES_ENTITY_NAME}/new-${GENRES_ENTITY_NAME}`,
         };
       case 1:
         return {
           text: 'Add country',
-          link: `/${GENRES_ENTITY_NAME}/new-${COUNTRIES_ENTITY_NAME}`,
+          link: `/${SERVICES_ENTITY_NAME}/new-${COUNTRIES_ENTITY_NAME}`,
         };
       case 2:
         return {
           text: 'Add location',
-          link: `/${GENRES_ENTITY_NAME}/new-${LOCATIONS_ENTITY_NAME}`,
+          link: `/${SERVICES_ENTITY_NAME}/new-${LOCATIONS_ENTITY_NAME}`,
         };
       default:
         return { text: 'Add item', link: '#' };
@@ -157,7 +159,7 @@ function GenresList() {
 
   const renderList = (data, loading, onDelete, entityName) => (
     <>
-      <Box sx={scrollGenresListBoxStyle}>
+      <Box sx={scrollServicesListBoxStyle}>
         <List>
           {loading
             ? Array(adjustedItemsPerPage)
@@ -184,7 +186,7 @@ function GenresList() {
                           edge='end'
                           aria-label='edit'
                           component={Link}
-                          to={`/${GENRES_ENTITY_NAME}/edit-${entityName}/${item.id}`}
+                          to={`/${SERVICES_ENTITY_NAME}/edit-${entityName}/${item.id}`}
                         >
                           <EditIcon />
                         </IconButton>
@@ -296,4 +298,4 @@ function GenresList() {
   );
 }
 
-export default GenresList;
+export default ServicesList;

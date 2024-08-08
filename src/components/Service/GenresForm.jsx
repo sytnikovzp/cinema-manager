@@ -17,7 +17,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 // =============================================
 import SnackbarContext from '../../contexts/SnackbarContext';
 // =============================================
-import { GENRES_ENTITY_NAME, emptyGenre } from '../../constants';
+import { SERVICES_ENTITY_NAME, emptyGenre } from '../../constants';
 // =============================================
 import {
   getGenreById,
@@ -57,11 +57,11 @@ function GenreForm() {
     }
   }, [id, fetchGenre]);
 
-  const goBack = () => navigate(`/${GENRES_ENTITY_NAME}`);
+  const goBack = () => navigate(`/${SERVICES_ENTITY_NAME}`);
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('Genre title is a required field'),
-    logo: Yup.string().url('Invalid URL logo'),
+    logo: Yup.string().url('Invalid genre logo URL'),
   });
 
   const onFormSubmit = async (values) => {
@@ -73,7 +73,7 @@ function GenreForm() {
         await createGenre(values);
         showSnackbar('Genre created successfully!', 'success');
       }
-      navigate(`/${GENRES_ENTITY_NAME}`);
+      navigate(`/${SERVICES_ENTITY_NAME}`);
     } catch (error) {
       showSnackbar('Failed to save genre data!', 'error');
     }

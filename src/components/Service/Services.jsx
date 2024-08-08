@@ -1,5 +1,3 @@
-// import { useDispatch } from 'react-redux';
-// import { useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 // =============================================
 import Paper from '@mui/material/Paper';
@@ -8,23 +6,15 @@ import Box from '@mui/material/Box';
 import { rootComponentPaperStyle } from '../../services/styleService';
 // =============================================
 import {
+  SERVICES_ENTITY_NAME,
   GENRES_ENTITY_NAME,
   COUNTRIES_ENTITY_NAME,
   LOCATIONS_ENTITY_NAME,
 } from '../../constants';
 // =============================================
-// import { getAllGenres } from '../../store/slices/genresSlice';
-// =============================================
-// import GenresItem from './GenresItem';
-import GenresList from './GenresList';
+import ServicesList from './ServicesList';
 
-function Genres() {
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(getAllGenres());
-  // }, [dispatch]);
-
+function Services() {
   const location = useLocation();
   const applyPaperStyles =
     !location.pathname.includes('/edit') && !location.pathname.includes('/new');
@@ -40,13 +30,12 @@ function Genres() {
         sx={applyPaperStyles ? rootComponentPaperStyle : undefined}
       >
         <Routes>
-          <Route path='/' element={<GenresList />} />
-          {/* <Route path=':id' element={<GenresItem />} /> */}
+          <Route path='/' element={<ServicesList />} />
           <Route
             path={`new-${GENRES_ENTITY_NAME}`}
             element={
               <Navigate
-                to={`/${GENRES_ENTITY_NAME}/new-${GENRES_ENTITY_NAME}/:id`}
+                to={`/${SERVICES_ENTITY_NAME}/new-${GENRES_ENTITY_NAME}/:id`}
               />
             }
           />
@@ -54,7 +43,7 @@ function Genres() {
             path={`edit-${GENRES_ENTITY_NAME}`}
             element={
               <Navigate
-                to={`/${GENRES_ENTITY_NAME}/edit-${GENRES_ENTITY_NAME}/:id`}
+                to={`/${SERVICES_ENTITY_NAME}/edit-${GENRES_ENTITY_NAME}/:id`}
               />
             }
           />
@@ -62,7 +51,7 @@ function Genres() {
             path={`new-${COUNTRIES_ENTITY_NAME}`}
             element={
               <Navigate
-                to={`/${GENRES_ENTITY_NAME}/new-${COUNTRIES_ENTITY_NAME}/:id`}
+                to={`/${SERVICES_ENTITY_NAME}/new-${COUNTRIES_ENTITY_NAME}/:id`}
               />
             }
           />
@@ -70,7 +59,7 @@ function Genres() {
             path={`edit-${COUNTRIES_ENTITY_NAME}`}
             element={
               <Navigate
-                to={`/${GENRES_ENTITY_NAME}/edit-${COUNTRIES_ENTITY_NAME}/:id`}
+                to={`/${SERVICES_ENTITY_NAME}/edit-${COUNTRIES_ENTITY_NAME}/:id`}
               />
             }
           />
@@ -78,7 +67,7 @@ function Genres() {
             path={`new-${LOCATIONS_ENTITY_NAME}`}
             element={
               <Navigate
-                to={`/${GENRES_ENTITY_NAME}/new-${LOCATIONS_ENTITY_NAME}/:id`}
+                to={`/${SERVICES_ENTITY_NAME}/new-${LOCATIONS_ENTITY_NAME}/:id`}
               />
             }
           />
@@ -86,7 +75,7 @@ function Genres() {
             path={`edit-${LOCATIONS_ENTITY_NAME}`}
             element={
               <Navigate
-                to={`/${GENRES_ENTITY_NAME}/edit-${LOCATIONS_ENTITY_NAME}/:id`}
+                to={`/${SERVICES_ENTITY_NAME}/edit-${LOCATIONS_ENTITY_NAME}/:id`}
               />
             }
           />
@@ -96,4 +85,4 @@ function Genres() {
   );
 }
 
-export default Genres;
+export default Services;

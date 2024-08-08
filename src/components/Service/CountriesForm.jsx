@@ -17,7 +17,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 // =============================================
 import SnackbarContext from '../../contexts/SnackbarContext';
 // =============================================
-import { GENRES_ENTITY_NAME, emptyCountry } from '../../constants';
+import { SERVICES_ENTITY_NAME, emptyCountry } from '../../constants';
 // =============================================
 import {
   getCountryById,
@@ -57,11 +57,11 @@ function CountriesForm() {
     }
   }, [id, fetchCountry]);
 
-  const goBack = () => navigate(`/${GENRES_ENTITY_NAME}`);
+  const goBack = () => navigate(`/${SERVICES_ENTITY_NAME}`);
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('Country title is a required field'),
-    flag: Yup.string().url('Invalid URL flag image'),
+    flag: Yup.string().url('Invalid flag image URL'),
   });
 
   const onFormSubmit = async (values) => {
@@ -73,7 +73,7 @@ function CountriesForm() {
         await createCountry(values);
         showSnackbar('Country created successfully!', 'success');
       }
-      navigate(`/${GENRES_ENTITY_NAME}`);
+      navigate(`/${SERVICES_ENTITY_NAME}`);
     } catch (error) {
       showSnackbar('Failed to save country data!', 'error');
     }

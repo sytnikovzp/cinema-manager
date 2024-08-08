@@ -18,7 +18,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import SnackbarContext from '../../contexts/SnackbarContext';
 // =============================================
 import {
-  GENRES_ENTITY_NAME,
+  SERVICES_ENTITY_NAME,
   COUNTRIES_ENTITY_NAME,
   emptyLocation,
 } from '../../constants';
@@ -71,7 +71,7 @@ function LocationsForm() {
     }
   }, [id, fetchLocation]);
 
-  const goBack = () => navigate(`/${GENRES_ENTITY_NAME}`);
+  const goBack = () => navigate(`/${SERVICES_ENTITY_NAME}`);
 
   const sortedCountries = countries
     .slice()
@@ -80,7 +80,7 @@ function LocationsForm() {
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('Location title is a required field'),
     country: Yup.string().required('Location title is a required field'),
-    coat_of_arms: Yup.string().url('Invalid URL coat_of_arms'),
+    coat_of_arms: Yup.string().url('Invalid city coat of arms URL'),
   });
 
   const onFormSubmit = async (values) => {
@@ -92,7 +92,7 @@ function LocationsForm() {
         await createLocation(values);
         showSnackbar('Location created successfully!', 'success');
       }
-      navigate(`/${GENRES_ENTITY_NAME}`);
+      navigate(`/${SERVICES_ENTITY_NAME}`);
     } catch (error) {
       showSnackbar('Failed to save location data!', 'error');
     }
@@ -106,7 +106,7 @@ function LocationsForm() {
             <Field
               name='title'
               as={TextField}
-              label='Location title'
+              label='City name'
               value={values.title}
               fullWidth
               InputProps={{

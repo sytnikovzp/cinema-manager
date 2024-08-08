@@ -20,7 +20,7 @@ import {
   ACTORS_ENTITY_NAME,
   DIRECTORS_ENTITY_NAME,
   STUDIOS_ENTITY_NAME,
-  GENRES_ENTITY_NAME,
+  SERVICES_ENTITY_NAME,
 } from '../../constants';
 // =============================================
 import { navItemTextStyle } from '../../services/styleService';
@@ -110,7 +110,7 @@ function NavBar({ onClose }) {
             <ListItem
               disablePadding
               component={Link}
-              to={`/${GENRES_ENTITY_NAME}`}
+              to={`/${SERVICES_ENTITY_NAME}`}
               onClick={handleItemClick}
             >
               <ListItemButton>
