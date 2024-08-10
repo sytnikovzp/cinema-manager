@@ -36,8 +36,6 @@ import {
 // =============================================
 import { renderItemSkeleton } from '../../services/skeletonService';
 // =============================================
-import usePaginatedData from '../../hooks/usePaginatedData';
-// =============================================
 import DirectorsBiography from './DirectorsBiography';
 
 function DirectorsItem() {
@@ -47,12 +45,6 @@ function DirectorsItem() {
   const [director, setDirector] = useState(emptyDirector);
   const [tabIndex, setTabIndex] = useState(0);
   const [loading, setLoading] = useState(true);
-
-  const { data: movies, error } = usePaginatedData(
-    `/${MOVIES_ENTITY_NAME}`,
-    500,
-    1
-  );
 
   const { showSnackbar } = useContext(SnackbarContext);
 
@@ -76,12 +68,6 @@ function DirectorsItem() {
     }
   }, [id, fetchDirector]);
 
-  useEffect(() => {
-    if (error) {
-      showSnackbar(error, 'error');
-    }
-  }, [error, showSnackbar]);
-
   const goBack = () => {
     navigate(`/${DIRECTORS_ENTITY_NAME}`);
   };
@@ -90,16 +76,9 @@ function DirectorsItem() {
     setTabIndex(newValue);
   };
 
-  const filteredMoviesList =
-    movies.length > 0
-      ? movies
-          .filter((movie) => movie.directors.includes(director.full_name))
-          .map((movie) => ({ id: movie.id, title: movie.title }))
-      : [];
-
   const formattedMovies =
-    filteredMoviesList.length > 0
-      ? filteredMoviesList
+    director.movies && director.movies.length > 0
+      ? director.movies
           .map((movie) => (
             <Link
               key={movie.id}

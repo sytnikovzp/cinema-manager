@@ -36,8 +36,6 @@ import {
 // =============================================
 import { renderItemSkeleton } from '../../services/skeletonService';
 // =============================================
-import useFetchData from '../../hooks/useFetchData';
-// =============================================
 import ActorsBiography from './ActorsBiography';
 
 function ActorsItem() {
@@ -47,8 +45,6 @@ function ActorsItem() {
   const [actor, setActor] = useState(emptyActor);
   const [tabIndex, setTabIndex] = useState(0);
   const [loading, setLoading] = useState(true);
-
-  const { data: movies, error } = useFetchData(`/${MOVIES_ENTITY_NAME}`);
 
   const { showSnackbar } = useContext(SnackbarContext);
 
@@ -72,12 +68,6 @@ function ActorsItem() {
     }
   }, [id, fetchActor]);
 
-  useEffect(() => {
-    if (error) {
-      showSnackbar(error, 'error');
-    }
-  }, [error, showSnackbar]);
-
   const goBack = () => {
     navigate(`/${ACTORS_ENTITY_NAME}`);
   };
@@ -86,16 +76,9 @@ function ActorsItem() {
     setTabIndex(newValue);
   };
 
-  const filteredMoviesList =
-    movies.length > 0
-      ? movies
-          .filter((movie) => movie.actors.includes(actor.full_name))
-          .map((movie) => ({ id: movie.id, title: movie.title }))
-      : [];
-
   const formattedMovies =
-    filteredMoviesList.length > 0
-      ? filteredMoviesList
+    actor.movies && actor.movies.length > 0
+      ? actor.movies
           .map((movie) => (
             <Link
               key={movie.id}

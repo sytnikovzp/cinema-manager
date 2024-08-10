@@ -38,8 +38,6 @@ import {
 // =============================================
 import { renderItemSkeleton } from '../../services/skeletonService';
 // =============================================
-import usePaginatedData from '../../hooks/usePaginatedData';
-// =============================================
 import MoviesPlayer from './MoviesPlayer';
 
 function MoviesItem() {
@@ -49,18 +47,6 @@ function MoviesItem() {
   const [movie, setMovie] = useState(emptyMovie);
   const [tabIndex, setTabIndex] = useState(0);
   const [loading, setLoading] = useState(true);
-
-  const useEntityData = (entityName) => {
-    return usePaginatedData(`/${entityName}`, 500, 1);
-  };
-
-  const { data: actors, error: actorsError } =
-    useEntityData(ACTORS_ENTITY_NAME);
-  const { data: directors, error: directorsError } = useEntityData(
-    DIRECTORS_ENTITY_NAME
-  );
-  const { data: studios, error: studiosError } =
-    useEntityData(STUDIOS_ENTITY_NAME);
 
   const { showSnackbar } = useContext(SnackbarContext);
 
@@ -84,20 +70,6 @@ function MoviesItem() {
     }
   }, [id, fetchMovie]);
 
-  useEffect(() => {
-    const errors = [
-      { error: actorsError, key: 'actorsError' },
-      { error: directorsError, key: 'directorsError' },
-      { error: studiosError, key: 'studiosError' },
-    ];
-
-    errors.forEach(({ error, key }) => {
-      if (error) {
-        showSnackbar(error, key);
-      }
-    });
-  }, [actorsError, directorsError, studiosError, showSnackbar]);
-
   const goBack = () => {
     navigate(`/${MOVIES_ENTITY_NAME}`);
   };
@@ -106,46 +78,24 @@ function MoviesItem() {
     setTabIndex(newValue);
   };
 
-  const filteredActorsList = actors
-    .filter((actor) => {
-      for (let i = 0; i < movie.actors.length; i++) {
-        if (actor.full_name === movie.actors[i]) {
-          return true;
-        }
-      }
-      return false;
-    })
-    .map((actor) => ({ id: actor.id, full_name: actor.full_name }));
-
-  const formattedActors =
-    filteredActorsList.length > 0
-      ? filteredActorsList
-          .map((actor) => (
+  const formattedStudios =
+    movie.studios && movie.studios.length > 0
+      ? movie.studios
+          .map((studio) => (
             <Link
-              key={actor.id}
-              to={`/${ACTORS_ENTITY_NAME}/${actor.id}`}
+              key={studio.id}
+              to={`/${STUDIOS_ENTITY_NAME}/${studio.id}`}
               style={itemLinkStyle}
             >
-              {actor.full_name}
+              {studio.title}
             </Link>
           ))
           .reduce((prev, curr) => [prev, ', ', curr])
-      : 'No actors available';
-
-  const filteredDirectorsList = directors
-    .filter((director) => {
-      for (let i = 0; i < movie.directors.length; i++) {
-        if (director.full_name === movie.directors[i]) {
-          return true;
-        }
-      }
-      return false;
-    })
-    .map((director) => ({ id: director.id, full_name: director.full_name }));
+      : 'No studios available';
 
   const formattedDirectors =
-    filteredDirectorsList.length > 0
-      ? filteredDirectorsList
+    movie.directors && movie.directors.length > 0
+      ? movie.directors
           .map((director) => (
             <Link
               key={director.id}
@@ -158,31 +108,20 @@ function MoviesItem() {
           .reduce((prev, curr) => [prev, ', ', curr])
       : 'No directors available';
 
-  const filteredStudiosList = studios
-    .filter((studio) => {
-      for (let i = 0; i < movie.studios.length; i++) {
-        if (studio.title === movie.studios[i]) {
-          return true;
-        }
-      }
-      return false;
-    })
-    .map((studio) => ({ id: studio.id, title: studio.title }));
-
-  const formattedStudios =
-    filteredStudiosList.length > 0
-      ? filteredStudiosList
-          .map((studio) => (
+  const formattedActors =
+    movie.actors && movie.actors.length > 0
+      ? movie.actors
+          .map((actor) => (
             <Link
-              key={studio.id}
-              to={`/${STUDIOS_ENTITY_NAME}/${studio.id}`}
+              key={actor.id}
+              to={`/${ACTORS_ENTITY_NAME}/${actor.id}`}
               style={itemLinkStyle}
             >
-              {studio.title}
+              {actor.full_name}
             </Link>
           ))
           .reduce((prev, curr) => [prev, ', ', curr])
-      : 'No studios available';
+      : 'No actors available';
 
   return (
     <>

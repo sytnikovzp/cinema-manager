@@ -35,8 +35,6 @@ import {
 // =============================================
 import { renderItemSkeleton } from '../../services/skeletonService';
 // =============================================
-import usePaginatedData from '../../hooks/usePaginatedData';
-// =============================================
 import StudiosAbout from './StudiosAbout';
 
 function StudiosItem() {
@@ -46,12 +44,6 @@ function StudiosItem() {
   const [studio, setStudio] = useState(emptyStudio);
   const [tabIndex, setTabIndex] = useState(0);
   const [loading, setLoading] = useState(true);
-
-  const { data: movies, error } = usePaginatedData(
-    `/${MOVIES_ENTITY_NAME}`,
-    500,
-    1
-  );
 
   const { showSnackbar } = useContext(SnackbarContext);
 
@@ -75,12 +67,6 @@ function StudiosItem() {
     }
   }, [id, fetchStudio]);
 
-  useEffect(() => {
-    if (error) {
-      showSnackbar(error, 'error');
-    }
-  }, [error, showSnackbar]);
-
   const goBack = () => {
     navigate(`/${STUDIOS_ENTITY_NAME}`);
   };
@@ -89,16 +75,9 @@ function StudiosItem() {
     setTabIndex(newValue);
   };
 
-  const filteredMoviesList =
-    movies.length > 0
-      ? movies
-          .filter((movie) => movie.studios.includes(studio.title))
-          .map((movie) => ({ id: movie.id, title: movie.title }))
-      : [];
-
   const formattedMovies =
-    filteredMoviesList.length > 0
-      ? filteredMoviesList
+    studio.movies && studio.movies.length > 0
+      ? studio.movies
           .map((movie) => (
             <Link
               key={movie.id}
