@@ -36,7 +36,7 @@ import {
 // =============================================
 import { renderItemSkeleton } from '../../services/skeletonService';
 // =============================================
-import usePaginatedData from '../../hooks/usePaginatedData';
+import useFetchData from '../../hooks/useFetchData';
 // =============================================
 import ActorsBiography from './ActorsBiography';
 
@@ -48,11 +48,7 @@ function ActorsItem() {
   const [tabIndex, setTabIndex] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  const { data: movies, error } = usePaginatedData(
-    `/${MOVIES_ENTITY_NAME}`,
-    500,
-    1
-  );
+  const { data: movies, error } = useFetchData(`/${MOVIES_ENTITY_NAME}`);
 
   const { showSnackbar } = useContext(SnackbarContext);
 

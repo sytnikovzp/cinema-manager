@@ -26,8 +26,9 @@ const usePaginatedData = (url, itemsPerPage, currentPage) => {
       setTotalItems(parseInt(response.headers['x-total-count'], 10));
     } catch (error) {
       setError(error.message || 'An error occurred');
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }, [url, itemsPerPage, currentPage]);
 
   useEffect(() => {
