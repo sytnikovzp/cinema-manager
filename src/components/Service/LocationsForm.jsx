@@ -79,7 +79,7 @@ function LocationsForm() {
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('Location title is a required field'),
-    country: Yup.string().required('Location title is a required field'),
+    country: Yup.string(),
     coat_of_arms: Yup.string().url('Invalid city coat of arms URL'),
   });
 
