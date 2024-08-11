@@ -52,7 +52,7 @@ function StudiosItem() {
       const data = await getStudioById(id);
       setStudio(data);
     } catch (error) {
-      showSnackbar('Failed to fetch studio data!', 'error');
+      showSnackbar(error.message, 'error');
     } finally {
       setLoading(false);
     }

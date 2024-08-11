@@ -53,7 +53,7 @@ function ActorsItem() {
       const data = await getActorById(id);
       setActor(data);
     } catch (error) {
-      showSnackbar('Failed to fetch actor data!', 'error');
+      showSnackbar(error.message, 'error');
     } finally {
       setLoading(false);
     }

@@ -12,7 +12,7 @@ export const getAllCountries = async () => {
     const response = await api.get(`/${COUNTRIES_ENTITY_NAME}`);
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to get all countries');
+    handleError(error, 'Failed to get all countries!');
   }
 };
 
@@ -21,7 +21,7 @@ export const getCountryById = async (id) => {
     const response = await api.get(`/${COUNTRIES_ENTITY_NAME}/${id}`);
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to get country by id');
+    handleError(error, 'Failed to get country information!');
   }
 };
 
@@ -30,7 +30,7 @@ export const createCountry = async (countryData) => {
     const response = await api.post(`/${COUNTRIES_ENTITY_NAME}`, countryData);
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to create country');
+    handleError(error, 'Failed to create country!');
   }
 };
 
@@ -42,7 +42,7 @@ export const patchCountry = async (countryData) => {
     );
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to patch country');
+    handleError(error, 'Failed to update country!');
   }
 };
 
@@ -51,6 +51,6 @@ export const deleteCountry = async (id) => {
     const response = await api.delete(`/${COUNTRIES_ENTITY_NAME}/${id}`);
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to delete country');
+    handleError(error, 'Failed to delete country!');
   }
 };

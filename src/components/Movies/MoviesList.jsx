@@ -73,8 +73,8 @@ function MoviesList() {
         await deleteMovie(id);
         refetch();
         showSnackbar('Movie deleted successfully!', 'success');
-      } catch (err) {
-        showSnackbar('Failed to delete movie!', 'error');
+      } catch (error) {
+        showSnackbar(error.message, 'error');
       }
     },
     [refetch, showSnackbar]

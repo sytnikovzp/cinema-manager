@@ -73,8 +73,8 @@ function ActorsList() {
         await deleteActor(id);
         refetch();
         showSnackbar('Actor deleted successfully!', 'success');
-      } catch (err) {
-        showSnackbar('Failed to delete actor!', 'error');
+      } catch (error) {
+        showSnackbar(error.message, 'error');
       }
     },
     [refetch, showSnackbar]

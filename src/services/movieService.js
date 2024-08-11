@@ -12,7 +12,7 @@ export const getAllMovies = async () => {
     const response = await api.get(`/${MOVIES_ENTITY_NAME}`);
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to get all movies');
+    handleError(error, 'Failed to get all movies!');
   }
 };
 
@@ -21,7 +21,7 @@ export const getMovieById = async (id) => {
     const response = await api.get(`/${MOVIES_ENTITY_NAME}/${id}`);
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to get movie by id');
+    handleError(error, 'Failed to get movie information!');
   }
 };
 
@@ -30,7 +30,7 @@ export const createMovie = async (movieData) => {
     const response = await api.post(`/${MOVIES_ENTITY_NAME}`, movieData);
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to create movie');
+    handleError(error, 'Failed to create movie!');
   }
 };
 
@@ -42,7 +42,7 @@ export const patchMovie = async (movieData) => {
     );
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to patch movie');
+    handleError(error, 'Failed to update movie!');
   }
 };
 
@@ -51,6 +51,6 @@ export const deleteMovie = async (id) => {
     const response = await api.delete(`/${MOVIES_ENTITY_NAME}/${id}`);
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to delete movie');
+    handleError(error, 'Failed to delete movie!');
   }
 };

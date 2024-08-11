@@ -55,7 +55,7 @@ function MoviesItem() {
       const data = await getMovieById(id);
       setMovie(data);
     } catch (error) {
-      showSnackbar('Failed to fetch movie data!', 'error');
+      showSnackbar(error.message, 'error');
     } finally {
       setLoading(false);
     }

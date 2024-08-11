@@ -55,7 +55,7 @@ function LocationsForm() {
       const location = await getLocationById(id);
       setInitialValues(location);
     } catch (error) {
-      showSnackbar('Failed to fetch location data!', 'error');
+      showSnackbar(error.message, 'error');
     }
   }, [id, showSnackbar]);
 
@@ -90,7 +90,7 @@ function LocationsForm() {
       }
       navigate(`/${SERVICES_ENTITY_NAME}`);
     } catch (error) {
-      showSnackbar('Failed to save location data!', 'error');
+      showSnackbar(error.message, 'error');
     }
   };
 

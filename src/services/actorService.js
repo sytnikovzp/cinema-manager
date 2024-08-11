@@ -12,7 +12,7 @@ export const getAllActors = async () => {
     const response = await api.get(`/${ACTORS_ENTITY_NAME}`);
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to get all actors');
+    handleError(error, 'Failed to get all actors!');
   }
 };
 
@@ -21,7 +21,7 @@ export const getActorById = async (id) => {
     const response = await api.get(`/${ACTORS_ENTITY_NAME}/${id}`);
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to get actor by id');
+    handleError(error, 'Failed to get actor information!');
   }
 };
 
@@ -30,7 +30,7 @@ export const createActor = async (actorData) => {
     const response = await api.post(`/${ACTORS_ENTITY_NAME}`, actorData);
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to create actor');
+    handleError(error, 'Failed to create actor!');
   }
 };
 
@@ -42,7 +42,7 @@ export const patchActor = async (actorData) => {
     );
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to patch actor');
+    handleError(error, 'Failed to update actor!');
   }
 };
 
@@ -51,6 +51,6 @@ export const deleteActor = async (id) => {
     const response = await api.delete(`/${ACTORS_ENTITY_NAME}/${id}`);
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to delete actor');
+    handleError(error, 'Failed to delete actor!');
   }
 };

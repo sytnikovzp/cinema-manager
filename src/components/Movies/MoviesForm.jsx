@@ -79,7 +79,7 @@ function MovieForm() {
       const movie = await getMovieById(id);
       setInitialValues(movie);
     } catch (error) {
-      showSnackbar('Failed to fetch movie data!', 'error');
+      showSnackbar(error.message, 'error');
     }
   }, [id, showSnackbar]);
 
@@ -170,7 +170,7 @@ function MovieForm() {
         navigate(`/${MOVIES_ENTITY_NAME}`);
       }
     } catch (error) {
-      showSnackbar('Failed to save movie data!', 'error');
+      showSnackbar(error.message, 'error');
     }
   };
 

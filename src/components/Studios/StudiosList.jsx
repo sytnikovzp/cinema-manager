@@ -73,8 +73,8 @@ function StudiosList() {
         await deleteStudio(id);
         refetch();
         showSnackbar('Studio deleted successfully!', 'success');
-      } catch (err) {
-        showSnackbar('Failed to delete studio!', 'error');
+      } catch (error) {
+        showSnackbar(error.message, 'error');
       }
     },
     [refetch, showSnackbar]

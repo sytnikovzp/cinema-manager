@@ -61,7 +61,7 @@ function ActorForm() {
       const actor = await getActorById(id);
       setInitialValues(actor);
     } catch (error) {
-      showSnackbar('Failed to fetch actor data!', 'error');
+      showSnackbar(error.message, 'error');
     }
   }, [id, showSnackbar]);
 
@@ -106,7 +106,7 @@ function ActorForm() {
         navigate(`/${ACTORS_ENTITY_NAME}`);
       }
     } catch (error) {
-      showSnackbar('Failed to save actor data!', 'error');
+      showSnackbar(error.message, 'error');
     }
   };
 

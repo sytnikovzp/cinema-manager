@@ -60,7 +60,7 @@ function StudioForm() {
       const studio = await getStudioById(id);
       setInitialValues(studio);
     } catch (error) {
-      showSnackbar('Failed to fetch studio data!', 'error');
+      showSnackbar(error.message, 'error');
     }
   }, [id, showSnackbar]);
 
@@ -104,7 +104,7 @@ function StudioForm() {
         navigate(`/${STUDIOS_ENTITY_NAME}`);
       }
     } catch (error) {
-      showSnackbar('Failed to save studio data!', 'error');
+      showSnackbar(error.message, 'error');
     }
   };
 

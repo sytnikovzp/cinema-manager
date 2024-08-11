@@ -112,8 +112,8 @@ function ServicesList() {
       refetch();
       setCurrentPage(1);
       showSnackbar(successMessage, 'success');
-    } catch (err) {
-      showSnackbar('Failed to delete item!', 'error');
+    } catch (error) {
+      showSnackbar(error.message, 'error');
     }
   };
 

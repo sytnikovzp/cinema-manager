@@ -73,8 +73,8 @@ function DirectorsList() {
         await deleteDirector(id);
         refetch();
         showSnackbar('Director deleted successfully!', 'success');
-      } catch (err) {
-        showSnackbar('Failed to delete director!', 'error');
+      } catch (error) {
+        showSnackbar(error.message, 'error');
       }
     },
     [refetch, showSnackbar]

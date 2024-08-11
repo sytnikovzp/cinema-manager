@@ -12,7 +12,7 @@ export const getAllLocations = async () => {
     const response = await api.get(`/${LOCATIONS_ENTITY_NAME}`);
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to get all locations');
+    handleError(error, 'Failed to get all locations!');
   }
 };
 
@@ -21,7 +21,7 @@ export const getLocationById = async (id) => {
     const response = await api.get(`/${LOCATIONS_ENTITY_NAME}/${id}`);
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to get location by id');
+    handleError(error, 'Failed to get location information!');
   }
 };
 
@@ -30,7 +30,7 @@ export const createLocation = async (locationData) => {
     const response = await api.post(`/${LOCATIONS_ENTITY_NAME}`, locationData);
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to create location');
+    handleError(error, 'Failed to create location!');
   }
 };
 
@@ -42,7 +42,7 @@ export const patchLocation = async (locationData) => {
     );
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to patch location');
+    handleError(error, 'Failed to update location!');
   }
 };
 
@@ -51,6 +51,6 @@ export const deleteLocation = async (id) => {
     const response = await api.delete(`/${LOCATIONS_ENTITY_NAME}/${id}`);
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to delete location');
+    handleError(error, 'Failed to delete location!');
   }
 };

@@ -45,7 +45,7 @@ function GenreForm() {
       const genre = await getGenreById(id);
       setInitialValues(genre);
     } catch (error) {
-      showSnackbar('Failed to fetch genre data!', 'error');
+      showSnackbar(error.message, 'error');
     }
   }, [id, showSnackbar]);
 
@@ -75,7 +75,7 @@ function GenreForm() {
       }
       navigate(`/${SERVICES_ENTITY_NAME}`);
     } catch (error) {
-      showSnackbar('Failed to save genre data!', 'error');
+      showSnackbar(error.message, 'error');
     }
   };
 

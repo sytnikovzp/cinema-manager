@@ -53,7 +53,7 @@ function DirectorsItem() {
       const data = await getDirectorById(id);
       setDirector(data);
     } catch (error) {
-      showSnackbar('Failed to fetch director data!', 'error');
+      showSnackbar(error.message, 'error');
     } finally {
       setLoading(false);
     }

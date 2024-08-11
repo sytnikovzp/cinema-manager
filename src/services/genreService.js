@@ -12,7 +12,7 @@ export const getAllGenres = async () => {
     const response = await api.get(`/${GENRES_ENTITY_NAME}`);
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to get all genres');
+    handleError(error, 'Failed to get all genres!');
   }
 };
 
@@ -21,7 +21,7 @@ export const getGenreById = async (id) => {
     const response = await api.get(`/${GENRES_ENTITY_NAME}/${id}`);
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to get genre by id');
+    handleError(error, 'Failed to get genre information!');
   }
 };
 
@@ -30,7 +30,7 @@ export const createGenre = async (genreData) => {
     const response = await api.post(`/${GENRES_ENTITY_NAME}`, genreData);
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to create genre');
+    handleError(error, 'Failed to create genre!');
   }
 };
 
@@ -42,7 +42,7 @@ export const patchGenre = async (genreData) => {
     );
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to patch genre');
+    handleError(error, 'Failed to update genre!');
   }
 };
 
@@ -51,6 +51,6 @@ export const deleteGenre = async (id) => {
     const response = await api.delete(`/${GENRES_ENTITY_NAME}/${id}`);
     return response.data;
   } catch (error) {
-    handleError(error, 'Failed to delete genre');
+    handleError(error, 'Failed to delete genre!');
   }
 };

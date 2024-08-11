@@ -45,7 +45,7 @@ function CountriesForm() {
       const country = await getCountryById(id);
       setInitialValues(country);
     } catch (error) {
-      showSnackbar('Failed to fetch country data!', 'error');
+      showSnackbar(error.message, 'error');
     }
   }, [id, showSnackbar]);
 
@@ -75,7 +75,7 @@ function CountriesForm() {
       }
       navigate(`/${SERVICES_ENTITY_NAME}`);
     } catch (error) {
-      showSnackbar('Failed to save country data!', 'error');
+      showSnackbar(error.message, 'error');
     }
   };
 

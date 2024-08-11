@@ -61,7 +61,7 @@ function DirectorForm() {
       const director = await getDirectorById(id);
       setInitialValues(director);
     } catch (error) {
-      showSnackbar('Failed to fetch director data!', 'error');
+      showSnackbar(error.message, 'error');
     }
   }, [id, showSnackbar]);
 
@@ -106,7 +106,7 @@ function DirectorForm() {
         navigate(`/${DIRECTORS_ENTITY_NAME}`);
       }
     } catch (error) {
-      showSnackbar('Failed to save director data!', 'error');
+      showSnackbar(error.message, 'error');
     }
   };
 
