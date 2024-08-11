@@ -42,7 +42,7 @@ import {
   stackButtonFormStyle,
 } from '../../services/styleService';
 // =============================================
-import usePaginatedData from '../../hooks/usePaginatedData';
+import useFetchData from '../../hooks/useFetchData';
 // =============================================
 import BasicAutocompleteField from '../Autocomplete/BasicAutocompleteField';
 
@@ -51,11 +51,7 @@ function StudioForm() {
   const navigate = useNavigate();
   const [initialValues, setInitialValues] = useState(emptyStudio);
 
-  const { data: locations } = usePaginatedData(
-    `/${LOCATIONS_ENTITY_NAME}`,
-    500,
-    1
-  );
+  const { data: locations } = useFetchData(`/${LOCATIONS_ENTITY_NAME}`);
 
   const { showSnackbar } = useContext(SnackbarContext);
 

@@ -43,7 +43,7 @@ import {
   stackButtonFormStyle,
 } from '../../services/styleService';
 // =============================================
-import usePaginatedData from '../../hooks/usePaginatedData';
+import useFetchData from '../../hooks/useFetchData';
 // =============================================
 import BasicAutocompleteField from '../Autocomplete/BasicAutocompleteField';
 
@@ -52,11 +52,7 @@ function DirectorForm() {
   const navigate = useNavigate();
   const [initialValues, setInitialValues] = useState(emptyDirector);
 
-  const { data: countries } = usePaginatedData(
-    `/${COUNTRIES_ENTITY_NAME}`,
-    500,
-    1
-  );
+  const { data: countries } = useFetchData(`/${COUNTRIES_ENTITY_NAME}`);
 
   const { showSnackbar } = useContext(SnackbarContext);
 

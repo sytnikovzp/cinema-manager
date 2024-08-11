@@ -55,7 +55,7 @@ import {
   stackButtonFormStyle,
 } from '../../services/styleService';
 // =============================================
-import usePaginatedData from '../../hooks/usePaginatedData';
+import useFetchData from '../../hooks/useFetchData';
 // =============================================
 import BasicAutocompleteField from '../Autocomplete/BasicAutocompleteField';
 import FieldArrayAutocompleteField from '../Autocomplete/FieldArrayAutocompleteField';
@@ -67,14 +67,10 @@ function MovieForm() {
   const [initialValues, setInitialValues] = useState(emptyMovie);
   const [activeStep, setActiveStep] = useState(0);
 
-  const { data: actors } = usePaginatedData(`/${ACTORS_ENTITY_NAME}`, 500, 1);
-  const { data: directors } = usePaginatedData(
-    `/${DIRECTORS_ENTITY_NAME}`,
-    500,
-    1
-  );
-  const { data: studios } = usePaginatedData(`/${STUDIOS_ENTITY_NAME}`, 500, 1);
-  const { data: genres } = usePaginatedData(`/${GENRES_ENTITY_NAME}`, 500, 1);
+  const { data: actors } = useFetchData(`/${ACTORS_ENTITY_NAME}`);
+  const { data: directors } = useFetchData(`/${DIRECTORS_ENTITY_NAME}`);
+  const { data: studios } = useFetchData(`/${STUDIOS_ENTITY_NAME}`);
+  const { data: genres } = useFetchData(`/${GENRES_ENTITY_NAME}`);
 
   const { showSnackbar } = useContext(SnackbarContext);
 
