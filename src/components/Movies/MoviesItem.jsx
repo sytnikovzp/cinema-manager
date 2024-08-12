@@ -81,45 +81,60 @@ function MoviesItem() {
   const formattedStudios =
     movie.studios && movie.studios.length > 0
       ? movie.studios
-          .map((studio) => (
-            <Link
-              key={studio.id}
-              to={`/${STUDIOS_ENTITY_NAME}/${studio.id}`}
-              style={itemLinkStyle}
-            >
-              {studio.title}
-            </Link>
-          ))
+          .map((studio) => {
+            if (typeof studio === 'string') {
+              return <span key={studio}>{studio}</span>;
+            }
+            return (
+              <Link
+                key={studio.id}
+                to={`/${STUDIOS_ENTITY_NAME}/${studio.id}`}
+                style={itemLinkStyle}
+              >
+                {studio.title}
+              </Link>
+            );
+          })
           .reduce((prev, curr) => [prev, ', ', curr])
       : 'No studios available';
 
   const formattedDirectors =
     movie.directors && movie.directors.length > 0
       ? movie.directors
-          .map((director) => (
-            <Link
-              key={director.id}
-              to={`/${DIRECTORS_ENTITY_NAME}/${director.id}`}
-              style={itemLinkStyle}
-            >
-              {director.full_name}
-            </Link>
-          ))
+          .map((director) => {
+            if (typeof director === 'string') {
+              return <span key={director}>{director}</span>;
+            }
+            return (
+              <Link
+                key={director.id}
+                to={`/${DIRECTORS_ENTITY_NAME}/${director.id}`}
+                style={itemLinkStyle}
+              >
+                {director.full_name}
+              </Link>
+            );
+          })
           .reduce((prev, curr) => [prev, ', ', curr])
       : 'No directors available';
 
   const formattedActors =
     movie.actors && movie.actors.length > 0
       ? movie.actors
-          .map((actor) => (
-            <Link
-              key={actor.id}
-              to={`/${ACTORS_ENTITY_NAME}/${actor.id}`}
-              style={itemLinkStyle}
-            >
-              {actor.full_name}
-            </Link>
-          ))
+          .map((actor) => {
+            if (typeof actor === 'string') {
+              return <span key={actor}>{actor}</span>;
+            }
+            return (
+              <Link
+                key={actor.id}
+                to={`/${ACTORS_ENTITY_NAME}/${actor.id}`}
+                style={itemLinkStyle}
+              >
+                {actor.full_name}
+              </Link>
+            );
+          })
           .reduce((prev, curr) => [prev, ', ', curr])
       : 'No actors available';
 
