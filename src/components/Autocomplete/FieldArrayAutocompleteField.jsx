@@ -14,10 +14,16 @@ const FieldArrayAutocompleteField = ({
   return (
     <Field name={name}>
       {({ field, form }) => {
+        let fieldValue = field.value;
+
+        if (typeof fieldValue === 'object' && fieldValue !== null) {
+          fieldValue = fieldValue.full_name || fieldValue.title || '';
+        }
+
         const currentValue =
           options.find(
             (option) =>
-              option.full_name === field.value || option.title === field.value
+              option.full_name === fieldValue || option.title === fieldValue
           ) || null;
 
         return (
@@ -29,19 +35,22 @@ const FieldArrayAutocompleteField = ({
             getOptionLabel={getOptionLabel}
             fullWidth
             value={currentValue}
-            onChange={(event, value) => {
+            onChange={(event, newValue) => {
               form.setFieldValue(
                 name,
-                value ? value.full_name || value.title : ''
+                newValue ? newValue.full_name || newValue.title || '' : ''
               );
             }}
-            disableClearable={true}
+            disableClearable
             renderInput={(params) => (
               <TextField
                 {...params}
-                name={name}
-                error={Boolean(params.error)}
-                helperText={params.helperText}
+                error={Boolean(form.errors[name] && form.touched[name])}
+                helperText={
+                  form.errors[name] && form.touched[name]
+                    ? form.errors[name]
+                    : ''
+                }
               />
             )}
           />
@@ -56,9 +65,7 @@ FieldArrayAutocompleteField.propTypes = {
   name: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
   getOptionLabel: PropTypes.func.isRequired,
-  groupBy: PropTypes.func.isRequired,
-  value: PropTypes.object,
-  onChange: PropTypes.func,
+  groupBy: PropTypes.func,
 };
 
 export default FieldArrayAutocompleteField;

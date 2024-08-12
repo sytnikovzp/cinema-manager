@@ -154,9 +154,21 @@ function MovieForm() {
   const onFormSubmit = async (values) => {
     const cleanValues = {
       ...values,
-      directors: values.directors.filter((v) => v),
-      actors: values.actors.filter((v) => v),
-      studios: values.studios.filter((v) => v),
+      directors: values.directors
+        .filter((v) => v)
+        .map((v) =>
+          typeof v === 'object' ? v.full_name || v.title || '' : String(v)
+        ),
+      actors: values.actors
+        .filter((v) => v)
+        .map((v) =>
+          typeof v === 'object' ? v.full_name || v.title || '' : String(v)
+        ),
+      studios: values.studios
+        .filter((v) => v)
+        .map((v) =>
+          typeof v === 'object' ? v.title || v.full_name || '' : String(v)
+        ),
     };
 
     try {
