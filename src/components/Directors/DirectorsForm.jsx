@@ -86,7 +86,15 @@ function DirectorForm() {
     .sort((a, b) => a.title.localeCompare(b.title));
 
   const validationSchema = Yup.object().shape({
-    full_name: Yup.string().required('Full name is a required field'),
+    full_name: Yup.string()
+      .trim('Full name cannot contain leading or trailing spaces')
+      .min(2, 'Full name must be at least 2 characters')
+      .max(30, 'Full name cannot exceed 30 characters')
+      .matches(
+        /^[A-Z](\w+\s?){1,50}\w+$/,
+        'Full name must start with an uppercase letter and can contain only letters [A-z] and spaces'
+      )
+      .required('Full name is a required field'),
     country: Yup.string(),
     birth_date: Yup.date(),
     death_date: Yup.date(),
