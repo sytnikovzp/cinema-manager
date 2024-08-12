@@ -341,9 +341,21 @@ function MovieForm() {
                     </Typography>
                     {directors.map((director, index) => {
                       const filteredOptions = optionsForDirectors.filter(
-                        (option) =>
-                          !values.directors.includes(option.full_name) ||
-                          option.full_name === director
+                        (option) => {
+                          const directorName =
+                            typeof director === 'string'
+                              ? director
+                              : director.full_name;
+
+                          const directorNamesInValues = values.directors.map(
+                            (d) => (typeof d === 'string' ? d : d.full_name)
+                          );
+
+                          return (
+                            !directorNamesInValues.includes(option.full_name) ||
+                            option.full_name === directorName
+                          );
+                        }
                       );
 
                       return (
@@ -402,9 +414,19 @@ function MovieForm() {
                     </Typography>
                     {actors.map((actor, index) => {
                       const filteredOptions = optionsForActors.filter(
-                        (option) =>
-                          !values.actors.includes(option.full_name) ||
-                          option.full_name === actor
+                        (option) => {
+                          const actorName =
+                            typeof actor === 'string' ? actor : actor.full_name;
+
+                          const actorNamesInValues = values.actors.map((a) =>
+                            typeof a === 'string' ? a : a.full_name
+                          );
+
+                          return (
+                            !actorNamesInValues.includes(option.full_name) ||
+                            option.full_name === actorName
+                          );
+                        }
                       );
 
                       return (
@@ -463,9 +485,19 @@ function MovieForm() {
                     </Typography>
                     {studios.map((studio, index) => {
                       const filteredOptions = optionsForStudios.filter(
-                        (option) =>
-                          !values.studios.includes(option.title) ||
-                          option.title === studio
+                        (option) => {
+                          const studioName =
+                            typeof studio === 'string' ? studio : studio.title;
+
+                          const studioNamesInValues = values.studios.map((s) =>
+                            typeof s === 'string' ? s : s.title
+                          );
+
+                          return (
+                            !studioNamesInValues.includes(option.title) ||
+                            option.title === studioName
+                          );
+                        }
                       );
 
                       return (
