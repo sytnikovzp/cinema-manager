@@ -135,14 +135,65 @@ function DirectorsItem() {
       </Stack>
 
       <Divider />
-      <Tabs
-        value={tabIndex}
-        onChange={handleTabChange}
-        aria-label='director details tabs'
-      >
-        <Tab label='General information' />
-        {director.biography && <Tab label='About the director' />}
-      </Tabs>
+
+      <Box display='flex' alignItems='center' justifyContent='space-between'>
+        <Tabs
+          value={tabIndex}
+          onChange={handleTabChange}
+          aria-label='director details tabs'
+        >
+          <Tab label='General information' />
+          {director.biography && <Tab label='About the director' />}
+        </Tabs>
+
+        {(director.createdAt || director.updatedAt) && (
+          <Stack direction='row' spacing={1}>
+            {director.createdAt === director.updatedAt ? (
+              <>
+                <Typography
+                  variant='caption'
+                  sx={{
+                    fontWeight: 'bold',
+                    textAlign: 'right',
+                    color: 'gray',
+                  }}
+                  component='div'
+                >
+                  Created at:
+                </Typography>
+                <Typography
+                  variant='caption'
+                  component='div'
+                  sx={{ textAlign: 'right', color: 'gray' }}
+                >
+                  {director.createdAt}
+                </Typography>
+              </>
+            ) : (
+              <>
+                <Typography
+                  variant='caption'
+                  sx={{
+                    fontWeight: 'bold',
+                    textAlign: 'right',
+                    color: 'gray',
+                  }}
+                  component='div'
+                >
+                  Updated at:
+                </Typography>
+                <Typography
+                  variant='caption'
+                  component='div'
+                  sx={{ textAlign: 'right', color: 'gray' }}
+                >
+                  {director.updatedAt}
+                </Typography>
+              </>
+            )}
+          </Stack>
+        )}
+      </Box>
 
       <Box sx={scrollItemBoxStyle}>
         {loading ? (

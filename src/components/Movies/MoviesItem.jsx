@@ -179,14 +179,64 @@ function MoviesItem() {
 
       <Divider />
 
-      <Tabs
-        value={tabIndex}
-        onChange={handleTabChange}
-        aria-label='movie details tabs'
-      >
-        <Tab label='About the movie' />
-        {movie.trailer && <Tab label='Movie trailer' />}
-      </Tabs>
+      <Box display='flex' alignItems='center' justifyContent='space-between'>
+        <Tabs
+          value={tabIndex}
+          onChange={handleTabChange}
+          aria-label='movie details tabs'
+        >
+          <Tab label='About the movie' />
+          {movie.trailer && <Tab label='Movie trailer' />}
+        </Tabs>
+
+        {(movie.createdAt || movie.updatedAt) && (
+          <Stack direction='row' spacing={1}>
+            {movie.createdAt === movie.updatedAt ? (
+              <>
+                <Typography
+                  variant='caption'
+                  sx={{
+                    fontWeight: 'bold',
+                    textAlign: 'right',
+                    color: 'gray',
+                  }}
+                  component='div'
+                >
+                  Created at:
+                </Typography>
+                <Typography
+                  variant='caption'
+                  component='div'
+                  sx={{ textAlign: 'right', color: 'gray' }}
+                >
+                  {movie.createdAt}
+                </Typography>
+              </>
+            ) : (
+              <>
+                <Typography
+                  variant='caption'
+                  sx={{
+                    fontWeight: 'bold',
+                    textAlign: 'right',
+                    color: 'gray',
+                  }}
+                  component='div'
+                >
+                  Updated at:
+                </Typography>
+                <Typography
+                  variant='caption'
+                  component='div'
+                  sx={{ textAlign: 'right', color: 'gray' }}
+                >
+                  {movie.updatedAt}
+                </Typography>
+              </>
+            )}
+          </Stack>
+        )}
+      </Box>
 
       {tabIndex === 0 && (
         <Box sx={scrollItemBoxStyle}>

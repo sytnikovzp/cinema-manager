@@ -130,14 +130,65 @@ function StudiosItem() {
       </Stack>
 
       <Divider />
-      <Tabs
-        value={tabIndex}
-        onChange={handleTabChange}
-        aria-label='studio details tabs'
-      >
-        <Tab label='General information' />
-        {studio.about && <Tab label='About the studio' />}
-      </Tabs>
+
+      <Box display='flex' alignItems='center' justifyContent='space-between'>
+        <Tabs
+          value={tabIndex}
+          onChange={handleTabChange}
+          aria-label='studio details tabs'
+        >
+          <Tab label='General information' />
+          {studio.about && <Tab label='About the studio' />}
+        </Tabs>
+
+        {(studio.createdAt || studio.updatedAt) && (
+          <Stack direction='row' spacing={1}>
+            {studio.createdAt === studio.updatedAt ? (
+              <>
+                <Typography
+                  variant='caption'
+                  sx={{
+                    fontWeight: 'bold',
+                    textAlign: 'right',
+                    color: 'gray',
+                  }}
+                  component='div'
+                >
+                  Created at:
+                </Typography>
+                <Typography
+                  variant='caption'
+                  component='div'
+                  sx={{ textAlign: 'right', color: 'gray' }}
+                >
+                  {studio.createdAt}
+                </Typography>
+              </>
+            ) : (
+              <>
+                <Typography
+                  variant='caption'
+                  sx={{
+                    fontWeight: 'bold',
+                    textAlign: 'right',
+                    color: 'gray',
+                  }}
+                  component='div'
+                >
+                  Updated at:
+                </Typography>
+                <Typography
+                  variant='caption'
+                  component='div'
+                  sx={{ textAlign: 'right', color: 'gray' }}
+                >
+                  {studio.updatedAt}
+                </Typography>
+              </>
+            )}
+          </Stack>
+        )}
+      </Box>
 
       <Box sx={scrollItemBoxStyle}>
         {loading ? (
