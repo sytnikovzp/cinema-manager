@@ -193,6 +193,7 @@ function StudiosItem() {
                 </Typography>
                 <Typography variant='body1' component='div'>
                   {studio.location || 'Unknown'}
+                  {studio.country ? ` (${studio.country})` : ''}
                 </Typography>
               </Stack>
 
