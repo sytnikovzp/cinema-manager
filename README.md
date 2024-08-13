@@ -1,15 +1,21 @@
-![Cinema Manager Logo](./screenshots/logo.png)
+# CLIENT
 
-![Last Commit](https://img.shields.io/github/last-commit/sytnikovzp/Cinema-manager-client)
+<p align="center">
+  <img src="./screenshots/logo.png" alt="Cinema Manager Logo">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/github/last-commit/sytnikovzp/Cinema-manager-server" alt="Last Commit">
+</p>
 
 ## Project Description
 
-CINEMA MANAGER client is a project that implements the ability to store and organize information about movies, actors, directors, and studios. It allows users to store and view information about actors and directors, as well as view movie plots and trailers.
+Cinema manager client is a project that implements the ability to store and organize information about movies, actors, directors, and studios. It allows users to store and view information about actors and directors, as well as view movie storylines and trailers.
 
-## Usage Examples
+## Screenshots of the Project
 
 <details>
-  <summary>Here are some screenshots of the project, click to expand:</summary>
+  <summary><strong>Here are some screenshots of the project, click to expand:</strong></summary>
   
   
 ![Home page](./screenshots/1.jpg)
@@ -96,15 +102,19 @@ CINEMA MANAGER client is a project that implements the ability to store and orga
    cd Cinema-manager-client
    ```
 3. Install dependencies:
+
    ```bash
    npm i
    ```
-4. Start the project:
-   ```bash
-   npm start
-   ```
+
+## Start client
+
+```bash
+npm start
+```
 
 ## Server-Side Links
 
 - [CINEMA MANAGER server (with Express & Sequelize)](https://github.com/sytnikovzp/Cinema-manager-server)
+
 - [CINEMA MANAGER server (with Express & Json-Server)](https://github.com/sytnikovzp/Cinema-manager-json-server)
