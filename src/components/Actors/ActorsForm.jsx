@@ -30,6 +30,12 @@ import {
 } from '../../constants';
 // =============================================
 import {
+  TITLE_NAME_SCHEMA,
+  STRING_SCHEMA,
+  DATE_SCHEMA,
+} from '../../services/itemService';
+// =============================================
+import {
   getActorById,
   createActor,
   patchActor,
@@ -86,20 +92,12 @@ function ActorForm() {
     .sort((a, b) => a.title.localeCompare(b.title));
 
   const validationSchema = Yup.object().shape({
-    full_name: Yup.string()
-      .trim('Full name cannot contain leading or trailing spaces')
-      .min(2, 'Full name must be at least 2 characters')
-      .max(30, 'Full name cannot exceed 30 characters')
-      .matches(
-        /^[A-Z](\w+\s?){1,50}\w+$/,
-        'Full name must start with an uppercase letter and can contain only letters [A-z] and spaces'
-      )
-      .required('Full name is a required field'),
-    country: Yup.string(),
-    birth_date: Yup.date(),
-    death_date: Yup.date(),
-    photo: Yup.string().url('Invalid photo URL'),
-    biography: Yup.string(),
+    full_name: TITLE_NAME_SCHEMA,
+    country: STRING_SCHEMA,
+    birth_date: DATE_SCHEMA,
+    death_date: DATE_SCHEMA,
+    photo: STRING_SCHEMA.url('Invalid photo URL'),
+    biography: STRING_SCHEMA,
   });
 
   const onFormSubmit = async (values) => {

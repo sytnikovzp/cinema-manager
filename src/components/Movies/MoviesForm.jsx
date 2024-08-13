@@ -40,6 +40,13 @@ import {
 } from '../../constants';
 // =============================================
 import {
+  TITLE_NAME_SCHEMA,
+  STRING_SCHEMA,
+  DATE_SCHEMA,
+  ARRAY_SCHEMA,
+} from '../../services/itemService';
+// =============================================
+import {
   getMovieById,
   createMovie,
   patchMovie,
@@ -140,28 +147,18 @@ function MovieForm() {
   };
 
   const validationSchema = Yup.object().shape({
-    title: Yup.string()
-      .trim('Title cannot contain leading or trailing spaces')
-      .min(2, 'Title must be at least 2 characters')
-      .max(30, 'Title cannot exceed 30 characters')
-      .matches(
-        /^[A-Z](\w+\s?){1,50}\w+$/,
-        'Title must start with an uppercase letter and can contain only letters [A-z] and spaces'
-      )
-      .required('Title is a required field'),
-    genre: Yup.string(),
-    release_year: Yup.date(),
-    poster: Yup.string().url('Invalid poster URL'),
-    trailer: Yup.string()
-      .url('Invalid Youtube URL')
-      .matches(
-        /^(https?:\/\/)?(www\.)?(youtube\.com\/(watch\?v=|embed\/|v\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})$/,
-        'Invalid YouTube URL'
-      ),
-    directors: Yup.array(),
-    actors: Yup.array(),
-    studios: Yup.array(),
-    storyline: Yup.string(),
+    title: TITLE_NAME_SCHEMA,
+    genre: STRING_SCHEMA,
+    release_year: DATE_SCHEMA,
+    poster: STRING_SCHEMA.url('Invalid poster URL'),
+    trailer: STRING_SCHEMA.url('Invalid Youtube URL').matches(
+      /^(https?:\/\/)?(www\.)?(youtube\.com\/(watch\?v=|embed\/|v\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})$/,
+      'Example: https://www.youtube.com/watch?v=a-bcdefghij'
+    ),
+    directors: ARRAY_SCHEMA,
+    actors: ARRAY_SCHEMA,
+    studios: ARRAY_SCHEMA,
+    storyline: STRING_SCHEMA,
   });
 
   const onFormSubmit = async (values) => {

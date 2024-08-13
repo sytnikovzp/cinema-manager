@@ -29,6 +29,12 @@ import {
 } from '../../constants';
 // =============================================
 import {
+  TITLE_NAME_SCHEMA,
+  STRING_SCHEMA,
+  DATE_SCHEMA,
+} from '../../services/itemService';
+// =============================================
+import {
   getStudioById,
   createStudio,
   patchStudio,
@@ -85,19 +91,11 @@ function StudioForm() {
     .sort((a, b) => a.title.localeCompare(b.title));
 
   const validationSchema = Yup.object().shape({
-    title: Yup.string()
-      .trim('Title cannot contain leading or trailing spaces')
-      .min(2, 'Title must be at least 2 characters')
-      .max(30, 'Title cannot exceed 30 characters')
-      .matches(
-        /^[A-Z](\w+\s?){1,50}\w+$/,
-        'Title must start with an uppercase letter and can contain only letters [A-z] and spaces'
-      )
-      .required('Title is a required field'),
-    location: Yup.string(),
-    foundation_year: Yup.date(),
-    logo: Yup.string().url('Invalid logo URL'),
-    about: Yup.string(),
+    title: TITLE_NAME_SCHEMA,
+    location: STRING_SCHEMA,
+    foundation_year: DATE_SCHEMA,
+    logo: STRING_SCHEMA.url('Invalid logo URL'),
+    about: STRING_SCHEMA,
   });
 
   const onFormSubmit = async (values) => {

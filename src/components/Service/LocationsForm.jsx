@@ -23,6 +23,8 @@ import {
   emptyLocation,
 } from '../../constants';
 // =============================================
+import { TITLE_NAME_SCHEMA, STRING_SCHEMA } from '../../services/itemService';
+// =============================================
 import {
   getLocationById,
   createLocation,
@@ -74,17 +76,9 @@ function LocationsForm() {
     .sort((a, b) => a.title.localeCompare(b.title));
 
   const validationSchema = Yup.object().shape({
-    title: Yup.string()
-      .trim('Title cannot contain leading or trailing spaces')
-      .min(2, 'Title must be at least 2 characters')
-      .max(30, 'Title cannot exceed 30 characters')
-      .matches(
-        /^[A-Z](\w+\s?){1,50}\w+$/,
-        'Title must start with an uppercase letter and can contain only letters [A-z] and spaces'
-      )
-      .required('Title is a required field'),
-    country: Yup.string(),
-    coat_of_arms: Yup.string().url('Invalid city coat of arms URL'),
+    title: TITLE_NAME_SCHEMA,
+    country: STRING_SCHEMA.required('Input is a required field'),
+    coat_of_arms: STRING_SCHEMA.url('Invalid city coat of arms URL'),
   });
 
   const onFormSubmit = async (values) => {

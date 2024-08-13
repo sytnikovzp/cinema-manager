@@ -19,6 +19,8 @@ import SnackbarContext from '../../contexts/SnackbarContext';
 // =============================================
 import { SERVICES_ENTITY_NAME, emptyGenre } from '../../constants';
 // =============================================
+import { TITLE_NAME_SCHEMA, STRING_SCHEMA } from '../../services/itemService';
+// =============================================
 import {
   getGenreById,
   createGenre,
@@ -60,16 +62,8 @@ function GenreForm() {
   const goBack = () => navigate(`/${SERVICES_ENTITY_NAME}`);
 
   const validationSchema = Yup.object().shape({
-    title: Yup.string()
-      .trim('Title cannot contain leading or trailing spaces')
-      .min(2, 'Title must be at least 2 characters')
-      .max(30, 'Title cannot exceed 30 characters')
-      .matches(
-        /^[A-Z](\w+\s?){1,50}\w+$/,
-        'Title must start with an uppercase letter and can contain only letters [A-z] and spaces'
-      )
-      .required('Title is a required field'),
-    logo: Yup.string().url('Invalid genre logo URL'),
+    title: TITLE_NAME_SCHEMA,
+    logo: STRING_SCHEMA.url('Invalid genre logo URL'),
   });
 
   const onFormSubmit = async (values) => {
