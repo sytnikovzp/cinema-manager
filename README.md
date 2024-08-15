@@ -47,9 +47,9 @@ Cinema manager client is a project that implements the ability to store and orga
 
 ![Service entities list (with Tabs)](./screenshots/15.jpg)
 
-![Adaptivity (mobile view)](./screenshots/16.jpg)
+![Adaptivity (mobile view)](./screenshots/mobile.jpg)
 
-![Adaptivity (tablet view)](./screenshots/17.jpg)
+![Adaptivity (tablet view)](./screenshots/tablet.jpg)
 
 </details>
 
