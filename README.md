@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/last-commit/sytnikovzp/Cinema-manager-server" alt="Last Commit">
+  <img src="https://img.shields.io/github/last-commit/sytnikovzp/Cinema-manager-client" alt="Last Commit">
 </p>
 
 ## Project Description
