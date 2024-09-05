@@ -28,11 +28,26 @@ export default [
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
+      'react/jsx-filename-extension': [
+        'warn',
+        {
+          extensions: ['.js', '.jsx'],
+        },
+      ],
+      'no-underscore-dangle': [
+        'error',
+        {
+          allow: ['_id'],
+        },
+      ],
+      'camelcase': ['warn', { properties: 'always' }],
       'react/jsx-no-target-blank': 'off',
+      'react/no-unescaped-entities': 'off',
       'react/prop-types': 'off',
+      'no-undef': 'warn',
       'no-unused-vars': 'warn',
       'react-refresh/only-export-components': [
-        'off',
+        'warn',
         { allowConstantExport: true },
       ],
     },
