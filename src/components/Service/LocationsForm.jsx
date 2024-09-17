@@ -78,7 +78,7 @@ function LocationsForm() {
   const validationSchema = Yup.object().shape({
     title: TITLE_NAME_SCHEMA,
     country: STRING_SCHEMA.required('Input is a required field'),
-    coat_of_arms: STRING_SCHEMA.url('Invalid city coat of arms URL'),
+    coatOfArms: STRING_SCHEMA.url('Invalid city coat of arms URL'),
   });
 
   const onFormSubmit = async (values) => {
@@ -137,17 +137,17 @@ function LocationsForm() {
 
           <Box sx={formItemStyle}>
             <Field
-              name='coat_of_arms'
+              name='coatOfArms'
               as={TextField}
               label='City coat of arms URL'
-              value={values.coat_of_arms}
+              value={values.coatOfArms}
               fullWidth
               InputProps={{
                 endAdornment: (
                   <InputAdornment position='end'>
                     <IconButton
                       aria-label='Clear field'
-                      onClick={() => setFieldValue('coat_of_arms', '')}
+                      onClick={() => setFieldValue('coatOfArms', '')}
                       edge='end'
                     >
                       <BackspaceIcon />
@@ -155,8 +155,8 @@ function LocationsForm() {
                   </InputAdornment>
                 ),
               }}
-              error={touched.coat_of_arms && Boolean(errors.coat_of_arms)}
-              helperText={touched.coat_of_arms && errors.coat_of_arms}
+              error={touched.coatOfArms && Boolean(errors.coatOfArms)}
+              helperText={touched.coatOfArms && errors.coatOfArms}
             />
           </Box>
         </Box>

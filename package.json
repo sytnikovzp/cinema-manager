@@ -7,7 +7,7 @@
     "dev": "vite",
     "fake": "npm run dev",
     "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint .",
     "preview": "vite preview"
   },
   "description": "> TODO: description",

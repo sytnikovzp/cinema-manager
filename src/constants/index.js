@@ -12,20 +12,20 @@ export const LOCATIONS_ENTITY_NAME = 'locations';
 
 export const emptyActor = {
   id: null,
-  full_name: '',
+  fullName: '',
   country: '',
-  birth_date: '',
-  death_date: '',
+  birthDate: '',
+  deathDate: '',
   photo: '',
   biography: '',
 };
 
 export const emptyDirector = {
   id: null,
-  full_name: '',
+  fullName: '',
   country: '',
-  birth_date: '',
-  death_date: '',
+  birthDate: '',
+  deathDate: '',
   photo: '',
   biography: '',
 };
@@ -34,7 +34,7 @@ export const emptyMovie = {
   id: null,
   title: '',
   genre: '',
-  release_year: '',
+  releaseYear: '',
   poster: '',
   trailer: '',
   directors: [''],
@@ -47,7 +47,7 @@ export const emptyStudio = {
   id: null,
   title: '',
   location: '',
-  foundation_year: '',
+  foundationYear: '',
   logo: '',
   about: '',
 };
@@ -68,5 +68,5 @@ export const emptyLocation = {
   id: null,
   title: '',
   country: '',
-  coat_of_arms: '',
+  coatOfArms: '',
 };

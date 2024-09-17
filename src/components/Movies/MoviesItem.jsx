@@ -111,7 +111,7 @@ function MoviesItem() {
                 to={`/${DIRECTORS_ENTITY_NAME}/${director.id}`}
                 style={itemLinkStyle}
               >
-                {director.full_name}
+                {director.fullName}
               </Link>
             );
           })
@@ -131,7 +131,7 @@ function MoviesItem() {
                 to={`/${ACTORS_ENTITY_NAME}/${actor.id}`}
                 style={itemLinkStyle}
               >
-                {actor.full_name}
+                {actor.fullName}
               </Link>
             );
           })
@@ -276,7 +276,7 @@ function MoviesItem() {
                     Movie year:
                   </Typography>
                   <Typography variant='body1' component='div'>
-                    {movie.release_year || 'Unknown'}
+                    {movie.releaseYear || 'Unknown'}
                   </Typography>
                 </Stack>
                 <Stack direction='row' spacing={1}>

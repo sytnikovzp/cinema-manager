@@ -117,8 +117,8 @@ function MovieForm() {
         })
       : [];
 
-  const optionsForActors = optionsForEntities(actors, 'full_name');
-  const optionsForDirectors = optionsForEntities(directors, 'full_name');
+  const optionsForActors = optionsForEntities(actors, 'fullName');
+  const optionsForDirectors = optionsForEntities(directors, 'fullName');
   const optionsForStudios = optionsForEntities(studios, 'title');
 
   const sortedGenres = genres
@@ -149,7 +149,7 @@ function MovieForm() {
   const validationSchema = Yup.object().shape({
     title: TITLE_NAME_SCHEMA,
     genre: STRING_SCHEMA,
-    release_year: DATE_SCHEMA,
+    releaseYear: DATE_SCHEMA,
     poster: STRING_SCHEMA.url('Invalid poster URL'),
     trailer: STRING_SCHEMA.url('Invalid Youtube URL').matches(
       /^(https?:\/\/)?(www\.)?(youtube\.com\/(watch\?v=|embed\/|v\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})$/,
@@ -167,17 +167,17 @@ function MovieForm() {
       directors: values.directors
         .filter((v) => v)
         .map((v) =>
-          typeof v === 'object' ? v.full_name || v.title || '' : String(v)
+          typeof v === 'object' ? v.fullName || v.title || '' : String(v)
         ),
       actors: values.actors
         .filter((v) => v)
         .map((v) =>
-          typeof v === 'object' ? v.full_name || v.title || '' : String(v)
+          typeof v === 'object' ? v.fullName || v.title || '' : String(v)
         ),
       studios: values.studios
         .filter((v) => v)
         .map((v) =>
-          typeof v === 'object' ? v.title || v.full_name || '' : String(v)
+          typeof v === 'object' ? v.title || v.fullName || '' : String(v)
         ),
     };
 
@@ -256,24 +256,24 @@ function MovieForm() {
                     name='date'
                     label='Release year'
                     value={
-                      values.release_year
-                        ? dayjs().year(values.release_year)
+                      values.releaseYear
+                        ? dayjs().year(values.releaseYear)
                         : null
                     }
                     views={['year']}
                     onChange={(value) =>
-                      setFieldValue('release_year', value ? value.year() : '')
+                      setFieldValue('releaseYear', value ? value.year() : '')
                     }
                     sx={{ width: '330px' }}
                     slotProps={{
                       textField: {
                         error:
-                          touched.release_year && Boolean(errors.release_year),
-                        helperText: touched.release_year && errors.release_year,
+                          touched.releaseYear && Boolean(errors.releaseYear),
+                        helperText: touched.releaseYear && errors.releaseYear,
                       },
                       field: {
                         clearable: true,
-                        onClear: () => setFieldValue('release_year', ''),
+                        onClear: () => setFieldValue('releaseYear', ''),
                       },
                     }}
                     minDate={dayjs().year(1950)}
@@ -355,15 +355,15 @@ function MovieForm() {
                           const directorName =
                             typeof director === 'string'
                               ? director
-                              : director.full_name;
+                              : director.fullName;
 
                           const directorNamesInValues = values.directors.map(
-                            (d) => (typeof d === 'string' ? d : d.full_name)
+                            (d) => (typeof d === 'string' ? d : d.fullName)
                           );
 
                           return (
-                            !directorNamesInValues.includes(option.full_name) ||
-                            option.full_name === directorName
+                            !directorNamesInValues.includes(option.fullName) ||
+                            option.fullName === directorName
                           );
                         }
                       );
@@ -378,7 +378,7 @@ function MovieForm() {
                                 -b.firstLetter.localeCompare(a.firstLetter)
                             )}
                             groupBy={(option) => option.firstLetter}
-                            getOptionLabel={(option) => option.full_name}
+                            getOptionLabel={(option) => option.fullName}
                           />
                           <IconButton onClick={() => remove(index)}>
                             <ClearIcon />
@@ -426,15 +426,15 @@ function MovieForm() {
                       const filteredOptions = optionsForActors.filter(
                         (option) => {
                           const actorName =
-                            typeof actor === 'string' ? actor : actor.full_name;
+                            typeof actor === 'string' ? actor : actor.fullName;
 
                           const actorNamesInValues = values.actors.map((a) =>
-                            typeof a === 'string' ? a : a.full_name
+                            typeof a === 'string' ? a : a.fullName
                           );
 
                           return (
-                            !actorNamesInValues.includes(option.full_name) ||
-                            option.full_name === actorName
+                            !actorNamesInValues.includes(option.fullName) ||
+                            option.fullName === actorName
                           );
                         }
                       );
@@ -449,7 +449,7 @@ function MovieForm() {
                                 -b.firstLetter.localeCompare(a.firstLetter)
                             )}
                             groupBy={(option) => option.firstLetter}
-                            getOptionLabel={(option) => option.full_name}
+                            getOptionLabel={(option) => option.fullName}
                           />
                           <IconButton onClick={() => remove(index)}>
                             <ClearIcon />

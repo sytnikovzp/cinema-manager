@@ -17,13 +17,13 @@ const FieldArrayAutocompleteField = ({
         let fieldValue = field.value;
 
         if (typeof fieldValue === 'object' && fieldValue !== null) {
-          fieldValue = fieldValue.full_name || fieldValue.title || '';
+          fieldValue = fieldValue.fullName || fieldValue.title || '';
         }
 
         const currentValue =
           options.find(
             (option) =>
-              option.full_name === fieldValue || option.title === fieldValue
+              option.fullName === fieldValue || option.title === fieldValue
           ) || null;
 
         return (
@@ -38,7 +38,7 @@ const FieldArrayAutocompleteField = ({
             onChange={(event, newValue) => {
               form.setFieldValue(
                 name,
-                newValue ? newValue.full_name || newValue.title || '' : ''
+                newValue ? newValue.fullName || newValue.title || '' : ''
               );
             }}
             disableClearable

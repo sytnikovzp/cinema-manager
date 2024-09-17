@@ -92,10 +92,10 @@ function DirectorForm() {
     .sort((a, b) => a.title.localeCompare(b.title));
 
   const validationSchema = Yup.object().shape({
-    full_name: TITLE_NAME_SCHEMA,
+    fullName: TITLE_NAME_SCHEMA,
     country: STRING_SCHEMA,
-    birth_date: DATE_SCHEMA,
-    death_date: DATE_SCHEMA,
+    birthDate: DATE_SCHEMA,
+    deathDate: DATE_SCHEMA,
     photo: STRING_SCHEMA.url('Invalid photo URL'),
     biography: STRING_SCHEMA,
   });
@@ -122,17 +122,17 @@ function DirectorForm() {
         <Box sx={formStyle}>
           <Box sx={formItemStyle}>
             <Field
-              name='full_name'
+              name='fullName'
               as={TextField}
               label='Full name'
-              value={values.full_name}
+              value={values.fullName}
               fullWidth
               InputProps={{
                 endAdornment: (
                   <InputAdornment position='end'>
                     <IconButton
                       aria-label='Clear field'
-                      onClick={() => setFieldValue('full_name', '')}
+                      onClick={() => setFieldValue('fullName', '')}
                       edge='end'
                     >
                       <BackspaceIcon />
@@ -140,8 +140,8 @@ function DirectorForm() {
                   </InputAdornment>
                 ),
               }}
-              error={touched.full_name && Boolean(errors.full_name)}
-              helperText={touched.full_name && errors.full_name}
+              error={touched.fullName && Boolean(errors.fullName)}
+              helperText={touched.fullName && errors.fullName}
             />
           </Box>
           <Box sx={formItemStyle}>
@@ -159,25 +159,25 @@ function DirectorForm() {
               adapterLocale='en-gb'
             >
               <DatePicker
-                name='birth_date'
+                name='birthDate'
                 label='Birth date'
                 value={
-                  values.birth_date
-                    ? dayjs(values.birth_date, 'YYYY-MM-DD')
+                  values.birthDate
+                    ? dayjs(values.birthDate, 'YYYY-MM-DD')
                     : null
                 }
                 views={['year', 'month', 'day']}
                 onChange={(value) => {
                   setFieldValue(
-                    'birth_date',
+                    'birthDate',
                     value ? value.format('YYYY-MM-DD') : ''
                   );
                   if (
                     value &&
-                    values.death_date &&
-                    dayjs(values.death_date).isBefore(value)
+                    values.deathDate &&
+                    dayjs(values.deathDate).isBefore(value)
                   ) {
-                    setFieldValue('death_date', '');
+                    setFieldValue('deathDate', '');
                   }
                 }}
                 sx={{ width: '100%' }}
@@ -186,29 +186,29 @@ function DirectorForm() {
                     InputProps: {
                       style: { fontSize: 14 },
                     },
-                    error: touched.birth_date && Boolean(errors.birth_date),
-                    helperText: touched.birth_date && errors.birth_date,
+                    error: touched.birthDate && Boolean(errors.birthDate),
+                    helperText: touched.birthDate && errors.birthDate,
                   },
                   field: {
                     clearable: true,
-                    onClear: () => setFieldValue('birth_date', ''),
+                    onClear: () => setFieldValue('birthDate', ''),
                   },
                 }}
                 maxDate={dayjs()}
               />
 
               <DatePicker
-                name='death_date'
+                name='deathDate'
                 label='Death date'
                 value={
-                  values.death_date
-                    ? dayjs(values.death_date, 'YYYY-MM-DD')
+                  values.deathDate
+                    ? dayjs(values.deathDate, 'YYYY-MM-DD')
                     : null
                 }
                 views={['year', 'month', 'day']}
                 onChange={(value) =>
                   setFieldValue(
-                    'death_date',
+                    'deathDate',
                     value ? value.format('YYYY-MM-DD') : ''
                   )
                 }
@@ -219,16 +219,16 @@ function DirectorForm() {
                     InputProps: {
                       style: { fontSize: 14 },
                     },
-                    error: touched.death_date && Boolean(errors.death_date),
-                    helperText: touched.death_date && errors.death_date,
+                    error: touched.deathDate && Boolean(errors.deathDate),
+                    helperText: touched.deathDate && errors.deathDate,
                   },
                   field: {
                     clearable: true,
-                    onClear: () => setFieldValue('death_date', ''),
+                    onClear: () => setFieldValue('deathDate', ''),
                   },
                 }}
                 maxDate={dayjs()}
-                minDate={values.birth_date ? dayjs(values.birth_date) : null}
+                minDate={values.birthDate ? dayjs(values.birthDate) : null}
               />
             </LocalizationProvider>
           </Box>

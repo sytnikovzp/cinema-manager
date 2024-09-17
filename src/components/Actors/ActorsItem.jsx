@@ -91,9 +91,9 @@ function ActorsItem() {
           .reduce((prev, curr) => [prev, ', ', curr])
       : 'No movies available';
 
-  const formattedbirth_date = formatDate(actor.birth_date);
-  const formatteddeath_date = formatDate(actor.death_date);
-  const calculatedAge = calculateAge(actor.birth_date, actor.death_date);
+  const formattedBirthDate = formatDate(actor.birthDate);
+  const formattedDeathDate = formatDate(actor.deathDate);
+  const calculatedAge = calculateAge(actor.birthDate, actor.deathDate);
 
   return (
     <>
@@ -209,7 +209,7 @@ function ActorsItem() {
                     actor.photo ||
                     'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
                   }
-                  alt={actor.full_name}
+                  alt={actor.fullName}
                 />
               </Card>
             </Box>
@@ -219,7 +219,7 @@ function ActorsItem() {
                 component='div'
                 sx={{ fontWeight: 'bold' }}
               >
-                {actor.full_name || 'Unknown actor'}
+                {actor.fullName || 'Unknown actor'}
               </Typography>
 
               <Stack direction='row' spacing={1}>
@@ -233,15 +233,15 @@ function ActorsItem() {
                   Birth date:
                 </Typography>
                 <Typography variant='body1' component='div'>
-                  {actor.birth_date ? formattedbirth_date : 'Unknown'}
-                  {actor.birth_date &&
-                    (actor.birth_date && actor.death_date
+                  {actor.birthDate ? formattedBirthDate : 'Unknown'}
+                  {actor.birthDate &&
+                    (actor.birthDate && actor.deathDate
                       ? ` (aged ${calculatedAge})`
                       : ` (age ${calculatedAge})`)}
                 </Typography>
               </Stack>
 
-              {actor.death_date && (
+              {actor.deathDate && (
                 <Stack direction='row' spacing={1}>
                   <Typography
                     variant='body1'
@@ -253,7 +253,7 @@ function ActorsItem() {
                     Death date:
                   </Typography>
                   <Typography variant='body1' component='div'>
-                    {formatteddeath_date}
+                    {formattedDeathDate}
                   </Typography>
                 </Stack>
               )}

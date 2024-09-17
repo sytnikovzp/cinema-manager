@@ -123,9 +123,9 @@ function DirectorsList() {
                         <StyledAvatar src={director.photo} />
                       </ListItemAvatar>
                       <ListItemText
-                        primary={`${
-                          director.full_name || 'Unknown director'
-                        }, ${director.country || 'unknown nationality'}`}
+                        primary={`${director.fullName || 'Unknown director'}, ${
+                          director.country || 'unknown nationality'
+                        }`}
                       />
                     </ListItemButton>
 

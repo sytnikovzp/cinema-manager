@@ -236,10 +236,6 @@ Cinema manager client is a project that implements the ability to store and orga
 
 - **Jun 24**:
 
-  - Replaced 'foundationYear' with 'foundation_year' name field in Studios components
-  - Replaced 'releaseYear' with 'release_year' name field in Movies components
-  - Replaced 'birthDate' with 'birth_date' name field in Actors&Directors components
-  - Replaced 'fullName' with 'full_name' name field in Actors&Directors components
   - Replaced 'image' with 'photo' name field in Actors&Directors components
   - Refactoring 'formatDate' function in Actors&Directors \*items components
   - Set stepper to 'horizontal' in MoviesForm component

@@ -228,7 +228,7 @@ function StudiosItem() {
                   Foundation year:
                 </Typography>
                 <Typography variant='body1' component='div'>
-                  {studio.foundation_year || 'Unknown'}
+                  {studio.foundationYear || 'Unknown'}
                 </Typography>
               </Stack>
 

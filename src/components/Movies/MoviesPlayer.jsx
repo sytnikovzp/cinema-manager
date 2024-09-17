@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player/lazy';
 // =============================================

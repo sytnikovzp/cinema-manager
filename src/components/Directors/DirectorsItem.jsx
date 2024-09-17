@@ -91,9 +91,9 @@ function DirectorsItem() {
           .reduce((prev, curr) => [prev, ', ', curr])
       : 'No movies available';
 
-  const formattedbirth_date = formatDate(director.birth_date);
-  const formatteddeath_date = formatDate(director.death_date);
-  const calculatedAge = calculateAge(director.birth_date, director.death_date);
+  const formattedBirthDate = formatDate(director.birthDate);
+  const formattedDeathDate = formatDate(director.deathDate);
+  const calculatedAge = calculateAge(director.birthDate, director.deathDate);
 
   return (
     <>
@@ -209,7 +209,7 @@ function DirectorsItem() {
                     director.photo ||
                     'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
                   }
-                  alt={director.full_name}
+                  alt={director.fullName}
                 />
               </Card>
             </Box>
@@ -219,7 +219,7 @@ function DirectorsItem() {
                 component='div'
                 sx={{ fontWeight: 'bold' }}
               >
-                {director.full_name || 'Unknown director'}
+                {director.fullName || 'Unknown director'}
               </Typography>
               <Stack direction='row' spacing={1}>
                 <Typography
@@ -232,14 +232,14 @@ function DirectorsItem() {
                   Birth date:
                 </Typography>
                 <Typography variant='body1' component='div'>
-                  {director.birth_date ? formattedbirth_date : 'Unknown'}
-                  {director.birth_date &&
-                    (director.birth_date && director.death_date
+                  {director.birthDate ? formattedBirthDate : 'Unknown'}
+                  {director.birthDate &&
+                    (director.birthDate && director.deathDate
                       ? ` (aged ${calculatedAge})`
                       : ` (age ${calculatedAge})`)}
                 </Typography>
               </Stack>
-              {director.death_date && (
+              {director.deathDate && (
                 <Stack direction='row' spacing={1}>
                   <Typography
                     variant='body1'
@@ -251,7 +251,7 @@ function DirectorsItem() {
                     Death date:
                   </Typography>
                   <Typography variant='body1' component='div'>
-                    {formatteddeath_date}
+                    {formattedDeathDate}
                   </Typography>
                 </Stack>
               )}

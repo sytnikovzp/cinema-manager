@@ -93,7 +93,7 @@ function StudioForm() {
   const validationSchema = Yup.object().shape({
     title: TITLE_NAME_SCHEMA,
     location: STRING_SCHEMA,
-    foundation_year: DATE_SCHEMA,
+    foundationYear: DATE_SCHEMA,
     logo: STRING_SCHEMA.url('Invalid logo URL'),
     about: STRING_SCHEMA,
   });
@@ -153,29 +153,27 @@ function StudioForm() {
 
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
-                name='foundation_year'
+                name='foundationYear'
                 label='Foundation year'
                 value={
-                  values.foundation_year
-                    ? dayjs().year(values.foundation_year)
+                  values.foundationYear
+                    ? dayjs().year(values.foundationYear)
                     : null
                 }
                 views={['year']}
                 onChange={(value) =>
-                  setFieldValue('foundation_year', value ? value.year() : '')
+                  setFieldValue('foundationYear', value ? value.year() : '')
                 }
                 sx={{ width: '330px' }}
                 slotProps={{
                   textField: {
                     error:
-                      touched.foundation_year &&
-                      Boolean(errors.foundation_year),
-                    helperText:
-                      touched.foundation_year && errors.foundation_year,
+                      touched.foundationYear && Boolean(errors.foundationYear),
+                    helperText: touched.foundationYear && errors.foundationYear,
                   },
                   field: {
                     clearable: true,
-                    onClear: () => setFieldValue('foundation_year', ''),
+                    onClear: () => setFieldValue('foundationYear', ''),
                   },
                 }}
                 maxDate={dayjs().year(dayjs().year())}

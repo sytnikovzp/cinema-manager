@@ -123,7 +123,7 @@ function ActorsList() {
                         <StyledAvatar src={actor.photo} />
                       </ListItemAvatar>
                       <ListItemText
-                        primary={`${actor.full_name || 'Unknown actor'}, ${
+                        primary={`${actor.fullName || 'Unknown actor'}, ${
                           actor.country || 'unknown nationality'
                         }`}
                       />

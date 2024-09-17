@@ -157,7 +157,7 @@ function ServicesList() {
                     <ListItemButton sx={{ borderRadius: 5 }}>
                       <ListItemAvatar>
                         <StyledAvatar
-                          src={item.logo || item.flag || item.coat_of_arms}
+                          src={item.logo || item.flag || item.coatOfArms}
                         />
                       </ListItemAvatar>
                       <ListItemText
