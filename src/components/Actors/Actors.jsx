@@ -28,7 +28,8 @@ function Actors() {
   return (
     <Box
       sx={{
-        m: 2,
+        mt: 2,
+        mb: 2,
       }}
     >
       <Paper

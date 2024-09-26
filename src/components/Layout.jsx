@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 // =============================================
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container';
 // =============================================
 import { ColorThemeProvider } from '../contexts/ThemeContext';
 // =============================================
@@ -43,32 +44,36 @@ function Layout() {
             <Header onToggleNavBar={handleToggleNavBar} />
           </Grid>
           <Grid container sx={{ mt: '1rem', mb: '1rem', flex: 1 }}>
-            <Grid
-              item
-              lg={2}
-              md={2}
-              sm={12}
-              xs={12}
-              sx={{ display: { xs: 'none', md: 'block' } }}
-            >
-              <NavBar />
-            </Grid>
-            <Grid
-              item
-              lg={2}
-              md={2}
-              sm={12}
-              xs={12}
-              sx={{ display: { xs: 'block', md: 'none' } }}
-            >
-              {isNavBarOpen && <NavBar onClose={handleCloseNavBar} />}
-            </Grid>
-            <Grid item lg={6} md={6} sm={12} xs={12}>
-              <Outlet />
-            </Grid>
-            <Grid item lg={4} md={4} sm={12} xs={12}>
-              <CinemaService />
-            </Grid>
+            <Container maxWidth='xl'>
+              <Grid container>
+                <Grid
+                  item
+                  lg={2}
+                  md={2}
+                  sm={12}
+                  xs={12}
+                  sx={{ display: { xs: 'none', md: 'block' } }}
+                >
+                  <NavBar />
+                </Grid>
+                <Grid
+                  item
+                  lg={2}
+                  md={2}
+                  sm={12}
+                  xs={12}
+                  sx={{ display: { xs: 'block', md: 'none' } }}
+                >
+                  {isNavBarOpen && <NavBar onClose={handleCloseNavBar} />}
+                </Grid>
+                <Grid item lg={6} md={6} sm={12} xs={12}>
+                  <Outlet />
+                </Grid>
+                <Grid item lg={4} md={4} sm={12} xs={12}>
+                  <CinemaService />
+                </Grid>
+              </Grid>
+            </Container>
           </Grid>
           <Grid item xs={12}>
             <Footer />

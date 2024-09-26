@@ -27,7 +27,8 @@ function CinemaService() {
   return (
     <Box
       sx={{
-        m: 2,
+        mt: 2,
+        ml: 2,
       }}
     >
       <Paper elevation={3}>

@@ -33,7 +33,7 @@ function NavBar({ onClose }) {
   };
 
   return (
-    <Box sx={{ m: 2 }}>
+    <Box sx={{ mt: 2, mr: 2 }}>
       <Paper elevation={3}>
         <nav aria-label='main menu items'>
           <List>

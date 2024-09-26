@@ -14,7 +14,7 @@ function MoviesPlayer({ trailer }) {
           url={trailer}
           light
           width='100%'
-          height='55vh'
+          minheight='35vh'
           config={{
             youtube: {
               playerVars: {
