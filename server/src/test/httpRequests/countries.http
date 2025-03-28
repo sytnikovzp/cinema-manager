@@ -1,0 +1,39 @@
+### Get all countries (default pagination)
+GET http://localhost:5000/api/countries HTTP/1.1
+
+### Get all countries (custom pagination)
+GET http://localhost:5000/api/countries?_page=1&_limit=10 HTTP/1.1
+
+### Get country by id
+GET http://localhost:5000/api/countries/3 HTTP/1.1
+
+### Create country
+POST http://localhost:5000/api/countries HTTP/1.1
+content-type: application/json
+
+{
+  "title": "New country",
+  "flag": ""
+}
+
+### Update country
+PUT http://localhost:5000/api/countries HTTP/1.1
+content-type: application/json
+
+{
+  "id": 40,
+  "title": "Updated country",
+  "flag": ""
+}
+
+### Patch country
+PATCH http://localhost:5000/api/countries/40 HTTP/1.1
+content-type: application/json
+
+{
+  "title": "Patched country",
+  "flag": ""
+}
+
+### Delete country
+DELETE  http://localhost:5000/api/countries/40 HTTP/1.1

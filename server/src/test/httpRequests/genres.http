@@ -1,0 +1,39 @@
+### Get all genres (default pagination)
+GET http://localhost:5000/api/genres HTTP/1.1
+
+### Get all genres (custom pagination)
+GET http://localhost:5000/api/genres?_page=1&_limit=10 HTTP/1.1
+
+### Get genre by id
+GET http://localhost:5000/api/genres/3 HTTP/1.1
+
+### Create genre
+POST http://localhost:5000/api/genres HTTP/1.1
+content-type: application/json
+
+{
+  "title": "New genre",
+  "logo": ""
+}
+
+### Update genre
+PUT http://localhost:5000/api/genres HTTP/1.1
+content-type: application/json
+
+{
+  "id": 20,
+  "title": "Updated genre",
+  "logo": ""
+}
+
+### Patch genre
+PATCH http://localhost:5000/api/genres/20 HTTP/1.1
+content-type: application/json
+
+{
+  "title": "Patched genre",
+  "logo": ""
+}
+
+### Delete genre
+DELETE  http://localhost:5000/api/genres/20 HTTP/1.1
