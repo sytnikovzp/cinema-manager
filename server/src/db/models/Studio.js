@@ -27,15 +27,31 @@ module.exports = (sequelize, DataTypes) => {
       },
       locationId: {
         type: DataTypes.INTEGER,
+        allowNull: true,
       },
       foundationYear: {
         type: DataTypes.INTEGER,
+        allowNull: true,
+        validate: {
+          isInt: true,
+          min: 1900,
+          max: new Date().getFullYear(),
+        },
       },
       logo: {
         type: DataTypes.TEXT,
+        allowNull: true,
+        validate: {
+          isUrl: true,
+          len: [0, 500],
+        },
       },
       about: {
         type: DataTypes.TEXT,
+        allowNull: true,
+        validate: {
+          len: [0, 5000],
+        },
       },
     },
     {

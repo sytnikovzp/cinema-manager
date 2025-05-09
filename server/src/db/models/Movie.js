@@ -37,21 +37,39 @@ module.exports = (sequelize, DataTypes) => {
       },
       genreId: {
         type: DataTypes.INTEGER,
+        allowNull: true,
       },
       releaseYear: {
         type: DataTypes.INTEGER,
+        allowNull: true,
+        validate: {
+          isInt: true,
+          min: 1900,
+          max: new Date().getFullYear(),
+        },
       },
       poster: {
         type: DataTypes.TEXT,
+        allowNull: true,
+        validate: {
+          isUrl: true,
+          len: [0, 500],
+        },
       },
       trailer: {
         type: DataTypes.STRING,
+        allowNull: true,
         validate: {
+          isUrl: true,
           len: [0, 100],
         },
       },
       storyline: {
         type: DataTypes.TEXT,
+        allowNull: true,
+        validate: {
+          len: [0, 5000],
+        },
       },
     },
     {

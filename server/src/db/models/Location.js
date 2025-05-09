@@ -27,9 +27,14 @@ module.exports = (sequelize, DataTypes) => {
       },
       countryId: {
         type: DataTypes.INTEGER,
+        allowNull: true,
       },
       coatOfArms: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+          isUrl: true,
+        },
       },
     },
     {

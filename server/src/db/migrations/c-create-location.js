@@ -25,6 +25,14 @@ module.exports = {
       coat_of_arms: {
         type: Sequelize.TEXT,
       },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
     });
   },
   async down(queryInterface) {

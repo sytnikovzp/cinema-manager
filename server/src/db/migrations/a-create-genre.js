@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('genres', {
@@ -14,6 +15,14 @@ module.exports = {
       },
       logo: {
         type: Sequelize.TEXT,
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
       },
     });
   },

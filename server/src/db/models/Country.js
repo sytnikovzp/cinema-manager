@@ -32,6 +32,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       flag: {
         type: DataTypes.TEXT,
+        allowNull: true,
+        validate: {
+          isUrl: true,
+          len: [0, 500],
+        },
       },
     },
     {
