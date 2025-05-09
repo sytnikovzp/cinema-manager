@@ -1,15 +1,17 @@
-require('dotenv').config();
+const {
+  DB_CONFIG: { DB_HOST, DB_DIALECT, DB_USER, DB_PASS, DB_NAME },
+} = require('../constants');
 
 module.exports = {
   development: {
-    username: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
-    host: process.env.DB_HOST,
-    dialect: 'postgres',
+    host: DB_HOST,
+    dialect: DB_DIALECT,
+    username: DB_USER,
+    password: DB_PASS,
+    database: DB_NAME,
     migrationStorage: 'json',
     seederStorage: 'json',
   },
-  test: {},
   production: {},
+  test: {},
 };

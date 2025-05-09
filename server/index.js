@@ -1,56 +1,47 @@
-const http = require('http');
-// ============================
-require('dotenv').config();
-// ============================
-const db = require('./src/db/models');
+const { createServer } = require('http');
+
 const app = require('./src/app');
+const {
+  API_CONFIG: { SERVER_HOST, SERVER_PORT },
+  DB_CONFIG: { DB_NAME },
+} = require('./src/constants');
+const dbPostgres = require('./src/db/models');
 
-// =========== Create server with HTTP module ===========
-const HOST_NAME = process.env.DB_HOST;
-
-const PORT = process.env.PORT || 5000;
-const server = http.createServer(app);
-
-// ==================== DB CHECK =======================
-const dbCheck = async () => {
+const connectPostgresDB = async () => {
   try {
-    await db.sequelize.authenticate();
+    await dbPostgres.sequelize.authenticate();
     console.log(
-      `Connection with DB ${process.env.DB_NAME.toUpperCase()} has been successfully done!`
+      `Connection to PostgreSQL database <<< ${DB_NAME} >>> is done!`
     );
   } catch (error) {
-    console.log('Can not connect to DB: ', error.message);
+    console.error(
+      `Can not connect to PostgreSQL database ${DB_NAME}!`,
+      error.message
+    );
   }
 };
 
-dbCheck();
+// ========================= DATABASE CONNECT ==========================
+const connectDatabases = async () => {
+  try {
+    await connectPostgresDB();
+  } catch (error) {
+    console.error('Error connecting to databases: ', error.message);
+    process.exit(1);
+  }
+};
 
-server.listen(PORT, HOST_NAME, () =>
-  console.log(`Server running at http://${HOST_NAME}:${PORT}`)
+// ===================== Create and Start Server =======================
+const startServer = async () => {
+  await connectDatabases();
+
+  const server = createServer(app);
+
+  server.listen(SERVER_PORT, SERVER_HOST, () => {
+    console.log(`Server running at http://${SERVER_HOST}:${SERVER_PORT}/api`);
+  });
+};
+console.log(
+  '================== Server is started successfully! =================='
 );
-
-console.log('Server is started!');
-
-// ======================= SYNC`s =======================
-
-const syncModel = async (model) => {
-  try {
-    await model.sync({ alter: true });
-    console.log(`Sync of ${model.name} has been done successfully!`);
-  } catch (error) {
-    console.log(`Can't sync ${model.name}: `, error.message);
-  }
-};
-
-// syncModel(db.genres);
-
-const syncModels = async () => {
-  try {
-    await db.sequelize.sync({ alter: true });
-    console.log('Sync all models has been done successfully!');
-  } catch (error) {
-    console.log('Can not sync all models: ', error.message);
-  }
-};
-
-// syncModels();
+startServer();

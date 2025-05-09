@@ -1,21 +1,21 @@
 const { Router } = require('express');
-// ============================
-const genreRouter = require('./genreRouters');
-const countryRouter = require('./countryRouters');
-const locationRouter = require('./locationRouters');
-const actorRouter = require('./actorRouters');
-const directorRouter = require('./directorRouters');
-const movieRouter = require('./movieRouters');
-const studioRouter = require('./studioRouters');
+
+const actorsRouter = require('./actorsRouter');
+const countriesRouter = require('./countriesRouter');
+const directorsRouter = require('./directorsRouter');
+const genresRouter = require('./genresRouter');
+const locationsRouter = require('./locationsRouter');
+const moviesRouter = require('./moviesRouter');
+const studiosRouter = require('./studiosRouter');
 
 const router = new Router();
 
-router.use('/genres', genreRouter);
-router.use('/countries', countryRouter);
-router.use('/locations', locationRouter);
-router.use('/actors', actorRouter);
-router.use('/directors', directorRouter);
-router.use('/movies', movieRouter);
-router.use('/studios', studioRouter);
+router.use('/genres', genresRouter);
+router.use('/countries', countriesRouter);
+router.use('/locations', locationsRouter);
+router.use('/actors', actorsRouter);
+router.use('/directors', directorsRouter);
+router.use('/movies', moviesRouter);
+router.use('/studios', studiosRouter);
 
 module.exports = router;

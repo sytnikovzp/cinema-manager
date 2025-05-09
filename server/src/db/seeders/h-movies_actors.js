@@ -1,5 +1,7 @@
 /* eslint-disable camelcase */
-const { movies_actors } = require('../../constants');
+const {
+  POSTGRES_DATA: { movies_actors },
+} = require('../../constants');
 
 module.exports = {
   async up(queryInterface) {
