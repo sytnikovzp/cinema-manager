@@ -1,44 +1,48 @@
-const { Model, Sequelize } = require('sequelize');
+const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Studio extends Model {
     static associate(models) {
       Studio.belongsTo(models.Location, {
         foreignKey: 'locationId',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
       });
-
       Studio.belongsToMany(models.Movie, {
         through: models.MovieStudio,
         foreignKey: 'studioId',
+        otherKey: 'movieId',
       });
     }
   }
   Studio.init(
     {
       title: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true,
+        validate: {
+          len: [1, 100],
+        },
       },
-      locationId: DataTypes.INTEGER,
-      foundationYear: DataTypes.INTEGER,
-      logo: DataTypes.TEXT,
-      about: DataTypes.TEXT,
-      createdAt: {
-        allowNull: false,
-        type: DataTypes.DATE,
-        defaultValue: Sequelize.literal('NOW()'),
+      locationId: {
+        type: DataTypes.INTEGER,
       },
-      updatedAt: {
-        allowNull: false,
-        type: DataTypes.DATE,
-        defaultValue: Sequelize.literal('NOW()'),
+      foundationYear: {
+        type: DataTypes.INTEGER,
+      },
+      logo: {
+        type: DataTypes.TEXT,
+      },
+      about: {
+        type: DataTypes.TEXT,
       },
     },
     {
       sequelize,
       modelName: 'Studio',
       tableName: 'studios',
+      timestamps: true,
       underscored: true,
     }
   );

@@ -5,17 +5,34 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       MovieActor.belongsTo(models.Movie, {
         foreignKey: 'movieId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       });
-
       MovieActor.belongsTo(models.Actor, {
         foreignKey: 'actorId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       });
     }
   }
   MovieActor.init(
     {
-      movieId: DataTypes.INTEGER,
-      actorId: DataTypes.INTEGER,
+      movieId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'movies',
+          key: 'id',
+        },
+      },
+      actorId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'actors',
+          key: 'id',
+        },
+      },
     },
     {
       sequelize,

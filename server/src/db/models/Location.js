@@ -5,8 +5,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Location.belongsTo(models.Country, {
         foreignKey: 'countryId',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
       });
-
       Location.hasMany(models.Studio, {
         foreignKey: 'locationId',
         onDelete: 'SET NULL',
@@ -17,18 +18,25 @@ module.exports = (sequelize, DataTypes) => {
   Location.init(
     {
       title: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true,
+        validate: {
+          len: [1, 100],
+        },
       },
-      countryId: DataTypes.INTEGER,
-      coatOfArms: DataTypes.TEXT,
+      countryId: {
+        type: DataTypes.INTEGER,
+      },
+      coatOfArms: {
+        type: DataTypes.TEXT,
+      },
     },
     {
       sequelize,
       modelName: 'Location',
       tableName: 'locations',
-      timestamps: false,
+      timestamps: true,
       underscored: true,
     }
   );

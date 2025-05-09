@@ -1,45 +1,51 @@
-const { Model, Sequelize } = require('sequelize');
+const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Director extends Model {
     static associate(models) {
       Director.belongsTo(models.Country, {
         foreignKey: 'countryId',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
       });
-
       Director.belongsToMany(models.Movie, {
         through: models.MovieDirector,
         foreignKey: 'directorId',
+        otherKey: 'movieId',
       });
     }
   }
   Director.init(
     {
       fullName: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true,
+        validate: {
+          len: [1, 100],
+        },
       },
-      countryId: DataTypes.INTEGER,
-      birthDate: DataTypes.DATEONLY,
-      deathDate: DataTypes.DATEONLY,
-      photo: DataTypes.TEXT,
-      biography: DataTypes.TEXT,
-      createdAt: {
-        allowNull: false,
-        type: DataTypes.DATE,
-        defaultValue: Sequelize.literal('NOW()'),
+      countryId: {
+        type: DataTypes.INTEGER,
       },
-      updatedAt: {
-        allowNull: false,
-        type: DataTypes.DATE,
-        defaultValue: Sequelize.literal('NOW()'),
+      birthDate: {
+        type: DataTypes.DATEONLY,
+      },
+      deathDate: {
+        type: DataTypes.DATEONLY,
+      },
+      photo: {
+        type: DataTypes.TEXT,
+      },
+      biography: {
+        type: DataTypes.TEXT,
       },
     },
     {
       sequelize,
       modelName: 'Director',
       tableName: 'directors',
+      timestamps: true,
       underscored: true,
     }
   );

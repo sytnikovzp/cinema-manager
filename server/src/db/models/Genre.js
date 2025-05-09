@@ -13,17 +13,22 @@ module.exports = (sequelize, DataTypes) => {
   Genre.init(
     {
       title: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true,
+        validate: {
+          len: [1, 100],
+        },
       },
-      logo: DataTypes.TEXT,
+      logo: {
+        type: DataTypes.TEXT,
+      },
     },
     {
       sequelize,
       modelName: 'Genre',
       tableName: 'genres',
-      timestamps: false,
+      timestamps: true,
       underscored: true,
     }
   );

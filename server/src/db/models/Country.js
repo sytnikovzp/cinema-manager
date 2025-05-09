@@ -8,13 +8,11 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       });
-
       Country.hasMany(models.Director, {
         foreignKey: 'countryId',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       });
-
       Country.hasMany(models.Location, {
         foreignKey: 'countryId',
         onDelete: 'SET NULL',
@@ -25,9 +23,12 @@ module.exports = (sequelize, DataTypes) => {
   Country.init(
     {
       title: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true,
+        validate: {
+          len: [1, 100],
+        },
       },
       flag: {
         type: DataTypes.TEXT,
@@ -37,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       modelName: 'Country',
       tableName: 'countries',
-      timestamps: false,
+      timestamps: true,
       underscored: true,
     }
   );
