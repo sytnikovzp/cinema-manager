@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   Country.init(
     {
       title: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(100),
         allowNull: false,
         unique: true,
         validate: {
@@ -31,11 +31,11 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       flag: {
-        type: DataTypes.TEXT,
+        type: DataTypes.TEXT(200),
         allowNull: true,
         validate: {
           isUrl: true,
-          len: [0, 500],
+          len: [0, 200],
         },
       },
     },

@@ -3,10 +3,10 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('movies', {
       id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true,
       },
       title: {
         type: Sequelize.STRING(100),
@@ -15,6 +15,7 @@ module.exports = {
       },
       genre_id: {
         type: Sequelize.INTEGER,
+        allowNull: true,
         references: {
           model: 'genres',
           key: 'id',
@@ -24,15 +25,19 @@ module.exports = {
       },
       release_year: {
         type: Sequelize.INTEGER,
+        allowNull: true,
       },
       poster: {
-        type: Sequelize.TEXT,
+        type: Sequelize.TEXT(200),
+        allowNull: true,
       },
       trailer: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(100),
+        allowNull: true,
       },
       storyline: {
-        type: Sequelize.TEXT,
+        type: Sequelize.TEXT(200),
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,

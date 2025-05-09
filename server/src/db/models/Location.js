@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   Location.init(
     {
       title: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(100),
         allowNull: false,
         unique: true,
         validate: {
@@ -28,12 +28,16 @@ module.exports = (sequelize, DataTypes) => {
       countryId: {
         type: DataTypes.INTEGER,
         allowNull: true,
+        validate: {
+          isInt: true,
+        },
       },
       coatOfArms: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT(200),
         allowNull: true,
         validate: {
           isUrl: true,
+          len: [0, 200],
         },
       },
     },

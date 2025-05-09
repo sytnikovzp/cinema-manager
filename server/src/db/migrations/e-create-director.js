@@ -3,10 +3,10 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('directors', {
       id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true,
       },
       full_name: {
         type: Sequelize.STRING(100),
@@ -15,6 +15,7 @@ module.exports = {
       },
       country_id: {
         type: Sequelize.INTEGER,
+        allowNull: true,
         references: {
           model: 'countries',
           key: 'id',
@@ -24,15 +25,19 @@ module.exports = {
       },
       birth_date: {
         type: Sequelize.DATEONLY,
+        allowNull: true,
       },
       death_date: {
         type: Sequelize.DATEONLY,
+        allowNull: true,
       },
       photo: {
-        type: Sequelize.TEXT,
+        type: Sequelize.TEXT(200),
+        allowNull: true,
       },
       biography: {
-        type: Sequelize.TEXT,
+        type: Sequelize.TEXT(200),
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,

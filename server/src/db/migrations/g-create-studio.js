@@ -3,10 +3,10 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('studios', {
       id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true,
       },
       title: {
         type: Sequelize.STRING(100),
@@ -15,6 +15,7 @@ module.exports = {
       },
       location_id: {
         type: Sequelize.INTEGER,
+        allowNull: true,
         references: {
           model: 'locations',
           key: 'id',
@@ -24,12 +25,15 @@ module.exports = {
       },
       foundation_year: {
         type: Sequelize.INTEGER,
+        allowNull: true,
       },
       logo: {
-        type: Sequelize.TEXT,
+        type: Sequelize.TEXT(200),
+        allowNull: true,
       },
       about: {
-        type: Sequelize.TEXT,
+        type: Sequelize.TEXT(200),
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,

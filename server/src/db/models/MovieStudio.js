@@ -20,17 +20,25 @@ module.exports = (sequelize, DataTypes) => {
       movieId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        primaryKey: true,
         references: {
           model: 'movies',
           key: 'id',
+        },
+        validate: {
+          isInt: true,
         },
       },
       studioId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        primaryKey: true,
         references: {
           model: 'studios',
           key: 'id',
+        },
+        validate: {
+          isInt: true,
         },
       },
     },
@@ -38,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       modelName: 'MovieStudio',
       tableName: 'movies_studios',
-      timestamps: false,
+      timestamps: true,
       underscored: true,
     }
   );

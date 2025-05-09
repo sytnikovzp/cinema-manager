@@ -1,18 +1,9 @@
-const { isBefore, parseISO } = require('date-fns');
 const { Model } = require('sequelize');
 
-function isBeforeCurrentDate(value) {
-  const currentDate = new Date();
-  if (!isBefore(parseISO(value), currentDate)) {
-    throw new Error('Дата не може бути у майбутньому');
-  }
-}
-
-function deathAfterBirth(value, birthDate) {
-  if (birthDate && isBefore(parseISO(value), parseISO(birthDate))) {
-    throw new Error('Дата смерті не може бути раніше дати народження');
-  }
-}
+const {
+  isBeforeCurrentDate,
+  deathAfterBirth,
+} = require('../../utils/sharedFunctions');
 
 module.exports = (sequelize, DataTypes) => {
   class Director extends Model {
@@ -32,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   Director.init(
     {
       fullName: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(100),
         allowNull: false,
         unique: true,
         validate: {
@@ -42,11 +33,17 @@ module.exports = (sequelize, DataTypes) => {
       countryId: {
         type: DataTypes.INTEGER,
         allowNull: true,
+        validate: {
+          isInt: true,
+        },
       },
       birthDate: {
         type: DataTypes.DATEONLY,
         allowNull: true,
-        validate: { isDate: true, isBeforeCurrentDate },
+        validate: {
+          isDate: true,
+          isBeforeCurrentDate,
+        },
       },
       deathDate: {
         type: DataTypes.DATEONLY,
@@ -60,18 +57,18 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       photo: {
-        type: DataTypes.TEXT,
+        type: DataTypes.TEXT(200),
         allowNull: true,
         validate: {
           isUrl: true,
-          len: [0, 500],
+          len: [0, 200],
         },
       },
       biography: {
-        type: DataTypes.TEXT,
+        type: DataTypes.TEXT(200),
         allowNull: true,
         validate: {
-          len: [0, 5000],
+          len: [0, 200],
         },
       },
     },

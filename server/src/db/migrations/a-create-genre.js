@@ -3,10 +3,10 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('genres', {
       id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true,
       },
       title: {
         type: Sequelize.STRING(100),
@@ -14,7 +14,8 @@ module.exports = {
         unique: true,
       },
       logo: {
-        type: Sequelize.TEXT,
+        type: Sequelize.TEXT(200),
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,

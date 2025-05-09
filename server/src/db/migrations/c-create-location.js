@@ -3,10 +3,10 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('locations', {
       id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true,
       },
       title: {
         type: Sequelize.STRING(100),
@@ -15,6 +15,7 @@ module.exports = {
       },
       country_id: {
         type: Sequelize.INTEGER,
+        allowNull: true,
         references: {
           model: 'countries',
           key: 'id',
@@ -23,7 +24,8 @@ module.exports = {
         onUpdate: 'CASCADE',
       },
       coat_of_arms: {
-        type: Sequelize.TEXT,
+        type: Sequelize.TEXT(200),
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,
