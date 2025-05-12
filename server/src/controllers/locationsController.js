@@ -1,44 +1,27 @@
-const createError = require('http-errors');
+const { sequelize } = require('../db/models');
 
-const { Location, Country, sequelize } = require('../db/models');
+const {
+  getAllLocations,
+  getLocationById,
+  createLocation,
+  updateLocation,
+  deleteLocation,
+} = require('../services/locationsService');
 
-class LocationsController {
+class Locations {
   static async getAllLocations(req, res, next) {
     try {
-      const { limit, offset } = req.pagination;
-      const locations = await Location.findAll({
-        attributes: ['id', 'title', 'coatOfArms'],
-        include: [
-          {
-            model: Country,
-            attributes: ['title'],
-          },
-        ],
-        raw: true,
-        limit,
-        offset,
-        order: [['id', 'DESC']],
-      });
-
-      const locationsCount = await Location.count();
-
-      const formattedLocations = locations.map((location) => ({
-        id: location.id,
-        title: location.title || '',
-        coatOfArms: location.coatOfArms || '',
-        country: location['Country.title'] || '',
-      }));
-
-      if (formattedLocations.length > 0) {
-        res
-          .status(200)
-          .set('X-Total-Count', locationsCount)
-          .json(formattedLocations);
+      const {
+        pagination: { limit, offset },
+      } = req;
+      const { allLocations, totalCount } = await getAllLocations(limit, offset);
+      if (allLocations.length > 0) {
+        res.status(200).set('X-Total-Count', totalCount).json(allLocations);
       } else {
-        next(createError(404, 'Locations not found'));
+        res.status(401);
       }
     } catch (error) {
-      console.log(error.message);
+      console.error('Get all locations error: ', error.message);
       next(error);
     }
   }
@@ -48,191 +31,92 @@ class LocationsController {
       const {
         params: { locationId },
       } = req;
-
-      const locationById = await Location.findByPk(locationId, {
-        attributes: {
-          exclude: ['countryId'],
-        },
-        include: [
-          {
-            model: Country,
-            attributes: ['title'],
-          },
-        ],
-      });
-
+      const locationById = await getLocationById(locationId);
       if (locationById) {
-        const locationData = locationById.toJSON();
-        const formattedLocation = {
-          ...locationData,
-          title: locationData.title || '',
-          coatOfArms: locationData.coatOfArms || '',
-          country: locationData.Country ? locationData.Country.title : '',
-        };
-
-        delete formattedLocation.Country;
-
-        res.status(200).json(formattedLocation);
+        res.status(200).json(locationById);
       } else {
-        next(createError(404, 'Location not found!'));
+        res.status(401);
       }
     } catch (error) {
-      console.log(error.message);
+      console.error('Get location by ID error: ', error.message);
       next(error);
     }
   }
 
   static async createLocation(req, res, next) {
     const transaction = await sequelize.transaction();
-
     try {
-      const { title, country, coatOfArms } = req.body;
-
-      const countryValue = country === '' ? null : country;
-
-      const countryRecord = countryValue
-        ? await Country.findOne({
-            where: { title: countryValue },
-            attributes: ['id'],
-            raw: true,
-          })
-        : null;
-
-      if (countryValue && !countryRecord) {
-        throw new Error('Country not found');
-      }
-
-      const countryId = countryRecord ? countryRecord.id : null;
-
-      const newBody = { title, countryId, coatOfArms };
-
-      const replaceEmptyStringsWithNull = (obj) =>
-        Object.fromEntries(
-          Object.entries(obj).map(([key, value]) => [
-            key,
-            value === '' ? null : value,
-          ])
-        );
-
-      const processedBody = replaceEmptyStringsWithNull(newBody);
-
-      const newLocation = await Location.create(processedBody, {
-        returning: ['id'],
-        transaction,
-      });
-
+      const {
+        body: { title, country, coatOfArms },
+      } = req;
+      const newLocation = await createLocation(
+        title,
+        country,
+        coatOfArms,
+        transaction
+      );
       if (newLocation) {
         await transaction.commit();
-        const { id } = newLocation;
-        res.status(201).json({
-          id,
-          ...processedBody,
-        });
+        res.status(201).json(newLocation);
+      } else {
+        await transaction.rollback();
+        res.status(401);
       }
-      await transaction.rollback();
-      next(createError(400, 'The location has not been created!'));
     } catch (error) {
-      console.log(error.message);
       await transaction.rollback();
+      console.error('Create location error: ', error.message);
       next(error);
     }
   }
 
   static async updateLocation(req, res, next) {
     const transaction = await sequelize.transaction();
-
     try {
       const {
         params: { locationId },
         body: { title, country, coatOfArms },
       } = req;
-
-      let countryId = null;
-      if (country && country !== '') {
-        const countryRecord = await Country.findOne({
-          where: {
-            title: country,
-          },
-          attributes: ['id'],
-          raw: true,
-        });
-
-        if (!countryRecord) {
-          throw new Error('Country not found');
-        }
-
-        countryId = countryRecord.id;
-      }
-
-      const newBody = {
+      const updatedLocation = await updateLocation(
+        locationId,
         title,
-        countryId,
+        country,
         coatOfArms,
-      };
-
-      const replaceEmptyStringsWithNull = (obj) =>
-        Object.fromEntries(
-          Object.entries(obj).map(([key, value]) => [
-            key,
-            value === '' ? null : value,
-          ])
-        );
-
-      const processedBody = replaceEmptyStringsWithNull(newBody);
-
-      const [affectedRows, [updatedLocation]] = await Location.update(
-        processedBody,
-        {
-          where: {
-            id: locationId,
-          },
-          returning: true,
-          transaction,
-        }
+        transaction
       );
-
-      if (affectedRows > 0) {
+      if (updatedLocation) {
         await transaction.commit();
         res.status(200).json(updatedLocation);
       } else {
         await transaction.rollback();
-        next(createError(404, 'The location has not been updated!'));
+        res.status(401);
       }
     } catch (error) {
-      console.log(error.message);
       await transaction.rollback();
+      console.error('Update location error: ', error.message);
       next(error);
     }
   }
 
   static async deleteLocation(req, res, next) {
     const transaction = await sequelize.transaction();
-
     try {
       const {
         params: { locationId },
       } = req;
-
-      const delLocation = await Location.destroy({
-        where: {
-          id: locationId,
-        },
-        transaction,
-      });
-
-      if (delLocation) {
+      const deletedLocation = await deleteLocation(locationId, transaction);
+      if (deletedLocation) {
         await transaction.commit();
-        res.sendStatus(res.statusCode);
+        res.status(200).json('OK');
       } else {
         await transaction.rollback();
-        next(createError(400, 'The location has not been deleted!'));
+        res.status(401);
       }
     } catch (error) {
-      console.log(error.message);
       await transaction.rollback();
+      console.error('Delete location error: ', error.message);
       next(error);
     }
   }
 }
 
-module.exports = LocationsController;
+module.exports = Locations;

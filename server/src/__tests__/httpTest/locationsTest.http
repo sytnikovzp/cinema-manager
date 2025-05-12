@@ -2,10 +2,10 @@
 GET http://localhost:5000/api/locations HTTP/1.1
 
 ### Get list all locations (custom pagination)
-GET http://localhost:5000/api/locations?page=1&limit=5 HTTP/1.1
+GET http://localhost:5000/api/locations?page=1&limit=8 HTTP/1.1
 
 ### Get location by ID
-GET http://localhost:5000/api/locations/3 HTTP/1.1
+GET http://localhost:5000/api/locations/11 HTTP/1.1
 
 ### Add location
 POST http://localhost:5000/api/locations HTTP/1.1
