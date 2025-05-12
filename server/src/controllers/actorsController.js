@@ -211,7 +211,6 @@ class ActorsController {
         returning: true,
         transaction,
       });
-      console.log(`Count of patched rows: ${affectedRows}`);
 
       if (affectedRows > 0) {
         await transaction.commit();

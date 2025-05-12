@@ -341,8 +341,6 @@ class MoviesController {
         transaction,
       });
 
-      console.log(`Count of patched rows: ${affectedRows}`);
-
       if (affectedRows > 0) {
         const movieInstance = await Movie.findByPk(movieId, {
           transaction,

@@ -12,10 +12,6 @@ class GeneralError extends Error {
   static notFound(message, errors = []) {
     return new GeneralError(404, message, errors);
   }
-
-  static forbidden(message, errors = []) {
-    return new GeneralError(403, message, errors);
-  }
 }
 
 module.exports = GeneralError;
