@@ -7,11 +7,10 @@ const {
 
 const {
   getAllCountries,
+  getCountryById,
   createCountry,
   updateCountry,
-  getCountryById,
   deleteCountry,
-  patchCountry,
 } = require('../controllers/countriesController');
 
 const countriesRouter = new Router();
@@ -19,13 +18,12 @@ const countriesRouter = new Router();
 countriesRouter
   .route('/')
   .get(paginateElements, getAllCountries)
-  .post(validateCountry, createCountry)
-  .put(validateCountry, updateCountry);
+  .post(validateCountry, createCountry);
 
 countriesRouter
   .route('/:countryId')
   .get(getCountryById)
   .delete(deleteCountry)
-  .patch(validatePatchCountry, patchCountry);
+  .patch(validatePatchCountry, updateCountry);
 
 module.exports = countriesRouter;

@@ -1,4 +1,5 @@
-const { isBefore, parseISO } = require('date-fns');
+const { format, isBefore, parseISO } = require('date-fns');
+const { enGB } = require('date-fns/locale');
 
 const isBeforeCurrentDate = (value) => {
   const currentDate = new Date();
@@ -13,7 +14,12 @@ const deathAfterBirth = (value, birthDate) => {
   }
 };
 
+const formatDateTime = function (date) {
+  return format(new Date(date), 'dd MMMM yyyy, HH:mm', { locale: enGB });
+};
+
 module.exports = {
   isBeforeCurrentDate,
   deathAfterBirth,
+  formatDateTime,
 };

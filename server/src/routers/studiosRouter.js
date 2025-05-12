@@ -7,11 +7,10 @@ const {
 
 const {
   getAllStudios,
+  getStudioById,
   createStudio,
   updateStudio,
-  getStudioById,
   deleteStudio,
-  patchStudio,
 } = require('../controllers/studiosController');
 
 const studiosRouter = new Router();
@@ -19,13 +18,12 @@ const studiosRouter = new Router();
 studiosRouter
   .route('/')
   .get(paginateElements, getAllStudios)
-  .post(validateStudio, createStudio)
-  .put(validateStudio, updateStudio);
+  .post(validateStudio, createStudio);
 
 studiosRouter
   .route('/:studioId')
   .get(getStudioById)
   .delete(deleteStudio)
-  .patch(validatePatchStudio, patchStudio);
+  .patch(validatePatchStudio, updateStudio);
 
 module.exports = studiosRouter;

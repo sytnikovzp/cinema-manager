@@ -1,13 +1,13 @@
-### Get all movies (default pagination)
+### Get list all movies (default pagination)
 GET http://localhost:5000/api/movies HTTP/1.1
 
-### Get all movies (custom pagination)
+### Get list all movies (custom pagination)
 GET http://localhost:5000/api/movies?page=1&limit=10 HTTP/1.1
 
 ### Get movie by id
 GET http://localhost:5000/api/movies/3 HTTP/1.1
 
-### Create movie
+### Add movie
 POST http://localhost:5000/api/movies HTTP/1.1
 content-type: application/json
 
@@ -23,29 +23,12 @@ content-type: application/json
   "studios": ["Lucasfilm Ltd."]     
 }
 
-### Update movie
-PUT http://localhost:5000/api/movies HTTP/1.1
-content-type: application/json
-
-{
-  "id": 51,
-  "title": "Updated movie",
-  "genre": "Documentary",
-  "releaseYear": 2000,
-  "poster": "",
-  "trailer": "",
-  "storyline": "",
-  "actors": [""], 
-  "directors": [""],  
-  "studios": [""]  
-}
-
-### Patch movie
+### Edit movie by id
 PATCH http://localhost:5000/api/movies/51 HTTP/1.1
 content-type: application/json
 
 {
-  "title": "Patched movie",
+  "title": "Updated movie",
   "genre": "",
   "releaseYear": "",
   "poster": "",
@@ -56,5 +39,5 @@ content-type: application/json
   "studios": [""]  
 }
 
-### Delete movie
+### Remove movie by id
 DELETE  http://localhost:5000/api/movies/51 HTTP/1.1

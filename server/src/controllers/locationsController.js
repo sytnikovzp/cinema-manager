@@ -74,7 +74,6 @@ class LocationsController {
 
         res.status(200).json(formattedLocation);
       } else {
-        console.log('Location not found!');
         next(createError(404, 'Location not found!'));
       }
     } catch (error) {
@@ -84,7 +83,7 @@ class LocationsController {
   }
 
   static async createLocation(req, res, next) {
-    const t = await sequelize.transaction();
+    const transaction = await sequelize.transaction();
 
     try {
       const { title, country, coatOfArms } = req.body;
@@ -119,87 +118,28 @@ class LocationsController {
 
       const newLocation = await Location.create(processedBody, {
         returning: ['id'],
-        transaction: t,
+        transaction,
       });
 
       if (newLocation) {
-        await t.commit();
+        await transaction.commit();
         const { id } = newLocation;
         res.status(201).json({
           id,
           ...processedBody,
         });
       }
-      await t.rollback();
-      console.log('The location has not been created!');
+      await transaction.rollback();
       next(createError(400, 'The location has not been created!'));
     } catch (error) {
       console.log(error.message);
-      await t.rollback();
+      await transaction.rollback();
       next(error);
     }
   }
 
   static async updateLocation(req, res, next) {
-    const t = await sequelize.transaction();
-
-    try {
-      const { id, title, country, coatOfArms } = req.body;
-
-      const countryValue = country === '' ? null : country;
-
-      const countryRecord = countryValue
-        ? await Country.findOne({
-            where: { title: countryValue },
-            attributes: ['id'],
-            raw: true,
-          })
-        : null;
-
-      if (countryValue && !countryRecord) {
-        throw new Error('Country not found');
-      }
-
-      const countryId = countryRecord ? countryRecord.id : null;
-
-      const newBody = { title, countryId, coatOfArms };
-
-      const replaceEmptyStringsWithNull = (obj) =>
-        Object.fromEntries(
-          Object.entries(obj).map(([key, value]) => [
-            key,
-            value === '' ? null : value,
-          ])
-        );
-
-      const processedBody = replaceEmptyStringsWithNull(newBody);
-
-      const [affectedRows, [updatedLocation]] = await Location.update(
-        processedBody,
-        {
-          where: { id },
-          returning: true,
-          transaction: t,
-        }
-      );
-
-      if (affectedRows > 0) {
-        await t.commit();
-        res.status(201).json(updatedLocation);
-      } else {
-        await t.rollback();
-        console.log('The location has not been updated!');
-        next(createError(400, 'The location has not been updated!'));
-      }
-    } catch (error) {
-      console.log(error.message);
-      await t.rollback();
-      next(error);
-    }
-  }
-
-  static async patchLocation(req, res, next) {
-    const t = await sequelize.transaction();
+    const transaction = await sequelize.transaction();
 
     try {
       const {
@@ -247,28 +187,27 @@ class LocationsController {
             id: locationId,
           },
           returning: true,
-          transaction: t,
+          transaction,
         }
       );
       console.log(`Count of patched rows: ${affectedRows}`);
 
       if (affectedRows > 0) {
-        await t.commit();
+        await transaction.commit();
         res.status(200).json(updatedLocation);
       } else {
-        await t.rollback();
-        console.log('The location has not been updated!');
+        await transaction.rollback();
         next(createError(404, 'The location has not been updated!'));
       }
     } catch (error) {
       console.log(error.message);
-      await t.rollback();
+      await transaction.rollback();
       next(error);
     }
   }
 
   static async deleteLocation(req, res, next) {
-    const t = await sequelize.transaction();
+    const transaction = await sequelize.transaction();
 
     try {
       const {
@@ -279,20 +218,19 @@ class LocationsController {
         where: {
           id: locationId,
         },
-        transaction: t,
+        transaction,
       });
 
       if (delLocation) {
-        await t.commit();
+        await transaction.commit();
         res.sendStatus(res.statusCode);
       } else {
-        await t.rollback();
-        console.log('The location has not been deleted!');
+        await transaction.rollback();
         next(createError(400, 'The location has not been deleted!'));
       }
     } catch (error) {
       console.log(error.message);
-      await t.rollback();
+      await transaction.rollback();
       next(error);
     }
   }

@@ -1,7 +1,8 @@
 const createError = require('http-errors');
-const moment = require('moment');
 
 const { Director, Movie, Country, sequelize } = require('../db/models');
+
+const { formatDateTime } = require('../utils/sharedFunctions');
 
 class DirectorsController {
   static async getAllDirectors(req, res, next) {
@@ -80,8 +81,8 @@ class DirectorsController {
           biography: directorData.biography || '',
           country: directorData.Country ? directorData.Country.title : '',
           movies: directorData.Movies || [],
-          createdAt: moment(directorData.createdAt).format('DD-MM-YYYY HH:mm'),
-          updatedAt: moment(directorData.updatedAt).format('DD-MM-YYYY HH:mm'),
+          createdAt: formatDateTime(directorData.createdAt),
+          updatedAt: formatDateTime(directorData.updatedAt),
         };
 
         delete formattedDirector.Country;
@@ -89,7 +90,6 @@ class DirectorsController {
 
         res.status(200).json(formattedDirector);
       } else {
-        console.log('Director not found!');
         next(createError(404, 'Director not found!'));
       }
     } catch (error) {
@@ -99,7 +99,7 @@ class DirectorsController {
   }
 
   static async createDirector(req, res, next) {
-    const t = await sequelize.transaction();
+    const transaction = await sequelize.transaction();
 
     try {
       const { fullName, country, birthDate, deathDate, photo, biography } =
@@ -142,95 +142,28 @@ class DirectorsController {
 
       const newDirector = await Director.create(processedBody, {
         returning: ['id'],
-        transaction: t,
+        transaction,
       });
 
       if (newDirector) {
-        await t.commit();
+        await transaction.commit();
         const { id } = newDirector;
         res.status(201).json({
           id,
           ...processedBody,
         });
       }
-      await t.rollback();
-      console.log('The director has not been created!');
+      await transaction.rollback();
       next(createError(400, 'The director has not been created!'));
     } catch (error) {
       console.log(error.message);
-      await t.rollback();
+      await transaction.rollback();
       next(error);
     }
   }
 
   static async updateDirector(req, res, next) {
-    const t = await sequelize.transaction();
-
-    try {
-      const { id, fullName, country, birthDate, deathDate, photo, biography } =
-        req.body;
-
-      const countryValue = country === '' ? null : country;
-
-      const countryRecord = countryValue
-        ? await Country.findOne({
-            where: { title: countryValue },
-            attributes: ['id'],
-            raw: true,
-          })
-        : null;
-
-      if (countryValue && !countryRecord) {
-        throw new Error('Country not found');
-      }
-
-      const countryId = countryRecord ? countryRecord.id : null;
-
-      const newBody = {
-        fullName,
-        countryId,
-        birthDate,
-        deathDate,
-        photo,
-        biography,
-      };
-
-      const replaceEmptyStringsWithNull = (obj) =>
-        Object.fromEntries(
-          Object.entries(obj).map(([key, value]) => [
-            key,
-            value === '' ? null : value,
-          ])
-        );
-
-      const processedBody = replaceEmptyStringsWithNull(newBody);
-
-      const [affectedRows, [updatedDirector]] = await Director.update(
-        processedBody,
-        {
-          where: { id },
-          returning: true,
-          transaction: t,
-        }
-      );
-
-      if (affectedRows > 0) {
-        await t.commit();
-        res.status(201).json(updatedDirector);
-      } else {
-        await t.rollback();
-        console.log('The director has not been updated!');
-        next(createError(400, 'The director has not been updated!'));
-      }
-    } catch (error) {
-      console.log(error.message);
-      await t.rollback();
-      next(error);
-    }
-  }
-
-  static async patchDirector(req, res, next) {
-    const t = await sequelize.transaction();
+    const transaction = await sequelize.transaction();
 
     try {
       const {
@@ -281,28 +214,27 @@ class DirectorsController {
             id: directorId,
           },
           returning: true,
-          transaction: t,
+          transaction,
         }
       );
       console.log(`Count of patched rows: ${affectedRows}`);
 
       if (affectedRows > 0) {
-        await t.commit();
+        await transaction.commit();
         res.status(200).json(updatedDirectors);
       } else {
-        await t.rollback();
-        console.log('The director has not been updated!');
+        await transaction.rollback();
         next(createError(404, 'The director has not been updated!'));
       }
     } catch (error) {
       console.log(error.message);
-      await t.rollback();
+      await transaction.rollback();
       next(error);
     }
   }
 
   static async deleteDirector(req, res, next) {
-    const t = await sequelize.transaction();
+    const transaction = await sequelize.transaction();
 
     try {
       const {
@@ -313,20 +245,19 @@ class DirectorsController {
         where: {
           id: directorId,
         },
-        transaction: t,
+        transaction,
       });
 
       if (delDirector) {
-        await t.commit();
+        await transaction.commit();
         res.sendStatus(res.statusCode);
       } else {
-        await t.rollback();
-        console.log('Bad request');
+        await transaction.rollback();
         next(createError(400, 'The director has not been deleted!'));
       }
     } catch (error) {
       console.log(error.message);
-      await t.rollback();
+      await transaction.rollback();
       next(error);
     }
   }

@@ -7,11 +7,10 @@ const {
 
 const {
   getAllActors,
+  getActorById,
   createActor,
   updateActor,
-  getActorById,
   deleteActor,
-  patchActor,
 } = require('../controllers/actorsController');
 
 const actorsRouter = new Router();
@@ -19,13 +18,12 @@ const actorsRouter = new Router();
 actorsRouter
   .route('/')
   .get(paginateElements, getAllActors)
-  .post(validatePerson, createActor)
-  .put(validatePerson, updateActor);
+  .post(validatePerson, createActor);
 
 actorsRouter
   .route('/:actorId')
   .get(getActorById)
   .delete(deleteActor)
-  .patch(validatePatchPerson, patchActor);
+  .patch(validatePatchPerson, updateActor);
 
 module.exports = actorsRouter;

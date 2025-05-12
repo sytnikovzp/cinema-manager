@@ -7,11 +7,10 @@ const {
 
 const {
   getAllDirectors,
+  getDirectorById,
   createDirector,
   updateDirector,
-  getDirectorById,
   deleteDirector,
-  patchDirector,
 } = require('../controllers/directorsController');
 
 const directorsRouter = new Router();
@@ -19,13 +18,12 @@ const directorsRouter = new Router();
 directorsRouter
   .route('/')
   .get(paginateElements, getAllDirectors)
-  .post(validatePerson, createDirector)
-  .put(validatePerson, updateDirector);
+  .post(validatePerson, createDirector);
 
 directorsRouter
   .route('/:directorId')
   .get(getDirectorById)
   .delete(deleteDirector)
-  .patch(validatePatchPerson, patchDirector);
+  .patch(validatePatchPerson, updateDirector);
 
 module.exports = directorsRouter;

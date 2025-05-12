@@ -1,7 +1,8 @@
 const createError = require('http-errors');
-const moment = require('moment');
 
 const { Movie, Studio, Location, Country, sequelize } = require('../db/models');
+
+const { formatDateTime } = require('../utils/sharedFunctions');
 
 class StudiosController {
   static async getAllStudios(req, res, next) {
@@ -80,8 +81,8 @@ class StudiosController {
           logo: studioData.logo || '',
           about: studioData.about || '',
           movies: studioData.Movies || [],
-          createdAt: moment(studioData.createdAt).format('DD-MM-YYYY HH:mm'),
-          updatedAt: moment(studioData.updatedAt).format('DD-MM-YYYY HH:mm'),
+          createdAt: formatDateTime(studioData.createdAt),
+          updatedAt: formatDateTime(studioData.updatedAt),
         };
 
         delete formattedStudio.Location;
@@ -89,7 +90,6 @@ class StudiosController {
 
         res.status(200).json(formattedStudio);
       } else {
-        console.log('Studio not found!');
         next(createError(404, 'Studio not found!'));
       }
     } catch (error) {
@@ -99,7 +99,7 @@ class StudiosController {
   }
 
   static async createStudio(req, res, next) {
-    const t = await sequelize.transaction();
+    const transaction = await sequelize.transaction();
 
     try {
       const { title, location, foundationYear, logo, about } = req.body;
@@ -140,93 +140,28 @@ class StudiosController {
 
       const newStudio = await Studio.create(processedBody, {
         returning: ['id'],
-        transaction: t,
+        transaction,
       });
 
       if (newStudio) {
-        await t.commit();
+        await transaction.commit();
         const { id } = newStudio;
         res.status(201).json({
           id,
           ...processedBody,
         });
       }
-      await t.rollback();
-      console.log('The studio has not been created!');
+      await transaction.rollback();
       next(createError(400, 'The studio has not been created!'));
     } catch (error) {
       console.log(error.message);
-      await t.rollback();
+      await transaction.rollback();
       next(error);
     }
   }
 
   static async updateStudio(req, res, next) {
-    const t = await sequelize.transaction();
-
-    try {
-      const { id, title, location, foundationYear, logo, about } = req.body;
-
-      const locationValue = location === '' ? null : location;
-
-      const locationRecord = locationValue
-        ? await Location.findOne({
-            where: { title: locationValue },
-            attributes: ['id'],
-            raw: true,
-          })
-        : null;
-
-      if (locationValue && !locationRecord) {
-        throw new Error('Location not found');
-      }
-
-      const locationId = locationRecord ? locationRecord.id : null;
-
-      const newBody = {
-        title,
-        locationId,
-        foundationYear,
-        logo,
-        about,
-      };
-
-      const replaceEmptyStringsWithNull = (obj) =>
-        Object.fromEntries(
-          Object.entries(obj).map(([key, value]) => [
-            key,
-            value === '' ? null : value,
-          ])
-        );
-
-      const processedBody = replaceEmptyStringsWithNull(newBody);
-
-      const [affectedRows, [updatedStudio]] = await Studio.update(
-        processedBody,
-        {
-          where: { id },
-          returning: true,
-          transaction: t,
-        }
-      );
-
-      if (affectedRows > 0) {
-        await t.commit();
-        res.status(201).json(updatedStudio);
-      } else {
-        await t.rollback();
-        console.log('The studio has not been updated!');
-        next(createError(400, 'The studio has not been updated!'));
-      }
-    } catch (error) {
-      console.log(error.message);
-      await t.rollback();
-      next(error);
-    }
-  }
-
-  static async patchStudio(req, res, next) {
-    const t = await sequelize.transaction();
+    const transaction = await sequelize.transaction();
 
     try {
       const {
@@ -276,28 +211,27 @@ class StudiosController {
             id: studioId,
           },
           returning: true,
-          transaction: t,
+          transaction,
         }
       );
       console.log(`Count of patched rows: ${affectedRows}`);
 
       if (affectedRows > 0) {
-        await t.commit();
+        await transaction.commit();
         res.status(200).json(updatedStudios);
       } else {
-        await t.rollback();
-        console.log('The studio has not been updated!');
+        await transaction.rollback();
         next(createError(404, 'The studio has not been updated!'));
       }
     } catch (error) {
       console.log(error.message);
-      await t.rollback();
+      await transaction.rollback();
       next(error);
     }
   }
 
   static async deleteStudio(req, res, next) {
-    const t = await sequelize.transaction();
+    const transaction = await sequelize.transaction();
 
     try {
       const {
@@ -308,20 +242,19 @@ class StudiosController {
         where: {
           id: studioId,
         },
-        transaction: t,
+        transaction,
       });
 
       if (delStudio) {
-        await t.commit();
+        await transaction.commit();
         res.sendStatus(res.statusCode);
       } else {
-        await t.rollback();
-        console.log('The studio has not been deleted!');
+        await transaction.rollback();
         next(createError(400, 'The studio has not been deleted!'));
       }
     } catch (error) {
       console.log(error.message);
-      await t.rollback();
+      await transaction.rollback();
       next(error);
     }
   }

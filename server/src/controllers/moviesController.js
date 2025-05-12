@@ -1,5 +1,4 @@
 const createError = require('http-errors');
-const moment = require('moment');
 
 const {
   Actor,
@@ -9,6 +8,8 @@ const {
   Genre,
   sequelize,
 } = require('../db/models');
+
+const { formatDateTime } = require('../utils/sharedFunctions');
 
 class MoviesController {
   static async getAllMovies(req, res, next) {
@@ -94,8 +95,8 @@ class MoviesController {
           studios: movieData.Studios || [],
           directors: movieData.Directors || [],
           actors: movieData.Actors || [],
-          createdAt: moment(movieData.createdAt).format('DD-MM-YYYY HH:mm'),
-          updatedAt: moment(movieData.updatedAt).format('DD-MM-YYYY HH:mm'),
+          createdAt: formatDateTime(movieData.createdAt),
+          updatedAt: formatDateTime(movieData.updatedAt),
         };
 
         delete formattedMovie.Genre;
@@ -105,7 +106,6 @@ class MoviesController {
 
         res.status(200).json(formattedMovie);
       } else {
-        console.log('Movie not found!');
         next(createError(404, 'Movie not found!'));
       }
     } catch (error) {
@@ -115,7 +115,7 @@ class MoviesController {
   }
 
   static async createMovie(req, res, next) {
-    const t = await sequelize.transaction();
+    const transaction = await sequelize.transaction();
 
     try {
       const {
@@ -156,7 +156,6 @@ class MoviesController {
           return actor ? actor.id : null;
         })
       );
-      console.log('Actors Id`s:', actorRecords);
 
       const directorRecords = await Promise.all(
         directors.map(async (fullName) => {
@@ -168,7 +167,6 @@ class MoviesController {
           return director ? director.id : null;
         })
       );
-      console.log('Directors Id`s:', directorRecords);
 
       const studioRecords = await Promise.all(
         studios.map(async (title) => {
@@ -180,7 +178,6 @@ class MoviesController {
           return studio ? studio.id : null;
         })
       );
-      console.log('Studios Id`s:', studioRecords);
 
       const newBody = {
         title,
@@ -203,182 +200,49 @@ class MoviesController {
 
       const newMovie = await Movie.create(processedBody, {
         returning: ['id'],
-        transaction: t,
+        transaction,
       });
 
       if (newMovie) {
         if (actorRecords.length > 0) {
           await newMovie.addActors(
             actorRecords.filter((id) => id !== null),
-            { transaction: t }
+            { transaction }
           );
         }
 
         if (directorRecords.length > 0) {
           await newMovie.addDirectors(
             directorRecords.filter((id) => id !== null),
-            { transaction: t }
+            { transaction }
           );
         }
 
         if (studioRecords.length > 0) {
           await newMovie.addStudios(
             studioRecords.filter((id) => id !== null),
-            { transaction: t }
+            { transaction }
           );
         }
 
-        await t.commit();
+        await transaction.commit();
         const { id } = newMovie;
         res.status(201).json({
           id,
           ...processedBody,
         });
       }
-      await t.rollback();
-      console.log('The movie has not been created!');
+      await transaction.rollback();
       next(createError(400, 'The movie has not been created!'));
     } catch (error) {
       console.log(error.message);
-      await t.rollback();
+      await transaction.rollback();
       next(error);
     }
   }
 
   static async updateMovie(req, res, next) {
-    const t = await sequelize.transaction();
-
-    try {
-      const {
-        id,
-        title,
-        genre,
-        releaseYear,
-        poster,
-        trailer,
-        storyline,
-        actors,
-        directors,
-        studios,
-      } = req.body;
-
-      const genreValue = genre === '' ? null : genre;
-
-      const genreRecord = genreValue
-        ? await Genre.findOne({
-            where: { title: genreValue },
-            attributes: ['id'],
-            raw: true,
-          })
-        : null;
-
-      if (genreValue && !genreRecord) {
-        throw new Error('Genre not found');
-      }
-
-      const genreId = genreRecord ? genreRecord.id : null;
-
-      const actorRecords = await Promise.all(
-        actors.map(async (fullName) => {
-          const actor = await Actor.findOne({
-            where: { fullName },
-            attributes: ['id'],
-            raw: true,
-          });
-          return actor ? actor.id : null;
-        })
-      );
-      console.log('Actors Id`s:', actorRecords);
-
-      const directorRecords = await Promise.all(
-        directors.map(async (fullName) => {
-          const director = await Director.findOne({
-            where: { fullName },
-            attributes: ['id'],
-            raw: true,
-          });
-          return director ? director.id : null;
-        })
-      );
-      console.log('Directors Id`s:', directorRecords);
-
-      const studioRecords = await Promise.all(
-        studios.map(async (title) => {
-          const studio = await Studio.findOne({
-            where: { title },
-            attributes: ['id'],
-            raw: true,
-          });
-          return studio ? studio.id : null;
-        })
-      );
-      console.log('Studios Id`s:', studioRecords);
-
-      const newBody = {
-        title,
-        genreId,
-        releaseYear,
-        poster,
-        trailer,
-        storyline,
-      };
-
-      const replaceEmptyStringsWithNull = (obj) =>
-        Object.fromEntries(
-          Object.entries(obj).map(([key, value]) => [
-            key,
-            value === '' ? null : value,
-          ])
-        );
-
-      const processedBody = replaceEmptyStringsWithNull(newBody);
-
-      const [affectedRows, [updatedMovie]] = await Movie.update(processedBody, {
-        where: { id },
-        returning: true,
-        transaction: t,
-      });
-
-      if (affectedRows > 0) {
-        const movieInstance = await Movie.findByPk(id, { transaction: t });
-
-        if (actorRecords.length > 0) {
-          await movieInstance.setActors(
-            actorRecords.filter((id) => id !== null),
-            { transaction: t }
-          );
-        }
-
-        if (directorRecords.length > 0) {
-          await movieInstance.setDirectors(
-            directorRecords.filter((id) => id !== null),
-            { transaction: t }
-          );
-        }
-
-        if (studioRecords.length > 0) {
-          await movieInstance.setStudios(
-            studioRecords.filter((id) => id !== null),
-            { transaction: t }
-          );
-        }
-
-        await t.commit();
-        res.status(201).json(updatedMovie);
-      } else {
-        await t.rollback();
-        console.log('The movie has not been updated!');
-        next(createError(400, 'The movie has not been updated!'));
-      }
-    } catch (error) {
-      console.log(error.message);
-      await t.rollback();
-      next(error);
-    }
-  }
-
-  static async patchMovie(req, res, next) {
-    const t = await sequelize.transaction();
+    const transaction = await sequelize.transaction();
 
     try {
       const {
@@ -426,8 +290,6 @@ class MoviesController {
           )
         : [];
 
-      console.log('Actors Id`s:', actorRecords);
-
       const directorRecords = directors
         ? await Promise.all(
             directors.map(async (fullName) => {
@@ -441,8 +303,6 @@ class MoviesController {
           )
         : [];
 
-      console.log('Directors Id`s:', directorRecords);
-
       const studioRecords = studios
         ? await Promise.all(
             studios.map(async (title) => {
@@ -455,8 +315,6 @@ class MoviesController {
             })
           )
         : [];
-
-      console.log('Studios Id`s:', studioRecords);
 
       const newBody = {
         title,
@@ -480,50 +338,51 @@ class MoviesController {
       const [affectedRows, [updatedMovie]] = await Movie.update(processedBody, {
         where: { id: movieId },
         returning: true,
-        transaction: t,
+        transaction,
       });
 
       console.log(`Count of patched rows: ${affectedRows}`);
 
       if (affectedRows > 0) {
-        const movieInstance = await Movie.findByPk(movieId, { transaction: t });
+        const movieInstance = await Movie.findByPk(movieId, {
+          transaction,
+        });
 
         if (actors && actorRecords.length > 0) {
           await movieInstance.setActors(
             actorRecords.filter((id) => id !== null),
-            { transaction: t }
+            { transaction }
           );
         }
 
         if (directors && directorRecords.length > 0) {
           await movieInstance.setDirectors(
             directorRecords.filter((id) => id !== null),
-            { transaction: t }
+            { transaction }
           );
         }
 
         if (studios && studioRecords.length > 0) {
           await movieInstance.setStudios(
             studioRecords.filter((id) => id !== null),
-            { transaction: t }
+            { transaction }
           );
         }
 
-        await t.commit();
+        await transaction.commit();
         res.status(200).json(updatedMovie);
       }
-      await t.rollback();
-      console.log('The movie has not been updated!');
+      await transaction.rollback();
       next(createError(404, 'The movie has not been updated!'));
     } catch (error) {
       console.log(error.message);
-      await t.rollback();
+      await transaction.rollback();
       next(error);
     }
   }
 
   static async deleteMovie(req, res, next) {
-    const t = await sequelize.transaction();
+    const transaction = await sequelize.transaction();
 
     try {
       const {
@@ -534,20 +393,19 @@ class MoviesController {
         where: {
           id: movieId,
         },
-        transaction: t,
+        transaction,
       });
 
       if (delMovie) {
-        await t.commit();
+        await transaction.commit();
         res.sendStatus(res.statusCode);
       } else {
-        await t.rollback();
-        console.log('The movie has not been deleted!');
+        await transaction.rollback();
         next(createError(400, 'The movie has not been deleted!'));
       }
     } catch (error) {
       console.log(error.message);
-      await t.rollback();
+      await transaction.rollback();
       next(error);
     }
   }

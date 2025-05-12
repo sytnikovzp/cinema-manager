@@ -1,7 +1,8 @@
 const createError = require('http-errors');
-const moment = require('moment');
 
 const { Actor, Movie, Country, sequelize } = require('../db/models');
+
+const { formatDateTime } = require('../utils/sharedFunctions');
 
 class ActorsController {
   static async getAllActors(req, res, next) {
@@ -77,8 +78,8 @@ class ActorsController {
           biography: actorData.biography || '',
           country: actorData.Country ? actorData.Country.title : '',
           movies: actorData.Movies || [],
-          createdAt: moment(actorData.createdAt).format('DD-MM-YYYY HH:mm'),
-          updatedAt: moment(actorData.updatedAt).format('DD-MM-YYYY HH:mm'),
+          createdAt: formatDateTime(actorData.createdAt),
+          updatedAt: formatDateTime(actorData.updatedAt),
         };
 
         delete formattedActor.Country;
@@ -86,7 +87,6 @@ class ActorsController {
 
         res.status(200).json(formattedActor);
       } else {
-        console.log('Actor not found!');
         next(createError(404, 'Actor not found!'));
       }
     } catch (error) {
@@ -96,7 +96,7 @@ class ActorsController {
   }
 
   static async createActor(req, res, next) {
-    const t = await sequelize.transaction();
+    const transaction = await sequelize.transaction();
 
     try {
       const { fullName, country, birthDate, deathDate, photo, biography } =
@@ -139,92 +139,28 @@ class ActorsController {
 
       const newActor = await Actor.create(processedBody, {
         returning: ['id'],
-        transaction: t,
+        transaction,
       });
 
       if (newActor) {
-        await t.commit();
+        await transaction.commit();
         const { id } = newActor;
         res.status(201).json({
           id,
           ...processedBody,
         });
       }
-      await t.rollback();
-      console.log('The actor has not been created!');
+      await transaction.rollback();
       next(createError(400, 'The actor has not been created!'));
     } catch (error) {
       console.log(error.message);
-      await t.rollback();
+      await transaction.rollback();
       next(error);
     }
   }
 
   static async updateActor(req, res, next) {
-    const t = await sequelize.transaction();
-
-    try {
-      const { id, fullName, country, birthDate, deathDate, photo, biography } =
-        req.body;
-
-      const countryValue = country === '' ? null : country;
-
-      const countryRecord = countryValue
-        ? await Country.findOne({
-            where: { title: countryValue },
-            attributes: ['id'],
-            raw: true,
-          })
-        : null;
-
-      if (countryValue && !countryRecord) {
-        throw new Error('Country not found');
-      }
-
-      const countryId = countryRecord ? countryRecord.id : null;
-
-      const newBody = {
-        fullName,
-        countryId,
-        birthDate,
-        deathDate,
-        photo,
-        biography,
-      };
-
-      const replaceEmptyStringsWithNull = (obj) =>
-        Object.fromEntries(
-          Object.entries(obj).map(([key, value]) => [
-            key,
-            value === '' ? null : value,
-          ])
-        );
-
-      const processedBody = replaceEmptyStringsWithNull(newBody);
-
-      const [affectedRows, [updatedActor]] = await Actor.update(processedBody, {
-        where: { id },
-        returning: true,
-        transaction: t,
-      });
-
-      if (affectedRows > 0) {
-        await t.commit();
-        res.status(201).json(updatedActor);
-      } else {
-        await t.rollback();
-        console.log('The actor has not been updated!');
-        next(createError(400, 'The actor has not been updated!'));
-      }
-    } catch (error) {
-      console.log(error.message);
-      await t.rollback();
-      next(error);
-    }
-  }
-
-  static async patchActor(req, res, next) {
-    const t = await sequelize.transaction();
+    const transaction = await sequelize.transaction();
 
     try {
       const {
@@ -273,27 +209,26 @@ class ActorsController {
           id: actorId,
         },
         returning: true,
-        transaction: t,
+        transaction,
       });
       console.log(`Count of patched rows: ${affectedRows}`);
 
       if (affectedRows > 0) {
-        await t.commit();
+        await transaction.commit();
         res.status(200).json(updatedActor);
       } else {
-        await t.rollback();
-        console.log('The actor has not been updated!');
+        await transaction.rollback();
         next(createError(404, 'The actor has not been updated!'));
       }
     } catch (error) {
       console.log(error.message);
-      await t.rollback();
+      await transaction.rollback();
       next(error);
     }
   }
 
   static async deleteActor(req, res, next) {
-    const t = await sequelize.transaction();
+    const transaction = await sequelize.transaction();
 
     try {
       const {
@@ -304,20 +239,19 @@ class ActorsController {
         where: {
           id: actorId,
         },
-        transaction: t,
+        transaction,
       });
 
       if (delActor) {
-        await t.commit();
+        await transaction.commit();
         res.sendStatus(res.statusCode);
       } else {
-        await t.rollback();
-        console.log('The actor has not been deleted!');
+        await transaction.rollback();
         next(createError(400, 'The actor has not been deleted!'));
       }
     } catch (error) {
       console.log(error.message);
-      await t.rollback();
+      await transaction.rollback();
       next(error);
     }
   }

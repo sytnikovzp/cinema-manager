@@ -7,11 +7,10 @@ const {
 
 const {
   getAllGenres,
+  getGenreById,
   createGenre,
   updateGenre,
-  getGenreById,
   deleteGenre,
-  patchGenre,
 } = require('../controllers/genresController');
 
 const genresRouter = new Router();
@@ -19,13 +18,12 @@ const genresRouter = new Router();
 genresRouter
   .route('/')
   .get(paginateElements, getAllGenres)
-  .post(validateGenre, createGenre)
-  .put(validateGenre, updateGenre);
+  .post(validateGenre, createGenre);
 
 genresRouter
   .route('/:genreId')
   .get(getGenreById)
   .delete(deleteGenre)
-  .patch(validatePatchGenre, patchGenre);
+  .patch(validatePatchGenre, updateGenre);
 
 module.exports = genresRouter;

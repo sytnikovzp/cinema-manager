@@ -1,13 +1,13 @@
-### Get all actors (default pagination)
+### Get list all actors (default pagination)
 GET http://localhost:5000/api/actors HTTP/1.1
 
-### Get all actors (custom pagination)
+### Get list all actors (custom pagination)
 GET http://localhost:5000/api/actors?page=1&limit=10 HTTP/1.1
 
 ### Get actor by id
 GET http://localhost:5000/api/actors/3 HTTP/1.1
 
-### Create actor
+### Add actor
 POST http://localhost:5000/api/actors HTTP/1.1
 content-type: application/json
 
@@ -20,26 +20,12 @@ content-type: application/json
   "biography": ""
 }
 
-### Update actor
-PUT http://localhost:5000/api/actors HTTP/1.1
-content-type: application/json
-
-{
-  "id": 238,
-  "fullName": "Updated actor",
-  "country": "Georgia",
-  "birthDate": "",
-  "deathDate": "",
-  "photo": "",
-  "biography": ""
-}
-
-### Patch actor
+### Edit actor by id
 PATCH http://localhost:5000/api/actors/238 HTTP/1.1
 content-type: application/json
 
 {
-  "fullName": "Patched actor",
+  "fullName": "Updated actor",
   "country": "",
   "birthDate": "",
   "deathDate": "",
@@ -47,5 +33,5 @@ content-type: application/json
   "biography": ""
 }
 
-### Delete actor
+### Remove actor by id
 DELETE  http://localhost:5000/api/actors/238 HTTP/1.1
