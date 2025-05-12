@@ -5,7 +5,7 @@ const { POSTGRES_DATA } = require('../../constants');
 
 module.exports = {
   async up(queryInterface) {
-    const { directors } = await POSTGRES_DATA();
+    const { locations } = await POSTGRES_DATA();
     const countries = await Country.findAll({
       attributes: ['id', 'title'],
     });
@@ -13,17 +13,17 @@ module.exports = {
       acc[country.title] = country.id;
       return acc;
     }, {});
-    const updatedDirectors = directors.map((director) => {
-      const countryId = countryMap[director.country];
+    const updatedLocations = locations.map((location) => {
+      const countryId = countryMap[location.country];
       if (countryId) {
-        director.country_id = countryId;
+        location.country_id = countryId;
       }
-      delete director.country;
-      return director;
+      delete location.country;
+      return location;
     });
-    await queryInterface.bulkInsert('directors', updatedDirectors, {});
+    await queryInterface.bulkInsert('locations', updatedLocations, {});
   },
   async down(queryInterface) {
-    await queryInterface.bulkDelete('directors', null, {});
+    await queryInterface.bulkDelete('locations', null, {});
   },
 };

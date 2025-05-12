@@ -359,7 +359,7 @@ const postgresData = () => {
     locations: [
       {
         title: 'San Francisco',
-        country_id: 1,
+        country: 'United States of America',
         coat_of_arms:
           'https://img.freepik.com/premium-vector/san-francisco-california-usa-stamp-logo-icon-symbol-design-skyline-city_731533-2144.jpg',
         created_at: now,
@@ -367,7 +367,7 @@ const postgresData = () => {
       },
       {
         title: 'Los Angeles',
-        country_id: 1,
+        country: 'United States of America',
         coat_of_arms:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Seal_of_Los_Angeles_County%2C_California.svg/640px-Seal_of_Los_Angeles_County%2C_California.svg.png',
         created_at: now,
@@ -375,7 +375,7 @@ const postgresData = () => {
       },
       {
         title: 'Culver City',
-        country_id: 1,
+        country: 'United States of America',
         coat_of_arms:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Seal_of_Culver_City%2C_California.png/768px-Seal_of_Culver_City%2C_California.png',
         created_at: now,
@@ -383,7 +383,7 @@ const postgresData = () => {
       },
       {
         title: 'London',
-        country_id: 2,
+        country: 'Great Britain (England)',
         coat_of_arms:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Coat_of_Arms_of_The_City_of_London.svg/250px-Coat_of_Arms_of_The_City_of_London.svg.png',
         created_at: now,
@@ -391,7 +391,7 @@ const postgresData = () => {
       },
       {
         title: 'Burbank',
-        country_id: 1,
+        country: 'United States of America',
         coat_of_arms:
           'https://upload.wikimedia.org/wikipedia/commons/9/99/Burbank%2C_California_proportionate_flag.png',
         created_at: now,
@@ -399,7 +399,7 @@ const postgresData = () => {
       },
       {
         title: 'Toronto',
-        country_id: 15,
+        country: 'Canada',
         coat_of_arms:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Coat_of_arms_of_Toronto.svg/500px-Coat_of_arms_of_Toronto.svg.png',
         created_at: now,
@@ -407,7 +407,7 @@ const postgresData = () => {
       },
       {
         title: 'New York',
-        country_id: 1,
+        country: 'United States of America',
         coat_of_arms:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Seal_of_New_York_City.svg/419px-Seal_of_New_York_City.svg.png',
         created_at: now,
@@ -415,7 +415,7 @@ const postgresData = () => {
       },
       {
         title: 'Sydney',
-        country_id: 6,
+        country: 'Australia',
         coat_of_arms:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Sydney_-_COA.svg/500px-Sydney_-_COA.svg.png',
         created_at: now,
@@ -423,7 +423,7 @@ const postgresData = () => {
       },
       {
         title: 'Paris',
-        country_id: 5,
+        country: 'France',
         coat_of_arms:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Grandes_Armes_de_Paris.svg/340px-Grandes_Armes_de_Paris.svg.png',
         created_at: now,
@@ -431,7 +431,7 @@ const postgresData = () => {
       },
       {
         title: 'Munchen',
-        country_id: 4,
+        country: 'Deutschland',
         coat_of_arms:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/DEU_M%C3%BCnchen_COA.svg/1200px-DEU_M%C3%BCnchen_COA.svg.png',
         created_at: now,
@@ -441,7 +441,7 @@ const postgresData = () => {
     actors: [
       {
         full_name: 'Harrison Ford',
-        country_id: 1,
+        country: 'United States of America',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Harrison_Ford_by_Gage_Skidmore_3.jpg/274px-Harrison_Ford_by_Gage_Skidmore_3.jpg',
         biography:
@@ -453,7 +453,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Johnny Depp',
-        country_id: 1,
+        country: 'United States of America',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Johnny_Depp_Deauville_2019.jpg/220px-Johnny_Depp_Deauville_2019.jpg',
         biography:
@@ -465,7 +465,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Sigourney Weaver',
-        country_id: 1,
+        country: 'United States of America',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Sigourney_Weaver_by_Gage_Skidmore_4.jpg/250px-Sigourney_Weaver_by_Gage_Skidmore_4.jpg',
         biography:
@@ -477,7 +477,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Phoebe Waller-Bridge',
-        country_id: 2,
+        country: 'Great Britain (England)',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Nicola_Benedetti_Humza_Yousaf_Phoebe_Waller-Bridge_-_All_Festivals_Reception_%28Waller-Bridge_cropped%29_%28cropped%29.jpg/440px-Nicola_Benedetti_Humza_Yousaf_Phoebe_Waller-Bridge_-_All_Festivals_Reception_%28Waller-Bridge_cropped%29_%28cropped%29.jpg',
         biography:
@@ -489,7 +489,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Mads Mikkelsen',
-        country_id: 10,
+        country: 'Denmark',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Mads_Mikkelsen_by_Gage_Skidmore_2.jpg/440px-Mads_Mikkelsen_by_Gage_Skidmore_2.jpg',
         biography:
@@ -501,7 +501,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Shia LaBeouf',
-        country_id: 1,
+        country: 'United States of America',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Shia_LaBeouf_2022.jpg/440px-Shia_LaBeouf_2022.jpg',
         biography:
@@ -513,7 +513,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Karen Allen',
-        country_id: 1,
+        country: 'United States of America',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/b/ba/Karenallen17_cropped.jpg',
         biography:
@@ -525,7 +525,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Tom Skerritt',
-        country_id: 1,
+        country: 'United States of America',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Tom_Skerritt_2014_%28cropped%29.jpg/440px-Tom_Skerritt_2014_%28cropped%29.jpg',
         biography:
@@ -537,7 +537,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Veronica Cartwright',
-        country_id: 2,
+        country: 'Great Britain (England)',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Veronica_Cartwright_2022.jpg/440px-Veronica_Cartwright_2022.jpg',
         biography:
@@ -549,7 +549,7 @@ const postgresData = () => {
       },
       {
         full_name: 'John Hurt',
-        country_id: 2,
+        country: 'Great Britain (England)',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/John_Hurt_at_the_2009_Tribeca_Film_Festival.jpg/440px-John_Hurt_at_the_2009_Tribeca_Film_Festival.jpg',
         biography:
@@ -561,7 +561,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Ian Holm',
-        country_id: 2,
+        country: 'Great Britain (England)',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Ian_Holm.jpg/440px-Ian_Holm.jpg',
         biography:
@@ -573,7 +573,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Bill Paxton',
-        country_id: 1,
+        country: 'United States of America',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Bill_Paxton_by_Gage_Skidmore.jpg/440px-Bill_Paxton_by_Gage_Skidmore.jpg',
         biography:
@@ -585,7 +585,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Michael Biehn',
-        country_id: 1,
+        country: 'United States of America',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Michael_Biehn_by_Gage_Skidmore.jpg/440px-Michael_Biehn_by_Gage_Skidmore.jpg',
         biography:
@@ -597,7 +597,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Lance Henriksen',
-        country_id: 1,
+        country: 'United States of America',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Lance_Henriksen_by_Gage_Skidmore.jpg/440px-Lance_Henriksen_by_Gage_Skidmore.jpg',
         biography:
@@ -609,7 +609,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Jenette Goldstein',
-        country_id: 1,
+        country: 'United States of America',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Jenette_Goldstein_Comic_Con_2023_%28cropped%29.jpg/440px-Jenette_Goldstein_Comic_Con_2023_%28cropped%29.jpg',
         biography:
@@ -621,7 +621,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Keira Knightley',
-        country_id: 2,
+        country: 'Great Britain (England)',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/b/b1/KeiraKnightleyByAndreaRaffin2011_%28cropped%29.jpg',
         biography:
@@ -633,7 +633,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Orlando Bloom',
-        country_id: 2,
+        country: 'Great Britain (England)',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Orlando_Bloom_Cannes_2013.jpg/440px-Orlando_Bloom_Cannes_2013.jpg',
         biography:
@@ -645,7 +645,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Geoffrey Rush',
-        country_id: 6,
+        country: 'Australia',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Geoffrey_Rush_Final_Portrait_Red_Carpet_Berlinale_2017_01_%28cropped%29.jpg/440px-Geoffrey_Rush_Final_Portrait_Red_Carpet_Berlinale_2017_01_%28cropped%29.jpg',
         biography:
@@ -657,7 +657,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Kevin McNally',
-        country_id: 2,
+        country: 'Great Britain (England)',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Kevin_McNally_by_Gage_Skidmore.jpg/440px-Kevin_McNally_by_Gage_Skidmore.jpg',
         biography:
@@ -669,7 +669,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Elijah Wood',
-        country_id: 1,
+        country: 'United States of America',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Elijah_Wood_%2847955397556%29_%28cropped%29.jpg/440px-Elijah_Wood_%2847955397556%29_%28cropped%29.jpg',
         biography:
@@ -681,7 +681,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Ian McKellen',
-        country_id: 2,
+        country: 'Great Britain (England)',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/SDCC13_-_Ian_McKellen.jpg/440px-SDCC13_-_Ian_McKellen.jpg',
         biography:
@@ -693,7 +693,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Viggo Mortensen',
-        country_id: 1,
+        country: 'United States of America',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Viggo_Mortensen_B_%282020%29.jpg/440px-Viggo_Mortensen_B_%282020%29.jpg',
         biography:
@@ -705,7 +705,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Kate Capshaw',
-        country_id: 1,
+        country: 'United States of America',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Kate_Capshaw%2C_actress.jpg/440px-Kate_Capshaw%2C_actress.jpg',
         biography:
@@ -717,7 +717,7 @@ const postgresData = () => {
       },
       {
         full_name: 'John Rhys-Davies',
-        country_id: 2,
+        country: 'Great Britain (England)',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/%28John_Rhys-Davies%29_2018-02-11_15-35-40_ILCE-6500_DSC07150_%2831235662177%29_%28cropped%29.jpg/440px-%28John_Rhys-Davies%29_2018-02-11_15-35-40_ILCE-6500_DSC07150_%2831235662177%29_%28cropped%29.jpg',
         biography:
@@ -729,7 +729,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Philip Stone',
-        country_id: 2,
+        country: 'Great Britain (England)',
         photo:
           'https://static.wikia.nocookie.net/indianajones/images/5/5a/Blumburtt.jpg',
         biography:
@@ -741,7 +741,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Ke Huy Quan',
-        country_id: 1,
+        country: 'United States of America',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Ke_Huy_Quan_at_the_White_House_%2852902390767%29_%28cropped%29.jpg/440px-Ke_Huy_Quan_at_the_White_House_%2852902390767%29_%28cropped%29.jpg',
         biography:
@@ -753,7 +753,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Mia Wasikowska',
-        country_id: 6,
+        country: 'Australia',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/MJK_08786_Mia_Wasikowska_%28Damsel%2C_Berlinale_2018%29_%28cropped%29.jpg/440px-MJK_08786_Mia_Wasikowska_%28Damsel%2C_Berlinale_2018%29_%28cropped%29.jpg',
         biography:
@@ -765,7 +765,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Helena Bonham Carter',
-        country_id: 2,
+        country: 'Great Britain (England)',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Helena_Bonham_Carter_2011_AA.jpg/440px-Helena_Bonham_Carter_2011_AA.jpg',
         biography:
@@ -777,7 +777,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Arnold Schwarzenegger',
-        country_id: 37,
+        country: 'Austria',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Arnold_Schwarzenegger_by_Gage_Skidmore_4.jpg/440px-Arnold_Schwarzenegger_by_Gage_Skidmore_4.jpg',
         biography:
@@ -789,7 +789,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Sean Connery',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1930-08-25',
         death_date: '2020-10-31',
         photo:
@@ -801,7 +801,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Hugh Laurie',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1959-06-11',
         death_date: null,
         photo:
@@ -813,7 +813,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Mel Gibson',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1956-01-03',
         death_date: null,
         photo:
@@ -825,7 +825,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Stanislav Boklan',
-        country_id: 3,
+        country: 'Ukraine',
         birth_date: '1960-01-12',
         death_date: null,
         photo:
@@ -837,7 +837,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Pierre Richard',
-        country_id: 5,
+        country: 'France',
         birth_date: '1934-08-16',
         death_date: null,
         photo:
@@ -849,7 +849,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Jackie Chan',
-        country_id: 16,
+        country: 'China',
         birth_date: '1954-04-07',
         death_date: null,
         photo:
@@ -861,7 +861,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Katheryn Winnick',
-        country_id: 15,
+        country: 'Canada',
         birth_date: '1977-12-17',
         death_date: null,
         photo:
@@ -873,7 +873,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Ryan Gosling',
-        country_id: 15,
+        country: 'Canada',
         birth_date: '1980-11-12',
         death_date: null,
         photo:
@@ -885,7 +885,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Paul Freeman',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1943-01-18',
         death_date: null,
         photo:
@@ -897,7 +897,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Russell Crowe',
-        country_id: 30,
+        country: 'New Zealand',
         birth_date: '1964-04-07',
         death_date: null,
         photo:
@@ -909,7 +909,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Joaquin Phoenix',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1974-10-28',
         death_date: null,
         photo:
@@ -921,7 +921,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Connie Nielsen',
-        country_id: 10,
+        country: 'Denmark',
         birth_date: '1965-07-03',
         death_date: null,
         photo:
@@ -933,7 +933,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Oliver Reed',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1938-02-13',
         death_date: '1999-05-02',
         photo:
@@ -945,7 +945,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Derek Jacobi',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1938-10-22',
         death_date: null,
         photo:
@@ -957,7 +957,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Djimon Hounsou',
-        country_id: 33,
+        country: 'Benin',
         birth_date: '1964-04-24',
         death_date: null,
         photo:
@@ -969,7 +969,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Richard Harris',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1930-10-01',
         death_date: '2002-10-25',
         photo:
@@ -981,7 +981,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Cate Blanchett',
-        country_id: 6,
+        country: 'Australia',
         birth_date: '1969-05-14',
         death_date: null,
         photo:
@@ -993,7 +993,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Ray Winstone',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1957-02-19',
         death_date: null,
         photo:
@@ -1005,7 +1005,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Jim Broadbent',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1949-05-24',
         death_date: null,
         photo:
@@ -1017,7 +1017,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Carrie Henn',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1976-05-07',
         death_date: null,
         photo:
@@ -1029,7 +1029,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Jonathan Pryce',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1947-06-01',
         death_date: null,
         photo:
@@ -1041,7 +1041,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Liv Tyler',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1977-07-01',
         death_date: null,
         photo:
@@ -1053,7 +1053,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Sean Astin',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1971-02-25',
         death_date: null,
         photo:
@@ -1065,7 +1065,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Billy Boyd',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1968-08-28',
         death_date: null,
         photo:
@@ -1077,7 +1077,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Dominic Monaghan',
-        country_id: 4,
+        country: 'Deutschland',
         birth_date: '1976-12-08',
         death_date: null,
         photo:
@@ -1089,7 +1089,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Diane Keaton',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1946-01-05',
         death_date: null,
         photo:
@@ -1101,7 +1101,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Christopher Lee',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1922-05-27',
         death_date: '2015-06-07',
         photo:
@@ -1113,7 +1113,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Hugo Weaving',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1960-04-04',
         death_date: null,
         photo:
@@ -1125,7 +1125,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Sean Bean',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1959-04-17',
         death_date: null,
         photo:
@@ -1137,7 +1137,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Andy Serkis',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1964-04-20',
         death_date: null,
         photo:
@@ -1149,7 +1149,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Travis Fimmel',
-        country_id: 6,
+        country: 'Australia',
         birth_date: '1979-07-15',
         death_date: null,
         photo:
@@ -1161,7 +1161,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Clive Standen',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1981-07-22',
         death_date: null,
         photo:
@@ -1173,7 +1173,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Jessalyn Gilsig',
-        country_id: 15,
+        country: 'Canada',
         birth_date: '1971-11-30',
         death_date: null,
         photo:
@@ -1185,7 +1185,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Gustaf Skarsgard',
-        country_id: 34,
+        country: 'Sweden',
         birth_date: '1980-11-12',
         death_date: null,
         photo:
@@ -1197,7 +1197,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Gabriel Byrne',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1950-05-12',
         death_date: null,
         photo:
@@ -1209,7 +1209,7 @@ const postgresData = () => {
       },
       {
         full_name: 'George Blagden',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1989-12-28',
         death_date: null,
         photo:
@@ -1221,7 +1221,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Donal Logue',
-        country_id: 13,
+        country: 'Ireland',
         birth_date: '1966-02-27',
         death_date: null,
         photo:
@@ -1233,7 +1233,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Alyssa Sutherland',
-        country_id: 6,
+        country: 'Australia',
         birth_date: '1982-09-23',
         death_date: null,
         photo:
@@ -1245,7 +1245,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Linus Roache',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1964-02-01',
         death_date: null,
         photo:
@@ -1257,7 +1257,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Alexander Ludwig',
-        country_id: 15,
+        country: 'Canada',
         birth_date: '1992-05-07',
         death_date: null,
         photo:
@@ -1269,19 +1269,19 @@ const postgresData = () => {
       },
       {
         full_name: 'Ben Robson',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1984-02-04',
         death_date: null,
         photo:
           'http://t2.gstatic.com/licensed-image?q=tbn:ANd9GcSo0cgAxHELvAoj7DQ-LFsy-lrRM6AW2e0eh3NjoTSUMAyCni8WQD-9DxTmSAqQbTzw',
         biography:
-          "Robson was born and grew up in Newcastle upon Tyne, England.  He is known for playing the roles as Kalf in the History TV18 series Vikings, Craig Cody in Animal Kingdom, and Frankie Scott in the Peacock series The Continental, the prequel to John Wick film franchise.\nHis father worked in manufacturing. He has one younger brother and one younger sister. His sister works as an agent for directors and voice coaches. His brother works in wealth management. His grandmother was born in a Ukrainian orphanage and she moved to Germany during the war.\n\nRobson went to the University of the West of England in Bristol where he studied business.\n\nIn August 2015, Ben Robson was cast as 'Craig Cody' in the pilot of Animal Kingdom based on the Australian film of the same name.\n\nIn 2016, Robson appeared in the horror film The Boy as 'Cole'. The film also starred Lauren Cohan and Rupert Evans. The film had moderate success but received negative reviews from critics. It grossed $64 million.\n\nIn October 2017, Robson was cast in the crime thriller film A Violent Separation as 'Ray'.",
+          "Robson was born and grew up in Newcastle upon Tyne, England. He is known for playing the roles as Kalf in the History TV18 series Vikings, Craig Cody in Animal Kingdom, and Frankie Scott in the Peacock series The Continental, the prequel to John Wick film franchise.\nHis father worked in manufacturing. He has one younger brother and one younger sister. His sister works as an agent for directors and voice coaches. His brother works in wealth management. His grandmother was born in a Ukrainian orphanage and she moved to Germany during the war.\n\nRobson went to the University of the West of England in Bristol where he studied business.\n\nIn August 2015, Ben Robson was cast as 'Craig Cody' in the pilot of Animal Kingdom based on the Australian film of the same name.\n\nIn 2016, Robson appeared in the horror film The Boy as 'Cole'. The film also starred Lauren Cohan and Rupert Evans. The film had moderate success but received negative reviews from critics. It grossed $64 million.\n\nIn October 2017, Robson was cast in the crime thriller film A Violent Separation as 'Ray'.",
         created_at: now,
         updated_at: now,
       },
       {
         full_name: 'Kevin Durand',
-        country_id: 15,
+        country: 'Canada',
         birth_date: '1974-01-14',
         death_date: null,
         photo:
@@ -1293,7 +1293,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Lothaire Bluteau',
-        country_id: 15,
+        country: 'Canada',
         birth_date: '1957-04-14',
         death_date: null,
         photo:
@@ -1305,7 +1305,7 @@ const postgresData = () => {
       },
       {
         full_name: 'John Kavanagh',
-        country_id: 13,
+        country: 'Ireland',
         birth_date: '1946-01-01',
         death_date: null,
         photo:
@@ -1317,7 +1317,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Peter Franzen',
-        country_id: 25,
+        country: 'Finland',
         birth_date: '1971-08-14',
         death_date: null,
         photo:
@@ -1329,7 +1329,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Jasper Paakkonen',
-        country_id: 25,
+        country: 'Finland',
         birth_date: '1980-07-15',
         death_date: null,
         photo:
@@ -1341,7 +1341,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Alex Hogh Andersen',
-        country_id: 10,
+        country: 'Denmark',
         birth_date: '1994-05-20',
         death_date: null,
         photo:
@@ -1353,7 +1353,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Marco Ilso',
-        country_id: 10,
+        country: 'Denmark',
         birth_date: '1994-09-29',
         death_date: null,
         photo:
@@ -1365,7 +1365,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Jordan Patrick Smith',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1989-06-18',
         death_date: null,
         photo:
@@ -1377,7 +1377,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Moe Dunford',
-        country_id: 13,
+        country: 'Ireland',
         birth_date: '1987-12-11',
         death_date: null,
         photo:
@@ -1389,7 +1389,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Jonathan Rhys Meyers',
-        country_id: 13,
+        country: 'Ireland',
         birth_date: '1977-07-27',
         death_date: null,
         photo:
@@ -1401,7 +1401,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Danila Kozlovsky',
-        country_id: 35,
+        country: 'Russian',
         birth_date: '1985-05-03',
         death_date: null,
         photo:
@@ -1413,7 +1413,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Eric Johnson',
-        country_id: 15,
+        country: 'Canada',
         birth_date: '1979-08-07',
         death_date: null,
         photo:
@@ -1425,7 +1425,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Georgia Hirst',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1994-12-26',
         death_date: null,
         photo:
@@ -1437,7 +1437,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Ragga Ragnars',
-        country_id: 36,
+        country: 'Iceland',
         birth_date: '1984-10-24',
         death_date: null,
         photo:
@@ -1449,7 +1449,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Sophie Marceau',
-        country_id: 5,
+        country: 'France',
         birth_date: '1966-11-17',
         death_date: null,
         photo:
@@ -1461,7 +1461,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Patrick McGoohan',
-        country_id: 13,
+        country: 'Ireland',
         birth_date: '1928-03-19',
         death_date: '2009-01-13',
         photo:
@@ -1473,7 +1473,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Catherine McCormack',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1972-04-03',
         death_date: null,
         photo:
@@ -1485,7 +1485,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Brendan Gleeson',
-        country_id: 13,
+        country: 'Ireland',
         birth_date: '1955-03-29',
         death_date: null,
         photo:
@@ -1497,7 +1497,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Marlon Brando',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1924-04-03',
         death_date: '2004-07-01',
         photo:
@@ -1509,7 +1509,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Al Pacino',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1940-04-25',
         death_date: null,
         photo:
@@ -1521,7 +1521,7 @@ const postgresData = () => {
       },
       {
         full_name: 'James Caan',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1940-03-26',
         death_date: '2022-07-06',
         photo:
@@ -1533,7 +1533,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Richard S. Castellano',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1933-09-04',
         death_date: '1988-12-10',
         photo:
@@ -1545,7 +1545,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Robert Duvall',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1931-01-05',
         death_date: null,
         photo:
@@ -1557,7 +1557,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Sterling Hayden',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1916-03-26',
         death_date: '1986-05-23',
         photo:
@@ -1569,7 +1569,7 @@ const postgresData = () => {
       },
       {
         full_name: 'John Marley',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1907-10-17',
         death_date: '1984-05-22',
         photo:
@@ -1581,7 +1581,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Richard Conte',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1910-03-24',
         death_date: '1975-04-15',
         photo:
@@ -1593,7 +1593,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Harry Dean Stanton',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1926-07-14',
         death_date: '2017-09-15',
         photo:
@@ -1605,7 +1605,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Yaphet Kotto',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1939-11-15',
         death_date: '2021-03-15',
         photo: 'https://m.media-amazon.com/images/I/71-DDV3l0dL.jpg',
@@ -1616,7 +1616,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Bill Nighy',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1949-12-12',
         death_date: null,
         photo:
@@ -1628,7 +1628,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Denholm Elliott',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1922-05-31',
         death_date: '1992-10-06',
         photo:
@@ -1640,7 +1640,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Henry Thomas',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1971-09-09',
         death_date: null,
         photo:
@@ -1652,7 +1652,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Dee Wallace',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1948-12-14',
         death_date: null,
         photo:
@@ -1664,7 +1664,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Drew Barrymore',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1975-02-22',
         death_date: null,
         photo:
@@ -1676,7 +1676,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Peter Coyote',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1941-10-10',
         death_date: null,
         photo:
@@ -1688,7 +1688,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Robert MacNaughton',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1966-12-19',
         death_date: null,
         photo:
@@ -1700,7 +1700,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Sam Worthington',
-        country_id: 6,
+        country: 'Australia',
         birth_date: '1976-08-02',
         death_date: null,
         photo:
@@ -1712,7 +1712,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Zoe Saldana',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1978-06-19',
         death_date: null,
         photo:
@@ -1724,7 +1724,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Stephen Lang',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1952-07-11',
         death_date: null,
         photo:
@@ -1736,7 +1736,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Michelle Rodriguez',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1978-07-12',
         death_date: null,
         photo:
@@ -1748,7 +1748,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Linda Hamilton',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1956-09-26',
         death_date: null,
         photo:
@@ -1760,7 +1760,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Paul Winfield',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1939-05-22',
         death_date: '2004-03-07',
         photo:
@@ -1772,7 +1772,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Winona Ryder',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1971-10-29',
         death_date: null,
         photo:
@@ -1784,7 +1784,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Dianne Wiest',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1948-03-28',
         death_date: null,
         photo:
@@ -1796,7 +1796,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Anthony Michael Hall',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1968-04-14',
         death_date: null,
         photo:
@@ -1808,7 +1808,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Kathy Baker',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1950-06-08',
         death_date: null,
         photo:
@@ -1820,7 +1820,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Bruce Willis',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1955-03-19',
         death_date: null,
         photo:
@@ -1832,7 +1832,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Alan Rickman',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1946-02-21',
         death_date: '2016-01-14',
         photo:
@@ -1844,7 +1844,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Bonnie Bedelia',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1948-03-25',
         death_date: null,
         photo:
@@ -1856,7 +1856,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Reginald VelJohnson',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1952-08-16',
         death_date: null,
         photo:
@@ -1868,7 +1868,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Alexander Godunov',
-        country_id: 35,
+        country: 'Russian',
         birth_date: '1949-11-28',
         death_date: null,
         photo:
@@ -1880,7 +1880,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Tom Cruise',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1962-07-03',
         death_date: null,
         photo:
@@ -1892,19 +1892,19 @@ const postgresData = () => {
       },
       {
         full_name: 'Brad Pitt',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1963-12-18',
         death_date: null,
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Brad_Pitt_2019_by_Glenn_Francis.jpg/440px-Brad_Pitt_2019_by_Glenn_Francis.jpg',
         biography:
-          "William Bradley Pitt (born December 18, 1963) is an American actor and film producer. He is the recipient of various accolades, including three Academy Awards, two British Academy Film Awards, two Golden Globe Awards, and a Primetime Emmy Award. One of the most influential celebrities, Pitt appeared on Forbes' annual Celebrity 100 list from 2006 to 2008, and the Time 100 list in 2007.\n\nPitt first gained recognition as a cowboy hitchhiker in the Ridley Scott road film Thelma & Louise (1991). His first leading roles in big-budget productions came with the drama films A River Runs Through It (1992) and Legends of the Fall (1994). He also starred in the horror film Interview with the Vampire (1994), alongside Tom Cruise. He gave critically acclaimed performances in David Fincher's crime thriller Seven (1995) and the science fiction film 12 Monkeys (1995). The latter earned him a Golden Globe Award for Best Supporting Actor and his first Academy Award nomination.\n\nPitt found greater commercial success starring in Steven Soderbergh's heist film Ocean's Eleven (2001), and reprised his role in its sequels. He cemented his leading man status starring in blockbusters such as the historical epic Troy (2004), the romantic crime film Mr. & Mrs. Smith (2005), the horror film World War Z (2013), and the action film Bullet Train (2022). Pitt also starred in the critically acclaimed films Fight Club (1999), Babel (2006), The Assassination of Jesse James by the Coward Robert Ford (2007), Burn After Reading (2008), Inglourious Basterds (2009), The Tree of Life (2011), and The Big Short (2015). Pitt received Academy Award nominations for his performances in The Curious Case of Benjamin Button (2008) and Moneyball (2011), and he won the Academy Award for Best Supporting Actor for playing a stuntman in Once Upon a Time in Hollywood (2019).\n\nIn 2001, Pitt co-founded the production company Plan B Entertainment. He personally produced The Departed (2006) and 12 Years a Slave (2013), and Plan B Entertainment produced Moonlight (2016), all of which won the Academy Award for Best Picture, while others such as The Tree of Life (2011), Moneyball (2011), Selma (2014), and The Big Short (2015) were nominated for the award. Pitt was named People's Sexiest Man Alive in 1995 and 2000. His personal life is the subject of wide publicity. He is divorced from actresses Jennifer Aniston and Angelina Jolie. Pitt has six children with Jolie, three of whom were adopted internationally.",
+          "William Bradley Pitt (born December 18, 1963) is an American actor and film producer. He is the recipient of various accolades, including three Academy Awards, two British Academy Film Awards, two Golden Globe Awards, and a Primetime Emmy Award. One of the most influential celebrities, Pitt appeared on Forbes' annual Celebrity 100 list from 2006 to 2008, and the Time 100 list in 2007.\n\nPitt first gained recognition as a cowboy hitchhiker in the Ridley Scott road film Thelma & Louise (1991). His first leading roles in big-budget productions came with the drama films A River Runs Through It (1992) and Legends of the Fall (1994). He also starred in the horror film Interview with the Vampire (1994), alongside Tom Cruise. He gave critically acclaimed performances in David Fincher's crime thriller Seven (1995) and the science fiction film 12 Monkeys (1995). The latter earned him a Golden Globe Award for Best Supporting Actor and his first Academy Award nomination.\n\nPitt found greater commercial success starring in Steven Soderbergh's heist film Ocean`s Eleven (2001), and reprised his role in its sequels. He cemented his leading man status starring in blockbusters such as the historical epic Troy (2004), the romantic crime film Mr. & Mrs. Smith (2005), the horror film World War Z (2013), and the action film Bullet Train (2022). Pitt also starred in the critically acclaimed films Fight Club (1999), Babel (2006), The Assassination of Jesse James by the Coward Robert Ford (2007), Burn After Reading (2008), Inglourious Basterds (2009), The Tree of Life (2011), and The Big Short (2015). Pitt received Academy Award nominations for his performances in The Curious Case of Benjamin Button (2008) and Moneyball (2011), and he won the Academy Award for Best Supporting Actor for playing a stuntman in Once Upon a Time in Hollywood (2019).\n\nIn 2001, Pitt co-founded the production company Plan B Entertainment. He personally produced The Departed (2006) and 12 Years a Slave (2013), and Plan B Entertainment produced Moonlight (2016), all of which won the Academy Award for Best Picture, while others such as The Tree of Life (2011), Moneyball (2011), Selma (2014), and The Big Short (2015) were nominated for the award. Pitt was named People's Sexiest Man Alive in 1995 and 2000. His personal life is the subject of wide publicity. He is divorced from actresses Jennifer Aniston and Angelina Jolie. Pitt has six children with Jolie, three of whom were adopted internationally.",
         created_at: now,
         updated_at: now,
       },
       {
         full_name: 'Kirsten Dunst',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1982-04-30',
         death_date: null,
         photo:
@@ -1916,7 +1916,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Antonio Banderas',
-        country_id: 38,
+        country: 'Spain',
         birth_date: '1960-08-10',
         death_date: null,
         photo:
@@ -1928,7 +1928,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Christian Slater',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1969-08-18',
         death_date: null,
         photo:
@@ -1940,7 +1940,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Haley Joel Osment',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1988-04-10',
         death_date: null,
         photo:
@@ -1952,7 +1952,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Toni Collette',
-        country_id: 6,
+        country: 'Australia',
         birth_date: '1972-11-01',
         death_date: null,
         photo:
@@ -1964,7 +1964,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Olivia Williams',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1968-07-26',
         death_date: null,
         photo:
@@ -1976,7 +1976,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Donnie Wahlberg',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1969-08-17',
         death_date: null,
         photo:
@@ -1988,7 +1988,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Christian Bale',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1974-01-30',
         death_date: null,
         photo:
@@ -2000,7 +2000,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Heath Ledger',
-        country_id: 6,
+        country: 'Australia',
         birth_date: '1979-04-04',
         death_date: '2008-01-22',
         photo:
@@ -2012,7 +2012,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Michael Caine',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1933-03-14',
         death_date: null,
         photo:
@@ -2024,7 +2024,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Gary Oldman',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1958-03-21',
         death_date: null,
         photo:
@@ -2036,7 +2036,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Morgan Freeman',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1937-06-01',
         death_date: null,
         photo:
@@ -2048,7 +2048,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Edward Furlong',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1977-08-02',
         death_date: null,
         photo:
@@ -2060,7 +2060,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Robert Patrick',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1958-11-05',
         death_date: null,
         photo:
@@ -2072,7 +2072,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Joe Morton',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1947-10-18',
         death_date: null,
         photo:
@@ -2084,7 +2084,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Bryce Dallas Howard',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1981-03-02',
         death_date: null,
         photo:
@@ -2096,7 +2096,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Adrien Brody',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1973-04-14',
         death_date: null,
         photo:
@@ -2108,7 +2108,7 @@ const postgresData = () => {
       },
       {
         full_name: 'William Hurt',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1950-03-20',
         death_date: null,
         photo:
@@ -2120,7 +2120,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Robert Downey Jr.',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1965-04-04',
         death_date: null,
         photo:
@@ -2132,7 +2132,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Chris Evans',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1981-06-13',
         death_date: null,
         photo:
@@ -2144,7 +2144,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Mark Ruffalo',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1967-11-22',
         death_date: null,
         photo:
@@ -2156,7 +2156,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Chris Hemsworth',
-        country_id: 6,
+        country: 'Australia',
         birth_date: '1983-08-11',
         death_date: null,
         photo:
@@ -2168,7 +2168,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Scarlett Johansson',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1984-11-22',
         death_date: null,
         photo:
@@ -2180,7 +2180,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Jeremy Renner',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1971-01-07',
         death_date: null,
         photo:
@@ -2192,7 +2192,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Tom Hiddleston',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1981-02-09',
         death_date: null,
         photo:
@@ -2204,7 +2204,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Samuel L. Jackson',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1948-12-21',
         death_date: null,
         photo:
@@ -2216,7 +2216,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Tom Hardy',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1977-09-15',
         death_date: null,
         photo:
@@ -2228,7 +2228,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Leonardo DiCaprio',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1974-11-11',
         death_date: null,
         photo:
@@ -2240,7 +2240,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Joseph Gordon-Levitt',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1981-02-17',
         death_date: null,
         photo:
@@ -2252,7 +2252,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Ellen Page',
-        country_id: 15,
+        country: 'Canada',
         birth_date: '1987-02-21',
         death_date: null,
         photo:
@@ -2264,7 +2264,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Ken Watanabe',
-        country_id: 29,
+        country: 'Japan',
         birth_date: '1959-10-21',
         death_date: null,
         photo:
@@ -2276,7 +2276,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Cillian Murphy',
-        country_id: 13,
+        country: 'Ireland',
         birth_date: '1976-05-25',
         death_date: null,
         photo:
@@ -2288,7 +2288,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Marion Cotillard',
-        country_id: 5,
+        country: 'France',
         birth_date: '1975-09-30',
         death_date: null,
         photo:
@@ -2300,7 +2300,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Daniel Radcliffe',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1989-07-23',
         death_date: null,
         photo:
@@ -2312,7 +2312,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Rupert Grint',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1988-08-24',
         death_date: null,
         photo:
@@ -2324,7 +2324,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Emma Watson',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1990-04-15',
         death_date: null,
         photo:
@@ -2336,7 +2336,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Maggie Smith',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1934-12-28',
         death_date: null,
         photo:
@@ -2348,7 +2348,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Robbie Coltrane',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1950-03-30',
         death_date: '2022-10-14',
         photo:
@@ -2360,7 +2360,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Kenneth Branagh',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1960-12-10',
         death_date: null,
         photo:
@@ -2372,7 +2372,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Jason Isaacs',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1963-06-06',
         death_date: null,
         photo:
@@ -2384,7 +2384,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Georgie Henley',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1995-07-09',
         death_date: null,
         photo:
@@ -2396,7 +2396,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Skandar Keynes',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1991-09-05',
         death_date: null,
         photo:
@@ -2408,7 +2408,7 @@ const postgresData = () => {
       },
       {
         full_name: 'William Moseley',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1987-04-27',
         death_date: null,
         photo:
@@ -2420,7 +2420,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Anna Popplewell',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1988-12-16',
         death_date: null,
         photo:
@@ -2432,7 +2432,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Tilda Swinton',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1960-11-05',
         death_date: null,
         photo:
@@ -2444,7 +2444,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Charlize Theron',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1975-08-07',
         death_date: null,
         photo:
@@ -2456,7 +2456,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Nicholas Hoult',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1989-12-07',
         death_date: null,
         photo:
@@ -2468,7 +2468,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Hugh Keays-Byrne',
-        country_id: 6,
+        country: 'Australia',
         birth_date: '1947-05-18',
         death_date: '2020-12-02',
         photo:
@@ -2480,7 +2480,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Rosie Huntington-Whiteley',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1987-04-18',
         death_date: null,
         photo:
@@ -2492,7 +2492,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Aaron Eckhart',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1968-03-12',
         death_date: null,
         photo:
@@ -2504,7 +2504,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Maggie Gyllenhaal',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1977-11-16',
         death_date: null,
         photo:
@@ -2516,7 +2516,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Sam Neill',
-        country_id: 30,
+        country: 'New Zealand',
         birth_date: '1947-09-14',
         death_date: null,
         photo:
@@ -2528,7 +2528,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Laura Dern',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1967-02-10',
         death_date: null,
         photo:
@@ -2540,7 +2540,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Jeff Goldblum',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1952-10-22',
         death_date: null,
         photo:
@@ -2552,7 +2552,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Richard Attenborough',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1923-08-29',
         death_date: '2014-08-24',
         photo:
@@ -2564,7 +2564,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Keanu Reeves',
-        country_id: 15,
+        country: 'Canada',
         birth_date: '1964-09-02',
         death_date: null,
         photo:
@@ -2576,7 +2576,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Laurence Fishburne',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1961-07-30',
         death_date: null,
         photo:
@@ -2588,7 +2588,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Carrie-Anne Moss',
-        country_id: 15,
+        country: 'Canada',
         birth_date: '1967-08-21',
         death_date: null,
         photo:
@@ -2600,7 +2600,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Joe Pantoliano',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1951-09-12',
         death_date: null,
         photo:
@@ -2612,7 +2612,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Kate Winslet',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1975-10-05',
         death_date: null,
         photo:
@@ -2624,7 +2624,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Billy Zane',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1966-02-24',
         death_date: null,
         photo:
@@ -2636,7 +2636,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Kathy Bates',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1948-06-28',
         death_date: null,
         photo:
@@ -2648,7 +2648,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Frances Fisher',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1952-05-11',
         death_date: null,
         photo:
@@ -2660,7 +2660,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Liam Neeson',
-        country_id: 13,
+        country: 'Ireland',
         birth_date: '1952-06-07',
         death_date: null,
         photo:
@@ -2672,7 +2672,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Katie Holmes',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1978-12-18',
         death_date: null,
         photo:
@@ -2684,7 +2684,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Rutger Hauer',
-        country_id: 20,
+        country: 'Netherlands',
         birth_date: '1944-01-23',
         death_date: '2019-07-19',
         photo:
@@ -2696,7 +2696,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Sean Young',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1959-11-20',
         death_date: null,
         photo:
@@ -2708,7 +2708,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Edward James Olmos',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1947-02-24',
         death_date: null,
         photo:
@@ -2720,7 +2720,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Daryl Hannah',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1960-12-03',
         death_date: null,
         photo:
@@ -2732,7 +2732,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Hugh Jackman',
-        country_id: 6,
+        country: 'Australia',
         birth_date: '1968-10-12',
         death_date: null,
         photo:
@@ -2744,7 +2744,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Piper Perabo',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1976-10-31',
         death_date: null,
         photo:
@@ -2756,7 +2756,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Milla Jovovich',
-        country_id: 3,
+        country: 'Ukraine',
         birth_date: '1975-12-17',
         death_date: null,
         photo:
@@ -2768,7 +2768,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Chris Tucker',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1971-08-31',
         death_date: null,
         photo:
@@ -2780,7 +2780,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Eric Mabius',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1971-04-22',
         death_date: null,
         photo:
@@ -2792,7 +2792,7 @@ const postgresData = () => {
       },
       {
         full_name: 'James Purefoy',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1964-06-03',
         death_date: null,
         photo:
@@ -2804,7 +2804,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Martin Crewes',
-        country_id: 6,
+        country: 'Australia',
         birth_date: '1968-02-28',
         death_date: null,
         photo:
@@ -2816,7 +2816,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Ben Kingsley',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1943-12-31',
         death_date: null,
         photo:
@@ -2828,7 +2828,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Max von Sydow',
-        country_id: 34,
+        country: 'Sweden',
         birth_date: '1929-04-10',
         death_date: '2020-03-08',
         photo:
@@ -2840,7 +2840,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Michelle Williams',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1980-09-09',
         death_date: null,
         photo:
@@ -2852,7 +2852,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Patrick Stewart',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1940-07-13',
         death_date: null,
         photo:
@@ -2864,7 +2864,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Dafne Keen',
-        country_id: 38,
+        country: 'Spain',
         birth_date: '2005-01-04',
         death_date: null,
         photo:
@@ -2876,7 +2876,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Boyd Holbrook',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1981-09-01',
         death_date: null,
         photo:
@@ -2888,7 +2888,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Stephen Merchant',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1974-11-24',
         death_date: null,
         photo:
@@ -2900,7 +2900,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Tim Robbins',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1958-10-16',
         death_date: null,
         photo:
@@ -2912,7 +2912,7 @@ const postgresData = () => {
       },
       {
         full_name: 'William Sadler',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1950-04-13',
         death_date: null,
         photo:
@@ -2924,7 +2924,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Clancy Brown',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1959-01-05',
         death_date: null,
         photo:
@@ -2936,7 +2936,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Gil Bellows',
-        country_id: 15,
+        country: 'Canada',
         birth_date: '1967-06-28',
         death_date: null,
         photo:
@@ -2948,7 +2948,7 @@ const postgresData = () => {
       },
       {
         full_name: 'George Clooney',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1961-05-06',
         death_date: null,
         photo:
@@ -2960,7 +2960,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Matt Damon',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1970-10-08',
         death_date: null,
         photo:
@@ -2972,7 +2972,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Julia Roberts',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1967-10-28',
         death_date: null,
         photo:
@@ -2984,7 +2984,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Andy Garcia',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1956-04-12',
         death_date: null,
         photo:
@@ -2996,7 +2996,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Bradley Cooper',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1975-01-05',
         death_date: null,
         photo:
@@ -3008,7 +3008,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Ed Helms',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1974-01-24',
         death_date: null,
         photo:
@@ -3020,7 +3020,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Zach Galifianakis',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1969-10-01',
         death_date: null,
         photo:
@@ -3032,7 +3032,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Justin Bartha',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1978-07-21',
         death_date: null,
         photo:
@@ -3044,7 +3044,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Heather Graham',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1970-01-29',
         death_date: null,
         photo:
@@ -3056,7 +3056,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Domhnall Gleeson',
-        country_id: 13,
+        country: 'Ireland',
         birth_date: '1983-05-12',
         death_date: null,
         photo:
@@ -3068,7 +3068,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Will Poulter',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1993-01-28',
         death_date: null,
         photo:
@@ -3080,7 +3080,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Forrest Goodluck',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1998-08-06',
         death_date: null,
         photo:
@@ -3092,7 +3092,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Jessica Chastain',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1977-03-24',
         death_date: null,
         photo:
@@ -3104,7 +3104,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Kristen Wiig',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1973-08-22',
         death_date: null,
         photo:
@@ -3116,7 +3116,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Jeff Daniels',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1955-02-19',
         death_date: null,
         photo:
@@ -3128,7 +3128,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Michael Pena',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1976-01-31',
         death_date: null,
         photo:
@@ -3140,7 +3140,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Jonah Hill',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1983-12-20',
         death_date: null,
         photo:
@@ -3152,7 +3152,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Margot Robbie',
-        country_id: 6,
+        country: 'Australia',
         birth_date: '1990-07-02',
         death_date: null,
         photo:
@@ -3164,7 +3164,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Matthew McConaughey',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1969-11-04',
         death_date: null,
         photo:
@@ -3176,7 +3176,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Kyle Chandler',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1965-09-17',
         death_date: null,
         photo:
@@ -3188,7 +3188,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Jean Reno',
-        country_id: 5,
+        country: 'France',
         birth_date: '1948-07-30',
         death_date: null,
         photo:
@@ -3200,7 +3200,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Natalie Portman',
-        country_id: 11,
+        country: 'Israel',
         birth_date: '1981-06-09',
         death_date: null,
         photo:
@@ -3212,7 +3212,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Danny Aiello',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1933-06-20',
         death_date: '2019-12-12',
         photo:
@@ -3224,7 +3224,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Michael Badalucco',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1954-12-20',
         death_date: null,
         photo:
@@ -3236,7 +3236,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Tom Hanks',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1956-07-09',
         death_date: null,
         photo:
@@ -3248,7 +3248,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Christopher Walken',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1943-03-31',
         death_date: null,
         photo:
@@ -3260,7 +3260,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Martin Sheen',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1940-08-03',
         death_date: null,
         photo:
@@ -3272,7 +3272,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Amy Adams',
-        country_id: 14,
+        country: 'Italy',
         birth_date: '1974-08-20',
         death_date: null,
         photo:
@@ -3286,7 +3286,7 @@ const postgresData = () => {
     directors: [
       {
         full_name: 'Steven Spielberg',
-        country_id: 1,
+        country: 'United States of America',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Ready_Player_One_Japan_Premiere_Red_Carpet_Steven_Spielberg_%2841604920761%29_%28cropped%29.jpg/240px-Ready_Player_One_Japan_Premiere_Red_Carpet_Steven_Spielberg_%2841604920761%29_%28cropped%29.jpg',
         biography:
@@ -3298,7 +3298,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Ridley Scott',
-        country_id: 2,
+        country: 'Great Britain (England)',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/NASA_Journey_to_Mars_and_%E2%80%9CThe_Martian%E2%80%9D_%28201508180030HQ%29.jpg/220px-NASA_Journey_to_Mars_and_%E2%80%9CThe_Martian%E2%80%9D_%28201508180030HQ%29.jpg',
         biography:
@@ -3310,7 +3310,7 @@ const postgresData = () => {
       },
       {
         full_name: 'James Cameron',
-        country_id: 15,
+        country: 'Canada',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/James_Cameron_by_Gage_Skidmore.jpg/240px-James_Cameron_by_Gage_Skidmore.jpg',
         biography:
@@ -3322,7 +3322,7 @@ const postgresData = () => {
       },
       {
         full_name: 'James Mangold',
-        country_id: 1,
+        country: 'United States of America',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/James_Mangold_Press_Conference_Logan_Berlinale_2017_03.jpg/440px-James_Mangold_Press_Conference_Logan_Berlinale_2017_03.jpg',
         biography:
@@ -3334,7 +3334,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Gore Verbinski',
-        country_id: 1,
+        country: 'United States of America',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Verbinski_gore.jpg/440px-Verbinski_gore.jpg',
         biography:
@@ -3346,7 +3346,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Peter Jackson',
-        country_id: 30,
+        country: 'New Zealand',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Peter_Jackson_SDCC_2014.jpg/440px-Peter_Jackson_SDCC_2014.jpg',
         biography:
@@ -3358,7 +3358,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Tim Burton',
-        country_id: 1,
+        country: 'United States of America',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Tim_Burton_%287587109150%29.jpg/440px-Tim_Burton_%287587109150%29.jpg',
         biography:
@@ -3370,7 +3370,7 @@ const postgresData = () => {
       },
       {
         full_name: 'John McTiernan',
-        country_id: 1,
+        country: 'United States of America',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/b/b2/John_McTiernan_Deauville_2014_3.jpg',
         biography:
@@ -3382,7 +3382,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Brian De Palma',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1940-09-11',
         death_date: null,
         photo:
@@ -3394,7 +3394,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Neil Patrick Jordan',
-        country_id: 13,
+        country: 'Ireland',
         birth_date: '1950-02-25',
         death_date: null,
         photo:
@@ -3406,7 +3406,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Michael Hirst',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1952-09-21',
         death_date: null,
         photo:
@@ -3418,7 +3418,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Mel Gibson',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1956-01-03',
         death_date: null,
         photo:
@@ -3430,7 +3430,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Francis Ford Coppola',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1939-04-07',
         death_date: null,
         photo:
@@ -3442,7 +3442,7 @@ const postgresData = () => {
       },
       {
         full_name: 'M. Night Shyamalan',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1970-08-06',
         death_date: null,
         photo:
@@ -3454,7 +3454,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Christopher Nolan',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1970-07-30',
         death_date: null,
         photo:
@@ -3466,7 +3466,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Joss Whedon',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1964-06-23',
         death_date: null,
         photo:
@@ -3478,7 +3478,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Chris Columbus',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1958-09-10',
         death_date: null,
         photo:
@@ -3490,7 +3490,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Andrew Adamson',
-        country_id: 30,
+        country: 'New Zealand',
         birth_date: '1966-12-01',
         death_date: null,
         photo:
@@ -3502,7 +3502,7 @@ const postgresData = () => {
       },
       {
         full_name: 'George Miller',
-        country_id: 6,
+        country: 'Australia',
         birth_date: '1945-03-03',
         death_date: null,
         photo:
@@ -3514,7 +3514,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Lana Wachowski',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1965-06-21',
         death_date: null,
         photo:
@@ -3526,7 +3526,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Lilly Wachowski',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1967-12-29',
         death_date: null,
         photo:
@@ -3538,7 +3538,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Luc Besson',
-        country_id: 5,
+        country: 'France',
         birth_date: '1959-03-18',
         death_date: null,
         photo:
@@ -3550,7 +3550,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Paul W.S. Anderson',
-        country_id: 2,
+        country: 'Great Britain (England)',
         birth_date: '1965-03-04',
         death_date: null,
         photo:
@@ -3562,7 +3562,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Martin Scorsese',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1942-11-17',
         death_date: null,
         photo:
@@ -3574,7 +3574,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Frank Darabont',
-        country_id: 5,
+        country: 'France',
         birth_date: '1959-01-28',
         death_date: null,
         photo:
@@ -3586,7 +3586,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Steven Soderbergh',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1963-01-14',
         death_date: null,
         photo:
@@ -3598,7 +3598,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Todd Phillips',
-        country_id: 1,
+        country: 'United States of America',
         birth_date: '1970-12-20',
         death_date: null,
         photo:
@@ -3610,7 +3610,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Alejandro Gonzalez Inarritu',
-        country_id: 39,
+        country: 'Mexico',
         birth_date: '1963-08-15',
         death_date: null,
         photo:
@@ -3625,7 +3625,7 @@ const postgresData = () => {
       {
         title: 'Indiana Jones: Raiders of the Lost Ark',
         release_year: 1981,
-        genre_id: 1,
+        genre: 'Action',
         poster:
           'https://m.media-amazon.com/images/I/81UOBSDQh0L._AC_UF894,1000_QL80_.jpg',
         trailer: 'https://www.youtube.com/watch?v=0xQSIdSRlAk',
@@ -3637,7 +3637,7 @@ const postgresData = () => {
       {
         title: 'Alien',
         release_year: 1979,
-        genre_id: 11,
+        genre: 'Horror',
         poster:
           'https://upload.wikimedia.org/wikipedia/ru/thumb/c/c3/Alien_movie_poster.jpg/232px-Alien_movie_poster.jpg',
         trailer: 'https://www.youtube.com/watch?v=4v4Kn0J6E-I',
@@ -3649,7 +3649,7 @@ const postgresData = () => {
       {
         title: 'Aliens',
         release_year: 1986,
-        genre_id: 1,
+        genre: 'Action',
         poster:
           'https://upload.wikimedia.org/wikipedia/ru/thumb/f/fb/Aliens_poster.jpg/196px-Aliens_poster.jpg',
         trailer: 'https://www.youtube.com/watch?v=QlztL3cYwHs',
@@ -3661,7 +3661,7 @@ const postgresData = () => {
       {
         title: 'Pirates of the Caribbean: The Curse of the Black Pearl',
         release_year: 2003,
-        genre_id: 9,
+        genre: 'Fantasy',
         poster:
           'https://upload.wikimedia.org/wikipedia/ru/thumb/7/79/Pirates-of-the-Caribbean-The-Curse-of-the-Black-Pearl-.jpg/201px-Pirates-of-the-Caribbean-The-Curse-of-the-Black-Pearl-.jpg',
         trailer: 'https://www.youtube.com/watch?v=gPBaZpDONgg',
@@ -3673,7 +3673,7 @@ const postgresData = () => {
       {
         title: 'The Lord of the Rings: The Fellowship of the Ring',
         release_year: 2001,
-        genre_id: 2,
+        genre: 'Adventure',
         poster:
           'https://upload.wikimedia.org/wikipedia/en/f/fb/Lord_Rings_Fellowship_Ring.jpg',
         trailer: 'https://www.youtube.com/watch?v=_nZdmwHrcnw',
@@ -3684,7 +3684,7 @@ const postgresData = () => {
       },
       {
         title: 'Indiana Jones and the Temple of Doom',
-        genre_id: 2,
+        genre: 'Adventure',
         poster:
           'https://m.media-amazon.com/images/I/61AbSnzGR+L._AC_UF894,1000_QL80_.jpg',
         trailer: 'https://www.youtube.com/watch?v=WBdyLyijZhU',
@@ -3696,7 +3696,7 @@ const postgresData = () => {
       },
       {
         title: 'Alice in Wonderland',
-        genre_id: 9,
+        genre: 'Fantasy',
         poster:
           'https://upload.wikimedia.org/wikipedia/en/3/36/Alice_in_Wonderland_%282010_film%29.png',
         trailer: 'https://www.youtube.com/watch?v=9POCgSRVvf0',
@@ -3707,8 +3707,8 @@ const postgresData = () => {
         updated_at: now,
       },
       {
-        title: "Pirates of the Caribbean: At World's End",
-        genre_id: 9,
+        title: 'Pirates of the Caribbean: At World`s End',
+        genre: 'Fantasy',
         poster:
           'https://upload.wikimedia.org/wikipedia/en/5/5a/Pirates_AWE_Poster.jpg',
         trailer: 'https://www.youtube.com/watch?v=kmxWPr8s_Y4',
@@ -3720,7 +3720,7 @@ const postgresData = () => {
       },
       {
         title: 'The Terminator',
-        genre_id: 18,
+        genre: 'Thriller',
         poster:
           'https://upload.wikimedia.org/wikipedia/en/7/70/Terminator1984movieposter.jpg',
         trailer: 'https://www.youtube.com/watch?v=k64P4l2Wmeg',
@@ -3732,7 +3732,7 @@ const postgresData = () => {
       },
       {
         title: 'Predator',
-        genre_id: 15,
+        genre: 'Science fiction',
         poster:
           'https://i.etsystatic.com/35396601/r/il/0ecb17/4578464483/il_fullxfull.4578464483_83es.jpg',
         trailer: 'https://www.youtube.com/watch?v=_1wDBNHYDv8',
@@ -3743,8 +3743,8 @@ const postgresData = () => {
         updated_at: now,
       },
       {
-        title: "Pirates of the Caribbean: Dead Man's Chest",
-        genre_id: 2,
+        title: 'Pirates of the Caribbean: Dead Man`s Chest',
+        genre: 'Adventure',
         release_year: 2006,
         poster:
           'https://m.media-amazon.com/images/I/71leEAIbMNL._AC_UF894,1000_QL80_.jpg',
@@ -3756,7 +3756,7 @@ const postgresData = () => {
       },
       {
         title: 'The Lord of the Rings: The Two Towers',
-        genre_id: 9,
+        genre: 'Fantasy',
         release_year: 2002,
         poster:
           'https://static.posters.cz/image/750/%D0%9F%D0%BB%D0%B0%D0%BA%D0%B0%D1%82%D0%B8/lord-of-the-rings-two-towers-one-sheet-i11970.jpg',
@@ -3768,7 +3768,7 @@ const postgresData = () => {
       },
       {
         title: 'Gladiator',
-        genre_id: 8,
+        genre: 'Drama',
         release_year: 2000,
         poster:
           'https://static.displate.com/857x1200/displate/2019-03-05/3aec87b7a6fe397484c598bd091f9d7f_836bccaf66e0a4b08935a1d40c8de8a2.jpg',
@@ -3780,7 +3780,7 @@ const postgresData = () => {
       },
       {
         title: 'Braveheart',
-        genre_id: 10,
+        genre: 'Historic',
         release_year: 1995,
         poster:
           'https://static.displate.com/857x1200/displate/2020-04-08/efbabfd1f52286165f0e165a3ea37482_6af217f9259c71d711534ce9549eeaf5.jpg',
@@ -3792,7 +3792,7 @@ const postgresData = () => {
       },
       {
         title: 'The Godfather',
-        genre_id: 6,
+        genre: 'Crime film',
         release_year: 1972,
         poster:
           'https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg',
@@ -3804,7 +3804,7 @@ const postgresData = () => {
       },
       {
         title: 'E.T. the Extra-Terrestrial',
-        genre_id: 9,
+        genre: 'Fantasy',
         release_year: 1982,
         poster: 'https://i.ebayimg.com/images/g/rnkAAOSwyvBjOBm0/s-l1200.jpg',
         trailer: 'https://www.youtube.com/watch?v=qYAETtIIClk',
@@ -3815,7 +3815,7 @@ const postgresData = () => {
       },
       {
         title: 'Avatar',
-        genre_id: 1,
+        genre: 'Action',
         release_year: 2009,
         poster:
           'https://m.media-amazon.com/images/I/41kTVLeW1CL._AC_UF894,1000_QL80_.jpg',
@@ -3827,7 +3827,7 @@ const postgresData = () => {
       },
       {
         title: 'Edward Scissorhands',
-        genre_id: 8,
+        genre: 'Drama',
         release_year: 1990,
         poster: 'https://i.ebayimg.com/images/g/8EsAAMXQVT9Sse40/s-l1600.jpg',
         trailer: 'https://www.youtube.com/watch?v=TBHIO60whNw',
@@ -3838,7 +3838,7 @@ const postgresData = () => {
       },
       {
         title: 'Die Hard',
-        genre_id: 18,
+        genre: 'Thriller',
         release_year: 1988,
         poster:
           'https://image.tmdb.org/t/p/original/aJCpHDC6RoGz7d1Fzayl019xnxX.jpg',
@@ -3850,7 +3850,7 @@ const postgresData = () => {
       },
       {
         title: 'Interview with the Vampire',
-        genre_id: 11,
+        genre: 'Horror',
         release_year: 1994,
         poster:
           'https://m.media-amazon.com/images/I/51v26fotaOL._AC_UF894,1000_QL80_.jpg',
@@ -3862,7 +3862,7 @@ const postgresData = () => {
       },
       {
         title: 'The Sixth Sense',
-        genre_id: 18,
+        genre: 'Thriller',
         release_year: 1999,
         poster: 'https://i.ebayimg.com/images/g/~rIAAOSwMJJg5rJL/s-l1600.jpg',
         trailer: 'https://www.youtube.com/watch?v=YxvpPqsPhf8',
@@ -3873,7 +3873,7 @@ const postgresData = () => {
       },
       {
         title: 'The Dark Knight',
-        genre_id: 8,
+        genre: 'Drama',
         release_year: 2008,
         poster:
           'https://static.posters.cz/image/1300/art-photo/the-dark-knight-trilogy-on-fire-i197743.jpg',
@@ -3885,7 +3885,7 @@ const postgresData = () => {
       },
       {
         title: 'Terminator 2: Judgment Day',
-        genre_id: 1,
+        genre: 'Action',
         release_year: 1991,
         poster:
           'https://m.media-amazon.com/images/M/MV5BMGU2NzRmZjUtOGUxYS00ZjdjLWEwZWItY2NlM2JhNjkxNTFmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg',
@@ -3897,7 +3897,7 @@ const postgresData = () => {
       },
       {
         title: 'The Village',
-        genre_id: 18,
+        genre: 'Thriller',
         release_year: 2004,
         poster:
           'https://m.media-amazon.com/images/I/41cS6fwQErL._AC_UF894,1000_QL80_.jpg',
@@ -3909,7 +3909,7 @@ const postgresData = () => {
       },
       {
         title: 'The Hobbit: An Unexpected Journey',
-        genre_id: 2,
+        genre: 'Adventure',
         release_year: 2012,
         poster:
           'https://static.posters.cz/image/750/%D0%9F%D0%BB%D0%B0%D0%BA%D0%B0%D1%82%D0%B8/the-hobbit-an-unexpected-journey-i34677.jpg',
@@ -3921,7 +3921,7 @@ const postgresData = () => {
       },
       {
         title: 'The Avengers',
-        genre_id: 1,
+        genre: 'Action',
         release_year: 2012,
         poster:
           'https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg',
@@ -3933,7 +3933,7 @@ const postgresData = () => {
       },
       {
         title: 'The Dark Knight Rises',
-        genre_id: 2,
+        genre: 'Adventure',
         release_year: 2012,
         poster:
           'https://static.posters.cz/image/1300/art-photo/the-dark-knight-trilogy-rise-i184445.jpg',
@@ -3945,7 +3945,7 @@ const postgresData = () => {
       },
       {
         title: 'Inception',
-        genre_id: 2,
+        genre: 'Adventure',
         release_year: 2010,
         poster:
           'https://cdn11.bigcommerce.com/s-yzgoj/images/stencil/1280x1280/products/2919271/5944675/MOVEB46211__19379.1679590452.jpg',
@@ -3957,7 +3957,7 @@ const postgresData = () => {
       },
       {
         title: 'Harry Potter and the Chamber of Secrets',
-        genre_id: 9,
+        genre: 'Fantasy',
         release_year: 2002,
         poster:
           'https://m.media-amazon.com/images/M/MV5BMjE0YjUzNDUtMjc5OS00MTU3LTgxMmUtODhkOThkMzdjNWI4XkEyXkFqcGdeQXVyMTA3MzQ4MTc0._V1_.jpg',
@@ -3969,7 +3969,7 @@ const postgresData = () => {
       },
       {
         title: 'The Chronicles of Narnia',
-        genre_id: 9,
+        genre: 'Fantasy',
         release_year: 2005,
         poster:
           'https://m.media-amazon.com/images/M/MV5BMTc0NTUwMTU5OV5BMl5BanBnXkFtZTcwNjAwNzQzMw@@._V1_.jpg',
@@ -3981,7 +3981,7 @@ const postgresData = () => {
       },
       {
         title: 'Mad Max: Fury Road',
-        genre_id: 1,
+        genre: 'Action',
         release_year: 2015,
         poster:
           'https://m.media-amazon.com/images/M/MV5BN2EwM2I5OWMtMGQyMi00Zjg1LWJkNTctZTdjYTA4OGUwZjMyXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg',
@@ -3993,7 +3993,7 @@ const postgresData = () => {
       },
       {
         title: 'Jurassic Park',
-        genre_id: 2,
+        genre: 'Adventure',
         release_year: 1993,
         poster:
           'https://vice-press.com/cdn/shop/products/Jurassic-Park-Editions-poster-florey.jpg',
@@ -4005,7 +4005,7 @@ const postgresData = () => {
       },
       {
         title: 'The Matrix',
-        genre_id: 1,
+        genre: 'Action',
         release_year: 1999,
         poster:
           'https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg',
@@ -4017,7 +4017,7 @@ const postgresData = () => {
       },
       {
         title: 'Titanic',
-        genre_id: 8,
+        genre: 'Drama',
         release_year: 1997,
         poster:
           'https://m.media-amazon.com/images/I/71uoicxpqoS._AC_UF1000,1000_QL80_.jpg',
@@ -4028,8 +4028,8 @@ const postgresData = () => {
         updated_at: now,
       },
       {
-        title: "Harry Potter and the Sorcerer's Stone",
-        genre_id: 9,
+        title: 'Harry Potter and the Sorcerer`s Stone',
+        genre: 'Fantasy',
         release_year: 2001,
         poster:
           'https://static.posters.cz/image/1300/%D0%9F%D0%BB%D0%B0%D0%BA%D0%B0%D1%82%D0%B8/harry-potter-philosopher-s-stone-i104639.jpg',
@@ -4041,7 +4041,7 @@ const postgresData = () => {
       },
       {
         title: 'Batman Begins',
-        genre_id: 2,
+        genre: 'Adventure',
         release_year: 2005,
         poster:
           'https://m.media-amazon.com/images/M/MV5BOTY4YjI2N2MtYmFlMC00ZjcyLTg3YjEtMDQyM2ZjYzQ5YWFkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg',
@@ -4053,7 +4053,7 @@ const postgresData = () => {
       },
       {
         title: 'Blade Runner',
-        genre_id: 18,
+        genre: 'Thriller',
         release_year: 1982,
         poster:
           'https://upload.wikimedia.org/wikipedia/uk/archive/5/53/20110104212121%21Blade_Runner_poster.jpg',
@@ -4065,7 +4065,7 @@ const postgresData = () => {
       },
       {
         title: 'The Prestige',
-        genre_id: 18,
+        genre: 'Thriller',
         release_year: 2006,
         poster:
           'https://image.tmdb.org/t/p/original/tRNlZbgNCNOpLpbPEz5L8G8A0JN.jpg',
@@ -4077,7 +4077,7 @@ const postgresData = () => {
       },
       {
         title: 'The Fifth Element',
-        genre_id: 1,
+        genre: 'Action',
         release_year: 1997,
         poster:
           'https://m.media-amazon.com/images/I/51F5dxl+MwL._AC_UF894,1000_QL80_.jpg',
@@ -4089,7 +4089,7 @@ const postgresData = () => {
       },
       {
         title: 'Resident Evil',
-        genre_id: 11,
+        genre: 'Horror',
         release_year: 2002,
         poster:
           'https://m.media-amazon.com/images/M/MV5BZmI1ZGRhNDYtOGVjZC00MmUyLThlNTktMTQyZGE3MzE1ZTdlXkEyXkFqcGdeQXVyNDE5MTU2MDE@._V1_.jpg',
@@ -4101,7 +4101,7 @@ const postgresData = () => {
       },
       {
         title: 'Shutter Island',
-        genre_id: 18,
+        genre: 'Thriller',
         release_year: 2010,
         poster:
           'https://m.media-amazon.com/images/I/51MsI8xR-NL._AC_UF894,1000_QL80_.jpg',
@@ -4113,7 +4113,7 @@ const postgresData = () => {
       },
       {
         title: 'Logan',
-        genre_id: 8,
+        genre: 'Drama',
         release_year: 2017,
         poster:
           'https://m.media-amazon.com/images/I/51wewtpj08L._AC_UF894,1000_QL80_.jpg',
@@ -4125,7 +4125,7 @@ const postgresData = () => {
       },
       {
         title: 'The Shawshank Redemption',
-        genre_id: 8,
+        genre: 'Drama',
         release_year: 1994,
         poster:
           'https://m.media-amazon.com/images/I/51WYsbIa7TS._AC_UF1000,1000_QL80_.jpg',
@@ -4136,8 +4136,8 @@ const postgresData = () => {
         updated_at: now,
       },
       {
-        title: "Ocean's Eleven",
-        genre_id: 5,
+        title: 'Ocean`s Eleven',
+        genre: 'Comedy',
         release_year: 2001,
         poster:
           'https://m.media-amazon.com/images/M/MV5BYzVmYzVkMmUtOGRhMi00MTNmLThlMmUtZTljYjlkMjNkMjJkXkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_.jpg',
@@ -4149,7 +4149,7 @@ const postgresData = () => {
       },
       {
         title: 'The Hangover',
-        genre_id: 5,
+        genre: 'Comedy',
         release_year: 2009,
         poster:
           'https://images.fineartamerica.com/images/artworkimages/medium/3/the-hangover-movie-poster-essencejac-kowski.jpg',
@@ -4161,7 +4161,7 @@ const postgresData = () => {
       },
       {
         title: 'The Revenant',
-        genre_id: 2,
+        genre: 'Adventure',
         release_year: 2015,
         poster:
           'https://image.tmdb.org/t/p/original/o6XkwTovSWryJoEY3hoywwHLJtK.jpg',
@@ -4173,7 +4173,7 @@ const postgresData = () => {
       },
       {
         title: 'The Martian',
-        genre_id: 8,
+        genre: 'Drama',
         release_year: 2015,
         poster:
           'https://mir-s3-cdn-cf.behance.net/project_modules/1400/a6be4a102352277.621937d23c642.jpg',
@@ -4185,7 +4185,7 @@ const postgresData = () => {
       },
       {
         title: 'The Wolf of Wall Street',
-        genre_id: 4,
+        genre: 'Biopic',
         release_year: 2013,
         poster:
           'https://m.media-amazon.com/images/M/MV5BMjIxMjgxNTk0MF5BMl5BanBnXkFtZTgwNjIyOTg2MDE@._V1_.jpg',
@@ -4197,7 +4197,7 @@ const postgresData = () => {
       },
       {
         title: 'Leon: The Professional',
-        genre_id: 18,
+        genre: 'Thriller',
         release_year: 1994,
         poster:
           'https://m.media-amazon.com/images/I/61P-HNp5QsL._AC_UF894,1000_QL80_.jpg',
@@ -4209,7 +4209,7 @@ const postgresData = () => {
       },
       {
         title: 'Catch Me If You Can',
-        genre_id: 4,
+        genre: 'Biopic',
         release_year: 2002,
         poster: 'https://i.ebayimg.com/images/g/Yl0AAOSwZ8ZW9AuW/s-l1600.jpg',
         trailer: 'https://www.youtube.com/watch?v=s-7pyIxz8Qg',
@@ -4222,7 +4222,7 @@ const postgresData = () => {
     studios: [
       {
         title: 'Lucasfilm Ltd.',
-        location_id: 1,
+        location: 'San Francisco',
         foundation_year: 1971,
         logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Lucasfilm_logo.svg/250px-Lucasfilm_logo.svg.png',
         about:
@@ -4232,7 +4232,7 @@ const postgresData = () => {
       },
       {
         title: '20th Century Studios, Inc.',
-        location_id: 2,
+        location: 'Los Angeles',
         foundation_year: 1935,
         logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlWG8HxHW6-VKfUD-QiVpnFeHfh4u_qYguFA&s',
         about:
@@ -4242,7 +4242,7 @@ const postgresData = () => {
       },
       {
         title: 'Walt Disney Pictures',
-        location_id: 5,
+        location: 'Burbank',
         foundation_year: 1929,
         logo: 'https://i.insider.com/5f5770dee6ff30001d4e7684?width=800&format=jpeg&auto=webp',
         about:
@@ -4252,7 +4252,7 @@ const postgresData = () => {
       },
       {
         title: 'New Line Cinema',
-        location_id: 2,
+        location: 'Los Angeles',
         foundation_year: 1967,
         logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC-5SpIGPcNSnOT5_jDBdLa9zAE3yESllFFw&s',
         about:
@@ -4262,7 +4262,7 @@ const postgresData = () => {
       },
       {
         title: 'Paramount Pictures',
-        location_id: 2,
+        location: 'Los Angeles',
         foundation_year: 1912,
         logo: 'https://i.pinimg.com/736x/e1/c6/8f/e1c68fd07166e48c6bd1194134d432e7.jpg',
         about:
@@ -4272,7 +4272,7 @@ const postgresData = () => {
       },
       {
         title: 'Universal Studios',
-        location_id: 5,
+        location: 'Burbank',
         foundation_year: 1912,
         logo: 'https://media.tacdn.com/media/attractions-splice-spp-674x446/09/28/92/ef.jpg',
         about:
@@ -4282,7 +4282,7 @@ const postgresData = () => {
       },
       {
         title: 'Hemdale Film Corporation',
-        location_id: 4,
+        location: 'London',
         foundation_year: 1967,
         logo: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/02df2846-a4a8-4c9d-bc27-349080c98596/d743mql-1d4b0afe-7568-4b74-b1cb-53728cf8578d.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzAyZGYyODQ2LWE0YTgtNGM5ZC1iYzI3LTM0OTA4MGM5ODU5NlwvZDc0M21xbC0xZDRiMGFmZS03NTY4LTRiNzQtYjFjYi01MzcyOGNmODU3OGQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.xVvAJfFNP9v7LWDWBB19jdeIoLPMkdtqONXkP-pHFL8',
         about:
@@ -4292,7 +4292,7 @@ const postgresData = () => {
       },
       {
         title: 'Columbia Pictures',
-        location_id: 5,
+        location: 'Burbank',
         foundation_year: 1924,
         logo: 'https://pbs.twimg.com/profile_images/3726733706/fa7e2dcde69c450a3c6e7e14cec1020d_400x400.png',
         about:
@@ -4302,7 +4302,7 @@ const postgresData = () => {
       },
       {
         title: 'Scott Free Productions',
-        location_id: 4,
+        location: 'London',
         foundation_year: 1970,
         logo: 'https://pbs.twimg.com/media/GE9VNoKXAAA0kch.jpg',
         about:
@@ -4312,7 +4312,7 @@ const postgresData = () => {
       },
       {
         title: 'Corus Entertainment',
-        location_id: 6,
+        location: 'Toronto',
         foundation_year: 1921,
         logo: 'https://www.anbmedia.com/wp-content/uploads/2023/02/Corus-Entertainment.jpg',
         about:
@@ -4322,7 +4322,7 @@ const postgresData = () => {
       },
       {
         title: 'DreamWorks Pictures',
-        location_id: 5,
+        location: 'Burbank',
         foundation_year: 1994,
         logo: 'https://static.tvtropes.org/pmwiki/pub/images/dreamworks_logo.png',
         about:
@@ -4332,7 +4332,7 @@ const postgresData = () => {
       },
       {
         title: 'Warner Bros.',
-        location_id: 5,
+        location: 'Burbank',
         foundation_year: 1923,
         logo: 'https://entertainment.time.com/wp-content/uploads/sites/3/2012/09/warner_bros-_pictures_intro.jpg?w=720&h=480&crop=1',
         about:
@@ -4342,7 +4342,7 @@ const postgresData = () => {
       },
       {
         title: 'Hollywood Pictures',
-        location_id: 5,
+        location: 'Burbank',
         foundation_year: 1989,
         logo: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/01093dcf-3500-4866-b84d-fb3c90fa9cfc/dfosopf-376bd8a3-1b5f-4933-b12c-f9d49f58486e.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzAxMDkzZGNmLTM1MDAtNDg2Ni1iODRkLWZiM2M5MGZhOWNmY1wvZGZvc29wZi0zNzZiZDhhMy0xYjVmLTQ5MzMtYjEyYy1mOWQ0OWY1ODQ4NmUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.XASaLLq_eWT7j3a-xmwD723hp1pnezJJTH74gIcvVII',
         about:
@@ -4352,7 +4352,7 @@ const postgresData = () => {
       },
       {
         title: 'TriStar Pictures',
-        location_id: 5,
+        location: 'Burbank',
         foundation_year: 1982,
         logo: 'https://global.discourse-cdn.com/business7/uploads/mst3k/original/3X/a/4/a4fb49ba2fddf84c144e9bdf9dad6096eaa8680f.jpeg',
         about:
@@ -4362,7 +4362,7 @@ const postgresData = () => {
       },
       {
         title: 'Touchstone Pictures',
-        location_id: 5,
+        location: 'Burbank',
         foundation_year: 1984,
         logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/a/af/Touchstone_Pictures_logo.svg/440px-Touchstone_Pictures_logo.svg.png',
         about:
@@ -4372,7 +4372,7 @@ const postgresData = () => {
       },
       {
         title: 'Marvel Studios',
-        location_id: 7,
+        location: 'New York',
         foundation_year: 1993,
         logo: 'https://thechronicleclc.com/wp-content/uploads/2024/05/Marvel_Studios-image.webp',
         about:
@@ -4382,7 +4382,7 @@ const postgresData = () => {
       },
       {
         title: 'Walden Media',
-        location_id: 5,
+        location: 'Burbank',
         foundation_year: 2000,
         logo: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c15210a3-97ee-467f-8ee6-deaa7f724e14/dfrn3bd-38b6dc9b-e628-4559-ab5c-5168f2b70899.png/v1/fill/w_960,h_720,q_80,strp/walden_media__2005___logo_remake_by_scottbrody666_dfrn3bd-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzIwIiwicGF0aCI6IlwvZlwvYzE1MjEwYTMtOTdlZS00NjdmLThlZTYtZGVhYTdmNzI0ZTE0XC9kZnJuM2JkLTM4YjZkYzliLWU2MjgtNDU1OS1hYjVjLTUxNjhmMmI3MDg5OS5wbmciLCJ3aWR0aCI6Ijw9OTYwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.C2TCaG2Ur8cNNdo0kj_EU2MdP9TW3rRv99damCCDgAE',
         about:
@@ -4392,7 +4392,7 @@ const postgresData = () => {
       },
       {
         title: 'WingNut Films',
-        location_id: 4,
+        location: 'London',
         foundation_year: 1987,
         logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/2/27/Wingnut_Films_logo.svg/440px-Wingnut_Films_logo.svg.png',
         about:
@@ -4402,7 +4402,7 @@ const postgresData = () => {
       },
       {
         title: 'Legendary Pictures',
-        location_id: 5,
+        location: 'Burbank',
         foundation_year: 2000,
         logo: 'https://variety.com/wp-content/uploads/2013/03/legendary_pictures.jpg',
         about:
@@ -4412,7 +4412,7 @@ const postgresData = () => {
       },
       {
         title: 'Syncopy Inc.',
-        location_id: 4,
+        location: 'London',
         foundation_year: 2001,
         logo: 'https://upload.wikimedia.org/wikipedia/uk/6/6a/SyncopyInc._logo.png',
         about:
@@ -4422,7 +4422,7 @@ const postgresData = () => {
       },
       {
         title: 'Village Roadshow Pictures',
-        location_id: 5,
+        location: 'Burbank',
         foundation_year: 1989,
         logo: 'https://variety.com/wp-content/uploads/2020/12/VRL-logoj-cr-res.jpg',
         about:
@@ -4432,7 +4432,7 @@ const postgresData = () => {
       },
       {
         title: 'Kennedy Miller Mitchell',
-        location_id: 8,
+        location: 'Sydney',
         foundation_year: 1978,
         logo: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/17c228f6-5f23-4f29-af0d-e4f9af650e5a/ddx96r5-9dc4bc0d-e0f1-4751-8389-4d2381151aa6.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzE3YzIyOGY2LTVmMjMtNGYyOS1hZjBkLWU0ZjlhZjY1MGU1YVwvZGR4OTZyNS05ZGM0YmMwZC1lMGYxLTQ3NTEtODM4OS00ZDIzODExNTFhYTYuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0._dz2boKvOYUCVyV6QEo-MvR572xNnYUxG32pzUII2Xs',
         about:
@@ -4442,7 +4442,7 @@ const postgresData = () => {
       },
       {
         title: 'Amblin Entertainment',
-        location_id: 5,
+        location: 'Burbank',
         foundation_year: 1981,
         logo: 'https://upload.wikimedia.org/wikipedia/en/4/4c/Amblin_official_poster.jpg',
         about:
@@ -4452,7 +4452,7 @@ const postgresData = () => {
       },
       {
         title: 'Silver Pictures',
-        location_id: 2,
+        location: 'Los Angeles',
         foundation_year: 1980,
         logo: 'https://upload.wikimedia.org/wikipedia/ru/1/17/Silver_pictures.jpg',
         about:
@@ -4462,7 +4462,7 @@ const postgresData = () => {
       },
       {
         title: 'Lightstorm Entertainment',
-        location_id: 5,
+        location: 'Burbank',
         foundation_year: 1990,
         logo: 'https://i.ytimg.com/vi/DOrYJx_R4Ls/maxresdefault.jpg',
         about:
@@ -4472,7 +4472,7 @@ const postgresData = () => {
       },
       {
         title: 'Jerry Bruckheimer Films',
-        location_id: 5,
+        location: 'Burbank',
         foundation_year: 1983,
         logo: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/06358576-9cb7-4a8b-8045-5f68265fb438/de4vee9-0e408ca7-b963-4ac1-8b40-9b2ad812f446.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzA2MzU4NTc2LTljYjctNGE4Yi04MDQ1LTVmNjgyNjVmYjQzOFwvZGU0dmVlOS0wZTQwOGNhNy1iOTYzLTRhYzEtOGI0MC05YjJhZDgxMmY0NDYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.rH2X_C1cK7tKVdZSjOwKopiFLoohhnmLntJkNyghLtM',
         about:
@@ -4482,7 +4482,7 @@ const postgresData = () => {
       },
       {
         title: 'Pacific Western Productions',
-        location_id: 5,
+        location: 'Burbank',
         foundation_year: 1982,
         logo: 'https://static.wikia.nocookie.net/dreamlogosandstations/images/1/10/Tilly-2.png',
         about:
@@ -4492,7 +4492,7 @@ const postgresData = () => {
       },
       {
         title: 'Brandywine Productions',
-        location_id: 5,
+        location: 'Burbank',
         foundation_year: 1969,
         logo: 'https://i.ytimg.com/vi/DBIZfNMesDI/hqdefault.jpg',
         about:
@@ -4502,7 +4502,7 @@ const postgresData = () => {
       },
       {
         title: 'Icon Productions',
-        location_id: 5,
+        location: 'Burbank',
         foundation_year: 1989,
         logo: 'https://upload.wikimedia.org/wikipedia/en/9/94/Iconmainlogo.png',
         about:
@@ -4512,7 +4512,7 @@ const postgresData = () => {
       },
       {
         title: 'The Ladd Company',
-        location_id: 5,
+        location: 'Burbank',
         foundation_year: 1979,
         logo: 'https://i.ytimg.com/vi/NBWJ0BS7Hgw/maxresdefault.jpg',
         about:
@@ -4522,7 +4522,7 @@ const postgresData = () => {
       },
       {
         title: 'Geffen Pictures',
-        location_id: 2,
+        location: 'Los Angeles',
         foundation_year: 1982,
         logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/0/08/Geffen-logo.webp/421px-Geffen-logo.webp.png',
         about:
@@ -4532,7 +4532,7 @@ const postgresData = () => {
       },
       {
         title: 'Spyglass Entertainment',
-        location_id: 2,
+        location: 'Los Angeles',
         foundation_year: 1998,
         logo: 'https://deadline.com/wp-content/uploads/2020/05/spyglass_colorlogo_overwht_rg.jpg',
         about:
@@ -4542,7 +4542,7 @@ const postgresData = () => {
       },
       {
         title: 'Metro-Goldwyn-Mayer',
-        location_id: 5,
+        location: 'Burbank',
         foundation_year: 1924,
         logo: 'https://static.espreso.tv/uploads/article/155941/images/im-Mgm-logo.jpeg',
         about:
@@ -4552,7 +4552,7 @@ const postgresData = () => {
       },
       {
         title: 'Gaumont',
-        location_id: 9,
+        location: 'Paris',
         foundation_year: 1900,
         logo: 'https://logowik.com/content/uploads/images/gaumont-new6827.logowik.com.webp',
         about:
@@ -4562,7 +4562,7 @@ const postgresData = () => {
       },
       {
         title: 'Pinewood Studios',
-        location_id: 4,
+        location: 'London',
         foundation_year: 1936,
         logo: 'https://img1.bonhams.com/image?src=Images/live/2013-05/15/8772351-1-1.jpg',
         about:
@@ -4572,7 +4572,7 @@ const postgresData = () => {
       },
       {
         title: 'Constantin Film',
-        location_id: 10,
+        location: 'Munchen',
         foundation_year: 1979,
         logo: 'https://i.ytimg.com/vi/K3MJsdDTapQ/maxresdefault.jpg',
         about:
@@ -4583,1616 +4583,1616 @@ const postgresData = () => {
     ],
     movies_actors: [
       {
-        movie_id: 1,
-        actor_id: 1,
+        movie: 'Indiana Jones: Raiders of the Lost Ark',
+        actor: 'Harrison Ford',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 1,
-        actor_id: 4,
+        movie: 'Indiana Jones: Raiders of the Lost Ark',
+        actor: 'Phoebe Waller-Bridge',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 1,
-        actor_id: 5,
+        movie: 'Indiana Jones: Raiders of the Lost Ark',
+        actor: 'Mads Mikkelsen',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 1,
-        actor_id: 6,
+        movie: 'Indiana Jones: Raiders of the Lost Ark',
+        actor: 'Shia LaBeouf',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 1,
-        actor_id: 7,
+        movie: 'Indiana Jones: Raiders of the Lost Ark',
+        actor: 'Karen Allen',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 1,
-        actor_id: 24,
+        movie: 'Indiana Jones: Raiders of the Lost Ark',
+        actor: 'John Rhys-Davies',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 1,
-        actor_id: 25,
+        movie: 'Indiana Jones: Raiders of the Lost Ark',
+        actor: 'Philip Stone',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 1,
-        actor_id: 26,
+        movie: 'Indiana Jones: Raiders of the Lost Ark',
+        actor: 'Ke Huy Quan',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 1,
-        actor_id: 38,
+        movie: 'Indiana Jones: Raiders of the Lost Ark',
+        actor: 'Paul Freeman',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 1,
-        actor_id: 100,
+        movie: 'Indiana Jones: Raiders of the Lost Ark',
+        actor: 'Denholm Elliott',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 2,
-        actor_id: 3,
+        movie: 'Alien',
+        actor: 'Sigourney Weaver',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 2,
-        actor_id: 8,
+        movie: 'Alien',
+        actor: 'Tom Skerritt',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 2,
-        actor_id: 9,
+        movie: 'Alien',
+        actor: 'Veronica Cartwright',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 2,
-        actor_id: 10,
+        movie: 'Alien',
+        actor: 'John Hurt',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 2,
-        actor_id: 11,
+        movie: 'Alien',
+        actor: 'Ian Holm',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 3,
-        actor_id: 3,
+        movie: 'Aliens',
+        actor: 'Sigourney Weaver',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 3,
-        actor_id: 12,
+        movie: 'Aliens',
+        actor: 'Bill Paxton',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 3,
-        actor_id: 13,
+        movie: 'Aliens',
+        actor: 'Michael Biehn',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 3,
-        actor_id: 14,
+        movie: 'Aliens',
+        actor: 'Lance Henriksen',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 3,
-        actor_id: 15,
+        movie: 'Aliens',
+        actor: 'Jenette Goldstein',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 3,
-        actor_id: 49,
+        movie: 'Aliens',
+        actor: 'Carrie Henn',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 4,
-        actor_id: 2,
+        movie: 'Pirates of the Caribbean: The Curse of the Black Pearl',
+        actor: 'Johnny Depp',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 4,
-        actor_id: 17,
+        movie: 'Pirates of the Caribbean: The Curse of the Black Pearl',
+        actor: 'Orlando Bloom',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 4,
-        actor_id: 16,
+        movie: 'Pirates of the Caribbean: The Curse of the Black Pearl',
+        actor: 'Keira Knightley',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 4,
-        actor_id: 18,
+        movie: 'Pirates of the Caribbean: The Curse of the Black Pearl',
+        actor: 'Geoffrey Rush',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 4,
-        actor_id: 19,
+        movie: 'Pirates of the Caribbean: The Curse of the Black Pearl',
+        actor: 'Kevin McNally',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 5,
-        actor_id: 20,
+        movie: 'The Lord of the Rings: The Fellowship of the Ring',
+        actor: 'Elijah Wood',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 5,
-        actor_id: 21,
+        movie: 'The Lord of the Rings: The Fellowship of the Ring',
+        actor: 'Ian McKellen',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 5,
-        actor_id: 22,
+        movie: 'The Lord of the Rings: The Fellowship of the Ring',
+        actor: 'Viggo Mortensen',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 5,
-        actor_id: 17,
+        movie: 'The Lord of the Rings: The Fellowship of the Ring',
+        actor: 'Orlando Bloom',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 5,
-        actor_id: 11,
+        movie: 'The Lord of the Rings: The Fellowship of the Ring',
+        actor: 'Ian Holm',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 5,
-        actor_id: 58,
+        movie: 'The Lord of the Rings: The Fellowship of the Ring',
+        actor: 'Sean Bean',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 6,
-        actor_id: 1,
+        movie: 'Indiana Jones and the Temple of Doom',
+        actor: 'Harrison Ford',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 6,
-        actor_id: 23,
+        movie: 'Indiana Jones and the Temple of Doom',
+        actor: 'Kate Capshaw',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 6,
-        actor_id: 7,
+        movie: 'Indiana Jones and the Temple of Doom',
+        actor: 'Karen Allen',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 6,
-        actor_id: 24,
+        movie: 'Indiana Jones and the Temple of Doom',
+        actor: 'John Rhys-Davies',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 6,
-        actor_id: 25,
+        movie: 'Indiana Jones and the Temple of Doom',
+        actor: 'Philip Stone',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 6,
-        actor_id: 26,
+        movie: 'Indiana Jones and the Temple of Doom',
+        actor: 'Ke Huy Quan',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 7,
-        actor_id: 2,
+        movie: 'Alice in Wonderland',
+        actor: 'Johnny Depp',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 7,
-        actor_id: 27,
+        movie: 'Alice in Wonderland',
+        actor: 'Mia Wasikowska',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 7,
-        actor_id: 28,
+        movie: 'Alice in Wonderland',
+        actor: 'Helena Bonham Carter',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 8,
-        actor_id: 2,
+        movie: 'Pirates of the Caribbean: At World`s End',
+        actor: 'Johnny Depp',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 8,
-        actor_id: 16,
+        movie: 'Pirates of the Caribbean: At World`s End',
+        actor: 'Keira Knightley',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 8,
-        actor_id: 17,
+        movie: 'Pirates of the Caribbean: At World`s End',
+        actor: 'Orlando Bloom',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 8,
-        actor_id: 18,
+        movie: 'Pirates of the Caribbean: At World`s End',
+        actor: 'Geoffrey Rush',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 9,
-        actor_id: 29,
+        movie: 'The Terminator',
+        actor: 'Arnold Schwarzenegger',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 9,
-        actor_id: 13,
+        movie: 'The Terminator',
+        actor: 'Michael Biehn',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 9,
-        actor_id: 14,
+        movie: 'The Terminator',
+        actor: 'Lance Henriksen',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 9,
-        actor_id: 12,
+        movie: 'The Terminator',
+        actor: 'Bill Paxton',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 9,
-        actor_id: 111,
+        movie: 'The Terminator',
+        actor: 'Paul Winfield',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 9,
-        actor_id: 110,
+        movie: 'The Terminator',
+        actor: 'Linda Hamilton',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 10,
-        actor_id: 29,
+        movie: 'Predator',
+        actor: 'Arnold Schwarzenegger',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 10,
-        actor_id: 12,
+        movie: 'Predator',
+        actor: 'Bill Paxton',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 11,
-        actor_id: 2,
+        movie: 'Pirates of the Caribbean: Dead Man`s Chest',
+        actor: 'Johnny Depp',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 11,
-        actor_id: 16,
+        movie: 'Pirates of the Caribbean: Dead Man`s Chest',
+        actor: 'Keira Knightley',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 11,
-        actor_id: 17,
+        movie: 'Pirates of the Caribbean: Dead Man`s Chest',
+        actor: 'Orlando Bloom',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 11,
-        actor_id: 18,
+        movie: 'Pirates of the Caribbean: Dead Man`s Chest',
+        actor: 'Geoffrey Rush',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 11,
-        actor_id: 99,
+        movie: 'Pirates of the Caribbean: Dead Man`s Chest',
+        actor: 'Yaphet Kotto',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 12,
-        actor_id: 20,
+        movie: 'The Lord of the Rings: The Two Towers',
+        actor: 'Elijah Wood',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 12,
-        actor_id: 21,
+        movie: 'The Lord of the Rings: The Two Towers',
+        actor: 'Ian McKellen',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 12,
-        actor_id: 17,
+        movie: 'The Lord of the Rings: The Two Towers',
+        actor: 'Orlando Bloom',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 12,
-        actor_id: 52,
+        movie: 'The Lord of the Rings: The Two Towers',
+        actor: 'Sean Astin',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 12,
-        actor_id: 22,
+        movie: 'The Lord of the Rings: The Two Towers',
+        actor: 'Viggo Mortensen',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 13,
-        actor_id: 39,
+        movie: 'Gladiator',
+        actor: 'Russell Crowe',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 13,
-        actor_id: 40,
+        movie: 'Gladiator',
+        actor: 'Joaquin Phoenix',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 13,
-        actor_id: 41,
+        movie: 'Gladiator',
+        actor: 'Connie Nielsen',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 13,
-        actor_id: 42,
+        movie: 'Gladiator',
+        actor: 'Oliver Reed',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 13,
-        actor_id: 43,
+        movie: 'Gladiator',
+        actor: 'Derek Jacobi',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 13,
-        actor_id: 44,
+        movie: 'Gladiator',
+        actor: 'Djimon Hounsou',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 14,
-        actor_id: 32,
+        movie: 'Braveheart',
+        actor: 'Mel Gibson',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 14,
-        actor_id: 85,
+        movie: 'Braveheart',
+        actor: 'Sophie Marceau',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 14,
-        actor_id: 86,
+        movie: 'Braveheart',
+        actor: 'Patrick McGoohan',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 14,
-        actor_id: 87,
+        movie: 'Braveheart',
+        actor: 'Catherine McCormack',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 14,
-        actor_id: 88,
+        movie: 'Braveheart',
+        actor: 'Brendan Gleeson',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 15,
-        actor_id: 89,
+        movie: 'The Godfather',
+        actor: 'Marlon Brando',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 15,
-        actor_id: 90,
+        movie: 'The Godfather',
+        actor: 'Al Pacino',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 15,
-        actor_id: 91,
+        movie: 'The Godfather',
+        actor: 'James Caan',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 15,
-        actor_id: 93,
+        movie: 'The Godfather',
+        actor: 'Robert Duvall',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 15,
-        actor_id: 94,
+        movie: 'The Godfather',
+        actor: 'Sterling Hayden',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 16,
-        actor_id: 101,
+        movie: 'E.T. the Extra-Terrestrial',
+        actor: 'Henry Thomas',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 16,
-        actor_id: 102,
+        movie: 'E.T. the Extra-Terrestrial',
+        actor: 'Dee Wallace',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 16,
-        actor_id: 103,
+        movie: 'E.T. the Extra-Terrestrial',
+        actor: 'Drew Barrymore',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 16,
-        actor_id: 104,
+        movie: 'E.T. the Extra-Terrestrial',
+        actor: 'Peter Coyote',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 16,
-        actor_id: 105,
+        movie: 'E.T. the Extra-Terrestrial',
+        actor: 'Robert MacNaughton',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 17,
-        actor_id: 3,
+        movie: 'Avatar',
+        actor: 'Sigourney Weaver',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 17,
-        actor_id: 106,
+        movie: 'Avatar',
+        actor: 'Sam Worthington',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 17,
-        actor_id: 107,
+        movie: 'Avatar',
+        actor: 'Zoe Saldana',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 17,
-        actor_id: 108,
+        movie: 'Avatar',
+        actor: 'Stephen Lang',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 17,
-        actor_id: 109,
+        movie: 'Avatar',
+        actor: 'Michelle Rodriguez',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 18,
-        actor_id: 2,
+        movie: 'Edward Scissorhands',
+        actor: 'Johnny Depp',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 18,
-        actor_id: 112,
+        movie: 'Edward Scissorhands',
+        actor: 'Winona Ryder',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 18,
-        actor_id: 113,
+        movie: 'Edward Scissorhands',
+        actor: 'Dianne Wiest',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 18,
-        actor_id: 114,
+        movie: 'Edward Scissorhands',
+        actor: 'Anthony Michael Hall',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 18,
-        actor_id: 115,
+        movie: 'Edward Scissorhands',
+        actor: 'Kathy Baker',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 19,
-        actor_id: 116,
+        movie: 'Die Hard',
+        actor: 'Bruce Willis',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 19,
-        actor_id: 117,
+        movie: 'Die Hard',
+        actor: 'Alan Rickman',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 19,
-        actor_id: 118,
+        movie: 'Die Hard',
+        actor: 'Bonnie Bedelia',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 19,
-        actor_id: 119,
+        movie: 'Die Hard',
+        actor: 'Reginald VelJohnson',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 19,
-        actor_id: 120,
+        movie: 'Die Hard',
+        actor: 'Alexander Godunov',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 20,
-        actor_id: 121,
+        movie: 'Interview with the Vampire',
+        actor: 'Tom Cruise',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 20,
-        actor_id: 122,
+        movie: 'Interview with the Vampire',
+        actor: 'Brad Pitt',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 20,
-        actor_id: 123,
+        movie: 'Interview with the Vampire',
+        actor: 'Kirsten Dunst',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 20,
-        actor_id: 124,
+        movie: 'Interview with the Vampire',
+        actor: 'Antonio Banderas',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 20,
-        actor_id: 125,
+        movie: 'Interview with the Vampire',
+        actor: 'Christian Slater',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 21,
-        actor_id: 116,
+        movie: 'The Sixth Sense',
+        actor: 'Bruce Willis',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 21,
-        actor_id: 126,
+        movie: 'The Sixth Sense',
+        actor: 'Haley Joel Osment',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 21,
-        actor_id: 127,
+        movie: 'The Sixth Sense',
+        actor: 'Toni Collette',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 21,
-        actor_id: 128,
+        movie: 'The Sixth Sense',
+        actor: 'Olivia Williams',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 21,
-        actor_id: 129,
+        movie: 'The Sixth Sense',
+        actor: 'Donnie Wahlberg',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 22,
-        actor_id: 130,
+        movie: 'The Dark Knight',
+        actor: 'Christian Bale',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 22,
-        actor_id: 131,
+        movie: 'The Dark Knight',
+        actor: 'Heath Ledger',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 22,
-        actor_id: 132,
+        movie: 'The Dark Knight',
+        actor: 'Michael Caine',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 22,
-        actor_id: 133,
+        movie: 'The Dark Knight',
+        actor: 'Gary Oldman',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 22,
-        actor_id: 134,
+        movie: 'The Dark Knight',
+        actor: 'Morgan Freeman',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 22,
-        actor_id: 172,
+        movie: 'The Dark Knight',
+        actor: 'Aaron Eckhart',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 22,
-        actor_id: 173,
+        movie: 'The Dark Knight',
+        actor: 'Maggie Gyllenhaal',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 23,
-        actor_id: 29,
+        movie: 'Terminator 2: Judgment Day',
+        actor: 'Arnold Schwarzenegger',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 23,
-        actor_id: 110,
+        movie: 'Terminator 2: Judgment Day',
+        actor: 'Linda Hamilton',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 23,
-        actor_id: 135,
+        movie: 'Terminator 2: Judgment Day',
+        actor: 'Edward Furlong',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 23,
-        actor_id: 136,
+        movie: 'Terminator 2: Judgment Day',
+        actor: 'Robert Patrick',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 23,
-        actor_id: 137,
+        movie: 'Terminator 2: Judgment Day',
+        actor: 'Joe Morton',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 24,
-        actor_id: 40,
+        movie: 'The Village',
+        actor: 'Joaquin Phoenix',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 24,
-        actor_id: 3,
+        movie: 'The Village',
+        actor: 'Sigourney Weaver',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 24,
-        actor_id: 138,
+        movie: 'The Village',
+        actor: 'Bryce Dallas Howard',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 24,
-        actor_id: 139,
+        movie: 'The Village',
+        actor: 'Adrien Brody',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 24,
-        actor_id: 140,
+        movie: 'The Village',
+        actor: 'William Hurt',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 25,
-        actor_id: 21,
+        movie: 'The Hobbit: An Unexpected Journey',
+        actor: 'Ian McKellen',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 25,
-        actor_id: 46,
+        movie: 'The Hobbit: An Unexpected Journey',
+        actor: 'Cate Blanchett',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 25,
-        actor_id: 57,
+        movie: 'The Hobbit: An Unexpected Journey',
+        actor: 'Hugo Weaving',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 25,
-        actor_id: 56,
+        movie: 'The Hobbit: An Unexpected Journey',
+        actor: 'Christopher Lee',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 25,
-        actor_id: 59,
+        movie: 'The Hobbit: An Unexpected Journey',
+        actor: 'Andy Serkis',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 26,
-        actor_id: 141,
+        movie: 'The Avengers',
+        actor: 'Robert Downey Jr.',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 26,
-        actor_id: 142,
+        movie: 'The Avengers',
+        actor: 'Chris Evans',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 26,
-        actor_id: 143,
+        movie: 'The Avengers',
+        actor: 'Mark Ruffalo',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 26,
-        actor_id: 144,
+        movie: 'The Avengers',
+        actor: 'Chris Hemsworth',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 26,
-        actor_id: 145,
+        movie: 'The Avengers',
+        actor: 'Scarlett Johansson',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 26,
-        actor_id: 146,
+        movie: 'The Avengers',
+        actor: 'Jeremy Renner',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 26,
-        actor_id: 147,
+        movie: 'The Avengers',
+        actor: 'Tom Hiddleston',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 26,
-        actor_id: 148,
+        movie: 'The Avengers',
+        actor: 'Samuel L. Jackson',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 27,
-        actor_id: 130,
+        movie: 'The Dark Knight Rises',
+        actor: 'Christian Bale',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 27,
-        actor_id: 132,
+        movie: 'The Dark Knight Rises',
+        actor: 'Michael Caine',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 27,
-        actor_id: 133,
+        movie: 'The Dark Knight Rises',
+        actor: 'Gary Oldman',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 27,
-        actor_id: 134,
+        movie: 'The Dark Knight Rises',
+        actor: 'Morgan Freeman',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 27,
-        actor_id: 149,
+        movie: 'The Dark Knight Rises',
+        actor: 'Tom Hardy',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 27,
-        actor_id: 151,
+        movie: 'The Dark Knight Rises',
+        actor: 'Joseph Gordon-Levitt',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 28,
-        actor_id: 150,
+        movie: 'Inception',
+        actor: 'Leonardo DiCaprio',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 28,
-        actor_id: 151,
+        movie: 'Inception',
+        actor: 'Joseph Gordon-Levitt',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 28,
-        actor_id: 152,
+        movie: 'Inception',
+        actor: 'Ellen Page',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 28,
-        actor_id: 149,
+        movie: 'Inception',
+        actor: 'Tom Hardy',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 28,
-        actor_id: 153,
+        movie: 'Inception',
+        actor: 'Ken Watanabe',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 28,
-        actor_id: 154,
+        movie: 'Inception',
+        actor: 'Cillian Murphy',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 28,
-        actor_id: 155,
+        movie: 'Inception',
+        actor: 'Marion Cotillard',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 28,
-        actor_id: 132,
+        movie: 'Inception',
+        actor: 'Michael Caine',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 29,
-        actor_id: 156,
+        movie: 'Harry Potter and the Chamber of Secrets',
+        actor: 'Daniel Radcliffe',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 29,
-        actor_id: 157,
+        movie: 'Harry Potter and the Chamber of Secrets',
+        actor: 'Rupert Grint',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 29,
-        actor_id: 158,
+        movie: 'Harry Potter and the Chamber of Secrets',
+        actor: 'Emma Watson',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 29,
-        actor_id: 45,
+        movie: 'Harry Potter and the Chamber of Secrets',
+        actor: 'Richard Harris',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 29,
-        actor_id: 159,
+        movie: 'Harry Potter and the Chamber of Secrets',
+        actor: 'Maggie Smith',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 29,
-        actor_id: 160,
+        movie: 'Harry Potter and the Chamber of Secrets',
+        actor: 'Robbie Coltrane',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 29,
-        actor_id: 161,
+        movie: 'Harry Potter and the Chamber of Secrets',
+        actor: 'Kenneth Branagh',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 29,
-        actor_id: 117,
+        movie: 'Harry Potter and the Chamber of Secrets',
+        actor: 'Alan Rickman',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 29,
-        actor_id: 162,
+        movie: 'Harry Potter and the Chamber of Secrets',
+        actor: 'Jason Isaacs',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 29,
-        actor_id: 10,
+        movie: 'Harry Potter and the Chamber of Secrets',
+        actor: 'John Hurt',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 30,
-        actor_id: 163,
+        movie: 'The Chronicles of Narnia',
+        actor: 'Georgie Henley',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 30,
-        actor_id: 164,
+        movie: 'The Chronicles of Narnia',
+        actor: 'Skandar Keynes',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 30,
-        actor_id: 165,
+        movie: 'The Chronicles of Narnia',
+        actor: 'William Moseley',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 30,
-        actor_id: 166,
+        movie: 'The Chronicles of Narnia',
+        actor: 'Anna Popplewell',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 30,
-        actor_id: 167,
+        movie: 'The Chronicles of Narnia',
+        actor: 'Tilda Swinton',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 30,
-        actor_id: 48,
+        movie: 'The Chronicles of Narnia',
+        actor: 'Jim Broadbent',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 31,
-        actor_id: 149,
+        movie: 'Mad Max: Fury Road',
+        actor: 'Tom Hardy',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 31,
-        actor_id: 168,
+        movie: 'Mad Max: Fury Road',
+        actor: 'Charlize Theron',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 31,
-        actor_id: 169,
+        movie: 'Mad Max: Fury Road',
+        actor: 'Nicholas Hoult',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 31,
-        actor_id: 170,
+        movie: 'Mad Max: Fury Road',
+        actor: 'Hugh Keays-Byrne',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 31,
-        actor_id: 171,
+        movie: 'Mad Max: Fury Road',
+        actor: 'Rosie Huntington-Whiteley',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 32,
-        actor_id: 148,
+        movie: 'Jurassic Park',
+        actor: 'Samuel L. Jackson',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 32,
-        actor_id: 174,
+        movie: 'Jurassic Park',
+        actor: 'Sam Neill',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 32,
-        actor_id: 175,
+        movie: 'Jurassic Park',
+        actor: 'Laura Dern',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 32,
-        actor_id: 176,
+        movie: 'Jurassic Park',
+        actor: 'Jeff Goldblum',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 32,
-        actor_id: 177,
+        movie: 'Jurassic Park',
+        actor: 'Richard Attenborough',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 33,
-        actor_id: 57,
+        movie: 'The Matrix',
+        actor: 'Hugo Weaving',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 33,
-        actor_id: 178,
+        movie: 'The Matrix',
+        actor: 'Keanu Reeves',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 33,
-        actor_id: 179,
+        movie: 'The Matrix',
+        actor: 'Laurence Fishburne',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 33,
-        actor_id: 180,
+        movie: 'The Matrix',
+        actor: 'Carrie-Anne Moss',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 33,
-        actor_id: 181,
+        movie: 'The Matrix',
+        actor: 'Joe Pantoliano',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 34,
-        actor_id: 150,
+        movie: 'Titanic',
+        actor: 'Leonardo DiCaprio',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 34,
-        actor_id: 182,
+        movie: 'Titanic',
+        actor: 'Kate Winslet',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 34,
-        actor_id: 183,
+        movie: 'Titanic',
+        actor: 'Billy Zane',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 34,
-        actor_id: 184,
+        movie: 'Titanic',
+        actor: 'Kathy Bates',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 34,
-        actor_id: 185,
+        movie: 'Titanic',
+        actor: 'Frances Fisher',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 35,
-        actor_id: 156,
+        movie: 'Harry Potter and the Sorcerer`s Stone',
+        actor: 'Daniel Radcliffe',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 35,
-        actor_id: 157,
+        movie: 'Harry Potter and the Sorcerer`s Stone',
+        actor: 'Rupert Grint',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 35,
-        actor_id: 158,
+        movie: 'Harry Potter and the Sorcerer`s Stone',
+        actor: 'Emma Watson',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 35,
-        actor_id: 160,
+        movie: 'Harry Potter and the Sorcerer`s Stone',
+        actor: 'Robbie Coltrane',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 35,
-        actor_id: 159,
+        movie: 'Harry Potter and the Sorcerer`s Stone',
+        actor: 'Maggie Smith',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 36,
-        actor_id: 130,
+        movie: 'Batman Begins',
+        actor: 'Christian Bale',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 36,
-        actor_id: 132,
+        movie: 'Batman Begins',
+        actor: 'Michael Caine',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 36,
-        actor_id: 133,
+        movie: 'Batman Begins',
+        actor: 'Gary Oldman',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 36,
-        actor_id: 187,
+        movie: 'Batman Begins',
+        actor: 'Katie Holmes',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 36,
-        actor_id: 186,
+        movie: 'Batman Begins',
+        actor: 'Liam Neeson',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 37,
-        actor_id: 1,
+        movie: 'Blade Runner',
+        actor: 'Harrison Ford',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 37,
-        actor_id: 188,
+        movie: 'Blade Runner',
+        actor: 'Rutger Hauer',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 37,
-        actor_id: 189,
+        movie: 'Blade Runner',
+        actor: 'Sean Young',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 37,
-        actor_id: 190,
+        movie: 'Blade Runner',
+        actor: 'Edward James Olmos',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 37,
-        actor_id: 191,
+        movie: 'Blade Runner',
+        actor: 'Daryl Hannah',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 38,
-        actor_id: 130,
+        movie: 'The Prestige',
+        actor: 'Christian Bale',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 38,
-        actor_id: 132,
+        movie: 'The Prestige',
+        actor: 'Michael Caine',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 38,
-        actor_id: 145,
+        movie: 'The Prestige',
+        actor: 'Scarlett Johansson',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 38,
-        actor_id: 192,
+        movie: 'The Prestige',
+        actor: 'Hugh Jackman',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 38,
-        actor_id: 193,
+        movie: 'The Prestige',
+        actor: 'Piper Perabo',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 39,
-        actor_id: 116,
+        movie: 'The Fifth Element',
+        actor: 'Bruce Willis',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 39,
-        actor_id: 133,
+        movie: 'The Fifth Element',
+        actor: 'Gary Oldman',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 39,
-        actor_id: 194,
+        movie: 'The Fifth Element',
+        actor: 'Milla Jovovich',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 39,
-        actor_id: 11,
+        movie: 'The Fifth Element',
+        actor: 'Ian Holm',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 39,
-        actor_id: 195,
+        movie: 'The Fifth Element',
+        actor: 'Chris Tucker',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 40,
-        actor_id: 194,
+        movie: 'Resident Evil',
+        actor: 'Milla Jovovich',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 40,
-        actor_id: 109,
+        movie: 'Resident Evil',
+        actor: 'Michelle Rodriguez',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 40,
-        actor_id: 196,
+        movie: 'Resident Evil',
+        actor: 'Eric Mabius',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 40,
-        actor_id: 197,
+        movie: 'Resident Evil',
+        actor: 'James Purefoy',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 40,
-        actor_id: 198,
+        movie: 'Resident Evil',
+        actor: 'Martin Crewes',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 41,
-        actor_id: 150,
+        movie: 'Shutter Island',
+        actor: 'Leonardo DiCaprio',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 41,
-        actor_id: 143,
+        movie: 'Shutter Island',
+        actor: 'Mark Ruffalo',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 41,
-        actor_id: 199,
+        movie: 'Shutter Island',
+        actor: 'Ben Kingsley',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 41,
-        actor_id: 200,
+        movie: 'Shutter Island',
+        actor: 'Max von Sydow',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 41,
-        actor_id: 201,
+        movie: 'Shutter Island',
+        actor: 'Michelle Williams',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 42,
-        actor_id: 192,
+        movie: 'Logan',
+        actor: 'Hugh Jackman',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 42,
-        actor_id: 202,
+        movie: 'Logan',
+        actor: 'Patrick Stewart',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 42,
-        actor_id: 203,
+        movie: 'Logan',
+        actor: 'Dafne Keen',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 42,
-        actor_id: 204,
+        movie: 'Logan',
+        actor: 'Boyd Holbrook',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 42,
-        actor_id: 205,
+        movie: 'Logan',
+        actor: 'Stephen Merchant',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 43,
-        actor_id: 134,
+        movie: 'The Shawshank Redemption',
+        actor: 'Morgan Freeman',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 43,
-        actor_id: 206,
+        movie: 'The Shawshank Redemption',
+        actor: 'Tim Robbins',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 43,
-        actor_id: 207,
+        movie: 'The Shawshank Redemption',
+        actor: 'William Sadler',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 43,
-        actor_id: 208,
+        movie: 'The Shawshank Redemption',
+        actor: 'Clancy Brown',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 43,
-        actor_id: 209,
+        movie: 'The Shawshank Redemption',
+        actor: 'Gil Bellows',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 44,
-        actor_id: 122,
+        movie: 'Ocean`s Eleven',
+        actor: 'Brad Pitt',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 44,
-        actor_id: 210,
+        movie: 'Ocean`s Eleven',
+        actor: 'George Clooney',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 44,
-        actor_id: 211,
+        movie: 'Ocean`s Eleven',
+        actor: 'Matt Damon',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 44,
-        actor_id: 212,
+        movie: 'Ocean`s Eleven',
+        actor: 'Julia Roberts',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 44,
-        actor_id: 213,
+        movie: 'Ocean`s Eleven',
+        actor: 'Andy Garcia',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 45,
-        actor_id: 214,
+        movie: 'The Hangover',
+        actor: 'Bradley Cooper',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 45,
-        actor_id: 215,
+        movie: 'The Hangover',
+        actor: 'Ed Helms',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 45,
-        actor_id: 216,
+        movie: 'The Hangover',
+        actor: 'Zach Galifianakis',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 45,
-        actor_id: 217,
+        movie: 'The Hangover',
+        actor: 'Justin Bartha',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 45,
-        actor_id: 218,
+        movie: 'The Hangover',
+        actor: 'Heather Graham',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 46,
-        actor_id: 150,
+        movie: 'The Revenant',
+        actor: 'Leonardo DiCaprio',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 46,
-        actor_id: 149,
+        movie: 'The Revenant',
+        actor: 'Tom Hardy',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 46,
-        actor_id: 219,
+        movie: 'The Revenant',
+        actor: 'Domhnall Gleeson',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 46,
-        actor_id: 220,
+        movie: 'The Revenant',
+        actor: 'Will Poulter',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 46,
-        actor_id: 221,
+        movie: 'The Revenant',
+        actor: 'Forrest Goodluck',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 47,
-        actor_id: 211,
+        movie: 'The Martian',
+        actor: 'Matt Damon',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 47,
-        actor_id: 222,
+        movie: 'The Martian',
+        actor: 'Jessica Chastain',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 47,
-        actor_id: 223,
+        movie: 'The Martian',
+        actor: 'Kristen Wiig',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 47,
-        actor_id: 224,
+        movie: 'The Martian',
+        actor: 'Jeff Daniels',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 47,
-        actor_id: 225,
+        movie: 'The Martian',
+        actor: 'Michael Pena',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 48,
-        actor_id: 150,
+        movie: 'The Wolf of Wall Street',
+        actor: 'Leonardo DiCaprio',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 48,
-        actor_id: 226,
+        movie: 'The Wolf of Wall Street',
+        actor: 'Jonah Hill',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 48,
-        actor_id: 227,
+        movie: 'The Wolf of Wall Street',
+        actor: 'Margot Robbie',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 48,
-        actor_id: 228,
+        movie: 'The Wolf of Wall Street',
+        actor: 'Matthew McConaughey',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 48,
-        actor_id: 229,
+        movie: 'The Wolf of Wall Street',
+        actor: 'Kyle Chandler',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 49,
-        actor_id: 133,
+        movie: 'Leon: The Professional',
+        actor: 'Gary Oldman',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 49,
-        actor_id: 230,
+        movie: 'Leon: The Professional',
+        actor: 'Jean Reno',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 49,
-        actor_id: 231,
+        movie: 'Leon: The Professional',
+        actor: 'Natalie Portman',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 49,
-        actor_id: 232,
+        movie: 'Leon: The Professional',
+        actor: 'Danny Aiello',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 49,
-        actor_id: 233,
+        movie: 'Leon: The Professional',
+        actor: 'Michael Badalucco',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 50,
-        actor_id: 150,
+        movie: 'Catch Me If You Can',
+        actor: 'Leonardo DiCaprio',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 50,
-        actor_id: 234,
+        movie: 'Catch Me If You Can',
+        actor: 'Tom Hanks',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 50,
-        actor_id: 235,
+        movie: 'Catch Me If You Can',
+        actor: 'Christopher Walken',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 50,
-        actor_id: 236,
+        movie: 'Catch Me If You Can',
+        actor: 'Martin Sheen',
         created_at: now,
         updated_at: now,
       },
       {
-        movie_id: 50,
-        actor_id: 237,
+        movie: 'Catch Me If You Can',
+        actor: 'Amy Adams',
         created_at: now,
         updated_at: now,
       },
