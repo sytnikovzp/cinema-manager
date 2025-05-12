@@ -36,7 +36,7 @@ class GenresService {
   }
 
   static async getGenreById(id) {
-    const foundGenre = await Genre.findOne({ where: { id } });
+    const foundGenre = await Genre.findByPk(id);
     if (!foundGenre) {
       throw notFound('Genre not found');
     }
@@ -61,7 +61,7 @@ class GenresService {
   }
 
   static async updateGenre(id, title, logo, transaction) {
-    const foundGenre = await Genre.findOne({ where: { id } });
+    const foundGenre = await Genre.findByPk(id);
     if (!foundGenre) {
       throw notFound('Genre not found');
     }
@@ -85,7 +85,7 @@ class GenresService {
   }
 
   static async deleteGenre(id, transaction) {
-    const foundGenre = await Genre.findOne({ where: { id } });
+    const foundGenre = await Genre.findByPk(id);
     if (!foundGenre) {
       throw notFound('Genre not found');
     }

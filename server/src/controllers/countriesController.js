@@ -1,37 +1,27 @@
-const createError = require('http-errors');
+const { sequelize } = require('../db/models');
 
-const { Country, sequelize } = require('../db/models');
+const {
+  getAllCountries,
+  getCountryById,
+  createCountry,
+  updateCountry,
+  deleteCountry,
+} = require('../services/countriesService');
 
 class CountriesController {
   static async getAllCountries(req, res, next) {
     try {
-      const { limit, offset } = req.pagination;
-      const countries = await Country.findAll({
-        attributes: ['id', 'title', 'flag'],
-        raw: true,
-        limit,
-        offset,
-        order: [['id', 'DESC']],
-      });
-
-      const countriesCount = await Country.count();
-
-      const formattedCountries = countries.map((country) => ({
-        id: country.id,
-        title: country.title || '',
-        flag: country.flag || '',
-      }));
-
-      if (formattedCountries.length > 0) {
-        res
-          .status(200)
-          .set('X-Total-Count', countriesCount)
-          .json(formattedCountries);
+      const {
+        pagination: { limit, offset },
+      } = req;
+      const { allCountries, totalCount } = await getAllCountries(limit, offset);
+      if (allCountries.length > 0) {
+        res.status(200).set('X-Total-Count', totalCount).json(allCountries);
       } else {
-        next(createError(404, 'Countries not found'));
+        res.status(401);
       }
     } catch (error) {
-      console.log(error.message);
+      console.error('Get all countries error: ', error.message);
       next(error);
     }
   }
@@ -41,138 +31,83 @@ class CountriesController {
       const {
         params: { countryId },
       } = req;
-
-      const countryById = await Country.findByPk(countryId);
-
+      const countryById = await getCountryById(countryId);
       if (countryById) {
-        const countryData = countryById.toJSON();
-        const formattedCountry = {
-          ...countryData,
-          title: countryData.title || '',
-          flag: countryData.flag || '',
-        };
-
-        res.status(200).json(formattedCountry);
+        res.status(200).json(countryById);
       } else {
-        next(createError(404, 'Country not found!'));
+        res.status(401);
       }
     } catch (error) {
-      console.log(error.message);
+      console.error('Get country by ID error: ', error.message);
       next(error);
     }
   }
 
   static async createCountry(req, res, next) {
     const transaction = await sequelize.transaction();
-
     try {
-      const { title, flag } = req.body;
-
-      const newBody = { title, flag };
-
-      const replaceEmptyStringsWithNull = (obj) =>
-        Object.fromEntries(
-          Object.entries(obj).map(([key, value]) => [
-            key,
-            value === '' ? null : value,
-          ])
-        );
-
-      const processedBody = replaceEmptyStringsWithNull(newBody);
-
-      const newCountry = await Country.create(processedBody, {
-        returning: ['id'],
-        transaction,
-      });
-
+      const {
+        body: { title, flag },
+      } = req;
+      const newCountry = await createCountry(title, flag, transaction);
       if (newCountry) {
         await transaction.commit();
-        const { id } = newCountry;
-        res.status(201).json({
-          id,
-          ...processedBody,
-        });
+        res.status(201).json(newCountry);
+      } else {
+        await transaction.rollback();
+        res.status(401);
       }
-      await transaction.rollback();
-      next(createError(400, 'The country has not been created!'));
     } catch (error) {
-      console.log(error.message);
       await transaction.rollback();
+      console.error('Create country error: ', error.message);
       next(error);
     }
   }
 
   static async updateCountry(req, res, next) {
     const transaction = await sequelize.transaction();
-
     try {
       const {
         params: { countryId },
         body: { title, flag },
       } = req;
-
-      const newBody = { title, flag };
-
-      const replaceEmptyStringsWithNull = (obj) =>
-        Object.fromEntries(
-          Object.entries(obj).map(([key, value]) => [
-            key,
-            value === '' ? null : value,
-          ])
-        );
-
-      const processedBody = replaceEmptyStringsWithNull(newBody);
-
-      const [affectedRows, [updatedCountry]] = await Country.update(
-        processedBody,
-        {
-          where: {
-            id: countryId,
-          },
-          returning: true,
-          transaction,
-        }
+      const updatedCountry = await updateCountry(
+        countryId,
+        title,
+        flag,
+        transaction
       );
-
-      if (affectedRows > 0) {
+      if (updatedCountry) {
         await transaction.commit();
         res.status(200).json(updatedCountry);
       } else {
         await transaction.rollback();
-        next(createError(404, 'The country has not been updated!'));
+        res.status(401);
       }
     } catch (error) {
-      console.log(error.message);
       await transaction.rollback();
+      console.error('Update country error: ', error.message);
       next(error);
     }
   }
 
   static async deleteCountry(req, res, next) {
     const transaction = await sequelize.transaction();
-
     try {
       const {
         params: { countryId },
       } = req;
-
-      const delCountry = await Country.destroy({
-        where: {
-          id: countryId,
-        },
-        transaction,
-      });
-
-      if (delCountry) {
+      const deletedCountry = await deleteCountry(countryId, transaction);
+      if (deletedCountry) {
         await transaction.commit();
-        res.sendStatus(res.statusCode);
+        res.status(200).json('OK');
       } else {
         await transaction.rollback();
-        next(createError(400, 'The country has not been deleted!'));
+        res.status(401);
       }
     } catch (error) {
-      console.log(error.message);
       await transaction.rollback();
+      console.error('Delete country error: ', error.message);
       next(error);
     }
   }

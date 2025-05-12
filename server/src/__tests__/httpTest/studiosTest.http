@@ -4,7 +4,7 @@ GET http://localhost:5000/api/studios HTTP/1.1
 ### Get list all studios (custom pagination)
 GET http://localhost:5000/api/studios?page=1&limit=10 HTTP/1.1
 
-### Get studio by id
+### Get studio by ID
 GET http://localhost:5000/api/studios/3 HTTP/1.1
 
 ### Add studio
@@ -19,7 +19,7 @@ content-type: application/json
   "about": ""
 }
 
-### Edit studio by id
+### Edit studio by ID
 PATCH http://localhost:5000/api/studios/37 HTTP/1.1
 content-type: application/json
 
@@ -31,5 +31,5 @@ content-type: application/json
   "about": ""
 }
 
-### Remove studio by id
+### Remove studio by ID
 DELETE  http://localhost:5000/api/studios/37 HTTP/1.1

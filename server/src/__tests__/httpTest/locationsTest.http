@@ -4,7 +4,7 @@ GET http://localhost:5000/api/locations HTTP/1.1
 ### Get list all locations (custom pagination)
 GET http://localhost:5000/api/locations?page=1&limit=5 HTTP/1.1
 
-### Get location by id
+### Get location by ID
 GET http://localhost:5000/api/locations/3 HTTP/1.1
 
 ### Add location
@@ -17,7 +17,7 @@ content-type: application/json
   "coatOfArms": ""
 }
 
-### Edit location by id
+### Edit location by ID
 PATCH http://localhost:5000/api/locations/11 HTTP/1.1
 content-type: application/json
 
@@ -27,5 +27,5 @@ content-type: application/json
   "coatOfArms": ""
 }
 
-### Remove location by id
+### Remove location by ID
 DELETE  http://localhost:5000/api/locations/11 HTTP/1.1

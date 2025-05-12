@@ -4,7 +4,7 @@ GET http://localhost:5000/api/directors HTTP/1.1
 ### Get list all directors (custom pagination)
 GET http://localhost:5000/api/directors?page=1&limit=10 HTTP/1.1
 
-### Get director by id
+### Get director by ID
 GET http://localhost:5000/api/directors/3 HTTP/1.1
 
 ### Add director
@@ -20,7 +20,7 @@ content-type: application/json
   "biography": ""
 }
 
-### Edit director by id
+### Edit director by ID
 PATCH http://localhost:5000/api/directors/29 HTTP/1.1
 content-type: application/json
 
@@ -33,5 +33,5 @@ content-type: application/json
   "biography": ""
 }
 
-### Remove director by id
+### Remove director by ID
 DELETE  http://localhost:5000/api/directors/29 HTTP/1.1

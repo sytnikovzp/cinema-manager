@@ -4,7 +4,7 @@ GET http://localhost:5000/api/genres HTTP/1.1
 ### Get list all genres (custom pagination)
 GET http://localhost:5000/api/genres?page=1&limit=10 HTTP/1.1
 
-### Get genre by id
+### Get genre by ID
 GET http://localhost:5000/api/genres/21 HTTP/1.1
 
 ### Add genre
@@ -16,7 +16,7 @@ content-type: application/json
   "logo": ""
 }
 
-### Edit genre by id
+### Edit genre by ID
 PATCH http://localhost:5000/api/genres/21 HTTP/1.1
 content-type: application/json
 
@@ -25,5 +25,5 @@ content-type: application/json
   "logo": ""
 }
 
-### Remove genre by id
+### Remove genre by ID
 DELETE  http://localhost:5000/api/genres/21 HTTP/1.1

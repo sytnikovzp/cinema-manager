@@ -4,7 +4,7 @@ GET http://localhost:5000/api/actors HTTP/1.1
 ### Get list all actors (custom pagination)
 GET http://localhost:5000/api/actors?page=1&limit=10 HTTP/1.1
 
-### Get actor by id
+### Get actor by ID
 GET http://localhost:5000/api/actors/3 HTTP/1.1
 
 ### Add actor
@@ -20,7 +20,7 @@ content-type: application/json
   "biography": ""
 }
 
-### Edit actor by id
+### Edit actor by ID
 PATCH http://localhost:5000/api/actors/238 HTTP/1.1
 content-type: application/json
 
@@ -33,5 +33,5 @@ content-type: application/json
   "biography": ""
 }
 
-### Remove actor by id
+### Remove actor by ID
 DELETE  http://localhost:5000/api/actors/238 HTTP/1.1
