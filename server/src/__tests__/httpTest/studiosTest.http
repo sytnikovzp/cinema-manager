@@ -1,27 +1,30 @@
 ### Get list all studios (default pagination)
 GET http://localhost:5000/api/studios HTTP/1.1
+Content-Type: application/json
 
 ### Get list all studios (custom pagination)
 GET http://localhost:5000/api/studios?page=1&limit=10 HTTP/1.1
-
-### Get studio by ID
-GET http://localhost:5000/api/studios/3 HTTP/1.1
+Content-Type: application/json
 
 ### Add studio
 POST http://localhost:5000/api/studios HTTP/1.1
-content-type: application/json
+Content-Type: application/json
 
 {
   "title": "New studio",
   "location": "Los Angeles",
-  "foundationYear": 2024,
+  "foundationYear": 2025,
   "logo": "",
   "about": ""
 }
 
+### Get studio by ID
+GET http://localhost:5000/api/studios/37 HTTP/1.1
+Content-Type: application/json
+
 ### Edit studio by ID
 PATCH http://localhost:5000/api/studios/37 HTTP/1.1
-content-type: application/json
+Content-Type: application/json
 
 {
   "title": "Updated studio",
@@ -33,3 +36,4 @@ content-type: application/json
 
 ### Remove studio by ID
 DELETE  http://localhost:5000/api/studios/37 HTTP/1.1
+Content-Type: application/json

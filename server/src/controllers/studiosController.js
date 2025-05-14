@@ -1,40 +1,27 @@
-const createError = require('http-errors');
+const { sequelize } = require('../db/models');
 
-const { Movie, Studio, Location, Country, sequelize } = require('../db/models');
-
-const { formatDateTime } = require('../utils/sharedFunctions');
+const {
+  getAllStudios,
+  getStudioById,
+  createStudio,
+  updateStudio,
+  deleteStudio,
+} = require('../services/studiosService');
 
 class StudiosController {
   static async getAllStudios(req, res, next) {
     try {
-      const { limit, offset } = req.pagination;
-      const studios = await Studio.findAll({
-        attributes: ['id', 'title', 'foundationYear', 'logo'],
-        raw: true,
-        limit,
-        offset,
-        order: [['id', 'DESC']],
-      });
-
-      const studiosCount = await Studio.count();
-
-      const formattedStudios = studios.map((studio) => ({
-        id: studio.id,
-        title: studio.title || '',
-        foundationYear: studio.foundationYear || '',
-        logo: studio.logo || '',
-      }));
-
-      if (formattedStudios.length > 0) {
-        res
-          .status(200)
-          .set('X-Total-Count', studiosCount)
-          .json(formattedStudios);
+      const {
+        pagination: { limit, offset },
+      } = req;
+      const { allStudios, totalCount } = await getAllStudios(limit, offset);
+      if (allStudios.length > 0) {
+        res.status(200).set('X-Total-Count', totalCount).json(allStudios);
       } else {
-        next(createError(404, 'Studios not found'));
+        res.status(401);
       }
     } catch (error) {
-      console.log(error.message);
+      console.error('Get all studios error: ', error.message);
       next(error);
     }
   }
@@ -44,216 +31,93 @@ class StudiosController {
       const {
         params: { studioId },
       } = req;
-
-      const studioById = await Studio.findByPk(studioId, {
-        attributes: {
-          exclude: ['locationId'],
-        },
-        include: [
-          {
-            model: Location,
-            attributes: ['title'],
-            include: [
-              {
-                model: Country,
-                attributes: ['title'],
-              },
-            ],
-          },
-          {
-            model: Movie,
-            attributes: ['id', 'title'],
-            through: {
-              attributes: [],
-            },
-          },
-        ],
-      });
-
+      const studioById = await getStudioById(studioId);
       if (studioById) {
-        const studioData = studioById.toJSON();
-        const formattedStudio = {
-          ...studioData,
-          title: studioData.title || '',
-          location: studioData.Location ? studioData.Location.title : '',
-          country: studioData.Location ? studioData.Location.Country.title : '',
-          foundationYear: studioData.foundationYear || '',
-          logo: studioData.logo || '',
-          about: studioData.about || '',
-          movies: studioData.Movies || [],
-          createdAt: formatDateTime(studioData.createdAt),
-          updatedAt: formatDateTime(studioData.updatedAt),
-        };
-
-        delete formattedStudio.Location;
-        delete formattedStudio.Movies;
-
-        res.status(200).json(formattedStudio);
+        res.status(200).json(studioById);
       } else {
-        next(createError(404, 'Studio not found!'));
+        res.status(401);
       }
     } catch (error) {
-      console.log(error.message);
+      console.error('Get studio by ID error: ', error.message);
       next(error);
     }
   }
 
   static async createStudio(req, res, next) {
     const transaction = await sequelize.transaction();
-
     try {
-      const { title, location, foundationYear, logo, about } = req.body;
-
-      const locationValue = location === '' ? null : location;
-
-      const locationRecord = locationValue
-        ? await Location.findOne({
-            where: { title: locationValue },
-            attributes: ['id'],
-            raw: true,
-          })
-        : null;
-
-      if (locationValue && !locationRecord) {
-        throw new Error('Location not found');
-      }
-
-      const locationId = locationRecord ? locationRecord.id : null;
-
-      const newBody = {
+      const {
+        body: { title, location, foundationYear, logo, about },
+      } = req;
+      const newStudio = await createStudio(
         title,
-        locationId,
+        location,
         foundationYear,
         logo,
         about,
-      };
-
-      const replaceEmptyStringsWithNull = (obj) =>
-        Object.fromEntries(
-          Object.entries(obj).map(([key, value]) => [
-            key,
-            value === '' ? null : value,
-          ])
-        );
-
-      const processedBody = replaceEmptyStringsWithNull(newBody);
-
-      const newStudio = await Studio.create(processedBody, {
-        returning: ['id'],
-        transaction,
-      });
-
+        transaction
+      );
       if (newStudio) {
         await transaction.commit();
-        const { id } = newStudio;
-        res.status(201).json({
-          id,
-          ...processedBody,
-        });
+        res.status(201).json(newStudio);
+      } else {
+        await transaction.rollback();
+        res.status(401);
       }
-      await transaction.rollback();
-      next(createError(400, 'The studio has not been created!'));
     } catch (error) {
-      console.log(error.message);
       await transaction.rollback();
+      console.error('Create studio error: ', error.message);
       next(error);
     }
   }
 
   static async updateStudio(req, res, next) {
     const transaction = await sequelize.transaction();
-
     try {
       const {
         params: { studioId },
         body: { title, location, foundationYear, logo, about },
       } = req;
-
-      let locationId = null;
-      if (location && location !== '') {
-        const locationRecord = await Location.findOne({
-          where: {
-            title: location,
-          },
-          attributes: ['id'],
-          raw: true,
-        });
-
-        if (!locationRecord) {
-          throw new Error('Location not found');
-        }
-
-        locationId = locationRecord.id;
-      }
-
-      const newBody = {
+      const updatedStudio = await updateStudio(
+        studioId,
         title,
-        locationId,
+        location,
         foundationYear,
         logo,
         about,
-      };
-
-      const replaceEmptyStringsWithNull = (obj) =>
-        Object.fromEntries(
-          Object.entries(obj).map(([key, value]) => [
-            key,
-            value === '' ? null : value,
-          ])
-        );
-
-      const processedBody = replaceEmptyStringsWithNull(newBody);
-
-      const [affectedRows, [updatedStudios]] = await Studio.update(
-        processedBody,
-        {
-          where: {
-            id: studioId,
-          },
-          returning: true,
-          transaction,
-        }
+        transaction
       );
-
-      if (affectedRows > 0) {
+      if (updatedStudio) {
         await transaction.commit();
-        res.status(200).json(updatedStudios);
+        res.status(200).json(updatedStudio);
       } else {
         await transaction.rollback();
-        next(createError(404, 'The studio has not been updated!'));
+        res.status(401);
       }
     } catch (error) {
-      console.log(error.message);
       await transaction.rollback();
+      console.error('Update studio error: ', error.message);
       next(error);
     }
   }
 
   static async deleteStudio(req, res, next) {
     const transaction = await sequelize.transaction();
-
     try {
       const {
         params: { studioId },
       } = req;
-
-      const delStudio = await Studio.destroy({
-        where: {
-          id: studioId,
-        },
-        transaction,
-      });
-
-      if (delStudio) {
+      const deletedStudio = await deleteStudio(studioId, transaction);
+      if (deletedStudio) {
         await transaction.commit();
-        res.sendStatus(res.statusCode);
+        res.status(200).json('OK');
       } else {
         await transaction.rollback();
-        next(createError(400, 'The studio has not been deleted!'));
+        res.status(401);
       }
     } catch (error) {
-      console.log(error.message);
       await transaction.rollback();
+      console.error('Delete studio error: ', error.message);
       next(error);
     }
   }
