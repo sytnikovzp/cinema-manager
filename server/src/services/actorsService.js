@@ -79,18 +79,18 @@ class ActorsService {
 
   static async createActor(
     fullName,
-    country,
+    countryValue,
     birthDateValue,
     deathDateValue,
-    photo,
-    biography,
+    photoValue,
+    biographyValue,
     transaction
   ) {
     if (await Actor.findOne({ where: { fullName } })) {
       throw badRequest('This actor already exists');
     }
-    const countryRecord = country
-      ? await getRecordByTitle(Country, country)
+    const countryRecord = countryValue
+      ? await getRecordByTitle(Country, countryValue)
       : null;
     const birthDate = parseAndValidateDate(birthDateValue);
     const deathDate = parseAndValidateDate(deathDateValue);
@@ -99,8 +99,8 @@ class ActorsService {
         fullName,
         birthDate,
         deathDate,
-        photo: photo || null,
-        biography: biography || null,
+        photo: photoValue || null,
+        biography: biographyValue || null,
         countryId: countryRecord?.id || null,
       },
       { transaction, returning: true }
@@ -114,11 +114,11 @@ class ActorsService {
   static async updateActor(
     id,
     fullName,
-    country,
+    countryValue,
     birthDateValue,
     deathDateValue,
-    photo,
-    biography,
+    photoValue,
+    biographyValue,
     transaction
   ) {
     const foundActor = await Actor.findByPk(id);
@@ -131,8 +131,8 @@ class ActorsService {
         throw badRequest('This actor already exists');
       }
     }
-    const countryRecord = country
-      ? await getRecordByTitle(Country, country)
+    const countryRecord = countryValue
+      ? await getRecordByTitle(Country, countryValue)
       : null;
     const birthDate = parseAndValidateDate(birthDateValue);
     const deathDate = parseAndValidateDate(deathDateValue);
@@ -141,8 +141,8 @@ class ActorsService {
         fullName,
         birthDate,
         deathDate,
-        photo: photo || null,
-        biography: biography || null,
+        photo: photoValue || null,
+        biography: biographyValue || null,
         countryId: countryRecord?.id || null,
       },
       { where: { id }, returning: true, transaction }

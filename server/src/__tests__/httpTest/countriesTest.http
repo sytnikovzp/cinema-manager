@@ -16,7 +16,7 @@ Content-Type: application/json
 }
 
 ### Get country by ID
-GET http://localhost:5000/api/countries/3 HTTP/1.1
+GET http://localhost:5000/api/countries/40 HTTP/1.1
 Content-Type: application/json
 
 ### Edit country by ID

@@ -14,16 +14,16 @@ Content-Type: application/json
   "title": "New movie",
   "genre": "Action",
   "releaseYear": 2025,
-  "poster": null,
-  "trailer": null,
-  "storyline": null,
-  "actors": ["Harrison Ford", "Johnny Depp", "Sigourney Weaver"], 
-  "directors": ["Steven Spielberg"],  
-  "studios": ["Lucasfilm Ltd."]     
+  "poster": "",
+  "trailer": "",
+  "storyline": "",
+  "studios": ["Lucasfilm Ltd."],
+  "directors": ["Steven Spielberg"],
+  "actors": ["Harrison Ford", "Johnny Depp", "Sigourney Weaver"]
 }
 
 ### Get movie by ID
-GET http://localhost:5000/api/movies/3 HTTP/1.1
+GET http://localhost:5000/api/movies/51 HTTP/1.1
 Content-Type: application/json
 
 ### Edit movie by ID
@@ -37,9 +37,9 @@ Content-Type: application/json
   "poster": "",
   "trailer": "",
   "storyline": "",
-  "actors": [""], 
-  "directors": [""],  
-  "studios": [""]  
+  "studios": [],
+  "directors": [],
+  "actors": []
 }
 
 ### Remove movie by ID

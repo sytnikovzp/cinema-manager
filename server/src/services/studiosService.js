@@ -85,24 +85,24 @@ class StudiosService {
 
   static async createStudio(
     title,
-    location,
-    foundationYear,
-    logo,
-    about,
+    locationValue,
+    foundationYearValue,
+    logoValue,
+    aboutValue,
     transaction
   ) {
     if (await Studio.findOne({ where: { title } })) {
       throw badRequest('This studio already exists');
     }
-    const locationRecord = location
-      ? await getRecordByTitle(Location, location)
+    const locationRecord = locationValue
+      ? await getRecordByTitle(Location, locationValue)
       : null;
     const newStudio = await Studio.create(
       {
         title,
-        foundationYear: foundationYear || null,
-        logo: logo || null,
-        about: about || null,
+        foundationYear: foundationYearValue || null,
+        logo: logoValue || null,
+        about: aboutValue || null,
         locationId: locationRecord?.id || null,
       },
       { transaction, returning: true }
@@ -116,10 +116,10 @@ class StudiosService {
   static async updateStudio(
     id,
     title,
-    location,
-    foundationYear,
-    logo,
-    about,
+    locationValue,
+    foundationYearValue,
+    logoValue,
+    aboutValue,
     transaction
   ) {
     const foundStudio = await Studio.findByPk(id);
@@ -132,15 +132,15 @@ class StudiosService {
         throw badRequest('This studio already exists');
       }
     }
-    const locationRecord = location
-      ? await getRecordByTitle(Location, location)
+    const locationRecord = locationValue
+      ? await getRecordByTitle(Location, locationValue)
       : null;
     const [affectedRows, [updatedStudio]] = await Studio.update(
       {
         title,
-        foundationYear: foundationYear || null,
-        logo: logo || null,
-        about: about || null,
+        foundationYear: foundationYearValue || null,
+        logo: logoValue || null,
+        about: aboutValue || null,
         locationId: locationRecord?.id || null,
       },
       { where: { id }, returning: true, transaction }

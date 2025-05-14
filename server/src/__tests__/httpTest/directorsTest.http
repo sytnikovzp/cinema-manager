@@ -20,7 +20,7 @@ Content-Type: application/json
 }
 
 ### Get director by ID
-GET http://localhost:5000/api/directors/3 HTTP/1.1
+GET http://localhost:5000/api/directors/29 HTTP/1.1
 Content-Type: application/json
 
 ### Edit director by ID

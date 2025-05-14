@@ -64,18 +64,23 @@ class LocationsService {
     };
   }
 
-  static async createLocation(title, country, coatOfArms, transaction) {
+  static async createLocation(
+    title,
+    countryValue,
+    coatOfArmsValue,
+    transaction
+  ) {
     if (await Location.findOne({ where: { title } })) {
       throw badRequest('This location already exists');
     }
-    const countryRecord = country
-      ? await getRecordByTitle(Country, country)
+    const countryRecord = countryValue
+      ? await getRecordByTitle(Country, countryValue)
       : null;
     const newLocation = await Location.create(
       {
         title,
         countryId: countryRecord?.id || null,
-        coatOfArms: coatOfArms || null,
+        coatOfArms: coatOfArmsValue || null,
       },
       { transaction, returning: true }
     );
@@ -85,7 +90,13 @@ class LocationsService {
     return formatLocationData(newLocation);
   }
 
-  static async updateLocation(id, title, country, coatOfArms, transaction) {
+  static async updateLocation(
+    id,
+    title,
+    countryValue,
+    coatOfArmsValue,
+    transaction
+  ) {
     const foundLocation = await Location.findByPk(id);
     if (!foundLocation) {
       throw notFound('Location not found');
@@ -96,14 +107,14 @@ class LocationsService {
         throw badRequest('This location already exists');
       }
     }
-    const countryRecord = country
-      ? await getRecordByTitle(Country, country)
+    const countryRecord = countryValue
+      ? await getRecordByTitle(Country, countryValue)
       : null;
     const [affectedRows, [updatedLocation]] = await Location.update(
       {
         title,
         countryId: countryRecord?.id || null,
-        coatOfArms: coatOfArms || null,
+        coatOfArms: coatOfArmsValue || null,
       },
       { where: { id }, returning: true, transaction }
     );

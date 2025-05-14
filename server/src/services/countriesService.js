@@ -43,14 +43,14 @@ class CountriesService {
     return formatCountryData(foundCountry);
   }
 
-  static async createCountry(title, flag, transaction) {
+  static async createCountry(title, flagValue, transaction) {
     if (await Country.findOne({ where: { title } })) {
       throw badRequest('This country already exists');
     }
     const newCountry = await Country.create(
       {
         title,
-        flag: flag || null,
+        flag: flagValue || null,
       },
       { transaction, returning: true }
     );
@@ -60,7 +60,7 @@ class CountriesService {
     return formatCountryData(newCountry);
   }
 
-  static async updateCountry(id, title, flag, transaction) {
+  static async updateCountry(id, title, flagValue, transaction) {
     const foundCountry = await Country.findByPk(id);
     if (!foundCountry) {
       throw notFound('Country not found');
@@ -74,7 +74,7 @@ class CountriesService {
     const [affectedRows, [updatedCountry]] = await Country.update(
       {
         title,
-        flag: flag || null,
+        flag: flagValue || null,
       },
       { where: { id }, returning: true, transaction }
     );

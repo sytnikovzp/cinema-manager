@@ -43,14 +43,14 @@ class GenresService {
     return formatGenreData(foundGenre);
   }
 
-  static async createGenre(title, logo, transaction) {
+  static async createGenre(title, logoValue, transaction) {
     if (await Genre.findOne({ where: { title } })) {
       throw badRequest('This genre already exists');
     }
     const newGenre = await Genre.create(
       {
         title,
-        logo: logo || null,
+        logo: logoValue || null,
       },
       { transaction, returning: true }
     );
@@ -60,7 +60,7 @@ class GenresService {
     return formatGenreData(newGenre);
   }
 
-  static async updateGenre(id, title, logo, transaction) {
+  static async updateGenre(id, title, logoValue, transaction) {
     const foundGenre = await Genre.findByPk(id);
     if (!foundGenre) {
       throw notFound('Genre not found');
@@ -74,7 +74,7 @@ class GenresService {
     const [affectedRows, [updatedGenre]] = await Genre.update(
       {
         title,
-        logo: logo || null,
+        logo: logoValue || null,
       },
       { where: { id }, returning: true, transaction }
     );
