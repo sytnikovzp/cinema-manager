@@ -14,7 +14,7 @@ content-type: application/json
 {
   "fullName": "New director",
   "country": "United States of America",
-  "birthDate": "2000-01-01",
+  "birthDate": "16 April 2025",
   "deathDate": "",
   "photo": "",
   "biography": ""
