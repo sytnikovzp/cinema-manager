@@ -13,8 +13,8 @@ content-type: application/json
 
 {
   "fullName": "New actor",
-  "country": "United States of America",
-  "birthDate": "2000-01-01",
+  "country": "Italy",
+  "birthDate": "25 May 2005",
   "deathDate": "",
   "photo": "",
   "biography": ""

@@ -1,43 +1,27 @@
-const createError = require('http-errors');
+const { sequelize } = require('../db/models');
 
-const { Actor, Movie, Country, sequelize } = require('../db/models');
-
-const { formatDateTime } = require('../utils/sharedFunctions');
+const {
+  getAllActors,
+  getActorById,
+  createActor,
+  updateActor,
+  deleteActor,
+} = require('../services/actorsService');
 
 class ActorsController {
   static async getAllActors(req, res, next) {
     try {
-      const { limit, offset } = req.pagination;
-      const actors = await Actor.findAll({
-        attributes: ['id', 'fullName', 'photo'],
-        include: [
-          {
-            model: Country,
-            attributes: ['title'],
-          },
-        ],
-        raw: true,
-        limit,
-        offset,
-        order: [['id', 'DESC']],
-      });
-
-      const actorsCount = await Actor.count();
-
-      const formattedActors = actors.map((actor) => ({
-        id: actor.id,
-        fullName: actor.fullName || '',
-        photo: actor.photo || '',
-        country: actor['Country.title'] || '',
-      }));
-
-      if (formattedActors.length > 0) {
-        res.status(200).set('X-Total-Count', actorsCount).json(formattedActors);
+      const {
+        pagination: { limit, offset },
+      } = req;
+      const { allActors, totalCount } = await getAllActors(limit, offset);
+      if (allActors.length > 0) {
+        res.status(200).set('X-Total-Count', totalCount).json(allActors);
       } else {
-        next(createError(404, 'Actors not found'));
+        res.status(401);
       }
     } catch (error) {
-      console.log(error.message);
+      console.error('Get all actors error: ', error.message);
       next(error);
     }
   }
@@ -47,210 +31,95 @@ class ActorsController {
       const {
         params: { actorId },
       } = req;
-
-      const actorById = await Actor.findByPk(actorId, {
-        attributes: {
-          exclude: ['countryId'],
-        },
-        include: [
-          {
-            model: Country,
-            attributes: ['title'],
-          },
-          {
-            model: Movie,
-            attributes: ['id', 'title'],
-            through: {
-              attributes: [],
-            },
-          },
-        ],
-      });
-
+      const actorById = await getActorById(actorId);
       if (actorById) {
-        const actorData = actorById.toJSON();
-        const formattedActor = {
-          ...actorData,
-          fullName: actorData.fullName || '',
-          birthDate: actorData.birthDate || '',
-          deathDate: actorData.deathDate || '',
-          photo: actorData.photo || '',
-          biography: actorData.biography || '',
-          country: actorData.Country ? actorData.Country.title : '',
-          movies: actorData.Movies || [],
-          createdAt: formatDateTime(actorData.createdAt),
-          updatedAt: formatDateTime(actorData.updatedAt),
-        };
-
-        delete formattedActor.Country;
-        delete formattedActor.Movies;
-
-        res.status(200).json(formattedActor);
+        res.status(200).json(actorById);
       } else {
-        next(createError(404, 'Actor not found!'));
+        res.status(401);
       }
     } catch (error) {
-      console.log(error.message);
+      console.error('Get actor by ID error: ', error.message);
       next(error);
     }
   }
 
   static async createActor(req, res, next) {
     const transaction = await sequelize.transaction();
-
     try {
-      const { fullName, country, birthDate, deathDate, photo, biography } =
-        req.body;
-
-      const countryValue = country === '' ? null : country;
-
-      const countryRecord = countryValue
-        ? await Country.findOne({
-            where: { title: countryValue },
-            attributes: ['id'],
-            raw: true,
-          })
-        : null;
-
-      if (countryValue && !countryRecord) {
-        throw new Error('Country not found');
-      }
-
-      const countryId = countryRecord ? countryRecord.id : null;
-
-      const newBody = {
+      const {
+        body: { fullName, country, birthDate, deathDate, photo, biography },
+      } = req;
+      const newActor = await createActor(
         fullName,
-        countryId,
+        country,
         birthDate,
         deathDate,
         photo,
         biography,
-      };
-
-      const replaceEmptyStringsWithNull = (obj) =>
-        Object.fromEntries(
-          Object.entries(obj).map(([key, value]) => [
-            key,
-            value === '' ? null : value,
-          ])
-        );
-
-      const processedBody = replaceEmptyStringsWithNull(newBody);
-
-      const newActor = await Actor.create(processedBody, {
-        returning: ['id'],
-        transaction,
-      });
-
+        transaction
+      );
       if (newActor) {
         await transaction.commit();
-        const { id } = newActor;
-        res.status(201).json({
-          id,
-          ...processedBody,
-        });
+        res.status(201).json(newActor);
+      } else {
+        await transaction.rollback();
+        res.status(401);
       }
-      await transaction.rollback();
-      next(createError(400, 'The actor has not been created!'));
     } catch (error) {
-      console.log(error.message);
       await transaction.rollback();
+      console.error('Create actor error: ', error.message);
       next(error);
     }
   }
 
   static async updateActor(req, res, next) {
     const transaction = await sequelize.transaction();
-
     try {
       const {
         params: { actorId },
         body: { fullName, country, birthDate, deathDate, photo, biography },
       } = req;
-
-      let countryId = null;
-      if (country && country !== '') {
-        const countryRecord = await Country.findOne({
-          where: {
-            title: country,
-          },
-          attributes: ['id'],
-          raw: true,
-        });
-
-        if (!countryRecord) {
-          throw new Error('Country not found');
-        }
-
-        countryId = countryRecord.id;
-      }
-
-      const newBody = {
+      const updatedActor = await updateActor(
+        actorId,
         fullName,
-        countryId,
+        country,
         birthDate,
         deathDate,
         photo,
         biography,
-      };
-
-      const replaceEmptyStringsWithNull = (obj) =>
-        Object.fromEntries(
-          Object.entries(obj).map(([key, value]) => [
-            key,
-            value === '' ? null : value,
-          ])
-        );
-
-      const processedBody = replaceEmptyStringsWithNull(newBody);
-
-      const [affectedRows, [updatedActor]] = await Actor.update(processedBody, {
-        where: {
-          id: actorId,
-        },
-        returning: true,
-        transaction,
-      });
-
-      if (affectedRows > 0) {
+        transaction
+      );
+      if (updatedActor) {
         await transaction.commit();
         res.status(200).json(updatedActor);
       } else {
         await transaction.rollback();
-        next(createError(404, 'The actor has not been updated!'));
+        res.status(401);
       }
     } catch (error) {
-      console.log(error.message);
       await transaction.rollback();
+      console.error('Update actor error: ', error.message);
       next(error);
     }
   }
 
   static async deleteActor(req, res, next) {
     const transaction = await sequelize.transaction();
-
     try {
       const {
         params: { actorId },
       } = req;
-
-      const delActor = await Actor.destroy({
-        where: {
-          id: actorId,
-        },
-        transaction,
-      });
-
-      if (delActor) {
+      const deletedActor = await deleteActor(actorId, transaction);
+      if (deletedActor) {
         await transaction.commit();
-        res.sendStatus(res.statusCode);
+        res.status(200).json('OK');
       } else {
         await transaction.rollback();
-        next(createError(400, 'The actor has not been deleted!'));
+        res.status(401);
       }
     } catch (error) {
-      console.log(error.message);
       await transaction.rollback();
+      console.error('Delete actor error: ', error.message);
       next(error);
     }
   }

@@ -43,8 +43,7 @@ class LocationsService {
   }
 
   static async getLocationById(id) {
-    const foundLocation = await Location.findOne({
-      where: { id },
+    const foundLocation = await Location.findByPk(id, {
       attributes: { exclude: ['countryId'] },
       include: [{ model: Country, attributes: ['id', 'title'] }],
     });

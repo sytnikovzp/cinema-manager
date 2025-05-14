@@ -8,7 +8,7 @@ const {
   deleteLocation,
 } = require('../services/locationsService');
 
-class Locations {
+class LocationsController {
   static async getAllLocations(req, res, next) {
     try {
       const {
@@ -119,4 +119,4 @@ class Locations {
   }
 }
 
-module.exports = Locations;
+module.exports = LocationsController;

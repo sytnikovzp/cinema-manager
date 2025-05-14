@@ -5,7 +5,7 @@ GET http://localhost:5000/api/genres HTTP/1.1
 GET http://localhost:5000/api/genres?page=1&limit=10 HTTP/1.1
 
 ### Get genre by ID
-GET http://localhost:5000/api/genres/21 HTTP/1.1
+GET http://localhost:5000/api/genres/20 HTTP/1.1
 
 ### Add genre
 POST http://localhost:5000/api/genres HTTP/1.1
@@ -17,7 +17,7 @@ content-type: application/json
 }
 
 ### Edit genre by ID
-PATCH http://localhost:5000/api/genres/21 HTTP/1.1
+PATCH http://localhost:5000/api/genres/20 HTTP/1.1
 content-type: application/json
 
 {
@@ -26,4 +26,4 @@ content-type: application/json
 }
 
 ### Remove genre by ID
-DELETE  http://localhost:5000/api/genres/21 HTTP/1.1
+DELETE  http://localhost:5000/api/genres/20 HTTP/1.1

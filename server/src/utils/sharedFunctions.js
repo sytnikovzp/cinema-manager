@@ -1,23 +1,50 @@
-const { format, isBefore, parseISO } = require('date-fns');
+const { format, parse, isValid, isBefore, parseISO } = require('date-fns');
 const { enGB } = require('date-fns/locale');
 
-const { notFound } = require('../errors/generalErrors');
+const { notFound, badRequest } = require('../errors/generalErrors');
 
 const isBeforeCurrentDate = (value) => {
+  if (!value) {
+    return;
+  }
   const currentDate = new Date();
   if (!isBefore(parseISO(value), currentDate)) {
-    throw new Error('Дата не може бути у майбутньому');
+    throw new Error('The date cannot be in the future');
   }
 };
 
 const deathAfterBirth = (value, birthDate) => {
-  if (birthDate && isBefore(parseISO(value), parseISO(birthDate))) {
-    throw new Error('Дата смерті не може бути раніше дати народження');
+  if (!value || !birthDate) {
+    return;
+  }
+  if (isBefore(parseISO(value), parseISO(birthDate))) {
+    throw new Error('Date of death cannot be before date of birth');
   }
 };
 
 const formatDateTime = function (date) {
+  if (!date) {
+    return null;
+  }
   return format(new Date(date), 'dd MMMM yyyy, HH:mm', { locale: enGB });
+};
+
+const formatDate = function (date) {
+  if (!date) {
+    return null;
+  }
+  return format(new Date(date), 'dd MMMM yyyy', { locale: enGB });
+};
+
+const parseAndValidateDate = function (dateValue) {
+  if (!dateValue) {
+    return null;
+  }
+  const date = parse(dateValue, 'dd MMMM yyyy', new Date(), { locale: enGB });
+  if (!isValid(date)) {
+    throw badRequest('Invalid date format');
+  }
+  return date;
 };
 
 const getRecordByTitle = async function (Model, title) {
@@ -39,5 +66,7 @@ module.exports = {
   isBeforeCurrentDate,
   deathAfterBirth,
   formatDateTime,
+  formatDate,
+  parseAndValidateDate,
   getRecordByTitle,
 };
