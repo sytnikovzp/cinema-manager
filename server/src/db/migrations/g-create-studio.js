@@ -28,11 +28,11 @@ module.exports = {
         allowNull: true,
       },
       logo: {
-        type: Sequelize.TEXT(200),
+        type: Sequelize.TEXT,
         allowNull: true,
       },
       about: {
-        type: Sequelize.TEXT(200),
+        type: Sequelize.TEXT,
         allowNull: true,
       },
       created_at: {

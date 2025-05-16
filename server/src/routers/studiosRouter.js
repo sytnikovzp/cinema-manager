@@ -1,7 +1,7 @@
 const { Router } = require('express');
 
 const {
-  validation: { validateStudio, validatePatchStudio },
+  validation: { validateStudio },
   pagination: { paginateElements },
 } = require('../middlewares');
 
@@ -24,6 +24,6 @@ studiosRouter
   .route('/:studioId')
   .get(getStudioById)
   .delete(deleteStudio)
-  .patch(validatePatchStudio, updateStudio);
+  .patch(validateStudio, updateStudio);
 
 module.exports = studiosRouter;

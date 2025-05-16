@@ -22,6 +22,12 @@ const deathAfterBirth = (value, birthDate) => {
   }
 };
 
+const stripTime = (date) => {
+  const d = new Date(date);
+  d.setHours(0, 0, 0, 0);
+  return d;
+};
+
 const formatDateTime = function (date) {
   if (!date) {
     return null;
@@ -47,6 +53,20 @@ const parseAndValidateDate = function (dateValue) {
   return date;
 };
 
+const parseDateString = (value, originalValue) => {
+  if (typeof originalValue === 'string') {
+    const trimmed = originalValue.trim();
+    if (trimmed === '') {
+      return null;
+    }
+    const parsedDate = parse(trimmed, 'dd MMMM yyyy', new Date(), {
+      locale: enGB,
+    });
+    return isValid(parsedDate) ? parsedDate : null;
+  }
+  return originalValue;
+};
+
 const getRecordByTitle = async function (Model, title) {
   if (!title) {
     return null;
@@ -68,5 +88,7 @@ module.exports = {
   formatDateTime,
   formatDate,
   parseAndValidateDate,
+  stripTime,
+  parseDateString,
   getRecordByTitle,
 };

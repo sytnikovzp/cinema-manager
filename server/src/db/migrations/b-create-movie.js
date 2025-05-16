@@ -28,7 +28,7 @@ module.exports = {
         allowNull: true,
       },
       poster: {
-        type: Sequelize.TEXT(200),
+        type: Sequelize.TEXT,
         allowNull: true,
       },
       trailer: {
@@ -36,7 +36,7 @@ module.exports = {
         allowNull: true,
       },
       storyline: {
-        type: Sequelize.TEXT(200),
+        type: Sequelize.TEXT,
         allowNull: true,
       },
       created_at: {

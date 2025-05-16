@@ -32,11 +32,11 @@ module.exports = {
         allowNull: true,
       },
       photo: {
-        type: Sequelize.TEXT(200),
+        type: Sequelize.TEXT,
         allowNull: true,
       },
       biography: {
-        type: Sequelize.TEXT(200),
+        type: Sequelize.TEXT,
         allowNull: true,
       },
       created_at: {

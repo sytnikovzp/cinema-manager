@@ -1,7 +1,7 @@
 const { Router } = require('express');
 
 const {
-  validation: { validateMovie, validatePatchMovie },
+  validation: { validateMovie },
   pagination: { paginateElements },
 } = require('../middlewares');
 
@@ -24,6 +24,6 @@ moviesRouter
   .route('/:movieId')
   .get(getMovieById)
   .delete(deleteMovie)
-  .patch(validatePatchMovie, updateMovie);
+  .patch(validateMovie, updateMovie);
 
 module.exports = moviesRouter;

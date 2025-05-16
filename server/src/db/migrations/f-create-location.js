@@ -24,7 +24,7 @@ module.exports = {
         onUpdate: 'CASCADE',
       },
       coat_of_arms: {
-        type: Sequelize.TEXT(200),
+        type: Sequelize.TEXT,
         allowNull: true,
       },
       created_at: {

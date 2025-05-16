@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       flag: {
-        type: DataTypes.TEXT(200),
+        type: DataTypes.TEXT,
         allowNull: true,
         validate: {
           isUrl: true,

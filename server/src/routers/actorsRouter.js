@@ -1,7 +1,7 @@
 const { Router } = require('express');
 
 const {
-  validation: { validatePerson, validatePatchPerson },
+  validation: { validatePerson },
   pagination: { paginateElements },
 } = require('../middlewares');
 
@@ -24,6 +24,6 @@ actorsRouter
   .route('/:actorId')
   .get(getActorById)
   .delete(deleteActor)
-  .patch(validatePatchPerson, updateActor);
+  .patch(validatePerson, updateActor);
 
 module.exports = actorsRouter;

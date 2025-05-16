@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       logo: {
-        type: DataTypes.TEXT(200),
+        type: DataTypes.TEXT,
         allowNull: true,
         validate: {
           isUrl: true,
@@ -50,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       about: {
-        type: DataTypes.TEXT(200),
+        type: DataTypes.TEXT,
         allowNull: true,
         validate: {
           len: [0, 200],

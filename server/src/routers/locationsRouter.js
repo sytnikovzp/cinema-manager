@@ -1,7 +1,7 @@
 const { Router } = require('express');
 
 const {
-  validation: { validateLocation, validatePatchLocation },
+  validation: { validateLocation },
   pagination: { paginateElements },
 } = require('../middlewares');
 
@@ -24,6 +24,6 @@ locationsRouter
   .route('/:locationId')
   .get(getLocationById)
   .delete(deleteLocation)
-  .patch(validatePatchLocation, updateLocation);
+  .patch(validateLocation, updateLocation);
 
 module.exports = locationsRouter;

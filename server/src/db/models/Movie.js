@@ -52,7 +52,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       poster: {
-        type: DataTypes.TEXT(200),
+        type: DataTypes.TEXT,
         allowNull: true,
         validate: {
           isUrl: true,
@@ -68,7 +68,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       storyline: {
-        type: DataTypes.TEXT(200),
+        type: DataTypes.TEXT,
         allowNull: true,
         validate: {
           len: [0, 200],

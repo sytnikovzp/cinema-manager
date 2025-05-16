@@ -57,7 +57,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       photo: {
-        type: DataTypes.TEXT(200),
+        type: DataTypes.TEXT,
         allowNull: true,
         validate: {
           isUrl: true,
@@ -65,7 +65,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       biography: {
-        type: DataTypes.TEXT(200),
+        type: DataTypes.TEXT,
         allowNull: true,
         validate: {
           len: [0, 200],

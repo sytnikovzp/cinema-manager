@@ -1,7 +1,7 @@
 const { Router } = require('express');
 
 const {
-  validation: { validatePerson, validatePatchPerson },
+  validation: { validatePerson },
   pagination: { paginateElements },
 } = require('../middlewares');
 
@@ -24,6 +24,6 @@ directorsRouter
   .route('/:directorId')
   .get(getDirectorById)
   .delete(deleteDirector)
-  .patch(validatePatchPerson, updateDirector);
+  .patch(validatePerson, updateDirector);
 
 module.exports = directorsRouter;

@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       coatOfArms: {
-        type: DataTypes.TEXT(200),
+        type: DataTypes.TEXT,
         allowNull: true,
         validate: {
           isUrl: true,

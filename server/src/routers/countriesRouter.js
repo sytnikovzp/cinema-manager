@@ -1,7 +1,7 @@
 const { Router } = require('express');
 
 const {
-  validation: { validateCountry, validatePatchCountry },
+  validation: { validateCountry },
   pagination: { paginateElements },
 } = require('../middlewares');
 
@@ -24,6 +24,6 @@ countriesRouter
   .route('/:countryId')
   .get(getCountryById)
   .delete(deleteCountry)
-  .patch(validatePatchCountry, updateCountry);
+  .patch(validateCountry, updateCountry);
 
 module.exports = countriesRouter;

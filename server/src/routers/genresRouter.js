@@ -1,7 +1,7 @@
 const { Router } = require('express');
 
 const {
-  validation: { validateGenre, validatePatchGenre },
+  validation: { validateGenre },
   pagination: { paginateElements },
 } = require('../middlewares');
 
@@ -24,6 +24,6 @@ genresRouter
   .route('/:genreId')
   .get(getGenreById)
   .delete(deleteGenre)
-  .patch(validatePatchGenre, updateGenre);
+  .patch(validateGenre, updateGenre);
 
 module.exports = genresRouter;
