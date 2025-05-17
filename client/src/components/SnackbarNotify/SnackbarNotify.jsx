@@ -1,29 +1,28 @@
 import { useContext } from 'react';
-// =============================================
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
-// =============================================
-import SnackbarContext from '../contexts/SnackbarContext';
 
-const SnackbarComponent = () => {
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
+
+import SnackbarContext from '../../contexts/SnackbarContext';
+
+function SnackbarNotify() {
   const { snackbar, handleClose } = useContext(SnackbarContext);
 
   return (
     <Snackbar
-      open={snackbar.open}
       autoHideDuration={1500}
+      open={snackbar.open}
       onClose={handleClose}
     >
       <Alert
-        onClose={handleClose}
         severity={snackbar.severity}
         variant='filled'
-        sx={{ width: '100%' }}
+        onClose={handleClose}
       >
         {snackbar.message}
       </Alert>
     </Snackbar>
   );
-};
+}
 
-export default SnackbarComponent;
+export default SnackbarNotify;

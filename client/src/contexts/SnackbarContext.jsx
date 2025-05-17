@@ -1,10 +1,10 @@
 import { createContext } from 'react';
-// =============================================
+
 import useSnackbar from '../hooks/useSnackbar';
 
 const SnackbarContext = createContext();
 
-export const SnackbarProvider = ({ children }) => {
+export function SnackbarProvider({ children }) {
   const snackbar = useSnackbar();
 
   return (
@@ -12,6 +12,6 @@ export const SnackbarProvider = ({ children }) => {
       {children}
     </SnackbarContext.Provider>
   );
-};
+}
 
 export default SnackbarContext;

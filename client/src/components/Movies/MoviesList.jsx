@@ -1,40 +1,40 @@
-import { useState, useCallback, useContext, useEffect } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-// =============================================
+
+import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
-import VideoCallIcon from '@mui/icons-material/VideoCall';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import EditIcon from '@mui/icons-material/Edit';
-import { styled } from '@mui/material/styles';
-import Divider from '@mui/material/Divider';
+import ListItemText from '@mui/material/ListItemText';
 import Pagination from '@mui/material/Pagination';
-// =============================================
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+
+import { styled } from '@mui/material/styles';
+
+import EditIcon from '@mui/icons-material/Edit';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import VideoCallIcon from '@mui/icons-material/VideoCall';
+
+import useItemsPerPage from '../../hooks/useItemsPerPage';
+import usePagination from '../../hooks/usePagination';
+
+import { deleteMovie } from '../../services/movieService';
 import {
   buttonMainStyle,
   itemListStyle,
   scrollListBoxStyle,
+  styleListListItemButton,
 } from '../../services/styleService';
-// =============================================
-import { renderListSkeleton } from '../../services/skeletonService';
-// =============================================
-import { MOVIES_ENTITY_NAME } from '../../constants';
-import { deleteMovie } from '../../services/movieService';
-// =============================================
+
 import SnackbarContext from '../../contexts/SnackbarContext';
-// =============================================
-import useItemsPerPage from '../../hooks/useItemsPerPage';
-import usePaginatedData from '../../hooks/usePaginatedData';
+import ListSkeleton from '../SkeletonLoader/ListSkeleton';
 
 const StyledAvatar = styled(Avatar)({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
@@ -52,7 +52,7 @@ function MoviesList() {
     loading,
     error,
     refetch,
-  } = usePaginatedData(`/${MOVIES_ENTITY_NAME}`, itemsPerPage, currentPage);
+  } = usePagination(`/movies`, itemsPerPage, currentPage);
 
   const { showSnackbar } = useContext(SnackbarContext);
 
@@ -62,11 +62,11 @@ function MoviesList() {
     }
   }, [error, showSnackbar]);
 
-  const handlePageChange = (event, value) => {
+  const handlePageChange = useCallback((event, value) => {
     setCurrentPage(value);
-  };
+  }, []);
 
-  const onMovieDelete = useCallback(
+  const handleDeleteMovie = useCallback(
     async (event, id) => {
       event.stopPropagation();
       try {
@@ -80,21 +80,29 @@ function MoviesList() {
     [refetch, showSnackbar]
   );
 
+  const onDelete = useCallback(
+    (id) => (event) => {
+      event.stopPropagation();
+      handleDeleteMovie(event, id);
+    },
+    [handleDeleteMovie]
+  );
+
   return (
     <>
       <Stack direction='row' justifyContent='space-between'>
-        <Typography variant='h4' component='h2'>
+        <Typography component='h2' variant='h4'>
           Movies list
         </Typography>
 
         <Button
+          color='success'
           component={Link}
+          startIcon={<VideoCallIcon />}
+          sx={buttonMainStyle}
           to='new'
           type='button'
           variant='contained'
-          color='success'
-          sx={buttonMainStyle}
-          startIcon={<VideoCallIcon />}
         >
           Add movie
         </Button>
@@ -108,17 +116,19 @@ function MoviesList() {
             ? Array(itemsPerPage)
                 .fill()
                 .map((_, index) => (
-                  <Box key={index}>{renderListSkeleton()}</Box>
+                  <Box key={index}>
+                    <ListSkeleton />
+                  </Box>
                 ))
             : movies.map((movie) => (
                 <Stack key={movie.id} direction='column' marginBottom={1}>
                   <ListItem
-                    component={Link}
-                    to={`/${MOVIES_ENTITY_NAME}/${movie.id}`}
                     disablePadding
+                    component={Link}
                     sx={itemListStyle}
+                    to={`/movies/${movie.id}`}
                   >
-                    <ListItemButton sx={{ borderRadius: 5 }}>
+                    <ListItemButton sx={styleListListItemButton}>
                       <ListItemAvatar>
                         <StyledAvatar src={movie.poster} />
                       </ListItemAvatar>
@@ -132,19 +142,17 @@ function MoviesList() {
                     <ListItemSecondaryAction>
                       <Stack direction='row' spacing={1}>
                         <IconButton
-                          edge='end'
                           aria-label='edit'
                           component={Link}
-                          to={`/${MOVIES_ENTITY_NAME}/edit/${movie.id}`}
+                          edge='end'
+                          to={`/movies/edit/${movie.id}`}
                         >
                           <EditIcon />
                         </IconButton>
                         <IconButton
-                          edge='end'
                           aria-label='delete'
-                          onClick={(event) => {
-                            onMovieDelete(event, movie.id);
-                          }}
+                          edge='end'
+                          onClick={onDelete(movie.id)}
                         >
                           <HighlightOffIcon />
                         </IconButton>
@@ -156,12 +164,12 @@ function MoviesList() {
         </List>
       </Box>
 
-      <Stack spacing={2} alignItems='center' marginTop={2}>
+      <Stack alignItems='center' marginTop={2} spacing={2}>
         <Pagination
+          color='primary'
           count={Math.ceil(totalItems / itemsPerPage)}
           page={currentPage}
           onChange={handlePageChange}
-          color='primary'
         />
       </Stack>
     </>

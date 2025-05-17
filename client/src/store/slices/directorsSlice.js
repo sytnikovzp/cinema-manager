@@ -1,10 +1,26 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-// =============================================
-import { directorsState } from '../../model/initialStates';
-import { DIRECTORS_ENTITY_NAME } from '../../constants';
-// =============================================
-import api from '../../api';
-import { setError, setLoading } from '../../services/reducerService';
+import { createSlice } from '@reduxjs/toolkit';
+
+import { DIRECTORS_SLICE_NAME } from '../../constants';
+import { setErrorState, setFetchingState } from '../../utils/reduxHelpers';
+
+import {
+  addDirector,
+  editDirector,
+  fetchDirectors,
+  removeDirector,
+} from '../thunks/directorsThunk';
+
+const directorsState = [
+  {
+    id: null,
+    fullName: '',
+    country: '',
+    birthDate: '',
+    deathDate: '',
+    photo: '',
+    biography: '',
+  },
+];
 
 const initialState = {
   directors: directorsState,
@@ -12,66 +28,8 @@ const initialState = {
   error: null,
 };
 
-export const getAllDirectors = createAsyncThunk(
-  `${DIRECTORS_ENTITY_NAME}/getAllDirectors`,
-  async (_, { rejectWithValue }) => {
-    try {
-      const { status, data } = await api.get(`/${DIRECTORS_ENTITY_NAME}`);
-      if (status >= 400) throw new Error(`Error getting directors ${status}`);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const createDirector = createAsyncThunk(
-  `${DIRECTORS_ENTITY_NAME}/createDirector`,
-  async (director, { rejectWithValue }) => {
-    try {
-      const { status, data } = await api.post(
-        `/${DIRECTORS_ENTITY_NAME}`,
-        director
-      );
-      if (status >= 400) throw new Error(`Error create director ${status}`);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const updateDirector = createAsyncThunk(
-  `${DIRECTORS_ENTITY_NAME}/updateDirector`,
-  async (director, { rejectWithValue }) => {
-    try {
-      const { status, data } = await api.put(
-        `/${DIRECTORS_ENTITY_NAME}/${director.id}`,
-        director
-      );
-      if (status >= 400) throw new Error(`Error update director ${status}`);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const deleteDirector = createAsyncThunk(
-  `${DIRECTORS_ENTITY_NAME}/deleteDirector`,
-  async (id, { rejectWithValue }) => {
-    try {
-      const { status } = await api.delete(`/${DIRECTORS_ENTITY_NAME}/${id}`);
-      if (status >= 400) throw new Error(`Error delete director ${status}`);
-      return id;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
 const directorsSlice = createSlice({
-  name: DIRECTORS_ENTITY_NAME,
+  name: DIRECTORS_SLICE_NAME,
   initialState,
   reducers: {
     resetStatus(state) {
@@ -81,24 +39,24 @@ const directorsSlice = createSlice({
 
   extraReducers: (builder) => {
     // Success
-    builder.addCase(getAllDirectors.fulfilled, (state, { payload }) => {
+    builder.addCase(fetchDirectors.fulfilled, (state, { payload }) => {
       state.directors = payload;
       state.status = null;
       state.error = null;
     });
-    builder.addCase(createDirector.fulfilled, (state, { payload }) => {
+    builder.addCase(addDirector.fulfilled, (state, { payload }) => {
       state.directors.push(payload);
       state.status = 'Director created successfully!';
       state.error = null;
     });
-    builder.addCase(updateDirector.fulfilled, (state, { payload }) => {
+    builder.addCase(editDirector.fulfilled, (state, { payload }) => {
       state.directors = state.directors.map((director) =>
-        director.id === payload.id ? payload : director
+        (director.id === payload.id ? payload : director)
       );
       state.status = 'Director updated successfully!';
       state.error = null;
     });
-    builder.addCase(deleteDirector.fulfilled, (state, { payload }) => {
+    builder.addCase(removeDirector.fulfilled, (state, { payload }) => {
       state.directors = state.directors.filter(
         (director) => director.id !== payload
       );
@@ -107,22 +65,22 @@ const directorsSlice = createSlice({
     });
 
     // Pending
-    builder.addCase(getAllDirectors.pending, setLoading);
-    builder.addCase(createDirector.pending, setLoading);
-    builder.addCase(updateDirector.pending, setLoading);
-    builder.addCase(deleteDirector.pending, setLoading);
+    builder.addCase(fetchDirectors.pending, setFetchingState);
+    builder.addCase(addDirector.pending, setFetchingState);
+    builder.addCase(editDirector.pending, setFetchingState);
+    builder.addCase(removeDirector.pending, setFetchingState);
 
     // Error
-    builder.addCase(getAllDirectors.rejected, setError);
-    builder.addCase(createDirector.rejected, (state, { payload }) => {
+    builder.addCase(fetchDirectors.rejected, setErrorState);
+    builder.addCase(addDirector.rejected, (state, { payload }) => {
       state.status = 'Failed to create director!';
       state.error = payload;
     });
-    builder.addCase(updateDirector.rejected, (state, { payload }) => {
+    builder.addCase(editDirector.rejected, (state, { payload }) => {
       state.status = 'Failed to update director!';
       state.error = payload;
     });
-    builder.addCase(deleteDirector.rejected, (state, { payload }) => {
+    builder.addCase(removeDirector.rejected, (state, { payload }) => {
       state.status = 'Failed to delete director!';
       state.error = payload;
     });

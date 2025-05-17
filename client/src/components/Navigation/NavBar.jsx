@@ -1,39 +1,33 @@
+import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
-// =============================================
+
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
+import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import Divider from '@mui/material/Divider';
+import Paper from '@mui/material/Paper';
+
+import AssuredWorkloadIcon from '@mui/icons-material/AssuredWorkload';
 import HomeIcon from '@mui/icons-material/Home';
 import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices';
 import MovieFilterIcon from '@mui/icons-material/MovieFilter';
 import RecentActorsIcon from '@mui/icons-material/RecentActors';
 import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
-import AssuredWorkloadIcon from '@mui/icons-material/AssuredWorkload';
-// =============================================
-import {
-  MOVIES_ENTITY_NAME,
-  ACTORS_ENTITY_NAME,
-  DIRECTORS_ENTITY_NAME,
-  STUDIOS_ENTITY_NAME,
-  SERVICES_ENTITY_NAME,
-} from '../../constants';
-// =============================================
-import { navItemTextStyle } from '../../services/styleService';
+
+import { navBarBox, navItemTextStyle } from '../../services/styleService';
 
 function NavBar({ onClose }) {
-  const handleItemClick = () => {
+  const handleItemClick = useCallback(() => {
     if (onClose) {
       onClose();
     }
-  };
+  }, [onClose]);
 
   return (
-    <Box sx={{ mt: 2, mr: 2 }}>
+    <Box sx={navBarBox}>
       <Paper elevation={3}>
         <nav aria-label='main menu items'>
           <List>
@@ -47,59 +41,59 @@ function NavBar({ onClose }) {
                 <ListItemIcon>
                   <HomeIcon />
                 </ListItemIcon>
-                <ListItemText sx={navItemTextStyle} primary='Home' />
+                <ListItemText primary='Home' sx={navItemTextStyle} />
               </ListItemButton>
             </ListItem>
             <ListItem
               disablePadding
               component={Link}
-              to={`/${MOVIES_ENTITY_NAME}`}
+              to={`/movies`}
               onClick={handleItemClick}
             >
               <ListItemButton>
                 <ListItemIcon>
                   <MovieFilterIcon />
                 </ListItemIcon>
-                <ListItemText sx={navItemTextStyle} primary='Movies' />
+                <ListItemText primary='Movies' sx={navItemTextStyle} />
               </ListItemButton>
             </ListItem>
             <ListItem
               disablePadding
               component={Link}
-              to={`/${ACTORS_ENTITY_NAME}`}
+              to={`/actors`}
               onClick={handleItemClick}
             >
               <ListItemButton>
                 <ListItemIcon>
                   <RecentActorsIcon />
                 </ListItemIcon>
-                <ListItemText sx={navItemTextStyle} primary='Actors' />
+                <ListItemText primary='Actors' sx={navItemTextStyle} />
               </ListItemButton>
             </ListItem>
             <ListItem
               disablePadding
               component={Link}
-              to={`/${DIRECTORS_ENTITY_NAME}`}
+              to={`/directors`}
               onClick={handleItemClick}
             >
               <ListItemButton>
                 <ListItemIcon>
                   <VideoCameraFrontIcon />
                 </ListItemIcon>
-                <ListItemText sx={navItemTextStyle} primary='Directors' />
+                <ListItemText primary='Directors' sx={navItemTextStyle} />
               </ListItemButton>
             </ListItem>
             <ListItem
               disablePadding
               component={Link}
-              to={`/${STUDIOS_ENTITY_NAME}`}
+              to={`/studios`}
               onClick={handleItemClick}
             >
               <ListItemButton>
                 <ListItemIcon>
                   <AssuredWorkloadIcon />
                 </ListItemIcon>
-                <ListItemText sx={navItemTextStyle} primary='Studios' />
+                <ListItemText primary='Studios' sx={navItemTextStyle} />
               </ListItemButton>
             </ListItem>
           </List>
@@ -110,14 +104,14 @@ function NavBar({ onClose }) {
             <ListItem
               disablePadding
               component={Link}
-              to={`/${SERVICES_ENTITY_NAME}`}
+              to={`/services`}
               onClick={handleItemClick}
             >
               <ListItemButton>
                 <ListItemIcon>
                   <MiscellaneousServicesIcon />
                 </ListItemIcon>
-                <ListItemText sx={navItemTextStyle} primary='Service' />
+                <ListItemText primary='Service' sx={navItemTextStyle} />
               </ListItemButton>
             </ListItem>
           </List>

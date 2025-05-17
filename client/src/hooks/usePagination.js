@@ -1,8 +1,8 @@
-import { useState, useEffect, useCallback } from 'react';
-// =============================================
+import { useCallback, useEffect, useState } from 'react';
+
 import api from '../api';
 
-const usePaginatedData = (url, itemsPerPage, currentPage) => {
+const usePagination = (url, itemsPerPage, currentPage) => {
   const [data, setData] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -14,8 +14,8 @@ const usePaginatedData = (url, itemsPerPage, currentPage) => {
     try {
       const response = await api.get(url, {
         params: {
-          _limit: itemsPerPage,
-          _page: currentPage,
+          limit: itemsPerPage,
+          page: currentPage,
         },
         headers: {
           'Cache-Control': 'no-cache',
@@ -23,7 +23,7 @@ const usePaginatedData = (url, itemsPerPage, currentPage) => {
       });
 
       setData(response.data);
-      setTotalItems(parseInt(response.headers['x-total-count'], 10));
+      setTotalItems(parseInt(response.headers['x-total-count']));
     } catch (error) {
       setError(error.message || 'An error occurred');
     } finally {
@@ -38,4 +38,4 @@ const usePaginatedData = (url, itemsPerPage, currentPage) => {
   return { data, totalItems, loading, error, refetch: fetchData };
 };
 
-export default usePaginatedData;
+export default usePagination;

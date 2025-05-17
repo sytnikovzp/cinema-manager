@@ -1,56 +1,26 @@
 import api from '../api';
-// =============================================
-import { ACTORS_ENTITY_NAME } from '../constants';
-
-const handleError = (error, defaultMessage) => {
-  const errorMessage = error.response?.data?.message || defaultMessage;
-  throw new Error(errorMessage);
-};
 
 export const getAllActors = async () => {
-  try {
-    const response = await api.get(`/${ACTORS_ENTITY_NAME}`);
-    return response.data;
-  } catch (error) {
-    handleError(error, 'Failed to get all actors!');
-  }
+  const response = await api.get(`/actors`);
+  return response.data;
 };
 
 export const getActorById = async (id) => {
-  try {
-    const response = await api.get(`/${ACTORS_ENTITY_NAME}/${id}`);
-    return response.data;
-  } catch (error) {
-    handleError(error, 'Failed to get actor information!');
-  }
+  const response = await api.get(`/actors/${id}`);
+  return response.data;
 };
 
 export const createActor = async (actorData) => {
-  try {
-    const response = await api.post(`/${ACTORS_ENTITY_NAME}`, actorData);
-    return response.data;
-  } catch (error) {
-    handleError(error, 'Failed to create actor!');
-  }
+  const response = await api.post(`/actors`, actorData);
+  return response.data;
 };
 
-export const patchActor = async (actorData) => {
-  try {
-    const response = await api.patch(
-      `/${ACTORS_ENTITY_NAME}/${actorData.id}`,
-      actorData
-    );
-    return response.data;
-  } catch (error) {
-    handleError(error, 'Failed to update actor!');
-  }
+export const updateActor = async (actorData) => {
+  const response = await api.patch(`/actors/${actorData.id}`, actorData);
+  return response.data;
 };
 
 export const deleteActor = async (id) => {
-  try {
-    const response = await api.delete(`/${ACTORS_ENTITY_NAME}/${id}`);
-    return response.data;
-  } catch (error) {
-    handleError(error, 'Failed to delete actor!');
-  }
+  const response = await api.delete(`/actors/${id}`);
+  return response.data;
 };

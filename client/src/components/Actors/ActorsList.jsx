@@ -1,40 +1,40 @@
-import { useState, useCallback, useContext, useEffect } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-// =============================================
+
+import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
+import ListItemText from '@mui/material/ListItemText';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+
+import { styled } from '@mui/material/styles';
+
+import EditIcon from '@mui/icons-material/Edit';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import EditIcon from '@mui/icons-material/Edit';
-import { styled } from '@mui/material/styles';
-import Divider from '@mui/material/Divider';
-import Pagination from '@mui/material/Pagination';
-// =============================================
+
+import useItemsPerPage from '../../hooks/useItemsPerPage';
+import usePagination from '../../hooks/usePagination';
+
+import { deleteActor } from '../../services/actorService';
 import {
   buttonMainStyle,
   itemListStyle,
   scrollListBoxStyle,
+  styleListListItemButton,
 } from '../../services/styleService';
-// =============================================
-import { renderListSkeleton } from '../../services/skeletonService';
-// =============================================
-import { ACTORS_ENTITY_NAME } from '../../constants';
-import { deleteActor } from '../../services/actorService';
-// =============================================
+
 import SnackbarContext from '../../contexts/SnackbarContext';
-// =============================================
-import useItemsPerPage from '../../hooks/useItemsPerPage';
-import usePaginatedData from '../../hooks/usePaginatedData';
+import ListSkeleton from '../SkeletonLoader/ListSkeleton';
 
 const StyledAvatar = styled(Avatar)({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
@@ -52,7 +52,7 @@ function ActorsList() {
     loading,
     error,
     refetch,
-  } = usePaginatedData(`/${ACTORS_ENTITY_NAME}`, itemsPerPage, currentPage);
+  } = usePagination(`/actors`, itemsPerPage, currentPage);
 
   const { showSnackbar } = useContext(SnackbarContext);
 
@@ -62,11 +62,11 @@ function ActorsList() {
     }
   }, [error, showSnackbar]);
 
-  const handlePageChange = (event, value) => {
+  const handlePageChange = useCallback((event, value) => {
     setCurrentPage(value);
-  };
+  }, []);
 
-  const onActorDelete = useCallback(
+  const handleDeleteActor = useCallback(
     async (event, id) => {
       event.stopPropagation();
       try {
@@ -80,21 +80,29 @@ function ActorsList() {
     [refetch, showSnackbar]
   );
 
+  const onDelete = useCallback(
+    (id) => (event) => {
+      event.stopPropagation();
+      handleDeleteActor(event, id);
+    },
+    [handleDeleteActor]
+  );
+
   return (
     <>
       <Stack direction='row' justifyContent='space-between'>
-        <Typography variant='h4' component='h2'>
+        <Typography component='h2' variant='h4'>
           Actors list
         </Typography>
 
         <Button
+          color='success'
           component={Link}
+          startIcon={<GroupAddIcon />}
+          sx={buttonMainStyle}
           to='new'
           type='button'
           variant='contained'
-          color='success'
-          sx={buttonMainStyle}
-          startIcon={<GroupAddIcon />}
         >
           Add actor
         </Button>
@@ -108,17 +116,19 @@ function ActorsList() {
             ? Array(itemsPerPage)
                 .fill()
                 .map((_, index) => (
-                  <Box key={index}>{renderListSkeleton()}</Box>
+                  <Box key={index}>
+                    <ListSkeleton />
+                  </Box>
                 ))
             : actors.map((actor) => (
                 <Stack key={actor.id} direction='column' marginBottom={1}>
                   <ListItem
-                    component={Link}
-                    to={`/${ACTORS_ENTITY_NAME}/${actor.id}`}
                     disablePadding
+                    component={Link}
                     sx={itemListStyle}
+                    to={`/actors/${actor.id}`}
                   >
-                    <ListItemButton sx={{ borderRadius: 5 }}>
+                    <ListItemButton sx={styleListListItemButton}>
                       <ListItemAvatar>
                         <StyledAvatar src={actor.photo} />
                       </ListItemAvatar>
@@ -132,17 +142,17 @@ function ActorsList() {
                     <ListItemSecondaryAction>
                       <Stack direction='row' spacing={1}>
                         <IconButton
-                          edge='end'
                           aria-label='edit'
                           component={Link}
-                          to={`/${ACTORS_ENTITY_NAME}/edit/${actor.id}`}
+                          edge='end'
+                          to={`/actors/edit/${actor.id}`}
                         >
                           <EditIcon />
                         </IconButton>
                         <IconButton
-                          edge='end'
                           aria-label='delete'
-                          onClick={(event) => onActorDelete(event, actor.id)}
+                          edge='end'
+                          onClick={onDelete(actor.id)}
                         >
                           <HighlightOffIcon />
                         </IconButton>
@@ -154,12 +164,12 @@ function ActorsList() {
         </List>
       </Box>
 
-      <Stack spacing={2} alignItems='center' marginTop={2}>
+      <Stack alignItems='center' marginTop={2} spacing={2}>
         <Pagination
+          color='primary'
           count={Math.ceil(totalItems / itemsPerPage)}
           page={currentPage}
           onChange={handlePageChange}
-          color='primary'
         />
       </Stack>
     </>

@@ -1,41 +1,40 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-// =============================================
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import EditIcon from '@mui/icons-material/Edit';
 import Divider from '@mui/material/Divider';
-import Tabs from '@mui/material/Tabs';
+import Stack from '@mui/material/Stack';
 import Tab from '@mui/material/Tab';
-// =============================================
-import SnackbarContext from '../../contexts/SnackbarContext';
-// =============================================
-import {
-  MOVIES_ENTITY_NAME,
-  DIRECTORS_ENTITY_NAME,
-  emptyDirector,
-} from '../../constants';
-// =============================================
+import Tabs from '@mui/material/Tabs';
+import Typography from '@mui/material/Typography';
+
+import EditIcon from '@mui/icons-material/Edit';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+
+import { emptyDirector } from '../../constants';
+
 import { getDirectorById } from '../../services/directorService';
-import { formatDate, calculateAge } from '../../services/itemService';
-// =============================================
+import { calculateAge } from '../../services/itemService';
 import {
-  scrollItemBoxStyle,
   buttonMainStyle,
-  itemComponentBoxMainStyle,
   itemCardMediaBoxStyle,
+  itemComponentBoxMainStyle,
   itemInformationBoxStyle,
   itemLinkStyle,
+  scrollItemBoxStyle,
+  styleItemCreatedAtLabel,
+  styleItemCreatedAtValue,
+  styleItemTypography,
+  styleStackMargin,
 } from '../../services/styleService';
-// =============================================
-import { renderItemSkeleton } from '../../services/skeletonService';
-// =============================================
+
+import SnackbarContext from '../../contexts/SnackbarContext';
+import ItemSkeleton from '../SkeletonLoader/ItemSkeleton';
+
 import DirectorsBiography from './DirectorsBiography';
 
 function DirectorsItem() {
@@ -60,7 +59,7 @@ function DirectorsItem() {
   }, [id, showSnackbar]);
 
   useEffect(() => {
-    if (id === ':id' || id === undefined) {
+    if (id === ':id') {
       setDirector(emptyDirector);
       setLoading(false);
     } else {
@@ -68,13 +67,13 @@ function DirectorsItem() {
     }
   }, [id, fetchDirector]);
 
-  const goBack = () => {
-    navigate(`/${DIRECTORS_ENTITY_NAME}`);
-  };
+  const handleGoBack = useCallback(() => {
+    navigate(`/directors`);
+  }, [navigate]);
 
-  const handleTabChange = (event, newValue) => {
+  const handleTabChange = useCallback((event, newValue) => {
     setTabIndex(newValue);
-  };
+  }, []);
 
   const formattedMovies =
     director.movies && director.movies.length > 0
@@ -82,8 +81,8 @@ function DirectorsItem() {
           .map((movie) => (
             <Link
               key={movie.id}
-              to={`/${MOVIES_ENTITY_NAME}/${movie.id}`}
               style={itemLinkStyle}
+              to={`/movies/${movie.id}`}
             >
               {movie.title}
             </Link>
@@ -91,44 +90,42 @@ function DirectorsItem() {
           .reduce((prev, curr) => [prev, ', ', curr])
       : 'No movies available';
 
-  const formattedBirthDate = formatDate(director.birthDate);
-  const formattedDeathDate = formatDate(director.deathDate);
   const calculatedAge = calculateAge(director.birthDate, director.deathDate);
 
   return (
     <>
       <Stack direction='row' justifyContent='space-between'>
         <Button
+          color='info'
+          startIcon={<KeyboardBackspaceIcon />}
+          sx={buttonMainStyle}
           type='button'
           variant='contained'
-          color='info'
-          sx={buttonMainStyle}
-          startIcon={<KeyboardBackspaceIcon />}
-          onClick={goBack}
+          onClick={handleGoBack}
         >
           To directors
         </Button>
 
         <Button
+          color='warning'
+          component={Link}
+          startIcon={<EditIcon />}
+          sx={buttonMainStyle}
+          to={`/directors/edit/${id}`}
           type='button'
           variant='contained'
-          color='warning'
-          sx={buttonMainStyle}
-          startIcon={<EditIcon />}
-          component={Link}
-          to={`/${DIRECTORS_ENTITY_NAME}/edit/${id}`}
         >
           Edit
         </Button>
 
         <Button
+          color='success'
           component={Link}
-          to={`/${DIRECTORS_ENTITY_NAME}/new`}
+          startIcon={<GroupAddIcon />}
+          sx={buttonMainStyle}
+          to={`/directors/new`}
           type='button'
           variant='contained'
-          color='success'
-          sx={buttonMainStyle}
-          startIcon={<GroupAddIcon />}
         >
           Add director
         </Button>
@@ -136,11 +133,11 @@ function DirectorsItem() {
 
       <Divider />
 
-      <Box display='flex' alignItems='center' justifyContent='space-between'>
+      <Box alignItems='center' display='flex' justifyContent='space-between'>
         <Tabs
+          aria-label='director details tabs'
           value={tabIndex}
           onChange={handleTabChange}
-          aria-label='director details tabs'
         >
           <Tab label='General information' />
           {director.biography && <Tab label='About the director' />}
@@ -151,20 +148,16 @@ function DirectorsItem() {
             {director.createdAt === director.updatedAt ? (
               <>
                 <Typography
-                  variant='caption'
-                  sx={{
-                    fontWeight: 'bold',
-                    textAlign: 'right',
-                    color: 'gray',
-                  }}
                   component='div'
+                  sx={styleItemCreatedAtLabel}
+                  variant='caption'
                 >
                   Created at:
                 </Typography>
                 <Typography
-                  variant='caption'
                   component='div'
-                  sx={{ textAlign: 'right', color: 'gray' }}
+                  sx={styleItemCreatedAtValue}
+                  variant='caption'
                 >
                   {director.createdAt}
                 </Typography>
@@ -172,20 +165,16 @@ function DirectorsItem() {
             ) : (
               <>
                 <Typography
-                  variant='caption'
-                  sx={{
-                    fontWeight: 'bold',
-                    textAlign: 'right',
-                    color: 'gray',
-                  }}
                   component='div'
+                  sx={styleItemCreatedAtLabel}
+                  variant='caption'
                 >
                   Updated at:
                 </Typography>
                 <Typography
-                  variant='caption'
                   component='div'
-                  sx={{ textAlign: 'right', color: 'gray' }}
+                  sx={styleItemCreatedAtValue}
+                  variant='caption'
                 >
                   {director.updatedAt}
                 </Typography>
@@ -197,42 +186,36 @@ function DirectorsItem() {
 
       <Box sx={scrollItemBoxStyle}>
         {loading ? (
-          renderItemSkeleton()
+          <ItemSkeleton />
         ) : (
           <Box sx={itemComponentBoxMainStyle}>
             <Box sx={itemCardMediaBoxStyle}>
               <Card>
                 <CardMedia
+                  alt={director.fullName}
                   component='img'
                   height='100%'
                   image={
                     director.photo ||
                     'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
                   }
-                  alt={director.fullName}
                 />
               </Card>
             </Box>
             <Box sx={itemInformationBoxStyle}>
-              <Typography
-                variant='h5'
-                component='div'
-                sx={{ fontWeight: 'bold' }}
-              >
+              <Typography component='div' sx={styleItemTypography} variant='h5'>
                 {director.fullName || 'Unknown director'}
               </Typography>
               <Stack direction='row' spacing={1}>
                 <Typography
-                  variant='body1'
-                  sx={{
-                    fontWeight: 'bold',
-                  }}
                   component='div'
+                  sx={styleItemTypography}
+                  variant='body1'
                 >
                   Birth date:
                 </Typography>
-                <Typography variant='body1' component='div'>
-                  {director.birthDate ? formattedBirthDate : 'Unknown'}
+                <Typography component='div' variant='body1'>
+                  {director.birthDate ? director.birthDate : 'Unknown'}
                   {director.birthDate &&
                     (director.birthDate && director.deathDate
                       ? ` (aged ${calculatedAge})`
@@ -242,45 +225,39 @@ function DirectorsItem() {
               {director.deathDate && (
                 <Stack direction='row' spacing={1}>
                   <Typography
-                    variant='body1'
-                    sx={{
-                      fontWeight: 'bold',
-                    }}
                     component='div'
+                    sx={styleItemTypography}
+                    variant='body1'
                   >
                     Death date:
                   </Typography>
-                  <Typography variant='body1' component='div'>
-                    {formattedDeathDate}
+                  <Typography component='div' variant='body1'>
+                    {director.deathDate}
                   </Typography>
                 </Stack>
               )}
               <Stack direction='row' spacing={1}>
                 <Typography
-                  variant='body1'
-                  sx={{
-                    fontWeight: 'bold',
-                  }}
                   component='div'
+                  sx={styleItemTypography}
+                  variant='body1'
                 >
                   Nationality:
                 </Typography>
-                <Typography variant='body1' component='div'>
-                  {director.country || 'Unknown'}
+                <Typography component='div' variant='body1'>
+                  {director.country.title || 'Unknown'}
                 </Typography>
               </Stack>
               {tabIndex === 0 && (
-                <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
+                <Stack direction='row' spacing={1} sx={styleStackMargin}>
                   <Typography
-                    variant='body1'
-                    sx={{
-                      fontWeight: 'bold',
-                    }}
                     component='div'
+                    sx={styleItemTypography}
+                    variant='body1'
                   >
                     Movies:
                   </Typography>
-                  <Typography variant='body1' component='div'>
+                  <Typography component='div' variant='body1'>
                     {formattedMovies}
                   </Typography>
                 </Stack>

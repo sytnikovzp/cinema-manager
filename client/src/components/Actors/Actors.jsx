@@ -1,16 +1,16 @@
 // import { useDispatch } from 'react-redux';
 // import { useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
-// =============================================
-import Paper from '@mui/material/Paper';
+
 import Box from '@mui/material/Box';
-// =============================================
-import { rootComponentPaperStyle } from '../../services/styleService';
-// =============================================
-import { ACTORS_ENTITY_NAME } from '../../constants';
-// =============================================
+import Paper from '@mui/material/Paper';
+
+import {
+  rootComponentPaperStyle,
+  styleEntityBox,
+} from '../../services/styleService';
+
 // import { getAllActors } from '../../store/slices/actorsSlice';
-// =============================================
 import ActorsItem from './ActorsItem';
 import ActorsList from './ActorsList';
 
@@ -26,27 +26,16 @@ function Actors() {
     !location.pathname.includes('/edit') && !location.pathname.includes('/new');
 
   return (
-    <Box
-      sx={{
-        mt: 2,
-        mb: 2,
-      }}
-    >
+    <Box sx={styleEntityBox}>
       <Paper
         elevation={3}
-        sx={applyPaperStyles ? rootComponentPaperStyle : undefined}
+        sx={applyPaperStyles ? rootComponentPaperStyle : null}
       >
         <Routes>
-          <Route path='/' element={<ActorsList />} />
-          <Route path=':id' element={<ActorsItem />} />
-          <Route
-            path='new'
-            element={<Navigate to={`/${ACTORS_ENTITY_NAME}/new/:id`} />}
-          />
-          <Route
-            path='edit'
-            element={<Navigate to={`/${ACTORS_ENTITY_NAME}/edit/:id`} />}
-          />
+          <Route element={<ActorsList />} path='/' />
+          <Route element={<ActorsItem />} path=':id' />
+          <Route element={<Navigate to={`/actors/new/:id`} />} path='new' />
+          <Route element={<Navigate to={`/actors/edit/:id`} />} path='edit' />
         </Routes>
       </Paper>
     </Box>

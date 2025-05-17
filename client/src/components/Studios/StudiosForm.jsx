@@ -1,55 +1,47 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-// =============================================
-import dayjs from 'dayjs';
-// =============================================
-import { Formik, Form, Field } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-// =============================================
+import dayjs from 'dayjs';
+
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import BackspaceIcon from '@mui/icons-material/Backspace';
+import InputAdornment from '@mui/material/InputAdornment';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import SaveIcon from '@mui/icons-material/Save';
-import ClearAllIcon from '@mui/icons-material/ClearAll';
+
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import InputAdornment from '@mui/material/InputAdornment';
-// =============================================
-import SnackbarContext from '../../contexts/SnackbarContext';
-// =============================================
-import {
-  STUDIOS_ENTITY_NAME,
-  LOCATIONS_ENTITY_NAME,
-  emptyStudio,
-} from '../../constants';
-// =============================================
-import {
-  TITLE_NAME_SCHEMA,
-  STRING_SCHEMA,
-  DATE_SCHEMA,
-} from '../../services/itemService';
-// =============================================
-import {
-  getStudioById,
-  createStudio,
-  patchStudio,
-} from '../../services/studioService';
-// =============================================
-import {
-  formStyle,
-  formItemStyle,
-  buttonFormStyle,
-  wideButtonFormStyle,
-  stackButtonFormStyle,
-} from '../../services/styleService';
-// =============================================
+import BackspaceIcon from '@mui/icons-material/Backspace';
+import ClearAllIcon from '@mui/icons-material/ClearAll';
+import SaveIcon from '@mui/icons-material/Save';
+
+import { emptyStudio } from '../../constants';
 import useFetchData from '../../hooks/useFetchData';
-// =============================================
+
+import {
+  DATE_SCHEMA,
+  STRING_SCHEMA,
+  TITLE_NAME_SCHEMA,
+} from '../../services/itemService';
+import {
+  createStudio,
+  getStudioById,
+  updateStudio,
+} from '../../services/studioService';
+import {
+  buttonFormStyle,
+  formItemStyle,
+  formStyle,
+  stackButtonFormStyle,
+  wideButtonFormStyle,
+} from '../../services/styleService';
+
+import SnackbarContext from '../../contexts/SnackbarContext';
 import BasicAutocompleteField from '../Autocomplete/BasicAutocompleteField';
 
 function StudioForm() {
@@ -57,7 +49,7 @@ function StudioForm() {
   const navigate = useNavigate();
   const [initialValues, setInitialValues] = useState(emptyStudio);
 
-  const { data: locations } = useFetchData(`/${LOCATIONS_ENTITY_NAME}`);
+  const { data: locations } = useFetchData(`/locations`);
 
   const { showSnackbar } = useContext(SnackbarContext);
 
@@ -71,20 +63,20 @@ function StudioForm() {
   }, [id, showSnackbar]);
 
   useEffect(() => {
-    if (id === ':id' || id === undefined) {
+    if (id === ':id') {
       setInitialValues(emptyStudio);
     } else {
       fetchStudio();
     }
   }, [id, fetchStudio]);
 
-  const goBack = () => {
-    if (id !== ':id') {
-      navigate(`/${STUDIOS_ENTITY_NAME}/${id}`);
+  const handleGoBack = useCallback(() => {
+    if (id === ':id') {
+      navigate(`/studios`);
     } else {
-      navigate(`/${STUDIOS_ENTITY_NAME}`);
+      navigate(`/studios/${id}`);
     }
-  };
+  }, [id, navigate]);
 
   const sortedLocations = locations
     .slice()
@@ -98,188 +90,189 @@ function StudioForm() {
     about: STRING_SCHEMA,
   });
 
-  const onFormSubmit = async (values) => {
-    try {
-      if (values.id) {
-        await patchStudio(values);
-        showSnackbar('Studio updated successfully!', 'success');
-        navigate(`/${STUDIOS_ENTITY_NAME}/${id}`);
-      } else {
-        await createStudio(values);
-        showSnackbar('Studio created successfully!', 'success');
-        navigate(`/${STUDIOS_ENTITY_NAME}`);
+  const handleSubmit = useCallback(
+    async (values) => {
+      try {
+        if (values.id) {
+          await updateStudio(values);
+          showSnackbar('Studio updated successfully!', 'success');
+          navigate(`/studios/${id}`);
+        } else {
+          await createStudio(values);
+          showSnackbar('Studio created successfully!', 'success');
+          navigate(`/studios`);
+        }
+      } catch (error) {
+        showSnackbar(error.message, 'error');
       }
-    } catch (error) {
-      showSnackbar(error.message, 'error');
-    }
-  };
+    },
+    [id, navigate, showSnackbar]
+  );
 
-  const renderForm = ({ values, errors, touched, setFieldValue }) => {
-    return (
-      <Form id='studio-form'>
-        <Box sx={formStyle}>
-          <Box sx={formItemStyle}>
-            <Field
-              name='title'
-              as={TextField}
-              label='Studio title'
-              value={values.title}
-              fullWidth
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position='end'>
-                    <IconButton
-                      aria-label='Clear field'
-                      onClick={() => setFieldValue('title', '')}
-                      edge='end'
-                    >
-                      <BackspaceIcon />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              error={touched.title && Boolean(errors.title)}
-              helperText={touched.title && errors.title}
-            />
-          </Box>
-          <Box sx={formItemStyle}>
-            <BasicAutocompleteField
-              name='location'
-              options={sortedLocations}
-              getOptionLabel={(option) => option.title}
-              label='Location'
-              setFieldValue={setFieldValue}
-            />
-
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                name='foundationYear'
-                label='Foundation year'
-                value={
-                  values.foundationYear
-                    ? dayjs().year(values.foundationYear)
-                    : null
-                }
-                views={['year']}
-                onChange={(value) =>
-                  setFieldValue('foundationYear', value ? value.year() : '')
-                }
-                sx={{ width: '330px' }}
-                slotProps={{
-                  textField: {
-                    error:
-                      touched.foundationYear && Boolean(errors.foundationYear),
-                    helperText: touched.foundationYear && errors.foundationYear,
-                  },
-                  field: {
-                    clearable: true,
-                    onClear: () => setFieldValue('foundationYear', ''),
-                  },
-                }}
-                maxDate={dayjs().year(dayjs().year())}
-              />
-            </LocalizationProvider>
-          </Box>
-          <Box sx={formItemStyle}>
-            <Field
-              name='logo'
-              as={TextField}
-              label='Logo URL'
-              value={values.logo}
-              fullWidth
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position='end'>
-                    <IconButton
-                      aria-label='Clear field'
-                      onClick={() => setFieldValue('logo', '')}
-                      edge='end'
-                    >
-                      <BackspaceIcon />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              error={touched.logo && Boolean(errors.logo)}
-              helperText={touched.logo && errors.logo}
-            />
-          </Box>
-          <Box sx={formItemStyle}>
-            <Field
-              name='about'
-              as={TextField}
-              id='about-textarea'
-              label='General information about the studio...'
-              value={values.about}
-              fullWidth
-              multiline
-              minRows={4}
-              maxRows={6}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position='end'>
-                    <IconButton
-                      aria-label='Clear field'
-                      onClick={() => setFieldValue('about', '')}
-                      edge='end'
-                    >
-                      <BackspaceIcon />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              error={touched.about && Boolean(errors.about)}
-              helperText={touched.about && errors.about}
-            />
-          </Box>
+  const renderForm = ({ values, errors, touched, setFieldValue }) => (
+    <Form id='studio-form'>
+      <Box sx={formStyle}>
+        <Box sx={formItemStyle}>
+          <Field
+            fullWidth
+            as={TextField}
+            error={touched.title && Boolean(errors.title)}
+            helperText={touched.title && errors.title}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position='end'>
+                  <IconButton
+                    aria-label='Clear field'
+                    edge='end'
+                    onClick={() => setFieldValue('title', '')}
+                  >
+                    <BackspaceIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            label='Studio title'
+            name='title'
+            value={values.title}
+          />
         </Box>
-        <Stack
-          direction='row'
-          justifyContent='center'
-          spacing={1}
-          sx={stackButtonFormStyle}
+        <Box sx={formItemStyle}>
+          <BasicAutocompleteField
+            getOptionLabel={(option) => option.title}
+            label='Location'
+            name='location'
+            options={sortedLocations}
+            setFieldValue={setFieldValue}
+          />
+
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              label='Foundation year'
+              maxDate={dayjs().year(dayjs().year())}
+              name='foundationYear'
+              slotProps={{
+                textField: {
+                  error:
+                    touched.foundationYear && Boolean(errors.foundationYear),
+                  helperText: touched.foundationYear && errors.foundationYear,
+                },
+                field: {
+                  clearable: true,
+                  onClear: () => setFieldValue('foundationYear', ''),
+                },
+              }}
+              sx={{ width: '330px' }}
+              value={
+                values.foundationYear
+                  ? dayjs().year(values.foundationYear)
+                  : null
+              }
+              views={['year']}
+              onChange={(value) =>
+                setFieldValue('foundationYear', value ? value.year() : '')
+              }
+            />
+          </LocalizationProvider>
+        </Box>
+        <Box sx={formItemStyle}>
+          <Field
+            fullWidth
+            as={TextField}
+            error={touched.logo && Boolean(errors.logo)}
+            helperText={touched.logo && errors.logo}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position='end'>
+                  <IconButton
+                    aria-label='Clear field'
+                    edge='end'
+                    onClick={() => setFieldValue('logo', '')}
+                  >
+                    <BackspaceIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            label='Logo URL'
+            name='logo'
+            value={values.logo}
+          />
+        </Box>
+        <Box sx={formItemStyle}>
+          <Field
+            fullWidth
+            multiline
+            as={TextField}
+            error={touched.about && Boolean(errors.about)}
+            helperText={touched.about && errors.about}
+            id='about-textarea'
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position='end'>
+                  <IconButton
+                    aria-label='Clear field'
+                    edge='end'
+                    onClick={() => setFieldValue('about', '')}
+                  >
+                    <BackspaceIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            label='General information about the studio...'
+            maxRows={6}
+            minRows={4}
+            name='about'
+            value={values.about}
+          />
+        </Box>
+      </Box>
+      <Stack
+        direction='row'
+        justifyContent='center'
+        spacing={1}
+        sx={stackButtonFormStyle}
+      >
+        <Button
+          color='warning'
+          startIcon={<ArrowBackIcon />}
+          sx={buttonFormStyle}
+          type='button'
+          variant='contained'
+          onClick={handleGoBack}
         >
-          <Button
-            type='button'
-            variant='contained'
-            color='warning'
-            sx={buttonFormStyle}
-            onClick={goBack}
-            startIcon={<ArrowBackIcon />}
-          >
-            Return
-          </Button>
+          Return
+        </Button>
 
-          <Button
-            type='submit'
-            variant='contained'
-            color='success'
-            sx={wideButtonFormStyle}
-            startIcon={<SaveIcon />}
-          >
-            Save
-          </Button>
+        <Button
+          color='success'
+          startIcon={<SaveIcon />}
+          sx={wideButtonFormStyle}
+          type='submit'
+          variant='contained'
+        >
+          Save
+        </Button>
 
-          <Button
-            type='reset'
-            variant='contained'
-            color='error'
-            sx={buttonFormStyle}
-            startIcon={<ClearAllIcon />}
-          >
-            Reset
-          </Button>
-        </Stack>
-      </Form>
-    );
-  };
+        <Button
+          color='error'
+          startIcon={<ClearAllIcon />}
+          sx={buttonFormStyle}
+          type='reset'
+          variant='contained'
+        >
+          Reset
+        </Button>
+      </Stack>
+    </Form>
+  );
 
   return (
     <Formik
+      enableReinitialize
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={onFormSubmit}
-      enableReinitialize
+      onSubmit={handleSubmit}
     >
       {renderForm}
     </Formik>

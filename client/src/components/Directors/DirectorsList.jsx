@@ -1,40 +1,40 @@
-import { useState, useCallback, useContext, useEffect } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-// =============================================
+
+import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
+import ListItemText from '@mui/material/ListItemText';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+
+import { styled } from '@mui/material/styles';
+
+import EditIcon from '@mui/icons-material/Edit';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import EditIcon from '@mui/icons-material/Edit';
-import { styled } from '@mui/material/styles';
-import Divider from '@mui/material/Divider';
-import Pagination from '@mui/material/Pagination';
-// =============================================
+
+import useItemsPerPage from '../../hooks/useItemsPerPage';
+import usePagination from '../../hooks/usePagination';
+
+import { deleteDirector } from '../../services/directorService';
 import {
   buttonMainStyle,
   itemListStyle,
   scrollListBoxStyle,
+  styleListListItemButton,
 } from '../../services/styleService';
-// =============================================
-import { renderListSkeleton } from '../../services/skeletonService';
-// =============================================
-import { DIRECTORS_ENTITY_NAME } from '../../constants';
-import { deleteDirector } from '../../services/directorService';
-// =============================================
+
 import SnackbarContext from '../../contexts/SnackbarContext';
-// =============================================
-import useItemsPerPage from '../../hooks/useItemsPerPage';
-import usePaginatedData from '../../hooks/usePaginatedData';
+import ListSkeleton from '../SkeletonLoader/ListSkeleton';
 
 const StyledAvatar = styled(Avatar)({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
@@ -52,7 +52,7 @@ function DirectorsList() {
     loading,
     error,
     refetch,
-  } = usePaginatedData(`/${DIRECTORS_ENTITY_NAME}`, itemsPerPage, currentPage);
+  } = usePagination(`/directors`, itemsPerPage, currentPage);
 
   const { showSnackbar } = useContext(SnackbarContext);
 
@@ -62,11 +62,11 @@ function DirectorsList() {
     }
   }, [error, showSnackbar]);
 
-  const handlePageChange = (event, value) => {
+  const handlePageChange = useCallback((event, value) => {
     setCurrentPage(value);
-  };
+  }, []);
 
-  const onDirectorDelete = useCallback(
+  const handleDeleteDirector = useCallback(
     async (event, id) => {
       event.stopPropagation();
       try {
@@ -80,21 +80,29 @@ function DirectorsList() {
     [refetch, showSnackbar]
   );
 
+  const onDelete = useCallback(
+    (id) => (event) => {
+      event.stopPropagation();
+      handleDeleteDirector(event, id);
+    },
+    [handleDeleteDirector]
+  );
+
   return (
     <>
       <Stack direction='row' justifyContent='space-between'>
-        <Typography variant='h4' component='h2'>
+        <Typography component='h2' variant='h4'>
           Directors list
         </Typography>
 
         <Button
+          color='success'
           component={Link}
+          startIcon={<GroupAddIcon />}
+          sx={buttonMainStyle}
           to='new'
           type='button'
           variant='contained'
-          color='success'
-          sx={buttonMainStyle}
-          startIcon={<GroupAddIcon />}
         >
           Add director
         </Button>
@@ -108,17 +116,19 @@ function DirectorsList() {
             ? Array(itemsPerPage)
                 .fill()
                 .map((_, index) => (
-                  <Box key={index}>{renderListSkeleton()}</Box>
+                  <Box key={index}>
+                    <ListSkeleton />
+                  </Box>
                 ))
             : directors.map((director) => (
                 <Stack key={director.id} direction='column' marginBottom={1}>
                   <ListItem
-                    component={Link}
-                    to={`/${DIRECTORS_ENTITY_NAME}/${director.id}`}
                     disablePadding
+                    component={Link}
                     sx={itemListStyle}
+                    to={`/directors/${director.id}`}
                   >
-                    <ListItemButton sx={{ borderRadius: 5 }}>
+                    <ListItemButton sx={styleListListItemButton}>
                       <ListItemAvatar>
                         <StyledAvatar src={director.photo} />
                       </ListItemAvatar>
@@ -132,19 +142,17 @@ function DirectorsList() {
                     <ListItemSecondaryAction>
                       <Stack direction='row' spacing={1}>
                         <IconButton
-                          edge='end'
                           aria-label='edit'
                           component={Link}
-                          to={`/${DIRECTORS_ENTITY_NAME}/edit/${director.id}`}
+                          edge='end'
+                          to={`/directors/edit/${director.id}`}
                         >
                           <EditIcon />
                         </IconButton>
                         <IconButton
-                          edge='end'
                           aria-label='delete'
-                          onClick={(event) => {
-                            onDirectorDelete(event, director.id);
-                          }}
+                          edge='end'
+                          onClick={onDelete(director.id)}
                         >
                           <HighlightOffIcon />
                         </IconButton>
@@ -156,12 +164,12 @@ function DirectorsList() {
         </List>
       </Box>
 
-      <Stack spacing={2} alignItems='center' marginTop={2}>
+      <Stack alignItems='center' marginTop={2} spacing={2}>
         <Pagination
+          color='primary'
           count={Math.ceil(totalItems / itemsPerPage)}
           page={currentPage}
           onChange={handlePageChange}
-          color='primary'
         />
       </Stack>
     </>

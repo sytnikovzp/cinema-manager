@@ -1,64 +1,57 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-// =============================================
-import dayjs from 'dayjs';
-import 'dayjs/locale/en-gb';
-// =============================================
-import { Formik, Form, Field } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-// =============================================
+import dayjs from 'dayjs';
+
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import BackspaceIcon from '@mui/icons-material/Backspace';
+import InputAdornment from '@mui/material/InputAdornment';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import SaveIcon from '@mui/icons-material/Save';
-import ClearAllIcon from '@mui/icons-material/ClearAll';
+
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import InputAdornment from '@mui/material/InputAdornment';
-// =============================================
-import SnackbarContext from '../../contexts/SnackbarContext';
-// =============================================
-import {
-  DIRECTORS_ENTITY_NAME,
-  COUNTRIES_ENTITY_NAME,
-  emptyDirector,
-} from '../../constants';
-// =============================================
-import {
-  TITLE_NAME_SCHEMA,
-  STRING_SCHEMA,
-  DATE_SCHEMA,
-} from '../../services/itemService';
-// =============================================
-import {
-  getDirectorById,
-  createDirector,
-  patchDirector,
-} from '../../services/directorService';
-// =============================================
-import {
-  formStyle,
-  formItemStyle,
-  buttonFormStyle,
-  wideButtonFormStyle,
-  stackButtonFormStyle,
-} from '../../services/styleService';
-// =============================================
+import BackspaceIcon from '@mui/icons-material/Backspace';
+import ClearAllIcon from '@mui/icons-material/ClearAll';
+import SaveIcon from '@mui/icons-material/Save';
+
+import { emptyDirector } from '../../constants';
 import useFetchData from '../../hooks/useFetchData';
-// =============================================
+
+import {
+  createDirector,
+  getDirectorById,
+  updateDirector,
+} from '../../services/directorService';
+import {
+  DATE_SCHEMA,
+  STRING_SCHEMA,
+  TITLE_NAME_SCHEMA,
+} from '../../services/itemService';
+import {
+  buttonFormStyle,
+  formItemStyle,
+  formStyle,
+  stackButtonFormStyle,
+  wideButtonFormStyle,
+} from '../../services/styleService';
+
+import SnackbarContext from '../../contexts/SnackbarContext';
 import BasicAutocompleteField from '../Autocomplete/BasicAutocompleteField';
+
+import 'dayjs/locale/en-gb';
 
 function DirectorForm() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [initialValues, setInitialValues] = useState(emptyDirector);
 
-  const { data: countries } = useFetchData(`/${COUNTRIES_ENTITY_NAME}`);
+  const { data: countries } = useFetchData(`/countries`);
 
   const { showSnackbar } = useContext(SnackbarContext);
 
@@ -72,20 +65,20 @@ function DirectorForm() {
   }, [id, showSnackbar]);
 
   useEffect(() => {
-    if (id === ':id' || id === undefined) {
+    if (id === ':id') {
       setInitialValues(emptyDirector);
     } else {
       fetchDirector();
     }
   }, [id, fetchDirector]);
 
-  const goBack = () => {
-    if (id !== ':id') {
-      navigate(`/${DIRECTORS_ENTITY_NAME}/${id}`);
+  const handleGoBack = useCallback(() => {
+    if (id === ':id') {
+      navigate(`/directors`);
     } else {
-      navigate(`/${DIRECTORS_ENTITY_NAME}`);
+      navigate(`/directors/${id}`);
     }
-  };
+  }, [id, navigate]);
 
   const sortedCountries = countries
     .slice()
@@ -100,239 +93,236 @@ function DirectorForm() {
     biography: STRING_SCHEMA,
   });
 
-  const onFormSubmit = async (values) => {
-    try {
-      if (values.id) {
-        await patchDirector(values);
-        showSnackbar('Director updated successfully!', 'success');
-        navigate(`/${DIRECTORS_ENTITY_NAME}/${id}`);
-      } else {
-        await createDirector(values);
-        showSnackbar('Director created successfully!', 'success');
-        navigate(`/${DIRECTORS_ENTITY_NAME}`);
+  const handleSubmit = useCallback(
+    async (values) => {
+      try {
+        if (values.id) {
+          await updateDirector(values);
+          showSnackbar('Director updated successfully!', 'success');
+          navigate(`/directors/${id}`);
+        } else {
+          await createDirector(values);
+          showSnackbar('Director created successfully!', 'success');
+          navigate(`/directors`);
+        }
+      } catch (error) {
+        showSnackbar(error.message, 'error');
       }
-    } catch (error) {
-      showSnackbar(error.message, 'error');
-    }
-  };
+    },
+    [id, navigate, showSnackbar]
+  );
 
-  const renderForm = ({ values, errors, touched, setFieldValue }) => {
-    return (
-      <Form id='director-form'>
-        <Box sx={formStyle}>
-          <Box sx={formItemStyle}>
-            <Field
-              name='fullName'
-              as={TextField}
-              label='Full name'
-              value={values.fullName}
-              fullWidth
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position='end'>
-                    <IconButton
-                      aria-label='Clear field'
-                      onClick={() => setFieldValue('fullName', '')}
-                      edge='end'
-                    >
-                      <BackspaceIcon />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              error={touched.fullName && Boolean(errors.fullName)}
-              helperText={touched.fullName && errors.fullName}
-            />
-          </Box>
-          <Box sx={formItemStyle}>
-            <BasicAutocompleteField
-              name='country'
-              options={sortedCountries}
-              getOptionLabel={(option) => option.title}
-              label='Nationality'
-              setFieldValue={setFieldValue}
-            />
-          </Box>
-          <Box sx={formItemStyle}>
-            <LocalizationProvider
-              dateAdapter={AdapterDayjs}
-              adapterLocale='en-gb'
-            >
-              <DatePicker
-                name='birthDate'
-                label='Birth date'
-                value={
-                  values.birthDate
-                    ? dayjs(values.birthDate, 'YYYY-MM-DD')
-                    : null
-                }
-                views={['year', 'month', 'day']}
-                onChange={(value) => {
-                  setFieldValue(
-                    'birthDate',
-                    value ? value.format('YYYY-MM-DD') : ''
-                  );
-                  if (
-                    value &&
-                    values.deathDate &&
-                    dayjs(values.deathDate).isBefore(value)
-                  ) {
-                    setFieldValue('deathDate', '');
-                  }
-                }}
-                sx={{ width: '100%' }}
-                slotProps={{
-                  textField: {
-                    InputProps: {
-                      style: { fontSize: 14 },
-                    },
-                    error: touched.birthDate && Boolean(errors.birthDate),
-                    helperText: touched.birthDate && errors.birthDate,
-                  },
-                  field: {
-                    clearable: true,
-                    onClear: () => setFieldValue('birthDate', ''),
-                  },
-                }}
-                maxDate={dayjs()}
-              />
-
-              <DatePicker
-                name='deathDate'
-                label='Death date'
-                value={
-                  values.deathDate
-                    ? dayjs(values.deathDate, 'YYYY-MM-DD')
-                    : null
-                }
-                views={['year', 'month', 'day']}
-                onChange={(value) =>
-                  setFieldValue(
-                    'deathDate',
-                    value ? value.format('YYYY-MM-DD') : ''
-                  )
-                }
-                sx={{ width: '100%' }}
-                size='small'
-                slotProps={{
-                  textField: {
-                    InputProps: {
-                      style: { fontSize: 14 },
-                    },
-                    error: touched.deathDate && Boolean(errors.deathDate),
-                    helperText: touched.deathDate && errors.deathDate,
-                  },
-                  field: {
-                    clearable: true,
-                    onClear: () => setFieldValue('deathDate', ''),
-                  },
-                }}
-                maxDate={dayjs()}
-                minDate={values.birthDate ? dayjs(values.birthDate) : null}
-              />
-            </LocalizationProvider>
-          </Box>
-
-          <Box sx={formItemStyle}>
-            <Field
-              name='photo'
-              as={TextField}
-              label='Photo URL'
-              value={values.photo}
-              fullWidth
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position='end'>
-                    <IconButton
-                      aria-label='Clear field'
-                      onClick={() => setFieldValue('photo', '')}
-                      edge='end'
-                    >
-                      <BackspaceIcon />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              error={touched.photo && Boolean(errors.photo)}
-              helperText={touched.photo && errors.photo}
-            />
-          </Box>
-          <Box sx={formItemStyle}>
-            <Field
-              name='biography'
-              as={TextField}
-              id='biography-textarea'
-              label='Brief biography of the director...'
-              value={values.biography}
-              fullWidth
-              multiline
-              minRows={4}
-              maxRows={6}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position='end'>
-                    <IconButton
-                      aria-label='Clear field'
-                      onClick={() => setFieldValue('biography', '')}
-                      edge='end'
-                    >
-                      <BackspaceIcon />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              error={touched.biography && Boolean(errors.biography)}
-              helperText={touched.biography && errors.biography}
-            />
-          </Box>
+  const renderForm = ({ values, errors, touched, setFieldValue }) => (
+    <Form id='director-form'>
+      <Box sx={formStyle}>
+        <Box sx={formItemStyle}>
+          <Field
+            fullWidth
+            as={TextField}
+            error={touched.fullName && Boolean(errors.fullName)}
+            helperText={touched.fullName && errors.fullName}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position='end'>
+                  <IconButton
+                    aria-label='Clear field'
+                    edge='end'
+                    onClick={() => setFieldValue('fullName', '')}
+                  >
+                    <BackspaceIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            label='Full name'
+            name='fullName'
+            value={values.fullName}
+          />
         </Box>
-        <Stack
-          direction='row'
-          justifyContent='center'
-          spacing={1}
-          sx={stackButtonFormStyle}
+        <Box sx={formItemStyle}>
+          <BasicAutocompleteField
+            getOptionLabel={(option) => option.title}
+            label='Nationality'
+            name='country'
+            options={sortedCountries}
+            setFieldValue={setFieldValue}
+          />
+        </Box>
+        <Box sx={formItemStyle}>
+          <LocalizationProvider
+            adapterLocale='en-gb'
+            dateAdapter={AdapterDayjs}
+          >
+            <DatePicker
+              label='Birth date'
+              maxDate={dayjs()}
+              name='birthDate'
+              slotProps={{
+                textField: {
+                  InputProps: {
+                    style: { fontSize: 14 },
+                  },
+                  error: touched.birthDate && Boolean(errors.birthDate),
+                  helperText: touched.birthDate && errors.birthDate,
+                },
+                field: {
+                  clearable: true,
+                  onClear: () => setFieldValue('birthDate', ''),
+                },
+              }}
+              sx={{ width: '100%' }}
+              value={
+                values.birthDate ? dayjs(values.birthDate, 'YYYY-MM-DD') : null
+              }
+              views={['year', 'month', 'day']}
+              onChange={(value) => {
+                setFieldValue(
+                  'birthDate',
+                  value ? value.format('YYYY-MM-DD') : ''
+                );
+                if (
+                  value &&
+                  values.deathDate &&
+                  dayjs(values.deathDate).isBefore(value)
+                ) {
+                  setFieldValue('deathDate', '');
+                }
+              }}
+            />
+
+            <DatePicker
+              label='Death date'
+              maxDate={dayjs()}
+              minDate={values.birthDate ? dayjs(values.birthDate) : null}
+              name='deathDate'
+              size='small'
+              slotProps={{
+                textField: {
+                  InputProps: {
+                    style: { fontSize: 14 },
+                  },
+                  error: touched.deathDate && Boolean(errors.deathDate),
+                  helperText: touched.deathDate && errors.deathDate,
+                },
+                field: {
+                  clearable: true,
+                  onClear: () => setFieldValue('deathDate', ''),
+                },
+              }}
+              sx={{ width: '100%' }}
+              value={
+                values.deathDate ? dayjs(values.deathDate, 'YYYY-MM-DD') : null
+              }
+              views={['year', 'month', 'day']}
+              onChange={(value) =>
+                setFieldValue(
+                  'deathDate',
+                  value ? value.format('YYYY-MM-DD') : ''
+                )
+              }
+            />
+          </LocalizationProvider>
+        </Box>
+
+        <Box sx={formItemStyle}>
+          <Field
+            fullWidth
+            as={TextField}
+            error={touched.photo && Boolean(errors.photo)}
+            helperText={touched.photo && errors.photo}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position='end'>
+                  <IconButton
+                    aria-label='Clear field'
+                    edge='end'
+                    onClick={() => setFieldValue('photo', '')}
+                  >
+                    <BackspaceIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            label='Photo URL'
+            name='photo'
+            value={values.photo}
+          />
+        </Box>
+        <Box sx={formItemStyle}>
+          <Field
+            fullWidth
+            multiline
+            as={TextField}
+            error={touched.biography && Boolean(errors.biography)}
+            helperText={touched.biography && errors.biography}
+            id='biography-textarea'
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position='end'>
+                  <IconButton
+                    aria-label='Clear field'
+                    edge='end'
+                    onClick={() => setFieldValue('biography', '')}
+                  >
+                    <BackspaceIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            label='Brief biography of the director...'
+            maxRows={6}
+            minRows={4}
+            name='biography'
+            value={values.biography}
+          />
+        </Box>
+      </Box>
+      <Stack
+        direction='row'
+        justifyContent='center'
+        spacing={1}
+        sx={stackButtonFormStyle}
+      >
+        <Button
+          color='warning'
+          startIcon={<ArrowBackIcon />}
+          sx={buttonFormStyle}
+          type='button'
+          variant='contained'
+          onClick={handleGoBack}
         >
-          <Button
-            type='button'
-            variant='contained'
-            color='warning'
-            sx={buttonFormStyle}
-            onClick={goBack}
-            startIcon={<ArrowBackIcon />}
-          >
-            Return
-          </Button>
+          Return
+        </Button>
 
-          <Button
-            type='submit'
-            variant='contained'
-            color='success'
-            sx={wideButtonFormStyle}
-            startIcon={<SaveIcon />}
-          >
-            Save
-          </Button>
+        <Button
+          color='success'
+          startIcon={<SaveIcon />}
+          sx={wideButtonFormStyle}
+          type='submit'
+          variant='contained'
+        >
+          Save
+        </Button>
 
-          <Button
-            type='reset'
-            variant='contained'
-            color='error'
-            sx={buttonFormStyle}
-            startIcon={<ClearAllIcon />}
-          >
-            Reset
-          </Button>
-        </Stack>
-      </Form>
-    );
-  };
+        <Button
+          color='error'
+          startIcon={<ClearAllIcon />}
+          sx={buttonFormStyle}
+          type='reset'
+          variant='contained'
+        >
+          Reset
+        </Button>
+      </Stack>
+    </Form>
+  );
 
   return (
     <Formik
+      enableReinitialize
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={onFormSubmit}
-      enableReinitialize
+      onSubmit={handleSubmit}
     >
       {renderForm}
     </Formik>

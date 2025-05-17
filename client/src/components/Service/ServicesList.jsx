@@ -1,49 +1,44 @@
-import { useState, useCallback, useContext, useEffect } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-// =============================================
+
+import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
-import VideoSettingsIcon from '@mui/icons-material/VideoSettings';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import EditIcon from '@mui/icons-material/Edit';
-import { styled } from '@mui/material/styles';
-import Divider from '@mui/material/Divider';
+import ListItemText from '@mui/material/ListItemText';
 import Pagination from '@mui/material/Pagination';
-import { Tab, Tabs } from '@mui/material';
-// =============================================
+import Stack from '@mui/material/Stack';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+import Typography from '@mui/material/Typography';
+
+import { styled } from '@mui/material/styles';
+
+import EditIcon from '@mui/icons-material/Edit';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import VideoSettingsIcon from '@mui/icons-material/VideoSettings';
+
+import useItemsPerPage from '../../hooks/useItemsPerPage';
+import usePagination from '../../hooks/usePagination';
+
+import { deleteCountry } from '../../services/countryService';
+import { deleteGenre } from '../../services/genreService';
+import { deleteLocation } from '../../services/locationService';
 import {
   buttonMainStyle,
   itemListStyle,
   scrollServicesListBoxStyle,
+  styleListListItemButton,
 } from '../../services/styleService';
-// =============================================
-import { renderListSkeleton } from '../../services/skeletonService';
-// =============================================
-import {
-  SERVICES_ENTITY_NAME,
-  GENRES_ENTITY_NAME,
-  COUNTRIES_ENTITY_NAME,
-  LOCATIONS_ENTITY_NAME,
-} from '../../constants';
-// =============================================
-import { deleteGenre } from '../../services/genreService';
-import { deleteCountry } from '../../services/countryService';
-import { deleteLocation } from '../../services/locationService';
-// =============================================
+
 import SnackbarContext from '../../contexts/SnackbarContext';
-// =============================================
-import useItemsPerPage from '../../hooks/useItemsPerPage';
-import usePaginatedData from '../../hooks/usePaginatedData';
+import ListSkeleton from '../SkeletonLoader/ListSkeleton';
 
 const StyledAvatar = styled(Avatar)({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
@@ -61,10 +56,10 @@ function ServicesList() {
 
   const { showSnackbar } = useContext(SnackbarContext);
 
-  const handleTabChange = (event, newValue) => {
+  const handleTabChange = useCallback((event, newValue) => {
     setTabIndex(newValue);
     setCurrentPage(1);
-  };
+  }, []);
 
   const handleError = useCallback(
     (error, type) => {
@@ -75,18 +70,18 @@ function ServicesList() {
     [showSnackbar]
   );
 
-  const genresData = usePaginatedData(
-    `/${GENRES_ENTITY_NAME}`,
+  const genresData = usePagination(
+    `/genres`,
     adjustedItemsPerPage,
     currentPage
   );
-  const countriesData = usePaginatedData(
-    `/${COUNTRIES_ENTITY_NAME}`,
+  const countriesData = usePagination(
+    `/countries`,
     adjustedItemsPerPage,
     currentPage
   );
-  const locationsData = usePaginatedData(
-    `/${LOCATIONS_ENTITY_NAME}`,
+  const locationsData = usePagination(
+    `/locations`,
     adjustedItemsPerPage,
     currentPage
   );
@@ -101,9 +96,9 @@ function ServicesList() {
     handleError(error, 'error');
   }, [error, handleError]);
 
-  const handlePageChange = (event, value) => {
+  const handlePageChange = useCallback((event, value) => {
     setCurrentPage(value);
-  };
+  }, []);
 
   const onDelete = async (event, id, deleteFunction, successMessage) => {
     event.stopPropagation();
@@ -122,17 +117,17 @@ function ServicesList() {
       case 0:
         return {
           text: 'Add genre',
-          link: `/${SERVICES_ENTITY_NAME}/new-${GENRES_ENTITY_NAME}`,
+          link: `/services/new-genres`,
         };
       case 1:
         return {
           text: 'Add country',
-          link: `/${SERVICES_ENTITY_NAME}/new-${COUNTRIES_ENTITY_NAME}`,
+          link: `/services/new-countries`,
         };
       case 2:
         return {
           text: 'Add location',
-          link: `/${SERVICES_ENTITY_NAME}/new-${LOCATIONS_ENTITY_NAME}`,
+          link: `/services/new-locations`,
         };
       default:
         return { text: 'Add item', link: '#' };
@@ -149,36 +144,38 @@ function ServicesList() {
             ? Array(adjustedItemsPerPage)
                 .fill()
                 .map((_, index) => (
-                  <Box key={index}>{renderListSkeleton()}</Box>
+                  <Box key={index}>
+                    <ListSkeleton />
+                  </Box>
                 ))
             : data.map((item) => (
                 <Stack key={item.id} direction='column' marginBottom={1}>
                   <ListItem disablePadding sx={itemListStyle}>
-                    <ListItemButton sx={{ borderRadius: 5 }}>
+                    <ListItemButton sx={styleListListItemButton}>
                       <ListItemAvatar>
                         <StyledAvatar
                           src={item.logo || item.flag || item.coatOfArms}
                         />
                       </ListItemAvatar>
                       <ListItemText
-                        primary={`${item.title || 'Unknown ${entityName}'}${
-                          item.country ? `, ` + item.country : ''
+                        primary={`${item.title}${
+                          item.country ? `, ${item.country}` : ''
                         }`}
                       />
                     </ListItemButton>
                     <ListItemSecondaryAction>
                       <Stack direction='row' spacing={1}>
                         <IconButton
-                          edge='end'
                           aria-label='edit'
                           component={Link}
-                          to={`/${SERVICES_ENTITY_NAME}/edit-${entityName}/${item.id}`}
+                          edge='end'
+                          to={`/services/edit-${entityName}/${item.id}`}
                         >
                           <EditIcon />
                         </IconButton>
                         <IconButton
-                          edge='end'
                           aria-label='delete'
+                          edge='end'
                           onClick={(event) => onDelete(event, item.id)}
                         >
                           <HighlightOffIcon />
@@ -190,12 +187,12 @@ function ServicesList() {
               ))}
         </List>
       </Box>
-      <Stack spacing={2} alignItems='center' marginTop={2}>
+      <Stack alignItems='center' marginTop={2} spacing={2}>
         <Pagination
+          color='primary'
           count={Math.ceil(totalItems / adjustedItemsPerPage)}
           page={currentPage}
           onChange={handlePageChange}
-          color='primary'
         />
       </Stack>
     </>
@@ -204,17 +201,17 @@ function ServicesList() {
   return (
     <>
       <Stack direction='row' justifyContent='space-between'>
-        <Typography variant='h4' component='h2'>
+        <Typography component='h2' variant='h4'>
           Service List
         </Typography>
         <Button
+          color='success'
           component={Link}
+          startIcon={<VideoSettingsIcon />}
+          sx={buttonMainStyle}
           to={link}
           type='button'
           variant='contained'
-          color='success'
-          sx={buttonMainStyle}
-          startIcon={<VideoSettingsIcon />}
         >
           {text}
         </Button>
@@ -223,9 +220,9 @@ function ServicesList() {
       <Divider />
 
       <Tabs
+        aria-label='service details tabs'
         value={tabIndex}
         onChange={handleTabChange}
-        aria-label='service details tabs'
       >
         <Tab label='Movie genres' />
         <Tab label='Countries' />
@@ -238,7 +235,7 @@ function ServicesList() {
           loading,
           (e, id) =>
             onDelete(e, id, deleteGenre, 'Genre deleted successfully!'),
-          GENRES_ENTITY_NAME
+          'genres'
         )}
       {tabIndex === 1 &&
         renderList(
@@ -246,7 +243,7 @@ function ServicesList() {
           loading,
           (e, id) =>
             onDelete(e, id, deleteCountry, 'Country deleted successfully!'),
-          COUNTRIES_ENTITY_NAME
+          'countries'
         )}
       {tabIndex === 2 &&
         renderList(
@@ -254,7 +251,7 @@ function ServicesList() {
           loading,
           (e, id) =>
             onDelete(e, id, deleteLocation, 'Location deleted successfully!'),
-          LOCATIONS_ENTITY_NAME
+          'locations'
         )}
     </>
   );

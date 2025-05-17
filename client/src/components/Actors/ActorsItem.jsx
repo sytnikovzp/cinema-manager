@@ -1,41 +1,40 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-// =============================================
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import EditIcon from '@mui/icons-material/Edit';
 import Divider from '@mui/material/Divider';
-import Tabs from '@mui/material/Tabs';
+import Stack from '@mui/material/Stack';
 import Tab from '@mui/material/Tab';
-// =============================================
-import SnackbarContext from '../../contexts/SnackbarContext';
-// =============================================
-import {
-  MOVIES_ENTITY_NAME,
-  ACTORS_ENTITY_NAME,
-  emptyActor,
-} from '../../constants';
-// =============================================
+import Tabs from '@mui/material/Tabs';
+import Typography from '@mui/material/Typography';
+
+import EditIcon from '@mui/icons-material/Edit';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+
+import { emptyActor } from '../../constants';
+
 import { getActorById } from '../../services/actorService';
-import { formatDate, calculateAge } from '../../services/itemService';
-// =============================================
+import { calculateAge } from '../../services/itemService';
 import {
-  scrollItemBoxStyle,
   buttonMainStyle,
-  itemComponentBoxMainStyle,
   itemCardMediaBoxStyle,
+  itemComponentBoxMainStyle,
   itemInformationBoxStyle,
   itemLinkStyle,
+  scrollItemBoxStyle,
+  styleItemCreatedAtLabel,
+  styleItemCreatedAtValue,
+  styleItemTypography,
+  styleStackMargin,
 } from '../../services/styleService';
-// =============================================
-import { renderItemSkeleton } from '../../services/skeletonService';
-// =============================================
+
+import SnackbarContext from '../../contexts/SnackbarContext';
+import ItemSkeleton from '../SkeletonLoader/ItemSkeleton';
+
 import ActorsBiography from './ActorsBiography';
 
 function ActorsItem() {
@@ -60,7 +59,7 @@ function ActorsItem() {
   }, [id, showSnackbar]);
 
   useEffect(() => {
-    if (id === ':id' || id === undefined) {
+    if (id === ':id') {
       setActor(emptyActor);
       setLoading(false);
     } else {
@@ -68,13 +67,13 @@ function ActorsItem() {
     }
   }, [id, fetchActor]);
 
-  const goBack = () => {
-    navigate(`/${ACTORS_ENTITY_NAME}`);
-  };
+  const handleGoBack = useCallback(() => {
+    navigate(`/actors`);
+  }, [navigate]);
 
-  const handleTabChange = (event, newValue) => {
+  const handleTabChange = useCallback((event, newValue) => {
     setTabIndex(newValue);
-  };
+  }, []);
 
   const formattedMovies =
     actor.movies && actor.movies.length > 0
@@ -82,8 +81,8 @@ function ActorsItem() {
           .map((movie) => (
             <Link
               key={movie.id}
-              to={`/${MOVIES_ENTITY_NAME}/${movie.id}`}
               style={itemLinkStyle}
+              to={`/movies/${movie.id}`}
             >
               {movie.title}
             </Link>
@@ -91,44 +90,42 @@ function ActorsItem() {
           .reduce((prev, curr) => [prev, ', ', curr])
       : 'No movies available';
 
-  const formattedBirthDate = formatDate(actor.birthDate);
-  const formattedDeathDate = formatDate(actor.deathDate);
   const calculatedAge = calculateAge(actor.birthDate, actor.deathDate);
 
   return (
     <>
       <Stack direction='row' justifyContent='space-between'>
         <Button
+          color='info'
+          startIcon={<KeyboardBackspaceIcon />}
+          sx={buttonMainStyle}
           type='button'
           variant='contained'
-          color='info'
-          sx={buttonMainStyle}
-          startIcon={<KeyboardBackspaceIcon />}
-          onClick={goBack}
+          onClick={handleGoBack}
         >
           To actors
         </Button>
 
         <Button
+          color='warning'
+          component={Link}
+          startIcon={<EditIcon />}
+          sx={buttonMainStyle}
+          to={`/actors/edit/${id}`}
           type='button'
           variant='contained'
-          color='warning'
-          sx={buttonMainStyle}
-          startIcon={<EditIcon />}
-          component={Link}
-          to={`/${ACTORS_ENTITY_NAME}/edit/${id}`}
         >
           Edit
         </Button>
 
         <Button
+          color='success'
           component={Link}
-          to={`/${ACTORS_ENTITY_NAME}/new`}
+          startIcon={<GroupAddIcon />}
+          sx={buttonMainStyle}
+          to={`/actors/new`}
           type='button'
           variant='contained'
-          color='success'
-          sx={buttonMainStyle}
-          startIcon={<GroupAddIcon />}
         >
           Add actor
         </Button>
@@ -136,11 +133,11 @@ function ActorsItem() {
 
       <Divider />
 
-      <Box display='flex' alignItems='center' justifyContent='space-between'>
+      <Box alignItems='center' display='flex' justifyContent='space-between'>
         <Tabs
+          aria-label='actor details tabs'
           value={tabIndex}
           onChange={handleTabChange}
-          aria-label='actor details tabs'
         >
           <Tab label='General information' />
           {actor.biography && <Tab label='About the actor' />}
@@ -151,20 +148,16 @@ function ActorsItem() {
             {actor.createdAt === actor.updatedAt ? (
               <>
                 <Typography
-                  variant='caption'
-                  sx={{
-                    fontWeight: 'bold',
-                    textAlign: 'right',
-                    color: 'gray',
-                  }}
                   component='div'
+                  sx={styleItemCreatedAtLabel}
+                  variant='caption'
                 >
                   Created at:
                 </Typography>
                 <Typography
-                  variant='caption'
                   component='div'
-                  sx={{ textAlign: 'right', color: 'gray' }}
+                  sx={styleItemCreatedAtValue}
+                  variant='caption'
                 >
                   {actor.createdAt}
                 </Typography>
@@ -172,20 +165,16 @@ function ActorsItem() {
             ) : (
               <>
                 <Typography
-                  variant='caption'
-                  sx={{
-                    fontWeight: 'bold',
-                    textAlign: 'right',
-                    color: 'gray',
-                  }}
                   component='div'
+                  sx={styleItemCreatedAtLabel}
+                  variant='caption'
                 >
                   Updated at:
                 </Typography>
                 <Typography
-                  variant='caption'
                   component='div'
-                  sx={{ textAlign: 'right', color: 'gray' }}
+                  sx={styleItemCreatedAtValue}
+                  variant='caption'
                 >
                   {actor.updatedAt}
                 </Typography>
@@ -197,43 +186,37 @@ function ActorsItem() {
 
       <Box sx={scrollItemBoxStyle}>
         {loading ? (
-          renderItemSkeleton()
+          <ItemSkeleton />
         ) : (
           <Box sx={itemComponentBoxMainStyle}>
             <Box sx={itemCardMediaBoxStyle}>
               <Card>
                 <CardMedia
+                  alt={actor.fullName}
                   component='img'
                   height='100%'
                   image={
                     actor.photo ||
                     'https://excelautomationinc.com/wp-content/uploads/2021/07/No-Photo-Available.jpg'
                   }
-                  alt={actor.fullName}
                 />
               </Card>
             </Box>
             <Box sx={itemInformationBoxStyle}>
-              <Typography
-                variant='h5'
-                component='div'
-                sx={{ fontWeight: 'bold' }}
-              >
+              <Typography component='div' sx={styleItemTypography} variant='h5'>
                 {actor.fullName || 'Unknown actor'}
               </Typography>
 
               <Stack direction='row' spacing={1}>
                 <Typography
-                  variant='body1'
-                  sx={{
-                    fontWeight: 'bold',
-                  }}
                   component='div'
+                  sx={styleItemTypography}
+                  variant='body1'
                 >
                   Birth date:
                 </Typography>
-                <Typography variant='body1' component='div'>
-                  {actor.birthDate ? formattedBirthDate : 'Unknown'}
+                <Typography component='div' variant='body1'>
+                  {actor.birthDate ? actor.birthDate : 'Unknown'}
                   {actor.birthDate &&
                     (actor.birthDate && actor.deathDate
                       ? ` (aged ${calculatedAge})`
@@ -244,47 +227,41 @@ function ActorsItem() {
               {actor.deathDate && (
                 <Stack direction='row' spacing={1}>
                   <Typography
-                    variant='body1'
-                    sx={{
-                      fontWeight: 'bold',
-                    }}
                     component='div'
+                    sx={styleItemTypography}
+                    variant='body1'
                   >
                     Death date:
                   </Typography>
-                  <Typography variant='body1' component='div'>
-                    {formattedDeathDate}
+                  <Typography component='div' variant='body1'>
+                    {actor.deathDate}
                   </Typography>
                 </Stack>
               )}
 
               <Stack direction='row' spacing={1}>
                 <Typography
-                  variant='body1'
-                  sx={{
-                    fontWeight: 'bold',
-                  }}
                   component='div'
+                  sx={styleItemTypography}
+                  variant='body1'
                 >
                   Nationality:
                 </Typography>
-                <Typography variant='body1' component='div'>
-                  {actor.country || 'Unknown'}
+                <Typography component='div' variant='body1'>
+                  {actor.country.title || 'Unknown'}
                 </Typography>
               </Stack>
 
               {tabIndex === 0 && (
-                <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
+                <Stack direction='row' spacing={1} sx={styleStackMargin}>
                   <Typography
-                    variant='body1'
-                    sx={{
-                      fontWeight: 'bold',
-                    }}
                     component='div'
+                    sx={styleItemTypography}
+                    variant='body1'
                   >
                     Movies:
                   </Typography>
-                  <Typography variant='body1' component='div'>
+                  <Typography component='div' variant='body1'>
                     {formattedMovies}
                   </Typography>
                 </Stack>

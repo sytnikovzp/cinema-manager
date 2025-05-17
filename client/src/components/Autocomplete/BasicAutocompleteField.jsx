@@ -1,10 +1,9 @@
-import PropTypes from 'prop-types';
 import { Field } from 'formik';
-// =============================================
+
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 
-const BasicAutocompleteField = ({ name, options, getOptionLabel, label }) => {
+function BasicAutocompleteField({ name, options, getOptionLabel, label }) {
   return (
     <Field name={name}>
       {({ field, form }) => {
@@ -14,35 +13,27 @@ const BasicAutocompleteField = ({ name, options, getOptionLabel, label }) => {
         return (
           <Autocomplete
             disablePortal
+            fullWidth
+            getOptionLabel={getOptionLabel}
             id={`${name}-select`}
             options={options}
-            getOptionLabel={getOptionLabel}
-            fullWidth
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                error={form.touched[name] && Boolean(form.errors[name])}
+                helperText={form.touched[name] && form.errors[name]}
+                label={label}
+              />
+            )}
             value={currentValue}
             onChange={(event, value) => {
               form.setFieldValue(name, value ? value.title : '');
             }}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label={label}
-                error={form.touched[name] && Boolean(form.errors[name])}
-                helperText={form.touched[name] && form.errors[name]}
-              />
-            )}
           />
         );
       }}
     </Field>
   );
-};
-
-BasicAutocompleteField.propTypes = {
-  name: PropTypes.string.isRequired,
-  options: PropTypes.array.isRequired,
-  getOptionLabel: PropTypes.func.isRequired,
-  label: PropTypes.string.isRequired,
-  onChange: PropTypes.func,
-};
+}
 
 export default BasicAutocompleteField;

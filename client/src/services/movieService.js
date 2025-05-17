@@ -1,56 +1,26 @@
 import api from '../api';
-// =============================================
-import { MOVIES_ENTITY_NAME } from '../constants';
-
-const handleError = (error, defaultMessage) => {
-  const errorMessage = error.response?.data?.message || defaultMessage;
-  throw new Error(errorMessage);
-};
 
 export const getAllMovies = async () => {
-  try {
-    const response = await api.get(`/${MOVIES_ENTITY_NAME}`);
-    return response.data;
-  } catch (error) {
-    handleError(error, 'Failed to get all movies!');
-  }
+  const response = await api.get(`/movies`);
+  return response.data;
 };
 
 export const getMovieById = async (id) => {
-  try {
-    const response = await api.get(`/${MOVIES_ENTITY_NAME}/${id}`);
-    return response.data;
-  } catch (error) {
-    handleError(error, 'Failed to get movie information!');
-  }
+  const response = await api.get(`/movies/${id}`);
+  return response.data;
 };
 
 export const createMovie = async (movieData) => {
-  try {
-    const response = await api.post(`/${MOVIES_ENTITY_NAME}`, movieData);
-    return response.data;
-  } catch (error) {
-    handleError(error, 'Failed to create movie!');
-  }
+  const response = await api.post(`/movies`, movieData);
+  return response.data;
 };
 
-export const patchMovie = async (movieData) => {
-  try {
-    const response = await api.patch(
-      `/${MOVIES_ENTITY_NAME}/${movieData.id}`,
-      movieData
-    );
-    return response.data;
-  } catch (error) {
-    handleError(error, 'Failed to update movie!');
-  }
+export const updateMovie = async (movieData) => {
+  const response = await api.patch(`/movies/${movieData.id}`, movieData);
+  return response.data;
 };
 
 export const deleteMovie = async (id) => {
-  try {
-    const response = await api.delete(`/${MOVIES_ENTITY_NAME}/${id}`);
-    return response.data;
-  } catch (error) {
-    handleError(error, 'Failed to delete movie!');
-  }
+  const response = await api.delete(`/movies/${id}`);
+  return response.data;
 };

@@ -1,4 +1,9 @@
-// =============================================
+function getBackgroundColor(theme) {
+  return theme.palette.mode === 'light'
+    ? theme.palette.grey[100]
+    : theme.palette.grey[700];
+}
+
 // General style
 
 export const rootComponentPaperStyle = {
@@ -19,14 +24,17 @@ export const textIndentStyle = {
   fontWeight: 'medium',
 };
 
-// =============================================
 // NavBar component
+
+export const navBarBox = {
+  mt: 2,
+  mr: 2,
+};
 
 export const navItemTextStyle = {
   color: 'text.primary',
 };
 
-// =============================================
 // HomePage component
 
 export const carouselStyles = {
@@ -53,7 +61,6 @@ export const skeletonHomePageStyles = {
   width: '50%',
 };
 
-// =============================================
 // *form components
 
 export const formStyle = {
@@ -106,7 +113,6 @@ export const addButtonFormStyle = {
   width: '200px',
 };
 
-// =============================================
 // *list components
 
 export const scrollListBoxStyle = {
@@ -125,7 +131,6 @@ export const scrollServicesListBoxStyle = {
   overflowY: 'auto',
 };
 
-// =============================================
 // *item components
 
 export const scrollItemBoxStyle = {
@@ -159,7 +164,6 @@ export const itemLinkStyle = {
   color: 'inherit',
 };
 
-// =============================================
 // MoviesPlayer component
 
 export const playerStyle = {
@@ -167,4 +171,71 @@ export const playerStyle = {
   mr: 2,
   mb: 2,
   boxShadow: '0 10px 15px rgba(0, 0, 0, 0.7)',
+};
+
+// Custom
+
+export const styleEntityBox = {
+  mt: 2,
+  mb: 2,
+};
+
+export const styleStackMargin = {
+  marginTop: 2,
+};
+
+export const styleItemTypography = {
+  fontWeight: 'bold',
+};
+
+export const styleListListItemButton = {
+  borderRadius: 5,
+};
+
+export const styleItemCreatedAtLabel = {
+  fontWeight: 'bold',
+  textAlign: 'right',
+  color: 'gray',
+};
+
+export const styleItemCreatedAtValue = {
+  textAlign: 'right',
+  color: 'gray',
+};
+
+export const styleCinemaServiceBox = {
+  mt: 2,
+  ml: 2,
+};
+
+export const styleCinemaServiceTypography = {
+  textAlign: 'center',
+  paddingTop: 1,
+  paddingBottom: 1,
+};
+
+export const styleLayoutBox = {
+  display: 'flex',
+  flexDirection: 'column',
+  minHeight: '100vh',
+};
+
+export const styleLayoutMainGridContainer = {
+  flexGrow: 1,
+  color: 'text.primary',
+  backgroundColor: getBackgroundColor,
+};
+
+export const styleLayoutGridContainer = {
+  mt: '1rem',
+  mb: '1rem',
+  flex: 1,
+};
+
+export const styleLayoutDesktopNavbar = {
+  display: { xs: 'none', md: 'block' },
+};
+
+export const styleLayoutMobileNavbar = {
+  display: { xs: 'block', md: 'none' },
 };

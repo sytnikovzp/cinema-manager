@@ -1,17 +1,13 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
-// =============================================
-import Paper from '@mui/material/Paper';
+
 import Box from '@mui/material/Box';
-// =============================================
-import { rootComponentPaperStyle } from '../../services/styleService';
-// =============================================
+import Paper from '@mui/material/Paper';
+
 import {
-  SERVICES_ENTITY_NAME,
-  GENRES_ENTITY_NAME,
-  COUNTRIES_ENTITY_NAME,
-  LOCATIONS_ENTITY_NAME,
-} from '../../constants';
-// =============================================
+  rootComponentPaperStyle,
+  styleEntityBox,
+} from '../../services/styleService';
+
 import ServicesList from './ServicesList';
 
 function Services() {
@@ -20,65 +16,36 @@ function Services() {
     !location.pathname.includes('/edit') && !location.pathname.includes('/new');
 
   return (
-    <Box
-      sx={{
-        mt: 2,
-        mb: 2,
-      }}
-    >
+    <Box sx={styleEntityBox}>
       <Paper
         elevation={3}
-        sx={applyPaperStyles ? rootComponentPaperStyle : undefined}
+        sx={applyPaperStyles ? rootComponentPaperStyle : null}
       >
         <Routes>
-          <Route path='/' element={<ServicesList />} />
+          <Route element={<ServicesList />} path='/' />
           <Route
-            path={`new-${GENRES_ENTITY_NAME}`}
-            element={
-              <Navigate
-                to={`/${SERVICES_ENTITY_NAME}/new-${GENRES_ENTITY_NAME}/:id`}
-              />
-            }
+            element={<Navigate to={`/services/new-genres/:id`} />}
+            path={`new-genres`}
           />
           <Route
-            path={`edit-${GENRES_ENTITY_NAME}`}
-            element={
-              <Navigate
-                to={`/${SERVICES_ENTITY_NAME}/edit-${GENRES_ENTITY_NAME}/:id`}
-              />
-            }
+            element={<Navigate to={`/services/edit-genres/:id`} />}
+            path={`edit-genres`}
           />
           <Route
-            path={`new-${COUNTRIES_ENTITY_NAME}`}
-            element={
-              <Navigate
-                to={`/${SERVICES_ENTITY_NAME}/new-${COUNTRIES_ENTITY_NAME}/:id`}
-              />
-            }
+            element={<Navigate to={`/services/new-countries/:id`} />}
+            path={`new-countries`}
           />
           <Route
-            path={`edit-${COUNTRIES_ENTITY_NAME}`}
-            element={
-              <Navigate
-                to={`/${SERVICES_ENTITY_NAME}/edit-${COUNTRIES_ENTITY_NAME}/:id`}
-              />
-            }
+            element={<Navigate to={`/services/edit-countries/:id`} />}
+            path={`edit-countries`}
           />
           <Route
-            path={`new-${LOCATIONS_ENTITY_NAME}`}
-            element={
-              <Navigate
-                to={`/${SERVICES_ENTITY_NAME}/new-${LOCATIONS_ENTITY_NAME}/:id`}
-              />
-            }
+            element={<Navigate to={`/services/new-locations/:id`} />}
+            path={`new-locations`}
           />
           <Route
-            path={`edit-${LOCATIONS_ENTITY_NAME}`}
-            element={
-              <Navigate
-                to={`/${SERVICES_ENTITY_NAME}/edit-${LOCATIONS_ENTITY_NAME}/:id`}
-              />
-            }
+            element={<Navigate to={`/services/edit-locations/:id`} />}
+            path={`edit-locations`}
           />
         </Routes>
       </Paper>

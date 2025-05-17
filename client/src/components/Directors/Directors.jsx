@@ -1,16 +1,16 @@
 // import { useEffect } from 'react';
 // import { useDispatch } from 'react-redux';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
-// =============================================
-import Paper from '@mui/material/Paper';
+
 import Box from '@mui/material/Box';
-// =============================================
-import { rootComponentPaperStyle } from '../../services/styleService';
-// =============================================
-import { DIRECTORS_ENTITY_NAME } from '../../constants';
-// =============================================
+import Paper from '@mui/material/Paper';
+
+import {
+  rootComponentPaperStyle,
+  styleEntityBox,
+} from '../../services/styleService';
+
 // import { getAllDirectors } from '../../store/slices/directorsSlice';
-// =============================================
 import DirectorsItem from './DirectorsItem';
 import DirectorsList from './DirectorsList';
 
@@ -26,26 +26,18 @@ function Directors() {
     !location.pathname.includes('/edit') && !location.pathname.includes('/new');
 
   return (
-    <Box
-      sx={{
-        mt: 2,
-        mb: 2,
-      }}
-    >
+    <Box sx={styleEntityBox}>
       <Paper
         elevation={3}
-        sx={applyPaperStyles ? rootComponentPaperStyle : undefined}
+        sx={applyPaperStyles ? rootComponentPaperStyle : null}
       >
         <Routes>
-          <Route path='/' element={<DirectorsList />} />
-          <Route path=':id' element={<DirectorsItem />} />
+          <Route element={<DirectorsList />} path='/' />
+          <Route element={<DirectorsItem />} path=':id' />
+          <Route element={<Navigate to={`/directors/new/:id`} />} path='new' />
           <Route
-            path='new'
-            element={<Navigate to={`/${DIRECTORS_ENTITY_NAME}/new/:id`} />}
-          />
-          <Route
+            element={<Navigate to={`/directors/edit/:id`} />}
             path='edit'
-            element={<Navigate to={`/${DIRECTORS_ENTITY_NAME}/edit/:id`} />}
           />
         </Routes>
       </Paper>

@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { logger } from 'redux-logger';
-// =============================================
+
 import actorsReducer from './slices/actorsSlice';
 import directorsReducer from './slices/directorsSlice';
 import moviesReducer from './slices/moviesSlice';

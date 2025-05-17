@@ -1,56 +1,26 @@
 import api from '../api';
-// =============================================
-import { GENRES_ENTITY_NAME } from '../constants';
-
-const handleError = (error, defaultMessage) => {
-  const errorMessage = error.response?.data?.message || defaultMessage;
-  throw new Error(errorMessage);
-};
 
 export const getAllGenres = async () => {
-  try {
-    const response = await api.get(`/${GENRES_ENTITY_NAME}`);
-    return response.data;
-  } catch (error) {
-    handleError(error, 'Failed to get all genres!');
-  }
+  const response = await api.get(`/genres`);
+  return response.data;
 };
 
 export const getGenreById = async (id) => {
-  try {
-    const response = await api.get(`/${GENRES_ENTITY_NAME}/${id}`);
-    return response.data;
-  } catch (error) {
-    handleError(error, 'Failed to get genre information!');
-  }
+  const response = await api.get(`/genres/${id}`);
+  return response.data;
 };
 
 export const createGenre = async (genreData) => {
-  try {
-    const response = await api.post(`/${GENRES_ENTITY_NAME}`, genreData);
-    return response.data;
-  } catch (error) {
-    handleError(error, 'Failed to create genre!');
-  }
+  const response = await api.post(`/genres`, genreData);
+  return response.data;
 };
 
-export const patchGenre = async (genreData) => {
-  try {
-    const response = await api.patch(
-      `/${GENRES_ENTITY_NAME}/${genreData.id}`,
-      genreData
-    );
-    return response.data;
-  } catch (error) {
-    handleError(error, 'Failed to update genre!');
-  }
+export const updateGenre = async (genreData) => {
+  const response = await api.patch(`/genres/${genreData.id}`, genreData);
+  return response.data;
 };
 
 export const deleteGenre = async (id) => {
-  try {
-    const response = await api.delete(`/${GENRES_ENTITY_NAME}/${id}`);
-    return response.data;
-  } catch (error) {
-    handleError(error, 'Failed to delete genre!');
-  }
+  const response = await api.delete(`/genres/${id}`);
+  return response.data;
 };

@@ -1,153 +1,76 @@
 import { Route, Routes } from 'react-router-dom';
-// =============================================
+
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-// =============================================
+
 import {
-  ACTORS_ENTITY_NAME,
-  DIRECTORS_ENTITY_NAME,
-  MOVIES_ENTITY_NAME,
-  STUDIOS_ENTITY_NAME,
-  SERVICES_ENTITY_NAME,
-  GENRES_ENTITY_NAME,
-  COUNTRIES_ENTITY_NAME,
-  LOCATIONS_ENTITY_NAME,
-} from '../../constants';
-// =============================================
+  styleCinemaServiceBox,
+  styleCinemaServiceTypography,
+} from '../../services/styleService';
+
 import ActorsForm from '../Actors/ActorsForm';
 import DirectorsForm from '../Directors/DirectorsForm';
 import MoviesForm from '../Movies/MoviesForm';
 import StudiosForm from '../Studios/StudiosForm';
-import GenresForm from '../Service/GenresForm';
+
 import CountriesForm from './CountriesForm';
+import GenresForm from './GenresForm';
 import LocationsForm from './LocationsForm';
 
 function CinemaService() {
   return (
-    <Box
-      sx={{
-        mt: 2,
-        ml: 2,
-      }}
-    >
+    <Box sx={styleCinemaServiceBox}>
       <Paper elevation={3}>
-        <Typography
-          variant='h5'
-          sx={{
-            textAlign: 'center',
-            paddingTop: 1,
-            paddingBottom: 1,
-          }}
-        >
+        <Typography sx={styleCinemaServiceTypography} variant='h5'>
           Cinema service
         </Typography>
         <Routes>
-          <Route path={`/${ACTORS_ENTITY_NAME}/new`} element={<ActorsForm />} />
+          <Route element={<ActorsForm />} path={`/actors/new`} />
+          <Route element={<ActorsForm />} path={`/actors/new/:id`} />
+          <Route element={<ActorsForm />} path={`/actors/edit`} />
+          <Route element={<ActorsForm />} path={`/actors/edit/:id`} />
+          <Route element={<DirectorsForm />} path={`/directors/new`} />
+          <Route element={<DirectorsForm />} path={`/directors/new/:id`} />
+          <Route element={<DirectorsForm />} path={`/directors/edit`} />
+          <Route element={<DirectorsForm />} path={`/directors/edit/:id`} />
+          <Route element={<MoviesForm />} path={`/movies/new`} />
+          <Route element={<MoviesForm />} path={`/movies/new/:id`} />
+          <Route element={<MoviesForm />} path={`/movies/edit`} />
+          <Route element={<MoviesForm />} path={`/movies/edit/:id`} />
+          <Route element={<StudiosForm />} path={`/studios/new`} />
+          <Route element={<StudiosForm />} path={`/studios/new/:id`} />
+          <Route element={<StudiosForm />} path={`/studios/edit`} />
+          <Route element={<StudiosForm />} path={`/studios/edit/:id`} />
+          <Route element={<GenresForm />} path={`/services/new-genres`} />
+          <Route element={<GenresForm />} path={`/services/new-genres/:id`} />
+          <Route element={<GenresForm />} path={`/services/edit-genres`} />
+          <Route element={<GenresForm />} path={`/services/edit-genres/:id`} />
+          <Route element={<CountriesForm />} path={`/services/new-countries`} />
           <Route
-            path={`/${ACTORS_ENTITY_NAME}/new/:id`}
-            element={<ActorsForm />}
-          />
-          <Route
-            path={`/${ACTORS_ENTITY_NAME}/edit`}
-            element={<ActorsForm />}
-          />
-          <Route
-            path={`/${ACTORS_ENTITY_NAME}/edit/:id`}
-            element={<ActorsForm />}
-          />
-          <Route
-            path={`/${DIRECTORS_ENTITY_NAME}/new`}
-            element={<DirectorsForm />}
-          />
-          <Route
-            path={`/${DIRECTORS_ENTITY_NAME}/new/:id`}
-            element={<DirectorsForm />}
-          />
-          <Route
-            path={`/${DIRECTORS_ENTITY_NAME}/edit`}
-            element={<DirectorsForm />}
-          />
-          <Route
-            path={`/${DIRECTORS_ENTITY_NAME}/edit/:id`}
-            element={<DirectorsForm />}
-          />
-          <Route path={`/${MOVIES_ENTITY_NAME}/new`} element={<MoviesForm />} />
-          <Route
-            path={`/${MOVIES_ENTITY_NAME}/new/:id`}
-            element={<MoviesForm />}
-          />
-          <Route
-            path={`/${MOVIES_ENTITY_NAME}/edit`}
-            element={<MoviesForm />}
-          />
-          <Route
-            path={`/${MOVIES_ENTITY_NAME}/edit/:id`}
-            element={<MoviesForm />}
-          />
-          <Route
-            path={`/${STUDIOS_ENTITY_NAME}/new`}
-            element={<StudiosForm />}
-          />
-          <Route
-            path={`/${STUDIOS_ENTITY_NAME}/new/:id`}
-            element={<StudiosForm />}
-          />
-          <Route
-            path={`/${STUDIOS_ENTITY_NAME}/edit`}
-            element={<StudiosForm />}
-          />
-          <Route
-            path={`/${STUDIOS_ENTITY_NAME}/edit/:id`}
-            element={<StudiosForm />}
-          />
-          <Route
-            path={`/${SERVICES_ENTITY_NAME}/new-${GENRES_ENTITY_NAME}`}
-            element={<GenresForm />}
-          />
-          <Route
-            path={`/${SERVICES_ENTITY_NAME}/new-${GENRES_ENTITY_NAME}/:id`}
-            element={<GenresForm />}
-          />
-          <Route
-            path={`/${SERVICES_ENTITY_NAME}/edit-${GENRES_ENTITY_NAME}`}
-            element={<GenresForm />}
-          />
-          <Route
-            path={`/${SERVICES_ENTITY_NAME}/edit-${GENRES_ENTITY_NAME}/:id`}
-            element={<GenresForm />}
-          />
-          <Route
-            path={`/${SERVICES_ENTITY_NAME}/new-${COUNTRIES_ENTITY_NAME}`}
             element={<CountriesForm />}
+            path={`/services/new-countries/:id`}
           />
           <Route
-            path={`/${SERVICES_ENTITY_NAME}/new-${COUNTRIES_ENTITY_NAME}/:id`}
             element={<CountriesForm />}
+            path={`/services/edit-countries`}
           />
           <Route
-            path={`/${SERVICES_ENTITY_NAME}/edit-${COUNTRIES_ENTITY_NAME}`}
             element={<CountriesForm />}
+            path={`/services/edit-countries/:id`}
           />
+          <Route element={<LocationsForm />} path={`/services/new-locations`} />
           <Route
-            path={`/${SERVICES_ENTITY_NAME}/edit-${COUNTRIES_ENTITY_NAME}/:id`}
-            element={<CountriesForm />}
-          />
-          <Route
-            path={`/${SERVICES_ENTITY_NAME}/new-${LOCATIONS_ENTITY_NAME}`}
             element={<LocationsForm />}
+            path={`/services/new-locations/:id`}
           />
           <Route
-            path={`/${SERVICES_ENTITY_NAME}/new-${LOCATIONS_ENTITY_NAME}/:id`}
             element={<LocationsForm />}
+            path={`/services/edit-locations`}
           />
           <Route
-            path={`/${SERVICES_ENTITY_NAME}/edit-${LOCATIONS_ENTITY_NAME}`}
             element={<LocationsForm />}
-          />
-          <Route
-            path={`/${SERVICES_ENTITY_NAME}/edit-${LOCATIONS_ENTITY_NAME}/:id`}
-            element={<LocationsForm />}
+            path={`/services/edit-locations/:id`}
           />
         </Routes>
       </Paper>

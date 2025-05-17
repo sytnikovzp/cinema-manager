@@ -1,16 +1,15 @@
-import PropTypes from 'prop-types';
 import { Field } from 'formik';
-// =============================================
+
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 
-const FieldArrayAutocompleteField = ({
+function FieldArrayAutocompleteField({
   id,
   name,
   options,
   getOptionLabel,
   groupBy,
-}) => {
+}) {
   return (
     <Field name={name}>
       {({ field, form }) => {
@@ -28,20 +27,13 @@ const FieldArrayAutocompleteField = ({
 
         return (
           <Autocomplete
+            disableClearable
             disablePortal
+            fullWidth
+            getOptionLabel={getOptionLabel}
+            groupBy={groupBy}
             id={id}
             options={options}
-            groupBy={groupBy}
-            getOptionLabel={getOptionLabel}
-            fullWidth
-            value={currentValue}
-            onChange={(event, newValue) => {
-              form.setFieldValue(
-                name,
-                newValue ? newValue.fullName || newValue.title || '' : ''
-              );
-            }}
-            disableClearable
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -53,19 +45,18 @@ const FieldArrayAutocompleteField = ({
                 }
               />
             )}
+            value={currentValue}
+            onChange={(event, newValue) => {
+              form.setFieldValue(
+                name,
+                newValue ? newValue.fullName || newValue.title || '' : ''
+              );
+            }}
           />
         );
       }}
     </Field>
   );
-};
-
-FieldArrayAutocompleteField.propTypes = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  options: PropTypes.array.isRequired,
-  getOptionLabel: PropTypes.func.isRequired,
-  groupBy: PropTypes.func,
-};
+}
 
 export default FieldArrayAutocompleteField;

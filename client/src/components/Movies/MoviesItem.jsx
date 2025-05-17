@@ -1,43 +1,40 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-// =============================================
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import VideoCallIcon from '@mui/icons-material/VideoCall';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import EditIcon from '@mui/icons-material/Edit';
 import Divider from '@mui/material/Divider';
-import Tabs from '@mui/material/Tabs';
+import Stack from '@mui/material/Stack';
 import Tab from '@mui/material/Tab';
-// =============================================
-import SnackbarContext from '../../contexts/SnackbarContext';
-// =============================================
-import {
-  MOVIES_ENTITY_NAME,
-  ACTORS_ENTITY_NAME,
-  DIRECTORS_ENTITY_NAME,
-  STUDIOS_ENTITY_NAME,
-  emptyMovie,
-} from '../../constants';
-// =============================================
+import Tabs from '@mui/material/Tabs';
+import Typography from '@mui/material/Typography';
+
+import EditIcon from '@mui/icons-material/Edit';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import VideoCallIcon from '@mui/icons-material/VideoCall';
+
+import { emptyMovie } from '../../constants';
+
 import { getMovieById } from '../../services/movieService';
-// =============================================
 import {
-  scrollItemBoxStyle,
   buttonMainStyle,
-  itemComponentBoxMainStyle,
   itemCardMediaBoxStyle,
+  itemComponentBoxMainStyle,
   itemInformationBoxStyle,
-  textIndentStyle,
   itemLinkStyle,
+  scrollItemBoxStyle,
+  styleItemCreatedAtLabel,
+  styleItemCreatedAtValue,
+  styleItemTypography,
+  styleStackMargin,
+  textIndentStyle,
 } from '../../services/styleService';
-// =============================================
-import { renderItemSkeleton } from '../../services/skeletonService';
-// =============================================
+
+import SnackbarContext from '../../contexts/SnackbarContext';
+import ItemSkeleton from '../SkeletonLoader/ItemSkeleton';
+
 import MoviesPlayer from './MoviesPlayer';
 
 function MoviesItem() {
@@ -62,7 +59,7 @@ function MoviesItem() {
   }, [id, showSnackbar]);
 
   useEffect(() => {
-    if (id === ':id' || id === undefined) {
+    if (id === ':id') {
       setMovie(emptyMovie);
       setLoading(false);
     } else {
@@ -70,13 +67,13 @@ function MoviesItem() {
     }
   }, [id, fetchMovie]);
 
-  const goBack = () => {
-    navigate(`/${MOVIES_ENTITY_NAME}`);
-  };
+  const handleGoBack = useCallback(() => {
+    navigate(`/movies`);
+  }, [navigate]);
 
-  const handleTabChange = (event, newValue) => {
+  const handleTabChange = useCallback((event, newValue) => {
     setTabIndex(newValue);
-  };
+  }, []);
 
   const formattedStudios =
     movie.studios && movie.studios.length > 0
@@ -88,8 +85,8 @@ function MoviesItem() {
             return (
               <Link
                 key={studio.id}
-                to={`/${STUDIOS_ENTITY_NAME}/${studio.id}`}
                 style={itemLinkStyle}
+                to={`/studios/${studio.id}`}
               >
                 {studio.title}
               </Link>
@@ -108,8 +105,8 @@ function MoviesItem() {
             return (
               <Link
                 key={director.id}
-                to={`/${DIRECTORS_ENTITY_NAME}/${director.id}`}
                 style={itemLinkStyle}
+                to={`/directors/${director.id}`}
               >
                 {director.fullName}
               </Link>
@@ -128,8 +125,8 @@ function MoviesItem() {
             return (
               <Link
                 key={actor.id}
-                to={`/${ACTORS_ENTITY_NAME}/${actor.id}`}
                 style={itemLinkStyle}
+                to={`/actors/${actor.id}`}
               >
                 {actor.fullName}
               </Link>
@@ -142,36 +139,36 @@ function MoviesItem() {
     <>
       <Stack direction='row' justifyContent='space-between'>
         <Button
+          color='info'
+          startIcon={<KeyboardBackspaceIcon />}
+          sx={buttonMainStyle}
           type='button'
           variant='contained'
-          color='info'
-          sx={buttonMainStyle}
-          startIcon={<KeyboardBackspaceIcon />}
-          onClick={goBack}
+          onClick={handleGoBack}
         >
           To movies
         </Button>
 
         <Button
+          color='warning'
+          component={Link}
+          startIcon={<EditIcon />}
+          sx={buttonMainStyle}
+          to={`/movies/edit/${id}`}
           type='button'
           variant='contained'
-          color='warning'
-          sx={buttonMainStyle}
-          startIcon={<EditIcon />}
-          component={Link}
-          to={`/${MOVIES_ENTITY_NAME}/edit/${id}`}
         >
           Edit
         </Button>
 
         <Button
+          color='success'
           component={Link}
-          to={`/${MOVIES_ENTITY_NAME}/new`}
+          startIcon={<VideoCallIcon />}
+          sx={buttonMainStyle}
+          to={`/movies/new`}
           type='button'
           variant='contained'
-          color='success'
-          sx={buttonMainStyle}
-          startIcon={<VideoCallIcon />}
         >
           Add movie
         </Button>
@@ -179,11 +176,11 @@ function MoviesItem() {
 
       <Divider />
 
-      <Box display='flex' alignItems='center' justifyContent='space-between'>
+      <Box alignItems='center' display='flex' justifyContent='space-between'>
         <Tabs
+          aria-label='movie details tabs'
           value={tabIndex}
           onChange={handleTabChange}
-          aria-label='movie details tabs'
         >
           <Tab label='About the movie' />
           {movie.trailer && <Tab label='Movie trailer' />}
@@ -194,20 +191,16 @@ function MoviesItem() {
             {movie.createdAt === movie.updatedAt ? (
               <>
                 <Typography
-                  variant='caption'
-                  sx={{
-                    fontWeight: 'bold',
-                    textAlign: 'right',
-                    color: 'gray',
-                  }}
                   component='div'
+                  sx={styleItemCreatedAtLabel}
+                  variant='caption'
                 >
                   Created at:
                 </Typography>
                 <Typography
-                  variant='caption'
                   component='div'
-                  sx={{ textAlign: 'right', color: 'gray' }}
+                  sx={styleItemCreatedAtValue}
+                  variant='caption'
                 >
                   {movie.createdAt}
                 </Typography>
@@ -215,20 +208,16 @@ function MoviesItem() {
             ) : (
               <>
                 <Typography
-                  variant='caption'
-                  sx={{
-                    fontWeight: 'bold',
-                    textAlign: 'right',
-                    color: 'gray',
-                  }}
                   component='div'
+                  sx={styleItemCreatedAtLabel}
+                  variant='caption'
                 >
                   Updated at:
                 </Typography>
                 <Typography
-                  variant='caption'
                   component='div'
-                  sx={{ textAlign: 'right', color: 'gray' }}
+                  sx={styleItemCreatedAtValue}
+                  variant='caption'
                 >
                   {movie.updatedAt}
                 </Typography>
@@ -241,108 +230,98 @@ function MoviesItem() {
       {tabIndex === 0 && (
         <Box sx={scrollItemBoxStyle}>
           {loading ? (
-            renderItemSkeleton()
+            <ItemSkeleton />
           ) : (
             <Box sx={itemComponentBoxMainStyle}>
               <Box sx={itemCardMediaBoxStyle}>
                 <Card>
                   <CardMedia
+                    alt={movie.title}
                     component='img'
                     height='100%'
                     image={
                       movie.poster ||
                       'https://www.prokerala.com/movies/assets/img/no-poster-available.jpg'
                     }
-                    alt={movie.title}
                   />
                 </Card>
               </Box>
               <Box sx={itemInformationBoxStyle}>
                 <Typography
-                  variant='h5'
                   component='div'
-                  sx={{ fontWeight: 'bold' }}
+                  sx={styleItemTypography}
+                  variant='h5'
                 >
                   {movie.title || 'Unknown movie'}
                 </Typography>
                 <Stack direction='row' spacing={1}>
                   <Typography
-                    variant='body1'
-                    sx={{
-                      fontWeight: 'bold',
-                    }}
                     component='div'
+                    sx={styleItemTypography}
+                    variant='body1'
                   >
                     Movie year:
                   </Typography>
-                  <Typography variant='body1' component='div'>
+                  <Typography component='div' variant='body1'>
                     {movie.releaseYear || 'Unknown'}
                   </Typography>
                 </Stack>
                 <Stack direction='row' spacing={1}>
                   <Typography
-                    variant='body1'
-                    sx={{
-                      fontWeight: 'bold',
-                    }}
                     component='div'
+                    sx={styleItemTypography}
+                    variant='body1'
                   >
                     Genre:
                   </Typography>
-                  <Typography variant='body1' component='div'>
-                    {movie.genre || 'Unknown'}
+                  <Typography component='div' variant='body1'>
+                    {movie.genre.title || 'Unknown'}
                   </Typography>
                 </Stack>
-                <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
+                <Stack direction='row' spacing={1} sx={styleStackMargin}>
                   <Typography
-                    variant='body1'
-                    sx={{
-                      fontWeight: 'bold',
-                    }}
                     component='div'
+                    sx={styleItemTypography}
+                    variant='body1'
                   >
                     Studios:
                   </Typography>
-                  <Typography variant='body1' component='div'>
+                  <Typography component='div' variant='body1'>
                     {formattedStudios}
                   </Typography>
                 </Stack>
-                <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
+                <Stack direction='row' spacing={1} sx={styleStackMargin}>
                   <Typography
-                    variant='body1'
-                    sx={{
-                      fontWeight: 'bold',
-                    }}
                     component='div'
+                    sx={styleItemTypography}
+                    variant='body1'
                   >
                     Directors:
                   </Typography>
-                  <Typography variant='body1' component='div'>
+                  <Typography component='div' variant='body1'>
                     {formattedDirectors}
                   </Typography>
                 </Stack>
-                <Stack direction='row' spacing={1} sx={{ marginTop: 2 }}>
+                <Stack direction='row' spacing={1} sx={styleStackMargin}>
                   <Typography
-                    variant='body1'
-                    sx={{
-                      fontWeight: 'bold',
-                    }}
                     component='div'
+                    sx={styleItemTypography}
+                    variant='body1'
                   >
                     Actors:
                   </Typography>
-                  <Typography variant='body1' component='div'>
+                  <Typography component='div' variant='body1'>
                     {formattedActors}
                   </Typography>
                 </Stack>
 
                 {movie.storyline && (
                   <>
-                    <Divider sx={{ marginTop: 2 }} />
+                    <Divider sx={styleStackMargin} />
                     <Typography
-                      variant='body1'
                       component='div'
                       sx={textIndentStyle}
+                      variant='body1'
                     >
                       {movie.storyline}
                     </Typography>
