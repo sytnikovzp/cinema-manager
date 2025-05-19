@@ -163,12 +163,12 @@ function StudioForm() {
                 },
               }}
               sx={{ width: '330px' }}
-              views={['year']}
               value={
                 values.foundationYear
                   ? new Date(values.foundationYear, 0, 1)
                   : null
               }
+              views={['year']}
               onChange={(value) =>
                 setFieldValue(
                   'foundationYear',

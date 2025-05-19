@@ -37,20 +37,38 @@ export const navItemTextStyle = {
 
 // HomePage component
 
-export const carouselStyles = {
-  imgContainerStyle: {
-    height: '70vh',
-    padding: '15px',
-  },
+export const stylesHomePageBox = {
+  maxWidth: 900,
+  mx: 'auto',
+  mt: 4,
+};
 
-  imgStyle: {
-    borderRadius: '15px',
-    position: 'absolute',
-    left: '50%',
-    transform: 'translate(-50%, 0)',
-    width: 'inherit',
-    height: '95%',
-  },
+export const stylesHomePageAutoplayConfig = {
+  delay: 3000,
+  disableOnInteraction: false,
+};
+
+export const stylesHomePageCoverflowEffect = {
+  rotate: 0,
+  stretch: 0,
+  depth: 150,
+  modifier: 2.5,
+  slideShadows: true,
+};
+
+export const stylesHomePageSwiperSlideBox = {
+  overflow: 'hidden',
+  borderRadius: 2,
+  boxShadow: 6,
+  cursor: 'pointer',
+  transition: 'transform 0.3s ease-in-out',
+};
+
+export const stylesHomePageSwiperSlideImg = {
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+  display: 'block',
 };
 
 export const skeletonHomePageStyles = {

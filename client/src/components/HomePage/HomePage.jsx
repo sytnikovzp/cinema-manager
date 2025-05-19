@@ -1,15 +1,26 @@
+/* eslint-disable import/no-unresolved */
 import { useContext, useEffect } from 'react';
-import Carousel from 'react-material-ui-carousel';
 import { Link } from 'react-router-dom';
+import { Autoplay, EffectCoverflow } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 import Box from '@mui/material/Box';
 
 import usePagination from '../../hooks/usePagination';
 
-import { carouselStyles } from '../../services/styleService';
+import {
+  stylesHomePageAutoplayConfig,
+  stylesHomePageBox,
+  stylesHomePageCoverflowEffect,
+  stylesHomePageSwiperSlideBox,
+  stylesHomePageSwiperSlideImg,
+} from '../../services/styleService';
 
 import SnackbarContext from '../../contexts/SnackbarContext';
 import HomePageSkeleton from '../SkeletonLoader/HomePageSkeleton';
+
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
 
 const ITEMS_PER_PAGE = 15;
 
@@ -31,26 +42,34 @@ function HomePage() {
   const filteredMovies = movies.filter((movie) => movie.poster);
   const lastMovies = filteredMovies.slice(0, ITEMS_PER_PAGE);
 
-  return (
-    <>
-      {loading ? (
-        <HomePageSkeleton />
-      ) : (
-        <Carousel stopAutoPlayOnHover>
-          {lastMovies.map((movie) => (
-            <Box key={movie.uuid} style={carouselStyles.imgContainerStyle}>
+  return loading ? (
+    <HomePageSkeleton />
+  ) : (
+    <Box sx={stylesHomePageBox}>
+      <Swiper
+        autoplay={stylesHomePageAutoplayConfig}
+        centeredSlides={true}
+        coverflowEffect={stylesHomePageCoverflowEffect}
+        effect='coverflow'
+        loop={true}
+        modules={[Autoplay, EffectCoverflow]}
+        slidesPerView={2}
+      >
+        {lastMovies.map((movie) => (
+          <SwiperSlide key={movie.uuid}>
+            <Box sx={stylesHomePageSwiperSlideBox}>
               <Link to={`/movies/${movie.uuid}`}>
                 <img
                   alt={movie.title}
                   src={movie.poster}
-                  style={carouselStyles.imgStyle}
+                  style={stylesHomePageSwiperSlideImg}
                 />
               </Link>
             </Box>
-          ))}
-        </Carousel>
-      )}
-    </>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </Box>
   );
 }
 
