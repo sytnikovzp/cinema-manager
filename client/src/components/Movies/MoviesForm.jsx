@@ -1,8 +1,9 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { getYear } from 'date-fns';
+import { enGB } from 'date-fns/locale';
 import { Field, FieldArray, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import dayjs from 'dayjs';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -15,9 +16,9 @@ import Stepper from '@mui/material/Stepper';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -242,31 +243,39 @@ function MovieForm() {
                 setFieldValue={setFieldValue}
               />
 
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                  label='Release year'
-                  maxDate={dayjs().year(dayjs().year())}
-                  minDate={dayjs().year(1950)}
-                  name='date'
-                  slotProps={{
-                    textField: {
-                      error: touched.releaseYear && Boolean(errors.releaseYear),
-                      helperText: touched.releaseYear && errors.releaseYear,
-                    },
-                    field: {
-                      clearable: true,
-                      onClear: () => setFieldValue('releaseYear', ''),
-                    },
-                  }}
-                  sx={{ width: '330px' }}
-                  value={
-                    values.releaseYear ? dayjs().year(values.releaseYear) : null
-                  }
-                  views={['year']}
-                  onChange={(value) =>
-                    setFieldValue('releaseYear', value ? value.year() : '')
-                  }
-                />
+              <LocalizationProvider
+                adapterLocale={enGB}
+                dateAdapter={AdapterDateFns}
+              >
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DatePicker
+                    label='Release year'
+                    maxDate={new Date(getYear(new Date()), 11, 31)}
+                    minDate={new Date(1900, 0, 1)}
+                    name='date'
+                    slotProps={{
+                      textField: {
+                        error:
+                          touched.releaseYear && Boolean(errors.releaseYear),
+                        helperText: touched.releaseYear && errors.releaseYear,
+                      },
+                      field: {
+                        clearable: true,
+                        onClear: () => setFieldValue('releaseYear', ''),
+                      },
+                    }}
+                    sx={{ width: '330px' }}
+                    value={
+                      values.releaseYear
+                        ? new Date(values.releaseYear, 0, 1)
+                        : null
+                    }
+                    views={['year']}
+                    onChange={(value) =>
+                      setFieldValue('releaseYear', value ? getYear(value) : '')
+                    }
+                  />
+                </LocalizationProvider>
               </LocalizationProvider>
             </Box>
             <Box sx={formItemStyle}>

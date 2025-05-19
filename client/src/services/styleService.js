@@ -116,7 +116,7 @@ export const addButtonFormStyle = {
 // *list components
 
 export const scrollListBoxStyle = {
-  height: '65vh',
+  minHeight: '55vh',
   overflowY: 'auto',
 };
 
@@ -127,14 +127,14 @@ export const itemListStyle = {
 };
 
 export const scrollServicesListBoxStyle = {
-  height: '56vh',
+  height: '45vh',
   overflowY: 'auto',
 };
 
 // *item components
 
 export const scrollItemBoxStyle = {
-  height: '65vh',
+  height: '55vh',
   overflowY: 'auto',
 };
 

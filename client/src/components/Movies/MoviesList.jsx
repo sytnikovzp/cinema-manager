@@ -164,7 +164,7 @@ function MoviesList() {
         </List>
       </Box>
 
-      <Stack alignItems='center' marginTop={2} spacing={2}>
+      <Stack alignItems='center' spacing={2}>
         <Pagination
           color='primary'
           count={Math.ceil(totalItems / itemsPerPage)}

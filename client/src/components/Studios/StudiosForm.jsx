@@ -1,8 +1,9 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { format, isBefore, parse } from 'date-fns';
+import { enGB } from 'date-fns/locale';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import dayjs from 'dayjs';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -11,9 +12,9 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import BackspaceIcon from '@mui/icons-material/Backspace';
@@ -145,10 +146,10 @@ function StudioForm() {
             setFieldValue={setFieldValue}
           />
 
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <LocalizationProvider dateAdapter={AdapterDateFns} locale={enGB}>
             <DatePicker
               label='Foundation year'
-              maxDate={dayjs().year(dayjs().year())}
+              maxDate={new Date()}
               name='foundationYear'
               slotProps={{
                 textField: {
@@ -162,14 +163,17 @@ function StudioForm() {
                 },
               }}
               sx={{ width: '330px' }}
+              views={['year']}
               value={
                 values.foundationYear
-                  ? dayjs().year(values.foundationYear)
+                  ? new Date(values.foundationYear, 0, 1)
                   : null
               }
-              views={['year']}
               onChange={(value) =>
-                setFieldValue('foundationYear', value ? value.year() : '')
+                setFieldValue(
+                  'foundationYear',
+                  value ? value.getFullYear() : ''
+                )
               }
             />
           </LocalizationProvider>

@@ -1,8 +1,9 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { format, isBefore, parse } from 'date-fns';
+import { enGB } from 'date-fns/locale';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import dayjs from 'dayjs';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -11,9 +12,9 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import BackspaceIcon from '@mui/icons-material/Backspace';
@@ -43,8 +44,6 @@ import {
 
 import SnackbarContext from '../../contexts/SnackbarContext';
 import BasicAutocompleteField from '../Autocomplete/BasicAutocompleteField';
-
-import 'dayjs/locale/en-gb';
 
 function DirectorForm() {
   const { uuid } = useParams();
@@ -150,12 +149,12 @@ function DirectorForm() {
         </Box>
         <Box sx={formItemStyle}>
           <LocalizationProvider
-            adapterLocale='en-gb'
-            dateAdapter={AdapterDayjs}
+            adapterLocale={enGB}
+            dateAdapter={AdapterDateFns}
           >
             <DatePicker
               label='Birth date'
-              maxDate={dayjs()}
+              maxDate={new Date()}
               name='birthDate'
               slotProps={{
                 textField: {
@@ -172,18 +171,25 @@ function DirectorForm() {
               }}
               sx={{ width: '100%' }}
               value={
-                values.birthDate ? dayjs(values.birthDate, 'YYYY-MM-DD') : null
+                values.birthDate
+                  ? parse(values.birthDate, 'dd MMMM yyyy', new Date(), {
+                      locale: enGB,
+                    })
+                  : null
               }
               views={['year', 'month', 'day']}
               onChange={(value) => {
-                setFieldValue(
-                  'birthDate',
-                  value ? value.format('YYYY-MM-DD') : ''
-                );
+                const formatted = value ? format(value, 'dd MMMM yyyy') : '';
+                setFieldValue('birthDate', formatted);
                 if (
                   value &&
                   values.deathDate &&
-                  dayjs(values.deathDate).isBefore(value)
+                  isBefore(
+                    parse(values.deathDate, 'dd MMMM yyyy', new Date(), {
+                      locale: enGB,
+                    }),
+                    value
+                  )
                 ) {
                   setFieldValue('deathDate', '');
                 }
@@ -192,8 +198,14 @@ function DirectorForm() {
 
             <DatePicker
               label='Death date'
-              maxDate={dayjs()}
-              minDate={values.birthDate ? dayjs(values.birthDate) : null}
+              maxDate={new Date()}
+              minDate={
+                values.birthDate
+                  ? parse(values.birthDate, 'dd MMMM yyyy', new Date(), {
+                      locale: enGB,
+                    })
+                  : null
+              }
               name='deathDate'
               size='small'
               slotProps={{
@@ -211,13 +223,17 @@ function DirectorForm() {
               }}
               sx={{ width: '100%' }}
               value={
-                values.deathDate ? dayjs(values.deathDate, 'YYYY-MM-DD') : null
+                values.deathDate
+                  ? parse(values.deathDate, 'dd MMMM yyyy', new Date(), {
+                      locale: enGB,
+                    })
+                  : null
               }
               views={['year', 'month', 'day']}
               onChange={(value) =>
                 setFieldValue(
                   'deathDate',
-                  value ? value.format('YYYY-MM-DD') : ''
+                  value ? format(value, 'dd MMMM yyyy') : ''
                 )
               }
             />
