@@ -2,9 +2,10 @@ const { Country } = require('../db/models');
 
 const { notFound, badRequest } = require('../errors/generalErrors');
 const { formatDateTime } = require('../utils/sharedFunctions');
+const { isValidUUID } = require('../utils/validators');
 
 const formatCountryData = (country) => ({
-  id: country.id,
+  uuid: country.uuid,
   title: country.title,
   flag: country.flag || '',
   createdAt: formatDateTime(country.createdAt),
@@ -14,17 +15,17 @@ const formatCountryData = (country) => ({
 class CountriesService {
   static async getAllCountries(limit, offset) {
     const foundCountries = await Country.findAll({
-      attributes: ['id', 'title', 'flag'],
+      attributes: ['uuid', 'title', 'flag'],
       raw: true,
       limit,
       offset,
-      order: [['id', 'DESC']],
+      order: [['uuid', 'DESC']],
     });
     if (!foundCountries.length) {
       throw notFound('Countries not found');
     }
     const allCountries = foundCountries.map((country) => ({
-      id: country.id,
+      uuid: country.uuid,
       title: country.title,
       flag: country.flag || '',
     }));
@@ -35,8 +36,11 @@ class CountriesService {
     };
   }
 
-  static async getCountryById(id) {
-    const foundCountry = await Country.findByPk(id);
+  static async getCountryByUuid(uuid) {
+    if (!isValidUUID(uuid)) {
+      throw badRequest('Invalid UUID format');
+    }
+    const foundCountry = await Country.findByPk(uuid);
     if (!foundCountry) {
       throw notFound('Country not found');
     }
@@ -60,8 +64,11 @@ class CountriesService {
     return formatCountryData(newCountry);
   }
 
-  static async updateCountry(id, title, flagValue, transaction) {
-    const foundCountry = await Country.findByPk(id);
+  static async updateCountry(uuid, title, flagValue, transaction) {
+    if (!isValidUUID(uuid)) {
+      throw badRequest('Invalid UUID format');
+    }
+    const foundCountry = await Country.findByPk(uuid);
     if (!foundCountry) {
       throw notFound('Country not found');
     }
@@ -76,7 +83,7 @@ class CountriesService {
         title,
         flag: flagValue || null,
       },
-      { where: { id }, returning: true, transaction }
+      { where: { uuid }, returning: true, transaction }
     );
     if (!affectedRows) {
       throw badRequest('No data has been updated for this country');
@@ -84,13 +91,16 @@ class CountriesService {
     return formatCountryData(updatedCountry);
   }
 
-  static async deleteCountry(id, transaction) {
-    const foundCountry = await Country.findByPk(id);
+  static async deleteCountry(uuid, transaction) {
+    if (!isValidUUID(uuid)) {
+      throw badRequest('Invalid UUID format');
+    }
+    const foundCountry = await Country.findByPk(uuid);
     if (!foundCountry) {
       throw notFound('Country not found');
     }
     const deletedCountry = await Country.destroy({
-      where: { id },
+      where: { uuid },
       transaction,
     });
     if (!deletedCountry) {

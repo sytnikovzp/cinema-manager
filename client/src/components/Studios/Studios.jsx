@@ -33,9 +33,12 @@ function Studios() {
       >
         <Routes>
           <Route element={<StudiosList />} path='/' />
-          <Route element={<StudiosItem />} path=':id' />
-          <Route element={<Navigate to={`/studios/new/:id`} />} path='new' />
-          <Route element={<Navigate to={`/studios/edit/:id`} />} path='edit' />
+          <Route element={<StudiosItem />} path=':uuid' />
+          <Route element={<Navigate to={`/studios/new/:uuid`} />} path='new' />
+          <Route
+            element={<Navigate to={`/studios/edit/:uuid`} />}
+            path='edit'
+          />
         </Routes>
       </Paper>
     </Box>

@@ -16,12 +16,12 @@ Content-Type: application/json
   "coatOfArms": ""
 }
 
-### Get location by ID
-GET http://localhost:5000/api/locations/11 HTTP/1.1
+### Get location by UUID
+GET http://localhost:5000/api/locations/68de446d-938a-4c93-bd1f-39b5e602bfbc HTTP/1.1
 Content-Type: application/json
 
-### Edit location by ID
-PATCH http://localhost:5000/api/locations/11 HTTP/1.1
+### Edit location by UUID
+PATCH http://localhost:5000/api/locations/68de446d-938a-4c93-bd1f-39b5e602bfbc HTTP/1.1
 Content-Type: application/json
 
 {
@@ -30,6 +30,6 @@ Content-Type: application/json
   "coatOfArms": ""
 }
 
-### Remove location by ID
-DELETE  http://localhost:5000/api/locations/11 HTTP/1.1
+### Remove location by UUID
+DELETE  http://localhost:5000/api/locations/68de446d-938a-4c93-bd1f-39b5e602bfbc HTTP/1.1
 Content-Type: application/json

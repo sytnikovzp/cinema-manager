@@ -2,9 +2,10 @@ const { Genre } = require('../db/models');
 
 const { notFound, badRequest } = require('../errors/generalErrors');
 const { formatDateTime } = require('../utils/sharedFunctions');
+const { isValidUUID } = require('../utils/validators');
 
 const formatGenreData = (genre) => ({
-  id: genre.id,
+  uuid: genre.uuid,
   title: genre.title,
   logo: genre.logo || '',
   createdAt: formatDateTime(genre.createdAt),
@@ -14,17 +15,17 @@ const formatGenreData = (genre) => ({
 class GenresService {
   static async getAllGenres(limit, offset) {
     const foundGenres = await Genre.findAll({
-      attributes: ['id', 'title', 'logo'],
+      attributes: ['uuid', 'title', 'logo'],
       raw: true,
       limit,
       offset,
-      order: [['id', 'DESC']],
+      order: [['uuid', 'DESC']],
     });
     if (!foundGenres.length) {
       throw notFound('Genres not found');
     }
     const allGenres = foundGenres.map((genre) => ({
-      id: genre.id,
+      uuid: genre.uuid,
       title: genre.title,
       logo: genre.logo || '',
     }));
@@ -35,8 +36,11 @@ class GenresService {
     };
   }
 
-  static async getGenreById(id) {
-    const foundGenre = await Genre.findByPk(id);
+  static async getGenreByUuid(uuid) {
+    if (!isValidUUID(uuid)) {
+      throw badRequest('Invalid UUID format');
+    }
+    const foundGenre = await Genre.findByPk(uuid);
     if (!foundGenre) {
       throw notFound('Genre not found');
     }
@@ -60,8 +64,11 @@ class GenresService {
     return formatGenreData(newGenre);
   }
 
-  static async updateGenre(id, title, logoValue, transaction) {
-    const foundGenre = await Genre.findByPk(id);
+  static async updateGenre(uuid, title, logoValue, transaction) {
+    if (!isValidUUID(uuid)) {
+      throw badRequest('Invalid UUID format');
+    }
+    const foundGenre = await Genre.findByPk(uuid);
     if (!foundGenre) {
       throw notFound('Genre not found');
     }
@@ -76,7 +83,7 @@ class GenresService {
         title,
         logo: logoValue || null,
       },
-      { where: { id }, returning: true, transaction }
+      { where: { uuid }, returning: true, transaction }
     );
     if (!affectedRows) {
       throw badRequest('No data has been updated for this genre');
@@ -84,13 +91,16 @@ class GenresService {
     return formatGenreData(updatedGenre);
   }
 
-  static async deleteGenre(id, transaction) {
-    const foundGenre = await Genre.findByPk(id);
+  static async deleteGenre(uuid, transaction) {
+    if (!isValidUUID(uuid)) {
+      throw badRequest('Invalid UUID format');
+    }
+    const foundGenre = await Genre.findByPk(uuid);
     if (!foundGenre) {
       throw notFound('Genre not found');
     }
     const deletedGenre = await Genre.destroy({
-      where: { id },
+      where: { uuid },
       transaction,
     });
     if (!deletedGenre) {

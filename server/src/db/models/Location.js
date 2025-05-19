@@ -1,15 +1,15 @@
-const { Model } = require('sequelize');
+const { Model, Sequelize } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Location extends Model {
     static associate(models) {
       Location.belongsTo(models.Country, {
-        foreignKey: 'countryId',
+        foreignKey: 'countryUuid',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       });
       Location.hasMany(models.Studio, {
-        foreignKey: 'locationId',
+        foreignKey: 'locationUuid',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       });
@@ -17,6 +17,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   Location.init(
     {
+      uuid: {
+        type: DataTypes.UUID,
+        defaultValue: Sequelize.literal('uuid_generate_v4()'),
+        allowNull: false,
+        primaryKey: true,
+      },
       title: {
         type: DataTypes.STRING(100),
         allowNull: false,
@@ -25,19 +31,16 @@ module.exports = (sequelize, DataTypes) => {
           len: [1, 100],
         },
       },
-      countryId: {
-        type: DataTypes.INTEGER,
+      countryUuid: {
+        type: DataTypes.UUID,
         allowNull: true,
-        validate: {
-          isInt: true,
-        },
       },
       coatOfArms: {
         type: DataTypes.TEXT,
         allowNull: true,
         validate: {
           isUrl: true,
-          len: [0, 200],
+          len: [0, 3000],
         },
       },
     },

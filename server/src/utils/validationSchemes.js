@@ -10,11 +10,12 @@ const STRING_SCHEME = yup
 const TEXT_NULLABLE_SCHEME = yup
   .string('This should be a string')
   .transform((value) => (value === null ? value : value.trim()))
-  .max(200, 'The entered data cannot exceed 200 characters')
+  .max(3000, 'The entered data cannot exceed 3000 characters')
   .nullable();
 
 const NUMBER_NULLABLE_SCHEME = yup
   .number()
+  .transform((value, originalValue) => (originalValue === '' ? null : value))
   .typeError('This must be a number')
   .nullable();
 

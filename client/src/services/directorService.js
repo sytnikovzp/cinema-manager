@@ -5,8 +5,8 @@ export const getAllDirectors = async () => {
   return response.data;
 };
 
-export const getDirectorById = async (id) => {
-  const response = await api.get(`/directors/${id}`);
+export const getDirectorByUuid = async (uuid) => {
+  const response = await api.get(`/directors/${uuid}`);
   return response.data;
 };
 
@@ -17,13 +17,13 @@ export const createDirector = async (directorData) => {
 
 export const updateDirector = async (directorData) => {
   const response = await api.patch(
-    `/directors/${directorData.id}`,
+    `/directors/${directorData.uuid}`,
     directorData
   );
   return response.data;
 };
 
-export const deleteDirector = async (id) => {
-  const response = await api.delete(`/directors/${id}`);
+export const deleteDirector = async (uuid) => {
+  const response = await api.delete(`/directors/${uuid}`);
   return response.data;
 };

@@ -9,8 +9,7 @@ const useFetchData = (url) => {
 
   const fetchData = useCallback(async () => {
     try {
-      const response = await api.get(url);
-
+      const response = await api.get(`${url}?page=1&limit=500`);
       setData(response.data);
     } catch (error) {
       setError(error.message || 'An error occurred');

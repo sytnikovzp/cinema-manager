@@ -19,12 +19,12 @@ Content-Type: application/json
   "biography": ""
 }
 
-### Get director by ID
-GET http://localhost:5000/api/directors/29 HTTP/1.1
+### Get director by UUID
+GET http://localhost:5000/api/directors/3681c74f-ede5-49e2-9223-974776954e8c HTTP/1.1
 Content-Type: application/json
 
-### Edit director by ID
-PATCH http://localhost:5000/api/directors/29 HTTP/1.1
+### Edit director by UUID
+PATCH http://localhost:5000/api/directors/3681c74f-ede5-49e2-9223-974776954e8c HTTP/1.1
 Content-Type: application/json
 
 {
@@ -36,6 +36,6 @@ Content-Type: application/json
   "biography": ""
 }
 
-### Remove director by ID
-DELETE  http://localhost:5000/api/directors/29 HTTP/1.1
+### Remove director by UUID
+DELETE  http://localhost:5000/api/directors/3681c74f-ede5-49e2-9223-974776954e8c HTTP/1.1
 Content-Type: application/json

@@ -30,7 +30,7 @@ import {
 } from '../../services/itemService';
 import {
   createStudio,
-  getStudioById,
+  getStudioByUuid,
   updateStudio,
 } from '../../services/studioService';
 import {
@@ -45,7 +45,7 @@ import SnackbarContext from '../../contexts/SnackbarContext';
 import BasicAutocompleteField from '../Autocomplete/BasicAutocompleteField';
 
 function StudioForm() {
-  const { id } = useParams();
+  const { uuid } = useParams();
   const navigate = useNavigate();
   const [initialValues, setInitialValues] = useState(emptyStudio);
 
@@ -55,28 +55,28 @@ function StudioForm() {
 
   const fetchStudio = useCallback(async () => {
     try {
-      const studio = await getStudioById(id);
+      const studio = await getStudioByUuid(uuid);
       setInitialValues(studio);
     } catch (error) {
       showSnackbar(error.message, 'error');
     }
-  }, [id, showSnackbar]);
+  }, [uuid, showSnackbar]);
 
   useEffect(() => {
-    if (id === ':id') {
+    if (uuid === ':uuid') {
       setInitialValues(emptyStudio);
     } else {
       fetchStudio();
     }
-  }, [id, fetchStudio]);
+  }, [uuid, fetchStudio]);
 
   const handleGoBack = useCallback(() => {
-    if (id === ':id') {
+    if (uuid === ':uuid') {
       navigate(`/studios`);
     } else {
-      navigate(`/studios/${id}`);
+      navigate(`/studios/${uuid}`);
     }
-  }, [id, navigate]);
+  }, [uuid, navigate]);
 
   const sortedLocations = locations
     .slice()
@@ -93,10 +93,10 @@ function StudioForm() {
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        if (values.id) {
+        if (values.uuid) {
           await updateStudio(values);
           showSnackbar('Studio updated successfully!', 'success');
-          navigate(`/studios/${id}`);
+          navigate(`/studios/${uuid}`);
         } else {
           await createStudio(values);
           showSnackbar('Studio created successfully!', 'success');
@@ -106,7 +106,7 @@ function StudioForm() {
         showSnackbar(error.message, 'error');
       }
     },
-    [id, navigate, showSnackbar]
+    [uuid, navigate, showSnackbar]
   );
 
   const renderForm = ({ values, errors, touched, setFieldValue }) => (

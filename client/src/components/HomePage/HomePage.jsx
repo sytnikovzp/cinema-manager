@@ -38,8 +38,8 @@ function HomePage() {
       ) : (
         <Carousel stopAutoPlayOnHover>
           {lastMovies.map((movie) => (
-            <Box key={movie.id} style={carouselStyles.imgContainerStyle}>
-              <Link to={`/movies/${movie.id}`}>
+            <Box key={movie.uuid} style={carouselStyles.imgContainerStyle}>
+              <Link to={`/movies/${movie.uuid}`}>
                 <img
                   alt={movie.title}
                   src={movie.poster}

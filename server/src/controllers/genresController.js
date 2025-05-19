@@ -2,7 +2,7 @@ const { sequelize } = require('../db/models');
 
 const {
   getAllGenres,
-  getGenreById,
+  getGenreByUuid,
   createGenre,
   updateGenre,
   deleteGenre,
@@ -26,19 +26,19 @@ class GenresController {
     }
   }
 
-  static async getGenreById(req, res, next) {
+  static async getGenreByUuid(req, res, next) {
     try {
       const {
-        params: { genreId },
+        params: { genreUuid },
       } = req;
-      const genreById = await getGenreById(genreId);
-      if (genreById) {
-        res.status(200).json(genreById);
+      const genreByUuid = await getGenreByUuid(genreUuid);
+      if (genreByUuid) {
+        res.status(200).json(genreByUuid);
       } else {
         res.status(401);
       }
     } catch (error) {
-      console.error('Get genre by ID error: ', error.message);
+      console.error('Get genre by UUID error: ', error.message);
       next(error);
     }
   }
@@ -68,10 +68,15 @@ class GenresController {
     const transaction = await sequelize.transaction();
     try {
       const {
-        params: { genreId },
+        params: { genreUuid },
         body: { title, logo },
       } = req;
-      const updatedGenre = await updateGenre(genreId, title, logo, transaction);
+      const updatedGenre = await updateGenre(
+        genreUuid,
+        title,
+        logo,
+        transaction
+      );
       if (updatedGenre) {
         await transaction.commit();
         res.status(200).json(updatedGenre);
@@ -90,9 +95,9 @@ class GenresController {
     const transaction = await sequelize.transaction();
     try {
       const {
-        params: { genreId },
+        params: { genreUuid },
       } = req;
-      const deletedGenre = await deleteGenre(genreId, transaction);
+      const deletedGenre = await deleteGenre(genreUuid, transaction);
       if (deletedGenre) {
         await transaction.commit();
         res.status(200).json('OK');

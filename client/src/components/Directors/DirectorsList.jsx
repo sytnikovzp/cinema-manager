@@ -67,10 +67,10 @@ function DirectorsList() {
   }, []);
 
   const handleDeleteDirector = useCallback(
-    async (event, id) => {
+    async (event, uuid) => {
       event.stopPropagation();
       try {
-        await deleteDirector(id);
+        await deleteDirector(uuid);
         refetch();
         showSnackbar('Director deleted successfully!', 'success');
       } catch (error) {
@@ -81,9 +81,9 @@ function DirectorsList() {
   );
 
   const onDelete = useCallback(
-    (id) => (event) => {
+    (uuid) => (event) => {
       event.stopPropagation();
-      handleDeleteDirector(event, id);
+      handleDeleteDirector(event, uuid);
     },
     [handleDeleteDirector]
   );
@@ -121,12 +121,12 @@ function DirectorsList() {
                   </Box>
                 ))
             : directors.map((director) => (
-                <Stack key={director.id} direction='column' marginBottom={1}>
+                <Stack key={director.uuid} direction='column' marginBottom={1}>
                   <ListItem
                     disablePadding
                     component={Link}
                     sx={itemListStyle}
-                    to={`/directors/${director.id}`}
+                    to={`/directors/${director.uuid}`}
                   >
                     <ListItemButton sx={styleListListItemButton}>
                       <ListItemAvatar>
@@ -145,14 +145,14 @@ function DirectorsList() {
                           aria-label='edit'
                           component={Link}
                           edge='end'
-                          to={`/directors/edit/${director.id}`}
+                          to={`/directors/edit/${director.uuid}`}
                         >
                           <EditIcon />
                         </IconButton>
                         <IconButton
                           aria-label='delete'
                           edge='end'
-                          onClick={onDelete(director.id)}
+                          onClick={onDelete(director.uuid)}
                         >
                           <HighlightOffIcon />
                         </IconButton>

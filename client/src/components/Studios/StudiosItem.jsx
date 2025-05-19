@@ -17,7 +17,7 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 import { emptyStudio } from '../../constants';
 
-import { getStudioById } from '../../services/studioService';
+import { getStudioByUuid } from '../../services/studioService';
 import {
   buttonMainStyle,
   itemCardMediaBoxStyle,
@@ -37,7 +37,7 @@ import ItemSkeleton from '../SkeletonLoader/ItemSkeleton';
 import StudiosAbout from './StudiosAbout';
 
 function StudiosItem() {
-  const { id } = useParams();
+  const { uuid } = useParams();
   const navigate = useNavigate();
 
   const [studio, setStudio] = useState(emptyStudio);
@@ -48,23 +48,23 @@ function StudiosItem() {
 
   const fetchStudio = useCallback(async () => {
     try {
-      const data = await getStudioById(id);
+      const data = await getStudioByUuid(uuid);
       setStudio(data);
     } catch (error) {
       showSnackbar(error.message, 'error');
     } finally {
       setLoading(false);
     }
-  }, [id, showSnackbar]);
+  }, [uuid, showSnackbar]);
 
   useEffect(() => {
-    if (id === ':id') {
+    if (uuid === ':uuid') {
       setStudio(emptyStudio);
       setLoading(false);
     } else {
       fetchStudio();
     }
-  }, [id, fetchStudio]);
+  }, [uuid, fetchStudio]);
 
   const handleGoBack = useCallback(() => {
     navigate(`/studios`);
@@ -79,9 +79,9 @@ function StudiosItem() {
       ? studio.movies
           .map((movie) => (
             <Link
-              key={movie.id}
+              key={movie.uuid}
               style={itemLinkStyle}
-              to={`/movies/${movie.id}`}
+              to={`/movies/${movie.uuid}`}
             >
               {movie.title}
             </Link>
@@ -108,7 +108,7 @@ function StudiosItem() {
           component={Link}
           startIcon={<EditIcon />}
           sx={buttonMainStyle}
-          to={`/studios/edit/${id}`}
+          to={`/studios/edit/${uuid}`}
           type='button'
           variant='contained'
         >

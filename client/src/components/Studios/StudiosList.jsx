@@ -67,10 +67,10 @@ function StudiosList() {
   }, []);
 
   const handleDeleteStudio = useCallback(
-    async (event, id) => {
+    async (event, uuid) => {
       event.stopPropagation();
       try {
-        await deleteStudio(id);
+        await deleteStudio(uuid);
         refetch();
         showSnackbar('Studio deleted successfully!', 'success');
       } catch (error) {
@@ -81,9 +81,9 @@ function StudiosList() {
   );
 
   const onDelete = useCallback(
-    (id) => (event) => {
+    (uuid) => (event) => {
       event.stopPropagation();
-      handleDeleteStudio(event, id);
+      handleDeleteStudio(event, uuid);
     },
     [handleDeleteStudio]
   );
@@ -121,12 +121,12 @@ function StudiosList() {
                   </Box>
                 ))
             : studios.map((studio) => (
-                <Stack key={studio.id} direction='column' marginBottom={1}>
+                <Stack key={studio.uuid} direction='column' marginBottom={1}>
                   <ListItem
                     disablePadding
                     component={Link}
                     sx={itemListStyle}
-                    to={`/studios/${studio.id}`}
+                    to={`/studios/${studio.uuid}`}
                   >
                     <ListItemButton sx={styleListListItemButton}>
                       <ListItemAvatar>
@@ -145,14 +145,14 @@ function StudiosList() {
                           aria-label='edit'
                           component={Link}
                           edge='end'
-                          to={`/studios/edit/${studio.id}`}
+                          to={`/studios/edit/${studio.uuid}`}
                         >
                           <EditIcon />
                         </IconButton>
                         <IconButton
                           aria-label='delete'
                           edge='end'
-                          onClick={onDelete(studio.id)}
+                          onClick={onDelete(studio.uuid)}
                         >
                           <HighlightOffIcon />
                         </IconButton>

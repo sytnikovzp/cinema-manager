@@ -32,7 +32,7 @@ export const editMovie = createAsyncThunk(
   async (movie, { rejectWithValue }) => {
     try {
       const { data } = await api.patch(
-        `/${MOVIES_SLICE_NAME}/${movie.id}`,
+        `/${MOVIES_SLICE_NAME}/${movie.uuid}`,
         movie
       );
       return data;
@@ -44,10 +44,10 @@ export const editMovie = createAsyncThunk(
 
 export const removeMovie = createAsyncThunk(
   `${MOVIES_SLICE_NAME}/remove`,
-  async (id, { rejectWithValue }) => {
+  async (uuid, { rejectWithValue }) => {
     try {
-      await api.delete(`/${MOVIES_SLICE_NAME}/${id}`);
-      return id;
+      await api.delete(`/${MOVIES_SLICE_NAME}/${uuid}`);
+      return uuid;
     } catch (error) {
       return rejectWithValue(error.message);
     }

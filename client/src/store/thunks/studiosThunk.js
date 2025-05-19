@@ -32,7 +32,7 @@ export const editStudio = createAsyncThunk(
   async (studio, { rejectWithValue }) => {
     try {
       const { data } = await api.patch(
-        `/${STUDIOS_SLICE_NAME}/${studio.id}`,
+        `/${STUDIOS_SLICE_NAME}/${studio.uuid}`,
         studio
       );
       return data;
@@ -44,10 +44,10 @@ export const editStudio = createAsyncThunk(
 
 export const removeStudio = createAsyncThunk(
   `${STUDIOS_SLICE_NAME}/remove`,
-  async (id, { rejectWithValue }) => {
+  async (uuid, { rejectWithValue }) => {
     try {
-      await api.delete(`/${STUDIOS_SLICE_NAME}/${id}`);
-      return id;
+      await api.delete(`/${STUDIOS_SLICE_NAME}/${uuid}`);
+      return uuid;
     } catch (error) {
       return rejectWithValue(error.message);
     }

@@ -5,8 +5,8 @@ export const getAllCountries = async () => {
   return response.data;
 };
 
-export const getCountryById = async (id) => {
-  const response = await api.get(`/countries/${id}`);
+export const getCountryByUuid = async (uuid) => {
+  const response = await api.get(`/countries/${uuid}`);
   return response.data;
 };
 
@@ -16,11 +16,14 @@ export const createCountry = async (countryData) => {
 };
 
 export const updateCountry = async (countryData) => {
-  const response = await api.patch(`/countries/${countryData.id}`, countryData);
+  const response = await api.patch(
+    `/countries/${countryData.uuid}`,
+    countryData
+  );
   return response.data;
 };
 
-export const deleteCountry = async (id) => {
-  const response = await api.delete(`/countries/${id}`);
+export const deleteCountry = async (uuid) => {
+  const response = await api.delete(`/countries/${uuid}`);
   return response.data;
 };

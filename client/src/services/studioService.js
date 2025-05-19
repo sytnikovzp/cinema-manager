@@ -5,8 +5,8 @@ export const getAllStudios = async () => {
   return response.data;
 };
 
-export const getStudioById = async (id) => {
-  const response = await api.get(`/studios/${id}`);
+export const getStudioByUuid = async (uuid) => {
+  const response = await api.get(`/studios/${uuid}`);
   return response.data;
 };
 
@@ -16,11 +16,11 @@ export const createStudio = async (studioData) => {
 };
 
 export const updateStudio = async (studioData) => {
-  const response = await api.patch(`/studios/${studioData.id}`, studioData);
+  const response = await api.patch(`/studios/${studioData.uuid}`, studioData);
   return response.data;
 };
 
-export const deleteStudio = async (id) => {
-  const response = await api.delete(`/studios/${id}`);
+export const deleteStudio = async (uuid) => {
+  const response = await api.delete(`/studios/${uuid}`);
   return response.data;
 };

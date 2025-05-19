@@ -24,27 +24,27 @@ function Services() {
         <Routes>
           <Route element={<ServicesList />} path='/' />
           <Route
-            element={<Navigate to={`/services/new-genres/:id`} />}
+            element={<Navigate to={`/services/new-genres/:uuid`} />}
             path={`new-genres`}
           />
           <Route
-            element={<Navigate to={`/services/edit-genres/:id`} />}
+            element={<Navigate to={`/services/edit-genres/:uuid`} />}
             path={`edit-genres`}
           />
           <Route
-            element={<Navigate to={`/services/new-countries/:id`} />}
+            element={<Navigate to={`/services/new-countries/:uuid`} />}
             path={`new-countries`}
           />
           <Route
-            element={<Navigate to={`/services/edit-countries/:id`} />}
+            element={<Navigate to={`/services/edit-countries/:uuid`} />}
             path={`edit-countries`}
           />
           <Route
-            element={<Navigate to={`/services/new-locations/:id`} />}
+            element={<Navigate to={`/services/new-locations/:uuid`} />}
             path={`new-locations`}
           />
           <Route
-            element={<Navigate to={`/services/edit-locations/:id`} />}
+            element={<Navigate to={`/services/edit-locations/:uuid`} />}
             path={`edit-locations`}
           />
         </Routes>

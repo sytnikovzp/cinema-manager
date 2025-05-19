@@ -2,7 +2,7 @@ const { sequelize } = require('../db/models');
 
 const {
   getAllLocations,
-  getLocationById,
+  getLocationByUuid,
   createLocation,
   updateLocation,
   deleteLocation,
@@ -26,19 +26,19 @@ class LocationsController {
     }
   }
 
-  static async getLocationById(req, res, next) {
+  static async getLocationByUuid(req, res, next) {
     try {
       const {
-        params: { locationId },
+        params: { locationUuid },
       } = req;
-      const locationById = await getLocationById(locationId);
-      if (locationById) {
-        res.status(200).json(locationById);
+      const locationByUuid = await getLocationByUuid(locationUuid);
+      if (locationByUuid) {
+        res.status(200).json(locationByUuid);
       } else {
         res.status(401);
       }
     } catch (error) {
-      console.error('Get location by ID error: ', error.message);
+      console.error('Get location by UUID error: ', error.message);
       next(error);
     }
   }
@@ -73,11 +73,11 @@ class LocationsController {
     const transaction = await sequelize.transaction();
     try {
       const {
-        params: { locationId },
+        params: { locationUuid },
         body: { title, country, coatOfArms },
       } = req;
       const updatedLocation = await updateLocation(
-        locationId,
+        locationUuid,
         title,
         country,
         coatOfArms,
@@ -101,9 +101,9 @@ class LocationsController {
     const transaction = await sequelize.transaction();
     try {
       const {
-        params: { locationId },
+        params: { locationUuid },
       } = req;
-      const deletedLocation = await deleteLocation(locationId, transaction);
+      const deletedLocation = await deleteLocation(locationUuid, transaction);
       if (deletedLocation) {
         await transaction.commit();
         res.status(200).json('OK');

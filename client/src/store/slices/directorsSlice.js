@@ -12,7 +12,7 @@ import {
 
 const directorsState = [
   {
-    id: null,
+    uuid: null,
     fullName: '',
     country: '',
     birthDate: '',
@@ -51,14 +51,14 @@ const directorsSlice = createSlice({
     });
     builder.addCase(editDirector.fulfilled, (state, { payload }) => {
       state.directors = state.directors.map((director) =>
-        (director.id === payload.id ? payload : director)
+        (director.uuid === payload.uuid ? payload : director)
       );
       state.status = 'Director updated successfully!';
       state.error = null;
     });
     builder.addCase(removeDirector.fulfilled, (state, { payload }) => {
       state.directors = state.directors.filter(
-        (director) => director.id !== payload
+        (director) => director.uuid !== payload
       );
       state.status = 'Director deleted successfully!';
       state.error = null;

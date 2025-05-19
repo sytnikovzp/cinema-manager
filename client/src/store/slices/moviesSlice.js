@@ -12,7 +12,7 @@ import {
 
 const moviesState = [
   {
-    id: null,
+    uuid: null,
     title: '',
     genre: '',
     releaseYear: '',
@@ -54,13 +54,13 @@ const moviesSlice = createSlice({
     });
     builder.addCase(editMovie.fulfilled, (state, { payload }) => {
       state.movies = state.movies.map((movie) =>
-        (movie.id === payload.id ? payload : movie)
+        (movie.uuid === payload.uuid ? payload : movie)
       );
       state.status = 'Movie updated successfully!';
       state.error = null;
     });
     builder.addCase(removeMovie.fulfilled, (state, { payload }) => {
-      state.movies = state.movies.filter((movie) => movie.id !== payload);
+      state.movies = state.movies.filter((movie) => movie.uuid !== payload);
       state.status = 'Movie deleted successfully!';
       state.error = null;
     });

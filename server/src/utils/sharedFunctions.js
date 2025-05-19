@@ -72,7 +72,7 @@ const getRecordByTitle = async function (Model, title) {
     return null;
   }
   const record = await Model.findOne({
-    attributes: ['id', 'title'],
+    attributes: ['uuid', 'title'],
     raw: true,
     where: { title },
   });

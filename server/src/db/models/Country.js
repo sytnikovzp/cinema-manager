@@ -1,20 +1,20 @@
-const { Model } = require('sequelize');
+const { Model, Sequelize } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Country extends Model {
     static associate(models) {
       Country.hasMany(models.Actor, {
-        foreignKey: 'countryId',
+        foreignKey: 'countryUuid',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       });
       Country.hasMany(models.Director, {
-        foreignKey: 'countryId',
+        foreignKey: 'countryUuid',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       });
       Country.hasMany(models.Location, {
-        foreignKey: 'countryId',
+        foreignKey: 'countryUuid',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       });
@@ -22,6 +22,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   Country.init(
     {
+      uuid: {
+        type: DataTypes.UUID,
+        defaultValue: Sequelize.literal('uuid_generate_v4()'),
+        allowNull: false,
+        primaryKey: true,
+      },
       title: {
         type: DataTypes.STRING(100),
         allowNull: false,
@@ -35,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         validate: {
           isUrl: true,
-          len: [0, 200],
+          len: [0, 3000],
         },
       },
     },

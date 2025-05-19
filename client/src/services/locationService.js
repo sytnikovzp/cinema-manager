@@ -5,8 +5,8 @@ export const getAllLocations = async () => {
   return response.data;
 };
 
-export const getLocationById = async (id) => {
-  const response = await api.get(`/locations/${id}`);
+export const getLocationByUuid = async (uuid) => {
+  const response = await api.get(`/locations/${uuid}`);
   return response.data;
 };
 
@@ -17,13 +17,13 @@ export const createLocation = async (locationData) => {
 
 export const updateLocation = async (locationData) => {
   const response = await api.patch(
-    `/locations/${locationData.id}`,
+    `/locations/${locationData.uuid}`,
     locationData
   );
   return response.data;
 };
 
-export const deleteLocation = async (id) => {
-  const response = await api.delete(`/locations/${id}`);
+export const deleteLocation = async (uuid) => {
+  const response = await api.delete(`/locations/${uuid}`);
   return response.data;
 };

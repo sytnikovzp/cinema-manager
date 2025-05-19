@@ -39,7 +39,7 @@ import {
 } from '../../services/itemService';
 import {
   createMovie,
-  getMovieById,
+  getMovieByUuid,
   updateMovie,
 } from '../../services/movieService';
 import {
@@ -57,7 +57,7 @@ import BasicAutocompleteField from '../Autocomplete/BasicAutocompleteField';
 import FieldArrayAutocompleteField from '../Autocomplete/FieldArrayAutocompleteField';
 
 function MovieForm() {
-  const { id } = useParams();
+  const { uuid } = useParams();
   const navigate = useNavigate();
 
   const [initialValues, setInitialValues] = useState(emptyMovie);
@@ -72,28 +72,28 @@ function MovieForm() {
 
   const fetchMovie = useCallback(async () => {
     try {
-      const movie = await getMovieById(id);
+      const movie = await getMovieByUuid(uuid);
       setInitialValues(movie);
     } catch (error) {
       showSnackbar(error.message, 'error');
     }
-  }, [id, showSnackbar]);
+  }, [uuid, showSnackbar]);
 
   useEffect(() => {
-    if (id === ':id') {
+    if (uuid === ':uuid') {
       setInitialValues(emptyMovie);
     } else {
       fetchMovie();
     }
-  }, [id, fetchMovie]);
+  }, [uuid, fetchMovie]);
 
   const handleGoBack = useCallback(() => {
-    if (id === ':id') {
+    if (uuid === ':uuid') {
       navigate(`/movies`);
     } else {
-      navigate(`/movies/${id}`);
+      navigate(`/movies/${uuid}`);
     }
-  }, [id, navigate]);
+  }, [uuid, navigate]);
 
   const optionsForEntities = (entities, key) =>
     entities.length > 1
@@ -172,10 +172,10 @@ function MovieForm() {
       };
 
       try {
-        if (cleanValues.id) {
+        if (cleanValues.uuid) {
           await updateMovie(cleanValues);
           showSnackbar('Movie updated successfully!', 'success');
-          navigate(`/movies/${id}`);
+          navigate(`/movies/${uuid}`);
         } else {
           await createMovie(cleanValues);
           showSnackbar('Movie created successfully!', 'success');
@@ -185,7 +185,7 @@ function MovieForm() {
         showSnackbar(error.message, 'error');
       }
     },
-    [id, navigate, showSnackbar]
+    [uuid, navigate, showSnackbar]
   );
 
   const renderForm = ({

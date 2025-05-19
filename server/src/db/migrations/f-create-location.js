@@ -1,10 +1,13 @@
 /* eslint-disable camelcase */
 module.exports = {
   async up(queryInterface, Sequelize) {
+    await queryInterface.sequelize.query(
+      'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'
+    );
     await queryInterface.createTable('locations', {
-      id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
+      uuid: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.literal('uuid_generate_v4()'),
         allowNull: false,
         primaryKey: true,
       },
@@ -13,12 +16,12 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
-      country_id: {
-        type: Sequelize.INTEGER,
+      country_uuid: {
+        type: Sequelize.UUID,
         allowNull: true,
         references: {
           model: 'countries',
-          key: 'id',
+          key: 'uuid',
         },
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
@@ -38,6 +41,9 @@ module.exports = {
     });
   },
   async down(queryInterface) {
+    await queryInterface.sequelize.query(
+      'DROP EXTENSION IF EXISTS "uuid-ossp";'
+    );
     await queryInterface.dropTable('locations');
   },
 };

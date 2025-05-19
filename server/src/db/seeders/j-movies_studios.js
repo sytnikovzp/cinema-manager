@@ -7,29 +7,29 @@ module.exports = {
   async up(queryInterface) {
     const { movies_studios } = await POSTGRES_DATA();
     const [movies, studios] = await Promise.all([
-      Movie.findAll({ attributes: ['id', 'title'] }),
-      Studio.findAll({ attributes: ['id', 'title'] }),
+      Movie.findAll({ attributes: ['uuid', 'title'] }),
+      Studio.findAll({ attributes: ['uuid', 'title'] }),
     ]);
     const movieMap = movies.reduce((acc, movie) => {
-      acc[movie.title] = movie.id;
+      acc[movie.title] = movie.uuid;
       return acc;
     }, {});
     const studioMap = studios.reduce((acc, studio) => {
-      acc[studio.title] = studio.id;
+      acc[studio.title] = studio.uuid;
       return acc;
     }, {});
     const updatedMovies_Studios = movies_studios
       .map(({ movie, studio, ...rest }) => {
-        const movie_id = movieMap[movie];
-        const studio_id = studioMap[studio];
-        if (movie_id && studio_id) {
-          return { movie_id, studio_id, ...rest };
+        const movie_uuid = movieMap[movie];
+        const studio_uuid = studioMap[studio];
+        if (movie_uuid && studio_uuid) {
+          return { movie_uuid, studio_uuid, ...rest };
         }
-        if (!movie_id && !studio_id) {
+        if (!movie_uuid && !studio_uuid) {
           console.warn(`Not found: movie "${movie}" AND studio "${studio}"`);
-        } else if (!movie_id) {
+        } else if (!movie_uuid) {
           console.warn(`Not found: movie "${movie}"`);
-        } else if (!studio_id) {
+        } else if (!studio_uuid) {
           console.warn(`Not found: studio "${studio}"`);
         }
         return null;

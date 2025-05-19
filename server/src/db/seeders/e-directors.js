@@ -7,16 +7,16 @@ module.exports = {
   async up(queryInterface) {
     const { directors } = await POSTGRES_DATA();
     const countries = await Country.findAll({
-      attributes: ['id', 'title'],
+      attributes: ['uuid', 'title'],
     });
     const countryMap = countries.reduce((acc, country) => {
-      acc[country.title] = country.id;
+      acc[country.title] = country.uuid;
       return acc;
     }, {});
     const updatedDirectors = directors.map((director) => {
-      const countryId = countryMap[director.country];
-      if (countryId) {
-        director.country_id = countryId;
+      const countryUuid = countryMap[director.country];
+      if (countryUuid) {
+        director.country_uuid = countryUuid;
       }
       delete director.country;
       return director;

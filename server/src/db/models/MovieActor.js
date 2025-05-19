@@ -4,12 +4,12 @@ module.exports = (sequelize, DataTypes) => {
   class MovieActor extends Model {
     static associate(models) {
       MovieActor.belongsTo(models.Movie, {
-        foreignKey: 'movieId',
+        foreignKey: 'movieUuid',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       });
       MovieActor.belongsTo(models.Actor, {
-        foreignKey: 'actorId',
+        foreignKey: 'actorUuid',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       });
@@ -17,28 +17,22 @@ module.exports = (sequelize, DataTypes) => {
   }
   MovieActor.init(
     {
-      movieId: {
-        type: DataTypes.INTEGER,
+      movieUuid: {
+        type: DataTypes.UUID,
         allowNull: false,
         primaryKey: true,
         references: {
           model: 'movies',
-          key: 'id',
-        },
-        validate: {
-          isInt: true,
+          key: 'uuid',
         },
       },
-      actorId: {
-        type: DataTypes.INTEGER,
+      actorUuid: {
+        type: DataTypes.UUID,
         allowNull: false,
         primaryKey: true,
         references: {
           model: 'actors',
-          key: 'id',
-        },
-        validate: {
-          isInt: true,
+          key: 'uuid',
         },
       },
     },

@@ -2,7 +2,7 @@ const { sequelize } = require('../db/models');
 
 const {
   getAllCountries,
-  getCountryById,
+  getCountryByUuid,
   createCountry,
   updateCountry,
   deleteCountry,
@@ -26,19 +26,19 @@ class CountriesController {
     }
   }
 
-  static async getCountryById(req, res, next) {
+  static async getCountryByUuid(req, res, next) {
     try {
       const {
-        params: { countryId },
+        params: { countryUuid },
       } = req;
-      const countryById = await getCountryById(countryId);
-      if (countryById) {
-        res.status(200).json(countryById);
+      const countryByUuid = await getCountryByUuid(countryUuid);
+      if (countryByUuid) {
+        res.status(200).json(countryByUuid);
       } else {
         res.status(401);
       }
     } catch (error) {
-      console.error('Get country by ID error: ', error.message);
+      console.error('Get country by UUID error: ', error.message);
       next(error);
     }
   }
@@ -68,11 +68,11 @@ class CountriesController {
     const transaction = await sequelize.transaction();
     try {
       const {
-        params: { countryId },
+        params: { countryUuid },
         body: { title, flag },
       } = req;
       const updatedCountry = await updateCountry(
-        countryId,
+        countryUuid,
         title,
         flag,
         transaction
@@ -95,9 +95,9 @@ class CountriesController {
     const transaction = await sequelize.transaction();
     try {
       const {
-        params: { countryId },
+        params: { countryUuid },
       } = req;
-      const deletedCountry = await deleteCountry(countryId, transaction);
+      const deletedCountry = await deleteCountry(countryUuid, transaction);
       if (deletedCountry) {
         await transaction.commit();
         res.status(200).json('OK');

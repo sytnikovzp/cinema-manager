@@ -17,7 +17,7 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 import { emptyActor } from '../../constants';
 
-import { getActorById } from '../../services/actorService';
+import { getActorByUuid } from '../../services/actorService';
 import { calculateAge } from '../../services/itemService';
 import {
   buttonMainStyle,
@@ -38,7 +38,7 @@ import ItemSkeleton from '../SkeletonLoader/ItemSkeleton';
 import ActorsBiography from './ActorsBiography';
 
 function ActorsItem() {
-  const { id } = useParams();
+  const { uuid } = useParams();
   const navigate = useNavigate();
 
   const [actor, setActor] = useState(emptyActor);
@@ -49,23 +49,23 @@ function ActorsItem() {
 
   const fetchActor = useCallback(async () => {
     try {
-      const data = await getActorById(id);
+      const data = await getActorByUuid(uuid);
       setActor(data);
     } catch (error) {
       showSnackbar(error.message, 'error');
     } finally {
       setLoading(false);
     }
-  }, [id, showSnackbar]);
+  }, [uuid, showSnackbar]);
 
   useEffect(() => {
-    if (id === ':id') {
+    if (uuid === ':uuid') {
       setActor(emptyActor);
       setLoading(false);
     } else {
       fetchActor();
     }
-  }, [id, fetchActor]);
+  }, [uuid, fetchActor]);
 
   const handleGoBack = useCallback(() => {
     navigate(`/actors`);
@@ -80,9 +80,9 @@ function ActorsItem() {
       ? actor.movies
           .map((movie) => (
             <Link
-              key={movie.id}
+              key={movie.uuid}
               style={itemLinkStyle}
-              to={`/movies/${movie.id}`}
+              to={`/movies/${movie.uuid}`}
             >
               {movie.title}
             </Link>
@@ -111,7 +111,7 @@ function ActorsItem() {
           component={Link}
           startIcon={<EditIcon />}
           sx={buttonMainStyle}
-          to={`/actors/edit/${id}`}
+          to={`/actors/edit/${uuid}`}
           type='button'
           variant='contained'
         >

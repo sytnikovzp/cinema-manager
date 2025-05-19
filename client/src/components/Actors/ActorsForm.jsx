@@ -25,7 +25,7 @@ import useFetchData from '../../hooks/useFetchData';
 
 import {
   createActor,
-  getActorById,
+  getActorByUuid,
   updateActor,
 } from '../../services/actorService';
 import {
@@ -47,7 +47,7 @@ import BasicAutocompleteField from '../Autocomplete/BasicAutocompleteField';
 import 'dayjs/locale/en-gb';
 
 function ActorForm() {
-  const { id } = useParams();
+  const { uuid } = useParams();
   const navigate = useNavigate();
   const [initialValues, setInitialValues] = useState(emptyActor);
 
@@ -57,28 +57,28 @@ function ActorForm() {
 
   const fetchActor = useCallback(async () => {
     try {
-      const actor = await getActorById(id);
+      const actor = await getActorByUuid(uuid);
       setInitialValues(actor);
     } catch (error) {
       showSnackbar(error.message, 'error');
     }
-  }, [id, showSnackbar]);
+  }, [uuid, showSnackbar]);
 
   useEffect(() => {
-    if (id === ':id') {
+    if (uuid === ':uuid') {
       setInitialValues(emptyActor);
     } else {
       fetchActor();
     }
-  }, [id, fetchActor]);
+  }, [uuid, fetchActor]);
 
   const handleGoBack = useCallback(() => {
-    if (id === ':id') {
+    if (uuid === ':uuid') {
       navigate(`/actors`);
     } else {
-      navigate(`/actors/${id}`);
+      navigate(`/actors/${uuid}`);
     }
-  }, [id, navigate]);
+  }, [uuid, navigate]);
 
   const sortedCountries = countries
     .slice()
@@ -96,10 +96,10 @@ function ActorForm() {
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        if (values.id) {
+        if (values.uuid) {
           await updateActor(values);
           showSnackbar('Actor updated successfully!', 'success');
-          navigate(`/actors/${id}`);
+          navigate(`/actors/${uuid}`);
         } else {
           await createActor(values);
           showSnackbar('Actor created successfully!', 'success');
@@ -109,7 +109,7 @@ function ActorForm() {
         showSnackbar(error.message, 'error');
       }
     },
-    [id, navigate, showSnackbar]
+    [uuid, navigate, showSnackbar]
   );
 
   const renderForm = ({ values, errors, touched, setFieldValue }) => (

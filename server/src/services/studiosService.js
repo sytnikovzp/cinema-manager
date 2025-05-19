@@ -5,9 +5,10 @@ const {
   formatDateTime,
   getRecordByTitle,
 } = require('../utils/sharedFunctions');
+const { isValidUUID } = require('../utils/validators');
 
 const formatStudioData = (studio) => ({
-  id: studio.id,
+  uuid: studio.uuid,
   title: studio.title,
   foundationYear: studio.foundationYear || '',
   logo: studio.logo || '',
@@ -20,18 +21,18 @@ const formatStudioData = (studio) => ({
 class StudiosService {
   static async getAllStudios(limit, offset) {
     const foundStudios = await Studio.findAll({
-      attributes: ['id', 'title', 'foundationYear', 'logo'],
+      attributes: ['uuid', 'title', 'foundationYear', 'logo'],
       raw: true,
       limit,
       offset,
-      order: [['id', 'DESC']],
+      order: [['uuid', 'DESC']],
     });
     if (!foundStudios.length) {
       throw notFound('Studios not found');
     }
     const allStudios = foundStudios.map(
-      ({ id, title, foundationYear, logo }) => ({
-        id,
+      ({ uuid, title, foundationYear, logo }) => ({
+        uuid,
         title,
         foundationYear: foundationYear || '',
         logo: logo || '',
@@ -44,18 +45,21 @@ class StudiosService {
     };
   }
 
-  static async getStudioById(id) {
-    const foundStudio = await Studio.findByPk(id, {
-      attributes: { exclude: ['locationId'] },
+  static async getStudioByUuid(uuid) {
+    if (!isValidUUID(uuid)) {
+      throw badRequest('Invalid UUID format');
+    }
+    const foundStudio = await Studio.findByPk(uuid, {
+      attributes: { exclude: ['locationUuid'] },
       include: [
         {
           model: Location,
-          attributes: ['id', 'title'],
-          include: [{ model: Country, attributes: ['id', 'title'] }],
+          attributes: ['uuid', 'title'],
+          include: [{ model: Country, attributes: ['uuid', 'title'] }],
         },
         {
           model: Movie,
-          attributes: ['id', 'title'],
+          attributes: ['uuid', 'title'],
           through: { attributes: [] },
         },
       ],
@@ -65,19 +69,19 @@ class StudiosService {
     }
     const studioData = {
       ...foundStudio.toJSON(),
-      locationId: foundStudio.Location?.id || '',
+      locationUuid: foundStudio.Location?.uuid || '',
       locationTitle: foundStudio.Location?.title || '',
-      countryId: foundStudio.Location?.Country?.id || '',
+      countryUuid: foundStudio.Location?.Country?.uuid || '',
       countryTitle: foundStudio.Location?.Country?.title || '',
     };
     return {
       ...formatStudioData(studioData),
       location: {
-        id: studioData.locationId,
+        uuid: studioData.locationUuid,
         title: studioData.locationTitle,
       },
       country: {
-        id: studioData.countryId,
+        uuid: studioData.countryUuid,
         title: studioData.countryTitle,
       },
     };
@@ -103,7 +107,7 @@ class StudiosService {
         foundationYear: foundationYearValue || null,
         logo: logoValue || null,
         about: aboutValue || null,
-        locationId: locationRecord?.id || null,
+        locationUuid: locationRecord?.uuid || null,
       },
       { transaction, returning: true }
     );
@@ -114,7 +118,7 @@ class StudiosService {
   }
 
   static async updateStudio(
-    id,
+    uuid,
     title,
     locationValue,
     foundationYearValue,
@@ -122,7 +126,10 @@ class StudiosService {
     aboutValue,
     transaction
   ) {
-    const foundStudio = await Studio.findByPk(id);
+    if (!isValidUUID(uuid)) {
+      throw badRequest('Invalid UUID format');
+    }
+    const foundStudio = await Studio.findByPk(uuid);
     if (!foundStudio) {
       throw notFound('Studio not found');
     }
@@ -141,9 +148,9 @@ class StudiosService {
         foundationYear: foundationYearValue || null,
         logo: logoValue || null,
         about: aboutValue || null,
-        locationId: locationRecord?.id || null,
+        locationUuid: locationRecord?.uuid || null,
       },
-      { where: { id }, returning: true, transaction }
+      { where: { uuid }, returning: true, transaction }
     );
     if (!affectedRows) {
       throw badRequest('No data has been updated for this studio');
@@ -151,13 +158,16 @@ class StudiosService {
     return formatStudioData(updatedStudio);
   }
 
-  static async deleteStudio(id, transaction) {
-    const foundStudio = await Studio.findByPk(id);
+  static async deleteStudio(uuid, transaction) {
+    if (!isValidUUID(uuid)) {
+      throw badRequest('Invalid UUID format');
+    }
+    const foundStudio = await Studio.findByPk(uuid);
     if (!foundStudio) {
       throw notFound('Studio not found');
     }
     const deletedStudio = await Studio.destroy({
-      where: { id },
+      where: { uuid },
       transaction,
     });
     if (!deletedStudio) {

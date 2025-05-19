@@ -32,7 +32,7 @@ export const editActor = createAsyncThunk(
   async (actor, { rejectWithValue }) => {
     try {
       const { data } = await api.patch(
-        `/${ACTORS_SLICE_NAME}/${actor.id}`,
+        `/${ACTORS_SLICE_NAME}/${actor.uuid}`,
         actor
       );
       return data;
@@ -44,10 +44,10 @@ export const editActor = createAsyncThunk(
 
 export const removeActor = createAsyncThunk(
   `${ACTORS_SLICE_NAME}/remove`,
-  async (id, { rejectWithValue }) => {
+  async (uuid, { rejectWithValue }) => {
     try {
-      await api.delete(`/${ACTORS_SLICE_NAME}/${id}`);
-      return id;
+      await api.delete(`/${ACTORS_SLICE_NAME}/${uuid}`);
+      return uuid;
     } catch (error) {
       return rejectWithValue(error.message);
     }

@@ -17,7 +17,7 @@ import VideoCallIcon from '@mui/icons-material/VideoCall';
 
 import { emptyMovie } from '../../constants';
 
-import { getMovieById } from '../../services/movieService';
+import { getMovieByUuid } from '../../services/movieService';
 import {
   buttonMainStyle,
   itemCardMediaBoxStyle,
@@ -38,7 +38,7 @@ import ItemSkeleton from '../SkeletonLoader/ItemSkeleton';
 import MoviesPlayer from './MoviesPlayer';
 
 function MoviesItem() {
-  const { id } = useParams();
+  const { uuid } = useParams();
   const navigate = useNavigate();
 
   const [movie, setMovie] = useState(emptyMovie);
@@ -49,23 +49,23 @@ function MoviesItem() {
 
   const fetchMovie = useCallback(async () => {
     try {
-      const data = await getMovieById(id);
+      const data = await getMovieByUuid(uuid);
       setMovie(data);
     } catch (error) {
       showSnackbar(error.message, 'error');
     } finally {
       setLoading(false);
     }
-  }, [id, showSnackbar]);
+  }, [uuid, showSnackbar]);
 
   useEffect(() => {
-    if (id === ':id') {
+    if (uuid === ':uuid') {
       setMovie(emptyMovie);
       setLoading(false);
     } else {
       fetchMovie();
     }
-  }, [id, fetchMovie]);
+  }, [uuid, fetchMovie]);
 
   const handleGoBack = useCallback(() => {
     navigate(`/movies`);
@@ -84,9 +84,9 @@ function MoviesItem() {
             }
             return (
               <Link
-                key={studio.id}
+                key={studio.uuid}
                 style={itemLinkStyle}
-                to={`/studios/${studio.id}`}
+                to={`/studios/${studio.uuid}`}
               >
                 {studio.title}
               </Link>
@@ -104,9 +104,9 @@ function MoviesItem() {
             }
             return (
               <Link
-                key={director.id}
+                key={director.uuid}
                 style={itemLinkStyle}
-                to={`/directors/${director.id}`}
+                to={`/directors/${director.uuid}`}
               >
                 {director.fullName}
               </Link>
@@ -124,9 +124,9 @@ function MoviesItem() {
             }
             return (
               <Link
-                key={actor.id}
+                key={actor.uuid}
                 style={itemLinkStyle}
-                to={`/actors/${actor.id}`}
+                to={`/actors/${actor.uuid}`}
               >
                 {actor.fullName}
               </Link>
@@ -154,7 +154,7 @@ function MoviesItem() {
           component={Link}
           startIcon={<EditIcon />}
           sx={buttonMainStyle}
-          to={`/movies/edit/${id}`}
+          to={`/movies/edit/${uuid}`}
           type='button'
           variant='contained'
         >

@@ -2,7 +2,7 @@ const { sequelize } = require('../db/models');
 
 const {
   getAllMovies,
-  getMovieById,
+  getMovieByUuid,
   createMovie,
   updateMovie,
   deleteMovie,
@@ -26,19 +26,19 @@ class MoviesController {
     }
   }
 
-  static async getMovieById(req, res, next) {
+  static async getMovieByUuid(req, res, next) {
     try {
       const {
-        params: { movieId },
+        params: { movieUuid },
       } = req;
-      const movieById = await getMovieById(movieId);
-      if (movieById) {
-        res.status(200).json(movieById);
+      const movieByUuid = await getMovieByUuid(movieUuid);
+      if (movieByUuid) {
+        res.status(200).json(movieByUuid);
       } else {
         res.status(401);
       }
     } catch (error) {
-      console.error('Get movie by ID error: ', error.message);
+      console.error('Get movie by UUID error: ', error.message);
       next(error);
     }
   }
@@ -89,7 +89,7 @@ class MoviesController {
     const transaction = await sequelize.transaction();
     try {
       const {
-        params: { movieId },
+        params: { movieUuid },
         body: {
           title,
           genre,
@@ -103,7 +103,7 @@ class MoviesController {
         },
       } = req;
       const updatedMovie = await updateMovie(
-        movieId,
+        movieUuid,
         title,
         genre,
         releaseYear,
@@ -133,9 +133,9 @@ class MoviesController {
     const transaction = await sequelize.transaction();
     try {
       const {
-        params: { movieId },
+        params: { movieUuid },
       } = req;
-      const deletedMovie = await deleteMovie(movieId, transaction);
+      const deletedMovie = await deleteMovie(movieUuid, transaction);
       if (deletedMovie) {
         await transaction.commit();
         res.status(200).json('OK');

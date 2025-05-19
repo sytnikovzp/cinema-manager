@@ -33,10 +33,13 @@ function Directors() {
       >
         <Routes>
           <Route element={<DirectorsList />} path='/' />
-          <Route element={<DirectorsItem />} path=':id' />
-          <Route element={<Navigate to={`/directors/new/:id`} />} path='new' />
+          <Route element={<DirectorsItem />} path=':uuid' />
           <Route
-            element={<Navigate to={`/directors/edit/:id`} />}
+            element={<Navigate to={`/directors/new/:uuid`} />}
+            path='new'
+          />
+          <Route
+            element={<Navigate to={`/directors/edit/:uuid`} />}
             path='edit'
           />
         </Routes>

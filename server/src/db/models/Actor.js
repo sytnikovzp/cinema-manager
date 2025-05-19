@@ -1,4 +1,4 @@
-const { Model } = require('sequelize');
+const { Model, Sequelize } = require('sequelize');
 
 const {
   isBeforeCurrentDate,
@@ -9,19 +9,25 @@ module.exports = (sequelize, DataTypes) => {
   class Actor extends Model {
     static associate(models) {
       Actor.belongsTo(models.Country, {
-        foreignKey: 'countryId',
+        foreignKey: 'countryUuid',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       });
       Actor.belongsToMany(models.Movie, {
         through: models.MovieActor,
-        foreignKey: 'actorId',
-        otherKey: 'movieId',
+        foreignKey: 'actorUuid',
+        otherKey: 'movieUuid',
       });
     }
   }
   Actor.init(
     {
+      uuid: {
+        type: DataTypes.UUID,
+        defaultValue: Sequelize.literal('uuid_generate_v4()'),
+        allowNull: false,
+        primaryKey: true,
+      },
       fullName: {
         type: DataTypes.STRING(100),
         allowNull: false,
@@ -30,12 +36,9 @@ module.exports = (sequelize, DataTypes) => {
           len: [1, 100],
         },
       },
-      countryId: {
-        type: DataTypes.INTEGER,
+      countryUuid: {
+        type: DataTypes.UUID,
         allowNull: true,
-        validate: {
-          isInt: true,
-        },
       },
       birthDate: {
         type: DataTypes.DATEONLY,
@@ -61,14 +64,14 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         validate: {
           isUrl: true,
-          len: [0, 200],
+          len: [0, 3000],
         },
       },
       biography: {
         type: DataTypes.TEXT,
         allowNull: true,
         validate: {
-          len: [0, 200],
+          len: [0, 3000],
         },
       },
     },

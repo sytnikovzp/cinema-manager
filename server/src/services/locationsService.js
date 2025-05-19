@@ -5,9 +5,10 @@ const {
   formatDateTime,
   getRecordByTitle,
 } = require('../utils/sharedFunctions');
+const { isValidUUID } = require('../utils/validators');
 
 const formatLocationData = (location) => ({
-  id: location.id,
+  uuid: location.uuid,
   title: location.title,
   coatOfArms: location.coatOfArms || '',
   createdAt: formatDateTime(location.createdAt),
@@ -17,19 +18,19 @@ const formatLocationData = (location) => ({
 class LocationsService {
   static async getAllLocations(limit, offset) {
     const foundLocations = await Location.findAll({
-      attributes: ['id', 'title', 'coatOfArms'],
+      attributes: ['uuid', 'title', 'coatOfArms'],
       include: [{ model: Country, attributes: ['title'] }],
       raw: true,
       limit,
       offset,
-      order: [['id', 'DESC']],
+      order: [['uuid', 'DESC']],
     });
     if (!foundLocations.length) {
       throw notFound('Locations not found');
     }
     const allLocations = foundLocations.map(
-      ({ id, title, coatOfArms, 'Country.title': countryTitle }) => ({
-        id,
+      ({ uuid, title, coatOfArms, 'Country.title': countryTitle }) => ({
+        uuid,
         title,
         country: countryTitle || '',
         coatOfArms: coatOfArms || '',
@@ -42,23 +43,26 @@ class LocationsService {
     };
   }
 
-  static async getLocationById(id) {
-    const foundLocation = await Location.findByPk(id, {
-      attributes: { exclude: ['countryId'] },
-      include: [{ model: Country, attributes: ['id', 'title'] }],
+  static async getLocationByUuid(uuid) {
+    if (!isValidUUID(uuid)) {
+      throw badRequest('Invalid UUID format');
+    }
+    const foundLocation = await Location.findByPk(uuid, {
+      attributes: { exclude: ['countryUuid'] },
+      include: [{ model: Country, attributes: ['uuid', 'title'] }],
     });
     if (!foundLocation) {
       throw notFound('Location not found');
     }
     const locationData = {
       ...foundLocation.toJSON(),
-      countryId: foundLocation.Country?.id || '',
+      countryUuid: foundLocation.Country?.uuid || '',
       countryTitle: foundLocation.Country?.title || '',
     };
     return {
       ...formatLocationData(locationData),
       country: {
-        id: locationData.countryId,
+        uuid: locationData.countryUuid,
         title: locationData.countryTitle,
       },
     };
@@ -79,7 +83,7 @@ class LocationsService {
     const newLocation = await Location.create(
       {
         title,
-        countryId: countryRecord?.id || null,
+        countryUuid: countryRecord?.uuid || null,
         coatOfArms: coatOfArmsValue || null,
       },
       { transaction, returning: true }
@@ -91,13 +95,16 @@ class LocationsService {
   }
 
   static async updateLocation(
-    id,
+    uuid,
     title,
     countryValue,
     coatOfArmsValue,
     transaction
   ) {
-    const foundLocation = await Location.findByPk(id);
+    if (!isValidUUID(uuid)) {
+      throw badRequest('Invalid UUID format');
+    }
+    const foundLocation = await Location.findByPk(uuid);
     if (!foundLocation) {
       throw notFound('Location not found');
     }
@@ -113,10 +120,10 @@ class LocationsService {
     const [affectedRows, [updatedLocation]] = await Location.update(
       {
         title,
-        countryId: countryRecord?.id || null,
+        countryUuid: countryRecord?.uuid || null,
         coatOfArms: coatOfArmsValue || null,
       },
-      { where: { id }, returning: true, transaction }
+      { where: { uuid }, returning: true, transaction }
     );
     if (!affectedRows) {
       throw badRequest('No data has been updated for this location');
@@ -124,13 +131,16 @@ class LocationsService {
     return formatLocationData(updatedLocation);
   }
 
-  static async deleteLocation(id, transaction) {
-    const foundLocation = await Location.findByPk(id);
+  static async deleteLocation(uuid, transaction) {
+    if (!isValidUUID(uuid)) {
+      throw badRequest('Invalid UUID format');
+    }
+    const foundLocation = await Location.findByPk(uuid);
     if (!foundLocation) {
       throw notFound('Location not found');
     }
     const deletedLocation = await Location.destroy({
-      where: { id },
+      where: { uuid },
       transaction,
     });
     if (!deletedLocation) {

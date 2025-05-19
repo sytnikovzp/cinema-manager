@@ -7,7 +7,7 @@ const {
 
 const {
   getAllGenres,
-  getGenreById,
+  getGenreByUuid,
   createGenre,
   updateGenre,
   deleteGenre,
@@ -21,8 +21,8 @@ genresRouter
   .post(validateGenre, createGenre);
 
 genresRouter
-  .route('/:genreId')
-  .get(getGenreById)
+  .route('/:genreUuid')
+  .get(getGenreByUuid)
   .delete(deleteGenre)
   .patch(validateGenre, updateGenre);
 

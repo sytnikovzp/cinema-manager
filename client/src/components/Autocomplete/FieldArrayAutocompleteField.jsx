@@ -4,7 +4,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 
 function FieldArrayAutocompleteField({
-  id,
+  uuid,
   name,
   options,
   getOptionLabel,
@@ -32,7 +32,7 @@ function FieldArrayAutocompleteField({
             fullWidth
             getOptionLabel={getOptionLabel}
             groupBy={groupBy}
-            id={id}
+            id={uuid}
             options={options}
             renderInput={(params) => (
               <TextField

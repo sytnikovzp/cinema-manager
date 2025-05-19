@@ -19,7 +19,7 @@ import { emptyCountry } from '../../constants';
 
 import {
   createCountry,
-  getCountryById,
+  getCountryByUuid,
   updateCountry,
 } from '../../services/countryService';
 import { STRING_SCHEMA, TITLE_NAME_SCHEMA } from '../../services/itemService';
@@ -34,7 +34,7 @@ import {
 import SnackbarContext from '../../contexts/SnackbarContext';
 
 function CountriesForm() {
-  const { id } = useParams();
+  const { uuid } = useParams();
   const navigate = useNavigate();
   const [initialValues, setInitialValues] = useState(emptyCountry);
 
@@ -42,20 +42,20 @@ function CountriesForm() {
 
   const fetchCountry = useCallback(async () => {
     try {
-      const country = await getCountryById(id);
+      const country = await getCountryByUuid(uuid);
       setInitialValues(country);
     } catch (error) {
       showSnackbar(error.message, 'error');
     }
-  }, [id, showSnackbar]);
+  }, [uuid, showSnackbar]);
 
   useEffect(() => {
-    if (id === ':id') {
+    if (uuid === ':uuid') {
       setInitialValues(emptyCountry);
     } else {
       fetchCountry();
     }
-  }, [id, fetchCountry]);
+  }, [uuid, fetchCountry]);
 
   const handleGoBack = useCallback(() => navigate(`/services`), [navigate]);
 
@@ -67,7 +67,7 @@ function CountriesForm() {
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        if (values.id) {
+        if (values.uuid) {
           await updateCountry(values);
           showSnackbar('Country updated successfully!', 'success');
         } else {

@@ -7,9 +7,10 @@ const {
   formatDate,
   parseAndValidateDate,
 } = require('../utils/sharedFunctions');
+const { isValidUUID } = require('../utils/validators');
 
 const formatActorData = (actor) => ({
-  id: actor.id,
+  uuid: actor.uuid,
   fullName: actor.fullName,
   birthDate: formatDate(actor.birthDate) || '',
   deathDate: formatDate(actor.deathDate) || '',
@@ -23,19 +24,19 @@ const formatActorData = (actor) => ({
 class ActorsService {
   static async getAllActors(limit, offset) {
     const foundActors = await Actor.findAll({
-      attributes: ['id', 'fullName', 'photo'],
+      attributes: ['uuid', 'fullName', 'photo'],
       include: [{ model: Country, attributes: ['title'] }],
       raw: true,
       limit,
       offset,
-      order: [['id', 'DESC']],
+      order: [['uuid', 'DESC']],
     });
     if (!foundActors.length) {
       throw notFound('Actors not found');
     }
     const allActors = foundActors.map(
-      ({ id, fullName, photo, 'Country.title': countryTitle }) => ({
-        id,
+      ({ uuid, fullName, photo, 'Country.title': countryTitle }) => ({
+        uuid,
         fullName,
         country: countryTitle || '',
         photo: photo || '',
@@ -48,14 +49,17 @@ class ActorsService {
     };
   }
 
-  static async getActorById(id) {
-    const foundActor = await Actor.findByPk(id, {
-      attributes: { exclude: ['countryId'] },
+  static async getActorByUuid(uuid) {
+    if (!isValidUUID(uuid)) {
+      throw badRequest('Invalid UUID format');
+    }
+    const foundActor = await Actor.findByPk(uuid, {
+      attributes: { exclude: ['countryUuid'] },
       include: [
-        { model: Country, attributes: ['id', 'title'] },
+        { model: Country, attributes: ['uuid', 'title'] },
         {
           model: Movie,
-          attributes: ['id', 'title'],
+          attributes: ['uuid', 'title'],
           through: { attributes: [] },
         },
       ],
@@ -65,13 +69,13 @@ class ActorsService {
     }
     const actorData = {
       ...foundActor.toJSON(),
-      countryId: foundActor.Country?.id || '',
+      countryUuid: foundActor.Country?.uuid || '',
       countryTitle: foundActor.Country?.title || '',
     };
     return {
       ...formatActorData(actorData),
       country: {
-        id: actorData.countryId,
+        uuid: actorData.countryUuid,
         title: actorData.countryTitle,
       },
     };
@@ -101,7 +105,7 @@ class ActorsService {
         deathDate,
         photo: photoValue || null,
         biography: biographyValue || null,
-        countryId: countryRecord?.id || null,
+        countryUuid: countryRecord?.uuid || null,
       },
       { transaction, returning: true }
     );
@@ -112,7 +116,7 @@ class ActorsService {
   }
 
   static async updateActor(
-    id,
+    uuid,
     fullName,
     countryValue,
     birthDateValue,
@@ -121,7 +125,10 @@ class ActorsService {
     biographyValue,
     transaction
   ) {
-    const foundActor = await Actor.findByPk(id);
+    if (!isValidUUID(uuid)) {
+      throw badRequest('Invalid UUID format');
+    }
+    const foundActor = await Actor.findByPk(uuid);
     if (!foundActor) {
       throw notFound('Actor not found');
     }
@@ -143,9 +150,9 @@ class ActorsService {
         deathDate,
         photo: photoValue || null,
         biography: biographyValue || null,
-        countryId: countryRecord?.id || null,
+        countryUuid: countryRecord?.uuid || null,
       },
-      { where: { id }, returning: true, transaction }
+      { where: { uuid }, returning: true, transaction }
     );
     if (!affectedRows) {
       throw badRequest('No data has been updated for this actor');
@@ -153,13 +160,16 @@ class ActorsService {
     return formatActorData(updatedActor);
   }
 
-  static async deleteActor(id, transaction) {
-    const foundActor = await Actor.findByPk(id);
+  static async deleteActor(uuid, transaction) {
+    if (!isValidUUID(uuid)) {
+      throw badRequest('Invalid UUID format');
+    }
+    const foundActor = await Actor.findByPk(uuid);
     if (!foundActor) {
       throw notFound('Actor not found');
     }
     const deletedActor = await Actor.destroy({
-      where: { id },
+      where: { uuid },
       transaction,
     });
     if (!deletedActor) {

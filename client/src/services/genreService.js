@@ -5,8 +5,8 @@ export const getAllGenres = async () => {
   return response.data;
 };
 
-export const getGenreById = async (id) => {
-  const response = await api.get(`/genres/${id}`);
+export const getGenreByUuid = async (uuid) => {
+  const response = await api.get(`/genres/${uuid}`);
   return response.data;
 };
 
@@ -16,11 +16,11 @@ export const createGenre = async (genreData) => {
 };
 
 export const updateGenre = async (genreData) => {
-  const response = await api.patch(`/genres/${genreData.id}`, genreData);
+  const response = await api.patch(`/genres/${genreData.uuid}`, genreData);
   return response.data;
 };
 
-export const deleteGenre = async (id) => {
-  const response = await api.delete(`/genres/${id}`);
+export const deleteGenre = async (uuid) => {
+  const response = await api.delete(`/genres/${uuid}`);
   return response.data;
 };

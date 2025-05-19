@@ -21,7 +21,7 @@ import useFetchData from '../../hooks/useFetchData';
 import { STRING_SCHEMA, TITLE_NAME_SCHEMA } from '../../services/itemService';
 import {
   createLocation,
-  getLocationById,
+  getLocationByUuid,
   updateLocation,
 } from '../../services/locationService';
 import {
@@ -36,7 +36,7 @@ import SnackbarContext from '../../contexts/SnackbarContext';
 import BasicAutocompleteField from '../Autocomplete/BasicAutocompleteField';
 
 function LocationsForm() {
-  const { id } = useParams();
+  const { uuid } = useParams();
   const navigate = useNavigate();
   const [initialValues, setInitialValues] = useState(emptyLocation);
 
@@ -46,20 +46,20 @@ function LocationsForm() {
 
   const fetchLocation = useCallback(async () => {
     try {
-      const location = await getLocationById(id);
+      const location = await getLocationByUuid(uuid);
       setInitialValues(location);
     } catch (error) {
       showSnackbar(error.message, 'error');
     }
-  }, [id, showSnackbar]);
+  }, [uuid, showSnackbar]);
 
   useEffect(() => {
-    if (id === ':id') {
+    if (uuid === ':uuid') {
       setInitialValues(emptyLocation);
     } else {
       fetchLocation();
     }
-  }, [id, fetchLocation]);
+  }, [uuid, fetchLocation]);
 
   const handleGoBack = useCallback(() => navigate(`/services`), [navigate]);
 
@@ -76,7 +76,7 @@ function LocationsForm() {
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        if (values.id) {
+        if (values.uuid) {
           await updateLocation(values);
           showSnackbar('Location updated successfully!', 'success');
         } else {

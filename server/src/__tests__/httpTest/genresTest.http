@@ -15,12 +15,12 @@ Content-Type: application/json
   "logo": ""
 }
 
-### Get genre by ID
-GET http://localhost:5000/api/genres/20 HTTP/1.1
+### Get genre by UUID
+GET http://localhost:5000/api/genres/f87ff1fa-47b4-4f05-bf1f-8f741887e242 HTTP/1.1
 Content-Type: application/json
 
-### Edit genre by ID
-PATCH http://localhost:5000/api/genres/20 HTTP/1.1
+### Edit genre by UUID
+PATCH http://localhost:5000/api/genres/f87ff1fa-47b4-4f05-bf1f-8f741887e242 HTTP/1.1
 Content-Type: application/json
 
 {
@@ -28,6 +28,6 @@ Content-Type: application/json
   "logo": ""
 }
 
-### Remove genre by ID
-DELETE  http://localhost:5000/api/genres/20 HTTP/1.1
+### Remove genre by UUID
+DELETE  http://localhost:5000/api/genres/f87ff1fa-47b4-4f05-bf1f-8f741887e242 HTTP/1.1
 Content-Type: application/json

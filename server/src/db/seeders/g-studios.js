@@ -7,16 +7,16 @@ module.exports = {
   async up(queryInterface) {
     const { studios } = await POSTGRES_DATA();
     const locations = await Location.findAll({
-      attributes: ['id', 'title'],
+      attributes: ['uuid', 'title'],
     });
     const locationMap = locations.reduce((acc, location) => {
-      acc[location.title] = location.id;
+      acc[location.title] = location.uuid;
       return acc;
     }, {});
     const updatedStudios = studios.map((studio) => {
-      const locationId = locationMap[studio.location];
-      if (locationId) {
-        studio.location_id = locationId;
+      const locationUuid = locationMap[studio.location];
+      if (locationUuid) {
+        studio.location_uuid = locationUuid;
       }
       delete studio.location;
       return studio;

@@ -7,7 +7,7 @@ const {
 
 const {
   getAllCountries,
-  getCountryById,
+  getCountryByUuid,
   createCountry,
   updateCountry,
   deleteCountry,
@@ -21,8 +21,8 @@ countriesRouter
   .post(validateCountry, createCountry);
 
 countriesRouter
-  .route('/:countryId')
-  .get(getCountryById)
+  .route('/:countryUuid')
+  .get(getCountryByUuid)
   .delete(deleteCountry)
   .patch(validateCountry, updateCountry);
 

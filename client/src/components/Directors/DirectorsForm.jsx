@@ -25,7 +25,7 @@ import useFetchData from '../../hooks/useFetchData';
 
 import {
   createDirector,
-  getDirectorById,
+  getDirectorByUuid,
   updateDirector,
 } from '../../services/directorService';
 import {
@@ -47,7 +47,7 @@ import BasicAutocompleteField from '../Autocomplete/BasicAutocompleteField';
 import 'dayjs/locale/en-gb';
 
 function DirectorForm() {
-  const { id } = useParams();
+  const { uuid } = useParams();
   const navigate = useNavigate();
   const [initialValues, setInitialValues] = useState(emptyDirector);
 
@@ -57,28 +57,28 @@ function DirectorForm() {
 
   const fetchDirector = useCallback(async () => {
     try {
-      const director = await getDirectorById(id);
+      const director = await getDirectorByUuid(uuid);
       setInitialValues(director);
     } catch (error) {
       showSnackbar(error.message, 'error');
     }
-  }, [id, showSnackbar]);
+  }, [uuid, showSnackbar]);
 
   useEffect(() => {
-    if (id === ':id') {
+    if (uuid === ':uuid') {
       setInitialValues(emptyDirector);
     } else {
       fetchDirector();
     }
-  }, [id, fetchDirector]);
+  }, [uuid, fetchDirector]);
 
   const handleGoBack = useCallback(() => {
-    if (id === ':id') {
+    if (uuid === ':uuid') {
       navigate(`/directors`);
     } else {
-      navigate(`/directors/${id}`);
+      navigate(`/directors/${uuid}`);
     }
-  }, [id, navigate]);
+  }, [uuid, navigate]);
 
   const sortedCountries = countries
     .slice()
@@ -96,10 +96,10 @@ function DirectorForm() {
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        if (values.id) {
+        if (values.uuid) {
           await updateDirector(values);
           showSnackbar('Director updated successfully!', 'success');
-          navigate(`/directors/${id}`);
+          navigate(`/directors/${uuid}`);
         } else {
           await createDirector(values);
           showSnackbar('Director created successfully!', 'success');
@@ -109,7 +109,7 @@ function DirectorForm() {
         showSnackbar(error.message, 'error');
       }
     },
-    [id, navigate, showSnackbar]
+    [uuid, navigate, showSnackbar]
   );
 
   const renderForm = ({ values, errors, touched, setFieldValue }) => (

@@ -7,7 +7,7 @@ const {
 
 const {
   getAllLocations,
-  getLocationById,
+  getLocationByUuid,
   createLocation,
   updateLocation,
   deleteLocation,
@@ -21,8 +21,8 @@ locationsRouter
   .post(validateLocation, createLocation);
 
 locationsRouter
-  .route('/:locationId')
-  .get(getLocationById)
+  .route('/:locationUuid')
+  .get(getLocationByUuid)
   .delete(deleteLocation)
   .patch(validateLocation, updateLocation);
 

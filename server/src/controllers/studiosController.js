@@ -2,7 +2,7 @@ const { sequelize } = require('../db/models');
 
 const {
   getAllStudios,
-  getStudioById,
+  getStudioByUuid,
   createStudio,
   updateStudio,
   deleteStudio,
@@ -26,19 +26,19 @@ class StudiosController {
     }
   }
 
-  static async getStudioById(req, res, next) {
+  static async getStudioByUuid(req, res, next) {
     try {
       const {
-        params: { studioId },
+        params: { studioUuid },
       } = req;
-      const studioById = await getStudioById(studioId);
-      if (studioById) {
-        res.status(200).json(studioById);
+      const studioByUuid = await getStudioByUuid(studioUuid);
+      if (studioByUuid) {
+        res.status(200).json(studioByUuid);
       } else {
         res.status(401);
       }
     } catch (error) {
-      console.error('Get studio by ID error: ', error.message);
+      console.error('Get studio by UUID error: ', error.message);
       next(error);
     }
   }
@@ -75,11 +75,11 @@ class StudiosController {
     const transaction = await sequelize.transaction();
     try {
       const {
-        params: { studioId },
+        params: { studioUuid },
         body: { title, location, foundationYear, logo, about },
       } = req;
       const updatedStudio = await updateStudio(
-        studioId,
+        studioUuid,
         title,
         location,
         foundationYear,
@@ -105,9 +105,9 @@ class StudiosController {
     const transaction = await sequelize.transaction();
     try {
       const {
-        params: { studioId },
+        params: { studioUuid },
       } = req;
-      const deletedStudio = await deleteStudio(studioId, transaction);
+      const deletedStudio = await deleteStudio(studioUuid, transaction);
       if (deletedStudio) {
         await transaction.commit();
         res.status(200).json('OK');

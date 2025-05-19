@@ -7,7 +7,7 @@ const {
 
 const {
   getAllActors,
-  getActorById,
+  getActorByUuid,
   createActor,
   updateActor,
   deleteActor,
@@ -21,8 +21,8 @@ actorsRouter
   .post(validatePerson, createActor);
 
 actorsRouter
-  .route('/:actorId')
-  .get(getActorById)
+  .route('/:actorUuid')
+  .get(getActorByUuid)
   .delete(deleteActor)
   .patch(validatePerson, updateActor);
 

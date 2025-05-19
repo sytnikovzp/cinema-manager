@@ -19,7 +19,7 @@ import { emptyGenre } from '../../constants';
 
 import {
   createGenre,
-  getGenreById,
+  getGenreByUuid,
   updateGenre,
 } from '../../services/genreService';
 import { STRING_SCHEMA, TITLE_NAME_SCHEMA } from '../../services/itemService';
@@ -34,7 +34,7 @@ import {
 import SnackbarContext from '../../contexts/SnackbarContext';
 
 function GenreForm() {
-  const { id } = useParams();
+  const { uuid } = useParams();
   const navigate = useNavigate();
   const [initialValues, setInitialValues] = useState(emptyGenre);
 
@@ -42,20 +42,20 @@ function GenreForm() {
 
   const fetchGenre = useCallback(async () => {
     try {
-      const genre = await getGenreById(id);
+      const genre = await getGenreByUuid(uuid);
       setInitialValues(genre);
     } catch (error) {
       showSnackbar(error.message, 'error');
     }
-  }, [id, showSnackbar]);
+  }, [uuid, showSnackbar]);
 
   useEffect(() => {
-    if (id === ':id') {
+    if (uuid === ':uuid') {
       setInitialValues(emptyGenre);
     } else {
       fetchGenre();
     }
-  }, [id, fetchGenre]);
+  }, [uuid, fetchGenre]);
 
   const handleGoBack = useCallback(() => navigate(`/services`), [navigate]);
 
@@ -67,7 +67,7 @@ function GenreForm() {
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        if (values.id) {
+        if (values.uuid) {
           await updateGenre(values);
           showSnackbar('Genre updated successfully!', 'success');
         } else {

@@ -1,22 +1,28 @@
-const { Model } = require('sequelize');
+const { Model, Sequelize } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Studio extends Model {
     static associate(models) {
       Studio.belongsTo(models.Location, {
-        foreignKey: 'locationId',
+        foreignKey: 'locationUuid',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       });
       Studio.belongsToMany(models.Movie, {
         through: models.MovieStudio,
-        foreignKey: 'studioId',
-        otherKey: 'movieId',
+        foreignKey: 'studioUuid',
+        otherKey: 'movieUuid',
       });
     }
   }
   Studio.init(
     {
+      uuid: {
+        type: DataTypes.UUID,
+        defaultValue: Sequelize.literal('uuid_generate_v4()'),
+        allowNull: false,
+        primaryKey: true,
+      },
       title: {
         type: DataTypes.STRING(100),
         allowNull: false,
@@ -25,12 +31,9 @@ module.exports = (sequelize, DataTypes) => {
           len: [1, 100],
         },
       },
-      locationId: {
-        type: DataTypes.INTEGER,
+      locationUuid: {
+        type: DataTypes.UUID,
         allowNull: true,
-        validate: {
-          isInt: true,
-        },
       },
       foundationYear: {
         type: DataTypes.INTEGER,
@@ -46,14 +49,14 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         validate: {
           isUrl: true,
-          len: [0, 200],
+          len: [0, 3000],
         },
       },
       about: {
         type: DataTypes.TEXT,
         allowNull: true,
         validate: {
-          len: [0, 200],
+          len: [0, 3000],
         },
       },
     },

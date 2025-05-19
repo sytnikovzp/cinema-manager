@@ -1,23 +1,26 @@
 /* eslint-disable camelcase */
 module.exports = {
   async up(queryInterface, Sequelize) {
+    await queryInterface.sequelize.query(
+      'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'
+    );
     await queryInterface.createTable('movies_actors', {
-      movie_id: {
-        type: Sequelize.INTEGER,
+      movie_uuid: {
+        type: Sequelize.UUID,
         allowNull: false,
         references: {
           model: 'movies',
-          key: 'id',
+          key: 'uuid',
         },
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
-      actor_id: {
-        type: Sequelize.INTEGER,
+      actor_uuid: {
+        type: Sequelize.UUID,
         allowNull: false,
         references: {
           model: 'actors',
-          key: 'id',
+          key: 'uuid',
         },
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
@@ -33,12 +36,15 @@ module.exports = {
     });
 
     await queryInterface.addConstraint('movies_actors', {
-      fields: ['movie_id', 'actor_id'],
+      fields: ['movie_uuid', 'actor_uuid'],
       type: 'primary key',
       name: 'movies_actors_pkey',
     });
   },
   async down(queryInterface) {
+    await queryInterface.sequelize.query(
+      'DROP EXTENSION IF EXISTS "uuid-ossp";'
+    );
     await queryInterface.dropTable('movies_actors');
   },
 };

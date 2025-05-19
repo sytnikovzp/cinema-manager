@@ -48,9 +48,9 @@ function Movies() {
       >
         <Routes>
           <Route element={<MoviesList />} path='/' />
-          <Route element={<MoviesItem />} path=':id' />
-          <Route element={<Navigate to={`/movies/new/:id`} />} path='new' />
-          <Route element={<Navigate to={`/movies/edit/:id`} />} path='edit' />
+          <Route element={<MoviesItem />} path=':uuid' />
+          <Route element={<Navigate to={`/movies/new/:uuid`} />} path='new' />
+          <Route element={<Navigate to={`/movies/edit/:uuid`} />} path='edit' />
         </Routes>
       </Paper>
     </Box>

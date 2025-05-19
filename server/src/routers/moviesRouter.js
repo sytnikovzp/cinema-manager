@@ -7,7 +7,7 @@ const {
 
 const {
   getAllMovies,
-  getMovieById,
+  getMovieByUuid,
   createMovie,
   updateMovie,
   deleteMovie,
@@ -21,8 +21,8 @@ moviesRouter
   .post(validateMovie, createMovie);
 
 moviesRouter
-  .route('/:movieId')
-  .get(getMovieById)
+  .route('/:movieUuid')
+  .get(getMovieByUuid)
   .delete(deleteMovie)
   .patch(validateMovie, updateMovie);
 

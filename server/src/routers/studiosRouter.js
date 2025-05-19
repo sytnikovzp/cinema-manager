@@ -7,7 +7,7 @@ const {
 
 const {
   getAllStudios,
-  getStudioById,
+  getStudioByUuid,
   createStudio,
   updateStudio,
   deleteStudio,
@@ -21,8 +21,8 @@ studiosRouter
   .post(validateStudio, createStudio);
 
 studiosRouter
-  .route('/:studioId')
-  .get(getStudioById)
+  .route('/:studioUuid')
+  .get(getStudioByUuid)
   .delete(deleteStudio)
   .patch(validateStudio, updateStudio);
 

@@ -12,7 +12,7 @@ import {
 
 const actorsState = [
   {
-    id: null,
+    uuid: null,
     fullName: '',
     country: '',
     birthDate: '',
@@ -51,13 +51,13 @@ const actorsSlice = createSlice({
     });
     builder.addCase(editActor.fulfilled, (state, { payload }) => {
       state.actors = state.actors.map((actor) =>
-        (actor.id === payload.id ? payload : actor)
+        (actor.uuid === payload.uuid ? payload : actor)
       );
       state.status = 'Actor updated successfully!';
       state.error = null;
     });
     builder.addCase(removeActor.fulfilled, (state, { payload }) => {
-      state.actors = state.actors.filter((actor) => actor.id !== payload);
+      state.actors = state.actors.filter((actor) => actor.uuid !== payload);
       state.status = 'Actor deleted successfully!';
       state.error = null;
     });

@@ -13,7 +13,7 @@ export const stylesLogoBoxDesktop = {
 };
 
 export const stylesLogoTypographyDesktop = {
-  mr: 2,
+  ml: 2,
   fontFamily: 'Roboto, sans-serif',
   fontWeight: 600,
   letterSpacing: '.3rem',

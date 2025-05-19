@@ -10,7 +10,7 @@ export const COUNTRIES_SLICE_NAME = 'countries';
 export const LOCATIONS_SLICE_NAME = 'locations';
 
 export const emptyActor = {
-  id: null,
+  uuid: null,
   fullName: '',
   country: '',
   birthDate: '',
@@ -20,7 +20,7 @@ export const emptyActor = {
 };
 
 export const emptyDirector = {
-  id: null,
+  uuid: null,
   fullName: '',
   country: '',
   birthDate: '',
@@ -30,7 +30,7 @@ export const emptyDirector = {
 };
 
 export const emptyMovie = {
-  id: null,
+  uuid: null,
   title: '',
   genre: '',
   releaseYear: '',
@@ -43,7 +43,7 @@ export const emptyMovie = {
 };
 
 export const emptyStudio = {
-  id: null,
+  uuid: null,
   title: '',
   location: '',
   foundationYear: '',
@@ -52,19 +52,19 @@ export const emptyStudio = {
 };
 
 export const emptyGenre = {
-  id: null,
+  uuid: null,
   title: '',
   logo: '',
 };
 
 export const emptyCountry = {
-  id: null,
+  uuid: null,
   title: '',
   flag: '',
 };
 
 export const emptyLocation = {
-  id: null,
+  uuid: null,
   title: '',
   country: '',
   coatOfArms: '',

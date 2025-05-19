@@ -7,16 +7,16 @@ module.exports = {
   async up(queryInterface) {
     const { movies } = await POSTGRES_DATA();
     const genres = await Genre.findAll({
-      attributes: ['id', 'title'],
+      attributes: ['uuid', 'title'],
     });
     const genreMap = genres.reduce((acc, genre) => {
-      acc[genre.title] = genre.id;
+      acc[genre.title] = genre.uuid;
       return acc;
     }, {});
     const updatedMovies = movies.map((movie) => {
-      const genreId = genreMap[movie.genre];
-      if (genreId) {
-        movie.genre_id = genreId;
+      const genreUuid = genreMap[movie.genre];
+      if (genreUuid) {
+        movie.genre_uuid = genreUuid;
       }
       delete movie.genre;
       return movie;

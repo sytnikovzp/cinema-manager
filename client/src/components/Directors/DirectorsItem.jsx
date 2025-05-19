@@ -17,7 +17,7 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 import { emptyDirector } from '../../constants';
 
-import { getDirectorById } from '../../services/directorService';
+import { getDirectorByUuid } from '../../services/directorService';
 import { calculateAge } from '../../services/itemService';
 import {
   buttonMainStyle,
@@ -38,7 +38,7 @@ import ItemSkeleton from '../SkeletonLoader/ItemSkeleton';
 import DirectorsBiography from './DirectorsBiography';
 
 function DirectorsItem() {
-  const { id } = useParams();
+  const { uuid } = useParams();
   const navigate = useNavigate();
 
   const [director, setDirector] = useState(emptyDirector);
@@ -49,23 +49,23 @@ function DirectorsItem() {
 
   const fetchDirector = useCallback(async () => {
     try {
-      const data = await getDirectorById(id);
+      const data = await getDirectorByUuid(uuid);
       setDirector(data);
     } catch (error) {
       showSnackbar(error.message, 'error');
     } finally {
       setLoading(false);
     }
-  }, [id, showSnackbar]);
+  }, [uuid, showSnackbar]);
 
   useEffect(() => {
-    if (id === ':id') {
+    if (uuid === ':uuid') {
       setDirector(emptyDirector);
       setLoading(false);
     } else {
       fetchDirector();
     }
-  }, [id, fetchDirector]);
+  }, [uuid, fetchDirector]);
 
   const handleGoBack = useCallback(() => {
     navigate(`/directors`);
@@ -80,9 +80,9 @@ function DirectorsItem() {
       ? director.movies
           .map((movie) => (
             <Link
-              key={movie.id}
+              key={movie.uuid}
               style={itemLinkStyle}
-              to={`/movies/${movie.id}`}
+              to={`/movies/${movie.uuid}`}
             >
               {movie.title}
             </Link>
@@ -111,7 +111,7 @@ function DirectorsItem() {
           component={Link}
           startIcon={<EditIcon />}
           sx={buttonMainStyle}
-          to={`/directors/edit/${id}`}
+          to={`/directors/edit/${uuid}`}
           type='button'
           variant='contained'
         >

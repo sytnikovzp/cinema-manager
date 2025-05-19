@@ -5,9 +5,10 @@ const {
   formatDateTime,
   getRecordByTitle,
 } = require('../utils/sharedFunctions');
+const { isValidUUID } = require('../utils/validators');
 
 const formatMovieData = (movie) => ({
-  id: movie.id,
+  uuid: movie.uuid,
   title: movie.title,
   releaseYear: movie.releaseYear || '',
   poster: movie.poster || '',
@@ -23,21 +24,23 @@ const formatMovieData = (movie) => ({
 class MoviesService {
   static async getAllMovies(limit, offset) {
     const foundMovies = await Movie.findAll({
-      attributes: ['id', 'title', 'releaseYear', 'poster'],
+      attributes: ['uuid', 'title', 'releaseYear', 'poster'],
       raw: true,
       limit,
       offset,
-      order: [['id', 'DESC']],
+      order: [['uuid', 'DESC']],
     });
     if (!foundMovies.length) {
       throw notFound('Movies not found');
     }
-    const allMovies = foundMovies.map(({ id, title, releaseYear, poster }) => ({
-      id,
-      title,
-      releaseYear: releaseYear || '',
-      poster: poster || '',
-    }));
+    const allMovies = foundMovies.map(
+      ({ uuid, title, releaseYear, poster }) => ({
+        uuid,
+        title,
+        releaseYear: releaseYear || '',
+        poster: poster || '',
+      })
+    );
     const totalCount = await Movie.count();
     return {
       allMovies,
@@ -45,24 +48,27 @@ class MoviesService {
     };
   }
 
-  static async getMovieById(id) {
-    const foundMovie = await Movie.findByPk(id, {
-      attributes: { exclude: ['genreId'] },
+  static async getMovieByUuid(uuid) {
+    if (!isValidUUID(uuid)) {
+      throw badRequest('Invalid UUID format');
+    }
+    const foundMovie = await Movie.findByPk(uuid, {
+      attributes: { exclude: ['genreUuid'] },
       include: [
-        { model: Genre, attributes: ['id', 'title'] },
+        { model: Genre, attributes: ['uuid', 'title'] },
         {
           model: Actor,
-          attributes: ['id', 'fullName'],
+          attributes: ['uuid', 'fullName'],
           through: { attributes: [] },
         },
         {
           model: Director,
-          attributes: ['id', 'fullName'],
+          attributes: ['uuid', 'fullName'],
           through: { attributes: [] },
         },
         {
           model: Studio,
-          attributes: ['id', 'title'],
+          attributes: ['uuid', 'title'],
           through: { attributes: [] },
         },
       ],
@@ -72,13 +78,13 @@ class MoviesService {
     }
     const movieData = {
       ...foundMovie.toJSON(),
-      genreId: foundMovie.Genre?.id || '',
+      genreUuid: foundMovie.Genre?.uuid || '',
       genreTitle: foundMovie.Genre?.title || '',
     };
     return {
       ...formatMovieData(movieData),
       genre: {
-        id: movieData.genreId,
+        uuid: movieData.genreUuid,
         title: movieData.genreTitle,
       },
     };
@@ -102,7 +108,7 @@ class MoviesService {
     const genreRecord = genreValue
       ? await getRecordByTitle(Genre, genreValue)
       : null;
-    const allStudios = await Studio.findAll({ attributes: ['id', 'title'] });
+    const allStudios = await Studio.findAll({ attributes: ['uuid', 'title'] });
     const foundStudios = allStudios.filter((studio) =>
       studiosTitles.includes(studio.title)
     );
@@ -115,7 +121,7 @@ class MoviesService {
       );
     }
     const allDirectors = await Director.findAll({
-      attributes: ['id', 'fullName'],
+      attributes: ['uuid', 'fullName'],
     });
     const foundDirectors = allDirectors.filter((director) =>
       directorsFullNames.includes(director.fullName)
@@ -130,7 +136,7 @@ class MoviesService {
       );
     }
     const allActors = await Actor.findAll({
-      attributes: ['id', 'fullName'],
+      attributes: ['uuid', 'fullName'],
     });
     const foundActors = allActors.filter((actor) =>
       actorsFullNames.includes(actor.fullName)
@@ -150,7 +156,7 @@ class MoviesService {
         poster: posterValue || null,
         trailer: trailerValue || null,
         storyline: storylineValue || null,
-        genreId: genreRecord?.id || null,
+        genreUuid: genreRecord?.uuid || null,
       },
       { transaction, returning: true }
     );
@@ -164,17 +170,17 @@ class MoviesService {
       include: [
         {
           model: Studio,
-          attributes: ['id', 'title'],
+          attributes: ['uuid', 'title'],
           through: { attributes: [] },
         },
         {
           model: Director,
-          attributes: ['id', 'fullName'],
+          attributes: ['uuid', 'fullName'],
           through: { attributes: [] },
         },
         {
           model: Actor,
-          attributes: ['id', 'fullName'],
+          attributes: ['uuid', 'fullName'],
           through: { attributes: [] },
         },
       ],
@@ -184,7 +190,7 @@ class MoviesService {
   }
 
   static async updateMovie(
-    id,
+    uuid,
     title,
     genreValue,
     releaseYearValue,
@@ -196,7 +202,10 @@ class MoviesService {
     actorsFullNames,
     transaction
   ) {
-    const foundMovie = await Movie.findByPk(id);
+    if (!isValidUUID(uuid)) {
+      throw badRequest('Invalid UUID format');
+    }
+    const foundMovie = await Movie.findByPk(uuid);
     if (!foundMovie) {
       throw notFound('Movie not found');
     }
@@ -209,7 +218,7 @@ class MoviesService {
     const genreRecord = genreValue
       ? await getRecordByTitle(Genre, genreValue)
       : null;
-    const allStudios = await Studio.findAll({ attributes: ['id', 'title'] });
+    const allStudios = await Studio.findAll({ attributes: ['uuid', 'title'] });
     const foundStudios = allStudios.filter((studio) =>
       studiosTitles.includes(studio.title)
     );
@@ -222,7 +231,7 @@ class MoviesService {
       );
     }
     const allDirectors = await Director.findAll({
-      attributes: ['id', 'fullName'],
+      attributes: ['uuid', 'fullName'],
     });
     const foundDirectors = allDirectors.filter((director) =>
       directorsFullNames.includes(director.fullName)
@@ -237,7 +246,7 @@ class MoviesService {
       );
     }
     const allActors = await Actor.findAll({
-      attributes: ['id', 'fullName'],
+      attributes: ['uuid', 'fullName'],
     });
     const foundActors = allActors.filter((actor) =>
       actorsFullNames.includes(actor.fullName)
@@ -257,9 +266,9 @@ class MoviesService {
         poster: posterValue || null,
         trailer: trailerValue || null,
         storyline: storylineValue || null,
-        genreId: genreRecord?.id || null,
+        genreUuid: genreRecord?.uuid || null,
       },
-      { where: { id }, returning: true, transaction }
+      { where: { uuid }, returning: true, transaction }
     );
     if (!affectedRows) {
       throw badRequest('No data has been updated for this movie');
@@ -271,17 +280,17 @@ class MoviesService {
       include: [
         {
           model: Studio,
-          attributes: ['id', 'title'],
+          attributes: ['uuid', 'title'],
           through: { attributes: [] },
         },
         {
           model: Director,
-          attributes: ['id', 'fullName'],
+          attributes: ['uuid', 'fullName'],
           through: { attributes: [] },
         },
         {
           model: Actor,
-          attributes: ['id', 'fullName'],
+          attributes: ['uuid', 'fullName'],
           through: { attributes: [] },
         },
       ],
@@ -290,13 +299,16 @@ class MoviesService {
     return formatMovieData(updatedMovie);
   }
 
-  static async deleteMovie(id, transaction) {
-    const foundMovie = await Movie.findByPk(id);
+  static async deleteMovie(uuid, transaction) {
+    if (!isValidUUID(uuid)) {
+      throw badRequest('Invalid UUID format');
+    }
+    const foundMovie = await Movie.findByPk(uuid);
     if (!foundMovie) {
       throw notFound('Movie not found');
     }
     const deletedMovie = await Movie.destroy({
-      where: { id },
+      where: { uuid },
       transaction,
     });
     if (!deletedMovie) {

@@ -2,7 +2,7 @@ const { sequelize } = require('../db/models');
 
 const {
   getAllActors,
-  getActorById,
+  getActorByUuid,
   createActor,
   updateActor,
   deleteActor,
@@ -26,19 +26,19 @@ class ActorsController {
     }
   }
 
-  static async getActorById(req, res, next) {
+  static async getActorByUuid(req, res, next) {
     try {
       const {
-        params: { actorId },
+        params: { actorUuid },
       } = req;
-      const actorById = await getActorById(actorId);
-      if (actorById) {
-        res.status(200).json(actorById);
+      const actorByUuid = await getActorByUuid(actorUuid);
+      if (actorByUuid) {
+        res.status(200).json(actorByUuid);
       } else {
         res.status(401);
       }
     } catch (error) {
-      console.error('Get actor by ID error: ', error.message);
+      console.error('Get actor by UUID error: ', error.message);
       next(error);
     }
   }
@@ -76,11 +76,11 @@ class ActorsController {
     const transaction = await sequelize.transaction();
     try {
       const {
-        params: { actorId },
+        params: { actorUuid },
         body: { fullName, country, birthDate, deathDate, photo, biography },
       } = req;
       const updatedActor = await updateActor(
-        actorId,
+        actorUuid,
         fullName,
         country,
         birthDate,
@@ -107,9 +107,9 @@ class ActorsController {
     const transaction = await sequelize.transaction();
     try {
       const {
-        params: { actorId },
+        params: { actorUuid },
       } = req;
-      const deletedActor = await deleteActor(actorId, transaction);
+      const deletedActor = await deleteActor(actorUuid, transaction);
       if (deletedActor) {
         await transaction.commit();
         res.status(200).json('OK');

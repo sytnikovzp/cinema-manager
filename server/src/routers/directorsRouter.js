@@ -7,7 +7,7 @@ const {
 
 const {
   getAllDirectors,
-  getDirectorById,
+  getDirectorByUuid,
   createDirector,
   updateDirector,
   deleteDirector,
@@ -21,8 +21,8 @@ directorsRouter
   .post(validatePerson, createDirector);
 
 directorsRouter
-  .route('/:directorId')
-  .get(getDirectorById)
+  .route('/:directorUuid')
+  .get(getDirectorByUuid)
   .delete(deleteDirector)
   .patch(validatePerson, updateDirector);
 

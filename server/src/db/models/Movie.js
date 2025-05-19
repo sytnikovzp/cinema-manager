@@ -1,32 +1,38 @@
-const { Model } = require('sequelize');
+const { Model, Sequelize } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Movie extends Model {
     static associate(models) {
       Movie.belongsTo(models.Genre, {
-        foreignKey: 'genreId',
+        foreignKey: 'genreUuid',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       });
       Movie.belongsToMany(models.Actor, {
         through: models.MovieActor,
-        foreignKey: 'movieId',
-        otherKey: 'actorId',
+        foreignKey: 'movieUuid',
+        otherKey: 'actorUuid',
       });
       Movie.belongsToMany(models.Director, {
         through: models.MovieDirector,
-        foreignKey: 'movieId',
-        otherKey: 'directorId',
+        foreignKey: 'movieUuid',
+        otherKey: 'directorUuid',
       });
       Movie.belongsToMany(models.Studio, {
         through: models.MovieStudio,
-        foreignKey: 'movieId',
-        otherKey: 'studioId',
+        foreignKey: 'movieUuid',
+        otherKey: 'studioUuid',
       });
     }
   }
   Movie.init(
     {
+      uuid: {
+        type: DataTypes.UUID,
+        defaultValue: Sequelize.literal('uuid_generate_v4()'),
+        allowNull: false,
+        primaryKey: true,
+      },
       title: {
         type: DataTypes.STRING(100),
         allowNull: false,
@@ -35,12 +41,9 @@ module.exports = (sequelize, DataTypes) => {
           len: [1, 100],
         },
       },
-      genreId: {
-        type: DataTypes.INTEGER,
+      genreUuid: {
+        type: DataTypes.UUID,
         allowNull: true,
-        validate: {
-          isInt: true,
-        },
       },
       releaseYear: {
         type: DataTypes.INTEGER,
@@ -56,7 +59,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         validate: {
           isUrl: true,
-          len: [0, 200],
+          len: [0, 3000],
         },
       },
       trailer: {
@@ -71,7 +74,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         allowNull: true,
         validate: {
-          len: [0, 200],
+          len: [0, 3000],
         },
       },
     },

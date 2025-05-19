@@ -100,10 +100,10 @@ function ServicesList() {
     setCurrentPage(value);
   }, []);
 
-  const onDelete = async (event, id, deleteFunction, successMessage) => {
+  const onDelete = async (event, uuid, deleteFunction, successMessage) => {
     event.stopPropagation();
     try {
-      await deleteFunction(id);
+      await deleteFunction(uuid);
       refetch();
       setCurrentPage(1);
       showSnackbar(successMessage, 'success');
@@ -149,7 +149,7 @@ function ServicesList() {
                   </Box>
                 ))
             : data.map((item) => (
-                <Stack key={item.id} direction='column' marginBottom={1}>
+                <Stack key={item.uuid} direction='column' marginBottom={1}>
                   <ListItem disablePadding sx={itemListStyle}>
                     <ListItemButton sx={styleListListItemButton}>
                       <ListItemAvatar>
@@ -169,14 +169,14 @@ function ServicesList() {
                           aria-label='edit'
                           component={Link}
                           edge='end'
-                          to={`/services/edit-${entityName}/${item.id}`}
+                          to={`/services/edit-${entityName}/${item.uuid}`}
                         >
                           <EditIcon />
                         </IconButton>
                         <IconButton
                           aria-label='delete'
                           edge='end'
-                          onClick={(event) => onDelete(event, item.id)}
+                          onClick={(event) => onDelete(event, item.uuid)}
                         >
                           <HighlightOffIcon />
                         </IconButton>
@@ -233,24 +233,24 @@ function ServicesList() {
         renderList(
           data,
           loading,
-          (e, id) =>
-            onDelete(e, id, deleteGenre, 'Genre deleted successfully!'),
+          (e, uuid) =>
+            onDelete(e, uuid, deleteGenre, 'Genre deleted successfully!'),
           'genres'
         )}
       {tabIndex === 1 &&
         renderList(
           data,
           loading,
-          (e, id) =>
-            onDelete(e, id, deleteCountry, 'Country deleted successfully!'),
+          (e, uuid) =>
+            onDelete(e, uuid, deleteCountry, 'Country deleted successfully!'),
           'countries'
         )}
       {tabIndex === 2 &&
         renderList(
           data,
           loading,
-          (e, id) =>
-            onDelete(e, id, deleteLocation, 'Location deleted successfully!'),
+          (e, uuid) =>
+            onDelete(e, uuid, deleteLocation, 'Location deleted successfully!'),
           'locations'
         )}
     </>

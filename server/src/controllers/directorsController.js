@@ -2,7 +2,7 @@ const { sequelize } = require('../db/models');
 
 const {
   getAllDirectors,
-  getDirectorById,
+  getDirectorByUuid,
   createDirector,
   updateDirector,
   deleteDirector,
@@ -26,19 +26,19 @@ class DirectorsController {
     }
   }
 
-  static async getDirectorById(req, res, next) {
+  static async getDirectorByUuid(req, res, next) {
     try {
       const {
-        params: { directorId },
+        params: { directorUuid },
       } = req;
-      const directorById = await getDirectorById(directorId);
-      if (directorById) {
-        res.status(200).json(directorById);
+      const directorByUuid = await getDirectorByUuid(directorUuid);
+      if (directorByUuid) {
+        res.status(200).json(directorByUuid);
       } else {
         res.status(401);
       }
     } catch (error) {
-      console.error('Get director by ID error: ', error.message);
+      console.error('Get director by UUID error: ', error.message);
       next(error);
     }
   }
@@ -76,11 +76,11 @@ class DirectorsController {
     const transaction = await sequelize.transaction();
     try {
       const {
-        params: { directorId },
+        params: { directorUuid },
         body: { fullName, country, birthDate, deathDate, photo, biography },
       } = req;
       const updatedDirector = await updateDirector(
-        directorId,
+        directorUuid,
         fullName,
         country,
         birthDate,
@@ -107,9 +107,9 @@ class DirectorsController {
     const transaction = await sequelize.transaction();
     try {
       const {
-        params: { directorId },
+        params: { directorUuid },
       } = req;
-      const deletedDirector = await deleteDirector(directorId, transaction);
+      const deletedDirector = await deleteDirector(directorUuid, transaction);
       if (deletedDirector) {
         await transaction.commit();
         res.status(200).json('OK');

@@ -5,8 +5,8 @@ export const getAllMovies = async () => {
   return response.data;
 };
 
-export const getMovieById = async (id) => {
-  const response = await api.get(`/movies/${id}`);
+export const getMovieByUuid = async (uuid) => {
+  const response = await api.get(`/movies/${uuid}`);
   return response.data;
 };
 
@@ -16,11 +16,11 @@ export const createMovie = async (movieData) => {
 };
 
 export const updateMovie = async (movieData) => {
-  const response = await api.patch(`/movies/${movieData.id}`, movieData);
+  const response = await api.patch(`/movies/${movieData.uuid}`, movieData);
   return response.data;
 };
 
-export const deleteMovie = async (id) => {
-  const response = await api.delete(`/movies/${id}`);
+export const deleteMovie = async (uuid) => {
+  const response = await api.delete(`/movies/${uuid}`);
   return response.data;
 };

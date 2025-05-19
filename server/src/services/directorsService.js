@@ -7,9 +7,10 @@ const {
   formatDate,
   parseAndValidateDate,
 } = require('../utils/sharedFunctions');
+const { isValidUUID } = require('../utils/validators');
 
 const formatDirectorData = (director) => ({
-  id: director.id,
+  uuid: director.uuid,
   fullName: director.fullName,
   birthDate: formatDate(director.birthDate) || '',
   deathDate: formatDate(director.deathDate) || '',
@@ -23,19 +24,19 @@ const formatDirectorData = (director) => ({
 class DirectorsService {
   static async getAllDirectors(limit, offset) {
     const foundDirectors = await Director.findAll({
-      attributes: ['id', 'fullName', 'photo'],
+      attributes: ['uuid', 'fullName', 'photo'],
       include: [{ model: Country, attributes: ['title'] }],
       raw: true,
       limit,
       offset,
-      order: [['id', 'DESC']],
+      order: [['uuid', 'DESC']],
     });
     if (!foundDirectors.length) {
       throw notFound('Directors not found');
     }
     const allDirectors = foundDirectors.map(
-      ({ id, fullName, photo, 'Country.title': countryTitle }) => ({
-        id,
+      ({ uuid, fullName, photo, 'Country.title': countryTitle }) => ({
+        uuid,
         fullName,
         country: countryTitle || '',
         photo: photo || '',
@@ -48,14 +49,17 @@ class DirectorsService {
     };
   }
 
-  static async getDirectorById(id) {
-    const foundDirector = await Director.findByPk(id, {
-      attributes: { exclude: ['countryId'] },
+  static async getDirectorByUuid(uuid) {
+    if (!isValidUUID(uuid)) {
+      throw badRequest('Invalid UUID format');
+    }
+    const foundDirector = await Director.findByPk(uuid, {
+      attributes: { exclude: ['countryUuid'] },
       include: [
-        { model: Country, attributes: ['id', 'title'] },
+        { model: Country, attributes: ['uuid', 'title'] },
         {
           model: Movie,
-          attributes: ['id', 'title'],
+          attributes: ['uuid', 'title'],
           through: { attributes: [] },
         },
       ],
@@ -65,13 +69,13 @@ class DirectorsService {
     }
     const directorData = {
       ...foundDirector.toJSON(),
-      countryId: foundDirector.Country?.id || '',
+      countryUuid: foundDirector.Country?.uuid || '',
       countryTitle: foundDirector.Country?.title || '',
     };
     return {
       ...formatDirectorData(directorData),
       country: {
-        id: directorData.countryId,
+        uuid: directorData.countryUuid,
         title: directorData.countryTitle,
       },
     };
@@ -101,7 +105,7 @@ class DirectorsService {
         deathDate,
         photo: photoValue || null,
         biography: biographyValue || null,
-        countryId: countryRecord?.id || null,
+        countryUuid: countryRecord?.uuid || null,
       },
       { transaction, returning: true }
     );
@@ -112,7 +116,7 @@ class DirectorsService {
   }
 
   static async updateDirector(
-    id,
+    uuid,
     fullName,
     countryValue,
     birthDateValue,
@@ -121,7 +125,10 @@ class DirectorsService {
     biographyValue,
     transaction
   ) {
-    const foundDirector = await Director.findByPk(id);
+    if (!isValidUUID(uuid)) {
+      throw badRequest('Invalid UUID format');
+    }
+    const foundDirector = await Director.findByPk(uuid);
     if (!foundDirector) {
       throw notFound('Director not found');
     }
@@ -143,9 +150,9 @@ class DirectorsService {
         deathDate,
         photo: photoValue || null,
         biography: biographyValue || null,
-        countryId: countryRecord?.id || null,
+        countryUuid: countryRecord?.uuid || null,
       },
-      { where: { id }, returning: true, transaction }
+      { where: { uuid }, returning: true, transaction }
     );
     if (!affectedRows) {
       throw badRequest('No data has been updated for this director');
@@ -153,13 +160,16 @@ class DirectorsService {
     return formatDirectorData(updatedDirector);
   }
 
-  static async deleteDirector(id, transaction) {
-    const foundDirector = await Director.findByPk(id);
+  static async deleteDirector(uuid, transaction) {
+    if (!isValidUUID(uuid)) {
+      throw badRequest('Invalid UUID format');
+    }
+    const foundDirector = await Director.findByPk(uuid);
     if (!foundDirector) {
       throw notFound('Director not found');
     }
     const deletedDirector = await Director.destroy({
-      where: { id },
+      where: { uuid },
       transaction,
     });
     if (!deletedDirector) {

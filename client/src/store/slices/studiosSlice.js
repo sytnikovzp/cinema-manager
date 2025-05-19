@@ -12,7 +12,7 @@ import {
 
 const studiosState = [
   {
-    id: null,
+    uuid: null,
     title: '',
     location: '',
     foundationYear: '',
@@ -50,13 +50,13 @@ const studiosSlice = createSlice({
     });
     builder.addCase(editStudio.fulfilled, (state, { payload }) => {
       state.studios = state.studios.map((studio) =>
-        studio.id === payload.id ? payload : studio
+        studio.uuid === payload.uuid ? payload : studio
       );
       state.status = 'Studio updated successfully!';
       state.error = null;
     });
     builder.addCase(removeStudio.fulfilled, (state, { payload }) => {
-      state.studios = state.studios.filter((studio) => studio.id !== payload);
+      state.studios = state.studios.filter((studio) => studio.uuid !== payload);
       state.status = 'Studio deleted successfully!';
       state.error = null;
     });

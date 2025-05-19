@@ -27,29 +27,32 @@ function CinemaService() {
         </Typography>
         <Routes>
           <Route element={<ActorsForm />} path={`/actors/new`} />
-          <Route element={<ActorsForm />} path={`/actors/new/:id`} />
+          <Route element={<ActorsForm />} path={`/actors/new/:uuid`} />
           <Route element={<ActorsForm />} path={`/actors/edit`} />
-          <Route element={<ActorsForm />} path={`/actors/edit/:id`} />
+          <Route element={<ActorsForm />} path={`/actors/edit/:uuid`} />
           <Route element={<DirectorsForm />} path={`/directors/new`} />
-          <Route element={<DirectorsForm />} path={`/directors/new/:id`} />
+          <Route element={<DirectorsForm />} path={`/directors/new/:uuid`} />
           <Route element={<DirectorsForm />} path={`/directors/edit`} />
-          <Route element={<DirectorsForm />} path={`/directors/edit/:id`} />
+          <Route element={<DirectorsForm />} path={`/directors/edit/:uuid`} />
           <Route element={<MoviesForm />} path={`/movies/new`} />
-          <Route element={<MoviesForm />} path={`/movies/new/:id`} />
+          <Route element={<MoviesForm />} path={`/movies/new/:uuid`} />
           <Route element={<MoviesForm />} path={`/movies/edit`} />
-          <Route element={<MoviesForm />} path={`/movies/edit/:id`} />
+          <Route element={<MoviesForm />} path={`/movies/edit/:uuid`} />
           <Route element={<StudiosForm />} path={`/studios/new`} />
-          <Route element={<StudiosForm />} path={`/studios/new/:id`} />
+          <Route element={<StudiosForm />} path={`/studios/new/:uuid`} />
           <Route element={<StudiosForm />} path={`/studios/edit`} />
-          <Route element={<StudiosForm />} path={`/studios/edit/:id`} />
+          <Route element={<StudiosForm />} path={`/studios/edit/:uuid`} />
           <Route element={<GenresForm />} path={`/services/new-genres`} />
-          <Route element={<GenresForm />} path={`/services/new-genres/:id`} />
+          <Route element={<GenresForm />} path={`/services/new-genres/:uuid`} />
           <Route element={<GenresForm />} path={`/services/edit-genres`} />
-          <Route element={<GenresForm />} path={`/services/edit-genres/:id`} />
+          <Route
+            element={<GenresForm />}
+            path={`/services/edit-genres/:uuid`}
+          />
           <Route element={<CountriesForm />} path={`/services/new-countries`} />
           <Route
             element={<CountriesForm />}
-            path={`/services/new-countries/:id`}
+            path={`/services/new-countries/:uuid`}
           />
           <Route
             element={<CountriesForm />}
@@ -57,12 +60,12 @@ function CinemaService() {
           />
           <Route
             element={<CountriesForm />}
-            path={`/services/edit-countries/:id`}
+            path={`/services/edit-countries/:uuid`}
           />
           <Route element={<LocationsForm />} path={`/services/new-locations`} />
           <Route
             element={<LocationsForm />}
-            path={`/services/new-locations/:id`}
+            path={`/services/new-locations/:uuid`}
           />
           <Route
             element={<LocationsForm />}
@@ -70,7 +73,7 @@ function CinemaService() {
           />
           <Route
             element={<LocationsForm />}
-            path={`/services/edit-locations/:id`}
+            path={`/services/edit-locations/:uuid`}
           />
         </Routes>
       </Paper>
