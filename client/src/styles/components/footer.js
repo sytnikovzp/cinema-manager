@@ -12,8 +12,8 @@ export const stylesFooterBox = {
   mt: 'auto',
   py: 2,
   borderTop: '1px solid rgba(0, 0, 0, 0.1)',
-  color: '#333',
   backgroundColor: getBackgroundColor,
+  color: '#333',
 };
 
 export const stylesFooterContainer = {

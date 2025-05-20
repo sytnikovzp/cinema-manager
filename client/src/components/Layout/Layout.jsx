@@ -7,10 +7,13 @@ import Grid from '@mui/material/Grid';
 
 import {
   styleLayoutBox,
+  styleLayoutCinemaServiceSize,
   styleLayoutDesktopNavbar,
   styleLayoutGridContainer,
   styleLayoutMainGridContainer,
   styleLayoutMobileNavbar,
+  styleLayoutNavbarSize,
+  styleLayoutOutletSize,
 } from '../../services/styleService';
 
 import Footer from '../Footer/Footer';
@@ -31,43 +34,29 @@ function Layout() {
 
   return (
     <Box sx={styleLayoutBox}>
-      <Grid container direction={'column'} sx={styleLayoutMainGridContainer}>
-        <Grid item xs={12}>
+      <Grid container direction='column' sx={styleLayoutMainGridContainer}>
+        <Grid>
           <Header onToggleNavBar={handleToggleNavBar} />
         </Grid>
         <Grid container sx={styleLayoutGridContainer}>
           <Container maxWidth='xl'>
-            <Grid container>
-              <Grid
-                item
-                lg={2}
-                md={2}
-                sm={12}
-                sx={styleLayoutDesktopNavbar}
-                xs={12}
-              >
+            <Grid container spacing={2}>
+              <Grid size={styleLayoutNavbarSize} sx={styleLayoutDesktopNavbar}>
                 <NavBar />
               </Grid>
-              <Grid
-                item
-                lg={2}
-                md={2}
-                sm={12}
-                sx={styleLayoutMobileNavbar}
-                xs={12}
-              >
+              <Grid size={styleLayoutNavbarSize} sx={styleLayoutMobileNavbar}>
                 {isNavBarOpen && <NavBar onClose={handleCloseNavBar} />}
               </Grid>
-              <Grid item lg={6} md={6} sm={12} xs={12}>
+              <Grid size={styleLayoutOutletSize}>
                 <Outlet />
               </Grid>
-              <Grid item lg={4} md={4} sm={12} xs={12}>
+              <Grid size={styleLayoutCinemaServiceSize}>
                 <CinemaService />
               </Grid>
             </Grid>
           </Container>
         </Grid>
-        <Grid item xs={12}>
+        <Grid>
           <Footer />
         </Grid>
       </Grid>

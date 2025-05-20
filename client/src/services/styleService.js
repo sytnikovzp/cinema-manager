@@ -7,21 +7,21 @@ function getBackgroundColor(theme) {
 // General style
 
 export const rootComponentPaperStyle = {
-  borderRadius: 1,
   display: 'flex',
   flexDirection: 'column',
   gap: 3,
   padding: '10px',
+  borderRadius: 1,
 };
 
 export const buttonMainStyle = {
-  height: '40px',
   width: '170px',
+  height: '40px',
 };
 
 export const textIndentStyle = {
-  textIndent: '2em',
   fontWeight: 'medium',
+  textIndent: '2em',
 };
 
 // NavBar component
@@ -39,8 +39,8 @@ export const navItemTextStyle = {
 
 export const stylesHomePageBox = {
   maxWidth: 900,
-  mx: 'auto',
   mt: 4,
+  mx: 'auto',
 };
 
 export const stylesHomePageAutoplayConfig = {
@@ -49,10 +49,10 @@ export const stylesHomePageAutoplayConfig = {
 };
 
 export const stylesHomePageCoverflowEffect = {
-  rotate: 0,
-  stretch: 0,
   depth: 150,
   modifier: 2.5,
+  rotate: 0,
+  stretch: 0,
   slideShadows: true,
 };
 
@@ -60,35 +60,35 @@ export const stylesHomePageSwiperSlideBox = {
   overflow: 'hidden',
   borderRadius: 2,
   boxShadow: 6,
-  cursor: 'pointer',
   transition: 'transform 0.3s ease-in-out',
+  cursor: 'pointer',
 };
 
 export const stylesHomePageSwiperSlideImg = {
+  display: 'block',
   width: '100%',
   height: '100%',
   objectFit: 'cover',
-  display: 'block',
 };
 
 export const skeletonHomePageStyles = {
+  width: '50%',
   height: '70vh',
   marginLeft: '25%',
   padding: '15px',
   borderRadius: '15px',
-  width: '50%',
 };
 
 // *form components
 
 export const formStyle = {
-  borderRadius: 0,
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   gap: 3,
-  paddingTop: '10px',
   minHeight: '65vh',
+  paddingTop: '10px',
+  borderRadius: 0,
 };
 
 export const formItemStyle = {
@@ -106,9 +106,9 @@ export const movieFormItemStyle = {
 
 export const fieldArrayStyle = {
   width: '100%',
-  paddingLeft: '10px',
   paddingRight: '10px',
   paddingBottom: '10px',
+  paddingLeft: '10px',
   borderRadius: '5px',
 };
 
@@ -117,43 +117,43 @@ export const stackButtonFormStyle = {
 };
 
 export const buttonFormStyle = {
-  height: '40px',
   width: '100px',
+  height: '40px',
 };
 
 export const wideButtonFormStyle = {
-  height: '40px',
   width: '120px',
+  height: '40px',
 };
 
 export const addButtonFormStyle = {
-  height: '40px',
   width: '200px',
+  height: '40px',
 };
 
 // *list components
 
 export const scrollListBoxStyle = {
-  minHeight: '55vh',
   overflowY: 'auto',
+  minHeight: '55vh',
 };
 
 export const itemListStyle = {
-  color: 'text.primary',
   border: '1px solid #009688',
   borderRadius: 5,
+  color: 'text.primary',
 };
 
 export const scrollServicesListBoxStyle = {
-  height: '45vh',
   overflowY: 'auto',
+  height: '45vh',
 };
 
 // *item components
 
 export const scrollItemBoxStyle = {
-  height: '55vh',
   overflowY: 'auto',
+  height: '55vh',
 };
 
 export const itemComponentBoxMainStyle = {
@@ -173,21 +173,21 @@ export const itemInformationBoxStyle = {
   display: 'flex',
   flexDirection: 'column',
   width: '65%',
-  textAlign: 'justify',
   paddingRight: 2,
+  textAlign: 'justify',
 };
 
 export const itemLinkStyle = {
-  textDecoration: 'underline dotted',
   color: 'inherit',
+  textDecoration: 'underline dotted',
 };
 
 // MoviesPlayer component
 
 export const playerStyle = {
-  ml: 2,
   mr: 2,
   mb: 2,
+  ml: 2,
   boxShadow: '0 10px 15px rgba(0, 0, 0, 0.7)',
 };
 
@@ -212,13 +212,13 @@ export const styleListListItemButton = {
 
 export const styleItemCreatedAtLabel = {
   fontWeight: 'bold',
-  textAlign: 'right',
   color: 'gray',
+  textAlign: 'right',
 };
 
 export const styleItemCreatedAtValue = {
-  textAlign: 'right',
   color: 'gray',
+  textAlign: 'right',
 };
 
 export const styleCinemaServiceBox = {
@@ -227,9 +227,9 @@ export const styleCinemaServiceBox = {
 };
 
 export const styleCinemaServiceTypography = {
-  textAlign: 'center',
   paddingTop: 1,
   paddingBottom: 1,
+  textAlign: 'center',
 };
 
 export const styleLayoutBox = {
@@ -240,14 +240,14 @@ export const styleLayoutBox = {
 
 export const styleLayoutMainGridContainer = {
   flexGrow: 1,
-  color: 'text.primary',
   backgroundColor: getBackgroundColor,
+  color: 'text.primary',
 };
 
 export const styleLayoutGridContainer = {
+  flex: 1,
   mt: '1rem',
   mb: '1rem',
-  flex: 1,
 };
 
 export const styleLayoutDesktopNavbar = {
@@ -256,4 +256,19 @@ export const styleLayoutDesktopNavbar = {
 
 export const styleLayoutMobileNavbar = {
   display: { xs: 'block', md: 'none' },
+};
+
+export const styleLayoutNavbarSize = {
+  xs: 12,
+  md: 2,
+};
+
+export const styleLayoutOutletSize = {
+  xs: 12,
+  md: 6,
+};
+
+export const styleLayoutCinemaServiceSize = {
+  xs: 12,
+  md: 4,
 };

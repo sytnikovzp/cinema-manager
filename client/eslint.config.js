@@ -117,7 +117,7 @@ export default [
       'max-classes-per-file': ['error', 1],
       'max-nested-callbacks': ['error', 5],
       'mui-path-imports/mui-path-imports': 'warn',
-      // 'mui-sx-order/sort-sx-keys': 'warn',
+      'mui-sx-order/sort-sx-keys': 'warn',
       'new-cap': 'off',
       'new-parens': 'error',
       'no-alert': 'error',
@@ -220,15 +220,7 @@ export default [
           property: 'import',
         },
       ],
-      'no-restricted-syntax': [
-        'error',
-        'WithStatement',
-        // {
-        //   selector: "LogicalExpression[operator='||']",
-        //   message:
-        //     'Используйте ?? вместо || для проверки на null или undefined.',
-        // },
-      ],
+      'no-restricted-syntax': ['error', 'WithStatement'],
       'no-return-assign': 'error',
       'no-return-await': 'error',
       'no-script-url': 'error',

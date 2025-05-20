@@ -264,7 +264,7 @@ function DirectorsItem() {
               )}
               {tabIndex === 1 && director.biography && (
                 <DirectorsBiography biography={director.biography} />
-              )}{' '}
+              )}
             </Box>
           </Box>
         )}
