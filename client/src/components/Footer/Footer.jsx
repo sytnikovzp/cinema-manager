@@ -42,7 +42,7 @@ function Footer() {
     <Box component='footer' sx={stylesFooterBox}>
       <Container maxWidth='xl' sx={stylesFooterContainer}>
         <Typography sx={stylesFooterTypography} variant='body2'>
-          © {years} Alexandr Sytnikov. All rights reserved.
+          © {years} Oleksandr Sytnikov. All rights reserved.
         </Typography>
         <Box sx={stylesFooterSocialLinks}>
           {socialLinks.map(({ href, icon }) => (

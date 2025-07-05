@@ -242,4 +242,4 @@ CTRL + C
 
 ---
 
-<p align="center">© 2024–2025 Alexandr Sytnikov. All rights reserved.</p>
+<p align="center">© 2024–2025 Oleksandr Sytnikov. All rights reserved.</p>

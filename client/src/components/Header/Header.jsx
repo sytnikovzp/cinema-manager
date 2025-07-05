@@ -71,7 +71,7 @@ function Header() {
               <Tooltip title='Open settings'>
                 <IconButton>
                   <Avatar
-                    alt='Alexandr Sytnikov'
+                    alt='Oleksandr Sytnikov'
                     src='https://avatars.githubusercontent.com/u/154733849?v=4'
                   />
                 </IconButton>
