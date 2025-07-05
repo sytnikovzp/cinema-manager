@@ -1,9 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Navigate,
-  Route,
-  Routes,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Actors from './components/Actors/Actors';
 import Directors from './components/Directors/Directors';
@@ -13,6 +8,8 @@ import Movies from './components/Movies/Movies';
 import Services from './components/Service/Services';
 import SnackbarNotify from './components/SnackbarNotify/SnackbarNotify';
 import Studios from './components/Studios/Studios';
+
+import NotFoundPage from './pages/NotFound/NotFoundPage';
 
 import { SnackbarProvider } from './contexts/SnackbarContext';
 
@@ -28,7 +25,7 @@ function App() {
             <Route element={<Directors />} path='directors/*' />
             <Route element={<Studios />} path='studios/*' />
             <Route element={<Services />} path='services/*' />
-            <Route element={<Navigate replace to='/' />} path='*' />
+            <Route element={<NotFoundPage />} path='*' />
           </Route>
         </Routes>
         <SnackbarNotify />
