@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-import { BASE_URL } from '../constants';
+import { API_CONFIG } from '../constants';
 
 export default axios.create({
-  baseURL: BASE_URL,
+  baseURL: API_CONFIG.BASE_URL,
   headers: { 'Content-Type': 'application/json' },
 });

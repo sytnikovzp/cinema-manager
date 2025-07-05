@@ -21,7 +21,6 @@ import BackspaceIcon from '@mui/icons-material/Backspace';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import SaveIcon from '@mui/icons-material/Save';
 
-import { emptyDirector } from '../../constants';
 import useFetchData from '../../hooks/useFetchData';
 
 import {
@@ -44,6 +43,16 @@ import {
 
 import SnackbarContext from '../../contexts/SnackbarContext';
 import BasicAutocompleteField from '../Autocomplete/BasicAutocompleteField';
+
+const emptyDirector = {
+  uuid: null,
+  fullName: '',
+  country: '',
+  birthDate: '',
+  deathDate: '',
+  photo: '',
+  biography: '',
+};
 
 function DirectorForm() {
   const { uuid } = useParams();

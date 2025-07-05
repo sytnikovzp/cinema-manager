@@ -15,8 +15,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
-import { emptyDirector } from '../../constants';
-
 import { getDirectorByUuid } from '../../services/directorService';
 import { calculateAge } from '../../services/itemService';
 import {
@@ -36,6 +34,16 @@ import SnackbarContext from '../../contexts/SnackbarContext';
 import ItemSkeleton from '../SkeletonLoader/ItemSkeleton';
 
 import DirectorsBiography from './DirectorsBiography';
+
+const emptyDirector = {
+  uuid: null,
+  fullName: '',
+  country: '',
+  birthDate: '',
+  deathDate: '',
+  photo: '',
+  biography: '',
+};
 
 function DirectorsItem() {
   const { uuid } = useParams();

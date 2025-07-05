@@ -21,7 +21,6 @@ import BackspaceIcon from '@mui/icons-material/Backspace';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import SaveIcon from '@mui/icons-material/Save';
 
-import { emptyStudio } from '../../constants';
 import useFetchData from '../../hooks/useFetchData';
 
 import {
@@ -44,6 +43,15 @@ import {
 
 import SnackbarContext from '../../contexts/SnackbarContext';
 import BasicAutocompleteField from '../Autocomplete/BasicAutocompleteField';
+
+const emptyStudio = {
+  uuid: null,
+  title: '',
+  location: '',
+  foundationYear: '',
+  logo: '',
+  about: '',
+};
 
 function StudioForm() {
   const { uuid } = useParams();

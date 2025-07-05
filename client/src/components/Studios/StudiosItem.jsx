@@ -15,8 +15,6 @@ import DomainAddIcon from '@mui/icons-material/DomainAdd';
 import EditIcon from '@mui/icons-material/Edit';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
-import { emptyStudio } from '../../constants';
-
 import { getStudioByUuid } from '../../services/studioService';
 import {
   buttonMainStyle,
@@ -35,6 +33,15 @@ import SnackbarContext from '../../contexts/SnackbarContext';
 import ItemSkeleton from '../SkeletonLoader/ItemSkeleton';
 
 import StudiosAbout from './StudiosAbout';
+
+const emptyStudio = {
+  uuid: null,
+  title: '',
+  location: '',
+  foundationYear: '',
+  logo: '',
+  about: '',
+};
 
 function StudiosItem() {
   const { uuid } = useParams();

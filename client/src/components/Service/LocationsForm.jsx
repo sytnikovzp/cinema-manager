@@ -15,7 +15,6 @@ import BackspaceIcon from '@mui/icons-material/Backspace';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import SaveIcon from '@mui/icons-material/Save';
 
-import { emptyLocation } from '../../constants';
 import useFetchData from '../../hooks/useFetchData';
 
 import { STRING_SCHEMA, TITLE_NAME_SCHEMA } from '../../services/itemService';
@@ -34,6 +33,13 @@ import {
 
 import SnackbarContext from '../../contexts/SnackbarContext';
 import BasicAutocompleteField from '../Autocomplete/BasicAutocompleteField';
+
+const emptyLocation = {
+  uuid: null,
+  title: '',
+  country: '',
+  coatOfArms: '',
+};
 
 function LocationsForm() {
   const { uuid } = useParams();

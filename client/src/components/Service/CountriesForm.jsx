@@ -15,8 +15,6 @@ import BackspaceIcon from '@mui/icons-material/Backspace';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import SaveIcon from '@mui/icons-material/Save';
 
-import { emptyCountry } from '../../constants';
-
 import {
   createCountry,
   getCountryByUuid,
@@ -32,6 +30,12 @@ import {
 } from '../../services/styleService';
 
 import SnackbarContext from '../../contexts/SnackbarContext';
+
+const emptyCountry = {
+  uuid: null,
+  title: '',
+  flag: '',
+};
 
 function CountriesForm() {
   const { uuid } = useParams();

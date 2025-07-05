@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { MOVIES_SLICE_NAME } from '../../constants';
+import { SLICE_NAMES } from '../../constants';
 import { setErrorState, setFetchingState } from '../../utils/reduxHelpers';
 
 import {
@@ -32,7 +32,7 @@ const initialState = {
 };
 
 const moviesSlice = createSlice({
-  name: MOVIES_SLICE_NAME,
+  name: SLICE_NAMES.MOVIES_SLICE_NAME,
   initialState,
   reducers: {
     resetStatus(state) {

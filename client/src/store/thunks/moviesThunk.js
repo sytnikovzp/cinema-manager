@@ -1,13 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { MOVIES_SLICE_NAME } from '../../constants';
+import { SLICE_NAMES } from '../../constants';
 import api from '../../api';
 
 export const fetchMovies = createAsyncThunk(
-  `${MOVIES_SLICE_NAME}/fetchAll`,
+  `${SLICE_NAMES.MOVIES_SLICE_NAME}/fetchAll`,
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await api.get(`/${MOVIES_SLICE_NAME}`);
+      const { data } = await api.get(`/${SLICE_NAMES.MOVIES_SLICE_NAME}`);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -16,10 +16,13 @@ export const fetchMovies = createAsyncThunk(
 );
 
 export const addMovie = createAsyncThunk(
-  `${MOVIES_SLICE_NAME}/add`,
+  `${SLICE_NAMES.MOVIES_SLICE_NAME}/add`,
   async (movie, { rejectWithValue }) => {
     try {
-      const { data } = await api.post(`/${MOVIES_SLICE_NAME}`, movie);
+      const { data } = await api.post(
+        `/${SLICE_NAMES.MOVIES_SLICE_NAME}`,
+        movie
+      );
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -28,11 +31,11 @@ export const addMovie = createAsyncThunk(
 );
 
 export const editMovie = createAsyncThunk(
-  `${MOVIES_SLICE_NAME}/edit`,
+  `${SLICE_NAMES.MOVIES_SLICE_NAME}/edit`,
   async (movie, { rejectWithValue }) => {
     try {
       const { data } = await api.patch(
-        `/${MOVIES_SLICE_NAME}/${movie.uuid}`,
+        `/${SLICE_NAMES.MOVIES_SLICE_NAME}/${movie.uuid}`,
         movie
       );
       return data;
@@ -43,10 +46,10 @@ export const editMovie = createAsyncThunk(
 );
 
 export const removeMovie = createAsyncThunk(
-  `${MOVIES_SLICE_NAME}/remove`,
+  `${SLICE_NAMES.MOVIES_SLICE_NAME}/remove`,
   async (uuid, { rejectWithValue }) => {
     try {
-      await api.delete(`/${MOVIES_SLICE_NAME}/${uuid}`);
+      await api.delete(`/${SLICE_NAMES.MOVIES_SLICE_NAME}/${uuid}`);
       return uuid;
     } catch (error) {
       return rejectWithValue(error.message);

@@ -15,8 +15,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
-import { emptyActor } from '../../constants';
-
 import { getActorByUuid } from '../../services/actorService';
 import { calculateAge } from '../../services/itemService';
 import {
@@ -36,6 +34,16 @@ import SnackbarContext from '../../contexts/SnackbarContext';
 import ItemSkeleton from '../SkeletonLoader/ItemSkeleton';
 
 import ActorsBiography from './ActorsBiography';
+
+const emptyActor = {
+  uuid: null,
+  fullName: '',
+  country: '',
+  birthDate: '',
+  deathDate: '',
+  photo: '',
+  biography: '',
+};
 
 function ActorsItem() {
   const { uuid } = useParams();

@@ -15,8 +15,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import VideoCallIcon from '@mui/icons-material/VideoCall';
 
-import { emptyMovie } from '../../constants';
-
 import { getMovieByUuid } from '../../services/movieService';
 import {
   buttonMainStyle,
@@ -36,6 +34,19 @@ import SnackbarContext from '../../contexts/SnackbarContext';
 import ItemSkeleton from '../SkeletonLoader/ItemSkeleton';
 
 import MoviesPlayer from './MoviesPlayer';
+
+const emptyMovie = {
+  uuid: null,
+  title: '',
+  genre: '',
+  releaseYear: '',
+  poster: '',
+  trailer: '',
+  directors: [''],
+  actors: [''],
+  studios: [''],
+  storyline: '',
+};
 
 function MoviesItem() {
   const { uuid } = useParams();

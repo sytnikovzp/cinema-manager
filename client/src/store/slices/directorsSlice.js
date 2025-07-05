@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { DIRECTORS_SLICE_NAME } from '../../constants';
+import { SLICE_NAMES } from '../../constants';
 import { setErrorState, setFetchingState } from '../../utils/reduxHelpers';
 
 import {
@@ -29,7 +29,7 @@ const initialState = {
 };
 
 const directorsSlice = createSlice({
-  name: DIRECTORS_SLICE_NAME,
+  name: SLICE_NAMES.DIRECTORS_SLICE_NAME,
   initialState,
   reducers: {
     resetStatus(state) {
@@ -51,7 +51,7 @@ const directorsSlice = createSlice({
     });
     builder.addCase(editDirector.fulfilled, (state, { payload }) => {
       state.directors = state.directors.map((director) =>
-        (director.uuid === payload.uuid ? payload : director)
+        director.uuid === payload.uuid ? payload : director
       );
       state.status = 'Director updated successfully!';
       state.error = null;

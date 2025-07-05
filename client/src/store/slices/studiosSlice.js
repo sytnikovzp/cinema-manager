@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { STUDIOS_SLICE_NAME } from '../../constants';
+import { SLICE_NAMES } from '../../constants';
 import { setErrorState, setFetchingState } from '../../utils/reduxHelpers';
 
 import {
@@ -28,7 +28,7 @@ const initialState = {
 };
 
 const studiosSlice = createSlice({
-  name: STUDIOS_SLICE_NAME,
+  name: SLICE_NAMES.STUDIOS_SLICE_NAME,
   initialState,
   reducers: {
     resetStatus(state) {

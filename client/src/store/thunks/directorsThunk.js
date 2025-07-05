@@ -1,13 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { DIRECTORS_SLICE_NAME } from '../../constants';
+import { SLICE_NAMES } from '../../constants';
 import api from '../../api';
 
 export const fetchDirectors = createAsyncThunk(
-  `${DIRECTORS_SLICE_NAME}/fetchAll`,
+  `${SLICE_NAMES.DIRECTORS_SLICE_NAME}/fetchAll`,
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await api.get(`/${DIRECTORS_SLICE_NAME}`);
+      const { data } = await api.get(`/${SLICE_NAMES.DIRECTORS_SLICE_NAME}`);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -16,10 +16,13 @@ export const fetchDirectors = createAsyncThunk(
 );
 
 export const addDirector = createAsyncThunk(
-  `${DIRECTORS_SLICE_NAME}/add`,
+  `${SLICE_NAMES.DIRECTORS_SLICE_NAME}/add`,
   async (director, { rejectWithValue }) => {
     try {
-      const { data } = await api.post(`/${DIRECTORS_SLICE_NAME}`, director);
+      const { data } = await api.post(
+        `/${SLICE_NAMES.DIRECTORS_SLICE_NAME}`,
+        director
+      );
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -28,11 +31,11 @@ export const addDirector = createAsyncThunk(
 );
 
 export const editDirector = createAsyncThunk(
-  `${DIRECTORS_SLICE_NAME}/edit`,
+  `${SLICE_NAMES.DIRECTORS_SLICE_NAME}/edit`,
   async (director, { rejectWithValue }) => {
     try {
       const { data } = await api.patch(
-        `/${DIRECTORS_SLICE_NAME}/${director.uuid}`,
+        `/${SLICE_NAMES.DIRECTORS_SLICE_NAME}/${director.uuid}`,
         director
       );
       return data;
@@ -43,10 +46,10 @@ export const editDirector = createAsyncThunk(
 );
 
 export const removeDirector = createAsyncThunk(
-  `${DIRECTORS_SLICE_NAME}/remove`,
+  `${SLICE_NAMES.DIRECTORS_SLICE_NAME}/remove`,
   async (uuid, { rejectWithValue }) => {
     try {
-      await api.delete(`/${DIRECTORS_SLICE_NAME}/${uuid}`);
+      await api.delete(`/${SLICE_NAMES.DIRECTORS_SLICE_NAME}/${uuid}`);
       return uuid;
     } catch (error) {
       return rejectWithValue(error.message);

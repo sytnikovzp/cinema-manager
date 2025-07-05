@@ -29,7 +29,6 @@ import DomainAddIcon from '@mui/icons-material/DomainAdd';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import SaveIcon from '@mui/icons-material/Save';
 
-import { emptyMovie } from '../../constants';
 import useFetchData from '../../hooks/useFetchData';
 
 import {
@@ -56,6 +55,19 @@ import {
 import SnackbarContext from '../../contexts/SnackbarContext';
 import BasicAutocompleteField from '../Autocomplete/BasicAutocompleteField';
 import FieldArrayAutocompleteField from '../Autocomplete/FieldArrayAutocompleteField';
+
+const emptyMovie = {
+  uuid: null,
+  title: '',
+  genre: '',
+  releaseYear: '',
+  poster: '',
+  trailer: '',
+  directors: [''],
+  actors: [''],
+  studios: [''],
+  storyline: '',
+};
 
 function MovieForm() {
   const { uuid } = useParams();
