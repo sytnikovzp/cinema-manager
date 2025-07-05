@@ -185,9 +185,9 @@ export const itemLinkStyle = {
 // MoviesPlayer component
 
 export const playerStyle = {
-  mr: 2,
-  mb: 2,
-  ml: 2,
+  width: '95%',
+  height: '35vh',
+  m: 2,
   boxShadow: '0 10px 15px rgba(0, 0, 0, 0.7)',
 };
 

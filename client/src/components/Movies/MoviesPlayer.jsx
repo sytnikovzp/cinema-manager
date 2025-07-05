@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import ReactPlayer from 'react-player/lazy';
+import ReactPlayer from 'react-player';
 
 import Box from '@mui/material/Box';
 
@@ -9,11 +9,9 @@ const config = {
   youtube: {
     playerVars: {
       autoplay: 1,
-      controls: 2,
+      controls: 1,
       iv_load_policy: 3,
       rel: 0,
-      showinfo: 0,
-      modestbranding: 1,
       cc_load_policy: 1,
       origin: 'http://localhost:3000',
     },
@@ -28,10 +26,12 @@ function MoviesPlayer({ trailer }) {
     <Box sx={scrollItemBoxStyle}>
       <Box sx={playerStyle}>
         <ReactPlayer
+          controls
           light
+          playing
           config={config}
-          minheight='35vh'
-          url={trailer}
+          height='100%'
+          src={trailer}
           width='100%'
         />
       </Box>
