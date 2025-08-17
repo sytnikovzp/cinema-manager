@@ -61,7 +61,13 @@ function GenreForm() {
     }
   }, [uuid, fetchGenre]);
 
-  const handleGoBack = useCallback(() => navigate(`/services`), [navigate]);
+  const handleGoBack = useCallback(() => {
+    if (uuid === ':uuid') {
+      navigate(`/genres`);
+    } else {
+      navigate(`/genres/${uuid}`);
+    }
+  }, [uuid, navigate]);
 
   const validationSchema = Yup.object().shape({
     title: TITLE_NAME_SCHEMA,
@@ -74,16 +80,17 @@ function GenreForm() {
         if (values.uuid) {
           await updateGenre(values);
           showSnackbar('Genre updated successfully!', 'success');
+          navigate(`/genres/${uuid}`);
         } else {
           await createGenre(values);
           showSnackbar('Genre created successfully!', 'success');
+          navigate(`/genres`);
         }
-        navigate(`/services`);
       } catch (error) {
         showSnackbar(error.message, 'error');
       }
     },
-    [navigate, showSnackbar]
+    [uuid, navigate, showSnackbar]
   );
 
   const renderForm = ({ values, errors, touched, setFieldValue }) => (

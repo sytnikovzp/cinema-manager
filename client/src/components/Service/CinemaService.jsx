@@ -41,39 +41,18 @@ function CinemaService() {
           <Route element={<StudiosForm />} path={`/studios/new/:uuid`} />
           <Route element={<StudiosForm />} path={`/studios/edit`} />
           <Route element={<StudiosForm />} path={`/studios/edit/:uuid`} />
-          <Route element={<GenresForm />} path={`/services/new-genres`} />
-          <Route element={<GenresForm />} path={`/services/new-genres/:uuid`} />
-          <Route element={<GenresForm />} path={`/services/edit-genres`} />
-          <Route
-            element={<GenresForm />}
-            path={`/services/edit-genres/:uuid`}
-          />
-          <Route element={<CountriesForm />} path={`/services/new-countries`} />
-          <Route
-            element={<CountriesForm />}
-            path={`/services/new-countries/:uuid`}
-          />
-          <Route
-            element={<CountriesForm />}
-            path={`/services/edit-countries`}
-          />
-          <Route
-            element={<CountriesForm />}
-            path={`/services/edit-countries/:uuid`}
-          />
-          <Route element={<LocationsForm />} path={`/services/new-locations`} />
-          <Route
-            element={<LocationsForm />}
-            path={`/services/new-locations/:uuid`}
-          />
-          <Route
-            element={<LocationsForm />}
-            path={`/services/edit-locations`}
-          />
-          <Route
-            element={<LocationsForm />}
-            path={`/services/edit-locations/:uuid`}
-          />
+          <Route element={<GenresForm />} path={`/genres/new`} />
+          <Route element={<GenresForm />} path={`/genres/new/:uuid`} />
+          <Route element={<GenresForm />} path={`/genres/edit`} />
+          <Route element={<GenresForm />} path={`/genres/edit/:uuid`} />
+          <Route element={<CountriesForm />} path={`/countries/new`} />
+          <Route element={<CountriesForm />} path={`/countries/new/:uuid`} />
+          <Route element={<CountriesForm />} path={`/countries/edit`} />
+          <Route element={<CountriesForm />} path={`/countries/edit/:uuid`} />
+          <Route element={<LocationsForm />} path={`/locations/new`} />
+          <Route element={<LocationsForm />} path={`/locations/new/:uuid`} />
+          <Route element={<LocationsForm />} path={`/locations/edit`} />
+          <Route element={<LocationsForm />} path={`/locations/edit/:uuid`} />
         </Routes>
       </Paper>
     </Box>

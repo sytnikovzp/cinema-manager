@@ -12,9 +12,11 @@ import Paper from '@mui/material/Paper';
 
 import AssuredWorkloadIcon from '@mui/icons-material/AssuredWorkload';
 import HomeIcon from '@mui/icons-material/Home';
-import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import MovieFilterIcon from '@mui/icons-material/MovieFilter';
+import PublicIcon from '@mui/icons-material/Public';
 import RecentActorsIcon from '@mui/icons-material/RecentActors';
+import TheatersIcon from '@mui/icons-material/Theaters';
 import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 
 import { navBarBox, navItemTextStyle } from '@/src/services/styleService';
@@ -52,7 +54,7 @@ function NavBar({ onClose }) {
             >
               <ListItemButton>
                 <ListItemIcon>
-                  <MovieFilterIcon />
+                  <TheatersIcon />
                 </ListItemIcon>
                 <ListItemText primary='Movies' sx={navItemTextStyle} />
               </ListItemButton>
@@ -104,14 +106,42 @@ function NavBar({ onClose }) {
             <ListItem
               disablePadding
               component={Link}
-              to={`/services`}
+              to={`/genres`}
               onClick={handleItemClick}
             >
               <ListItemButton>
                 <ListItemIcon>
-                  <MiscellaneousServicesIcon />
+                  <MovieFilterIcon />
                 </ListItemIcon>
-                <ListItemText primary='Service' sx={navItemTextStyle} />
+                <ListItemText primary='Genres' sx={navItemTextStyle} />
+              </ListItemButton>
+            </ListItem>
+
+            <ListItem
+              disablePadding
+              component={Link}
+              to={`/countries`}
+              onClick={handleItemClick}
+            >
+              <ListItemButton>
+                <ListItemIcon>
+                  <PublicIcon />
+                </ListItemIcon>
+                <ListItemText primary='Countries' sx={navItemTextStyle} />
+              </ListItemButton>
+            </ListItem>
+
+            <ListItem
+              disablePadding
+              component={Link}
+              to={`/locations`}
+              onClick={handleItemClick}
+            >
+              <ListItemButton>
+                <ListItemIcon>
+                  <LocationOnIcon />
+                </ListItemIcon>
+                <ListItemText primary='Locations' sx={navItemTextStyle} />
               </ListItemButton>
             </ListItem>
           </List>

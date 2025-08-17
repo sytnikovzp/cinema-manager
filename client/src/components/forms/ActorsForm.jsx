@@ -66,7 +66,13 @@ function ActorForm() {
   const fetchActor = useCallback(async () => {
     try {
       const actor = await getActorByUuid(uuid);
-      setInitialValues(actor);
+      setInitialValues({
+        ...actor,
+        country:
+          typeof actor.country === 'object' && actor.country !== null
+            ? actor.country.title
+            : actor.country,
+      });
     } catch (error) {
       showSnackbar(error.message, 'error');
     }

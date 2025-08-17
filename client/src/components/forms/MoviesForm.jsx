@@ -86,7 +86,13 @@ function MovieForm() {
   const fetchMovie = useCallback(async () => {
     try {
       const movie = await getMovieByUuid(uuid);
-      setInitialValues(movie);
+      setInitialValues({
+        ...movie,
+        genre:
+          typeof movie.genre === 'object' && movie.genre !== null
+            ? movie.genre.title
+            : movie.genre,
+      });
     } catch (error) {
       showSnackbar(error.message, 'error');
     }
@@ -109,7 +115,7 @@ function MovieForm() {
   }, [uuid, navigate]);
 
   const optionsForEntities = (entities, key) =>
-    (entities.length > 1
+    entities.length > 1
       ? entities.map((option) => {
           const firstLetter = option[key][0].toUpperCase();
           return {
@@ -117,7 +123,7 @@ function MovieForm() {
             ...option,
           };
         })
-      : []);
+      : [];
 
   const optionsForActors = optionsForEntities(actors, 'fullName');
   const optionsForDirectors = optionsForEntities(directors, 'fullName');
@@ -170,17 +176,17 @@ function MovieForm() {
         directors: values.directors
           .filter((v) => v)
           .map((v) =>
-            (typeof v === 'object' ? v.fullName || v.title || '' : String(v))
+            typeof v === 'object' ? v.fullName || v.title || '' : String(v)
           ),
         actors: values.actors
           .filter((v) => v)
           .map((v) =>
-            (typeof v === 'object' ? v.fullName || v.title || '' : String(v))
+            typeof v === 'object' ? v.fullName || v.title || '' : String(v)
           ),
         studios: values.studios
           .filter((v) => v)
           .map((v) =>
-            (typeof v === 'object' ? v.title || v.fullName || '' : String(v))
+            typeof v === 'object' ? v.title || v.fullName || '' : String(v)
           ),
       };
 
@@ -438,7 +444,7 @@ function MovieForm() {
                           typeof actor === 'string' ? actor : actor.fullName;
 
                         const actorNamesInValues = values.actors.map((a) =>
-                          (typeof a === 'string' ? a : a.fullName)
+                          typeof a === 'string' ? a : a.fullName
                         );
 
                         return (
@@ -509,7 +515,7 @@ function MovieForm() {
                           typeof studio === 'string' ? studio : studio.title;
 
                         const studioNamesInValues = values.studios.map((s) =>
-                          (typeof s === 'string' ? s : s.title)
+                          typeof s === 'string' ? s : s.title
                         );
 
                         return (

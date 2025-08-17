@@ -8,7 +8,7 @@ function BasicAutocompleteField({ name, options, getOptionLabel, label }) {
     <Field name={name}>
       {({ field, form }) => {
         const currentValue =
-          options.find((option) => option.title === field.value.title) || null;
+          options.find((option) => option.title === field.value) || null;
 
         return (
           <Autocomplete

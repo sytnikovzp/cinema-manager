@@ -61,7 +61,13 @@ function CountriesForm() {
     }
   }, [uuid, fetchCountry]);
 
-  const handleGoBack = useCallback(() => navigate(`/services`), [navigate]);
+  const handleGoBack = useCallback(() => {
+    if (uuid === ':uuid') {
+      navigate(`/countries`);
+    } else {
+      navigate(`/countries/${uuid}`);
+    }
+  }, [uuid, navigate]);
 
   const validationSchema = Yup.object().shape({
     title: TITLE_NAME_SCHEMA,
@@ -74,16 +80,17 @@ function CountriesForm() {
         if (values.uuid) {
           await updateCountry(values);
           showSnackbar('Country updated successfully!', 'success');
+          navigate(`/countries/${uuid}`);
         } else {
           await createCountry(values);
           showSnackbar('Country created successfully!', 'success');
+          navigate(`/countries`);
         }
-        navigate(`/services`);
       } catch (error) {
         showSnackbar(error.message, 'error');
       }
     },
-    [navigate, showSnackbar]
+    [uuid, navigate, showSnackbar]
   );
 
   const renderForm = ({ values, errors, touched, setFieldValue }) => (

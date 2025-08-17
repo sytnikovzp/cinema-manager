@@ -53,7 +53,13 @@ function LocationsForm() {
   const fetchLocation = useCallback(async () => {
     try {
       const location = await getLocationByUuid(uuid);
-      setInitialValues(location);
+      setInitialValues({
+        ...location,
+        country:
+          typeof location.country === 'object'
+            ? location.country.title
+            : location.country,
+      });
     } catch (error) {
       showSnackbar(error.message, 'error');
     }
@@ -67,7 +73,13 @@ function LocationsForm() {
     }
   }, [uuid, fetchLocation]);
 
-  const handleGoBack = useCallback(() => navigate(`/services`), [navigate]);
+  const handleGoBack = useCallback(() => {
+    if (uuid === ':uuid') {
+      navigate(`/locations`);
+    } else {
+      navigate(`/locations/${uuid}`);
+    }
+  }, [uuid, navigate]);
 
   const sortedCountries = countries
     .slice()
@@ -85,16 +97,17 @@ function LocationsForm() {
         if (values.uuid) {
           await updateLocation(values);
           showSnackbar('Location updated successfully!', 'success');
+          navigate(`/locations/${uuid}`);
         } else {
           await createLocation(values);
           showSnackbar('Location created successfully!', 'success');
+          navigate(`/locations`);
         }
-        navigate(`/services`);
       } catch (error) {
         showSnackbar(error.message, 'error');
       }
     },
-    [navigate, showSnackbar]
+    [uuid, navigate, showSnackbar]
   );
 
   const renderForm = ({ values, errors, touched, setFieldValue }) => (

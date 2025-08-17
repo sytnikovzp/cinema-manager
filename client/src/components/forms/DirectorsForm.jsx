@@ -66,7 +66,13 @@ function DirectorForm() {
   const fetchDirector = useCallback(async () => {
     try {
       const director = await getDirectorByUuid(uuid);
-      setInitialValues(director);
+      setInitialValues({
+        ...director,
+        country:
+          typeof director.country === 'object'
+            ? director.country.title
+            : director.country,
+      });
     } catch (error) {
       showSnackbar(error.message, 'error');
     }

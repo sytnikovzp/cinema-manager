@@ -64,7 +64,13 @@ function StudioForm() {
   const fetchStudio = useCallback(async () => {
     try {
       const studio = await getStudioByUuid(uuid);
-      setInitialValues(studio);
+      setInitialValues({
+        ...studio,
+        location:
+          typeof studio.location === 'object'
+            ? studio.location.title
+            : studio.location,
+      });
     } catch (error) {
       showSnackbar(error.message, 'error');
     }

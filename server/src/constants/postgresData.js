@@ -128,7 +128,7 @@ const postgresData = () => {
         updated_at: now,
       },
       {
-        title: 'Great Britain (England)',
+        title: 'Great Britain',
         flag: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_United_Kingdom_%281-2%29.svg/1200px-Flag_of_the_United_Kingdom_%281-2%29.svg.png',
         created_at: now,
         updated_at: now,
@@ -383,7 +383,7 @@ const postgresData = () => {
       },
       {
         title: 'London',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         coat_of_arms:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Coat_of_Arms_of_The_City_of_London.svg/250px-Coat_of_Arms_of_The_City_of_London.svg.png',
         created_at: now,
@@ -477,7 +477,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Phoebe Waller-Bridge',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Nicola_Benedetti_Humza_Yousaf_Phoebe_Waller-Bridge_-_All_Festivals_Reception_%28Waller-Bridge_cropped%29_%28cropped%29.jpg/440px-Nicola_Benedetti_Humza_Yousaf_Phoebe_Waller-Bridge_-_All_Festivals_Reception_%28Waller-Bridge_cropped%29_%28cropped%29.jpg',
         biography:
@@ -537,7 +537,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Veronica Cartwright',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Veronica_Cartwright_2022.jpg/440px-Veronica_Cartwright_2022.jpg',
         biography:
@@ -549,7 +549,7 @@ const postgresData = () => {
       },
       {
         full_name: 'John Hurt',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/John_Hurt_at_the_2009_Tribeca_Film_Festival.jpg/440px-John_Hurt_at_the_2009_Tribeca_Film_Festival.jpg',
         biography:
@@ -561,7 +561,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Ian Holm',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Ian_Holm.jpg/440px-Ian_Holm.jpg',
         biography:
@@ -621,7 +621,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Keira Knightley',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/b/b1/KeiraKnightleyByAndreaRaffin2011_%28cropped%29.jpg',
         biography:
@@ -633,7 +633,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Orlando Bloom',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Orlando_Bloom_Cannes_2013.jpg/440px-Orlando_Bloom_Cannes_2013.jpg',
         biography:
@@ -657,7 +657,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Kevin McNally',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Kevin_McNally_by_Gage_Skidmore.jpg/440px-Kevin_McNally_by_Gage_Skidmore.jpg',
         biography:
@@ -681,11 +681,11 @@ const postgresData = () => {
       },
       {
         full_name: 'Ian McKellen',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/SDCC13_-_Ian_McKellen.jpg/440px-SDCC13_-_Ian_McKellen.jpg',
         biography:
-          "Sir Ian Murray McKellen CH CBE (born 25 May 1939) is an English actor. With a career spanning more than sixty years, he is noted for his roles on the screen and stage in genres ranging from Shakespearean dramas and modern theatre to popular fantasy and science fiction. He is regarded as a British cultural icon and was knighted by Queen Elizabeth II in 1991. He has received numerous accolades, including a Tony Award, six Olivier Awards, and a Golden Globe Award as well as nominations for two Academy Awards, five BAFTA Awards and five Emmy Awards.\n\nMcKellen made his stage debut in 1961 at the Belgrade Theatre as a member of its repertory company, and in 1965 made his first West End appearance. In 1969, he was invited to join the Prospect Theatre Company to play the lead parts in Shakespeare's Richard II and Marlowe's Edward II. In the 1970s McKellen became a stalwart of the Royal Shakespeare Company and the National Theatre of Great Britain (England). He has earned five Olivier Awards for his roles in Pillars of the Community (1977), The Alchemist (1978), Bent (1979), Wild Honey (1984), and Richard III (1995). McKellen made his Broadway debut in The Promise (1965). He went on to receive the Tony Award for Best Actor in a Play for his role as Antonio Salieri in Amadeus (1980). He was further nominated for Ian McKellen: Acting Shakespeare (1984). He returned to Broadway in Wild Honey (1986), Dance of Death (1990), No Man's Land (2013), and Waiting for Godot (2013), the latter being a joint production with Patrick Stewart.\n\nMcKellen achieved worldwide fame for his film roles, including the titular King in Richard III (1995), James Whale in Gods and Monsters (1998), Magneto in the X-Men films, and Gandalf in The Lord of the Rings (2001–2003) and The Hobbit (2012–2014) trilogies. Other notable film roles include A Touch of Love (1969), Plenty (1985), Six Degrees of Separation (1993), Restoration (1995), Mr. Holmes (2015), and The Good Liar (2019).",
+          "Sir Ian Murray McKellen CH CBE (born 25 May 1939) is an English actor. With a career spanning more than sixty years, he is noted for his roles on the screen and stage in genres ranging from Shakespearean dramas and modern theatre to popular fantasy and science fiction. He is regarded as a British cultural icon and was knighted by Queen Elizabeth II in 1991. He has received numerous accolades, including a Tony Award, six Olivier Awards, and a Golden Globe Award as well as nominations for two Academy Awards, five BAFTA Awards and five Emmy Awards.\n\nMcKellen made his stage debut in 1961 at the Belgrade Theatre as a member of its repertory company, and in 1965 made his first West End appearance. In 1969, he was invited to join the Prospect Theatre Company to play the lead parts in Shakespeare's Richard II and Marlowe's Edward II. In the 1970s McKellen became a stalwart of the Royal Shakespeare Company and the National Theatre of Great Britain. He has earned five Olivier Awards for his roles in Pillars of the Community (1977), The Alchemist (1978), Bent (1979), Wild Honey (1984), and Richard III (1995). McKellen made his Broadway debut in The Promise (1965). He went on to receive the Tony Award for Best Actor in a Play for his role as Antonio Salieri in Amadeus (1980). He was further nominated for Ian McKellen: Acting Shakespeare (1984). He returned to Broadway in Wild Honey (1986), Dance of Death (1990), No Man's Land (2013), and Waiting for Godot (2013), the latter being a joint production with Patrick Stewart.\n\nMcKellen achieved worldwide fame for his film roles, including the titular King in Richard III (1995), James Whale in Gods and Monsters (1998), Magneto in the X-Men films, and Gandalf in The Lord of the Rings (2001–2003) and The Hobbit (2012–2014) trilogies. Other notable film roles include A Touch of Love (1969), Plenty (1985), Six Degrees of Separation (1993), Restoration (1995), Mr. Holmes (2015), and The Good Liar (2019).",
         birth_date: '1939-05-25',
         death_date: null,
         created_at: now,
@@ -717,7 +717,7 @@ const postgresData = () => {
       },
       {
         full_name: 'John Rhys-Davies',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/%28John_Rhys-Davies%29_2018-02-11_15-35-40_ILCE-6500_DSC07150_%2831235662177%29_%28cropped%29.jpg/440px-%28John_Rhys-Davies%29_2018-02-11_15-35-40_ILCE-6500_DSC07150_%2831235662177%29_%28cropped%29.jpg',
         biography:
@@ -729,7 +729,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Philip Stone',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         photo:
           'https://static.wikia.nocookie.net/indianajones/images/5/5a/Blumburtt.jpg',
         biography:
@@ -765,7 +765,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Helena Bonham Carter',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Helena_Bonham_Carter_2011_AA.jpg/440px-Helena_Bonham_Carter_2011_AA.jpg',
         biography:
@@ -789,7 +789,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Sean Connery',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1930-08-25',
         death_date: '2020-10-31',
         photo:
@@ -801,7 +801,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Hugh Laurie',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1959-06-11',
         death_date: null,
         photo:
@@ -885,7 +885,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Paul Freeman',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1943-01-18',
         death_date: null,
         photo:
@@ -933,7 +933,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Oliver Reed',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1938-02-13',
         death_date: '1999-05-02',
         photo:
@@ -945,7 +945,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Derek Jacobi',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1938-10-22',
         death_date: null,
         photo:
@@ -969,7 +969,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Richard Harris',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1930-10-01',
         death_date: '2002-10-25',
         photo:
@@ -993,7 +993,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Ray Winstone',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1957-02-19',
         death_date: null,
         photo:
@@ -1005,7 +1005,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Jim Broadbent',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1949-05-24',
         death_date: null,
         photo:
@@ -1029,7 +1029,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Jonathan Pryce',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1947-06-01',
         death_date: null,
         photo:
@@ -1065,7 +1065,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Billy Boyd',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1968-08-28',
         death_date: null,
         photo:
@@ -1101,7 +1101,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Christopher Lee',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1922-05-27',
         death_date: '2015-06-07',
         photo:
@@ -1113,7 +1113,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Hugo Weaving',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1960-04-04',
         death_date: null,
         photo:
@@ -1125,7 +1125,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Sean Bean',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1959-04-17',
         death_date: null,
         photo:
@@ -1137,7 +1137,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Andy Serkis',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1964-04-20',
         death_date: null,
         photo:
@@ -1161,7 +1161,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Clive Standen',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1981-07-22',
         death_date: null,
         photo:
@@ -1197,7 +1197,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Gabriel Byrne',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1950-05-12',
         death_date: null,
         photo:
@@ -1209,7 +1209,7 @@ const postgresData = () => {
       },
       {
         full_name: 'George Blagden',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1989-12-28',
         death_date: null,
         photo:
@@ -1245,7 +1245,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Linus Roache',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1964-02-01',
         death_date: null,
         photo:
@@ -1269,7 +1269,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Ben Robson',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1984-02-04',
         death_date: null,
         photo:
@@ -1365,7 +1365,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Jordan Patrick Smith',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1989-06-18',
         death_date: null,
         photo:
@@ -1425,7 +1425,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Georgia Hirst',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1994-12-26',
         death_date: null,
         photo:
@@ -1473,7 +1473,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Catherine McCormack',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1972-04-03',
         death_date: null,
         photo:
@@ -1616,7 +1616,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Bill Nighy',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1949-12-12',
         death_date: null,
         photo:
@@ -1628,7 +1628,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Denholm Elliott',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1922-05-31',
         death_date: '1992-10-06',
         photo:
@@ -1832,7 +1832,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Alan Rickman',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1946-02-21',
         death_date: '2016-01-14',
         photo:
@@ -1964,7 +1964,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Olivia Williams',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1968-07-26',
         death_date: null,
         photo:
@@ -1988,7 +1988,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Christian Bale',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1974-01-30',
         death_date: null,
         photo:
@@ -2012,7 +2012,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Michael Caine',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1933-03-14',
         death_date: null,
         photo:
@@ -2024,7 +2024,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Gary Oldman',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1958-03-21',
         death_date: null,
         photo:
@@ -2192,7 +2192,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Tom Hiddleston',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1981-02-09',
         death_date: null,
         photo:
@@ -2216,7 +2216,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Tom Hardy',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1977-09-15',
         death_date: null,
         photo:
@@ -2300,7 +2300,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Daniel Radcliffe',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1989-07-23',
         death_date: null,
         photo:
@@ -2312,7 +2312,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Rupert Grint',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1988-08-24',
         death_date: null,
         photo:
@@ -2324,7 +2324,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Emma Watson',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1990-04-15',
         death_date: null,
         photo:
@@ -2336,7 +2336,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Maggie Smith',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1934-12-28',
         death_date: null,
         photo:
@@ -2348,7 +2348,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Robbie Coltrane',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1950-03-30',
         death_date: '2022-10-14',
         photo:
@@ -2360,7 +2360,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Kenneth Branagh',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1960-12-10',
         death_date: null,
         photo:
@@ -2372,7 +2372,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Jason Isaacs',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1963-06-06',
         death_date: null,
         photo:
@@ -2384,7 +2384,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Georgie Henley',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1995-07-09',
         death_date: null,
         photo:
@@ -2396,7 +2396,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Skandar Keynes',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1991-09-05',
         death_date: null,
         photo:
@@ -2408,7 +2408,7 @@ const postgresData = () => {
       },
       {
         full_name: 'William Moseley',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1987-04-27',
         death_date: null,
         photo:
@@ -2420,7 +2420,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Anna Popplewell',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1988-12-16',
         death_date: null,
         photo:
@@ -2432,7 +2432,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Tilda Swinton',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1960-11-05',
         death_date: null,
         photo:
@@ -2456,7 +2456,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Nicholas Hoult',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1989-12-07',
         death_date: null,
         photo:
@@ -2480,7 +2480,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Rosie Huntington-Whiteley',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1987-04-18',
         death_date: null,
         photo:
@@ -2552,7 +2552,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Richard Attenborough',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1923-08-29',
         death_date: '2014-08-24',
         photo:
@@ -2612,7 +2612,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Kate Winslet',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1975-10-05',
         death_date: null,
         photo:
@@ -2648,7 +2648,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Frances Fisher',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1952-05-11',
         death_date: null,
         photo:
@@ -2792,7 +2792,7 @@ const postgresData = () => {
       },
       {
         full_name: 'James Purefoy',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1964-06-03',
         death_date: null,
         photo:
@@ -2816,7 +2816,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Ben Kingsley',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1943-12-31',
         death_date: null,
         photo:
@@ -2852,7 +2852,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Patrick Stewart',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1940-07-13',
         death_date: null,
         photo:
@@ -2888,7 +2888,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Stephen Merchant',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1974-11-24',
         death_date: null,
         photo:
@@ -3068,7 +3068,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Will Poulter',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1993-01-28',
         death_date: null,
         photo:
@@ -3298,7 +3298,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Ridley Scott',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         photo:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/NASA_Journey_to_Mars_and_%E2%80%9CThe_Martian%E2%80%9D_%28201508180030HQ%29.jpg/220px-NASA_Journey_to_Mars_and_%E2%80%9CThe_Martian%E2%80%9D_%28201508180030HQ%29.jpg',
         biography:
@@ -3406,7 +3406,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Michael Hirst',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1952-09-21',
         death_date: null,
         photo:
@@ -3550,7 +3550,7 @@ const postgresData = () => {
       },
       {
         full_name: 'Paul W.S. Anderson',
-        country: 'Great Britain (England)',
+        country: 'Great Britain',
         birth_date: '1965-03-04',
         death_date: null,
         photo:
