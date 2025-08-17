@@ -8,14 +8,14 @@ import Paper from '@mui/material/Paper';
 import {
   rootComponentPaperStyle,
   styleEntityBox,
-} from '../../services/styleService';
+} from '@/src/services/styleService';
 
-// import { getAllMovies } from '../../store/slices/moviesSlice';
-// import { getAllActors } from '../../store/slices/actorsSlice';
-// import { getAllDirectors } from '../../store/slices/directorsSlice';
-// import { getAllStudios } from '../../store/slices/studiosSlice';
-import MoviesItem from './MoviesItem';
-import MoviesList from './MoviesList';
+// import { getAllMovies } from '@/src/store/slices/moviesSlice';
+// import { getAllActors } from '@/src/store/slices/actorsSlice';
+// import { getAllDirectors } from '@/src/store/slices/directorsSlice';
+// import { getAllStudios } from '@/src/store/slices/studiosSlice';
+import MoviesItem from '@/src/components/Movies/MoviesItem';
+import MoviesList from '@/src/components/Movies/MoviesList';
 
 function Movies() {
   // const dispatch = useDispatch();

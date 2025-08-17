@@ -15,7 +15,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import VideoCallIcon from '@mui/icons-material/VideoCall';
 
-import { getMovieByUuid } from '../../services/movieService';
+import SnackbarContext from '@/src/contexts/SnackbarContext';
+
+import { getMovieByUuid } from '@/src/services/movieService';
 import {
   buttonMainStyle,
   itemCardMediaBoxStyle,
@@ -28,12 +30,10 @@ import {
   styleItemTypography,
   styleStackMargin,
   textIndentStyle,
-} from '../../services/styleService';
+} from '@/src/services/styleService';
 
-import SnackbarContext from '../../contexts/SnackbarContext';
-import ItemSkeleton from '../SkeletonLoader/ItemSkeleton';
-
-import MoviesPlayer from './MoviesPlayer';
+import MoviesPlayer from '@/src/components/Movies/MoviesPlayer';
+import ItemSkeleton from '@/src/components/SkeletonLoader/ItemSkeleton';
 
 const emptyMovie = {
   uuid: null,

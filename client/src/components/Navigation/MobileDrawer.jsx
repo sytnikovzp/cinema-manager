@@ -4,13 +4,13 @@ import IconButton from '@mui/material/IconButton';
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-import NavBar from './NavBar';
+import NavBar from '@/src/components/Navigation/NavBar';
 
 import {
   stylesMobileDrawerBox,
   stylesMobileDrawerBoxIcon,
   stylesMobileDrawerDrawer,
-} from '../../styles';
+} from '@/src/styles';
 
 function MobileDrawer({ open, onClose }) {
   return (

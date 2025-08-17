@@ -21,28 +21,28 @@ import BackspaceIcon from '@mui/icons-material/Backspace';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import SaveIcon from '@mui/icons-material/Save';
 
-import useFetchData from '../../hooks/useFetchData';
+import SnackbarContext from '@/src/contexts/SnackbarContext';
+import useFetchData from '@/src/hooks/useFetchData';
 
 import {
   createActor,
   getActorByUuid,
   updateActor,
-} from '../../services/actorService';
+} from '@/src/services/actorService';
 import {
   DATE_SCHEMA,
   STRING_SCHEMA,
   TITLE_NAME_SCHEMA,
-} from '../../services/itemService';
+} from '@/src/services/itemService';
 import {
   buttonFormStyle,
   formItemStyle,
   formStyle,
   stackButtonFormStyle,
   wideButtonFormStyle,
-} from '../../services/styleService';
+} from '@/src/services/styleService';
 
-import SnackbarContext from '../../contexts/SnackbarContext';
-import BasicAutocompleteField from '../Autocomplete/BasicAutocompleteField';
+import BasicAutocompleteField from '@/src/components/Autocomplete/BasicAutocompleteField';
 
 const emptyActor = {
   uuid: null,

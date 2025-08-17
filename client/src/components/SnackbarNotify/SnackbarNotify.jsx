@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 
-import SnackbarContext from '../../contexts/SnackbarContext';
+import SnackbarContext from '@/src/contexts/SnackbarContext';
 
 function SnackbarNotify() {
   const { snackbar, handleClose } = useContext(SnackbarContext);

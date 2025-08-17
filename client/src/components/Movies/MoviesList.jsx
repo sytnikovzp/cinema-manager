@@ -22,19 +22,19 @@ import EditIcon from '@mui/icons-material/Edit';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import VideoCallIcon from '@mui/icons-material/VideoCall';
 
-import useItemsPerPage from '../../hooks/useItemsPerPage';
-import usePagination from '../../hooks/usePagination';
+import SnackbarContext from '@/src/contexts/SnackbarContext';
+import useItemsPerPage from '@/src/hooks/useItemsPerPage';
+import usePagination from '@/src/hooks/usePagination';
 
-import { deleteMovie } from '../../services/movieService';
+import { deleteMovie } from '@/src/services/movieService';
 import {
   buttonMainStyle,
   itemListStyle,
   scrollListBoxStyle,
   styleListListItemButton,
-} from '../../services/styleService';
+} from '@/src/services/styleService';
 
-import SnackbarContext from '../../contexts/SnackbarContext';
-import ListSkeleton from '../SkeletonLoader/ListSkeleton';
+import ListSkeleton from '@/src/components/SkeletonLoader/ListSkeleton';
 
 const StyledAvatar = styled(Avatar)({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',

@@ -15,8 +15,10 @@ import EditIcon from '@mui/icons-material/Edit';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
-import { getDirectorByUuid } from '../../services/directorService';
-import { calculateAge } from '../../services/itemService';
+import SnackbarContext from '@/src/contexts/SnackbarContext';
+
+import { getDirectorByUuid } from '@/src/services/directorService';
+import { calculateAge } from '@/src/services/itemService';
 import {
   buttonMainStyle,
   itemCardMediaBoxStyle,
@@ -28,12 +30,10 @@ import {
   styleItemCreatedAtValue,
   styleItemTypography,
   styleStackMargin,
-} from '../../services/styleService';
+} from '@/src/services/styleService';
 
-import SnackbarContext from '../../contexts/SnackbarContext';
-import ItemSkeleton from '../SkeletonLoader/ItemSkeleton';
-
-import DirectorsBiography from './DirectorsBiography';
+import DirectorsBiography from '@/src/components/Directors/DirectorsBiography';
+import ItemSkeleton from '@/src/components/SkeletonLoader/ItemSkeleton';
 
 const emptyDirector = {
   uuid: null,

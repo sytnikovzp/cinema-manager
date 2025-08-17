@@ -8,7 +8,7 @@ import {
   itemComponentBoxMainStyle,
   itemInformationBoxStyle,
   styleItemTypography,
-} from '../../services/styleService';
+} from '@/src/services/styleService';
 
 function ItemSkeleton() {
   return (

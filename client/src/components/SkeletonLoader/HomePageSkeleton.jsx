@@ -1,6 +1,6 @@
 import Skeleton from '@mui/material/Skeleton';
 
-import { skeletonHomePageStyles } from '../../services/styleService';
+import { skeletonHomePageStyles } from '@/src/services/styleService';
 
 function HomePageSkeleton() {
   return (

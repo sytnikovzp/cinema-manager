@@ -3,7 +3,7 @@ import ReactPlayer from 'react-player';
 
 import Box from '@mui/material/Box';
 
-import { playerStyle, scrollItemBoxStyle } from '../../services/styleService';
+import { playerStyle, scrollItemBoxStyle } from '@/src/services/styleService';
 
 const config = {
   youtube: {

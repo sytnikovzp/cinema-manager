@@ -433,6 +433,7 @@ export default [
             ['^@mui/icons-material'],
             [
               '^@/src/constants($|\\/.*$)',
+              '^@/src/contexts($|\\/.*$)',
               '^@/src/utils($|\\/.*$)',
               '^@/src/api($|\\/.*$)',
               '^@/src/hooks($|\\/.*$)',

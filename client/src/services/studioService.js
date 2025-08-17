@@ -1,4 +1,4 @@
-import api from '../api';
+import api from '@/src/api';
 
 export const getAllStudios = async () => {
   const response = await api.get(`/studios`);

@@ -1,17 +1,17 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import Actors from './components/Actors/Actors';
-import Directors from './components/Directors/Directors';
-import HomePage from './components/HomePage/HomePage';
-import Layout from './components/Layout/Layout';
-import Movies from './components/Movies/Movies';
-import Services from './components/Service/Services';
-import SnackbarNotify from './components/SnackbarNotify/SnackbarNotify';
-import Studios from './components/Studios/Studios';
+import { SnackbarProvider } from '@/src/contexts/SnackbarContext';
 
-import NotFoundPage from './pages/NotFound/NotFoundPage';
+import Actors from '@/src/components/Actors/Actors';
+import Directors from '@/src/components/Directors/Directors';
+import HomePage from '@/src/components/HomePage/HomePage';
+import Layout from '@/src/components/Layout/Layout';
+import Movies from '@/src/components/Movies/Movies';
+import Services from '@/src/components/Service/Services';
+import SnackbarNotify from '@/src/components/SnackbarNotify/SnackbarNotify';
+import Studios from '@/src/components/Studios/Studios';
 
-import { SnackbarProvider } from './contexts/SnackbarContext';
+import NotFoundPage from '@/src/pages/NotFound/NotFoundPage';
 
 function App() {
   return (

@@ -3,10 +3,11 @@ import { Provider } from 'react-redux';
 
 import CssBaseline from '@mui/material/CssBaseline';
 
-import store from './store';
+import { ColorThemeProvider } from '@/src/contexts/ColorThemeProvider';
 
-import { ColorThemeProvider } from './contexts/ColorThemeProvider';
-import App from './App';
+import store from '@/src/store';
+
+import App from '@/src/App';
 
 ReactDOM.createRoot(document.querySelector('#root')).render(
   <Provider store={store}>

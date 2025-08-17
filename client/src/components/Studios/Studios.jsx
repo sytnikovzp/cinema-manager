@@ -8,11 +8,11 @@ import Paper from '@mui/material/Paper';
 import {
   rootComponentPaperStyle,
   styleEntityBox,
-} from '../../services/styleService';
+} from '@/src/services/styleService';
 
-// import { getAllStudios } from '../../store/slices/studiosSlice';
-import StudiosItem from './StudiosItem';
-import StudiosList from './StudiosList';
+// import { getAllStudios } from '@/src/store/slices/studiosSlice';
+import StudiosItem from '@/src/components/Studios/StudiosItem';
+import StudiosList from '@/src/components/Studios/StudiosList';
 
 function Studios() {
   // const dispatch = useDispatch();

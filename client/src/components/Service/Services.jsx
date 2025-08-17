@@ -6,9 +6,9 @@ import Paper from '@mui/material/Paper';
 import {
   rootComponentPaperStyle,
   styleEntityBox,
-} from '../../services/styleService';
+} from '@/src/services/styleService';
 
-import ServicesList from './ServicesList';
+import ServicesList from '@/src/components/Service/ServicesList';
 
 function Services() {
   const location = useLocation();

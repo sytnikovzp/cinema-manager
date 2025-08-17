@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import api from '../api';
+import api from '@/src/api';
 
 const usePagination = (url, itemsPerPage, currentPage) => {
   const [data, setData] = useState([]);

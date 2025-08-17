@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { logger } from 'redux-logger';
 
-import actorsReducer from './slices/actorsSlice';
-import directorsReducer from './slices/directorsSlice';
-import moviesReducer from './slices/moviesSlice';
-import studiosReducer from './slices/studiosSlice';
+import actorsReducer from '@/src/store/slices/actorsSlice';
+import directorsReducer from '@/src/store/slices/directorsSlice';
+import moviesReducer from '@/src/store/slices/moviesSlice';
+import studiosReducer from '@/src/store/slices/studiosSlice';
 
 export default configureStore({
   reducer: {

@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { SLICE_NAMES } from '../../constants';
-import { setErrorState, setFetchingState } from '../../utils/reduxHelpers';
+import { SLICE_NAMES } from '@/src/constants';
+import { setErrorState, setFetchingState } from '@/src/utils/reduxHelpers';
 
 import {
   addStudio,
   editStudio,
   fetchStudios,
   removeStudio,
-} from '../thunks/studiosThunk';
+} from '@/src/store/thunks/studiosThunk';
 
 const studiosState = [
   {

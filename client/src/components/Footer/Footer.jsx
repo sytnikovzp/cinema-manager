@@ -13,7 +13,7 @@ import {
   stylesFooterIcon,
   stylesFooterSocialLinks,
   stylesFooterTypography,
-} from '../../styles';
+} from '@/src/styles';
 
 const socialLinks = [
   {

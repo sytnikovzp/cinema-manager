@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { SLICE_NAMES } from '../../constants';
-import { setErrorState, setFetchingState } from '../../utils/reduxHelpers';
+import { SLICE_NAMES } from '@/src/constants';
+import { setErrorState, setFetchingState } from '@/src/utils/reduxHelpers';
 
 import {
   addActor,
   editActor,
   fetchAllActors,
   removeActor,
-} from '../thunks/actorsThunk';
+} from '@/src/store/thunks/actorsThunk';
 
 const actorsState = [
   {

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { ThemeContext } from './ThemeContext';
+import { ThemeContext } from '@/src/contexts/ThemeContext';
 
 export function ColorThemeProvider({ children }) {
   const getInitialMode = () =>

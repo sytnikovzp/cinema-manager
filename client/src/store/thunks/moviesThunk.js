@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { SLICE_NAMES } from '../../constants';
-import api from '../../api';
+import { SLICE_NAMES } from '@/src/constants';
+import api from '@/src/api';
 
 export const fetchMovies = createAsyncThunk(
   `${SLICE_NAMES.MOVIES_SLICE_NAME}/fetchAll`,

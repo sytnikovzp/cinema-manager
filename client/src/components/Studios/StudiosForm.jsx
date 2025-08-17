@@ -1,6 +1,5 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { format, isBefore, parse } from 'date-fns';
 import { enGB } from 'date-fns/locale';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
@@ -21,28 +20,28 @@ import BackspaceIcon from '@mui/icons-material/Backspace';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import SaveIcon from '@mui/icons-material/Save';
 
-import useFetchData from '../../hooks/useFetchData';
+import SnackbarContext from '@/src/contexts/SnackbarContext';
+import useFetchData from '@/src/hooks/useFetchData';
 
 import {
   DATE_SCHEMA,
   STRING_SCHEMA,
   TITLE_NAME_SCHEMA,
-} from '../../services/itemService';
+} from '@/src/services/itemService';
 import {
   createStudio,
   getStudioByUuid,
   updateStudio,
-} from '../../services/studioService';
+} from '@/src/services/studioService';
 import {
   buttonFormStyle,
   formItemStyle,
   formStyle,
   stackButtonFormStyle,
   wideButtonFormStyle,
-} from '../../services/styleService';
+} from '@/src/services/styleService';
 
-import SnackbarContext from '../../contexts/SnackbarContext';
-import BasicAutocompleteField from '../Autocomplete/BasicAutocompleteField';
+import BasicAutocompleteField from '@/src/components/Autocomplete/BasicAutocompleteField';
 
 const emptyStudio = {
   uuid: null,

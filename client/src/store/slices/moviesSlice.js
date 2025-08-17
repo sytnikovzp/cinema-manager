@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { SLICE_NAMES } from '../../constants';
-import { setErrorState, setFetchingState } from '../../utils/reduxHelpers';
+import { SLICE_NAMES } from '@/src/constants';
+import { setErrorState, setFetchingState } from '@/src/utils/reduxHelpers';
 
 import {
   addMovie,
   editMovie,
   fetchMovies,
   removeMovie,
-} from '../thunks/moviesThunk';
+} from '@/src/store/thunks/moviesThunk';
 
 const moviesState = [
   {

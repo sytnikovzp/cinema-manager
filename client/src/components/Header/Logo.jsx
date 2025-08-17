@@ -10,7 +10,7 @@ import {
   stylesLogoBoxMobile,
   stylesLogoTypographyDesktop,
   stylesLogoTypographyMobile,
-} from '../../styles';
+} from '@/src/styles';
 
 function Logo({ isMobile }) {
   return (

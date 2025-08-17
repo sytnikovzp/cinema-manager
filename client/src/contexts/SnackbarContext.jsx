@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-import useSnackbar from '../hooks/useSnackbar';
+import useSnackbar from '@/src/hooks/useSnackbar';
 
 const SnackbarContext = createContext();
 

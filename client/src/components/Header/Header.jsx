@@ -16,10 +16,10 @@ import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import MenuIcon from '@mui/icons-material/Menu';
 
-import { ThemeContext } from '../../contexts/ThemeContext';
-import MobileDrawer from '../Navigation/MobileDrawer';
+import { ThemeContext } from '@/src/contexts/ThemeContext';
 
-import Logo from './Logo';
+import Logo from '@/src/components/Header/Logo';
+import MobileDrawer from '@/src/components/Navigation/MobileDrawer';
 
 import {
   stylesHeaderAppBar,
@@ -27,7 +27,7 @@ import {
   stylesHeaderToolbar,
   stylesHeaderToolbarBox,
   stylesHeaderUserBlockWrapper,
-} from '../../styles';
+} from '@/src/styles';
 
 function Header() {
   const theme = useTheme();

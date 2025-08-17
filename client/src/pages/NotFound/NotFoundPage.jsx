@@ -5,13 +5,13 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-import { ERROR_MESSAGES } from '../../constants';
+import { ERROR_MESSAGES } from '@/src/constants';
 
 import {
   stylesErrorPageBox,
   stylesErrorPageButton,
   stylesErrorPageTypography,
-} from '../../styles';
+} from '@/src/styles';
 
 function NotFoundPage() {
   const navigate = useNavigate();

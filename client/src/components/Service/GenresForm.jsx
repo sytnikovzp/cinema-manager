@@ -15,21 +15,21 @@ import BackspaceIcon from '@mui/icons-material/Backspace';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import SaveIcon from '@mui/icons-material/Save';
 
+import SnackbarContext from '@/src/contexts/SnackbarContext';
+
 import {
   createGenre,
   getGenreByUuid,
   updateGenre,
-} from '../../services/genreService';
-import { STRING_SCHEMA, TITLE_NAME_SCHEMA } from '../../services/itemService';
+} from '@/src/services/genreService';
+import { STRING_SCHEMA, TITLE_NAME_SCHEMA } from '@/src/services/itemService';
 import {
   buttonFormStyle,
   formItemStyle,
   formStyle,
   stackButtonFormStyle,
   wideButtonFormStyle,
-} from '../../services/styleService';
-
-import SnackbarContext from '../../contexts/SnackbarContext';
+} from '@/src/services/styleService';
 
 const emptyGenre = {
   uuid: null,

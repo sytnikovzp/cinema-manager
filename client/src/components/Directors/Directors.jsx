@@ -8,11 +8,11 @@ import Paper from '@mui/material/Paper';
 import {
   rootComponentPaperStyle,
   styleEntityBox,
-} from '../../services/styleService';
+} from '@/src/services/styleService';
 
-// import { getAllDirectors } from '../../store/slices/directorsSlice';
-import DirectorsItem from './DirectorsItem';
-import DirectorsList from './DirectorsList';
+// import { getAllDirectors } from '@/src/store/slices/directorsSlice';
+import DirectorsItem from '@/src/components/Directors/DirectorsItem';
+import DirectorsList from '@/src/components/Directors/DirectorsList';
 
 function Directors() {
   // const dispatch = useDispatch();

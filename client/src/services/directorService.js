@@ -1,4 +1,4 @@
-import api from '../api';
+import api from '@/src/api';
 
 export const getAllDirectors = async () => {
   const response = await api.get(`/directors`);

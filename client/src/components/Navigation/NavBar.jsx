@@ -17,7 +17,7 @@ import MovieFilterIcon from '@mui/icons-material/MovieFilter';
 import RecentActorsIcon from '@mui/icons-material/RecentActors';
 import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 
-import { navBarBox, navItemTextStyle } from '../../services/styleService';
+import { navBarBox, navItemTextStyle } from '@/src/services/styleService';
 
 function NavBar({ onClose }) {
   const handleItemClick = useCallback(() => {

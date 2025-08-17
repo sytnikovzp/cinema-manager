@@ -15,24 +15,24 @@ import BackspaceIcon from '@mui/icons-material/Backspace';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import SaveIcon from '@mui/icons-material/Save';
 
-import useFetchData from '../../hooks/useFetchData';
+import SnackbarContext from '@/src/contexts/SnackbarContext';
+import useFetchData from '@/src/hooks/useFetchData';
 
-import { STRING_SCHEMA, TITLE_NAME_SCHEMA } from '../../services/itemService';
+import { STRING_SCHEMA, TITLE_NAME_SCHEMA } from '@/src/services/itemService';
 import {
   createLocation,
   getLocationByUuid,
   updateLocation,
-} from '../../services/locationService';
+} from '@/src/services/locationService';
 import {
   buttonFormStyle,
   formItemStyle,
   formStyle,
   stackButtonFormStyle,
   wideButtonFormStyle,
-} from '../../services/styleService';
+} from '@/src/services/styleService';
 
-import SnackbarContext from '../../contexts/SnackbarContext';
-import BasicAutocompleteField from '../Autocomplete/BasicAutocompleteField';
+import BasicAutocompleteField from '@/src/components/Autocomplete/BasicAutocompleteField';
 
 const emptyLocation = {
   uuid: null,

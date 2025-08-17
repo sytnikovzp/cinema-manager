@@ -14,12 +14,12 @@ import {
   styleLayoutMobileNavbar,
   styleLayoutNavbarSize,
   styleLayoutOutletSize,
-} from '../../services/styleService';
+} from '@/src/services/styleService';
 
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
-import NavBar from '../Navigation/NavBar';
-import CinemaService from '../Service/CinemaService';
+import Footer from '@/src/components/Footer/Footer';
+import Header from '@/src/components/Header/Header';
+import NavBar from '@/src/components/Navigation/NavBar';
+import CinemaService from '@/src/components/Service/CinemaService';
 
 function Layout() {
   const [isNavBarOpen, setIsNavBarOpen] = useState(false);

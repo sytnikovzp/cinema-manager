@@ -15,7 +15,9 @@ import DomainAddIcon from '@mui/icons-material/DomainAdd';
 import EditIcon from '@mui/icons-material/Edit';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
-import { getStudioByUuid } from '../../services/studioService';
+import SnackbarContext from '@/src/contexts/SnackbarContext';
+
+import { getStudioByUuid } from '@/src/services/studioService';
 import {
   buttonMainStyle,
   itemCardMediaBoxStyle,
@@ -27,12 +29,10 @@ import {
   styleItemCreatedAtValue,
   styleItemTypography,
   styleStackMargin,
-} from '../../services/styleService';
+} from '@/src/services/styleService';
 
-import SnackbarContext from '../../contexts/SnackbarContext';
-import ItemSkeleton from '../SkeletonLoader/ItemSkeleton';
-
-import StudiosAbout from './StudiosAbout';
+import ItemSkeleton from '@/src/components/SkeletonLoader/ItemSkeleton';
+import StudiosAbout from '@/src/components/Studios/StudiosAbout';
 
 const emptyStudio = {
   uuid: null,

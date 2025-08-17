@@ -7,16 +7,15 @@ import Typography from '@mui/material/Typography';
 import {
   styleCinemaServiceBox,
   styleCinemaServiceTypography,
-} from '../../services/styleService';
+} from '@/src/services/styleService';
 
-import ActorsForm from '../Actors/ActorsForm';
-import DirectorsForm from '../Directors/DirectorsForm';
-import MoviesForm from '../Movies/MoviesForm';
-import StudiosForm from '../Studios/StudiosForm';
-
-import CountriesForm from './CountriesForm';
-import GenresForm from './GenresForm';
-import LocationsForm from './LocationsForm';
+import ActorsForm from '@/src/components/Actors/ActorsForm';
+import DirectorsForm from '@/src/components/Directors/DirectorsForm';
+import MoviesForm from '@/src/components/Movies/MoviesForm';
+import CountriesForm from '@/src/components/Service/CountriesForm';
+import GenresForm from '@/src/components/Service/GenresForm';
+import LocationsForm from '@/src/components/Service/LocationsForm';
+import StudiosForm from '@/src/components/Studios/StudiosForm';
 
 function CinemaService() {
   return (

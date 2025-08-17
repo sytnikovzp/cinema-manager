@@ -9,7 +9,7 @@ import Stack from '@mui/material/Stack';
 import {
   itemListStyle,
   styleListListItemButton,
-} from '../../services/styleService';
+} from '@/src/services/styleService';
 
 function ListSkeleton() {
   return (

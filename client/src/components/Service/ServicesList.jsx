@@ -24,21 +24,21 @@ import EditIcon from '@mui/icons-material/Edit';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import VideoSettingsIcon from '@mui/icons-material/VideoSettings';
 
-import useItemsPerPage from '../../hooks/useItemsPerPage';
-import usePagination from '../../hooks/usePagination';
+import SnackbarContext from '@/src/contexts/SnackbarContext';
+import useItemsPerPage from '@/src/hooks/useItemsPerPage';
+import usePagination from '@/src/hooks/usePagination';
 
-import { deleteCountry } from '../../services/countryService';
-import { deleteGenre } from '../../services/genreService';
-import { deleteLocation } from '../../services/locationService';
+import { deleteCountry } from '@/src/services/countryService';
+import { deleteGenre } from '@/src/services/genreService';
+import { deleteLocation } from '@/src/services/locationService';
 import {
   buttonMainStyle,
   itemListStyle,
   scrollServicesListBoxStyle,
   styleListListItemButton,
-} from '../../services/styleService';
+} from '@/src/services/styleService';
 
-import SnackbarContext from '../../contexts/SnackbarContext';
-import ListSkeleton from '../SkeletonLoader/ListSkeleton';
+import ListSkeleton from '@/src/components/SkeletonLoader/ListSkeleton';
 
 const StyledAvatar = styled(Avatar)({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Autoplay, EffectCoverflow } from 'swiper/modules';
@@ -6,7 +5,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import Box from '@mui/material/Box';
 
-import usePagination from '../../hooks/usePagination';
+import SnackbarContext from '@/src/contexts/SnackbarContext';
+import usePagination from '@/src/hooks/usePagination';
 
 import {
   stylesHomePageAutoplayConfig,
@@ -14,10 +14,9 @@ import {
   stylesHomePageCoverflowEffect,
   stylesHomePageSwiperSlideBox,
   stylesHomePageSwiperSlideImg,
-} from '../../services/styleService';
+} from '@/src/services/styleService';
 
-import SnackbarContext from '../../contexts/SnackbarContext';
-import HomePageSkeleton from '../SkeletonLoader/HomePageSkeleton';
+import HomePageSkeleton from '@/src/components/SkeletonLoader/HomePageSkeleton';
 
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
