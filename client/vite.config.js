@@ -1,6 +1,6 @@
-/* eslint-disable import/default */
-/* eslint-disable import/no-named-as-default */
 /* eslint-disable import/no-named-as-default-member */
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/default */
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -19,6 +19,11 @@ export default defineConfig(({ mode }) => {
   return {
     envPrefix: 'CINEMA_',
     plugins: [react(), envCompatible({ path: '../' })],
+    resolve: {
+      alias: {
+        '@': path.resolve(dirname, '.'),
+      },
+    },
     server: {
       host: true,
       open: true,

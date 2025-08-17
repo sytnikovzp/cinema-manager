@@ -14,6 +14,7 @@
     "dbinit": "npm run cljson && npm run dbdrop && npm run dbcreate && npm run mig && npm run seedall",
     "cljson": "node ./src/utils/clearSequelizeJson.js",
     "lint": "eslint .",
+    "lintsumm": "eslint . -f summary",
     "fixlint": "eslint --fix .",
     "syncmodel": "node ./src/utils/syncModel.js",
     "syncallmodels": "node ./src/utils/syncAllModels.js"
@@ -33,25 +34,26 @@
   "dependencies": {
     "date-fns": "^4.1.0",
     "cors": "^2.8.5",
-    "dotenv": "^17.0.1",
+    "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "http-errors": "^2.0.0",
     "pg": "^8.16.3",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.7",
-    "yup": "^1.6.1"
+    "yup": "^1.7.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.30.1",
-    "eslint": "^9.30.1",
-    "eslint-config-prettier": "^10.1.5",
+    "@eslint/js": "^9.33.0",
+    "eslint": "^9.33.0",
+    "eslint-formatter-summary": "^2.0.2",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-optimize-regex": "^1.2.1",
-    "eslint-plugin-prettier": "^5.5.1",
+    "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-promise": "^7.2.1",
     "eslint-plugin-sequelize": "^1.0.4",
     "eslint-plugin-sort-keys-fix": "^1.1.2",
-    "morgan": "^1.10.0",
+    "morgan": "^1.10.1",
     "nodemon": "^3.1.10",
     "prettier": "^3.6.2",
     "sequelize-cli": "^6.6.3"
