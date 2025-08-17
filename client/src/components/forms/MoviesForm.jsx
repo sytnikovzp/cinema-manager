@@ -53,8 +53,8 @@ import {
   wideButtonFormStyle,
 } from '@/src/services/styleService';
 
-import BasicAutocompleteField from '@/src/components/Autocomplete/BasicAutocompleteField';
-import FieldArrayAutocompleteField from '@/src/components/Autocomplete/FieldArrayAutocompleteField';
+import BasicAutocompleteField from '@/src/components/forms/Autocomplete/BasicAutocompleteField';
+import FieldArrayAutocompleteField from '@/src/components/forms/Autocomplete/FieldArrayAutocompleteField';
 
 const emptyMovie = {
   uuid: null,

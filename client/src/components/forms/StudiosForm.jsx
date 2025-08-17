@@ -41,7 +41,7 @@ import {
   wideButtonFormStyle,
 } from '@/src/services/styleService';
 
-import BasicAutocompleteField from '@/src/components/Autocomplete/BasicAutocompleteField';
+import BasicAutocompleteField from '@/src/components/forms/Autocomplete/BasicAutocompleteField';
 
 const emptyStudio = {
   uuid: null,

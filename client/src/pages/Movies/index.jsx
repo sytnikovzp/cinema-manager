@@ -17,7 +17,7 @@ import {
 import MoviesItem from '@/src/components/Movies/MoviesItem';
 import MoviesList from '@/src/components/Movies/MoviesList';
 
-function Movies() {
+function MoviesPage() {
   // const dispatch = useDispatch();
 
   // useEffect(() => {
@@ -57,4 +57,4 @@ function Movies() {
   );
 }
 
-export default Movies;
+export default MoviesPage;

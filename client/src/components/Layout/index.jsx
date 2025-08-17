@@ -16,8 +16,8 @@ import {
   styleLayoutOutletSize,
 } from '@/src/services/styleService';
 
-import Footer from '@/src/components/Footer/Footer';
-import Header from '@/src/components/Header/Header';
+import Footer from '@/src/components/Footer';
+import Header from '@/src/components/Header';
 import NavBar from '@/src/components/Navigation/NavBar';
 import CinemaService from '@/src/components/Service/CinemaService';
 

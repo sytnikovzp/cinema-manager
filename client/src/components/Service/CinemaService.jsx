@@ -9,13 +9,13 @@ import {
   styleCinemaServiceTypography,
 } from '@/src/services/styleService';
 
-import ActorsForm from '@/src/components/Actors/ActorsForm';
-import DirectorsForm from '@/src/components/Directors/DirectorsForm';
-import MoviesForm from '@/src/components/Movies/MoviesForm';
-import CountriesForm from '@/src/components/Service/CountriesForm';
-import GenresForm from '@/src/components/Service/GenresForm';
-import LocationsForm from '@/src/components/Service/LocationsForm';
-import StudiosForm from '@/src/components/Studios/StudiosForm';
+import ActorsForm from '@/src/components/forms/ActorsForm';
+import CountriesForm from '@/src/components/forms/CountriesForm';
+import DirectorsForm from '@/src/components/forms/DirectorsForm';
+import GenresForm from '@/src/components/forms/GenresForm';
+import LocationsForm from '@/src/components/forms/LocationsForm';
+import MoviesForm from '@/src/components/forms/MoviesForm';
+import StudiosForm from '@/src/components/forms/StudiosForm';
 
 function CinemaService() {
   return (

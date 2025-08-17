@@ -10,7 +10,7 @@ import {
 
 import ServicesList from '@/src/components/Service/ServicesList';
 
-function Services() {
+function ServicesPage() {
   const location = useLocation();
   const applyPaperStyles =
     !location.pathname.includes('/edit') && !location.pathname.includes('/new');
@@ -53,4 +53,4 @@ function Services() {
   );
 }
 
-export default Services;
+export default ServicesPage;
