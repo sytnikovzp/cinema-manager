@@ -23,13 +23,14 @@ import {
   updateCountry,
 } from '@/src/services/countryService';
 import { STRING_SCHEMA, TITLE_NAME_SCHEMA } from '@/src/services/itemService';
+
 import {
   buttonFormStyle,
   formItemStyle,
   formStyle,
   stackButtonFormStyle,
   wideButtonFormStyle,
-} from '@/src/services/styleService';
+} from '@/src/styles';
 
 const emptyCountry = {
   uuid: null,

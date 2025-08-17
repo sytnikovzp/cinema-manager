@@ -5,14 +5,11 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 
-import {
-  rootComponentPaperStyle,
-  styleEntityBox,
-} from '@/src/services/styleService';
-
 // import { getAllGenres } from '@/src/store/slices/genresSlice';
 import GenresItem from '@/src/components/Genres/GenresItem';
 import GenresList from '@/src/components/Genres/GenresList';
+
+import { rootComponentPaperStyle, styleEntityBox } from '@/src/styles';
 
 function GenresPage() {
   // const dispatch = useDispatch();

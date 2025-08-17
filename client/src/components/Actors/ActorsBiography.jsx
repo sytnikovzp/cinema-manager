@@ -1,7 +1,7 @@
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
-import { styleStackMargin, textIndentStyle } from '@/src/services/styleService';
+import { styleStackMargin, textIndentStyle } from '@/src/styles';
 
 function ActorsBiography({ biography }) {
   return (

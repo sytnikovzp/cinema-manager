@@ -6,10 +6,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
 
-import {
-  itemListStyle,
-  styleListListItemButton,
-} from '@/src/services/styleService';
+import { itemListStyle, styleListListItemButton } from '@/src/styles';
 
 function ListSkeleton() {
   return (

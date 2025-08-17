@@ -18,6 +18,10 @@ import VideoCallIcon from '@mui/icons-material/VideoCall';
 import SnackbarContext from '@/src/contexts/SnackbarContext';
 
 import { getMovieByUuid } from '@/src/services/movieService';
+
+import MoviesPlayer from '@/src/components/Movies/MoviesPlayer';
+import ItemSkeleton from '@/src/components/SkeletonLoader/ItemSkeleton';
+
 import {
   buttonMainStyle,
   itemCardMediaBoxStyle,
@@ -30,10 +34,7 @@ import {
   styleItemTypography,
   styleStackMargin,
   textIndentStyle,
-} from '@/src/services/styleService';
-
-import MoviesPlayer from '@/src/components/Movies/MoviesPlayer';
-import ItemSkeleton from '@/src/components/SkeletonLoader/ItemSkeleton';
+} from '@/src/styles';
 
 const emptyMovie = {
   uuid: null,

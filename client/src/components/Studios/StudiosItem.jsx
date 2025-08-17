@@ -18,6 +18,10 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import SnackbarContext from '@/src/contexts/SnackbarContext';
 
 import { getStudioByUuid } from '@/src/services/studioService';
+
+import ItemSkeleton from '@/src/components/SkeletonLoader/ItemSkeleton';
+import StudiosAbout from '@/src/components/Studios/StudiosAbout';
+
 import {
   buttonMainStyle,
   itemCardMediaBoxStyle,
@@ -29,10 +33,7 @@ import {
   styleItemCreatedAtValue,
   styleItemTypography,
   styleStackMargin,
-} from '@/src/services/styleService';
-
-import ItemSkeleton from '@/src/components/SkeletonLoader/ItemSkeleton';
-import StudiosAbout from '@/src/components/Studios/StudiosAbout';
+} from '@/src/styles';
 
 const emptyStudio = {
   uuid: null,

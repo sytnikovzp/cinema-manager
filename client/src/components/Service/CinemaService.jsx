@@ -4,11 +4,6 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
-import {
-  styleCinemaServiceBox,
-  styleCinemaServiceTypography,
-} from '@/src/services/styleService';
-
 import ActorsForm from '@/src/components/forms/ActorsForm';
 import CountriesForm from '@/src/components/forms/CountriesForm';
 import DirectorsForm from '@/src/components/forms/DirectorsForm';
@@ -16,6 +11,11 @@ import GenresForm from '@/src/components/forms/GenresForm';
 import LocationsForm from '@/src/components/forms/LocationsForm';
 import MoviesForm from '@/src/components/forms/MoviesForm';
 import StudiosForm from '@/src/components/forms/StudiosForm';
+
+import {
+  styleCinemaServiceBox,
+  styleCinemaServiceTypography,
+} from '@/src/styles';
 
 function CinemaService() {
   return (

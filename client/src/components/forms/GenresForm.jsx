@@ -23,13 +23,14 @@ import {
   updateGenre,
 } from '@/src/services/genreService';
 import { STRING_SCHEMA, TITLE_NAME_SCHEMA } from '@/src/services/itemService';
+
 import {
   buttonFormStyle,
   formItemStyle,
   formStyle,
   stackButtonFormStyle,
   wideButtonFormStyle,
-} from '@/src/services/styleService';
+} from '@/src/styles';
 
 const emptyGenre = {
   uuid: null,

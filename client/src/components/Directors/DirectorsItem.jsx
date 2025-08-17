@@ -19,6 +19,10 @@ import SnackbarContext from '@/src/contexts/SnackbarContext';
 
 import { getDirectorByUuid } from '@/src/services/directorService';
 import { calculateAge } from '@/src/services/itemService';
+
+import DirectorsBiography from '@/src/components/Directors/DirectorsBiography';
+import ItemSkeleton from '@/src/components/SkeletonLoader/ItemSkeleton';
+
 import {
   buttonMainStyle,
   itemCardMediaBoxStyle,
@@ -30,10 +34,7 @@ import {
   styleItemCreatedAtValue,
   styleItemTypography,
   styleStackMargin,
-} from '@/src/services/styleService';
-
-import DirectorsBiography from '@/src/components/Directors/DirectorsBiography';
-import ItemSkeleton from '@/src/components/SkeletonLoader/ItemSkeleton';
+} from '@/src/styles';
 
 const emptyDirector = {
   uuid: null,

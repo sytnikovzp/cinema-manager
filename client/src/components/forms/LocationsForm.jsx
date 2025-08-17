@@ -24,15 +24,16 @@ import {
   getLocationByUuid,
   updateLocation,
 } from '@/src/services/locationService';
+
+import BasicAutocompleteField from '@/src/components/forms/Autocomplete/BasicAutocompleteField';
+
 import {
   buttonFormStyle,
   formItemStyle,
   formStyle,
   stackButtonFormStyle,
   wideButtonFormStyle,
-} from '@/src/services/styleService';
-
-import BasicAutocompleteField from '@/src/components/forms/Autocomplete/BasicAutocompleteField';
+} from '@/src/styles';
 
 const emptyLocation = {
   uuid: null,

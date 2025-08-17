@@ -5,14 +5,11 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 
-import {
-  rootComponentPaperStyle,
-  styleEntityBox,
-} from '@/src/services/styleService';
-
 // import { getAllLocations } from '@/src/store/slices/locationsSlice';
 import LocationsItem from '@/src/components/Locations/LocationsItem';
 import LocationsList from '@/src/components/Locations/LocationsList';
+
+import { rootComponentPaperStyle, styleEntityBox } from '@/src/styles';
 
 function LocationsPage() {
   // const dispatch = useDispatch();

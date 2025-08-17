@@ -18,6 +18,9 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import SnackbarContext from '@/src/contexts/SnackbarContext';
 
 import { getGenreByUuid } from '@/src/services/genreService';
+
+import ItemSkeleton from '@/src/components/SkeletonLoader/ItemSkeleton';
+
 import {
   buttonMainStyle,
   itemCardMediaBoxStyle,
@@ -29,9 +32,7 @@ import {
   styleItemCreatedAtValue,
   styleItemTypography,
   styleStackMargin,
-} from '@/src/services/styleService';
-
-import ItemSkeleton from '@/src/components/SkeletonLoader/ItemSkeleton';
+} from '@/src/styles';
 
 const emptyGenre = {
   uuid: null,

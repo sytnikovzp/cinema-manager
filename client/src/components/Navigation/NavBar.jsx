@@ -19,7 +19,7 @@ import RecentActorsIcon from '@mui/icons-material/RecentActors';
 import TheatersIcon from '@mui/icons-material/Theaters';
 import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 
-import { navBarBox, navItemTextStyle } from '@/src/services/styleService';
+import { navBarBox, navItemTextStyle } from '@/src/styles';
 
 function NavBar({ onClose }) {
   const handleItemClick = useCallback(() => {

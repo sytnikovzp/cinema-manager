@@ -5,14 +5,11 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 
-import {
-  rootComponentPaperStyle,
-  styleEntityBox,
-} from '@/src/services/styleService';
-
 // import { getAllStudios } from '@/src/store/slices/studiosSlice';
 import StudiosItem from '@/src/components/Studios/StudiosItem';
 import StudiosList from '@/src/components/Studios/StudiosList';
+
+import { rootComponentPaperStyle, styleEntityBox } from '@/src/styles';
 
 function Studios() {
   // const dispatch = useDispatch();

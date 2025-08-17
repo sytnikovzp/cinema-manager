@@ -8,15 +8,15 @@ import Box from '@mui/material/Box';
 import SnackbarContext from '@/src/contexts/SnackbarContext';
 import usePagination from '@/src/hooks/usePagination';
 
+import HomePageSkeleton from '@/src/components/SkeletonLoader/HomePageSkeleton';
+
 import {
   stylesHomePageAutoplayConfig,
   stylesHomePageBox,
   stylesHomePageCoverflowEffect,
   stylesHomePageSwiperSlideBox,
   stylesHomePageSwiperSlideImg,
-} from '@/src/services/styleService';
-
-import HomePageSkeleton from '@/src/components/SkeletonLoader/HomePageSkeleton';
+} from '@/src/styles';
 
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';

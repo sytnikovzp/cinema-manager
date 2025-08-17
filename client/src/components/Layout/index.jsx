@@ -5,6 +5,11 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 
+import Footer from '@/src/components/Footer';
+import Header from '@/src/components/Header';
+import NavBar from '@/src/components/Navigation/NavBar';
+import CinemaService from '@/src/components/Service/CinemaService';
+
 import {
   styleLayoutBox,
   styleLayoutCinemaServiceSize,
@@ -14,12 +19,7 @@ import {
   styleLayoutMobileNavbar,
   styleLayoutNavbarSize,
   styleLayoutOutletSize,
-} from '@/src/services/styleService';
-
-import Footer from '@/src/components/Footer';
-import Header from '@/src/components/Header';
-import NavBar from '@/src/components/Navigation/NavBar';
-import CinemaService from '@/src/components/Service/CinemaService';
+} from '@/src/styles';
 
 function Layout() {
   const [isNavBarOpen, setIsNavBarOpen] = useState(false);

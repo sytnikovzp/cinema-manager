@@ -27,14 +27,15 @@ import useItemsPerPage from '@/src/hooks/useItemsPerPage';
 import usePagination from '@/src/hooks/usePagination';
 
 import { deleteStudio } from '@/src/services/studioService';
+
+import ListSkeleton from '@/src/components/SkeletonLoader/ListSkeleton';
+
 import {
   buttonMainStyle,
   itemListStyle,
   scrollListBoxStyle,
   styleListListItemButton,
-} from '@/src/services/styleService';
-
-import ListSkeleton from '@/src/components/SkeletonLoader/ListSkeleton';
+} from '@/src/styles';
 
 const StyledAvatar = styled(Avatar)({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',

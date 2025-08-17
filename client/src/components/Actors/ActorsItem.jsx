@@ -19,6 +19,10 @@ import SnackbarContext from '@/src/contexts/SnackbarContext';
 
 import { getActorByUuid } from '@/src/services/actorService';
 import { calculateAge } from '@/src/services/itemService';
+
+import ActorsBiography from '@/src/components/Actors/ActorsBiography';
+import ItemSkeleton from '@/src/components/SkeletonLoader/ItemSkeleton';
+
 import {
   buttonMainStyle,
   itemCardMediaBoxStyle,
@@ -30,10 +34,7 @@ import {
   styleItemCreatedAtValue,
   styleItemTypography,
   styleStackMargin,
-} from '@/src/services/styleService';
-
-import ActorsBiography from '@/src/components/Actors/ActorsBiography';
-import ItemSkeleton from '@/src/components/SkeletonLoader/ItemSkeleton';
+} from '@/src/styles';
 
 const emptyActor = {
   uuid: null,
