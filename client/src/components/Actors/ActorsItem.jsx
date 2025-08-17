@@ -16,9 +16,9 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 import SnackbarContext from '@/src/contexts/SnackbarContext';
+import { calculateAge } from '@/src/utils/dateHelpers';
 
 import { getActorByUuid } from '@/src/services/actorService';
-import { calculateAge } from '@/src/services/itemService';
 
 import ActorsBiography from '@/src/components/Actors/ActorsBiography';
 import ItemSkeleton from '@/src/components/SkeletonLoader/ItemSkeleton';

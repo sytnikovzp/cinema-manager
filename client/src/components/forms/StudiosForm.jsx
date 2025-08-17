@@ -2,7 +2,6 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { enGB } from 'date-fns/locale';
 import { Field, Form, Formik } from 'formik';
-import * as Yup from 'yup';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -21,13 +20,9 @@ import ClearAllIcon from '@mui/icons-material/ClearAll';
 import SaveIcon from '@mui/icons-material/Save';
 
 import SnackbarContext from '@/src/contexts/SnackbarContext';
+import { STUDIO_VALIDATION_SCHEME } from '@/src/utils/validationSchemes';
 import useFetchData from '@/src/hooks/useFetchData';
 
-import {
-  DATE_SCHEMA,
-  STRING_SCHEMA,
-  TITLE_NAME_SCHEMA,
-} from '@/src/services/itemService';
 import {
   createStudio,
   getStudioByUuid,
@@ -96,14 +91,6 @@ function StudioForm() {
   const sortedLocations = locations
     .slice()
     .sort((a, b) => a.title.localeCompare(b.title));
-
-  const validationSchema = Yup.object().shape({
-    title: TITLE_NAME_SCHEMA,
-    location: STRING_SCHEMA,
-    foundationYear: DATE_SCHEMA,
-    logo: STRING_SCHEMA.url('Invalid logo URL'),
-    about: STRING_SCHEMA,
-  });
 
   const handleSubmit = useCallback(
     async (values) => {
@@ -289,7 +276,7 @@ function StudioForm() {
     <Formik
       enableReinitialize
       initialValues={initialValues}
-      validationSchema={validationSchema}
+      validationSchema={STUDIO_VALIDATION_SCHEME}
       onSubmit={handleSubmit}
     >
       {renderForm}

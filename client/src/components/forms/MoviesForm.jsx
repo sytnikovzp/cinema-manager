@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getYear } from 'date-fns';
 import { enGB } from 'date-fns/locale';
 import { Field, FieldArray, Form, Formik } from 'formik';
-import * as Yup from 'yup';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -30,14 +29,9 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import SaveIcon from '@mui/icons-material/Save';
 
 import SnackbarContext from '@/src/contexts/SnackbarContext';
+import { MOVIE_VALIDATION_SCHEME } from '@/src/utils/validationSchemes';
 import useFetchData from '@/src/hooks/useFetchData';
 
-import {
-  ARRAY_SCHEMA,
-  DATE_SCHEMA,
-  STRING_SCHEMA,
-  TITLE_NAME_SCHEMA,
-} from '@/src/services/itemService';
 import {
   createMovie,
   getMovieByUuid,
@@ -116,7 +110,7 @@ function MovieForm() {
   }, [uuid, navigate]);
 
   const optionsForEntities = (entities, key) =>
-    (entities.length > 1
+    entities.length > 1
       ? entities.map((option) => {
           const firstLetter = option[key][0].toUpperCase();
           return {
@@ -124,7 +118,7 @@ function MovieForm() {
             ...option,
           };
         })
-      : []);
+      : [];
 
   const optionsForActors = optionsForEntities(actors, 'fullName');
   const optionsForDirectors = optionsForEntities(directors, 'fullName');
@@ -155,21 +149,6 @@ function MovieForm() {
     resetForm();
   };
 
-  const validationSchema = Yup.object().shape({
-    title: TITLE_NAME_SCHEMA,
-    genre: STRING_SCHEMA,
-    releaseYear: DATE_SCHEMA,
-    poster: STRING_SCHEMA.url('Invalid poster URL'),
-    trailer: STRING_SCHEMA.url('Invalid Youtube URL').matches(
-      /^(https?:\/\/)?(www\.)?(youtube\.com\/(watch\?v=|embed\/|v\/)|youtu\.be\/)([\w-]{11})$/,
-      'Example: https://www.youtube.com/watch?v=a-bcdefghij'
-    ),
-    directors: ARRAY_SCHEMA,
-    actors: ARRAY_SCHEMA,
-    studios: ARRAY_SCHEMA,
-    storyline: STRING_SCHEMA,
-  });
-
   const handleSubmit = useCallback(
     async (values) => {
       const cleanValues = {
@@ -177,17 +156,17 @@ function MovieForm() {
         directors: values.directors
           .filter((v) => v)
           .map((v) =>
-            (typeof v === 'object' ? v.fullName || v.title || '' : String(v))
+            typeof v === 'object' ? v.fullName || v.title || '' : String(v)
           ),
         actors: values.actors
           .filter((v) => v)
           .map((v) =>
-            (typeof v === 'object' ? v.fullName || v.title || '' : String(v))
+            typeof v === 'object' ? v.fullName || v.title || '' : String(v)
           ),
         studios: values.studios
           .filter((v) => v)
           .map((v) =>
-            (typeof v === 'object' ? v.title || v.fullName || '' : String(v))
+            typeof v === 'object' ? v.title || v.fullName || '' : String(v)
           ),
       };
 
@@ -445,7 +424,7 @@ function MovieForm() {
                           typeof actor === 'string' ? actor : actor.fullName;
 
                         const actorNamesInValues = values.actors.map((a) =>
-                          (typeof a === 'string' ? a : a.fullName)
+                          typeof a === 'string' ? a : a.fullName
                         );
 
                         return (
@@ -516,7 +495,7 @@ function MovieForm() {
                           typeof studio === 'string' ? studio : studio.title;
 
                         const studioNamesInValues = values.studios.map((s) =>
-                          (typeof s === 'string' ? s : s.title)
+                          typeof s === 'string' ? s : s.title
                         );
 
                         return (
@@ -661,7 +640,7 @@ function MovieForm() {
       initialValues={initialValues}
       validateOnBlur={false}
       validateOnChange={false}
-      validationSchema={validationSchema}
+      validationSchema={MOVIE_VALIDATION_SCHEME}
       onSubmit={handleSubmit}
     >
       {renderForm}

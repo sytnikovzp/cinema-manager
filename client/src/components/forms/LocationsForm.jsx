@@ -1,7 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
-import * as Yup from 'yup';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -16,9 +15,9 @@ import ClearAllIcon from '@mui/icons-material/ClearAll';
 import SaveIcon from '@mui/icons-material/Save';
 
 import SnackbarContext from '@/src/contexts/SnackbarContext';
+import { LOCATION_VALIDATION_SCHEME } from '@/src/utils/validationSchemes';
 import useFetchData from '@/src/hooks/useFetchData';
 
-import { STRING_SCHEMA, TITLE_NAME_SCHEMA } from '@/src/services/itemService';
 import {
   createLocation,
   getLocationByUuid,
@@ -85,12 +84,6 @@ function LocationsForm() {
   const sortedCountries = countries
     .slice()
     .sort((a, b) => a.title.localeCompare(b.title));
-
-  const validationSchema = Yup.object().shape({
-    title: TITLE_NAME_SCHEMA,
-    country: STRING_SCHEMA.required('Input is a required field'),
-    coatOfArms: STRING_SCHEMA.url('Invalid city coat of arms URL'),
-  });
 
   const handleSubmit = useCallback(
     async (values) => {
@@ -218,7 +211,7 @@ function LocationsForm() {
     <Formik
       enableReinitialize
       initialValues={initialValues}
-      validationSchema={validationSchema}
+      validationSchema={LOCATION_VALIDATION_SCHEME}
       onSubmit={handleSubmit}
     >
       {renderForm}

@@ -1,6 +1,6 @@
-const yup = require('yup');
+import * as yup from 'yup';
 
-const { parseDateString, stripTime } = require('./dateHelpers');
+import { parseDateString, stripTime } from '@/src/utils/dateHelpers';
 
 const STRING_SCHEME = yup
   .string('This should be a string')
@@ -103,12 +103,12 @@ const STUDIO_VALIDATION_SCHEME = yup.object().shape({
   about: TEXT_NULLABLE_SCHEME,
 });
 
-module.exports = {
-  PERSON_VALIDATION_SCHEME,
+export {
   COUNTRY_VALIDATION_SCHEME,
   GENRE_VALIDATION_SCHEME,
   LOCATION_VALIDATION_SCHEME,
   MOVIE_VALIDATION_SCHEME,
-  STUDIO_VALIDATION_SCHEME,
   PAGINATION_SCHEME,
+  PERSON_VALIDATION_SCHEME,
+  STUDIO_VALIDATION_SCHEME,
 };

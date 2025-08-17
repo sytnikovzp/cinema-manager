@@ -1,7 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
-import * as Yup from 'yup';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -16,13 +15,13 @@ import ClearAllIcon from '@mui/icons-material/ClearAll';
 import SaveIcon from '@mui/icons-material/Save';
 
 import SnackbarContext from '@/src/contexts/SnackbarContext';
+import { GENRE_VALIDATION_SCHEME } from '@/src/utils/validationSchemes';
 
 import {
   createGenre,
   getGenreByUuid,
   updateGenre,
 } from '@/src/services/genreService';
-import { STRING_SCHEMA, TITLE_NAME_SCHEMA } from '@/src/services/itemService';
 
 import {
   buttonFormStyle,
@@ -69,11 +68,6 @@ function GenreForm() {
       navigate(`/genres/${uuid}`);
     }
   }, [uuid, navigate]);
-
-  const validationSchema = Yup.object().shape({
-    title: TITLE_NAME_SCHEMA,
-    logo: STRING_SCHEMA.url('Invalid genre logo URL'),
-  });
 
   const handleSubmit = useCallback(
     async (values) => {
@@ -190,7 +184,7 @@ function GenreForm() {
     <Formik
       enableReinitialize
       initialValues={initialValues}
-      validationSchema={validationSchema}
+      validationSchema={GENRE_VALIDATION_SCHEME}
       onSubmit={handleSubmit}
     >
       {renderForm}

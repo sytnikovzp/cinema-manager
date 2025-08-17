@@ -3,7 +3,7 @@ const { Model, Sequelize } = require('sequelize');
 const {
   isBeforeCurrentDate,
   deathAfterBirth,
-} = require('../../utils/sharedFunctions');
+} = require('../../utils/dateHelpers');
 
 module.exports = (sequelize, DataTypes) => {
   class Actor extends Model {

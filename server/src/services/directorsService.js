@@ -3,10 +3,10 @@ const { Director, Country, Movie } = require('../db/models');
 const { notFound, badRequest } = require('../errors/generalErrors');
 const {
   formatDateTime,
-  getRecordByTitle,
   formatDate,
   parseAndValidateDate,
-} = require('../utils/sharedFunctions');
+} = require('../utils/dateHelpers');
+const { getRecordByTitle } = require('../utils/sharedFunctions');
 const { isValidUUID } = require('../utils/validators');
 
 const formatDirectorData = (director) => ({

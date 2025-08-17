@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { format, isBefore, parse } from 'date-fns';
 import { enGB } from 'date-fns/locale';
 import { Field, Form, Formik } from 'formik';
-import * as Yup from 'yup';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -22,6 +21,7 @@ import ClearAllIcon from '@mui/icons-material/ClearAll';
 import SaveIcon from '@mui/icons-material/Save';
 
 import SnackbarContext from '@/src/contexts/SnackbarContext';
+import { PERSON_VALIDATION_SCHEME } from '@/src/utils/validationSchemes';
 import useFetchData from '@/src/hooks/useFetchData';
 
 import {
@@ -29,11 +29,6 @@ import {
   getActorByUuid,
   updateActor,
 } from '@/src/services/actorService';
-import {
-  DATE_SCHEMA,
-  STRING_SCHEMA,
-  TITLE_NAME_SCHEMA,
-} from '@/src/services/itemService';
 
 import BasicAutocompleteField from '@/src/components/forms/Autocomplete/BasicAutocompleteField';
 
@@ -98,15 +93,6 @@ function ActorForm() {
   const sortedCountries = countries
     .slice()
     .sort((a, b) => a.title.localeCompare(b.title));
-
-  const validationSchema = Yup.object().shape({
-    fullName: TITLE_NAME_SCHEMA,
-    country: STRING_SCHEMA,
-    birthDate: DATE_SCHEMA,
-    deathDate: DATE_SCHEMA,
-    photo: STRING_SCHEMA.url('Invalid photo URL'),
-    biography: STRING_SCHEMA,
-  });
 
   const handleSubmit = useCallback(
     async (values) => {
@@ -353,7 +339,7 @@ function ActorForm() {
     <Formik
       enableReinitialize
       initialValues={initialValues}
-      validationSchema={validationSchema}
+      validationSchema={PERSON_VALIDATION_SCHEME}
       onSubmit={handleSubmit}
     >
       {renderForm}

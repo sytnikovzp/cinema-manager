@@ -1,7 +1,7 @@
 const { Country } = require('../db/models');
 
 const { notFound, badRequest } = require('../errors/generalErrors');
-const { formatDateTime } = require('../utils/sharedFunctions');
+const { formatDateTime } = require('../utils/dateHelpers');
 const { isValidUUID } = require('../utils/validators');
 
 const formatCountryData = (country) => ({

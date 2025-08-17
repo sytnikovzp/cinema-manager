@@ -1,10 +1,8 @@
 const { Location, Country } = require('../db/models');
 
 const { notFound, badRequest } = require('../errors/generalErrors');
-const {
-  formatDateTime,
-  getRecordByTitle,
-} = require('../utils/sharedFunctions');
+const { formatDateTime } = require('../utils/dateHelpers');
+const { getRecordByTitle } = require('../utils/sharedFunctions');
 const { isValidUUID } = require('../utils/validators');
 
 const formatLocationData = (location) => ({
